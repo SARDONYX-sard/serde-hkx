@@ -5,9 +5,9 @@
   "size_x86": 40,
   "size_x86_64": 72,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "ShaderType",
@@ -49,7 +49,7 @@
   "members": [
     {
       "name": "name",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -64,7 +64,7 @@
     {
       "name": "type",
       "enum_ref": "ShaderType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum ShaderType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -78,7 +78,7 @@
     },
     {
       "name": "vertexEntryName",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -92,7 +92,7 @@
     },
     {
       "name": "geomEntryName",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -106,7 +106,7 @@
     },
     {
       "name": "pixelEntryName",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -120,7 +120,7 @@
     },
     {
       "name": "data",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkUint8>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_UINT8",

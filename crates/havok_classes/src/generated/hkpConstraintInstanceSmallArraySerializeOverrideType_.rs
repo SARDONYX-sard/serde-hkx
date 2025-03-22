@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpConstraintInstanceSmallArraySerializeOverrideType {
+pub struct hkpConstraintInstanceSmallArraySerializeOverrideType<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkpConstraintInstanceSmallArraySerializeOverrideType {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `data`(ctype: `void*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -30,25 +31,26 @@ pub struct hkpConstraintInstanceSmallArraySerializeOverrideType {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "data"))]
     #[cfg_attr(feature = "serde", serde(rename = "data"))]
-    pub m_data: Pointer,
+    pub m_data: Pointer<'a>,
     /// # C++ Info
     /// - name: `size`(ctype: `hkUint16`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "size"))]
     #[cfg_attr(feature = "serde", serde(rename = "size"))]
-    pub m_size: u16,
+    pub m_size: U16<'a>,
     /// # C++ Info
     /// - name: `capacityAndFlags`(ctype: `hkUint16`)
     /// - offset: `  6`(x86)/` 10`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "capacityAndFlags"))]
     #[cfg_attr(feature = "serde", serde(rename = "capacityAndFlags"))]
-    pub m_capacityAndFlags: u16,
+    pub m_capacityAndFlags: U16<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpConstraintInstanceSmallArraySerializeOverrideType {
+    impl<'a> _serde::HavokClass
+    for hkpConstraintInstanceSmallArraySerializeOverrideType<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpConstraintInstanceSmallArraySerializeOverrideType"
@@ -58,19 +60,21 @@ const _: () = {
             _serde::__private::Signature::new(0xee3c2aec)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_data.get());
+            v.push(&self.m_data);
             v
         }
     }
-    impl _serde::Serialize for hkpConstraintInstanceSmallArraySerializeOverrideType {
+    impl<'a> _serde::Serialize
+    for hkpConstraintInstanceSmallArraySerializeOverrideType<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xee3c2aec)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -92,7 +96,7 @@ const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
     impl<'de> _serde::Deserialize<'de>
-    for hkpConstraintInstanceSmallArraySerializeOverrideType {
+    for hkpConstraintInstanceSmallArraySerializeOverrideType<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -143,7 +147,7 @@ const _: () = {
             }
             struct __hkpConstraintInstanceSmallArraySerializeOverrideTypeVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkpConstraintInstanceSmallArraySerializeOverrideType,
+                    hkpConstraintInstanceSmallArraySerializeOverrideType<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -152,7 +156,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpConstraintInstanceSmallArraySerializeOverrideTypeVisitor<'de> {
-                type Value = hkpConstraintInstanceSmallArraySerializeOverrideType;
+                type Value = hkpConstraintInstanceSmallArraySerializeOverrideType<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -170,9 +174,9 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_size: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_capacityAndFlags: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_size: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_capacityAndFlags: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     for i in 0..3usize {
                         match i {
                             0usize => {
@@ -182,7 +186,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -197,7 +201,7 @@ const _: () = {
                                     );
                                 }
                                 m_size = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -214,7 +218,7 @@ const _: () = {
                                     );
                                 }
                                 m_capacityAndFlags = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -267,8 +271,8 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_size: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_capacityAndFlags: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_size: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_capacityAndFlags: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -289,7 +293,7 @@ const _: () = {
                                     );
                                 }
                                 m_size = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -315,7 +319,7 @@ const _: () = {
                                     );
                                 }
                                 m_capacityAndFlags = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -350,7 +354,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpConstraintInstanceSmallArraySerializeOverrideType {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_size,
                         m_capacityAndFlags,
                         ..Default::default()

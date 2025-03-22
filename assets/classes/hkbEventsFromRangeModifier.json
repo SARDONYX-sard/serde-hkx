@@ -5,13 +5,13 @@
   "size_x86": 68,
   "size_x86_64": 112,
   "parent": "hkbModifier",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "inputValue",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "lowerBound",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -40,7 +40,7 @@
     {
       "name": "eventRanges",
       "class_ref": "hkbEventRangeDataArray",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbEventRangeDataArray*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -54,7 +54,7 @@
     },
     {
       "name": "wasActiveInPreviousFrame",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",

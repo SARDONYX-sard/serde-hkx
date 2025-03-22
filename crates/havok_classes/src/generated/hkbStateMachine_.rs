@@ -22,7 +22,8 @@ pub struct hkbStateMachine<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -32,6 +33,7 @@ pub struct hkbStateMachine<'a> {
     /// - name: `eventToSendWhenStateOrTransitionChanges`(ctype: `struct hkbEvent`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
     /// - type_size: ` 12`(x86)/` 24`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(
         feature = "json_schema",
         schemars(rename = "eventToSendWhenStateOrTransitionChanges")
@@ -40,21 +42,21 @@ pub struct hkbStateMachine<'a> {
         feature = "serde",
         serde(rename = "eventToSendWhenStateOrTransitionChanges")
     )]
-    pub m_eventToSendWhenStateOrTransitionChanges: hkbEvent,
+    pub m_eventToSendWhenStateOrTransitionChanges: hkbEvent<'a>,
     /// # C++ Info
     /// - name: `startStateChooser`(ctype: `struct hkbStateChooser*`)
     /// - offset: ` 52`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "startStateChooser"))]
     #[cfg_attr(feature = "serde", serde(rename = "startStateChooser"))]
-    pub m_startStateChooser: Pointer,
+    pub m_startStateChooser: Pointer<'a>,
     /// # C++ Info
     /// - name: `startStateId`(ctype: `hkInt32`)
     /// - offset: ` 56`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "startStateId"))]
     #[cfg_attr(feature = "serde", serde(rename = "startStateId"))]
-    pub m_startStateId: i32,
+    pub m_startStateId: I32<'a>,
     /// # C++ Info
     /// - name: `returnToPreviousStateEventId`(ctype: `hkInt32`)
     /// - offset: ` 60`(x86)/`108`(x86_64)
@@ -64,14 +66,14 @@ pub struct hkbStateMachine<'a> {
         schemars(rename = "returnToPreviousStateEventId")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "returnToPreviousStateEventId"))]
-    pub m_returnToPreviousStateEventId: i32,
+    pub m_returnToPreviousStateEventId: I32<'a>,
     /// # C++ Info
     /// - name: `randomTransitionEventId`(ctype: `hkInt32`)
     /// - offset: ` 64`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "randomTransitionEventId"))]
     #[cfg_attr(feature = "serde", serde(rename = "randomTransitionEventId"))]
-    pub m_randomTransitionEventId: i32,
+    pub m_randomTransitionEventId: I32<'a>,
     /// # C++ Info
     /// - name: `transitionToNextHigherStateEventId`(ctype: `hkInt32`)
     /// - offset: ` 68`(x86)/`116`(x86_64)
@@ -81,7 +83,7 @@ pub struct hkbStateMachine<'a> {
         schemars(rename = "transitionToNextHigherStateEventId")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "transitionToNextHigherStateEventId"))]
-    pub m_transitionToNextHigherStateEventId: i32,
+    pub m_transitionToNextHigherStateEventId: I32<'a>,
     /// # C++ Info
     /// - name: `transitionToNextLowerStateEventId`(ctype: `hkInt32`)
     /// - offset: ` 72`(x86)/`120`(x86_64)
@@ -91,14 +93,14 @@ pub struct hkbStateMachine<'a> {
         schemars(rename = "transitionToNextLowerStateEventId")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "transitionToNextLowerStateEventId"))]
-    pub m_transitionToNextLowerStateEventId: i32,
+    pub m_transitionToNextLowerStateEventId: I32<'a>,
     /// # C++ Info
     /// - name: `syncVariableIndex`(ctype: `hkInt32`)
     /// - offset: ` 76`(x86)/`124`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "syncVariableIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "syncVariableIndex"))]
-    pub m_syncVariableIndex: i32,
+    pub m_syncVariableIndex: I32<'a>,
     /// # C++ Info
     /// - name: `currentStateId`(ctype: `hkInt32`)
     /// - offset: ` 80`(x86)/`128`(x86_64)
@@ -106,7 +108,7 @@ pub struct hkbStateMachine<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "currentStateId"))]
     #[cfg_attr(feature = "serde", serde(rename = "currentStateId"))]
-    pub m_currentStateId: i32,
+    pub m_currentStateId: I32<'a>,
     /// # C++ Info
     /// - name: `wrapAroundStateId`(ctype: `hkBool`)
     /// - offset: ` 84`(x86)/`132`(x86_64)
@@ -120,7 +122,7 @@ pub struct hkbStateMachine<'a> {
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "maxSimultaneousTransitions"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxSimultaneousTransitions"))]
-    pub m_maxSimultaneousTransitions: i8,
+    pub m_maxSimultaneousTransitions: I8<'a>,
     /// # C++ Info
     /// - name: `startStateMode`(ctype: `enum StartStateMode`)
     /// - offset: ` 86`(x86)/`134`(x86_64)
@@ -149,14 +151,14 @@ pub struct hkbStateMachine<'a> {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "states"))]
     #[cfg_attr(feature = "serde", serde(rename = "states"))]
-    pub m_states: Vec<Pointer>,
+    pub m_states: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `wildcardTransitions`(ctype: `struct hkbStateMachineTransitionInfoArray*`)
     /// - offset: `104`(x86)/`160`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "wildcardTransitions"))]
     #[cfg_attr(feature = "serde", serde(rename = "wildcardTransitions"))]
-    pub m_wildcardTransitions: Pointer,
+    pub m_wildcardTransitions: Pointer<'a>,
     /// # C++ Info
     /// - name: `stateIdToIndexMap`(ctype: `void*`)
     /// - offset: `108`(x86)/`168`(x86_64)
@@ -164,7 +166,7 @@ pub struct hkbStateMachine<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "stateIdToIndexMap"))]
     #[cfg_attr(feature = "serde", serde(rename = "stateIdToIndexMap"))]
-    pub m_stateIdToIndexMap: Pointer,
+    pub m_stateIdToIndexMap: Pointer<'a>,
     /// # C++ Info
     /// - name: `activeTransitions`(ctype: `hkArray<void>`)
     /// - offset: `112`(x86)/`176`(x86_64)
@@ -220,7 +222,7 @@ pub struct hkbStateMachine<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "previousStateId"))]
     #[cfg_attr(feature = "serde", serde(rename = "previousStateId"))]
-    pub m_previousStateId: i32,
+    pub m_previousStateId: I32<'a>,
     /// # C++ Info
     /// - name: `nextStartStateIndexOverride`(ctype: `hkInt32`)
     /// - offset: `172`(x86)/`252`(x86_64)
@@ -231,7 +233,7 @@ pub struct hkbStateMachine<'a> {
         schemars(rename = "nextStartStateIndexOverride")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "nextStartStateIndexOverride"))]
-    pub m_nextStartStateIndexOverride: i32,
+    pub m_nextStartStateIndexOverride: I32<'a>,
     /// # C++ Info
     /// - name: `stateOrTransitionChanged`(ctype: `hkBool`)
     /// - offset: `176`(x86)/`256`(x86_64)
@@ -258,7 +260,7 @@ pub struct hkbStateMachine<'a> {
         schemars(rename = "sCurrentStateIndexAndEntered")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "sCurrentStateIndexAndEntered"))]
-    pub m_sCurrentStateIndexAndEntered: u16,
+    pub m_sCurrentStateIndexAndEntered: U16<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -272,14 +274,14 @@ const _: () = {
             _serde::__private::Signature::new(0x816c1dcb)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
             v.extend(self.m_eventToSendWhenStateOrTransitionChanges.deps_indexes());
-            v.push(self.m_startStateChooser.get());
-            v.extend(self.m_states.iter().map(|ptr| ptr.get()));
-            v.push(self.m_wildcardTransitions.get());
-            v.push(self.m_stateIdToIndexMap.get());
+            v.push(&self.m_startStateChooser);
+            v.extend(self.m_states.iter());
+            v.push(&self.m_wildcardTransitions);
+            v.push(&self.m_stateIdToIndexMap);
             v
         }
     }
@@ -290,6 +292,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x816c1dcb)));
             let mut serializer = __serializer
                 .serialize_struct("hkbStateMachine", class_meta, (180u64, 264u64))?;
@@ -550,25 +553,29 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_eventToSendWhenStateOrTransitionChanges: _serde::__private::Option<
-                        hkbEvent,
+                        hkbEvent<'de>,
                     > = _serde::__private::None;
-                    let mut m_startStateChooser: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_startStateId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_startStateChooser: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_startStateId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_returnToPreviousStateEventId: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
-                    let mut m_randomTransitionEventId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_randomTransitionEventId: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_transitionToNextHigherStateEventId: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_transitionToNextLowerStateEventId: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
-                    let mut m_syncVariableIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_currentStateId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_syncVariableIndex: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_currentStateId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_wrapAroundStateId: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_maxSimultaneousTransitions: _serde::__private::Option<
-                        i8,
+                        I8<'de>,
                     > = _serde::__private::None;
                     let mut m_startStateMode: _serde::__private::Option<
                         StartStateMode,
@@ -577,9 +584,13 @@ const _: () = {
                         StateMachineSelfTransitionMode,
                     > = _serde::__private::None;
                     let mut m_isActive: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_states: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_wildcardTransitions: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_stateIdToIndexMap: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_states: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_wildcardTransitions: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_stateIdToIndexMap: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_activeTransitions: _serde::__private::Option<Vec<()>> = _serde::__private::None;
                     let mut m_transitionFlags: _serde::__private::Option<Vec<()>> = _serde::__private::None;
                     let mut m_wildcardTransitionFlags: _serde::__private::Option<
@@ -588,16 +599,16 @@ const _: () = {
                     let mut m_delayedTransitions: _serde::__private::Option<Vec<()>> = _serde::__private::None;
                     let mut m_timeInState: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_lastLocalTime: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_previousStateId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_previousStateId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_nextStartStateIndexOverride: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_stateOrTransitionChanged: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
                     let mut m_echoNextUpdate: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_sCurrentStateIndexAndEntered: _serde::__private::Option<
-                        u16,
+                        U16<'de>,
                     > = _serde::__private::None;
                     for i in 0..28usize {
                         match i {
@@ -612,7 +623,7 @@ const _: () = {
                                     );
                                 }
                                 m_eventToSendWhenStateOrTransitionChanges = _serde::__private::Some(
-                                    match __A::next_value::<hkbEvent>(&mut __map) {
+                                    match __A::next_value::<hkbEvent<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -631,7 +642,7 @@ const _: () = {
                                     );
                                 }
                                 m_startStateChooser = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -648,7 +659,7 @@ const _: () = {
                                     );
                                 }
                                 m_startStateId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -667,7 +678,7 @@ const _: () = {
                                     );
                                 }
                                 m_returnToPreviousStateEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -686,7 +697,7 @@ const _: () = {
                                     );
                                 }
                                 m_randomTransitionEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -705,7 +716,7 @@ const _: () = {
                                     );
                                 }
                                 m_transitionToNextHigherStateEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -724,7 +735,7 @@ const _: () = {
                                     );
                                 }
                                 m_transitionToNextLowerStateEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -743,7 +754,7 @@ const _: () = {
                                     );
                                 }
                                 m_syncVariableIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -760,7 +771,7 @@ const _: () = {
                                     );
                                 }
                                 m_currentStateId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -798,7 +809,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxSimultaneousTransitions = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -869,7 +880,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 7usize)?;
                                 m_states = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -888,7 +899,7 @@ const _: () = {
                                     );
                                 }
                                 m_wildcardTransitions = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -907,7 +918,7 @@ const _: () = {
                                     );
                                 }
                                 m_stateIdToIndexMap = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1032,7 +1043,7 @@ const _: () = {
                                     );
                                 }
                                 m_previousStateId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1051,7 +1062,7 @@ const _: () = {
                                     );
                                 }
                                 m_nextStartStateIndexOverride = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1106,7 +1117,7 @@ const _: () = {
                                     );
                                 }
                                 m_sCurrentStateIndexAndEntered = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1435,28 +1446,34 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_eventToSendWhenStateOrTransitionChanges: _serde::__private::Option<
-                        hkbEvent,
+                        hkbEvent<'de>,
                     > = _serde::__private::None;
-                    let mut m_startStateChooser: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_startStateId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_startStateChooser: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_startStateId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_returnToPreviousStateEventId: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
-                    let mut m_randomTransitionEventId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_randomTransitionEventId: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_transitionToNextHigherStateEventId: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     let mut m_transitionToNextLowerStateEventId: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
-                    let mut m_syncVariableIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_syncVariableIndex: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_wrapAroundStateId: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_maxSimultaneousTransitions: _serde::__private::Option<
-                        i8,
+                        I8<'de>,
                     > = _serde::__private::None;
                     let mut m_startStateMode: _serde::__private::Option<
                         StartStateMode,
@@ -1464,8 +1481,10 @@ const _: () = {
                     let mut m_selfTransitionMode: _serde::__private::Option<
                         StateMachineSelfTransitionMode,
                     > = _serde::__private::None;
-                    let mut m_states: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_wildcardTransitions: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_states: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_wildcardTransitions: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -1490,7 +1509,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1568,7 +1587,7 @@ const _: () = {
                                     );
                                 }
                                 m_eventToSendWhenStateOrTransitionChanges = _serde::__private::Some(
-                                    match __A::next_value::<hkbEvent>(&mut __map) {
+                                    match __A::next_value::<hkbEvent<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1596,7 +1615,7 @@ const _: () = {
                                     );
                                 }
                                 m_startStateChooser = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1622,7 +1641,7 @@ const _: () = {
                                     );
                                 }
                                 m_startStateId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1650,7 +1669,7 @@ const _: () = {
                                     );
                                 }
                                 m_returnToPreviousStateEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1678,7 +1697,7 @@ const _: () = {
                                     );
                                 }
                                 m_randomTransitionEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1706,7 +1725,7 @@ const _: () = {
                                     );
                                 }
                                 m_transitionToNextHigherStateEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1734,7 +1753,7 @@ const _: () = {
                                     );
                                 }
                                 m_transitionToNextLowerStateEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1762,7 +1781,7 @@ const _: () = {
                                     );
                                 }
                                 m_syncVariableIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1818,7 +1837,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxSimultaneousTransitions = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1898,7 +1917,7 @@ const _: () = {
                                     );
                                 }
                                 m_states = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1926,7 +1945,7 @@ const _: () = {
                                     );
                                 }
                                 m_wildcardTransitions = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2136,29 +2155,34 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
-                    let parent = hkbGenerator { __ptr, parent };
+                    let parent = hkbGenerator {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbStateMachine {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_eventToSendWhenStateOrTransitionChanges,
                         m_startStateChooser,
@@ -2371,16 +2395,16 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
-                        3i8 => _serde::__private::Ok(__Field::__field3),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(3i8) => _serde::__private::Ok(__Field::__field3),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -2547,15 +2571,15 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbFootIkDriverInfoLeg {
+pub struct hkbFootIkDriverInfoLeg<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkbFootIkDriverInfoLeg {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `prevAnkleRotLS`(ctype: `hkQuaternion`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -100,25 +101,25 @@ pub struct hkbFootIkDriverInfoLeg {
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "hipIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "hipIndex"))]
-    pub m_hipIndex: i16,
+    pub m_hipIndex: I16<'a>,
     /// # C++ Info
     /// - name: `kneeIndex`(ctype: `hkInt16`)
     /// - offset: ` 78`(x86)/` 78`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "kneeIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "kneeIndex"))]
-    pub m_kneeIndex: i16,
+    pub m_kneeIndex: I16<'a>,
     /// # C++ Info
     /// - name: `ankleIndex`(ctype: `hkInt16`)
     /// - offset: ` 80`(x86)/` 80`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "ankleIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "ankleIndex"))]
-    pub m_ankleIndex: i16,
+    pub m_ankleIndex: I16<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbFootIkDriverInfoLeg {
+    impl<'a> _serde::HavokClass for hkbFootIkDriverInfoLeg<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbFootIkDriverInfoLeg"
@@ -128,18 +129,19 @@ const _: () = {
             _serde::__private::Signature::new(0x224b18d1)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkbFootIkDriverInfoLeg {
+    impl<'a> _serde::Serialize for hkbFootIkDriverInfoLeg<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x224b18d1)));
             let mut serializer = __serializer
                 .serialize_struct("hkbFootIkDriverInfoLeg", class_meta, (96u64, 96u64))?;
@@ -177,7 +179,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbFootIkDriverInfoLeg {
+    impl<'de> _serde::Deserialize<'de> for hkbFootIkDriverInfoLeg<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -251,14 +253,14 @@ const _: () = {
                 }
             }
             struct __hkbFootIkDriverInfoLegVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbFootIkDriverInfoLeg>,
+                marker: _serde::__private::PhantomData<hkbFootIkDriverInfoLeg<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkbFootIkDriverInfoLegVisitor<'de> {
-                type Value = hkbFootIkDriverInfoLeg;
+                type Value = hkbFootIkDriverInfoLeg<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -286,9 +288,9 @@ const _: () = {
                     let mut m_maxKneeAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_minKneeAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_maxAnkleAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_hipIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_kneeIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_ankleIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_hipIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_kneeIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_ankleIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     for i in 0..13usize {
                         match i {
                             0usize => {
@@ -480,7 +482,7 @@ const _: () = {
                                     );
                                 }
                                 m_hipIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -497,7 +499,7 @@ const _: () = {
                                     );
                                 }
                                 m_kneeIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -514,7 +516,7 @@ const _: () = {
                                     );
                                 }
                                 m_ankleIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -688,9 +690,9 @@ const _: () = {
                     let mut m_maxKneeAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_minKneeAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_maxAnkleAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_hipIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_kneeIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_ankleIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_hipIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_kneeIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_ankleIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -957,7 +959,7 @@ const _: () = {
                                     );
                                 }
                                 m_hipIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -983,7 +985,7 @@ const _: () = {
                                     );
                                 }
                                 m_kneeIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1009,7 +1011,7 @@ const _: () = {
                                     );
                                 }
                                 m_ankleIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1164,7 +1166,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbFootIkDriverInfoLeg {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_kneeAxisLS,
                         m_footEndLS,
                         m_footPlantedAnkleHeightMS,

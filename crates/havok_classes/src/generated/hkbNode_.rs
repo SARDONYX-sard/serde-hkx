@@ -22,11 +22,13 @@ pub struct hkbNode<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkbBindable,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkbBindable<'a>,
     /// # C++ Info
     /// - name: `userData`(ctype: `hkUlong`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
@@ -49,7 +51,7 @@ pub struct hkbNode<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "id"))]
     #[cfg_attr(feature = "serde", serde(rename = "id"))]
-    pub m_id: i16,
+    pub m_id: I16<'a>,
     /// # C++ Info
     /// - name: `cloneState`(ctype: `enum unknown`)
     /// - offset: ` 38`(x86)/` 66`(x86_64)
@@ -57,7 +59,7 @@ pub struct hkbNode<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "cloneState"))]
     #[cfg_attr(feature = "serde", serde(rename = "cloneState"))]
-    pub m_cloneState: i8,
+    pub m_cloneState: I8<'a>,
     /// # C++ Info
     /// - name: `padNode`(ctype: `hkBool[1]`)
     /// - offset: ` 39`(x86)/` 67`(x86_64)
@@ -79,9 +81,9 @@ const _: () = {
             _serde::__private::Signature::new(0x6d26f61d)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.m_variableBindingSet.get());
+            v.push(&self.parent.m_variableBindingSet);
             v
         }
     }
@@ -92,6 +94,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x6d26f61d)));
             let mut serializer = __serializer
                 .serialize_struct("hkbNode", class_meta, (40u64, 72u64))?;
@@ -212,8 +215,8 @@ const _: () = {
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_id: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_cloneState: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_id: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_cloneState: _serde::__private::Option<I8<'de>> = _serde::__private::None;
                     let mut m_padNode: _serde::__private::Option<[bool; 1usize]> = _serde::__private::None;
                     for i in 0..5usize {
                         match i {
@@ -256,7 +259,7 @@ const _: () = {
                                     );
                                 }
                                 m_id = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -273,7 +276,7 @@ const _: () = {
                                     );
                                 }
                                 m_cloneState = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -362,7 +365,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
@@ -389,7 +394,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -483,21 +488,23 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,

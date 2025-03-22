@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbFootIkDriverInfo {
+pub struct hkbFootIkDriverInfo<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,18 +22,20 @@ pub struct hkbFootIkDriverInfo {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `legs`(ctype: `hkArray<struct hkbFootIkDriverInfoLeg>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "legs"))]
     #[cfg_attr(feature = "serde", serde(rename = "legs"))]
-    pub m_legs: Vec<hkbFootIkDriverInfoLeg>,
+    pub m_legs: Vec<hkbFootIkDriverInfoLeg<'a>>,
     /// # C++ Info
     /// - name: `raycastDistanceUp`(ctype: `hkReal`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
@@ -68,7 +70,7 @@ pub struct hkbFootIkDriverInfo {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "collisionFilterInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "collisionFilterInfo"))]
-    pub m_collisionFilterInfo: u32,
+    pub m_collisionFilterInfo: U32<'a>,
     /// # C++ Info
     /// - name: `forwardAlignFraction`(ctype: `hkReal`)
     /// - offset: ` 40`(x86)/` 52`(x86_64)
@@ -114,7 +116,7 @@ pub struct hkbFootIkDriverInfo {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbFootIkDriverInfo {
+    impl<'a> _serde::HavokClass for hkbFootIkDriverInfo<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbFootIkDriverInfo"
@@ -124,25 +126,26 @@ const _: () = {
             _serde::__private::Signature::new(0xc6a09dbf)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_legs
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
     }
-    impl _serde::Serialize for hkbFootIkDriverInfo {
+    impl<'a> _serde::Serialize for hkbFootIkDriverInfo<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xc6a09dbf)));
             let mut serializer = __serializer
                 .serialize_struct("hkbFootIkDriverInfo", class_meta, (56u64, 72u64))?;
@@ -194,7 +197,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbFootIkDriverInfo {
+    impl<'de> _serde::Deserialize<'de> for hkbFootIkDriverInfo<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -264,14 +267,14 @@ const _: () = {
                 }
             }
             struct __hkbFootIkDriverInfoVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbFootIkDriverInfo>,
+                marker: _serde::__private::PhantomData<hkbFootIkDriverInfo<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkbFootIkDriverInfoVisitor<'de> {
-                type Value = hkbFootIkDriverInfo;
+                type Value = hkbFootIkDriverInfo<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -297,7 +300,7 @@ const _: () = {
                     let mut m_raycastDistanceDown: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_originalGroundHeightMS: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_verticalOffset: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     let mut m_forwardAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_sidewaysAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_sidewaysSampleWidth: _serde::__private::Option<f32> = _serde::__private::None;
@@ -408,7 +411,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -684,7 +687,7 @@ const _: () = {
                     let mut m_raycastDistanceDown: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_originalGroundHeightMS: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_verticalOffset: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     let mut m_forwardAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_sidewaysAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_sidewaysSampleWidth: _serde::__private::Option<f32> = _serde::__private::None;
@@ -851,7 +854,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1173,15 +1176,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbFootIkDriverInfo {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_legs,
                         m_raycastDistanceUp,

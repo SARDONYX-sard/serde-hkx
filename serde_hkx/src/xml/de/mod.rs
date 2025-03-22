@@ -25,9 +25,9 @@ use crate::errors::{
 use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;
 use parser::tag::{class_start_tag, start_tag};
+use winnow::Parser;
 use winnow::ascii::{dec_int, dec_uint};
 use winnow::combinator::opt;
-use winnow::Parser;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -45,7 +45,7 @@ pub struct XmlDeserializer<'de> {
     /// Incremented each time deserialize_struct is called.
     ///
     /// And this is present in `SeqAccess::class_ptr` to refer to class_ptr as a key in [`HashMap`].
-    class_index: Option<usize>,
+    class_index: Option<Pointer<'de>>,
 
     ///  In `Struct` deserialization?
     ///
@@ -126,22 +126,26 @@ where
 {
     let mut de = de;
 
-    tri!(de
-        .parse_next(opt(winnow::token::take_until(
+    tri!(
+        de.parse_next(opt(winnow::token::take_until(
             0..,
             "<hksection name=\"__data__\">"
         )))
-        .map_err(|err| de.to_readable_err(err)));
-    tri!(de
-        .parse_next(winnow::token::take_until(0.., "<hkobject"))
-        .map_err(|err| de.to_readable_err(err)));
+        .map_err(|err| de.to_readable_err(err))
+    );
+    tri!(
+        de.parse_next(winnow::token::take_until(0.., "<hkobject"))
+            .map_err(|err| de.to_readable_err(err))
+    );
     let t = tri!(T::deserialize(&mut de).map_err(|err| de.to_readable_err(err)));
-    tri!(de
-        .parse_next(opt(end_tag("hksection")))
-        .map_err(|err| de.to_readable_err(err)));
-    tri!(de
-        .parse_next(opt(end_tag("hkpackfile")))
-        .map_err(|err| de.to_readable_err(err)));
+    tri!(
+        de.parse_next(opt(end_tag("hksection")))
+            .map_err(|err| de.to_readable_err(err))
+    );
+    tri!(
+        de.parse_next(opt(end_tag("hkpackfile")))
+            .map_err(|err| de.to_readable_err(err))
+    );
 
     if de.input.is_empty() {
         Ok(t)
@@ -295,56 +299,60 @@ impl<'de> de::Deserializer<'de> for &mut XmlDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int8(tri!(self.parse_next(dec_int)))
+        let n = tri!(self.parse_next(dec_int));
+        visitor.visit_int8(I8::Number(n))
     }
 
     fn deserialize_uint8<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint8(tri!(self.parse_next(dec_uint)))
+        let n = tri!(self.parse_next(dec_uint));
+        visitor.visit_uint8(U8::Number(n))
     }
 
     fn deserialize_int16<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int16(tri!(self.parse_next(dec_int)))
+        let n = tri!(self.parse_next(dec_int));
+        visitor.visit_int16(I16::Number(n))
     }
 
     fn deserialize_uint16<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint16(tri!(self.parse_next(dec_uint)))
+        let n = tri!(self.parse_next(dec_uint));
+        visitor.visit_uint16(U16::Number(n))
     }
 
     fn deserialize_int32<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int32(tri!(self.parse_next(dec_int)))
+        visitor.visit_int32(I32::Number(tri!(self.parse_next(dec_int))))
     }
 
     fn deserialize_uint32<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint32(tri!(self.parse_next(dec_uint)))
+        visitor.visit_uint32(U32::Number(tri!(self.parse_next(dec_uint))))
     }
 
     fn deserialize_int64<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_int64(tri!(self.parse_next(dec_int)))
+        visitor.visit_int64(I64::Number(tri!(self.parse_next(dec_int))))
     }
 
     fn deserialize_uint64<V>(self, visitor: V) -> Result<V::Value, Self::Error>
     where
         V: Visitor<'de>,
     {
-        visitor.visit_uint64(tri!(self.parse_next(dec_uint)))
+        visitor.visit_uint64(U64::Number(tri!(self.parse_next(dec_uint))))
     }
 
     fn deserialize_real<V>(self, visitor: V) -> Result<V::Value, Self::Error>
@@ -486,7 +494,7 @@ impl<'de> de::Deserializer<'de> for &mut XmlDeserializer<'de> {
                 });
             };
             self.in_struct = true;
-            self.class_index = Some(ptr_name.get()); // For `HashMap`'s seq key.
+            self.class_index = Some(ptr_name.clone()); // For `HashMap`'s seq key.
             Some(ptr_name)
         };
         #[cfg(feature = "tracing")]
@@ -583,8 +591,8 @@ mod tests {
 
     #[test]
     fn test_deserialize_primitive() {
-        use havok_classes::hkClassMember_::FlagValues;
         use havok_classes::EventMode;
+        use havok_classes::hkClassMember_::FlagValues;
 
         parse_peek_assert(
             "ALIGN_8|ALiGN_16|SERIALIZE_IGNORED</hkparam>",
@@ -632,7 +640,7 @@ mod tests {
     0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15
     16 17 18 19 20
 "#,
-            (0..21).collect::<Vec<i32>>(),
+            (0..21).map(I32::Number).collect::<Vec<I32>>(),
         );
     }
 
@@ -670,16 +678,16 @@ mod tests {
         use havok_classes::{hkBaseObject, hkReferencedObject};
         partial_parse_assert(
             r##"
-<hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
+<hkobject name="#1000" class="hkReferencedObject" signature="0xea7f1d08">
     <!-- memSizeAndFlags SERIALIZE_IGNORED -->
     <!-- referenceCount SERIALIZE_IGNORED -->
 </hkobject>
             "##,
             hkReferencedObject {
-                __ptr: Some(Pointer::new(1000)),
+                __ptr: Some(Pointer::new("#1000".into())),
                 parent: hkBaseObject { __ptr: None },
-                m_memSizeAndFlags: 0,
-                m_referenceCount: 0,
+                m_memSizeAndFlags: U16::Number(0),
+                m_referenceCount: I16::Number(0),
             },
         );
     }
@@ -722,12 +730,12 @@ mod tests {
         assert_eq!(
             from_str::<hkRootLevelContainer>(xml),
             Ok(hkRootLevelContainer {
-                __ptr: Some(8.into()),
+                __ptr: Some(Pointer::from_usize(8)),
                 m_namedVariants: vec![hkRootLevelContainerNamedVariant {
                     __ptr: None,
                     m_name: "hkbProjectData".into(),
                     m_className: "hkbProjectData".into(),
-                    m_variant: Pointer::new(10),
+                    m_variant: Pointer::from_usize(10),
                 }],
             })
         );

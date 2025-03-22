@@ -7,7 +7,7 @@ use winnow::binary::{self, Endianness};
 use winnow::combinator::{alt, seq, terminated};
 use winnow::error::{ContextError, StrContext, StrContextValue};
 use winnow::token::take_until;
-use winnow::{PResult, Parser};
+use winnow::{ModalResult, Parser};
 
 /// Parses [`bool`]. `true` or `false``
 /// - The corresponding type kind: `Bool`
@@ -15,7 +15,7 @@ use winnow::{PResult, Parser};
 /// # Errors
 /// When parse failed.
 #[inline]
-pub fn boolean(input: &mut BytesStream<'_>) -> PResult<bool> {
+pub fn boolean(input: &mut BytesStream<'_>) -> ModalResult<bool> {
     alt((1.value(true), 0.value(false)))
         .context(StrContext::Label("bool(u8)"))
         .context(StrContext::Expected(StrContextValue::Description(
@@ -116,15 +116,17 @@ pub fn transform<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Transfo
 /// Parses f16
 pub fn half<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, f16, ContextError> {
     move |bytes: &mut BytesStream<'a>| {
-        let (b0, b1) = tri!(seq! {
-            binary::u8,
-            binary::u8,
-        }
-        .context(StrContext::Label("half(f16)"))
-        .context(StrContext::Expected(StrContextValue::Description(
-            "half(f16)",
-        )))
-        .parse_next(bytes));
+        let (b0, b1) = tri!(
+            seq! {
+                binary::u8,
+                binary::u8,
+            }
+            .context(StrContext::Label("half(f16)"))
+            .context(StrContext::Expected(StrContextValue::Description(
+                "half(f16)",
+            )))
+            .parse_next(bytes)
+        );
 
         Ok(match endian {
             Endianness::Little => f16::from_le_bytes([b0, b1]),
@@ -145,7 +147,7 @@ pub fn half<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, f16, Context
 ///
 /// # Errors
 /// If parse failed.
-pub fn string<'a>(input: &mut BytesStream<'a>) -> PResult<&'a str> {
+pub fn string<'a>(input: &mut BytesStream<'a>) -> ModalResult<&'a str> {
     terminated(take_until(0.., b'\0'), b'\0')
         .try_map(|bytes| core::str::from_utf8(bytes))
         .context(StrContext::Label("string"))
@@ -165,20 +167,24 @@ pub fn array_meta<'a>(
 ) -> impl Parser<BytesStream<'a>, (usize, i32), ContextError> {
     move |bytes: &mut BytesStream<'a>| {
         if is_x86 {
-            tri!(binary::u32(endian)
-                .verify(|uint| *uint == 0)
-                .map(|uint| uint as u64)
-                .context(StrContext::Expected(StrContextValue::Description(
-                    "Skip x86 ptr size(0 fill 4bytes)",
-                )))
-                .parse_next(bytes))
+            tri!(
+                binary::u32(endian)
+                    .verify(|uint| *uint == 0)
+                    .map(|uint| uint as u64)
+                    .context(StrContext::Expected(StrContextValue::Description(
+                        "Skip x86 ptr size(0 fill 4bytes)",
+                    )))
+                    .parse_next(bytes)
+            )
         } else {
-            tri!(binary::u64(endian)
-                .verify(|ulong| *ulong == 0)
-                .context(StrContext::Expected(StrContextValue::Description(
-                    "Skip x64 ptr size(0 fill 8bytes)",
-                )))
-                .parse_next(bytes))
+            tri!(
+                binary::u64(endian)
+                    .verify(|ulong| *ulong == 0)
+                    .context(StrContext::Expected(StrContextValue::Description(
+                        "Skip x64 ptr size(0 fill 8bytes)",
+                    )))
+                    .parse_next(bytes)
+            )
         };
 
         seq! {

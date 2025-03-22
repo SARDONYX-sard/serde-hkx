@@ -1,6 +1,6 @@
 use crate::{
     cpp_info::Enum,
-    rust_gen::enum_or_flags::{to_rust_storage_size_ident, to_rust_storage_type},
+    rust_gen::enum_or_flags::{to_rust_storage_size_ident, to_rust_wrapper_type},
 };
 use proc_macro2::TokenStream;
 use quote::quote;
@@ -11,8 +11,11 @@ pub fn impl_de_for_flag(one_enum: &Enum) -> TokenStream {
     let flag_ident = syn::Ident::new(name, proc_macro2::Span::call_site());
     let expected = format!("struct {}(flags)", name);
 
-    // e.g. `u64`
-    let storage_type = to_rust_storage_type(vsubtype);
+    // e.g. `U64`
+    let rust_wrapper_type = to_rust_wrapper_type(vsubtype)
+        .unwrap_or_else(|| panic!("Unsupported enum storage type: {vsubtype}"));
+    let expected_msg_in_visit_number = format!("{flag_ident}({rust_wrapper_type}) Number");
+
     // e.g. `Uint64`
     let storage_size_ident = to_rust_storage_size_ident(vsubtype)
         .unwrap_or_else(|| panic!("Unsupported enum storage type: {vsubtype}"));
@@ -49,12 +52,18 @@ pub fn impl_de_for_flag(one_enum: &Enum) -> TokenStream {
                         #[inline]
                         fn #visitor_method_for_binary<__E>(
                             self,
-                            __value: #storage_type,
+                            __value: #rust_wrapper_type<'de>,
                         ) -> _serde::__private::Result<Self::Value, __E>
                         where
                             __E: _serde::de::Error,
                         {
-                            Ok(#flag_ident::from_bits_retain(__value as _)) // Contain unknown bits.
+                            match __value {
+                                #rust_wrapper_type::Number(__value) => Ok(#flag_ident::from_bits_retain(__value as _)),
+                                _ => Err(_serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::#storage_size_ident(__value as _),
+                                    &#expected_msg_in_visit_number,
+                                )),
+                            }
                         }
 
                         fn visit_stringptr<__E>(

@@ -22,11 +22,13 @@ pub struct hkaAnimationBinding<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `originalSkeletonName`(ctype: `hkStringPtr`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -41,7 +43,7 @@ pub struct hkaAnimationBinding<'a> {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "animation"))]
     #[cfg_attr(feature = "serde", serde(rename = "animation"))]
-    pub m_animation: Pointer,
+    pub m_animation: Pointer<'a>,
     /// # C++ Info
     /// - name: `transformTrackToBoneIndices`(ctype: `hkArray<hkInt16>`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
@@ -51,7 +53,7 @@ pub struct hkaAnimationBinding<'a> {
         schemars(rename = "transformTrackToBoneIndices")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "transformTrackToBoneIndices"))]
-    pub m_transformTrackToBoneIndices: Vec<i16>,
+    pub m_transformTrackToBoneIndices: Vec<I16<'a>>,
     /// # C++ Info
     /// - name: `floatTrackToFloatSlotIndices`(ctype: `hkArray<hkInt16>`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
@@ -61,7 +63,7 @@ pub struct hkaAnimationBinding<'a> {
         schemars(rename = "floatTrackToFloatSlotIndices")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "floatTrackToFloatSlotIndices"))]
-    pub m_floatTrackToFloatSlotIndices: Vec<i16>,
+    pub m_floatTrackToFloatSlotIndices: Vec<I16<'a>>,
     /// # C++ Info
     /// - name: `blendHint`(ctype: `enum BlendHint`)
     /// - offset: ` 40`(x86)/` 64`(x86_64)
@@ -82,9 +84,9 @@ const _: () = {
             _serde::__private::Signature::new(0x66eac971)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_animation.get());
+            v.push(&self.m_animation);
             v
         }
     }
@@ -95,6 +97,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x66eac971)));
             let mut serializer = __serializer
                 .serialize_struct("hkaAnimationBinding", class_meta, (44u64, 72u64))?;
@@ -217,12 +220,12 @@ const _: () = {
                     let mut m_originalSkeletonName: _serde::__private::Option<
                         StringPtr<'de>,
                     > = _serde::__private::None;
-                    let mut m_animation: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_animation: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_transformTrackToBoneIndices: _serde::__private::Option<
-                        Vec<i16>,
+                        Vec<I16<'de>>,
                     > = _serde::__private::None;
                     let mut m_floatTrackToFloatSlotIndices: _serde::__private::Option<
-                        Vec<i16>,
+                        Vec<I16<'de>>,
                     > = _serde::__private::None;
                     let mut m_blendHint: _serde::__private::Option<BlendHint> = _serde::__private::None;
                     for i in 0..5usize {
@@ -255,7 +258,7 @@ const _: () = {
                                     );
                                 }
                                 m_animation = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -274,7 +277,7 @@ const _: () = {
                                     );
                                 }
                                 m_transformTrackToBoneIndices = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                    match __A::next_value::<Vec<I16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -293,7 +296,7 @@ const _: () = {
                                     );
                                 }
                                 m_floatTrackToFloatSlotIndices = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                    match __A::next_value::<Vec<I16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -393,12 +396,12 @@ const _: () = {
                     let mut m_originalSkeletonName: _serde::__private::Option<
                         StringPtr<'de>,
                     > = _serde::__private::None;
-                    let mut m_animation: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_animation: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_transformTrackToBoneIndices: _serde::__private::Option<
-                        Vec<i16>,
+                        Vec<I16<'de>>,
                     > = _serde::__private::None;
                     let mut m_floatTrackToFloatSlotIndices: _serde::__private::Option<
-                        Vec<i16>,
+                        Vec<I16<'de>>,
                     > = _serde::__private::None;
                     let mut m_blendHint: _serde::__private::Option<BlendHint> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
@@ -451,7 +454,7 @@ const _: () = {
                                     );
                                 }
                                 m_animation = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -479,7 +482,7 @@ const _: () = {
                                     );
                                 }
                                 m_transformTrackToBoneIndices = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                    match __A::next_value::<Vec<I16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -507,7 +510,7 @@ const _: () = {
                                     );
                                 }
                                 m_floatTrackToFloatSlotIndices = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                    match __A::next_value::<Vec<I16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -605,15 +608,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkaAnimationBinding {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_originalSkeletonName,
                         m_animation,
@@ -718,14 +723,14 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

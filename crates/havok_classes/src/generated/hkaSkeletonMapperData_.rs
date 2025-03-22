@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkaSkeletonMapperData {
+pub struct hkaSkeletonMapperData<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,42 +22,43 @@ pub struct hkaSkeletonMapperData {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `skeletonA`(ctype: `struct hkaSkeleton*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "skeletonA"))]
     #[cfg_attr(feature = "serde", serde(rename = "skeletonA"))]
-    pub m_skeletonA: Pointer,
+    pub m_skeletonA: Pointer<'a>,
     /// # C++ Info
     /// - name: `skeletonB`(ctype: `struct hkaSkeleton*`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "skeletonB"))]
     #[cfg_attr(feature = "serde", serde(rename = "skeletonB"))]
-    pub m_skeletonB: Pointer,
+    pub m_skeletonB: Pointer<'a>,
     /// # C++ Info
     /// - name: `simpleMappings`(ctype: `hkArray<struct hkaSkeletonMapperDataSimpleMapping>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "simpleMappings"))]
     #[cfg_attr(feature = "serde", serde(rename = "simpleMappings"))]
-    pub m_simpleMappings: Vec<hkaSkeletonMapperDataSimpleMapping>,
+    pub m_simpleMappings: Vec<hkaSkeletonMapperDataSimpleMapping<'a>>,
     /// # C++ Info
     /// - name: `chainMappings`(ctype: `hkArray<struct hkaSkeletonMapperDataChainMapping>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "chainMappings"))]
     #[cfg_attr(feature = "serde", serde(rename = "chainMappings"))]
-    pub m_chainMappings: Vec<hkaSkeletonMapperDataChainMapping>,
+    pub m_chainMappings: Vec<hkaSkeletonMapperDataChainMapping<'a>>,
     /// # C++ Info
     /// - name: `unmappedBones`(ctype: `hkArray<hkInt16>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "unmappedBones"))]
     #[cfg_attr(feature = "serde", serde(rename = "unmappedBones"))]
-    pub m_unmappedBones: Vec<i16>,
+    pub m_unmappedBones: Vec<I16<'a>>,
     /// # C++ Info
     /// - name: `extractedMotionMapping`(ctype: `hkQsTransform`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
@@ -82,7 +83,7 @@ pub struct hkaSkeletonMapperData {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkaSkeletonMapperData {
+    impl<'a> _serde::HavokClass for hkaSkeletonMapperData<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkaSkeletonMapperData"
@@ -92,34 +93,35 @@ const _: () = {
             _serde::__private::Signature::new(0x95687ea0)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_skeletonA.get());
-            v.push(self.m_skeletonB.get());
+            v.push(&self.m_skeletonA);
+            v.push(&self.m_skeletonB);
             v.extend(
                 self
                     .m_simpleMappings
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(
                 self
                     .m_chainMappings
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
     }
-    impl _serde::Serialize for hkaSkeletonMapperData {
+    impl<'a> _serde::Serialize for hkaSkeletonMapperData<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x95687ea0)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -172,7 +174,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkaSkeletonMapperData {
+    impl<'de> _serde::Deserialize<'de> for hkaSkeletonMapperData<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -234,14 +236,14 @@ const _: () = {
                 }
             }
             struct __hkaSkeletonMapperDataVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkaSkeletonMapperData>,
+                marker: _serde::__private::PhantomData<hkaSkeletonMapperData<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkaSkeletonMapperDataVisitor<'de> {
-                type Value = hkaSkeletonMapperData;
+                type Value = hkaSkeletonMapperData<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -259,15 +261,15 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_skeletonA: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_skeletonB: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_skeletonA: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_skeletonB: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_simpleMappings: _serde::__private::Option<
                         Vec<hkaSkeletonMapperDataSimpleMapping>,
                     > = _serde::__private::None;
                     let mut m_chainMappings: _serde::__private::Option<
                         Vec<hkaSkeletonMapperDataChainMapping>,
                     > = _serde::__private::None;
-                    let mut m_unmappedBones: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
+                    let mut m_unmappedBones: _serde::__private::Option<Vec<I16<'de>>> = _serde::__private::None;
                     let mut m_extractedMotionMapping: _serde::__private::Option<
                         QsTransform,
                     > = _serde::__private::None;
@@ -284,7 +286,7 @@ const _: () = {
                                     );
                                 }
                                 m_skeletonA = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -301,7 +303,7 @@ const _: () = {
                                     );
                                 }
                                 m_skeletonB = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -356,7 +358,7 @@ const _: () = {
                                     );
                                 }
                                 m_unmappedBones = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                    match __A::next_value::<Vec<I16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -525,15 +527,15 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_skeletonA: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_skeletonB: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_skeletonA: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_skeletonB: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_simpleMappings: _serde::__private::Option<
                         Vec<hkaSkeletonMapperDataSimpleMapping>,
                     > = _serde::__private::None;
                     let mut m_chainMappings: _serde::__private::Option<
                         Vec<hkaSkeletonMapperDataChainMapping>,
                     > = _serde::__private::None;
-                    let mut m_unmappedBones: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
+                    let mut m_unmappedBones: _serde::__private::Option<Vec<I16<'de>>> = _serde::__private::None;
                     let mut m_extractedMotionMapping: _serde::__private::Option<
                         QsTransform,
                     > = _serde::__private::None;
@@ -561,7 +563,7 @@ const _: () = {
                                     );
                                 }
                                 m_skeletonA = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -587,7 +589,7 @@ const _: () = {
                                     );
                                 }
                                 m_skeletonB = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -669,7 +671,7 @@ const _: () = {
                                     );
                                 }
                                 m_unmappedBones = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                    match __A::next_value::<Vec<I16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -860,7 +862,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkaSkeletonMapperData {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_skeletonA,
                         m_skeletonB,
                         m_simpleMappings,
@@ -974,14 +976,14 @@ const _: () = {
                 }
                 fn visit_int32<__E>(
                     self,
-                    __value: i32,
+                    __value: I32<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i32 => _serde::__private::Ok(__Field::__field0),
-                        1i32 => _serde::__private::Ok(__Field::__field1),
+                        I32::Number(0i32) => _serde::__private::Ok(__Field::__field0),
+                        I32::Number(1i32) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

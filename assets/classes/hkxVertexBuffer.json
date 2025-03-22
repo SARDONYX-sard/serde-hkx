@@ -5,14 +5,14 @@
   "size_x86": 104,
   "size_x86_64": 136,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "data",
       "class_ref": "hkxVertexBufferVertexData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkxVertexBufferVertexData",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -27,7 +27,7 @@
     {
       "name": "desc",
       "class_ref": "hkxVertexDescription",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkxVertexDescription",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",

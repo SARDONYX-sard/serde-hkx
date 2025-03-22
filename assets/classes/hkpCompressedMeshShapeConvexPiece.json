@@ -4,13 +4,13 @@
   "signature": "0x385bb842",
   "size_x86": 64,
   "size_x86_64": 80,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "offset",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -24,7 +24,7 @@
     },
     {
       "name": "vertices",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkUint16>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_UINT16",
@@ -38,7 +38,7 @@
     },
     {
       "name": "faceVertices",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkUint8>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_UINT8",
@@ -52,7 +52,7 @@
     },
     {
       "name": "faceOffsets",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkUint16>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_UINT16",
@@ -66,7 +66,7 @@
     },
     {
       "name": "reference",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -80,7 +80,7 @@
     },
     {
       "name": "transformIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",

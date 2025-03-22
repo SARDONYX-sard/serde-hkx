@@ -5,14 +5,14 @@
   "size_x86": 24,
   "size_x86_64": 48,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "frame",
       "class_ref": "hkLocalFrame",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkLocalFrame*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -27,7 +27,7 @@
     {
       "name": "rigidBody",
       "class_ref": "hkpRigidBody",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpRigidBody*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -42,7 +42,7 @@
     {
       "name": "character",
       "class_ref": "hkbCharacter",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbCharacter*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -56,7 +56,7 @@
     },
     {
       "name": "animationBoneIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",

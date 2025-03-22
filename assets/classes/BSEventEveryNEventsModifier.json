@@ -5,14 +5,14 @@
   "size_x86": 72,
   "size_x86_64": 128,
   "parent": "hkbModifier",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "eventToCheckFor",
       "class_ref": "hkbEventProperty",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbEventProperty",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -27,7 +27,7 @@
     {
       "name": "eventToSend",
       "class_ref": "hkbEventProperty",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbEventProperty",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -41,7 +41,7 @@
     },
     {
       "name": "numberOfEventsBeforeSend",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt8",
       "vtype": "TYPE_INT8",
       "vsubtype": "TYPE_VOID",
@@ -55,7 +55,7 @@
     },
     {
       "name": "minimumNumberOfEventsBeforeSend",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt8",
       "vtype": "TYPE_INT8",
       "vsubtype": "TYPE_VOID",
@@ -69,7 +69,7 @@
     },
     {
       "name": "randomizeNumberOfEvents",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -83,7 +83,7 @@
     },
     {
       "name": "numberOfEventsSeen",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -97,7 +97,7 @@
     },
     {
       "name": "calculatedNumberOfEventsBeforeSend",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt8",
       "vtype": "TYPE_INT8",
       "vsubtype": "TYPE_VOID",

@@ -5,14 +5,14 @@
   "size_x86": 76,
   "size_x86_64": 136,
   "parent": "hkbModifier",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "contactEvent",
       "class_ref": "hkbEventProperty",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbEventProperty",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -27,7 +27,7 @@
     {
       "name": "bones",
       "class_ref": "hkbBoneIndexArray",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbBoneIndexArray*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -41,7 +41,7 @@
     },
     {
       "name": "throwEvent",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -55,7 +55,7 @@
     },
     {
       "name": "ragdollRigidBodies",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",

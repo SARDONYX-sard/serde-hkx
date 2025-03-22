@@ -22,7 +22,8 @@ pub struct BSLookAtModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -41,14 +42,14 @@ pub struct BSLookAtModifier<'a> {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "bones"))]
     #[cfg_attr(feature = "serde", serde(rename = "bones"))]
-    pub m_bones: Vec<BSLookAtModifierBoneData>,
+    pub m_bones: Vec<BSLookAtModifierBoneData<'a>>,
     /// # C++ Info
     /// - name: `eyeBones`(ctype: `hkArray<struct BSLookAtModifierBoneData>`)
     /// - offset: ` 60`(x86)/`104`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "eyeBones"))]
     #[cfg_attr(feature = "serde", serde(rename = "eyeBones"))]
-    pub m_eyeBones: Vec<BSLookAtModifierBoneData>,
+    pub m_eyeBones: Vec<BSLookAtModifierBoneData<'a>>,
     /// # C++ Info
     /// - name: `limitAngleDegrees`(ctype: `hkReal`)
     /// - offset: ` 72`(x86)/`120`(x86_64)
@@ -109,9 +110,10 @@ pub struct BSLookAtModifier<'a> {
     /// - name: `targetOutOfLimitEvent`(ctype: `struct hkbEventProperty`)
     /// - offset: `116`(x86)/`168`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "targetOutOfLimitEvent"))]
     #[cfg_attr(feature = "serde", serde(rename = "targetOutOfLimitEvent"))]
-    pub m_targetOutOfLimitEvent: hkbEventProperty,
+    pub m_targetOutOfLimitEvent: hkbEventProperty<'a>,
     /// # C++ Info
     /// - name: `lookAtCamera`(ctype: `hkBool`)
     /// - offset: `124`(x86)/`184`(x86_64)
@@ -163,7 +165,7 @@ pub struct BSLookAtModifier<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "pSkeletonMemory"))]
     #[cfg_attr(feature = "serde", serde(rename = "pSkeletonMemory"))]
-    pub m_pSkeletonMemory: Pointer,
+    pub m_pSkeletonMemory: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -177,25 +179,25 @@ const _: () = {
             _serde::__private::Signature::new(0xd756fc25)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
             v.extend(
                 self
                     .m_bones
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(
                 self
                     .m_eyeBones
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(self.m_targetOutOfLimitEvent.deps_indexes());
-            v.push(self.m_pSkeletonMemory.get());
+            v.push(&self.m_pSkeletonMemory);
             v
         }
     }
@@ -206,6 +208,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xd756fc25)));
             let mut serializer = __serializer
                 .serialize_struct("BSLookAtModifier", class_meta, (160u64, 224u64))?;
@@ -457,7 +460,7 @@ const _: () = {
                     let mut m_targetLocation: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_targetOutsideLimits: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_targetOutOfLimitEvent: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     let mut m_lookAtCamera: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_lookAtCameraX: _serde::__private::Option<f32> = _serde::__private::None;
@@ -465,7 +468,7 @@ const _: () = {
                     let mut m_lookAtCameraZ: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_timeStep: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_ballBonesValid: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_pSkeletonMemory: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_pSkeletonMemory: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     for i in 0..19usize {
                         match i {
                             0usize => {
@@ -678,7 +681,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 7usize)?;
                                 m_targetOutOfLimitEvent = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -799,7 +802,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 3usize)?;
                                 m_pSkeletonMemory = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1023,7 +1026,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
@@ -1047,7 +1052,7 @@ const _: () = {
                     let mut m_targetLocation: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_targetOutsideLimits: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_targetOutOfLimitEvent: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     let mut m_lookAtCamera: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_lookAtCameraX: _serde::__private::Option<f32> = _serde::__private::None;
@@ -1077,7 +1082,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1473,7 +1478,7 @@ const _: () = {
                                     );
                                 }
                                 m_targetOutOfLimitEvent = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1815,34 +1820,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(BSLookAtModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_lookAtTarget,
                         m_bones,

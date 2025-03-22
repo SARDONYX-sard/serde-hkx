@@ -22,18 +22,20 @@ pub struct hkbTestStateChooser<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkbStateChooser,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkbStateChooser<'a>,
     /// # C++ Info
     /// - name: `int`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "int"))]
     #[cfg_attr(feature = "serde", serde(rename = "int"))]
-    pub m_int: i32,
+    pub m_int: I32<'a>,
     /// # C++ Info
     /// - name: `real`(ctype: `hkReal`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
@@ -62,7 +64,7 @@ const _: () = {
             _serde::__private::Signature::new(0xc0fcc436)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
@@ -74,6 +76,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xc0fcc436)));
             let mut serializer = __serializer
                 .serialize_struct("hkbTestStateChooser", class_meta, (20u64, 32u64))?;
@@ -173,7 +176,7 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_int: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_int: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_real: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_string: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     for i in 0..3usize {
@@ -185,7 +188,7 @@ const _: () = {
                                     );
                                 }
                                 m_int = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -266,7 +269,7 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_int: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_int: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_real: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_string: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
@@ -289,7 +292,7 @@ const _: () = {
                                     );
                                 }
                                 m_int = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -379,16 +382,21 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
-                    let parent = hkbStateChooser { __ptr, parent };
+                    let parent = hkbStateChooser {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbTestStateChooser {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_int,
                         m_real,

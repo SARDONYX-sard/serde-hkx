@@ -22,7 +22,8 @@ pub struct hkpDashpotAction<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -69,12 +70,12 @@ const _: () = {
             _serde::__private::Signature::new(0x50746c6e)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.m_world.get());
-            v.push(self.parent.parent.m_island.get());
-            v.push(self.parent.m_entityA.get());
-            v.push(self.parent.m_entityB.get());
+            v.push(&self.parent.parent.m_world);
+            v.push(&self.parent.parent.m_island);
+            v.push(&self.parent.m_entityA);
+            v.push(&self.parent.m_entityB);
             v
         }
     }
@@ -85,6 +86,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x50746c6e)));
             let mut serializer = __serializer
                 .serialize_struct("hkpDashpotAction", class_meta, (96u64, 128u64))?;
@@ -340,8 +342,8 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_entityA: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_entityB: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_entityA: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_entityB: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_point: _serde::__private::Option<[Vector4; 2usize]> = _serde::__private::None;
                     let mut m_strength: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_damping: _serde::__private::Option<f32> = _serde::__private::None;
@@ -418,7 +420,7 @@ const _: () = {
                                     );
                                 }
                                 m_entityA = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -444,7 +446,7 @@ const _: () = {
                                     );
                                 }
                                 m_entityB = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -638,28 +640,30 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpAction {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkpBinaryAction {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_entityA,
                         m_entityB,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpDashpotAction {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_point,
                         m_strength,

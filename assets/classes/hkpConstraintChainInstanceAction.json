@@ -5,14 +5,14 @@
   "size_x86": 28,
   "size_x86_64": 56,
   "parent": "hkpAction",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "constraintInstance",
       "class_ref": "hkpConstraintChainInstance",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpConstraintChainInstance*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",

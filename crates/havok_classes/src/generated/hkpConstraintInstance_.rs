@@ -22,11 +22,13 @@ pub struct hkpConstraintInstance<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `owner`(ctype: `void*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -34,28 +36,28 @@ pub struct hkpConstraintInstance<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "owner"))]
     #[cfg_attr(feature = "serde", serde(rename = "owner"))]
-    pub m_owner: Pointer,
+    pub m_owner: Pointer<'a>,
     /// # C++ Info
     /// - name: `data`(ctype: `struct hkpConstraintData*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "data"))]
     #[cfg_attr(feature = "serde", serde(rename = "data"))]
-    pub m_data: Pointer,
+    pub m_data: Pointer<'a>,
     /// # C++ Info
     /// - name: `constraintModifiers`(ctype: `struct hkpModifierConstraintAtom*`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "constraintModifiers"))]
     #[cfg_attr(feature = "serde", serde(rename = "constraintModifiers"))]
-    pub m_constraintModifiers: Pointer,
+    pub m_constraintModifiers: Pointer<'a>,
     /// # C++ Info
     /// - name: `entities`(ctype: `struct hkpEntity*`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "entities"))]
     #[cfg_attr(feature = "serde", serde(rename = "entities"))]
-    pub m_entities: [Pointer; 2usize],
+    pub m_entities: [Pointer<'a>; 2usize],
     /// # C++ Info
     /// - name: `priority`(ctype: `enum ConstraintPriority`)
     /// - offset: ` 28`(x86)/` 56`(x86_64)
@@ -84,7 +86,7 @@ pub struct hkpConstraintInstance<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "listeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "listeners"))]
-    pub m_listeners: hkpConstraintInstanceSmallArraySerializeOverrideType,
+    pub m_listeners: hkpConstraintInstanceSmallArraySerializeOverrideType<'a>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 40`(x86)/` 80`(x86_64)
@@ -107,7 +109,7 @@ pub struct hkpConstraintInstance<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "internal"))]
     #[cfg_attr(feature = "serde", serde(rename = "internal"))]
-    pub m_internal: Pointer,
+    pub m_internal: Pointer<'a>,
     /// # C++ Info
     /// - name: `uid`(ctype: `hkUint32`)
     /// - offset: ` 52`(x86)/`104`(x86_64)
@@ -115,7 +117,7 @@ pub struct hkpConstraintInstance<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "uid"))]
     #[cfg_attr(feature = "serde", serde(rename = "uid"))]
-    pub m_uid: u32,
+    pub m_uid: U32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -129,14 +131,14 @@ const _: () = {
             _serde::__private::Signature::new(0x34eba5f)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_owner.get());
-            v.push(self.m_data.get());
-            v.push(self.m_constraintModifiers.get());
-            v.extend(self.m_entities.iter().map(|ptr| ptr.get()));
+            v.push(&self.m_owner);
+            v.push(&self.m_data);
+            v.push(&self.m_constraintModifiers);
+            v.extend(self.m_entities.iter());
             v.extend(self.m_listeners.deps_indexes());
-            v.push(self.m_internal.get());
+            v.push(&self.m_internal);
             v
         }
     }
@@ -147,6 +149,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x34eba5f)));
             let mut serializer = __serializer
                 .serialize_struct("hkpConstraintInstance", class_meta, (56u64, 112u64))?;
@@ -272,10 +275,14 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_owner: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_constraintModifiers: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_entities: _serde::__private::Option<[Pointer; 2usize]> = _serde::__private::None;
+                    let mut m_owner: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_constraintModifiers: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_entities: _serde::__private::Option<
+                        [Pointer<'de>; 2usize],
+                    > = _serde::__private::None;
                     let mut m_priority: _serde::__private::Option<ConstraintPriority> = _serde::__private::None;
                     let mut m_wantRuntime: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_destructionRemapInfo: _serde::__private::Option<
@@ -286,8 +293,8 @@ const _: () = {
                     > = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
-                    let mut m_internal: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_uid: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_internal: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_uid: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     for i in 0..12usize {
                         match i {
                             0usize => {
@@ -297,7 +304,7 @@ const _: () = {
                                     );
                                 }
                                 m_owner = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -312,7 +319,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -331,7 +338,7 @@ const _: () = {
                                     );
                                 }
                                 m_constraintModifiers = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -348,7 +355,9 @@ const _: () = {
                                     );
                                 }
                                 m_entities = _serde::__private::Some(
-                                    match __A::next_value::<[Pointer; 2usize]>(&mut __map) {
+                                    match __A::next_value::<
+                                        [Pointer<'de>; 2usize],
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -472,7 +481,7 @@ const _: () = {
                                     );
                                 }
                                 m_internal = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -487,7 +496,7 @@ const _: () = {
                                     );
                                 }
                                 m_uid = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -628,9 +637,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_constraintModifiers: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_entities: _serde::__private::Option<[Pointer; 2usize]> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_constraintModifiers: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_entities: _serde::__private::Option<
+                        [Pointer<'de>; 2usize],
+                    > = _serde::__private::None;
                     let mut m_priority: _serde::__private::Option<ConstraintPriority> = _serde::__private::None;
                     let mut m_wantRuntime: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_destructionRemapInfo: _serde::__private::Option<
@@ -658,7 +671,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -686,7 +699,7 @@ const _: () = {
                                     );
                                 }
                                 m_constraintModifiers = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -712,7 +725,9 @@ const _: () = {
                                     );
                                 }
                                 m_entities = _serde::__private::Some(
-                                    match __A::next_value::<[Pointer; 2usize]>(&mut __map) {
+                                    match __A::next_value::<
+                                        [Pointer<'de>; 2usize],
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -942,15 +957,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpConstraintInstance {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_data,
                         m_constraintModifiers,
@@ -1141,19 +1158,19 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
-                        2u8 => _serde::__private::Ok(__Field::__field2),
-                        3u8 => _serde::__private::Ok(__Field::__field3),
-                        4u8 => _serde::__private::Ok(__Field::__field4),
-                        5u8 => _serde::__private::Ok(__Field::__field5),
-                        6u8 => _serde::__private::Ok(__Field::__field6),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(2u8) => _serde::__private::Ok(__Field::__field2),
+                        U8::Number(3u8) => _serde::__private::Ok(__Field::__field3),
+                        U8::Number(4u8) => _serde::__private::Ok(__Field::__field4),
+                        U8::Number(5u8) => _serde::__private::Ok(__Field::__field5),
+                        U8::Number(6u8) => _serde::__private::Ok(__Field::__field6),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -1345,15 +1362,15 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
-                        2u8 => _serde::__private::Ok(__Field::__field2),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(2u8) => _serde::__private::Ok(__Field::__field2),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

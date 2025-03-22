@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbProxyModifierProxyInfo {
+pub struct hkbProxyModifierProxyInfo<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkbProxyModifierProxyInfo {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `dynamicFriction`(ctype: `hkReal`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -71,7 +72,7 @@ pub struct hkbProxyModifierProxyInfo {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "userPlanes"))]
     #[cfg_attr(feature = "serde", serde(rename = "userPlanes"))]
-    pub m_userPlanes: u32,
+    pub m_userPlanes: U32<'a>,
     /// # C++ Info
     /// - name: `maxCharacterSpeedForSolver`(ctype: `hkReal`)
     /// - offset: ` 44`(x86)/` 44`(x86_64)
@@ -113,7 +114,7 @@ pub struct hkbProxyModifierProxyInfo {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "maxCastIterations"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxCastIterations"))]
-    pub m_maxCastIterations: i32,
+    pub m_maxCastIterations: I32<'a>,
     /// # C++ Info
     /// - name: `refreshManifoldInCheckSupport`(ctype: `hkBool`)
     /// - offset: ` 68`(x86)/` 68`(x86_64)
@@ -127,7 +128,7 @@ pub struct hkbProxyModifierProxyInfo {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbProxyModifierProxyInfo {
+    impl<'a> _serde::HavokClass for hkbProxyModifierProxyInfo<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbProxyModifierProxyInfo"
@@ -137,18 +138,19 @@ const _: () = {
             _serde::__private::Signature::new(0x39de637e)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkbProxyModifierProxyInfo {
+    impl<'a> _serde::Serialize for hkbProxyModifierProxyInfo<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x39de637e)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -198,7 +200,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbProxyModifierProxyInfo {
+    impl<'de> _serde::Deserialize<'de> for hkbProxyModifierProxyInfo<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -280,7 +282,7 @@ const _: () = {
                 }
             }
             struct __hkbProxyModifierProxyInfoVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbProxyModifierProxyInfo>,
+                marker: _serde::__private::PhantomData<hkbProxyModifierProxyInfo<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -288,7 +290,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkbProxyModifierProxyInfoVisitor<'de> {
-                type Value = hkbProxyModifierProxyInfo;
+                type Value = hkbProxyModifierProxyInfo<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -312,7 +314,7 @@ const _: () = {
                     let mut m_up: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_keepDistance: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_contactAngleSensitivity: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_userPlanes: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_userPlanes: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     let mut m_maxCharacterSpeedForSolver: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
@@ -320,7 +322,7 @@ const _: () = {
                     let mut m_characterMass: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_maxSlope: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_penetrationRecoverySpeed: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxCastIterations: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_maxCastIterations: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_refreshManifoldInCheckSupport: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
@@ -440,7 +442,7 @@ const _: () = {
                                     );
                                 }
                                 m_userPlanes = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -550,7 +552,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxCastIterations = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -749,7 +751,7 @@ const _: () = {
                     let mut m_up: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_keepDistance: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_contactAngleSensitivity: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_userPlanes: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_userPlanes: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     let mut m_maxCharacterSpeedForSolver: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
@@ -757,7 +759,7 @@ const _: () = {
                     let mut m_characterMass: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_maxSlope: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_penetrationRecoverySpeed: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_maxCastIterations: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_maxCastIterations: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_refreshManifoldInCheckSupport: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
@@ -941,7 +943,7 @@ const _: () = {
                                     );
                                 }
                                 m_userPlanes = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1105,7 +1107,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxCastIterations = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1310,7 +1312,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbProxyModifierProxyInfo {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_dynamicFriction,
                         m_staticFriction,
                         m_keepContactTolerance,

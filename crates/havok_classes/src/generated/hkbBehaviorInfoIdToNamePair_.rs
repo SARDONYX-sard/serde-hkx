@@ -22,7 +22,8 @@ pub struct hkbBehaviorInfoIdToNamePair<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `behaviorName`(ctype: `hkStringPtr`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -52,7 +53,7 @@ pub struct hkbBehaviorInfoIdToNamePair<'a> {
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "id"))]
     #[cfg_attr(feature = "serde", serde(rename = "id"))]
-    pub m_id: i16,
+    pub m_id: I16<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -66,7 +67,7 @@ const _: () = {
             _serde::__private::Signature::new(0x35a0439a)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
@@ -78,6 +79,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x35a0439a)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -183,7 +185,7 @@ const _: () = {
                     let mut m_behaviorName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_nodeName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_toolType: _serde::__private::Option<ToolNodeType> = _serde::__private::None;
-                    let mut m_id: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_id: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     for i in 0..4usize {
                         match i {
                             0usize => {
@@ -245,7 +247,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 1usize, 1usize)?;
                                 m_id = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -310,7 +312,7 @@ const _: () = {
                     let mut m_behaviorName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_nodeName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_toolType: _serde::__private::Option<ToolNodeType> = _serde::__private::None;
-                    let mut m_id: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_id: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -409,7 +411,7 @@ const _: () = {
                                     );
                                 }
                                 m_id = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -464,7 +466,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbBehaviorInfoIdToNamePair {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_behaviorName,
                         m_nodeName,
                         m_toolType,
@@ -603,21 +605,21 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
-                        2u8 => _serde::__private::Ok(__Field::__field2),
-                        3u8 => _serde::__private::Ok(__Field::__field3),
-                        4u8 => _serde::__private::Ok(__Field::__field4),
-                        5u8 => _serde::__private::Ok(__Field::__field5),
-                        6u8 => _serde::__private::Ok(__Field::__field6),
-                        7u8 => _serde::__private::Ok(__Field::__field7),
-                        8u8 => _serde::__private::Ok(__Field::__field8),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(2u8) => _serde::__private::Ok(__Field::__field2),
+                        U8::Number(3u8) => _serde::__private::Ok(__Field::__field3),
+                        U8::Number(4u8) => _serde::__private::Ok(__Field::__field4),
+                        U8::Number(5u8) => _serde::__private::Ok(__Field::__field5),
+                        U8::Number(6u8) => _serde::__private::Ok(__Field::__field6),
+                        U8::Number(7u8) => _serde::__private::Ok(__Field::__field7),
+                        U8::Number(8u8) => _serde::__private::Ok(__Field::__field8),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

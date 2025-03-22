@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkVertexFormat {
+pub struct hkVertexFormat<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,25 +22,26 @@ pub struct hkVertexFormat {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `elements`(ctype: `struct hkVertexFormatElement[32]`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `256`(x86)/`256`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "elements"))]
     #[cfg_attr(feature = "serde", serde(rename = "elements"))]
-    pub m_elements: [hkVertexFormatElement; 32usize],
+    pub m_elements: [hkVertexFormatElement<'a>; 32usize],
     /// # C++ Info
     /// - name: `numElements`(ctype: `hkInt32`)
     /// - offset: `256`(x86)/`256`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numElements"))]
     #[cfg_attr(feature = "serde", serde(rename = "numElements"))]
-    pub m_numElements: i32,
+    pub m_numElements: I32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkVertexFormat {
+    impl<'a> _serde::HavokClass for hkVertexFormat<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkVertexFormat"
@@ -50,25 +51,26 @@ const _: () = {
             _serde::__private::Signature::new(0xf11e3ff7)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_elements
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
     }
-    impl _serde::Serialize for hkVertexFormat {
+    impl<'a> _serde::Serialize for hkVertexFormat<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xf11e3ff7)));
             let mut serializer = __serializer
                 .serialize_struct("hkVertexFormat", class_meta, (260u64, 260u64))?;
@@ -91,7 +93,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkVertexFormat {
+    impl<'de> _serde::Deserialize<'de> for hkVertexFormat<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -141,14 +143,14 @@ const _: () = {
                 }
             }
             struct __hkVertexFormatVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkVertexFormat>,
+                marker: _serde::__private::PhantomData<hkVertexFormat<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkVertexFormatVisitor<'de> {
-                type Value = hkVertexFormat;
+                type Value = hkVertexFormat<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -166,7 +168,7 @@ const _: () = {
                     let mut m_elements: _serde::__private::Option<
                         [hkVertexFormatElement; 32usize],
                     > = _serde::__private::None;
-                    let mut m_numElements: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numElements: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     for i in 0..2usize {
                         match i {
                             0usize => {
@@ -197,7 +199,7 @@ const _: () = {
                                     );
                                 }
                                 m_numElements = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -243,7 +245,7 @@ const _: () = {
                     let mut m_elements: _serde::__private::Option<
                         [hkVertexFormatElement; 32usize],
                     > = _serde::__private::None;
-                    let mut m_numElements: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numElements: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -294,7 +296,7 @@ const _: () = {
                                     );
                                 }
                                 m_numElements = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -329,7 +331,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkVertexFormat {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_elements,
                         m_numElements,
                     })
@@ -614,25 +616,25 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
-                        2u8 => _serde::__private::Ok(__Field::__field2),
-                        3u8 => _serde::__private::Ok(__Field::__field3),
-                        4u8 => _serde::__private::Ok(__Field::__field4),
-                        5u8 => _serde::__private::Ok(__Field::__field5),
-                        6u8 => _serde::__private::Ok(__Field::__field6),
-                        7u8 => _serde::__private::Ok(__Field::__field7),
-                        8u8 => _serde::__private::Ok(__Field::__field8),
-                        9u8 => _serde::__private::Ok(__Field::__field9),
-                        10u8 => _serde::__private::Ok(__Field::__field10),
-                        11u8 => _serde::__private::Ok(__Field::__field11),
-                        12u8 => _serde::__private::Ok(__Field::__field12),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(2u8) => _serde::__private::Ok(__Field::__field2),
+                        U8::Number(3u8) => _serde::__private::Ok(__Field::__field3),
+                        U8::Number(4u8) => _serde::__private::Ok(__Field::__field4),
+                        U8::Number(5u8) => _serde::__private::Ok(__Field::__field5),
+                        U8::Number(6u8) => _serde::__private::Ok(__Field::__field6),
+                        U8::Number(7u8) => _serde::__private::Ok(__Field::__field7),
+                        U8::Number(8u8) => _serde::__private::Ok(__Field::__field8),
+                        U8::Number(9u8) => _serde::__private::Ok(__Field::__field9),
+                        U8::Number(10u8) => _serde::__private::Ok(__Field::__field10),
+                        U8::Number(11u8) => _serde::__private::Ok(__Field::__field11),
+                        U8::Number(12u8) => _serde::__private::Ok(__Field::__field12),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -872,25 +874,25 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
-                        2u8 => _serde::__private::Ok(__Field::__field2),
-                        3u8 => _serde::__private::Ok(__Field::__field3),
-                        4u8 => _serde::__private::Ok(__Field::__field4),
-                        5u8 => _serde::__private::Ok(__Field::__field5),
-                        6u8 => _serde::__private::Ok(__Field::__field6),
-                        7u8 => _serde::__private::Ok(__Field::__field7),
-                        8u8 => _serde::__private::Ok(__Field::__field8),
-                        9u8 => _serde::__private::Ok(__Field::__field9),
-                        10u8 => _serde::__private::Ok(__Field::__field10),
-                        11u8 => _serde::__private::Ok(__Field::__field11),
-                        12u8 => _serde::__private::Ok(__Field::__field12),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(2u8) => _serde::__private::Ok(__Field::__field2),
+                        U8::Number(3u8) => _serde::__private::Ok(__Field::__field3),
+                        U8::Number(4u8) => _serde::__private::Ok(__Field::__field4),
+                        U8::Number(5u8) => _serde::__private::Ok(__Field::__field5),
+                        U8::Number(6u8) => _serde::__private::Ok(__Field::__field6),
+                        U8::Number(7u8) => _serde::__private::Ok(__Field::__field7),
+                        U8::Number(8u8) => _serde::__private::Ok(__Field::__field8),
+                        U8::Number(9u8) => _serde::__private::Ok(__Field::__field9),
+                        U8::Number(10u8) => _serde::__private::Ok(__Field::__field10),
+                        U8::Number(11u8) => _serde::__private::Ok(__Field::__field11),
+                        U8::Number(12u8) => _serde::__private::Ok(__Field::__field12),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -1126,12 +1128,24 @@ const _: () = {
                 #[inline]
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
-                    Ok(HintFlags::from_bits_retain(__value as _))
+                    match __value {
+                        U8::Number(__value) => {
+                            Ok(HintFlags::from_bits_retain(__value as _))
+                        }
+                        _ => {
+                            Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Uint8(__value as _),
+                                    &"HintFlags(U8) Number",
+                                ),
+                            )
+                        }
+                    }
                 }
                 fn visit_stringptr<__E>(
                     self,

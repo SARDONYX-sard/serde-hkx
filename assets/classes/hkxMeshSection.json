@@ -5,14 +5,14 @@
   "size_x86": 40,
   "size_x86_64": 64,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "vertexBuffer",
       "class_ref": "hkxVertexBuffer",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkxVertexBuffer*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -27,7 +27,7 @@
     {
       "name": "indexBuffers",
       "class_ref": "hkxIndexBuffer",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkxIndexBuffer*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -42,7 +42,7 @@
     {
       "name": "material",
       "class_ref": "hkxMaterial",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkxMaterial*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -57,7 +57,7 @@
     {
       "name": "userChannels",
       "class_ref": "hkReferencedObject",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkReferencedObject*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",

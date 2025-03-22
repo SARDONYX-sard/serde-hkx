@@ -103,7 +103,7 @@ impl OutFormat {
             _ => {
                 return Err(Error::UnsupportedExtensionPath {
                     path: path.to_path_buf(),
-                })
+                });
             }
         })
     }
@@ -146,7 +146,7 @@ impl OutFormat {
             _ => {
                 return Err(Error::UnsupportedExtension {
                     ext: ext.to_string_lossy().to_string(),
-                })
+                });
             }
         })
     }

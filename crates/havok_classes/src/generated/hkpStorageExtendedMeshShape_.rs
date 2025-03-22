@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpStorageExtendedMeshShape {
+pub struct hkpStorageExtendedMeshShape<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,29 +22,31 @@ pub struct hkpStorageExtendedMeshShape {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpExtendedMeshShape,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpExtendedMeshShape<'a>,
     /// # C++ Info
     /// - name: `meshstorage`(ctype: `hkArray<hkpStorageExtendedMeshShapeMeshSubpartStorage*>`)
     /// - offset: `240`(x86)/`336`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "meshstorage"))]
     #[cfg_attr(feature = "serde", serde(rename = "meshstorage"))]
-    pub m_meshstorage: Vec<Pointer>,
+    pub m_meshstorage: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `shapestorage`(ctype: `hkArray<hkpStorageExtendedMeshShapeShapeSubpartStorage*>`)
     /// - offset: `252`(x86)/`352`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "shapestorage"))]
     #[cfg_attr(feature = "serde", serde(rename = "shapestorage"))]
-    pub m_shapestorage: Vec<Pointer>,
+    pub m_shapestorage: Vec<Pointer<'a>>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpStorageExtendedMeshShape {
+    impl<'a> _serde::HavokClass for hkpStorageExtendedMeshShape<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpStorageExtendedMeshShape"
@@ -54,17 +56,17 @@ const _: () = {
             _serde::__private::Signature::new(0xb469efbc)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.parent.m_embeddedTrianglesSubpart.deps_indexes());
-            v.push(self.parent.m_materialClass.get());
+            v.push(&self.parent.m_materialClass);
             v.extend(
                 self
                     .parent
                     .m_trianglesSubparts
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(
                 self
@@ -72,20 +74,21 @@ const _: () = {
                     .m_shapesSubparts
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
-            v.extend(self.m_meshstorage.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_shapestorage.iter().map(|ptr| ptr.get()));
+            v.extend(self.m_meshstorage.iter());
+            v.extend(self.m_shapestorage.iter());
             v
         }
     }
-    impl _serde::Serialize for hkpStorageExtendedMeshShape {
+    impl<'a> _serde::Serialize for hkpStorageExtendedMeshShape<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xb469efbc)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -198,7 +201,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpStorageExtendedMeshShape {
+    impl<'de> _serde::Deserialize<'de> for hkpStorageExtendedMeshShape<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -280,7 +283,7 @@ const _: () = {
                 }
             }
             struct __hkpStorageExtendedMeshShapeVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpStorageExtendedMeshShape>,
+                marker: _serde::__private::PhantomData<hkpStorageExtendedMeshShape<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -288,7 +291,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpStorageExtendedMeshShapeVisitor<'de> {
-                type Value = hkpStorageExtendedMeshShape;
+                type Value = hkpStorageExtendedMeshShape<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -307,8 +310,12 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_meshstorage: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_shapestorage: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_meshstorage: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_shapestorage: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
                     for i in 0..2usize {
                         match i {
                             0usize => {
@@ -320,7 +327,7 @@ const _: () = {
                                     );
                                 }
                                 m_meshstorage = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -337,7 +344,7 @@ const _: () = {
                                     );
                                 }
                                 m_shapestorage = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -390,26 +397,34 @@ const _: () = {
                         CollectionType,
                     > = _serde::__private::None;
                     let mut m_embeddedTrianglesSubpart: _serde::__private::Option<
-                        hkpExtendedMeshShapeTrianglesSubpart,
+                        hkpExtendedMeshShapeTrianglesSubpart<'de>,
                     > = _serde::__private::None;
                     let mut m_aabbHalfExtents: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_aabbCenter: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_numBitsForSubpartIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numBitsForSubpartIndex: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_trianglesSubparts: _serde::__private::Option<
-                        Vec<hkpExtendedMeshShapeTrianglesSubpart>,
+                        Vec<hkpExtendedMeshShapeTrianglesSubpart<'de>>,
                     > = _serde::__private::None;
                     let mut m_shapesSubparts: _serde::__private::Option<
-                        Vec<hkpExtendedMeshShapeShapesSubpart>,
+                        Vec<hkpExtendedMeshShapeShapesSubpart<'de>>,
                     > = _serde::__private::None;
-                    let mut m_weldingInfo: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_weldingInfo: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
                     let mut m_weldingType: _serde::__private::Option<WeldingType> = _serde::__private::None;
                     let mut m_defaultCollisionFilterInfo: _serde::__private::Option<
-                        u32,
+                        U32<'de>,
                     > = _serde::__private::None;
-                    let mut m_cachedNumChildShapes: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_cachedNumChildShapes: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
                     let mut m_triangleRadius: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_meshstorage: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_shapestorage: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_meshstorage: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_shapestorage: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -513,7 +528,7 @@ const _: () = {
                                 }
                                 m_embeddedTrianglesSubpart = _serde::__private::Some(
                                     match __A::next_value::<
-                                        hkpExtendedMeshShapeTrianglesSubpart,
+                                        hkpExtendedMeshShapeTrianglesSubpart<'de>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -594,7 +609,7 @@ const _: () = {
                                     );
                                 }
                                 m_numBitsForSubpartIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -623,7 +638,7 @@ const _: () = {
                                 }
                                 m_trianglesSubparts = _serde::__private::Some(
                                     match __A::next_value::<
-                                        Vec<hkpExtendedMeshShapeTrianglesSubpart>,
+                                        Vec<hkpExtendedMeshShapeTrianglesSubpart<'de>>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -651,7 +666,7 @@ const _: () = {
                                 }
                                 m_shapesSubparts = _serde::__private::Some(
                                     match __A::next_value::<
-                                        Vec<hkpExtendedMeshShapeShapesSubpart>,
+                                        Vec<hkpExtendedMeshShapeShapesSubpart<'de>>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -678,7 +693,7 @@ const _: () = {
                                     );
                                 }
                                 m_weldingInfo = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -732,7 +747,7 @@ const _: () = {
                                     );
                                 }
                                 m_defaultCollisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -760,7 +775,7 @@ const _: () = {
                                     );
                                 }
                                 m_cachedNumChildShapes = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -812,7 +827,7 @@ const _: () = {
                                     );
                                 }
                                 m_meshstorage = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -838,7 +853,7 @@ const _: () = {
                                     );
                                 }
                                 m_shapestorage = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1040,26 +1055,28 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         ..Default::default()
                     };
                     let parent = hkpShapeCollection {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_disableWelding,
                         m_collectionType,
                     };
                     let parent = hkpExtendedMeshShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_embeddedTrianglesSubpart,
                         m_aabbHalfExtents,
@@ -1076,7 +1093,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpStorageExtendedMeshShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_meshstorage,
                         m_shapestorage,

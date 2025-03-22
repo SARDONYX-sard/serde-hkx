@@ -22,11 +22,13 @@ pub struct hkpNamedMeshMaterial<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpMeshMaterial,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpMeshMaterial<'a>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
@@ -48,7 +50,7 @@ const _: () = {
             _serde::__private::Signature::new(0x66b42df1)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
@@ -60,6 +62,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x66b42df1)));
             let mut serializer = __serializer
                 .serialize_struct("hkpNamedMeshMaterial", class_meta, (8u64, 16u64))?;
@@ -195,7 +198,7 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_filterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_filterInfo: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -219,7 +222,7 @@ const _: () = {
                                     );
                                 }
                                 m_filterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -278,12 +281,12 @@ const _: () = {
                     };
                     let __ptr = None;
                     let parent = hkpMeshMaterial {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_filterInfo,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpNamedMeshMaterial {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_name,
                     })

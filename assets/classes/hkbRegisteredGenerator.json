@@ -5,14 +5,14 @@
   "size_x86": 64,
   "size_x86_64": 96,
   "parent": "hkbBindable",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "generator",
       "class_ref": "hkbGenerator",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbGenerator*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -26,7 +26,7 @@
     },
     {
       "name": "relativePosition",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -40,7 +40,7 @@
     },
     {
       "name": "relativeDirection",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",

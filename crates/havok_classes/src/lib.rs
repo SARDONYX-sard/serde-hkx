@@ -40,12 +40,12 @@ pub use generated::*;
 
 #[cfg(test)]
 mod tests {
-    use crate::BlendModeFunction;
+    use super::*;
 
     #[test]
     fn main() {
-        let class = crate::BGSGamebryoSequenceGenerator::default();
-        dbg!(BlendModeFunction::BMF_PERCENT);
+        let class = hkAabbUint32::default();
+        dbg!(hkColor_::ExtendedColors::SLATEGRAY);
         dbg!(class);
     }
 }

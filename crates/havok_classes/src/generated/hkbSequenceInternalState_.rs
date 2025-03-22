@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbSequenceInternalState {
+pub struct hkbSequenceInternalState<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,39 +22,41 @@ pub struct hkbSequenceInternalState {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `nextSampleEvents`(ctype: `hkArray<hkInt32>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "nextSampleEvents"))]
     #[cfg_attr(feature = "serde", serde(rename = "nextSampleEvents"))]
-    pub m_nextSampleEvents: Vec<i32>,
+    pub m_nextSampleEvents: Vec<I32<'a>>,
     /// # C++ Info
     /// - name: `nextSampleReals`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "nextSampleReals"))]
     #[cfg_attr(feature = "serde", serde(rename = "nextSampleReals"))]
-    pub m_nextSampleReals: Vec<i32>,
+    pub m_nextSampleReals: Vec<I32<'a>>,
     /// # C++ Info
     /// - name: `nextSampleBools`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "nextSampleBools"))]
     #[cfg_attr(feature = "serde", serde(rename = "nextSampleBools"))]
-    pub m_nextSampleBools: Vec<i32>,
+    pub m_nextSampleBools: Vec<I32<'a>>,
     /// # C++ Info
     /// - name: `nextSampleInts`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "nextSampleInts"))]
     #[cfg_attr(feature = "serde", serde(rename = "nextSampleInts"))]
-    pub m_nextSampleInts: Vec<i32>,
+    pub m_nextSampleInts: Vec<I32<'a>>,
     /// # C++ Info
     /// - name: `time`(ctype: `hkReal`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
@@ -72,7 +74,7 @@ pub struct hkbSequenceInternalState {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbSequenceInternalState {
+    impl<'a> _serde::HavokClass for hkbSequenceInternalState<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbSequenceInternalState"
@@ -82,18 +84,19 @@ const _: () = {
             _serde::__private::Signature::new(0x419b9a05)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkbSequenceInternalState {
+    impl<'a> _serde::Serialize for hkbSequenceInternalState<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x419b9a05)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -141,7 +144,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbSequenceInternalState {
+    impl<'de> _serde::Deserialize<'de> for hkbSequenceInternalState<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -199,7 +202,7 @@ const _: () = {
                 }
             }
             struct __hkbSequenceInternalStateVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbSequenceInternalState>,
+                marker: _serde::__private::PhantomData<hkbSequenceInternalState<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -207,7 +210,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkbSequenceInternalStateVisitor<'de> {
-                type Value = hkbSequenceInternalState;
+                type Value = hkbSequenceInternalState<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -226,10 +229,16 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_nextSampleEvents: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
-                    let mut m_nextSampleReals: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
-                    let mut m_nextSampleBools: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
-                    let mut m_nextSampleInts: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
+                    let mut m_nextSampleEvents: _serde::__private::Option<
+                        Vec<I32<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_nextSampleReals: _serde::__private::Option<
+                        Vec<I32<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_nextSampleBools: _serde::__private::Option<
+                        Vec<I32<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_nextSampleInts: _serde::__private::Option<Vec<I32<'de>>> = _serde::__private::None;
                     let mut m_time: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_isEnabled: _serde::__private::Option<bool> = _serde::__private::None;
                     for i in 0..6usize {
@@ -243,7 +252,7 @@ const _: () = {
                                     );
                                 }
                                 m_nextSampleEvents = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                    match __A::next_value::<Vec<I32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -260,7 +269,7 @@ const _: () = {
                                     );
                                 }
                                 m_nextSampleReals = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                    match __A::next_value::<Vec<I32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -277,7 +286,7 @@ const _: () = {
                                     );
                                 }
                                 m_nextSampleBools = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                    match __A::next_value::<Vec<I32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -294,7 +303,7 @@ const _: () = {
                                     );
                                 }
                                 m_nextSampleInts = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                    match __A::next_value::<Vec<I32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -415,10 +424,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_nextSampleEvents: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
-                    let mut m_nextSampleReals: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
-                    let mut m_nextSampleBools: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
-                    let mut m_nextSampleInts: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
+                    let mut m_nextSampleEvents: _serde::__private::Option<
+                        Vec<I32<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_nextSampleReals: _serde::__private::Option<
+                        Vec<I32<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_nextSampleBools: _serde::__private::Option<
+                        Vec<I32<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_nextSampleInts: _serde::__private::Option<Vec<I32<'de>>> = _serde::__private::None;
                     let mut m_time: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_isEnabled: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
@@ -443,7 +458,7 @@ const _: () = {
                                     );
                                 }
                                 m_nextSampleEvents = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                    match __A::next_value::<Vec<I32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -469,7 +484,7 @@ const _: () = {
                                     );
                                 }
                                 m_nextSampleReals = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                    match __A::next_value::<Vec<I32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -495,7 +510,7 @@ const _: () = {
                                     );
                                 }
                                 m_nextSampleBools = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                    match __A::next_value::<Vec<I32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -521,7 +536,7 @@ const _: () = {
                                     );
                                 }
                                 m_nextSampleInts = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                    match __A::next_value::<Vec<I32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -653,15 +668,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbSequenceInternalState {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_nextSampleEvents,
                         m_nextSampleReals,

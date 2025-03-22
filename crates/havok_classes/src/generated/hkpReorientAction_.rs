@@ -22,7 +22,8 @@ pub struct hkpReorientAction<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -69,11 +70,11 @@ const _: () = {
             _serde::__private::Signature::new(0x2dc0ec6a)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.m_world.get());
-            v.push(self.parent.parent.m_island.get());
-            v.push(self.parent.m_entity.get());
+            v.push(&self.parent.parent.m_world);
+            v.push(&self.parent.parent.m_island);
+            v.push(&self.parent.m_entity);
             v
         }
     }
@@ -84,6 +85,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x2dc0ec6a)));
             let mut serializer = __serializer
                 .serialize_struct("hkpReorientAction", class_meta, (80u64, 112u64))?;
@@ -335,7 +337,7 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_entity: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_entity: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_rotationAxis: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_upAxis: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_strength: _serde::__private::Option<f32> = _serde::__private::None;
@@ -410,7 +412,7 @@ const _: () = {
                                     );
                                 }
                                 m_entity = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -596,27 +598,29 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpAction {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkpUnaryAction {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_entity,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpReorientAction {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_rotationAxis,
                         m_upAxis,

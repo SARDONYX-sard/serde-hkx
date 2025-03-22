@@ -5,14 +5,14 @@
   "size_x86": 88,
   "size_x86_64": 160,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "nearbyCharacters",
       "class_ref": "hkbCharacter",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkbCharacter*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -26,7 +26,7 @@
     },
     {
       "name": "currentLod",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -40,7 +40,7 @@
     },
     {
       "name": "numTracksInLod",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -54,7 +54,7 @@
     },
     {
       "name": "name",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -68,7 +68,7 @@
     },
     {
       "name": "ragdollDriver",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -82,7 +82,7 @@
     },
     {
       "name": "characterControllerDriver",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -96,7 +96,7 @@
     },
     {
       "name": "footIkDriver",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -110,7 +110,7 @@
     },
     {
       "name": "handIkDriver",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -125,7 +125,7 @@
     {
       "name": "setup",
       "class_ref": "hkbCharacterSetup",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbCharacterSetup*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -140,7 +140,7 @@
     {
       "name": "behaviorGraph",
       "class_ref": "hkbBehaviorGraph",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbBehaviorGraph*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -155,7 +155,7 @@
     {
       "name": "projectData",
       "class_ref": "hkbProjectData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbProjectData*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -169,7 +169,7 @@
     },
     {
       "name": "animationBindingSet",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -183,7 +183,7 @@
     },
     {
       "name": "raycastInterface",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -197,7 +197,7 @@
     },
     {
       "name": "world",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -211,7 +211,7 @@
     },
     {
       "name": "eventQueue",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -225,7 +225,7 @@
     },
     {
       "name": "worldFromModel",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -239,7 +239,7 @@
     },
     {
       "name": "poseLocal",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkSimpleArray<void>",
       "vtype": "TYPE_SIMPLEARRAY",
       "vsubtype": "TYPE_VOID",
@@ -253,7 +253,7 @@
     },
     {
       "name": "deleteWorldFromModel",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -267,7 +267,7 @@
     },
     {
       "name": "deletePoseLocal",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

@@ -4,13 +4,13 @@
   "signature": "0xcbfc95a4",
   "size_x86": 16,
   "size_x86_64": 16,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "a",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -24,7 +24,7 @@
     },
     {
       "name": "b",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -38,7 +38,7 @@
     },
     {
       "name": "c",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -52,7 +52,7 @@
     },
     {
       "name": "material",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -66,7 +66,7 @@
     },
     {
       "name": "weldingInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -80,7 +80,7 @@
     },
     {
       "name": "transformIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",

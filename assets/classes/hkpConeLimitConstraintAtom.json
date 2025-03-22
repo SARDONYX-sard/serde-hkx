@@ -5,9 +5,9 @@
   "size_x86": 20,
   "size_x86_64": 20,
   "parent": "hkpConstraintAtom",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "MeasurementMode",
@@ -29,7 +29,7 @@
   "members": [
     {
       "name": "isEnabled",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -43,7 +43,7 @@
     },
     {
       "name": "twistAxisInA",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -57,7 +57,7 @@
     },
     {
       "name": "refAxisInB",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -72,7 +72,7 @@
     {
       "name": "angleMeasurementMode",
       "enum_ref": "MeasurementMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum MeasurementMode",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -86,7 +86,7 @@
     },
     {
       "name": "memOffsetToAngleOffset",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -100,7 +100,7 @@
     },
     {
       "name": "minAngle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -114,7 +114,7 @@
     },
     {
       "name": "maxAngle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -128,7 +128,7 @@
     },
     {
       "name": "angularLimitsTauFactor",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",

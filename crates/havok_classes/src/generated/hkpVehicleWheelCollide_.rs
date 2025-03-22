@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpVehicleWheelCollide {
+pub struct hkpVehicleWheelCollide<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkpVehicleWheelCollide {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `alreadyUsed`(ctype: `hkBool`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -41,11 +43,11 @@ pub struct hkpVehicleWheelCollide {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "type"))]
     #[cfg_attr(feature = "serde", serde(rename = "type"))]
-    pub m_type: u8,
+    pub m_type: U8<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpVehicleWheelCollide {
+    impl<'a> _serde::HavokClass for hkpVehicleWheelCollide<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpVehicleWheelCollide"
@@ -55,18 +57,19 @@ const _: () = {
             _serde::__private::Signature::new(0x4a50fcb)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpVehicleWheelCollide {
+    impl<'a> _serde::Serialize for hkpVehicleWheelCollide<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x4a50fcb)));
             let mut serializer = __serializer
                 .serialize_struct("hkpVehicleWheelCollide", class_meta, (12u64, 24u64))?;
@@ -86,7 +89,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpVehicleWheelCollide {
+    impl<'de> _serde::Deserialize<'de> for hkpVehicleWheelCollide<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -134,14 +137,14 @@ const _: () = {
                 }
             }
             struct __hkpVehicleWheelCollideVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpVehicleWheelCollide>,
+                marker: _serde::__private::PhantomData<hkpVehicleWheelCollide<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpVehicleWheelCollideVisitor<'de> {
-                type Value = hkpVehicleWheelCollide;
+                type Value = hkpVehicleWheelCollide<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -161,7 +164,7 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_alreadyUsed: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_type: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_type: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     for i in 0..2usize {
                         match i {
                             0usize => {
@@ -188,7 +191,7 @@ const _: () = {
                                     );
                                 }
                                 m_type = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -280,15 +283,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpVehicleWheelCollide {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_alreadyUsed,
                         ..Default::default()

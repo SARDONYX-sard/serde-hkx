@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkAabbUint32 {
+pub struct hkAabbUint32<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkAabbUint32 {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `min`(ctype: `hkUint32[3]`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -30,46 +31,46 @@ pub struct hkAabbUint32 {
     /// - flags: `ALIGN_16`
     #[cfg_attr(feature = "json_schema", schemars(rename = "min"))]
     #[cfg_attr(feature = "serde", serde(rename = "min"))]
-    pub m_min: [u32; 3usize],
+    pub m_min: [U32<'a>; 3usize],
     /// # C++ Info
     /// - name: `expansionMin`(ctype: `hkUint8[3]`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  3`(x86)/`  3`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "expansionMin"))]
     #[cfg_attr(feature = "serde", serde(rename = "expansionMin"))]
-    pub m_expansionMin: [u8; 3usize],
+    pub m_expansionMin: [U8<'a>; 3usize],
     /// # C++ Info
     /// - name: `expansionShift`(ctype: `hkUint8`)
     /// - offset: ` 15`(x86)/` 15`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "expansionShift"))]
     #[cfg_attr(feature = "serde", serde(rename = "expansionShift"))]
-    pub m_expansionShift: u8,
+    pub m_expansionShift: U8<'a>,
     /// # C++ Info
     /// - name: `max`(ctype: `hkUint32[3]`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "max"))]
     #[cfg_attr(feature = "serde", serde(rename = "max"))]
-    pub m_max: [u32; 3usize],
+    pub m_max: [U32<'a>; 3usize],
     /// # C++ Info
     /// - name: `expansionMax`(ctype: `hkUint8[3]`)
     /// - offset: ` 28`(x86)/` 28`(x86_64)
     /// - type_size: `  3`(x86)/`  3`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "expansionMax"))]
     #[cfg_attr(feature = "serde", serde(rename = "expansionMax"))]
-    pub m_expansionMax: [u8; 3usize],
+    pub m_expansionMax: [U8<'a>; 3usize],
     /// # C++ Info
     /// - name: `shapeKeyByte`(ctype: `hkUint8`)
     /// - offset: ` 31`(x86)/` 31`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "shapeKeyByte"))]
     #[cfg_attr(feature = "serde", serde(rename = "shapeKeyByte"))]
-    pub m_shapeKeyByte: u8,
+    pub m_shapeKeyByte: U8<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkAabbUint32 {
+    impl<'a> _serde::HavokClass for hkAabbUint32<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkAabbUint32"
@@ -79,18 +80,19 @@ const _: () = {
             _serde::__private::Signature::new(0x11e7c11)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkAabbUint32 {
+    impl<'a> _serde::Serialize for hkAabbUint32<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x11e7c11)));
             let mut serializer = __serializer
                 .serialize_struct("hkAabbUint32", class_meta, (32u64, 32u64))?;
@@ -129,7 +131,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkAabbUint32 {
+    impl<'de> _serde::Deserialize<'de> for hkAabbUint32<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -187,14 +189,14 @@ const _: () = {
                 }
             }
             struct __hkAabbUint32Visitor<'de> {
-                marker: _serde::__private::PhantomData<hkAabbUint32>,
+                marker: _serde::__private::PhantomData<hkAabbUint32<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkAabbUint32Visitor<'de> {
-                type Value = hkAabbUint32;
+                type Value = hkAabbUint32<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -209,12 +211,16 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_min: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;
-                    let mut m_expansionMin: _serde::__private::Option<[u8; 3usize]> = _serde::__private::None;
-                    let mut m_expansionShift: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_max: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;
-                    let mut m_expansionMax: _serde::__private::Option<[u8; 3usize]> = _serde::__private::None;
-                    let mut m_shapeKeyByte: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_min: _serde::__private::Option<[U32<'de>; 3usize]> = _serde::__private::None;
+                    let mut m_expansionMin: _serde::__private::Option<
+                        [U8<'de>; 3usize],
+                    > = _serde::__private::None;
+                    let mut m_expansionShift: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_max: _serde::__private::Option<[U32<'de>; 3usize]> = _serde::__private::None;
+                    let mut m_expansionMax: _serde::__private::Option<
+                        [U8<'de>; 3usize],
+                    > = _serde::__private::None;
+                    let mut m_shapeKeyByte: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     for i in 0..6usize {
                         match i {
                             0usize => {
@@ -224,7 +230,7 @@ const _: () = {
                                     );
                                 }
                                 m_min = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 3usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -241,7 +247,7 @@ const _: () = {
                                     );
                                 }
                                 m_expansionMin = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 3usize]>(&mut __map) {
+                                    match __A::next_value::<[U8<'de>; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -258,7 +264,7 @@ const _: () = {
                                     );
                                 }
                                 m_expansionShift = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -273,7 +279,7 @@ const _: () = {
                                     );
                                 }
                                 m_max = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 3usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -290,7 +296,7 @@ const _: () = {
                                     );
                                 }
                                 m_expansionMax = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 3usize]>(&mut __map) {
+                                    match __A::next_value::<[U8<'de>; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -307,7 +313,7 @@ const _: () = {
                                     );
                                 }
                                 m_shapeKeyByte = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -392,12 +398,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_min: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;
-                    let mut m_expansionMin: _serde::__private::Option<[u8; 3usize]> = _serde::__private::None;
-                    let mut m_expansionShift: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_max: _serde::__private::Option<[u32; 3usize]> = _serde::__private::None;
-                    let mut m_expansionMax: _serde::__private::Option<[u8; 3usize]> = _serde::__private::None;
-                    let mut m_shapeKeyByte: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_min: _serde::__private::Option<[U32<'de>; 3usize]> = _serde::__private::None;
+                    let mut m_expansionMin: _serde::__private::Option<
+                        [U8<'de>; 3usize],
+                    > = _serde::__private::None;
+                    let mut m_expansionShift: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_max: _serde::__private::Option<[U32<'de>; 3usize]> = _serde::__private::None;
+                    let mut m_expansionMax: _serde::__private::Option<
+                        [U8<'de>; 3usize],
+                    > = _serde::__private::None;
+                    let mut m_shapeKeyByte: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -418,7 +428,7 @@ const _: () = {
                                     );
                                 }
                                 m_min = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 3usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -444,7 +454,7 @@ const _: () = {
                                     );
                                 }
                                 m_expansionMin = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 3usize]>(&mut __map) {
+                                    match __A::next_value::<[U8<'de>; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -470,7 +480,7 @@ const _: () = {
                                     );
                                 }
                                 m_expansionShift = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -494,7 +504,7 @@ const _: () = {
                                     );
                                 }
                                 m_max = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 3usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -520,7 +530,7 @@ const _: () = {
                                     );
                                 }
                                 m_expansionMax = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 3usize]>(&mut __map) {
+                                    match __A::next_value::<[U8<'de>; 3usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -546,7 +556,7 @@ const _: () = {
                                     );
                                 }
                                 m_shapeKeyByte = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -627,7 +637,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkAabbUint32 {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_min,
                         m_expansionMin,
                         m_expansionShift,

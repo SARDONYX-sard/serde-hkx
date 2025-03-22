@@ -2,6 +2,7 @@ use crate::{
     cpp_info::{Enum, EnumItem, TypeKind},
     rust_gen::enum_or_flags::{
         cast_number_to_token, to_rust_storage_size_ident, to_rust_storage_type,
+        to_rust_wrapper_type,
     },
 };
 use proc_macro2::TokenStream;
@@ -22,10 +23,16 @@ pub fn impl_de_for_enum(one_enum: &Enum) -> TokenStream {
         )
     };
     if *vsubtype == TypeKind::Void {
-        tracing::info!("Skip automatic enum generation because this enum {enum_name} is a void storage type, indicating that it is not used.");
+        tracing::info!(
+            "Skip automatic enum generation because this enum {enum_name} is a void storage type, indicating that it is not used."
+        );
         return quote! {};
     };
     let enum_ident = syn::Ident::new(enum_name, proc_macro2::Span::call_site());
+
+    // e.g. `U64`
+    let rust_wrapper_type = to_rust_wrapper_type(vsubtype)
+        .unwrap_or_else(|| panic!("Unsupported enum storage type: {vsubtype}"));
 
     let mut values = Vec::new();
     let mut fields_str = Vec::new();
@@ -45,7 +52,7 @@ pub fn impl_de_for_enum(one_enum: &Enum) -> TokenStream {
         let num_with_suffix = cast_number_to_token(enum_item, vsubtype);
         // `3u64 => _serde::__private::Ok(__Field::__field3)`
         visit_number_matcher.push(quote! {
-            #num_with_suffix => _serde::__private::Ok(__Field::#field_variant)
+            #rust_wrapper_type::Number(#num_with_suffix) => _serde::__private::Ok(__Field::#field_variant)
         });
 
         // # Example
@@ -79,6 +86,8 @@ pub fn impl_de_for_enum(one_enum: &Enum) -> TokenStream {
         // To define enum. e.g.  `__field1`, `__field2`, ...
         field_variants.push(field_variant);
     }
+
+    // e.g. `u64`
     let rust_storage_type = to_rust_storage_type(vsubtype)
         .unwrap_or_else(|| panic!("Unsupported enum storage type: {vsubtype}"));
     let expected_msg_in_visit_number = format!(
@@ -91,8 +100,6 @@ pub fn impl_de_for_enum(one_enum: &Enum) -> TokenStream {
         .unwrap_or_else(|| panic!("Unsupported enum storage type: {vsubtype}"));
     let visitor_method_for_binary =
         quote::format_ident!("visit_{}", storage_size_ident.to_string().to_lowercase());
-    let rust_storage_type = to_rust_storage_type(vsubtype)
-        .unwrap_or_else(|| panic!("Unsupported enum storage type: {vsubtype}"));
 
     quote! {
         #[doc(hidden)]
@@ -123,7 +130,7 @@ pub fn impl_de_for_enum(one_enum: &Enum) -> TokenStream {
                         }
                         fn #visitor_method_for_binary<__E>(
                             self,
-                            __value: #rust_storage_type,
+                            __value: #rust_wrapper_type<'de>,
                         ) -> _serde::__private::Result<Self::Value, __E>
                         where
                             __E: _serde::de::Error,

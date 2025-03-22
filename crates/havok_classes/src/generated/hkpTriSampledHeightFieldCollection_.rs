@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpTriSampledHeightFieldCollection {
+pub struct hkpTriSampledHeightFieldCollection<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,18 +22,20 @@ pub struct hkpTriSampledHeightFieldCollection {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpShapeCollection,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpShapeCollection<'a>,
     /// # C++ Info
     /// - name: `heightfield`(ctype: `struct hkpSampledHeightFieldShape*`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "heightfield"))]
     #[cfg_attr(feature = "serde", serde(rename = "heightfield"))]
-    pub m_heightfield: Pointer,
+    pub m_heightfield: Pointer<'a>,
     /// # C++ Info
     /// - name: `childSize`(ctype: `hkInt32`)
     /// - offset: ` 28`(x86)/` 56`(x86_64)
@@ -41,7 +43,7 @@ pub struct hkpTriSampledHeightFieldCollection {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "childSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "childSize"))]
-    pub m_childSize: i32,
+    pub m_childSize: I32<'a>,
     /// # C++ Info
     /// - name: `radius`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 60`(x86_64)
@@ -55,7 +57,7 @@ pub struct hkpTriSampledHeightFieldCollection {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "weldingInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "weldingInfo"))]
-    pub m_weldingInfo: Vec<u16>,
+    pub m_weldingInfo: Vec<U16<'a>>,
     /// # C++ Info
     /// - name: `triangleExtrusion`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
@@ -66,7 +68,7 @@ pub struct hkpTriSampledHeightFieldCollection {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpTriSampledHeightFieldCollection {
+    impl<'a> _serde::HavokClass for hkpTriSampledHeightFieldCollection<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpTriSampledHeightFieldCollection"
@@ -76,19 +78,20 @@ const _: () = {
             _serde::__private::Signature::new(0xc291ddde)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_heightfield.get());
+            v.push(&self.m_heightfield);
             v
         }
     }
-    impl _serde::Serialize for hkpTriSampledHeightFieldCollection {
+    impl<'a> _serde::Serialize for hkpTriSampledHeightFieldCollection<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xc291ddde)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -134,7 +137,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpTriSampledHeightFieldCollection {
+    impl<'de> _serde::Deserialize<'de> for hkpTriSampledHeightFieldCollection<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -195,7 +198,7 @@ const _: () = {
             }
             struct __hkpTriSampledHeightFieldCollectionVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkpTriSampledHeightFieldCollection,
+                    hkpTriSampledHeightFieldCollection<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -204,7 +207,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpTriSampledHeightFieldCollectionVisitor<'de> {
-                type Value = hkpTriSampledHeightFieldCollection;
+                type Value = hkpTriSampledHeightFieldCollection<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -223,10 +226,10 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_heightfield: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_childSize: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_heightfield: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_childSize: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_weldingInfo: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_weldingInfo: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
                     let mut m_triangleExtrusion: _serde::__private::Option<Vector4> = _serde::__private::None;
                     for i in 0..5usize {
                         match i {
@@ -239,7 +242,7 @@ const _: () = {
                                     );
                                 }
                                 m_heightfield = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -256,7 +259,7 @@ const _: () = {
                                     );
                                 }
                                 m_childSize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -288,7 +291,7 @@ const _: () = {
                                     );
                                 }
                                 m_weldingInfo = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -389,9 +392,9 @@ const _: () = {
                     let mut m_collectionType: _serde::__private::Option<
                         CollectionType,
                     > = _serde::__private::None;
-                    let mut m_heightfield: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_heightfield: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_weldingInfo: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_weldingInfo: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
                     let mut m_triangleExtrusion: _serde::__private::Option<Vector4> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -493,7 +496,7 @@ const _: () = {
                                     );
                                 }
                                 m_heightfield = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -543,7 +546,7 @@ const _: () = {
                                     );
                                 }
                                 m_weldingInfo = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -663,27 +666,29 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         ..Default::default()
                     };
                     let parent = hkpShapeCollection {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_disableWelding,
                         m_collectionType,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpTriSampledHeightFieldCollection {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_heightfield,
                         m_radius,

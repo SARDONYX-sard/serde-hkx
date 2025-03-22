@@ -22,7 +22,8 @@ pub struct hkClassEnum<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `name`(ctype: `char*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -46,7 +47,7 @@ pub struct hkClassEnum<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "attributes"))]
     #[cfg_attr(feature = "serde", serde(rename = "attributes"))]
-    pub m_attributes: Pointer,
+    pub m_attributes: Pointer<'a>,
     /// # C++ Info
     /// - name: `flags`(ctype: `flags FlagValues`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
@@ -67,9 +68,9 @@ const _: () = {
             _serde::__private::Signature::new(0x8a3609cf)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_attributes.get());
+            v.push(&self.m_attributes);
             v
         }
     }
@@ -80,6 +81,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x8a3609cf)));
             let mut serializer = __serializer
                 .serialize_struct("hkClassEnum", class_meta, (20u64, 40u64))?;
@@ -176,7 +178,7 @@ const _: () = {
                     let mut m_items: _serde::__private::Option<
                         Vec<hkClassEnumItem<'de>>,
                     > = _serde::__private::None;
-                    let mut m_attributes: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_attributes: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_flags: _serde::__private::Option<FlagValues> = _serde::__private::None;
                     for i in 0..4usize {
                         match i {
@@ -222,7 +224,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_attributes = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -417,7 +419,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkClassEnum {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_name,
                         m_items,
                         m_flags,
@@ -528,12 +530,24 @@ const _: () = {
                 #[inline]
                 fn visit_uint32<__E>(
                     self,
-                    __value: u32,
+                    __value: U32<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
-                    Ok(FlagValues::from_bits_retain(__value as _))
+                    match __value {
+                        U32::Number(__value) => {
+                            Ok(FlagValues::from_bits_retain(__value as _))
+                        }
+                        _ => {
+                            Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Uint32(__value as _),
+                                    &"FlagValues(U32) Number",
+                                ),
+                            )
+                        }
+                    }
                 }
                 fn visit_stringptr<__E>(
                     self,

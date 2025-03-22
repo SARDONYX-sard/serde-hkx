@@ -1,8 +1,8 @@
 //! Async Convert hkx <-> xml
-use super::{get_output_path, get_supported_files, process_serde, OutFormat};
+use super::{OutFormat, get_output_path, get_supported_files, process_serde};
 use crate::{
     error::Result,
-    fs::{write, ReadExt as _},
+    fs::{ReadExt as _, write},
     progress::{DefaultProgressMonitor, ProgressHandler},
 };
 use std::{

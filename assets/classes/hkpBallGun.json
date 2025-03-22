@@ -5,13 +5,13 @@
   "size_x86": 96,
   "size_x86_64": 112,
   "parent": "hkpFirstPersonGun",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "bulletRadius",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "bulletVelocity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -39,7 +39,7 @@
     },
     {
       "name": "bulletMass",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -53,7 +53,7 @@
     },
     {
       "name": "damageMultiplier",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -67,7 +67,7 @@
     },
     {
       "name": "maxBulletsInWorld",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -81,7 +81,7 @@
     },
     {
       "name": "bulletOffsetFromCenter",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -95,7 +95,7 @@
     },
     {
       "name": "addedBodies",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",

@@ -22,7 +22,8 @@ pub struct hkxMaterial<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -42,7 +43,7 @@ pub struct hkxMaterial<'a> {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "stages"))]
     #[cfg_attr(feature = "serde", serde(rename = "stages"))]
-    pub m_stages: Vec<hkxMaterialTextureStage>,
+    pub m_stages: Vec<hkxMaterialTextureStage<'a>>,
     /// # C++ Info
     /// - name: `diffuseColor`(ctype: `hkVector4`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
@@ -77,21 +78,21 @@ pub struct hkxMaterial<'a> {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "subMaterials"))]
     #[cfg_attr(feature = "serde", serde(rename = "subMaterials"))]
-    pub m_subMaterials: Vec<Pointer>,
+    pub m_subMaterials: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `extraData`(ctype: `struct hkReferencedObject*`)
     /// - offset: `124`(x86)/`144`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "extraData"))]
     #[cfg_attr(feature = "serde", serde(rename = "extraData"))]
-    pub m_extraData: Pointer,
+    pub m_extraData: Pointer<'a>,
     /// # C++ Info
     /// - name: `properties`(ctype: `hkArray<struct hkxMaterialProperty>`)
     /// - offset: `128`(x86)/`152`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "properties"))]
     #[cfg_attr(feature = "serde", serde(rename = "properties"))]
-    pub m_properties: Vec<hkxMaterialProperty>,
+    pub m_properties: Vec<hkxMaterialProperty<'a>>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -105,7 +106,7 @@ const _: () = {
             _serde::__private::Signature::new(0x2954537a)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
@@ -113,23 +114,23 @@ const _: () = {
                     .m_attributeGroups
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(
                 self
                     .m_stages
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
-            v.extend(self.m_subMaterials.iter().map(|ptr| ptr.get()));
-            v.push(self.m_extraData.get());
+            v.extend(self.m_subMaterials.iter());
+            v.push(&self.m_extraData);
             v.extend(
                 self
                     .m_properties
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
@@ -141,6 +142,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x2954537a)));
             let mut serializer = __serializer
                 .serialize_struct("hkxMaterial", class_meta, (144u64, 176u64))?;
@@ -297,8 +299,10 @@ const _: () = {
                     let mut m_ambientColor: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_specularColor: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_emissiveColor: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_subMaterials: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_extraData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_subMaterials: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_extraData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_properties: _serde::__private::Option<
                         Vec<hkxMaterialProperty>,
                     > = _serde::__private::None;
@@ -414,7 +418,7 @@ const _: () = {
                                     );
                                 }
                                 m_subMaterials = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -431,7 +435,7 @@ const _: () = {
                                     );
                                 }
                                 m_extraData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -581,8 +585,10 @@ const _: () = {
                     let mut m_ambientColor: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_specularColor: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_emissiveColor: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_subMaterials: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_extraData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_subMaterials: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_extraData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_properties: _serde::__private::Option<
                         Vec<hkxMaterialProperty>,
                     > = _serde::__private::None;
@@ -790,7 +796,7 @@ const _: () = {
                                     );
                                 }
                                 m_subMaterials = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -816,7 +822,7 @@ const _: () = {
                                     );
                                 }
                                 m_extraData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -972,20 +978,22 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkxAttributeHolder {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_attributeGroups,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkxMaterial {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_name,
                         m_stages,
@@ -1141,25 +1149,25 @@ const _: () = {
                 }
                 fn visit_int32<__E>(
                     self,
-                    __value: i32,
+                    __value: I32<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i32 => _serde::__private::Ok(__Field::__field0),
-                        1i32 => _serde::__private::Ok(__Field::__field1),
-                        2i32 => _serde::__private::Ok(__Field::__field2),
-                        3i32 => _serde::__private::Ok(__Field::__field3),
-                        4i32 => _serde::__private::Ok(__Field::__field4),
-                        5i32 => _serde::__private::Ok(__Field::__field5),
-                        6i32 => _serde::__private::Ok(__Field::__field6),
-                        7i32 => _serde::__private::Ok(__Field::__field7),
-                        8i32 => _serde::__private::Ok(__Field::__field8),
-                        9i32 => _serde::__private::Ok(__Field::__field9),
-                        10i32 => _serde::__private::Ok(__Field::__field10),
-                        11i32 => _serde::__private::Ok(__Field::__field11),
-                        12i32 => _serde::__private::Ok(__Field::__field12),
+                        I32::Number(0i32) => _serde::__private::Ok(__Field::__field0),
+                        I32::Number(1i32) => _serde::__private::Ok(__Field::__field1),
+                        I32::Number(2i32) => _serde::__private::Ok(__Field::__field2),
+                        I32::Number(3i32) => _serde::__private::Ok(__Field::__field3),
+                        I32::Number(4i32) => _serde::__private::Ok(__Field::__field4),
+                        I32::Number(5i32) => _serde::__private::Ok(__Field::__field5),
+                        I32::Number(6i32) => _serde::__private::Ok(__Field::__field6),
+                        I32::Number(7i32) => _serde::__private::Ok(__Field::__field7),
+                        I32::Number(8i32) => _serde::__private::Ok(__Field::__field8),
+                        I32::Number(9i32) => _serde::__private::Ok(__Field::__field9),
+                        I32::Number(10i32) => _serde::__private::Ok(__Field::__field10),
+                        I32::Number(11i32) => _serde::__private::Ok(__Field::__field11),
+                        I32::Number(12i32) => _serde::__private::Ok(__Field::__field12),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

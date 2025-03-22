@@ -5,13 +5,13 @@
   "size_x86": 32,
   "size_x86_64": 48,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "characterId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint64",
       "vtype": "TYPE_UINT64",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "eventName",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -39,7 +39,7 @@
     },
     {
       "name": "raisedBySdk",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -53,7 +53,7 @@
     },
     {
       "name": "senderId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -67,7 +67,7 @@
     },
     {
       "name": "padding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",

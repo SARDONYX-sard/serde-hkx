@@ -5,13 +5,13 @@
   "size_x86": 96,
   "size_x86_64": 128,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "characterId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint64",
       "vtype": "TYPE_UINT64",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "instanceName",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -39,7 +39,7 @@
     },
     {
       "name": "templateName",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -53,7 +53,7 @@
     },
     {
       "name": "fullPathToProject",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -68,7 +68,7 @@
     {
       "name": "skeleton",
       "class_ref": "hkaSkeleton",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkaSkeleton*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -82,7 +82,7 @@
     },
     {
       "name": "worldFromModel",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkQsTransform",
       "vtype": "TYPE_QSTRANSFORM",
       "vsubtype": "TYPE_VOID",
@@ -96,7 +96,7 @@
     },
     {
       "name": "poseModelSpace",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkQsTransform>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_QSTRANSFORM",

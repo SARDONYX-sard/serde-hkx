@@ -4,9 +4,9 @@ mod visit_struct_for_bytes;
 
 use crate::get_class_map::get_inherited_members;
 use crate::{
-    bail_syn_err,
+    ClassMap, bail_syn_err,
     cpp_info::{Class, Member, TypeKind},
-    syn_error, ClassMap,
+    syn_error,
 };
 use enum_fields::gen_enum_visitor;
 use proc_macro2::TokenStream;
@@ -20,13 +20,13 @@ pub fn impl_deserialize(class: &Class, class_map: &ClassMap) -> Result<TokenStre
     let class_name_str = &class.name;
 
     let visitor_ident = to_visitor_ident(class_name_str);
-    let visitor_for_bytes = visit_struct_for_bytes::gen(class, class_map)?;
-    let visitor_for_xml = visit_struct::gen(class, class_map)?;
+    let visitor_for_bytes = visit_struct_for_bytes::generate(class, class_map)?;
+    let visitor_for_xml = visit_struct::generate(class, class_map)?;
 
     let expected_msg = format!("struct {class_name_str}");
 
     let class_name = format_ident!("{class_name_str}");
-    let lifetime = if class.has_string {
+    let lifetime = if class.has_ref {
         quote! { <'de> }
     } else {
         quote! {}
@@ -98,7 +98,7 @@ pub(super) fn member_to_de_rust_type(member: &Member, class_name: &str) -> Resul
         name,
         class_ref,
         enum_ref,
-        has_string,
+        has_ref: has_string,
         vtype,
         vsubtype,
         arrsize,
@@ -167,14 +167,14 @@ fn to_rust_type(ty: &TypeKind) -> Option<TokenStream> {
         TypeKind::Void => quote!(()),
         TypeKind::Bool => quote!(bool),
         TypeKind::Char => quote!(char),
-        TypeKind::Int8 => quote!(i8),
-        TypeKind::Uint8 => quote!(u8),
-        TypeKind::Int16 => quote!(i16),
-        TypeKind::Uint16 => quote!(u16),
-        TypeKind::Int32 => quote!(i32),
-        TypeKind::Uint32 => quote!(u32),
-        TypeKind::Int64 => quote!(i64),
-        TypeKind::Uint64 => quote!(u64),
+        TypeKind::Int8 => quote!(I8<'de>),
+        TypeKind::Uint8 => quote!(U8<'de>),
+        TypeKind::Int16 => quote!(I16<'de>),
+        TypeKind::Uint16 => quote!(U16<'de>),
+        TypeKind::Int32 => quote!(I32<'de>),
+        TypeKind::Uint32 => quote!(U32<'de>),
+        TypeKind::Int64 => quote!(I64<'de>),
+        TypeKind::Uint64 => quote!(U64<'de>),
         TypeKind::Real => quote!(f32),
         TypeKind::Vector4 => quote!(Vector4),
         TypeKind::Quaternion => quote!(Quaternion),
@@ -184,7 +184,7 @@ fn to_rust_type(ty: &TypeKind) -> Option<TokenStream> {
         TypeKind::Matrix4 => quote!(Matrix4),
         TypeKind::Transform => quote!(Transform),
         // TypeKind::Zero => todo!(),
-        TypeKind::Pointer => quote!(Pointer),
+        TypeKind::Pointer => quote!(Pointer<'de>),
         // TypeKind::FnPtr => todo!(),
         TypeKind::Array | TypeKind::SimpleArray => quote!(Vec),
         // TypeKind::InplaceArray => todo!(),
@@ -192,7 +192,7 @@ fn to_rust_type(ty: &TypeKind) -> Option<TokenStream> {
         // TypeKind::Struct => todo!(),
         // TypeKind::SimpleArray => quote!(Vec),
         // TypeKind::HomogeneousArray => todo!(),
-        TypeKind::Variant => quote!(Variant),
+        TypeKind::Variant => quote!(Variant<'de>),
         TypeKind::CString => quote!(CString<'de>),
         TypeKind::Ulong => quote!(Ulong),
         // TypeKind::Flags => todo!(),

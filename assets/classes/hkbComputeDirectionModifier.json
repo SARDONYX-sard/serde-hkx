@@ -5,13 +5,13 @@
   "size_x86": 112,
   "size_x86_64": 144,
   "parent": "hkbModifier",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "pointIn",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "pointOut",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -39,7 +39,7 @@
     },
     {
       "name": "groundAngleOut",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -53,7 +53,7 @@
     },
     {
       "name": "upAngleOut",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -67,7 +67,7 @@
     },
     {
       "name": "verticalOffset",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -81,7 +81,7 @@
     },
     {
       "name": "reverseGroundAngle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -95,7 +95,7 @@
     },
     {
       "name": "reverseUpAngle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -109,7 +109,7 @@
     },
     {
       "name": "projectPoint",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -123,7 +123,7 @@
     },
     {
       "name": "normalizePoint",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -137,7 +137,7 @@
     },
     {
       "name": "computeOnlyOnce",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -151,7 +151,7 @@
     },
     {
       "name": "computedOutput",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

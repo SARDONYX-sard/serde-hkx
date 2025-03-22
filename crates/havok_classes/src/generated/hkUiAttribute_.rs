@@ -22,7 +22,8 @@ pub struct hkUiAttribute<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `visible`(ctype: `hkBool`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -95,7 +96,7 @@ const _: () = {
             _serde::__private::Signature::new(0xeb6e96e3)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
@@ -107,6 +108,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xeb6e96e3)));
             let mut serializer = __serializer
                 .serialize_struct("hkUiAttribute", class_meta, (20u64, 40u64))?;
@@ -766,7 +768,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkUiAttribute {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_visible,
                         m_hideInModeler,
                         m_label,
@@ -879,15 +881,15 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

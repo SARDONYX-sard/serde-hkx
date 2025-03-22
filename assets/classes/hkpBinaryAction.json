@@ -5,14 +5,14 @@
   "size_x86": 32,
   "size_x86_64": 64,
   "parent": "hkpAction",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "entityA",
       "class_ref": "hkpEntity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpEntity*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -27,7 +27,7 @@
     {
       "name": "entityB",
       "class_ref": "hkpEntity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpEntity*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",

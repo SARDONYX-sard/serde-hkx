@@ -3,9 +3,9 @@
 use super::error::{JsonSnafu, TomlSnafu, YamlSnafu};
 use crate::types_wrapper::ClassPtrMap;
 use crate::{
+    ClassMap,
     convert::OutFormat,
     error::{DeSnafu, Error, FailedReadFileSnafu, Result},
-    ClassMap,
 };
 use snafu::ResultExt as _;
 use std::{io::Read, path::Path};

@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpRackAndPinionConstraintAtom {
+pub struct hkpRackAndPinionConstraintAtom<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkpRackAndPinionConstraintAtom {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpConstraintAtom,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpConstraintAtom<'a>,
     /// # C++ Info
     /// - name: `pinionRadiusOrScrewPitch`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
@@ -50,14 +52,14 @@ pub struct hkpRackAndPinionConstraintAtom {
         schemars(rename = "memOffsetToInitialAngleOffset")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "memOffsetToInitialAngleOffset"))]
-    pub m_memOffsetToInitialAngleOffset: i8,
+    pub m_memOffsetToInitialAngleOffset: I8<'a>,
     /// # C++ Info
     /// - name: `memOffsetToPrevAngle`(ctype: `hkInt8`)
     /// - offset: ` 10`(x86)/` 10`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "memOffsetToPrevAngle"))]
     #[cfg_attr(feature = "serde", serde(rename = "memOffsetToPrevAngle"))]
-    pub m_memOffsetToPrevAngle: i8,
+    pub m_memOffsetToPrevAngle: I8<'a>,
     /// # C++ Info
     /// - name: `memOffsetToRevolutionCounter`(ctype: `hkInt8`)
     /// - offset: ` 11`(x86)/` 11`(x86_64)
@@ -67,11 +69,11 @@ pub struct hkpRackAndPinionConstraintAtom {
         schemars(rename = "memOffsetToRevolutionCounter")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "memOffsetToRevolutionCounter"))]
-    pub m_memOffsetToRevolutionCounter: i8,
+    pub m_memOffsetToRevolutionCounter: I8<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpRackAndPinionConstraintAtom {
+    impl<'a> _serde::HavokClass for hkpRackAndPinionConstraintAtom<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpRackAndPinionConstraintAtom"
@@ -81,18 +83,19 @@ const _: () = {
             _serde::__private::Signature::new(0x30cae006)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpRackAndPinionConstraintAtom {
+    impl<'a> _serde::Serialize for hkpRackAndPinionConstraintAtom<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x30cae006)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -129,7 +132,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpRackAndPinionConstraintAtom {
+    impl<'de> _serde::Deserialize<'de> for hkpRackAndPinionConstraintAtom<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -193,7 +196,9 @@ const _: () = {
                 }
             }
             struct __hkpRackAndPinionConstraintAtomVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpRackAndPinionConstraintAtom>,
+                marker: _serde::__private::PhantomData<
+                    hkpRackAndPinionConstraintAtom<'de>,
+                >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -201,7 +206,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpRackAndPinionConstraintAtomVisitor<'de> {
-                type Value = hkpRackAndPinionConstraintAtom;
+                type Value = hkpRackAndPinionConstraintAtom<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -223,11 +228,11 @@ const _: () = {
                     let mut m_pinionRadiusOrScrewPitch: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_isScrew: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_memOffsetToInitialAngleOffset: _serde::__private::Option<
-                        i8,
+                        I8<'de>,
                     > = _serde::__private::None;
-                    let mut m_memOffsetToPrevAngle: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_memOffsetToPrevAngle: _serde::__private::Option<I8<'de>> = _serde::__private::None;
                     let mut m_memOffsetToRevolutionCounter: _serde::__private::Option<
-                        i8,
+                        I8<'de>,
                     > = _serde::__private::None;
                     for i in 0..5usize {
                         match i {
@@ -279,7 +284,7 @@ const _: () = {
                                     );
                                 }
                                 m_memOffsetToInitialAngleOffset = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -298,7 +303,7 @@ const _: () = {
                                     );
                                 }
                                 m_memOffsetToPrevAngle = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -317,7 +322,7 @@ const _: () = {
                                     );
                                 }
                                 m_memOffsetToRevolutionCounter = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -398,11 +403,11 @@ const _: () = {
                     let mut m_pinionRadiusOrScrewPitch: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_isScrew: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_memOffsetToInitialAngleOffset: _serde::__private::Option<
-                        i8,
+                        I8<'de>,
                     > = _serde::__private::None;
-                    let mut m_memOffsetToPrevAngle: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_memOffsetToPrevAngle: _serde::__private::Option<I8<'de>> = _serde::__private::None;
                     let mut m_memOffsetToRevolutionCounter: _serde::__private::Option<
-                        i8,
+                        I8<'de>,
                     > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -506,7 +511,7 @@ const _: () = {
                                     );
                                 }
                                 m_memOffsetToInitialAngleOffset = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -534,7 +539,7 @@ const _: () = {
                                     );
                                 }
                                 m_memOffsetToPrevAngle = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -562,7 +567,7 @@ const _: () = {
                                     );
                                 }
                                 m_memOffsetToRevolutionCounter = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -642,10 +647,13 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkpConstraintAtom { __ptr, m_type };
+                    let parent = hkpConstraintAtom {
+                        __ptr: __ptr.clone(),
+                        m_type,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpRackAndPinionConstraintAtom {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_pinionRadiusOrScrewPitch,
                         m_isScrew,

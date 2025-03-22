@@ -4,13 +4,13 @@
   "signature": "0x35912f8a",
   "size_x86": 8,
   "size_x86_64": 16,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "name",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -24,7 +24,7 @@
     },
     {
       "name": "lockTranslation",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

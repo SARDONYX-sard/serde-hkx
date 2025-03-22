@@ -39,6 +39,7 @@ macro_rules! tri {
         }
     };
 }
+
 pub(crate) use tri;
 
 pub use crate::bytes::de::from_bytes;
@@ -46,3 +47,10 @@ pub use crate::bytes::ser::to_bytes;
 pub use crate::sort::HavokSort;
 pub use crate::xml::de::from_str;
 pub use crate::xml::ser::to_string;
+
+use indexmap::IndexMap;
+use std::borrow::Cow;
+
+/// Key type alias for flexibility
+pub type ClassMapKey<'a> = Cow<'a, str>;
+pub type GenericClassMap<'a, V, K = ClassMapKey<'a>> = IndexMap<K, V>;

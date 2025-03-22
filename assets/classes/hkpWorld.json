@@ -5,9 +5,9 @@
   "size_x86": 864,
   "size_x86_64": 1072,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "ReintegrationRecollideMode",
@@ -70,7 +70,7 @@
     {
       "name": "simulation",
       "class_ref": "hkpSimulation",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpSimulation*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -84,7 +84,7 @@
     },
     {
       "name": "gravity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -98,7 +98,7 @@
     },
     {
       "name": "fixedIsland",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -113,7 +113,7 @@
     {
       "name": "fixedRigidBody",
       "class_ref": "hkpRigidBody",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpRigidBody*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -127,7 +127,7 @@
     },
     {
       "name": "activeSimulationIslands",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -141,7 +141,7 @@
     },
     {
       "name": "inactiveSimulationIslands",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -155,7 +155,7 @@
     },
     {
       "name": "dirtySimulationIslands",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -169,7 +169,7 @@
     },
     {
       "name": "maintenanceMgr",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -183,7 +183,7 @@
     },
     {
       "name": "memoryWatchDog",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -197,7 +197,7 @@
     },
     {
       "name": "assertOnRunningOutOfSolverMemory",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -211,7 +211,7 @@
     },
     {
       "name": "broadPhase",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -225,7 +225,7 @@
     },
     {
       "name": "kdTreeManager",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -239,7 +239,7 @@
     },
     {
       "name": "autoUpdateTree",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -253,7 +253,7 @@
     },
     {
       "name": "broadPhaseDispatcher",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -267,7 +267,7 @@
     },
     {
       "name": "phantomBroadPhaseListener",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -281,7 +281,7 @@
     },
     {
       "name": "entityEntityBroadPhaseListener",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -295,7 +295,7 @@
     },
     {
       "name": "broadPhaseBorderListener",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -309,7 +309,7 @@
     },
     {
       "name": "multithreadedSimulationJobData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -323,7 +323,7 @@
     },
     {
       "name": "collisionInput",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -337,7 +337,7 @@
     },
     {
       "name": "collisionFilter",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -351,7 +351,7 @@
     },
     {
       "name": "collisionDispatcher",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -365,7 +365,7 @@
     },
     {
       "name": "convexListFilter",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -379,7 +379,7 @@
     },
     {
       "name": "pendingOperations",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -393,7 +393,7 @@
     },
     {
       "name": "pendingOperationsCount",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -407,7 +407,7 @@
     },
     {
       "name": "pendingBodyOperationsCount",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -421,7 +421,7 @@
     },
     {
       "name": "criticalOperationsLockCount",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -435,7 +435,7 @@
     },
     {
       "name": "criticalOperationsLockCountForPhantoms",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -449,7 +449,7 @@
     },
     {
       "name": "blockExecutingPendingOperations",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -463,7 +463,7 @@
     },
     {
       "name": "criticalOperationsAllowed",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -477,7 +477,7 @@
     },
     {
       "name": "pendingOperationQueues",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -491,7 +491,7 @@
     },
     {
       "name": "pendingOperationQueueCount",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -506,7 +506,7 @@
     {
       "name": "multiThreadCheck",
       "class_ref": "hkMultiThreadCheck",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkMultiThreadCheck",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -520,7 +520,7 @@
     },
     {
       "name": "processActionsInSingleThread",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -534,7 +534,7 @@
     },
     {
       "name": "allowIntegrationOfIslandsWithoutConstraintsInASeparateJob",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -548,7 +548,7 @@
     },
     {
       "name": "minDesiredIslandSize",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -562,7 +562,7 @@
     },
     {
       "name": "modifyConstraintCriticalSection",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -576,7 +576,7 @@
     },
     {
       "name": "isLocked",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -590,7 +590,7 @@
     },
     {
       "name": "islandDirtyListCriticalSection",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -604,7 +604,7 @@
     },
     {
       "name": "propertyMasterLock",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -618,7 +618,7 @@
     },
     {
       "name": "wantSimulationIslands",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -632,7 +632,7 @@
     },
     {
       "name": "useHybridBroadphase",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -646,7 +646,7 @@
     },
     {
       "name": "snapCollisionToConvexEdgeThreshold",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -660,7 +660,7 @@
     },
     {
       "name": "snapCollisionToConcaveEdgeThreshold",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -674,7 +674,7 @@
     },
     {
       "name": "enableToiWeldRejection",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -688,7 +688,7 @@
     },
     {
       "name": "wantDeactivation",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -702,7 +702,7 @@
     },
     {
       "name": "shouldActivateOnRigidBodyTransformChange",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -716,7 +716,7 @@
     },
     {
       "name": "deactivationReferenceDistance",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -730,7 +730,7 @@
     },
     {
       "name": "toiCollisionResponseRotateNormal",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -744,7 +744,7 @@
     },
     {
       "name": "maxSectorsPerMidphaseCollideTask",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -758,7 +758,7 @@
     },
     {
       "name": "maxSectorsPerNarrowphaseCollideTask",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -772,7 +772,7 @@
     },
     {
       "name": "processToisMultithreaded",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -786,7 +786,7 @@
     },
     {
       "name": "maxEntriesPerToiMidphaseCollideTask",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -800,7 +800,7 @@
     },
     {
       "name": "maxEntriesPerToiNarrowphaseCollideTask",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -814,7 +814,7 @@
     },
     {
       "name": "maxNumToiCollisionPairsSinglethreaded",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -828,7 +828,7 @@
     },
     {
       "name": "simulationType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum unknown",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT32",
@@ -842,7 +842,7 @@
     },
     {
       "name": "numToisTillAllowedPenetrationSimplifiedToi",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -856,7 +856,7 @@
     },
     {
       "name": "numToisTillAllowedPenetrationToi",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -870,7 +870,7 @@
     },
     {
       "name": "numToisTillAllowedPenetrationToiHigher",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -884,7 +884,7 @@
     },
     {
       "name": "numToisTillAllowedPenetrationToiForced",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -898,7 +898,7 @@
     },
     {
       "name": "lastEntityUid",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -912,7 +912,7 @@
     },
     {
       "name": "lastIslandUid",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -926,7 +926,7 @@
     },
     {
       "name": "lastConstraintUid",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -941,7 +941,7 @@
     {
       "name": "phantoms",
       "class_ref": "hkpPhantom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkpPhantom*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -955,7 +955,7 @@
     },
     {
       "name": "actionListeners",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -969,7 +969,7 @@
     },
     {
       "name": "entityListeners",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -983,7 +983,7 @@
     },
     {
       "name": "phantomListeners",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -997,7 +997,7 @@
     },
     {
       "name": "constraintListeners",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -1011,7 +1011,7 @@
     },
     {
       "name": "worldDeletionListeners",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -1025,7 +1025,7 @@
     },
     {
       "name": "islandActivationListeners",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -1039,7 +1039,7 @@
     },
     {
       "name": "worldPostSimulationListeners",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -1053,7 +1053,7 @@
     },
     {
       "name": "worldPostIntegrateListeners",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -1067,7 +1067,7 @@
     },
     {
       "name": "worldPostCollideListeners",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -1081,7 +1081,7 @@
     },
     {
       "name": "islandPostIntegrateListeners",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -1095,7 +1095,7 @@
     },
     {
       "name": "islandPostCollideListeners",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -1109,7 +1109,7 @@
     },
     {
       "name": "contactListeners",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -1123,7 +1123,7 @@
     },
     {
       "name": "contactImpulseLimitBreachedListeners",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -1137,7 +1137,7 @@
     },
     {
       "name": "worldExtensions",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -1151,7 +1151,7 @@
     },
     {
       "name": "violatedConstraintArray",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -1165,7 +1165,7 @@
     },
     {
       "name": "broadPhaseBorder",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -1179,7 +1179,7 @@
     },
     {
       "name": "destructionWorld",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -1193,7 +1193,7 @@
     },
     {
       "name": "npWorld",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -1207,7 +1207,7 @@
     },
     {
       "name": "broadPhaseExtents",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4[2]",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -1221,7 +1221,7 @@
     },
     {
       "name": "broadPhaseNumMarkers",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -1235,7 +1235,7 @@
     },
     {
       "name": "sizeOfToiEventQueue",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -1249,7 +1249,7 @@
     },
     {
       "name": "broadPhaseQuerySize",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -1263,7 +1263,7 @@
     },
     {
       "name": "broadPhaseUpdateSize",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -1277,7 +1277,7 @@
     },
     {
       "name": "contactPointGeneration",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum unknown",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",

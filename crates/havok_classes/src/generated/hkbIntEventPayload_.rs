@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbIntEventPayload {
+pub struct hkbIntEventPayload<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,22 +22,24 @@ pub struct hkbIntEventPayload {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkbEventPayload,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkbEventPayload<'a>,
     /// # C++ Info
     /// - name: `data`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "data"))]
     #[cfg_attr(feature = "serde", serde(rename = "data"))]
-    pub m_data: i32,
+    pub m_data: I32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbIntEventPayload {
+    impl<'a> _serde::HavokClass for hkbIntEventPayload<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbIntEventPayload"
@@ -47,18 +49,19 @@ const _: () = {
             _serde::__private::Signature::new(0xebbc1bd3)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkbIntEventPayload {
+    impl<'a> _serde::Serialize for hkbIntEventPayload<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xebbc1bd3)));
             let mut serializer = __serializer
                 .serialize_struct("hkbIntEventPayload", class_meta, (12u64, 24u64))?;
@@ -79,7 +82,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbIntEventPayload {
+    impl<'de> _serde::Deserialize<'de> for hkbIntEventPayload<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -127,14 +130,14 @@ const _: () = {
                 }
             }
             struct __hkbIntEventPayloadVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbIntEventPayload>,
+                marker: _serde::__private::PhantomData<hkbIntEventPayload<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkbIntEventPayloadVisitor<'de> {
-                type Value = hkbIntEventPayload;
+                type Value = hkbIntEventPayload<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -153,7 +156,7 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_data: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     for i in 0..1usize {
                         match i {
                             0usize => {
@@ -163,7 +166,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -197,7 +200,7 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_data: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -218,7 +221,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -240,16 +243,21 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
-                    let parent = hkbEventPayload { __ptr, parent };
+                    let parent = hkbEventPayload {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbIntEventPayload {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_data,
                     })

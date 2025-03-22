@@ -3,14 +3,13 @@ use crate::lib::*;
 
 use super::{
     delimited_comment_multispace0, delimited_multispace0_comment, delimited_with_multispace0,
-    type_kind::pointer,
 };
 use havok_types::{Pointer, Signature};
 use winnow::ascii::{digit1, hex_digit1, oct_digit1};
 use winnow::combinator::{delimited, dispatch, fail, seq};
 use winnow::error::{ContextError, StrContext, StrContextValue, StrContextValue::*};
 use winnow::token::{take, take_until};
-use winnow::{PResult, Parser};
+use winnow::{ModalResult, Parser};
 
 /// Parses the start tag `<tag>`
 pub fn start_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError> {
@@ -42,7 +41,7 @@ pub fn end_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError> 
 ///
 /// # Errors
 /// When parse failed.
-pub fn class_start_tag<'a>(input: &mut &'a str) -> PResult<(Pointer, &'a str, Signature)> {
+pub fn class_start_tag<'a>(input: &mut &'a str) -> ModalResult<(Pointer<'a>, &'a str, Signature)> {
     seq!(
         _: delimited_comment_multispace0("<"),
         _: delimited_with_multispace0("hkobject"),
@@ -92,7 +91,7 @@ pub fn field_start_open_tag<'a>(
 ///
 /// # Errors
 /// When parse failed.
-pub fn field_start_close_tag(input: &mut &str) -> PResult<Option<u64>> {
+pub fn field_start_close_tag(input: &mut &str) -> ModalResult<Option<u64>> {
     seq!(
         winnow::combinator::opt(
             seq!(
@@ -119,7 +118,7 @@ pub fn field_start_close_tag(input: &mut &str) -> PResult<Option<u64>> {
 ///
 /// # Errors
 /// When parse failed.
-pub fn number_in_string<Num>(input: &mut &str) -> PResult<Num>
+pub fn number_in_string<Num>(input: &mut &str) -> ModalResult<Num>
 where
     Num: FromStr,
 {
@@ -134,7 +133,7 @@ where
 ///
 /// # Errors
 /// When parse failed.
-pub fn attr_string<'a>(input: &mut &'a str) -> PResult<&'a str> {
+pub fn attr_string<'a>(input: &mut &'a str) -> ModalResult<&'a str> {
     delimited("\"", take_until(0.., "\""), "\"")
         .context(StrContext::Label("String in XML attribute"))
         .context(StrContext::Expected(Description(r#"String(e.g. `"Str"`)"#)))
@@ -145,15 +144,18 @@ pub fn attr_string<'a>(input: &mut &'a str) -> PResult<&'a str> {
 ///
 /// # Errors
 /// When parse failed.
-fn attr_ptr(input: &mut &str) -> PResult<Pointer> {
-    delimited("\"", pointer, "\"").parse_next(input)
+fn attr_ptr<'a>(input: &mut &'a str) -> ModalResult<Pointer<'a>> {
+    attr_string
+        .verify(|s: &str| !s.is_empty())
+        .map(|input: &str| Pointer::new(input.into()))
+        .parse_next(input)
 }
 
 /// Parse radix digits. e.g. `0b101`, `0xff`
 ///
 /// # Errors
 /// When parse failed.
-fn radix_digits(input: &mut &str) -> PResult<usize> {
+fn radix_digits(input: &mut &str) -> ModalResult<usize> {
     dispatch!(take(2_usize);
         "0b" | "0B" => digit1.try_map(|s| usize::from_str_radix(s, 2))
                         .context(StrContext::Label("digit")).context(StrContext::Expected(StrContextValue::Description("binary"))),
@@ -234,5 +236,19 @@ mod tests {
         assert_eq!(number_in_string.parse(r#""33""#), Ok(33));
         assert_eq!(number_in_string.parse(r#""100""#), Ok(100));
         assert_eq!(number_in_string.parse(r#""0""#), Ok(0));
+    }
+
+    #[test]
+    fn test_class_start() {
+        let input = r##"<hkobject name="#0010" class="hkbProjectData" signature="0x13a39ba7">"##;
+
+        assert_eq!(
+            class_start_tag.parse(input),
+            Ok((
+                Pointer::new("#0010".into()),
+                "hkbProjectData",
+                Signature::new(0x13a39ba7)
+            ))
+        );
     }
 }

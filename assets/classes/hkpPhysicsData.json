@@ -5,14 +5,14 @@
   "size_x86": 24,
   "size_x86_64": 40,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "worldCinfo",
       "class_ref": "hkpWorldCinfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpWorldCinfo*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -27,7 +27,7 @@
     {
       "name": "systems",
       "class_ref": "hkpPhysicsSystem",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkpPhysicsSystem*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",

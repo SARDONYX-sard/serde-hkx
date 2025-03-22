@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkxMeshSection {
+pub struct hkxMeshSection<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,43 +22,45 @@ pub struct hkxMeshSection {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `vertexBuffer`(ctype: `struct hkxVertexBuffer*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "vertexBuffer"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexBuffer"))]
-    pub m_vertexBuffer: Pointer,
+    pub m_vertexBuffer: Pointer<'a>,
     /// # C++ Info
     /// - name: `indexBuffers`(ctype: `hkArray<hkxIndexBuffer*>`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "indexBuffers"))]
     #[cfg_attr(feature = "serde", serde(rename = "indexBuffers"))]
-    pub m_indexBuffers: Vec<Pointer>,
+    pub m_indexBuffers: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `material`(ctype: `struct hkxMaterial*`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "material"))]
     #[cfg_attr(feature = "serde", serde(rename = "material"))]
-    pub m_material: Pointer,
+    pub m_material: Pointer<'a>,
     /// # C++ Info
     /// - name: `userChannels`(ctype: `hkArray<hkReferencedObject*>`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "userChannels"))]
     #[cfg_attr(feature = "serde", serde(rename = "userChannels"))]
-    pub m_userChannels: Vec<Pointer>,
+    pub m_userChannels: Vec<Pointer<'a>>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkxMeshSection {
+    impl<'a> _serde::HavokClass for hkxMeshSection<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkxMeshSection"
@@ -68,22 +70,23 @@ const _: () = {
             _serde::__private::Signature::new(0xe2286cf8)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_vertexBuffer.get());
-            v.extend(self.m_indexBuffers.iter().map(|ptr| ptr.get()));
-            v.push(self.m_material.get());
-            v.extend(self.m_userChannels.iter().map(|ptr| ptr.get()));
+            v.push(&self.m_vertexBuffer);
+            v.extend(self.m_indexBuffers.iter());
+            v.push(&self.m_material);
+            v.extend(self.m_userChannels.iter());
             v
         }
     }
-    impl _serde::Serialize for hkxMeshSection {
+    impl<'a> _serde::Serialize for hkxMeshSection<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xe2286cf8)));
             let mut serializer = __serializer
                 .serialize_struct("hkxMeshSection", class_meta, (40u64, 64u64))?;
@@ -114,7 +117,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkxMeshSection {
+    impl<'de> _serde::Deserialize<'de> for hkxMeshSection<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -168,14 +171,14 @@ const _: () = {
                 }
             }
             struct __hkxMeshSectionVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkxMeshSection>,
+                marker: _serde::__private::PhantomData<hkxMeshSection<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkxMeshSectionVisitor<'de> {
-                type Value = hkxMeshSection;
+                type Value = hkxMeshSection<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -191,10 +194,14 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_vertexBuffer: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_indexBuffers: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_material: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_userChannels: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_vertexBuffer: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_indexBuffers: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_material: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_userChannels: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
                     for i in 0..4usize {
                         match i {
                             0usize => {
@@ -206,7 +213,7 @@ const _: () = {
                                     );
                                 }
                                 m_vertexBuffer = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -223,7 +230,7 @@ const _: () = {
                                     );
                                 }
                                 m_indexBuffers = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -240,7 +247,7 @@ const _: () = {
                                     );
                                 }
                                 m_material = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -257,7 +264,7 @@ const _: () = {
                                     );
                                 }
                                 m_userChannels = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -323,10 +330,14 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_vertexBuffer: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_indexBuffers: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_material: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_userChannels: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_vertexBuffer: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_indexBuffers: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_material: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_userChannels: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -349,7 +360,7 @@ const _: () = {
                                     );
                                 }
                                 m_vertexBuffer = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -375,7 +386,7 @@ const _: () = {
                                     );
                                 }
                                 m_indexBuffers = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -401,7 +412,7 @@ const _: () = {
                                     );
                                 }
                                 m_material = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -427,7 +438,7 @@ const _: () = {
                                     );
                                 }
                                 m_userChannels = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -485,15 +496,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkxMeshSection {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_vertexBuffer,
                         m_indexBuffers,

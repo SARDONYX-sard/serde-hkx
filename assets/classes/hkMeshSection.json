@@ -4,9 +4,9 @@
   "signature": "0x1893c365",
   "size_x86": 40,
   "size_x86_64": 56,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "MeshSectionIndexType",
@@ -61,7 +61,7 @@
     {
       "name": "primitiveType",
       "enum_ref": "PrimitiveType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum PrimitiveType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -75,7 +75,7 @@
     },
     {
       "name": "numPrimitives",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -89,7 +89,7 @@
     },
     {
       "name": "numIndices",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -103,7 +103,7 @@
     },
     {
       "name": "vertexStartIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -117,7 +117,7 @@
     },
     {
       "name": "transformIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -132,7 +132,7 @@
     {
       "name": "indexType",
       "enum_ref": "MeshSectionIndexType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum MeshSectionIndexType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -146,7 +146,7 @@
     },
     {
       "name": "indices",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -161,7 +161,7 @@
     {
       "name": "vertexBuffer",
       "class_ref": "hkMeshVertexBuffer",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkMeshVertexBuffer*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -176,7 +176,7 @@
     {
       "name": "material",
       "class_ref": "hkMeshMaterial",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkMeshMaterial*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -190,7 +190,7 @@
     },
     {
       "name": "sectionIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",

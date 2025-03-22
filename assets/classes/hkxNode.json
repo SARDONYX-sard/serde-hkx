@@ -5,13 +5,13 @@
   "size_x86": 72,
   "size_x86_64": 112,
   "parent": "hkxAttributeHolder",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "name",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -26,7 +26,7 @@
     {
       "name": "object",
       "class_ref": "hkReferencedObject",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkReferencedObject*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -40,7 +40,7 @@
     },
     {
       "name": "keyFrames",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkMatrix4>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_MATRIX4",
@@ -55,7 +55,7 @@
     {
       "name": "children",
       "class_ref": "hkxNode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkxNode*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -70,7 +70,7 @@
     {
       "name": "annotations",
       "class_ref": "hkxNodeAnnotationData",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<struct hkxNodeAnnotationData>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -84,7 +84,7 @@
     },
     {
       "name": "userProperties",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -98,7 +98,7 @@
     },
     {
       "name": "selected",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

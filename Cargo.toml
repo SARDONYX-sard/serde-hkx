@@ -2,12 +2,12 @@
 authors = ["SARDONYX"]
 categories = ["encoding"]
 description = "Havok Behavior (De)Serialization Library(ver. hk_2010.2.0-r1)"
-edition = "2021"
+edition = "2024"
 keywords = ["serde", "havok"]
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/SARDONYX-sard/serde-hkx"                     # NOTE: Without it, CLI & CI build will error.
-rust-version = "1.79"
+rust-version = "1.85"
 version = "0.7.0"
 
 [workspace]
@@ -27,28 +27,28 @@ default-members = ["crates/cli"]
 resolver = "2"
 
 [workspace.dependencies]
-bitflags = "2.6.0"                                             # To generate flags type
+bitflags = "2.9.0"                                             # To generate flags type
 clap = { version = "4.5.23", features = ["derive"] }           # For CLI
 color-print = "0.3.7"                                          # To color example help
 educe = "0.6.0"                                                # Custom derive by derive
-indexmap = "2.7.0"                                             # Ordering HashMap
+indexmap = "2.8.0"                                             # Ordering HashMap
 jwalk = { version = "0.8.1" }                                  # To enumerate json class files
 num-derive = "0.4"                                             # To serialize Enum & Flags
 num-traits = "0.2.19"                                          # To serialize Enum & Flags
 parse-display = "0.10.0"                                       # Display derive
 parse_int = { version = "0.6" }
-proc-macro2 = { version = "1.0.92", default-features = false } # Rust token
-quote = { version = "1.0.37", default-features = false }       # Rust token gen to more convenience
+proc-macro2 = { version = "1.0.94", default-features = false } # Rust token
+quote = { version = "1.0.40", default-features = false }       # Rust token gen to more convenience
 rayon = { version = "1.10.0" }                                 # Parallel
 schemars = { version = "1.0.0-alpha.17" }
-serde = { version = "1.0.216", features = ["derive"] }         # (De)Serializer
-serde_json = { version = "1.0.133" }                           # To read and write Json files
-serde_with = "3.11.0"                                          # Serde utility
-similar = "2.6.0"                                              # Create diff
+serde = { version = "1.0.219", features = ["derive"] }         # (De)Serializer
+serde_json = { version = "1.0.140" }                           # To read and write Json files
+serde_with = "3.12.0"                                          # Serde utility
+similar = "2.7.0"                                              # Create diff
 snafu = "0.8.5"                                                # Define all error patterns(with backtrace)
 static_assertions = "1.1.0"                                    # Compile tim assertions
-syn = { version = "2.0.90", default-features = false }         # Rust parser
-tokio = { version = "1.42.0" }                                 # Async runtime
+syn = { version = "2.0.100", default-features = false }         # Rust parser
+tokio = { version = "1.44.1" }                                 # Async runtime
 tracing = { version = "0.1.41" }                               # logger
 
 # workspace members
@@ -78,6 +78,7 @@ cargo = { level = "warn", priority = -1 }
 nursery = { level = "warn", priority = -1 }
 
 # allow list
+allow_attributes_without_reason = "allow"
 cargo_common_metadata = "allow"
 derive_partial_eq_without_eq = "allow"
 future_not_send = "allow"
@@ -86,7 +87,6 @@ pub_with_shorthand = "allow"
 redundant_pub_crate = "allow"
 
 # custom deny list
-allow_attributes_without_reason = "deny"
 char_lit_as_u8 = "deny"
 checked_conversions = "deny"
 clone_on_ref_ptr = "deny"

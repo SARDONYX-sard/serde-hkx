@@ -22,18 +22,20 @@ pub struct hkbEventRaisedInfo<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `characterId`(ctype: `hkUint64`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "characterId"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterId"))]
-    pub m_characterId: u64,
+    pub m_characterId: U64<'a>,
     /// # C++ Info
     /// - name: `eventName`(ctype: `hkStringPtr`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
@@ -55,14 +57,14 @@ pub struct hkbEventRaisedInfo<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "senderId"))]
     #[cfg_attr(feature = "serde", serde(rename = "senderId"))]
-    pub m_senderId: i32,
+    pub m_senderId: I32<'a>,
     /// # C++ Info
     /// - name: `padding`(ctype: `hkInt32`)
     /// - offset: ` 28`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "padding"))]
     #[cfg_attr(feature = "serde", serde(rename = "padding"))]
-    pub m_padding: i32,
+    pub m_padding: I32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -76,7 +78,7 @@ const _: () = {
             _serde::__private::Signature::new(0xc02da3)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
@@ -88,6 +90,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xc02da3)));
             let mut serializer = __serializer
                 .serialize_struct("hkbEventRaisedInfo", class_meta, (32u64, 48u64))?;
@@ -193,11 +196,11 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_characterId: _serde::__private::Option<U64<'de>> = _serde::__private::None;
                     let mut m_eventName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_raisedBySdk: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_senderId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_padding: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_senderId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_padding: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     for i in 0..5usize {
                         match i {
                             0usize => {
@@ -209,7 +212,7 @@ const _: () = {
                                     );
                                 }
                                 m_characterId = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<U64<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -261,7 +264,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 3usize)?;
                                 m_senderId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -278,7 +281,7 @@ const _: () = {
                                     );
                                 }
                                 m_padding = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -354,11 +357,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_characterId: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_characterId: _serde::__private::Option<U64<'de>> = _serde::__private::None;
                     let mut m_eventName: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_raisedBySdk: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_senderId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_padding: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_senderId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_padding: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -381,7 +384,7 @@ const _: () = {
                                     );
                                 }
                                 m_characterId = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<U64<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -459,7 +462,7 @@ const _: () = {
                                     );
                                 }
                                 m_senderId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -485,7 +488,7 @@ const _: () = {
                                     );
                                 }
                                 m_padding = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -553,15 +556,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbEventRaisedInfo {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_characterId,
                         m_eventName,

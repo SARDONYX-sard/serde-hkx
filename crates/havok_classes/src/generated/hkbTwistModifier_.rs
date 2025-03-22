@@ -22,7 +22,8 @@ pub struct hkbTwistModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -48,14 +49,14 @@ pub struct hkbTwistModifier<'a> {
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "startBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "startBoneIndex"))]
-    pub m_startBoneIndex: i16,
+    pub m_startBoneIndex: I16<'a>,
     /// # C++ Info
     /// - name: `endBoneIndex`(ctype: `hkInt16`)
     /// - offset: ` 70`(x86)/`102`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "endBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "endBoneIndex"))]
-    pub m_endBoneIndex: i16,
+    pub m_endBoneIndex: I16<'a>,
     /// # C++ Info
     /// - name: `setAngleMethod`(ctype: `enum SetAngleMethod`)
     /// - offset: ` 72`(x86)/`104`(x86_64)
@@ -106,9 +107,9 @@ const _: () = {
             _serde::__private::Signature::new(0xb6b76b32)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
             v
         }
     }
@@ -119,6 +120,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xb6b76b32)));
             let mut serializer = __serializer
                 .serialize_struct("hkbTwistModifier", class_meta, (112u64, 144u64))?;
@@ -303,8 +305,8 @@ const _: () = {
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_axisOfRotation: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_twistAngle: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_startBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_endBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_startBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_endBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_setAngleMethod: _serde::__private::Option<
                         SetAngleMethod,
                     > = _serde::__private::None;
@@ -360,7 +362,7 @@ const _: () = {
                                     );
                                 }
                                 m_startBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -377,7 +379,7 @@ const _: () = {
                                     );
                                 }
                                 m_endBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -593,14 +595,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_axisOfRotation: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_twistAngle: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_startBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_endBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_startBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_endBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_setAngleMethod: _serde::__private::Option<
                         SetAngleMethod,
                     > = _serde::__private::None;
@@ -632,7 +636,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -784,7 +788,7 @@ const _: () = {
                                     );
                                 }
                                 m_startBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -810,7 +814,7 @@ const _: () = {
                                     );
                                 }
                                 m_endBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1030,34 +1034,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbTwistModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_axisOfRotation,
                         m_twistAngle,
@@ -1217,14 +1223,14 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -1361,14 +1367,14 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

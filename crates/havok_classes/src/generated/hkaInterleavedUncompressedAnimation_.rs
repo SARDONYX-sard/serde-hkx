@@ -22,7 +22,8 @@ pub struct hkaInterleavedUncompressedAnimation<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -55,16 +56,16 @@ const _: () = {
             _serde::__private::Signature::new(0x930af031)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.m_extractedMotion.get());
+            v.push(&self.parent.m_extractedMotion);
             v.extend(
                 self
                     .parent
                     .m_annotationTracks
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
@@ -76,6 +77,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x930af031)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -296,9 +298,11 @@ const _: () = {
                 {
                     let mut m_type: _serde::__private::Option<AnimationType> = _serde::__private::None;
                     let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_numberOfTransformTracks: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numberOfFloatTracks: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_extractedMotion: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_numberOfTransformTracks: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_numberOfFloatTracks: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_extractedMotion: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_annotationTracks: _serde::__private::Option<
                         Vec<hkaAnnotationTrack<'de>>,
                     > = _serde::__private::None;
@@ -378,7 +382,7 @@ const _: () = {
                                     );
                                 }
                                 m_numberOfTransformTracks = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -406,7 +410,7 @@ const _: () = {
                                     );
                                 }
                                 m_numberOfFloatTracks = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -432,7 +436,7 @@ const _: () = {
                                     );
                                 }
                                 m_extractedMotion = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -612,14 +616,16 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkaAnimation {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_type,
                         m_duration,
@@ -630,7 +636,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkaInterleavedUncompressedAnimation {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_transforms,
                         m_floats,

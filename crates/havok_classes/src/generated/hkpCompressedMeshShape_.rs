@@ -22,39 +22,41 @@ pub struct hkpCompressedMeshShape<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpShapeCollection,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpShapeCollection<'a>,
     /// # C++ Info
     /// - name: `bitsPerIndex`(ctype: `hkInt32`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "bitsPerIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "bitsPerIndex"))]
-    pub m_bitsPerIndex: i32,
+    pub m_bitsPerIndex: I32<'a>,
     /// # C++ Info
     /// - name: `bitsPerWIndex`(ctype: `hkInt32`)
     /// - offset: ` 28`(x86)/` 52`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "bitsPerWIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "bitsPerWIndex"))]
-    pub m_bitsPerWIndex: i32,
+    pub m_bitsPerWIndex: I32<'a>,
     /// # C++ Info
     /// - name: `wIndexMask`(ctype: `hkInt32`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "wIndexMask"))]
     #[cfg_attr(feature = "serde", serde(rename = "wIndexMask"))]
-    pub m_wIndexMask: i32,
+    pub m_wIndexMask: I32<'a>,
     /// # C++ Info
     /// - name: `indexMask`(ctype: `hkInt32`)
     /// - offset: ` 36`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "indexMask"))]
     #[cfg_attr(feature = "serde", serde(rename = "indexMask"))]
-    pub m_indexMask: i32,
+    pub m_indexMask: I32<'a>,
     /// # C++ Info
     /// - name: `radius`(ctype: `hkReal`)
     /// - offset: ` 40`(x86)/` 64`(x86_64)
@@ -82,21 +84,21 @@ pub struct hkpCompressedMeshShape<'a> {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "materials"))]
     #[cfg_attr(feature = "serde", serde(rename = "materials"))]
-    pub m_materials: Vec<u32>,
+    pub m_materials: Vec<U32<'a>>,
     /// # C++ Info
     /// - name: `materials16`(ctype: `hkArray<hkUint16>`)
     /// - offset: ` 60`(x86)/` 88`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "materials16"))]
     #[cfg_attr(feature = "serde", serde(rename = "materials16"))]
-    pub m_materials16: Vec<u16>,
+    pub m_materials16: Vec<U16<'a>>,
     /// # C++ Info
     /// - name: `materials8`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 72`(x86)/`104`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "materials8"))]
     #[cfg_attr(feature = "serde", serde(rename = "materials8"))]
-    pub m_materials8: Vec<u8>,
+    pub m_materials8: Vec<U8<'a>>,
     /// # C++ Info
     /// - name: `transforms`(ctype: `hkArray<hkQsTransform>`)
     /// - offset: ` 84`(x86)/`120`(x86_64)
@@ -117,21 +119,21 @@ pub struct hkpCompressedMeshShape<'a> {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "bigTriangles"))]
     #[cfg_attr(feature = "serde", serde(rename = "bigTriangles"))]
-    pub m_bigTriangles: Vec<hkpCompressedMeshShapeBigTriangle>,
+    pub m_bigTriangles: Vec<hkpCompressedMeshShapeBigTriangle<'a>>,
     /// # C++ Info
     /// - name: `chunks`(ctype: `hkArray<struct hkpCompressedMeshShapeChunk>`)
     /// - offset: `120`(x86)/`168`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "chunks"))]
     #[cfg_attr(feature = "serde", serde(rename = "chunks"))]
-    pub m_chunks: Vec<hkpCompressedMeshShapeChunk>,
+    pub m_chunks: Vec<hkpCompressedMeshShapeChunk<'a>>,
     /// # C++ Info
     /// - name: `convexPieces`(ctype: `hkArray<struct hkpCompressedMeshShapeConvexPiece>`)
     /// - offset: `132`(x86)/`184`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "convexPieces"))]
     #[cfg_attr(feature = "serde", serde(rename = "convexPieces"))]
-    pub m_convexPieces: Vec<hkpCompressedMeshShapeConvexPiece>,
+    pub m_convexPieces: Vec<hkpCompressedMeshShapeConvexPiece<'a>>,
     /// # C++ Info
     /// - name: `error`(ctype: `hkReal`)
     /// - offset: `144`(x86)/`200`(x86_64)
@@ -145,14 +147,14 @@ pub struct hkpCompressedMeshShape<'a> {
     /// - type_size: ` 32`(x86)/` 32`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "bounds"))]
     #[cfg_attr(feature = "serde", serde(rename = "bounds"))]
-    pub m_bounds: hkAabb,
+    pub m_bounds: hkAabb<'a>,
     /// # C++ Info
     /// - name: `defaultCollisionFilterInfo`(ctype: `hkUint32`)
     /// - offset: `192`(x86)/`240`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "defaultCollisionFilterInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "defaultCollisionFilterInfo"))]
-    pub m_defaultCollisionFilterInfo: u32,
+    pub m_defaultCollisionFilterInfo: U32<'a>,
     /// # C++ Info
     /// - name: `meshMaterials`(ctype: `void*`)
     /// - offset: `196`(x86)/`248`(x86_64)
@@ -160,21 +162,21 @@ pub struct hkpCompressedMeshShape<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "meshMaterials"))]
     #[cfg_attr(feature = "serde", serde(rename = "meshMaterials"))]
-    pub m_meshMaterials: Pointer,
+    pub m_meshMaterials: Pointer<'a>,
     /// # C++ Info
     /// - name: `materialStriding`(ctype: `hkUint16`)
     /// - offset: `200`(x86)/`256`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "materialStriding"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialStriding"))]
-    pub m_materialStriding: u16,
+    pub m_materialStriding: U16<'a>,
     /// # C++ Info
     /// - name: `numMaterials`(ctype: `hkUint16`)
     /// - offset: `202`(x86)/`258`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numMaterials"))]
     #[cfg_attr(feature = "serde", serde(rename = "numMaterials"))]
-    pub m_numMaterials: u16,
+    pub m_numMaterials: U16<'a>,
     /// # C++ Info
     /// - name: `namedMaterials`(ctype: `hkArray<struct hkpNamedMeshMaterial>`)
     /// - offset: `204`(x86)/`264`(x86_64)
@@ -196,37 +198,37 @@ const _: () = {
             _serde::__private::Signature::new(0xa62d5e6e)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_bigTriangles
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(
                 self
                     .m_chunks
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(
                 self
                     .m_convexPieces
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(self.m_bounds.deps_indexes());
-            v.push(self.m_meshMaterials.get());
+            v.push(&self.m_meshMaterials);
             v.extend(
                 self
                     .m_namedMaterials
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
@@ -238,6 +240,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xa62d5e6e)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -483,16 +486,16 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_bitsPerIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_bitsPerWIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_wIndexMask: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_indexMask: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_bitsPerIndex: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_bitsPerWIndex: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_wIndexMask: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_indexMask: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_weldingType: _serde::__private::Option<WeldingType> = _serde::__private::None;
                     let mut m_materialType: _serde::__private::Option<MaterialType> = _serde::__private::None;
-                    let mut m_materials: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_materials16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_materials8: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_materials: _serde::__private::Option<Vec<U32<'de>>> = _serde::__private::None;
+                    let mut m_materials16: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_materials8: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
                     let mut m_transforms: _serde::__private::Option<Vec<QsTransform>> = _serde::__private::None;
                     let mut m_bigVertices: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
                     let mut m_bigTriangles: _serde::__private::Option<
@@ -507,11 +510,11 @@ const _: () = {
                     let mut m_error: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_bounds: _serde::__private::Option<hkAabb> = _serde::__private::None;
                     let mut m_defaultCollisionFilterInfo: _serde::__private::Option<
-                        u32,
+                        U32<'de>,
                     > = _serde::__private::None;
-                    let mut m_meshMaterials: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_materialStriding: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_numMaterials: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_meshMaterials: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_materialStriding: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_numMaterials: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     let mut m_namedMaterials: _serde::__private::Option<
                         Vec<hkpNamedMeshMaterial<'de>>,
                     > = _serde::__private::None;
@@ -526,7 +529,7 @@ const _: () = {
                                     );
                                 }
                                 m_bitsPerIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -543,7 +546,7 @@ const _: () = {
                                     );
                                 }
                                 m_bitsPerWIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -560,7 +563,7 @@ const _: () = {
                                     );
                                 }
                                 m_wIndexMask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -577,7 +580,7 @@ const _: () = {
                                     );
                                 }
                                 m_indexMask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -644,7 +647,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 2usize, 2usize)?;
                                 m_materials = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -661,7 +664,7 @@ const _: () = {
                                     );
                                 }
                                 m_materials16 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -678,7 +681,7 @@ const _: () = {
                                     );
                                 }
                                 m_materials8 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -817,7 +820,7 @@ const _: () = {
                                     );
                                 }
                                 m_defaultCollisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -835,7 +838,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_meshMaterials = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -852,7 +855,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialStriding = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -869,7 +872,7 @@ const _: () = {
                                     );
                                 }
                                 m_numMaterials = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1153,16 +1156,16 @@ const _: () = {
                     let mut m_collectionType: _serde::__private::Option<
                         CollectionType,
                     > = _serde::__private::None;
-                    let mut m_bitsPerIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_bitsPerWIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_wIndexMask: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_indexMask: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_bitsPerIndex: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_bitsPerWIndex: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_wIndexMask: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_indexMask: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_weldingType: _serde::__private::Option<WeldingType> = _serde::__private::None;
                     let mut m_materialType: _serde::__private::Option<MaterialType> = _serde::__private::None;
-                    let mut m_materials: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_materials16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_materials8: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_materials: _serde::__private::Option<Vec<U32<'de>>> = _serde::__private::None;
+                    let mut m_materials16: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_materials8: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
                     let mut m_transforms: _serde::__private::Option<Vec<QsTransform>> = _serde::__private::None;
                     let mut m_bigVertices: _serde::__private::Option<Vec<Vector4>> = _serde::__private::None;
                     let mut m_bigTriangles: _serde::__private::Option<
@@ -1177,10 +1180,10 @@ const _: () = {
                     let mut m_error: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_bounds: _serde::__private::Option<hkAabb> = _serde::__private::None;
                     let mut m_defaultCollisionFilterInfo: _serde::__private::Option<
-                        u32,
+                        U32<'de>,
                     > = _serde::__private::None;
-                    let mut m_materialStriding: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_numMaterials: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_materialStriding: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_numMaterials: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     let mut m_namedMaterials: _serde::__private::Option<
                         Vec<hkpNamedMeshMaterial<'de>>,
                     > = _serde::__private::None;
@@ -1284,7 +1287,7 @@ const _: () = {
                                     );
                                 }
                                 m_bitsPerIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1310,7 +1313,7 @@ const _: () = {
                                     );
                                 }
                                 m_bitsPerWIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1336,7 +1339,7 @@ const _: () = {
                                     );
                                 }
                                 m_wIndexMask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1362,7 +1365,7 @@ const _: () = {
                                     );
                                 }
                                 m_indexMask = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1464,7 +1467,7 @@ const _: () = {
                                     );
                                 }
                                 m_materials = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1490,7 +1493,7 @@ const _: () = {
                                     );
                                 }
                                 m_materials16 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1516,7 +1519,7 @@ const _: () = {
                                     );
                                 }
                                 m_materials8 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1726,7 +1729,7 @@ const _: () = {
                                     );
                                 }
                                 m_defaultCollisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1752,7 +1755,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialStriding = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1778,7 +1781,7 @@ const _: () = {
                                     );
                                 }
                                 m_numMaterials = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2096,27 +2099,29 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         ..Default::default()
                     };
                     let parent = hkpShapeCollection {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_disableWelding,
                         m_collectionType,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpCompressedMeshShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_bitsPerIndex,
                         m_bitsPerWIndex,
@@ -2277,17 +2282,17 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
-                        2u8 => _serde::__private::Ok(__Field::__field2),
-                        3u8 => _serde::__private::Ok(__Field::__field3),
-                        4u8 => _serde::__private::Ok(__Field::__field4),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(2u8) => _serde::__private::Ok(__Field::__field2),
+                        U8::Number(3u8) => _serde::__private::Ok(__Field::__field3),
+                        U8::Number(4u8) => _serde::__private::Ok(__Field::__field4),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

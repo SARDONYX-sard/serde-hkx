@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkaRagdollInstance {
+pub struct hkaRagdollInstance<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,43 +22,45 @@ pub struct hkaRagdollInstance {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `rigidBodies`(ctype: `hkArray<hkpRigidBody*>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "rigidBodies"))]
     #[cfg_attr(feature = "serde", serde(rename = "rigidBodies"))]
-    pub m_rigidBodies: Vec<Pointer>,
+    pub m_rigidBodies: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `constraints`(ctype: `hkArray<hkpConstraintInstance*>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "constraints"))]
     #[cfg_attr(feature = "serde", serde(rename = "constraints"))]
-    pub m_constraints: Vec<Pointer>,
+    pub m_constraints: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `boneToRigidBodyMap`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "boneToRigidBodyMap"))]
     #[cfg_attr(feature = "serde", serde(rename = "boneToRigidBodyMap"))]
-    pub m_boneToRigidBodyMap: Vec<i32>,
+    pub m_boneToRigidBodyMap: Vec<I32<'a>>,
     /// # C++ Info
     /// - name: `skeleton`(ctype: `struct hkaSkeleton*`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "skeleton"))]
     #[cfg_attr(feature = "serde", serde(rename = "skeleton"))]
-    pub m_skeleton: Pointer,
+    pub m_skeleton: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkaRagdollInstance {
+    impl<'a> _serde::HavokClass for hkaRagdollInstance<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkaRagdollInstance"
@@ -68,21 +70,22 @@ const _: () = {
             _serde::__private::Signature::new(0x154948e8)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.extend(self.m_rigidBodies.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_constraints.iter().map(|ptr| ptr.get()));
-            v.push(self.m_skeleton.get());
+            v.extend(self.m_rigidBodies.iter());
+            v.extend(self.m_constraints.iter());
+            v.push(&self.m_skeleton);
             v
         }
     }
-    impl _serde::Serialize for hkaRagdollInstance {
+    impl<'a> _serde::Serialize for hkaRagdollInstance<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x154948e8)));
             let mut serializer = __serializer
                 .serialize_struct("hkaRagdollInstance", class_meta, (48u64, 72u64))?;
@@ -118,7 +121,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkaRagdollInstance {
+    impl<'de> _serde::Deserialize<'de> for hkaRagdollInstance<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -172,14 +175,14 @@ const _: () = {
                 }
             }
             struct __hkaRagdollInstanceVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkaRagdollInstance>,
+                marker: _serde::__private::PhantomData<hkaRagdollInstance<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkaRagdollInstanceVisitor<'de> {
-                type Value = hkaRagdollInstance;
+                type Value = hkaRagdollInstance<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -198,10 +201,16 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_rigidBodies: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_constraints: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_boneToRigidBodyMap: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
-                    let mut m_skeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_rigidBodies: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_constraints: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_boneToRigidBodyMap: _serde::__private::Option<
+                        Vec<I32<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_skeleton: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     for i in 0..4usize {
                         match i {
                             0usize => {
@@ -213,7 +222,7 @@ const _: () = {
                                     );
                                 }
                                 m_rigidBodies = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -230,7 +239,7 @@ const _: () = {
                                     );
                                 }
                                 m_constraints = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -249,7 +258,7 @@ const _: () = {
                                     );
                                 }
                                 m_boneToRigidBodyMap = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                    match __A::next_value::<Vec<I32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -266,7 +275,7 @@ const _: () = {
                                     );
                                 }
                                 m_skeleton = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -332,10 +341,16 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_rigidBodies: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_constraints: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_boneToRigidBodyMap: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
-                    let mut m_skeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_rigidBodies: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_constraints: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_boneToRigidBodyMap: _serde::__private::Option<
+                        Vec<I32<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_skeleton: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -358,7 +373,7 @@ const _: () = {
                                     );
                                 }
                                 m_rigidBodies = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -384,7 +399,7 @@ const _: () = {
                                     );
                                 }
                                 m_constraints = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -412,7 +427,7 @@ const _: () = {
                                     );
                                 }
                                 m_boneToRigidBodyMap = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                    match __A::next_value::<Vec<I32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -438,7 +453,7 @@ const _: () = {
                                     );
                                 }
                                 m_skeleton = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -496,15 +511,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkaRagdollInstance {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_rigidBodies,
                         m_constraints,

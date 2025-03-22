@@ -14,13 +14,13 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> Result<TokenStream
         name,
         vtype,
         arrsize,
-        has_string,
+        has_ref,
         ..
     } = member;
 
     let field_type = member_to_rust_type(member, class_name)?;
 
-    let serde_borrow_attr = serde_borrow_attr(*has_string);
+    let serde_borrow_attr = serde_borrow_attr(*has_ref);
 
     // `Default` implementations with huge sizes such as [0u8; 256] are not automatically supported, so use `educe` crate to define them.
     let arr_custom_attr = if *arrsize > 32 {
@@ -42,7 +42,7 @@ pub(super) fn gen_field(member: &Member, class_name: &str) -> Result<TokenStream
             | TypeKind::Int64
             | TypeKind::Uint64 => {
                 quote! {
-                    #[educe(Default = [0; #arrsize])]
+                    #[educe(Default(expression = core::array::from_fn(|_idx| Default::default())))]
                 }
             }
             _ => {

@@ -5,9 +5,9 @@
   "size_x86": 72,
   "size_x86_64": 112,
   "parent": "hkbGenerator",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "BlendModeFunction",
@@ -33,7 +33,7 @@
   "members": [
     {
       "name": "pSequence",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "char*",
       "vtype": "TYPE_CSTRING",
       "vsubtype": "TYPE_VOID",
@@ -48,7 +48,7 @@
     {
       "name": "eBlendModeFunction",
       "enum_ref": "BlendModeFunction",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum BlendModeFunction",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -62,7 +62,7 @@
     },
     {
       "name": "fPercent",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -76,7 +76,7 @@
     },
     {
       "name": "events",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",
@@ -90,7 +90,7 @@
     },
     {
       "name": "fTime",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -104,7 +104,7 @@
     },
     {
       "name": "bDelayedActivate",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -118,7 +118,7 @@
     },
     {
       "name": "bLooping",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

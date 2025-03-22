@@ -17,8 +17,8 @@ use crate::lib::*;
 mod impls;
 
 use havok_types::{
-    f16, variant::Variant, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation,
-    Signature, StringPtr, Transform, Ulong, Vector4,
+    CString, I8, I16, I32, I64, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation,
+    Signature, StringPtr, Transform, U8, U16, U32, U64, Ulong, Variant, Vector4, f16,
 };
 
 #[cfg(feature = "std")]
@@ -144,28 +144,28 @@ pub trait Serializer {
     /// If the format does not differentiate between `i8` and `i64`, a
     /// reasonable implementation would be to cast the value to `i64` and
     /// forward to `serialize_i64`.
-    fn serialize_int8(self, v: i8) -> Result<Self::Ok, Self::Error>;
+    fn serialize_int8(self, v: &I8) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `u8` value.
-    fn serialize_uint8(self, v: u8) -> Result<Self::Ok, Self::Error>;
+    fn serialize_uint8(self, v: &U8) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `i16` value.
-    fn serialize_int16(self, v: i16) -> Result<Self::Ok, Self::Error>;
+    fn serialize_int16(self, v: &I16) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `u16` value.
-    fn serialize_uint16(self, v: u16) -> Result<Self::Ok, Self::Error>;
+    fn serialize_uint16(self, v: &U16) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `i32` value.
-    fn serialize_int32(self, v: i32) -> Result<Self::Ok, Self::Error>;
+    fn serialize_int32(self, v: &I32) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `u32` value.
-    fn serialize_uint32(self, v: u32) -> Result<Self::Ok, Self::Error>;
+    fn serialize_uint32(self, v: &U32) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `u64` value.
-    fn serialize_int64(self, v: i64) -> Result<Self::Ok, Self::Error>;
+    fn serialize_int64(self, v: &I64) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `i64` value.
-    fn serialize_uint64(self, v: u64) -> Result<Self::Ok, Self::Error>;
+    fn serialize_uint64(self, v: &U64) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `f32` value.
     fn serialize_real(self, v: f32) -> Result<Self::Ok, Self::Error>;
@@ -192,7 +192,7 @@ pub trait Serializer {
     fn serialize_transform(self, v: &Transform) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `Pointer` value.
-    fn serialize_pointer(self, v: Pointer) -> Result<Self::Ok, Self::Error>;
+    fn serialize_pointer(self, v: &Pointer) -> Result<Self::Ok, Self::Error>;
 
     /// Serialize an `Array` value.
     fn serialize_array(self, len: Option<usize>) -> Result<Self::SerializeSeq, Self::Error>;
@@ -203,7 +203,7 @@ pub trait Serializer {
     fn serialize_struct(
         self,
         name: &'static str,
-        class_meta: Option<(Pointer, Signature)>,
+        class_meta: Option<(&Pointer, Signature)>,
         sizes: (u64, u64),
     ) -> Result<Self::SerializeStruct, Self::Error>;
 

@@ -5,14 +5,14 @@
   "size_x86": 128,
   "size_x86_64": 176,
   "parent": "hkbGenerator",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "pDefaultGenerator",
       "class_ref": "hkbGenerator",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbGenerator*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -27,7 +27,7 @@
     {
       "name": "pOffsetClipGenerator",
       "class_ref": "hkbGenerator",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbGenerator*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -41,7 +41,7 @@
     },
     {
       "name": "fOffsetVariable",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -55,7 +55,7 @@
     },
     {
       "name": "fOffsetRangeStart",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -69,7 +69,7 @@
     },
     {
       "name": "fOffsetRangeEnd",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -83,7 +83,7 @@
     },
     {
       "name": "BoneOffsetA",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",
@@ -97,7 +97,7 @@
     },
     {
       "name": "BoneIndexA",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",
@@ -111,7 +111,7 @@
     },
     {
       "name": "fCurrentPercentage",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -125,7 +125,7 @@
     },
     {
       "name": "iCurrentFrame",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -139,7 +139,7 @@
     },
     {
       "name": "bZeroOffset",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -153,7 +153,7 @@
     },
     {
       "name": "bOffsetValid",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

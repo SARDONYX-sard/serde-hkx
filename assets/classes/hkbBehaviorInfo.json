@@ -5,13 +5,13 @@
   "size_x86": 32,
   "size_x86_64": 48,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "characterId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint64",
       "vtype": "TYPE_UINT64",
       "vsubtype": "TYPE_VOID",
@@ -26,7 +26,7 @@
     {
       "name": "data",
       "class_ref": "hkbBehaviorGraphData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbBehaviorGraphData*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -41,7 +41,7 @@
     {
       "name": "idToNamePairs",
       "class_ref": "hkbBehaviorInfoIdToNamePair",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<struct hkbBehaviorInfoIdToNamePair>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",

@@ -22,7 +22,8 @@ pub struct hkbGeneratorTransitionEffect<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -34,7 +35,7 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "transitionGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "transitionGenerator"))]
-    pub m_transitionGenerator: Pointer,
+    pub m_transitionGenerator: Pointer<'a>,
     /// # C++ Info
     /// - name: `blendInDuration`(ctype: `hkReal`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
@@ -63,7 +64,7 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "fromGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "fromGenerator"))]
-    pub m_fromGenerator: Pointer,
+    pub m_fromGenerator: Pointer<'a>,
     /// # C++ Info
     /// - name: `toGenerator`(ctype: `void*`)
     /// - offset: ` 64`(x86)/`112`(x86_64)
@@ -71,7 +72,7 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "toGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "toGenerator"))]
-    pub m_toGenerator: Pointer,
+    pub m_toGenerator: Pointer<'a>,
     /// # C++ Info
     /// - name: `timeInTransition`(ctype: `hkReal`)
     /// - offset: ` 68`(x86)/`120`(x86_64)
@@ -111,7 +112,7 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "toGeneratorState"))]
     #[cfg_attr(feature = "serde", serde(rename = "toGeneratorState"))]
-    pub m_toGeneratorState: i8,
+    pub m_toGeneratorState: I8<'a>,
     /// # C++ Info
     /// - name: `echoTransitionGenerator`(ctype: `hkBool`)
     /// - offset: ` 85`(x86)/`137`(x86_64)
@@ -151,7 +152,7 @@ pub struct hkbGeneratorTransitionEffect<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "stage"))]
     #[cfg_attr(feature = "serde", serde(rename = "stage"))]
-    pub m_stage: i8,
+    pub m_stage: I8<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -165,12 +166,12 @@ const _: () = {
             _serde::__private::Signature::new(0x5f771b12)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.parent.m_variableBindingSet.get());
-            v.push(self.m_transitionGenerator.get());
-            v.push(self.m_fromGenerator.get());
-            v.push(self.m_toGenerator.get());
+            v.push(&self.parent.parent.parent.parent.m_variableBindingSet);
+            v.push(&self.m_transitionGenerator);
+            v.push(&self.m_fromGenerator);
+            v.push(&self.m_toGenerator);
             v
         }
     }
@@ -181,6 +182,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x5f771b12)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -374,26 +376,28 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_transitionGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_transitionGenerator: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_blendInDuration: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_blendOutDuration: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_syncToGeneratorStartTime: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
-                    let mut m_fromGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_toGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_fromGenerator: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_toGenerator: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_timeInTransition: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_effectiveBlendInDuration: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_effectiveBlendOutDuration: _serde::__private::Option<
                         f32,
                     > = _serde::__private::None;
-                    let mut m_toGeneratorState: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_toGeneratorState: _serde::__private::Option<I8<'de>> = _serde::__private::None;
                     let mut m_echoTransitionGenerator: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_echoToGenerator: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_justActivated: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_updateActiveNodes: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_stage: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_stage: _serde::__private::Option<I8<'de>> = _serde::__private::None;
                     for i in 0..16usize {
                         match i {
                             0usize => {
@@ -407,7 +411,7 @@ const _: () = {
                                     );
                                 }
                                 m_transitionGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -478,7 +482,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 7usize)?;
                                 m_fromGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -495,7 +499,7 @@ const _: () = {
                                     );
                                 }
                                 m_toGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -584,7 +588,7 @@ const _: () = {
                                     );
                                 }
                                 m_toGeneratorState = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -671,7 +675,7 @@ const _: () = {
                                     );
                                 }
                                 m_stage = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -868,14 +872,18 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_selfTransitionMode: _serde::__private::Option<
                         SelfTransitionMode,
                     > = _serde::__private::None;
                     let mut m_eventMode: _serde::__private::Option<EventMode> = _serde::__private::None;
-                    let mut m_transitionGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_transitionGenerator: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_blendInDuration: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_blendOutDuration: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_syncToGeneratorStartTime: _serde::__private::Option<
@@ -905,7 +913,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1037,7 +1045,7 @@ const _: () = {
                                     );
                                 }
                                 m_transitionGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1233,28 +1241,33 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
-                    let parent = hkbGenerator { __ptr, parent };
+                    let parent = hkbGenerator {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let parent = hkbTransitionEffect {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_selfTransitionMode,
                         m_eventMode,
@@ -1262,7 +1275,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbGeneratorTransitionEffect {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_transitionGenerator,
                         m_blendInDuration,
@@ -1445,16 +1458,16 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
-                        3i8 => _serde::__private::Ok(__Field::__field3),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(3i8) => _serde::__private::Ok(__Field::__field3),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -1619,15 +1632,15 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

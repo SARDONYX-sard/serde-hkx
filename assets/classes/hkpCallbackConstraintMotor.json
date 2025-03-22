@@ -5,9 +5,9 @@
   "size_x86": 40,
   "size_x86_64": 72,
   "parent": "hkpLimitedForceConstraintMotor",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "CallbackType",
@@ -41,7 +41,7 @@
   "members": [
     {
       "name": "callbackFunc",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -56,7 +56,7 @@
     {
       "name": "callbackType",
       "enum_ref": "CallbackType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum CallbackType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT32",
@@ -70,7 +70,7 @@
     },
     {
       "name": "userData0",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUlong",
       "vtype": "TYPE_ULONG",
       "vsubtype": "TYPE_VOID",
@@ -84,7 +84,7 @@
     },
     {
       "name": "userData1",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUlong",
       "vtype": "TYPE_ULONG",
       "vsubtype": "TYPE_VOID",
@@ -98,7 +98,7 @@
     },
     {
       "name": "userData2",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUlong",
       "vtype": "TYPE_ULONG",
       "vsubtype": "TYPE_VOID",

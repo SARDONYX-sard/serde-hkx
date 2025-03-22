@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpBallSocketConstraintAtom {
+pub struct hkpBallSocketConstraintAtom<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkpBallSocketConstraintAtom {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpConstraintAtom,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpConstraintAtom<'a>,
     /// # C++ Info
     /// - name: `solvingMethod`(ctype: `enum SolvingMethod`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
@@ -40,7 +42,7 @@ pub struct hkpBallSocketConstraintAtom {
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "bodiesToNotify"))]
     #[cfg_attr(feature = "serde", serde(rename = "bodiesToNotify"))]
-    pub m_bodiesToNotify: u8,
+    pub m_bodiesToNotify: U8<'a>,
     /// # C++ Info
     /// - name: `velocityStabilizationFactor`(ctype: `hkUint8`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
@@ -50,7 +52,7 @@ pub struct hkpBallSocketConstraintAtom {
         schemars(rename = "velocityStabilizationFactor")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "velocityStabilizationFactor"))]
-    pub m_velocityStabilizationFactor: u8,
+    pub m_velocityStabilizationFactor: U8<'a>,
     /// # C++ Info
     /// - name: `maxImpulse`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
@@ -68,7 +70,7 @@ pub struct hkpBallSocketConstraintAtom {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpBallSocketConstraintAtom {
+    impl<'a> _serde::HavokClass for hkpBallSocketConstraintAtom<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpBallSocketConstraintAtom"
@@ -78,18 +80,19 @@ const _: () = {
             _serde::__private::Signature::new(0xe70e4dfa)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpBallSocketConstraintAtom {
+    impl<'a> _serde::Serialize for hkpBallSocketConstraintAtom<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xe70e4dfa)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -121,7 +124,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpBallSocketConstraintAtom {
+    impl<'de> _serde::Deserialize<'de> for hkpBallSocketConstraintAtom<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -183,7 +186,7 @@ const _: () = {
                 }
             }
             struct __hkpBallSocketConstraintAtomVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpBallSocketConstraintAtom>,
+                marker: _serde::__private::PhantomData<hkpBallSocketConstraintAtom<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -191,7 +194,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpBallSocketConstraintAtomVisitor<'de> {
-                type Value = hkpBallSocketConstraintAtom;
+                type Value = hkpBallSocketConstraintAtom<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -211,9 +214,9 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_solvingMethod: _serde::__private::Option<SolvingMethod> = _serde::__private::None;
-                    let mut m_bodiesToNotify: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_bodiesToNotify: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     let mut m_velocityStabilizationFactor: _serde::__private::Option<
-                        u8,
+                        U8<'de>,
                     > = _serde::__private::None;
                     let mut m_maxImpulse: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_inertiaStabilizationFactor: _serde::__private::Option<
@@ -247,7 +250,7 @@ const _: () = {
                                     );
                                 }
                                 m_bodiesToNotify = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -266,7 +269,7 @@ const _: () = {
                                     );
                                 }
                                 m_velocityStabilizationFactor = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -384,9 +387,9 @@ const _: () = {
                 {
                     let mut m_type: _serde::__private::Option<AtomType> = _serde::__private::None;
                     let mut m_solvingMethod: _serde::__private::Option<SolvingMethod> = _serde::__private::None;
-                    let mut m_bodiesToNotify: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_bodiesToNotify: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     let mut m_velocityStabilizationFactor: _serde::__private::Option<
-                        u8,
+                        U8<'de>,
                     > = _serde::__private::None;
                     let mut m_maxImpulse: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_inertiaStabilizationFactor: _serde::__private::Option<
@@ -464,7 +467,7 @@ const _: () = {
                                     );
                                 }
                                 m_bodiesToNotify = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -492,7 +495,7 @@ const _: () = {
                                     );
                                 }
                                 m_velocityStabilizationFactor = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -628,10 +631,13 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkpConstraintAtom { __ptr, m_type };
+                    let parent = hkpConstraintAtom {
+                        __ptr: __ptr.clone(),
+                        m_type,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpBallSocketConstraintAtom {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_solvingMethod,
                         m_bodiesToNotify,

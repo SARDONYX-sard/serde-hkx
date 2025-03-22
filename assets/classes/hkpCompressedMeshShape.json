@@ -5,9 +5,9 @@
   "size_x86": 224,
   "size_x86_64": 304,
   "parent": "hkpShapeCollection",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "MaterialType",
@@ -41,7 +41,7 @@
   "members": [
     {
       "name": "bitsPerIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -55,7 +55,7 @@
     },
     {
       "name": "bitsPerWIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -69,7 +69,7 @@
     },
     {
       "name": "wIndexMask",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -83,7 +83,7 @@
     },
     {
       "name": "indexMask",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -97,7 +97,7 @@
     },
     {
       "name": "radius",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -112,7 +112,7 @@
     {
       "name": "weldingType",
       "enum_ref": "WeldingType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum WeldingType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -127,7 +127,7 @@
     {
       "name": "materialType",
       "enum_ref": "MaterialType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum MaterialType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -141,7 +141,7 @@
     },
     {
       "name": "materials",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkUint32>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_UINT32",
@@ -155,7 +155,7 @@
     },
     {
       "name": "materials16",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkUint16>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_UINT16",
@@ -169,7 +169,7 @@
     },
     {
       "name": "materials8",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkUint8>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_UINT8",
@@ -183,7 +183,7 @@
     },
     {
       "name": "transforms",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkQsTransform>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_QSTRANSFORM",
@@ -197,7 +197,7 @@
     },
     {
       "name": "bigVertices",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkVector4>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VECTOR4",
@@ -212,7 +212,7 @@
     {
       "name": "bigTriangles",
       "class_ref": "hkpCompressedMeshShapeBigTriangle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkpCompressedMeshShapeBigTriangle>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -227,7 +227,7 @@
     {
       "name": "chunks",
       "class_ref": "hkpCompressedMeshShapeChunk",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkpCompressedMeshShapeChunk>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -242,7 +242,7 @@
     {
       "name": "convexPieces",
       "class_ref": "hkpCompressedMeshShapeConvexPiece",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkpCompressedMeshShapeConvexPiece>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -256,7 +256,7 @@
     },
     {
       "name": "error",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -271,7 +271,7 @@
     {
       "name": "bounds",
       "class_ref": "hkAabb",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkAabb",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -285,7 +285,7 @@
     },
     {
       "name": "defaultCollisionFilterInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -299,7 +299,7 @@
     },
     {
       "name": "meshMaterials",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -313,7 +313,7 @@
     },
     {
       "name": "materialStriding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -327,7 +327,7 @@
     },
     {
       "name": "numMaterials",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -342,7 +342,7 @@
     {
       "name": "namedMaterials",
       "class_ref": "hkpNamedMeshMaterial",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<struct hkpNamedMeshMaterial>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",

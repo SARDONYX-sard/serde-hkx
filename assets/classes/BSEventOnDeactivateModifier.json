@@ -5,14 +5,14 @@
   "size_x86": 52,
   "size_x86_64": 96,
   "parent": "hkbModifier",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "event",
       "class_ref": "hkbEventProperty",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbEventProperty",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",

@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpViscousSurfaceModifierConstraintAtom {
+pub struct hkpViscousSurfaceModifierConstraintAtom<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,15 +22,17 @@ pub struct hkpViscousSurfaceModifierConstraintAtom {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpModifierConstraintAtom,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpModifierConstraintAtom<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpViscousSurfaceModifierConstraintAtom {
+    impl<'a> _serde::HavokClass for hkpViscousSurfaceModifierConstraintAtom<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpViscousSurfaceModifierConstraintAtom"
@@ -40,19 +42,20 @@ const _: () = {
             _serde::__private::Signature::new(0x5c6aa14d)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.m_child.get());
+            v.push(&self.parent.m_child);
             v
         }
     }
-    impl _serde::Serialize for hkpViscousSurfaceModifierConstraintAtom {
+    impl<'a> _serde::Serialize for hkpViscousSurfaceModifierConstraintAtom<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x5c6aa14d)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -83,7 +86,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpViscousSurfaceModifierConstraintAtom {
+    impl<'de> _serde::Deserialize<'de> for hkpViscousSurfaceModifierConstraintAtom<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -140,7 +143,7 @@ const _: () = {
             }
             struct __hkpViscousSurfaceModifierConstraintAtomVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkpViscousSurfaceModifierConstraintAtom,
+                    hkpViscousSurfaceModifierConstraintAtom<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -149,7 +152,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpViscousSurfaceModifierConstraintAtomVisitor<'de> {
-                type Value = hkpViscousSurfaceModifierConstraintAtom;
+                type Value = hkpViscousSurfaceModifierConstraintAtom<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -187,10 +190,10 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_type: _serde::__private::Option<AtomType> = _serde::__private::None;
-                    let mut m_modifierAtomSize: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_childSize: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_child: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_pad: _serde::__private::Option<[u32; 2usize]> = _serde::__private::None;
+                    let mut m_modifierAtomSize: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_childSize: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_child: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_pad: _serde::__private::Option<[U32<'de>; 2usize]> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -237,7 +240,7 @@ const _: () = {
                                     );
                                 }
                                 m_modifierAtomSize = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -263,7 +266,7 @@ const _: () = {
                                     );
                                 }
                                 m_childSize = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -287,7 +290,7 @@ const _: () = {
                                     );
                                 }
                                 m_child = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -311,7 +314,7 @@ const _: () = {
                                     );
                                 }
                                 m_pad = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 2usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 2usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -377,9 +380,12 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkpConstraintAtom { __ptr, m_type };
+                    let parent = hkpConstraintAtom {
+                        __ptr: __ptr.clone(),
+                        m_type,
+                    };
                     let parent = hkpModifierConstraintAtom {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_modifierAtomSize,
                         m_childSize,
@@ -388,7 +394,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpViscousSurfaceModifierConstraintAtom {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                     })
                 }

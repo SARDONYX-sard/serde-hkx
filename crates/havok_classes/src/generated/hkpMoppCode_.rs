@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpMoppCode {
+pub struct hkpMoppCode<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,25 +22,27 @@ pub struct hkpMoppCode {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `info`(ctype: `struct hkpMoppCodeCodeInfo`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "info"))]
     #[cfg_attr(feature = "serde", serde(rename = "info"))]
-    pub m_info: hkpMoppCodeCodeInfo,
+    pub m_info: hkpMoppCodeCodeInfo<'a>,
     /// # C++ Info
     /// - name: `data`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "data"))]
     #[cfg_attr(feature = "serde", serde(rename = "data"))]
-    pub m_data: Vec<u8>,
+    pub m_data: Vec<U8<'a>>,
     /// # C++ Info
     /// - name: `buildType`(ctype: `enum BuildType`)
     /// - offset: ` 44`(x86)/` 48`(x86_64)
@@ -51,7 +53,7 @@ pub struct hkpMoppCode {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpMoppCode {
+    impl<'a> _serde::HavokClass for hkpMoppCode<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpMoppCode"
@@ -61,19 +63,20 @@ const _: () = {
             _serde::__private::Signature::new(0x924c2661)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_info.deps_indexes());
             v
         }
     }
-    impl _serde::Serialize for hkpMoppCode {
+    impl<'a> _serde::Serialize for hkpMoppCode<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x924c2661)));
             let mut serializer = __serializer
                 .serialize_struct("hkpMoppCode", class_meta, (48u64, 64u64))?;
@@ -95,7 +98,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpMoppCode {
+    impl<'de> _serde::Deserialize<'de> for hkpMoppCode<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -147,14 +150,14 @@ const _: () = {
                 }
             }
             struct __hkpMoppCodeVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpMoppCode>,
+                marker: _serde::__private::PhantomData<hkpMoppCode<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpMoppCodeVisitor<'de> {
-                type Value = hkpMoppCode;
+                type Value = hkpMoppCode<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -171,7 +174,7 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_info: _serde::__private::Option<hkpMoppCodeCodeInfo> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
                     let mut m_buildType: _serde::__private::Option<BuildType> = _serde::__private::None;
                     for i in 0..3usize {
                         match i {
@@ -198,7 +201,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -270,7 +273,7 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_info: _serde::__private::Option<hkpMoppCodeCodeInfo> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
                     let mut m_buildType: _serde::__private::Option<BuildType> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -316,7 +319,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -386,15 +389,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpMoppCode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_info,
                         m_data,
@@ -501,15 +506,15 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

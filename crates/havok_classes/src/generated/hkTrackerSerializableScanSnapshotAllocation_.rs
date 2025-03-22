@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkTrackerSerializableScanSnapshotAllocation {
+pub struct hkTrackerSerializableScanSnapshotAllocation<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkTrackerSerializableScanSnapshotAllocation {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `start`(ctype: `hkUlong`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -43,11 +44,11 @@ pub struct hkTrackerSerializableScanSnapshotAllocation {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "traceId"))]
     #[cfg_attr(feature = "serde", serde(rename = "traceId"))]
-    pub m_traceId: i32,
+    pub m_traceId: I32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkTrackerSerializableScanSnapshotAllocation {
+    impl<'a> _serde::HavokClass for hkTrackerSerializableScanSnapshotAllocation<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkTrackerSerializableScanSnapshotAllocation"
@@ -57,18 +58,19 @@ const _: () = {
             _serde::__private::Signature::new(0x9ab3a6ac)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkTrackerSerializableScanSnapshotAllocation {
+    impl<'a> _serde::Serialize for hkTrackerSerializableScanSnapshotAllocation<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x9ab3a6ac)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -89,7 +91,8 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkTrackerSerializableScanSnapshotAllocation {
+    impl<'de> _serde::Deserialize<'de>
+    for hkTrackerSerializableScanSnapshotAllocation<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -142,7 +145,7 @@ const _: () = {
             }
             struct __hkTrackerSerializableScanSnapshotAllocationVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkTrackerSerializableScanSnapshotAllocation,
+                    hkTrackerSerializableScanSnapshotAllocation<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -151,7 +154,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkTrackerSerializableScanSnapshotAllocationVisitor<'de> {
-                type Value = hkTrackerSerializableScanSnapshotAllocation;
+                type Value = hkTrackerSerializableScanSnapshotAllocation<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -171,7 +174,7 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let mut m_start: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_size: _serde::__private::Option<Ulong> = _serde::__private::None;
-                    let mut m_traceId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_traceId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     for i in 0..3usize {
                         match i {
                             0usize => {
@@ -213,7 +216,7 @@ const _: () = {
                                     );
                                 }
                                 m_traceId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -266,7 +269,7 @@ const _: () = {
                 {
                     let mut m_start: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_size: _serde::__private::Option<Ulong> = _serde::__private::None;
-                    let mut m_traceId: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_traceId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -337,7 +340,7 @@ const _: () = {
                                     );
                                 }
                                 m_traceId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -380,7 +383,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkTrackerSerializableScanSnapshotAllocation {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_start,
                         m_size,
                         m_traceId,

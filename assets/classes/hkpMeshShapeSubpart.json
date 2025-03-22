@@ -4,13 +4,13 @@
   "signature": "0x27336e5d",
   "size_x86": 56,
   "size_x86_64": 80,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "vertexBase",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -24,7 +24,7 @@
     },
     {
       "name": "vertexStriding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -38,7 +38,7 @@
     },
     {
       "name": "numVertices",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -52,7 +52,7 @@
     },
     {
       "name": "indexBase",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -67,7 +67,7 @@
     {
       "name": "stridingType",
       "enum_ref": "MeshShapeIndexStridingType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum MeshShapeIndexStridingType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -82,7 +82,7 @@
     {
       "name": "materialIndexStridingType",
       "enum_ref": "MeshShapeMaterialIndexStridingType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum MeshShapeMaterialIndexStridingType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -96,7 +96,7 @@
     },
     {
       "name": "indexStriding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -110,7 +110,7 @@
     },
     {
       "name": "flipAlternateTriangles",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -124,7 +124,7 @@
     },
     {
       "name": "numTriangles",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -138,7 +138,7 @@
     },
     {
       "name": "materialIndexBase",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -152,7 +152,7 @@
     },
     {
       "name": "materialIndexStriding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -166,7 +166,7 @@
     },
     {
       "name": "materialBase",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -180,7 +180,7 @@
     },
     {
       "name": "materialStriding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -194,7 +194,7 @@
     },
     {
       "name": "numMaterials",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -208,7 +208,7 @@
     },
     {
       "name": "triangleOffset",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",

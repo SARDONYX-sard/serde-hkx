@@ -5,9 +5,9 @@
   "size_x86": 44,
   "size_x86_64": 80,
   "parent": "hkbGenerator",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "SelfTransitionMode",
@@ -62,7 +62,7 @@
     {
       "name": "selfTransitionMode",
       "enum_ref": "SelfTransitionMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum SelfTransitionMode",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -77,7 +77,7 @@
     {
       "name": "eventMode",
       "enum_ref": "EventMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum EventMode",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -91,7 +91,7 @@
     },
     {
       "name": "defaultEventMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum unknown",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",

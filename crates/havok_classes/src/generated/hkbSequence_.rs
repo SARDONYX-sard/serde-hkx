@@ -22,7 +22,8 @@ pub struct hkbSequence<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -34,49 +35,49 @@ pub struct hkbSequence<'a> {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "eventSequencedData"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventSequencedData"))]
-    pub m_eventSequencedData: Vec<Pointer>,
+    pub m_eventSequencedData: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `realVariableSequencedData`(ctype: `hkArray<hkbRealVariableSequencedData*>`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "realVariableSequencedData"))]
     #[cfg_attr(feature = "serde", serde(rename = "realVariableSequencedData"))]
-    pub m_realVariableSequencedData: Vec<Pointer>,
+    pub m_realVariableSequencedData: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `boolVariableSequencedData`(ctype: `hkArray<hkbBoolVariableSequencedData*>`)
     /// - offset: ` 68`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "boolVariableSequencedData"))]
     #[cfg_attr(feature = "serde", serde(rename = "boolVariableSequencedData"))]
-    pub m_boolVariableSequencedData: Vec<Pointer>,
+    pub m_boolVariableSequencedData: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `intVariableSequencedData`(ctype: `hkArray<hkbIntVariableSequencedData*>`)
     /// - offset: ` 80`(x86)/`128`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "intVariableSequencedData"))]
     #[cfg_attr(feature = "serde", serde(rename = "intVariableSequencedData"))]
-    pub m_intVariableSequencedData: Vec<Pointer>,
+    pub m_intVariableSequencedData: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `enableEventId`(ctype: `hkInt32`)
     /// - offset: ` 92`(x86)/`144`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "enableEventId"))]
     #[cfg_attr(feature = "serde", serde(rename = "enableEventId"))]
-    pub m_enableEventId: i32,
+    pub m_enableEventId: I32<'a>,
     /// # C++ Info
     /// - name: `disableEventId`(ctype: `hkInt32`)
     /// - offset: ` 96`(x86)/`148`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "disableEventId"))]
     #[cfg_attr(feature = "serde", serde(rename = "disableEventId"))]
-    pub m_disableEventId: i32,
+    pub m_disableEventId: I32<'a>,
     /// # C++ Info
     /// - name: `stringData`(ctype: `struct hkbSequenceStringData*`)
     /// - offset: `100`(x86)/`152`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "stringData"))]
     #[cfg_attr(feature = "serde", serde(rename = "stringData"))]
-    pub m_stringData: Pointer,
+    pub m_stringData: Pointer<'a>,
     /// # C++ Info
     /// - name: `variableIdMap`(ctype: `void*`)
     /// - offset: `104`(x86)/`160`(x86_64)
@@ -84,7 +85,7 @@ pub struct hkbSequence<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "variableIdMap"))]
     #[cfg_attr(feature = "serde", serde(rename = "variableIdMap"))]
-    pub m_variableIdMap: Pointer,
+    pub m_variableIdMap: Pointer<'a>,
     /// # C++ Info
     /// - name: `eventIdMap`(ctype: `void*`)
     /// - offset: `108`(x86)/`168`(x86_64)
@@ -92,7 +93,7 @@ pub struct hkbSequence<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "eventIdMap"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventIdMap"))]
-    pub m_eventIdMap: Pointer,
+    pub m_eventIdMap: Pointer<'a>,
     /// # C++ Info
     /// - name: `nextSampleEvents`(ctype: `hkArray<void>`)
     /// - offset: `112`(x86)/`176`(x86_64)
@@ -154,16 +155,16 @@ const _: () = {
             _serde::__private::Signature::new(0x43182ca3)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
-            v.extend(self.m_eventSequencedData.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_realVariableSequencedData.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_boolVariableSequencedData.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_intVariableSequencedData.iter().map(|ptr| ptr.get()));
-            v.push(self.m_stringData.get());
-            v.push(self.m_variableIdMap.get());
-            v.push(self.m_eventIdMap.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
+            v.extend(self.m_eventSequencedData.iter());
+            v.extend(self.m_realVariableSequencedData.iter());
+            v.extend(self.m_boolVariableSequencedData.iter());
+            v.extend(self.m_intVariableSequencedData.iter());
+            v.push(&self.m_stringData);
+            v.push(&self.m_variableIdMap);
+            v.push(&self.m_eventIdMap);
             v
         }
     }
@@ -174,6 +175,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x43182ca3)));
             let mut serializer = __serializer
                 .serialize_struct("hkbSequence", class_meta, (168u64, 248u64))?;
@@ -388,22 +390,22 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_eventSequencedData: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_realVariableSequencedData: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_boolVariableSequencedData: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_intVariableSequencedData: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
-                    let mut m_enableEventId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_disableEventId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_variableIdMap: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_eventIdMap: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_enableEventId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_disableEventId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_stringData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_variableIdMap: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_eventIdMap: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_nextSampleEvents: _serde::__private::Option<Vec<()>> = _serde::__private::None;
                     let mut m_nextSampleReals: _serde::__private::Option<Vec<()>> = _serde::__private::None;
                     let mut m_nextSampleBools: _serde::__private::Option<Vec<()>> = _serde::__private::None;
@@ -423,7 +425,7 @@ const _: () = {
                                     );
                                 }
                                 m_eventSequencedData = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -442,7 +444,7 @@ const _: () = {
                                     );
                                 }
                                 m_realVariableSequencedData = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -461,7 +463,7 @@ const _: () = {
                                     );
                                 }
                                 m_boolVariableSequencedData = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -480,7 +482,7 @@ const _: () = {
                                     );
                                 }
                                 m_intVariableSequencedData = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -497,7 +499,7 @@ const _: () = {
                                     );
                                 }
                                 m_enableEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -514,7 +516,7 @@ const _: () = {
                                     );
                                 }
                                 m_disableEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -531,7 +533,7 @@ const _: () = {
                                     );
                                 }
                                 m_stringData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -548,7 +550,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableIdMap = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -565,7 +567,7 @@ const _: () = {
                                     );
                                 }
                                 m_eventIdMap = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -853,25 +855,27 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_eventSequencedData: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_realVariableSequencedData: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_boolVariableSequencedData: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_intVariableSequencedData: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
-                    let mut m_enableEventId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_disableEventId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_enableEventId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_disableEventId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_stringData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -896,7 +900,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -998,7 +1002,7 @@ const _: () = {
                                     );
                                 }
                                 m_eventSequencedData = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1026,7 +1030,7 @@ const _: () = {
                                     );
                                 }
                                 m_realVariableSequencedData = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1054,7 +1058,7 @@ const _: () = {
                                     );
                                 }
                                 m_boolVariableSequencedData = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1082,7 +1086,7 @@ const _: () = {
                                     );
                                 }
                                 m_intVariableSequencedData = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1108,7 +1112,7 @@ const _: () = {
                                     );
                                 }
                                 m_enableEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1134,7 +1138,7 @@ const _: () = {
                                     );
                                 }
                                 m_disableEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1160,7 +1164,7 @@ const _: () = {
                                     );
                                 }
                                 m_stringData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1298,34 +1302,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbSequence {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_eventSequencedData,
                         m_realVariableSequencedData,

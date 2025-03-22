@@ -5,13 +5,13 @@
   "size_x86": 48,
   "size_x86_64": 72,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "characterId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint64",
       "vtype": "TYPE_UINT64",
       "vsubtype": "TYPE_VOID",
@@ -26,7 +26,7 @@
     {
       "name": "behavior",
       "class_ref": "hkbBehaviorGraph",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbBehaviorGraph*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -41,7 +41,7 @@
     {
       "name": "rootGenerator",
       "class_ref": "hkbGenerator",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbGenerator*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -56,7 +56,7 @@
     {
       "name": "referencedBehaviors",
       "class_ref": "hkbBehaviorGraph",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkbBehaviorGraph*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -70,7 +70,7 @@
     },
     {
       "name": "startStateIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -84,7 +84,7 @@
     },
     {
       "name": "randomizeSimulation",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -98,7 +98,7 @@
     },
     {
       "name": "padding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",

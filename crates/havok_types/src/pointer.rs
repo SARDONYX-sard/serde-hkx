@@ -6,7 +6,7 @@
 //! # Example
 //! - `#0457`
 //! - `#0007`
-use core::str::FromStr;
+use crate::lib::*;
 use parse_display::Display;
 
 /// Havok C++ Class unique number.
@@ -18,74 +18,110 @@ use parse_display::Display;
 ///
 /// # Examples
 /// ```
-/// use havok_types::pointer::Pointer;
-///
-/// assert_eq!(Pointer::new(50).to_string(), "#0050");
-/// assert_eq!(Pointer::new(100).to_string(), "#0100");
-/// assert_eq!(Pointer::new(1000).to_string(), "#1000");
-/// assert_eq!(Pointer::new(10000).to_string(), "#10000");
-///
-/// assert_eq!("#0050".parse(), Ok(Pointer::new(50)));
-/// assert_eq!("#100".parse(),  Ok(Pointer::new(100)));
-/// assert_eq!("#1000".parse(), Ok(Pointer::new(1000)));
-/// assert_eq!("#10000".parse(),Ok(Pointer::new(10000)));
+/// # use havok_types::pointer::Pointer;
+/// assert_eq!(Pointer::new("#0050".into()).to_string(), "#0050");
+/// assert_eq!(Pointer::new("#0100".into()).to_string(), "#0100");
 /// ```
-///
-/// # Note
-/// The [`Copy`] is derive for [`usize`] wrapper type.
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "json_schema", schemars(transparent))]
 #[cfg_attr(
     feature = "serde",
-    derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr)
+    derive(serde_with::SerializeDisplay, serde::Deserialize)
 )]
+#[cfg_attr(feature = "serde", serde(transparent))]
 #[repr(transparent)]
-#[derive(Debug, Copy, Clone, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display)]
-#[display("#{0:04}")]
-pub struct Pointer(#[cfg_attr(feature = "json_schema", schemars(with = "String"))] usize);
+#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Display)]
+#[display("{0}")]
+pub struct Pointer<'a>(
+    #[cfg_attr(feature = "json_schema", schemars(with = "String"))] Cow<'a, str>,
+);
 
-impl Pointer {
+impl Default for Pointer<'_> {
+    #[inline]
+    fn default() -> Self {
+        Self::null()
+    }
+}
+
+impl<'a> Pointer<'a> {
     /// Creates a new `Pointer`
     #[inline]
-    pub const fn new(ptr: usize) -> Self {
+    pub const fn new(ptr: Cow<'a, str>) -> Self {
         Self(ptr)
     }
 
-    /// Pointer(Class index) is null(`#0000`)?
+    /// Creates a new null `Pointer`
+    ///
+    /// # Example
+    /// ```
+    /// # use havok_types::pointer::Pointer;
+    /// assert_eq!(Pointer::null().to_string(), "null");
+    /// ```
     #[inline]
-    pub const fn is_null(&self) -> bool {
-        self.0 == 0
+    pub const fn null() -> Self {
+        Self::new(Cow::Borrowed("null"))
+    }
+
+    /// Creates a new `Pointer` from a `usize`
+    ///
+    /// # Example
+    /// ```
+    /// # use havok_types::pointer::Pointer;
+    /// assert_eq!(Pointer::from_usize(50).to_string(), "#0050");
+    /// ```
+    #[inline]
+    pub fn from_usize(value: usize) -> Self {
+        Self::new(format!("#{:04}", value).into())
+    }
+
+    /// Pointer(Class index) is null?
+    ///
+    /// # Example
+    /// ```
+    /// # use havok_types::pointer::Pointer;
+    /// assert!(Pointer::new(std::borrow::Cow::Borrowed("#0000")).is_null());
+    /// assert!(Pointer::new(std::borrow::Cow::Borrowed("null")).is_null());
+    /// assert!(Pointer::new(std::borrow::Cow::Borrowed("")).is_null());
+    /// ```
+    #[inline]
+    pub fn is_null(&self) -> bool {
+        matches!(self.0.as_ref(), "null" | "#0000" | "")
     }
 
     /// Get inner value.
     #[inline]
-    pub const fn get(&self) -> usize {
+    pub const fn get(&self) -> &Cow<'a, str> {
+        &self.0
+    }
+
+    /// Into inner value.
+    #[inline]
+    pub fn into_inner(self) -> Cow<'a, str> {
         self.0
     }
-}
 
-impl FromStr for Pointer {
-    type Err = &'static str;
-
+    /// To owned 'static pointer
     #[inline]
-    fn from_str(s: &str) -> Result<Self, Self::Err> {
-        Ok(Self::new(
-            parse_int::parse(s.trim_start_matches('#'))
-                .map_err(|_err| "Invalid integer for Name")?,
-        ))
+    pub fn to_static(&self) -> Pointer<'static> {
+        Pointer(Cow::Owned(self.0.to_string()))
     }
 }
 
-impl From<usize> for Pointer {
+// #0000
+// #9999
+impl From<usize> for Pointer<'_> {
     #[inline]
     fn from(value: usize) -> Self {
-        Self(value)
+        Self::from_usize(value)
     }
 }
 
-impl From<Pointer> for usize {
+// #0000
+// #9999
+// $sample10 <- new for Nemesis
+impl<'a> From<Cow<'a, str>> for Pointer<'a> {
     #[inline]
-    fn from(value: Pointer) -> Self {
-        value.0
+    fn from(value: Cow<'a, str>) -> Self {
+        Self(value)
     }
 }

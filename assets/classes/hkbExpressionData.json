@@ -4,9 +4,9 @@
   "signature": "0x6740042a",
   "size_x86": 16,
   "size_x86_64": 24,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "ExpressionEventMode",
@@ -36,7 +36,7 @@
   "members": [
     {
       "name": "expression",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -50,7 +50,7 @@
     },
     {
       "name": "assignmentVariableIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -64,7 +64,7 @@
     },
     {
       "name": "assignmentEventIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -79,7 +79,7 @@
     {
       "name": "eventMode",
       "enum_ref": "ExpressionEventMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum ExpressionEventMode",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -93,7 +93,7 @@
     },
     {
       "name": "raisedEvent",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -107,7 +107,7 @@
     },
     {
       "name": "wasTrueInPreviousFrame",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

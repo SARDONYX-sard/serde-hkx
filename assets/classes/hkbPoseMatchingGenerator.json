@@ -5,9 +5,9 @@
   "size_x86": 208,
   "size_x86_64": 240,
   "parent": "hkbBlenderGenerator",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "Mode",
@@ -29,7 +29,7 @@
   "members": [
     {
       "name": "worldFromModelRotation",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkQuaternion",
       "vtype": "TYPE_QUATERNION",
       "vsubtype": "TYPE_VOID",
@@ -43,7 +43,7 @@
     },
     {
       "name": "blendSpeed",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -57,7 +57,7 @@
     },
     {
       "name": "minSpeedToSwitch",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -71,7 +71,7 @@
     },
     {
       "name": "minSwitchTimeNoError",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -85,7 +85,7 @@
     },
     {
       "name": "minSwitchTimeFullError",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -99,7 +99,7 @@
     },
     {
       "name": "startPlayingEventId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -113,7 +113,7 @@
     },
     {
       "name": "startMatchingEventId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -127,7 +127,7 @@
     },
     {
       "name": "rootBoneIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -141,7 +141,7 @@
     },
     {
       "name": "otherBoneIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -155,7 +155,7 @@
     },
     {
       "name": "anotherBoneIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -169,7 +169,7 @@
     },
     {
       "name": "pelvisIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -184,7 +184,7 @@
     {
       "name": "mode",
       "enum_ref": "Mode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum Mode",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -198,7 +198,7 @@
     },
     {
       "name": "currentMatch",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -212,7 +212,7 @@
     },
     {
       "name": "bestMatch",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -226,7 +226,7 @@
     },
     {
       "name": "timeSinceBetterMatch",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -240,7 +240,7 @@
     },
     {
       "name": "error",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -254,7 +254,7 @@
     },
     {
       "name": "resetCurrentMatchLocalTime",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -268,7 +268,7 @@
     },
     {
       "name": "poseMatchingUtility",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",

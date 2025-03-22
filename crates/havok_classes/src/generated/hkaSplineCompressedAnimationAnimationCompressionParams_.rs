@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkaSplineCompressedAnimationAnimationCompressionParams {
+pub struct hkaSplineCompressedAnimationAnimationCompressionParams<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,14 +22,15 @@ pub struct hkaSplineCompressedAnimationAnimationCompressionParams {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `maxFramesPerBlock`(ctype: `hkUint16`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "maxFramesPerBlock"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxFramesPerBlock"))]
-    pub m_maxFramesPerBlock: u16,
+    pub m_maxFramesPerBlock: U16<'a>,
     /// # C++ Info
     /// - name: `enableSampleSingleTracks`(ctype: `hkBool`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
@@ -40,7 +41,8 @@ pub struct hkaSplineCompressedAnimationAnimationCompressionParams {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkaSplineCompressedAnimationAnimationCompressionParams {
+    impl<'a> _serde::HavokClass
+    for hkaSplineCompressedAnimationAnimationCompressionParams<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkaSplineCompressedAnimationAnimationCompressionParams"
@@ -50,18 +52,20 @@ const _: () = {
             _serde::__private::Signature::new(0xde830789)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkaSplineCompressedAnimationAnimationCompressionParams {
+    impl<'a> _serde::Serialize
+    for hkaSplineCompressedAnimationAnimationCompressionParams<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xde830789)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -86,7 +90,7 @@ const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
     impl<'de> _serde::Deserialize<'de>
-    for hkaSplineCompressedAnimationAnimationCompressionParams {
+    for hkaSplineCompressedAnimationAnimationCompressionParams<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -139,7 +143,7 @@ const _: () = {
             }
             struct __hkaSplineCompressedAnimationAnimationCompressionParamsVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkaSplineCompressedAnimationAnimationCompressionParams,
+                    hkaSplineCompressedAnimationAnimationCompressionParams<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -148,7 +152,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkaSplineCompressedAnimationAnimationCompressionParamsVisitor<'de> {
-                type Value = hkaSplineCompressedAnimationAnimationCompressionParams;
+                type Value = hkaSplineCompressedAnimationAnimationCompressionParams<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -166,7 +170,7 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_maxFramesPerBlock: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_maxFramesPerBlock: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     let mut m_enableSampleSingleTracks: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
@@ -183,7 +187,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxFramesPerBlock = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -248,7 +252,7 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_maxFramesPerBlock: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_maxFramesPerBlock: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     let mut m_enableSampleSingleTracks: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
@@ -276,7 +280,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxFramesPerBlock = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -341,7 +345,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkaSplineCompressedAnimationAnimationCompressionParams {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_maxFramesPerBlock,
                         m_enableSampleSingleTracks,
                     })

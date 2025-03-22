@@ -5,13 +5,13 @@
   "size_x86": 48,
   "size_x86_64": 48,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "mirrorAxis",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "bonePairMap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkInt16>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_INT16",

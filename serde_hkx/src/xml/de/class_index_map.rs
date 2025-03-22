@@ -1,5 +1,5 @@
 //! Deserializing each field element in an `Struct`
-use super::{parser::tag::class_start_tag, XmlDeserializer};
+use super::{XmlDeserializer, parser::tag::class_start_tag};
 use crate::{errors::de::Error, tri};
 use havok_serde::de::{ClassIndexAccess, DeserializeSeed};
 

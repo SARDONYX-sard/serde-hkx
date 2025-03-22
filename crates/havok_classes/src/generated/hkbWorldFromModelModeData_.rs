@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbWorldFromModelModeData {
+pub struct hkbWorldFromModelModeData<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,28 +22,29 @@ pub struct hkbWorldFromModelModeData {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `poseMatchingBone0`(ctype: `hkInt16`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "poseMatchingBone0"))]
     #[cfg_attr(feature = "serde", serde(rename = "poseMatchingBone0"))]
-    pub m_poseMatchingBone0: i16,
+    pub m_poseMatchingBone0: I16<'a>,
     /// # C++ Info
     /// - name: `poseMatchingBone1`(ctype: `hkInt16`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "poseMatchingBone1"))]
     #[cfg_attr(feature = "serde", serde(rename = "poseMatchingBone1"))]
-    pub m_poseMatchingBone1: i16,
+    pub m_poseMatchingBone1: I16<'a>,
     /// # C++ Info
     /// - name: `poseMatchingBone2`(ctype: `hkInt16`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "poseMatchingBone2"))]
     #[cfg_attr(feature = "serde", serde(rename = "poseMatchingBone2"))]
-    pub m_poseMatchingBone2: i16,
+    pub m_poseMatchingBone2: I16<'a>,
     /// # C++ Info
     /// - name: `mode`(ctype: `enum WorldFromModelMode`)
     /// - offset: `  6`(x86)/`  6`(x86_64)
@@ -54,7 +55,7 @@ pub struct hkbWorldFromModelModeData {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbWorldFromModelModeData {
+    impl<'a> _serde::HavokClass for hkbWorldFromModelModeData<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbWorldFromModelModeData"
@@ -64,18 +65,19 @@ const _: () = {
             _serde::__private::Signature::new(0xa3af8783)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkbWorldFromModelModeData {
+    impl<'a> _serde::Serialize for hkbWorldFromModelModeData<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xa3af8783)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -97,7 +99,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbWorldFromModelModeData {
+    impl<'de> _serde::Deserialize<'de> for hkbWorldFromModelModeData<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -151,7 +153,7 @@ const _: () = {
                 }
             }
             struct __hkbWorldFromModelModeDataVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbWorldFromModelModeData>,
+                marker: _serde::__private::PhantomData<hkbWorldFromModelModeData<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -159,7 +161,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkbWorldFromModelModeDataVisitor<'de> {
-                type Value = hkbWorldFromModelModeData;
+                type Value = hkbWorldFromModelModeData<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -177,9 +179,9 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_poseMatchingBone0: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_poseMatchingBone1: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_poseMatchingBone2: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_poseMatchingBone0: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_poseMatchingBone1: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_poseMatchingBone2: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_mode: _serde::__private::Option<WorldFromModelMode> = _serde::__private::None;
                     for i in 0..4usize {
                         match i {
@@ -194,7 +196,7 @@ const _: () = {
                                     );
                                 }
                                 m_poseMatchingBone0 = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -213,7 +215,7 @@ const _: () = {
                                     );
                                 }
                                 m_poseMatchingBone1 = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -232,7 +234,7 @@ const _: () = {
                                     );
                                 }
                                 m_poseMatchingBone2 = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -313,9 +315,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_poseMatchingBone0: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_poseMatchingBone1: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_poseMatchingBone2: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_poseMatchingBone0: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_poseMatchingBone1: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_poseMatchingBone2: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_mode: _serde::__private::Option<WorldFromModelMode> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -341,7 +343,7 @@ const _: () = {
                                     );
                                 }
                                 m_poseMatchingBone0 = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -369,7 +371,7 @@ const _: () = {
                                     );
                                 }
                                 m_poseMatchingBone1 = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -397,7 +399,7 @@ const _: () = {
                                     );
                                 }
                                 m_poseMatchingBone2 = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -480,7 +482,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbWorldFromModelModeData {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_poseMatchingBone0,
                         m_poseMatchingBone1,
                         m_poseMatchingBone2,
@@ -602,17 +604,17 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
-                        3i8 => _serde::__private::Ok(__Field::__field3),
-                        4i8 => _serde::__private::Ok(__Field::__field4),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(3i8) => _serde::__private::Ok(__Field::__field3),
+                        I8::Number(4i8) => _serde::__private::Ok(__Field::__field4),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

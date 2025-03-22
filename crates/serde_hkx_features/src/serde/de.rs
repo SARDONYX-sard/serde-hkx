@@ -54,7 +54,7 @@ where
                 return UnsupportedExtensionPathSnafu {
                     path: input.to_path_buf(),
                 }
-                .fail()
+                .fail();
             }
         }
     } else {

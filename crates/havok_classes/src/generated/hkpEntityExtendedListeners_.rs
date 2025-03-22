@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpEntityExtendedListeners {
+pub struct hkpEntityExtendedListeners<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkpEntityExtendedListeners {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `activationListeners`(ctype: `struct hkpEntitySmallArraySerializeOverrideType`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -30,7 +31,7 @@ pub struct hkpEntityExtendedListeners {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "activationListeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "activationListeners"))]
-    pub m_activationListeners: hkpEntitySmallArraySerializeOverrideType,
+    pub m_activationListeners: hkpEntitySmallArraySerializeOverrideType<'a>,
     /// # C++ Info
     /// - name: `entityListeners`(ctype: `struct hkpEntitySmallArraySerializeOverrideType`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -38,11 +39,11 @@ pub struct hkpEntityExtendedListeners {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "entityListeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "entityListeners"))]
-    pub m_entityListeners: hkpEntitySmallArraySerializeOverrideType,
+    pub m_entityListeners: hkpEntitySmallArraySerializeOverrideType<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpEntityExtendedListeners {
+    impl<'a> _serde::HavokClass for hkpEntityExtendedListeners<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpEntityExtendedListeners"
@@ -52,20 +53,21 @@ const _: () = {
             _serde::__private::Signature::new(0xf557023c)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_activationListeners.deps_indexes());
             v.extend(self.m_entityListeners.deps_indexes());
             v
         }
     }
-    impl _serde::Serialize for hkpEntityExtendedListeners {
+    impl<'a> _serde::Serialize for hkpEntityExtendedListeners<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xf557023c)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -84,7 +86,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpEntityExtendedListeners {
+    impl<'de> _serde::Deserialize<'de> for hkpEntityExtendedListeners<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -130,7 +132,7 @@ const _: () = {
                 }
             }
             struct __hkpEntityExtendedListenersVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpEntityExtendedListeners>,
+                marker: _serde::__private::PhantomData<hkpEntityExtendedListeners<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -138,7 +140,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpEntityExtendedListenersVisitor<'de> {
-                type Value = hkpEntityExtendedListeners;
+                type Value = hkpEntityExtendedListeners<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -250,7 +252,7 @@ const _: () = {
                     }
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpEntityExtendedListeners {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         ..Default::default()
                     })
                 }

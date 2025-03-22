@@ -4,14 +4,14 @@
   "signature": "0xc4d3a8b4",
   "size_x86": 12,
   "size_x86_64": 16,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "map",
       "class_ref": "hkMonitorStreamStringMapStringMap",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<struct hkMonitorStreamStringMapStringMap>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",

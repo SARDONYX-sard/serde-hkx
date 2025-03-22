@@ -5,14 +5,14 @@
   "size_x86": 324,
   "size_x86_64": 352,
   "parent": "hkMeshVertexBuffer",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "vertexFormat",
       "class_ref": "hkVertexFormat",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkVertexFormat",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -27,7 +27,7 @@
     {
       "name": "lockedElements",
       "class_ref": "hkMultipleVertexBufferLockedElement",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkMultipleVertexBufferLockedElement>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -42,7 +42,7 @@
     {
       "name": "lockedBuffer",
       "class_ref": "hkMemoryMeshVertexBuffer",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkMemoryMeshVertexBuffer*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -57,7 +57,7 @@
     {
       "name": "elementInfos",
       "class_ref": "hkMultipleVertexBufferElementInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkMultipleVertexBufferElementInfo>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -72,7 +72,7 @@
     {
       "name": "vertexBufferInfos",
       "class_ref": "hkMultipleVertexBufferVertexBufferInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkMultipleVertexBufferVertexBufferInfo>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -86,7 +86,7 @@
     },
     {
       "name": "numVertices",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -100,7 +100,7 @@
     },
     {
       "name": "isLocked",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -114,7 +114,7 @@
     },
     {
       "name": "updateCount",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -128,7 +128,7 @@
     },
     {
       "name": "writeLock",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -142,7 +142,7 @@
     },
     {
       "name": "isSharable",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -156,7 +156,7 @@
     },
     {
       "name": "constructionComplete",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

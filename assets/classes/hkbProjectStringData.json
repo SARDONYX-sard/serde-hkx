@@ -5,13 +5,13 @@
   "size_x86": 76,
   "size_x86_64": 120,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "animationFilenames",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<hkStringPtr>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRINGPTR",
@@ -25,7 +25,7 @@
     },
     {
       "name": "behaviorFilenames",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<hkStringPtr>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRINGPTR",
@@ -39,7 +39,7 @@
     },
     {
       "name": "characterFilenames",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<hkStringPtr>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRINGPTR",
@@ -53,7 +53,7 @@
     },
     {
       "name": "eventNames",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<hkStringPtr>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRINGPTR",
@@ -67,7 +67,7 @@
     },
     {
       "name": "animationPath",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -81,7 +81,7 @@
     },
     {
       "name": "behaviorPath",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -95,7 +95,7 @@
     },
     {
       "name": "characterPath",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -109,7 +109,7 @@
     },
     {
       "name": "fullPathToSource",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -123,7 +123,7 @@
     },
     {
       "name": "rootPath",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",

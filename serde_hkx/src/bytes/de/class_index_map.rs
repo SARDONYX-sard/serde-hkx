@@ -34,7 +34,7 @@ impl<'de> ClassIndexAccess<'de> for BytesClassIndexMapDeserializer<'_, 'de> {
         {
             // NOTE: First increment class_index(XML: `#0000`) to 1 based index notation.
             self.de.class_index += 1;
-            self.de.takable_class_index = Some(Pointer::new(self.de.class_index));
+            self.de.takable_class_index = Some(Pointer::from_usize(self.de.class_index));
             start_offset = *name_start_offset;
 
             if let Some(name) = self.de.classnames.get(name_start_offset) {

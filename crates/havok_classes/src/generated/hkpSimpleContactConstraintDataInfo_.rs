@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpSimpleContactConstraintDataInfo {
+pub struct hkpSimpleContactConstraintDataInfo<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkpSimpleContactConstraintDataInfo {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `flags`(ctype: `hkUint16`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -30,14 +31,14 @@ pub struct hkpSimpleContactConstraintDataInfo {
     /// - flags: `ALIGN_16`
     #[cfg_attr(feature = "json_schema", schemars(rename = "flags"))]
     #[cfg_attr(feature = "serde", serde(rename = "flags"))]
-    pub m_flags: u16,
+    pub m_flags: U16<'a>,
     /// # C++ Info
     /// - name: `index`(ctype: `hkUint16`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "index"))]
     #[cfg_attr(feature = "serde", serde(rename = "index"))]
-    pub m_index: u16,
+    pub m_index: U16<'a>,
     /// # C++ Info
     /// - name: `internalData0`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
@@ -65,11 +66,11 @@ pub struct hkpSimpleContactConstraintDataInfo {
     /// - type_size: ` 20`(x86)/` 20`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "data"))]
     #[cfg_attr(feature = "serde", serde(rename = "data"))]
-    pub m_data: [u32; 5usize],
+    pub m_data: [U32<'a>; 5usize],
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpSimpleContactConstraintDataInfo {
+    impl<'a> _serde::HavokClass for hkpSimpleContactConstraintDataInfo<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpSimpleContactConstraintDataInfo"
@@ -79,18 +80,19 @@ const _: () = {
             _serde::__private::Signature::new(0xb59d1734)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpSimpleContactConstraintDataInfo {
+    impl<'a> _serde::Serialize for hkpSimpleContactConstraintDataInfo<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xb59d1734)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -122,7 +124,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpSimpleContactConstraintDataInfo {
+    impl<'de> _serde::Deserialize<'de> for hkpSimpleContactConstraintDataInfo<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -183,7 +185,7 @@ const _: () = {
             }
             struct __hkpSimpleContactConstraintDataInfoVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkpSimpleContactConstraintDataInfo,
+                    hkpSimpleContactConstraintDataInfo<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -192,7 +194,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpSimpleContactConstraintDataInfoVisitor<'de> {
-                type Value = hkpSimpleContactConstraintDataInfo;
+                type Value = hkpSimpleContactConstraintDataInfo<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -210,14 +212,14 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_flags: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_index: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_index: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     let mut m_internalData0: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_rollingFrictionMultiplier: _serde::__private::Option<
                         f16,
                     > = _serde::__private::None;
                     let mut m_internalData1: _serde::__private::Option<f16> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<[u32; 5usize]> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<[U32<'de>; 5usize]> = _serde::__private::None;
                     for i in 0..6usize {
                         match i {
                             0usize => {
@@ -227,7 +229,7 @@ const _: () = {
                                     );
                                 }
                                 m_flags = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -242,7 +244,7 @@ const _: () = {
                                     );
                                 }
                                 m_index = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -310,7 +312,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 5usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 5usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -393,14 +395,14 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_flags: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_index: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_index: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     let mut m_internalData0: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_rollingFrictionMultiplier: _serde::__private::Option<
                         f16,
                     > = _serde::__private::None;
                     let mut m_internalData1: _serde::__private::Option<f16> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<[u32; 5usize]> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<[U32<'de>; 5usize]> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -421,7 +423,7 @@ const _: () = {
                                     );
                                 }
                                 m_flags = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -445,7 +447,7 @@ const _: () = {
                                     );
                                 }
                                 m_index = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -549,7 +551,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<[u32; 5usize]>(&mut __map) {
+                                    match __A::next_value::<[U32<'de>; 5usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -628,7 +630,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpSimpleContactConstraintDataInfo {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_flags,
                         m_index,
                         m_internalData0,

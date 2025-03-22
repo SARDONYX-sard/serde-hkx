@@ -25,14 +25,16 @@ pub fn generate(class: &Class) -> Vec<TokenStream> {
         } = one_enum;
 
         if *vsubtype == TypeKind::Void {
-            tracing::info!("Skip automatic enum generation because this enum {name} is a void storage type, indicating that it is not used.");
+            tracing::info!(
+                "Skip automatic enum generation because this enum {name} is a void storage type, indicating that it is not used."
+            );
             continue;
         };
 
         match vtype {
             TypeKind::Flags => {
                 let flag_struct = gen_flag(one_enum);
-                let impl_json_schema =  impl_schema_for_flag(one_enum);
+                let impl_json_schema = impl_schema_for_flag(one_enum);
 
                 enums.push(quote! {
                     #[havok_types_derive::impl_flags_methods]
@@ -45,7 +47,7 @@ pub fn generate(class: &Class) -> Vec<TokenStream> {
                 // An enum with the same value is not valid as an enum in Rust. Therefore, express them as BitFlag
                 let item_enum = if has_duplicate_value(one_enum) {
                     let flag_struct = gen_flag(one_enum);
-                    let impl_json_schema =  impl_schema_for_enum_flag(one_enum);
+                    let impl_json_schema = impl_schema_for_enum_flag(one_enum);
                     // NOTE: enum can make schema with derive, so it is not impl here.
 
                     quote! {
@@ -93,14 +95,36 @@ pub(super) fn has_duplicate_value(one_enum: &Enum) -> bool {
 /// e.g. `TypeKind::Int8` => `i8`
 pub(super) fn to_rust_storage_type(ty: &TypeKind) -> Option<TokenStream> {
     Some(match ty {
-        TypeKind::Int8 => quote!(i8),
-        TypeKind::Uint8 => quote!(u8),
-        TypeKind::Int16 => quote!(i16),
-        TypeKind::Uint16 => quote!(u16),
-        TypeKind::Int32 => quote!(i32),
-        TypeKind::Uint32 => quote!(u32),
-        TypeKind::Int64 => quote!(i64),
-        TypeKind::Uint64 => quote!(u64),
+        TypeKind::Int8 => quote! {    i8 },
+        TypeKind::Uint8 => quote! {   u8 },
+        TypeKind::Int16 => quote! {  i16 },
+        TypeKind::Uint16 => quote! { u16 },
+        TypeKind::Int32 => quote! {  i32 },
+        TypeKind::Uint32 => quote! { u32 },
+        TypeKind::Int64 => quote! {  i64 },
+        TypeKind::Uint64 => quote! { u64 },
+        _ => return None,
+    })
+}
+
+/// Returns the name of the rust type
+/// Return [`None`] except the following types.
+/// - `TYPE_INT8`, `TYPE_UINT8`,
+/// - `TYPE_INT16`, `TYPE_UINT16`,
+/// - `TYPE_INT32`, `TYPE_UINT32`,
+/// - `TYPE_INT64`, `TYPE_UINT64`
+///
+/// e.g. `TypeKind::Int8` => `I8`
+pub(super) fn to_rust_wrapper_type(ty: &TypeKind) -> Option<TokenStream> {
+    Some(match ty {
+        TypeKind::Int8 => quote! {   I8},
+        TypeKind::Uint8 => quote! {  U8},
+        TypeKind::Int16 => quote! { I16},
+        TypeKind::Uint16 => quote! {U16},
+        TypeKind::Int32 => quote! { I32},
+        TypeKind::Uint32 => quote! {U32},
+        TypeKind::Int64 => quote! { I64},
+        TypeKind::Uint64 => quote! {U64},
         _ => return None,
     })
 }

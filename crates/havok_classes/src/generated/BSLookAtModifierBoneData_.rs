@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct BSLookAtModifierBoneData {
+pub struct BSLookAtModifierBoneData<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,14 +22,15 @@ pub struct BSLookAtModifierBoneData {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `index`(ctype: `hkInt16`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "index"))]
     #[cfg_attr(feature = "serde", serde(rename = "index"))]
-    pub m_index: i16,
+    pub m_index: I16<'a>,
     /// # C++ Info
     /// - name: `fwdAxisLS`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
@@ -76,7 +77,7 @@ pub struct BSLookAtModifierBoneData {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for BSLookAtModifierBoneData {
+    impl<'a> _serde::HavokClass for BSLookAtModifierBoneData<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "BSLookAtModifierBoneData"
@@ -86,18 +87,19 @@ const _: () = {
             _serde::__private::Signature::new(0x29efee59)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for BSLookAtModifierBoneData {
+    impl<'a> _serde::Serialize for BSLookAtModifierBoneData<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x29efee59)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -123,7 +125,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for BSLookAtModifierBoneData {
+    impl<'de> _serde::Deserialize<'de> for BSLookAtModifierBoneData<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -181,7 +183,7 @@ const _: () = {
                 }
             }
             struct __BSLookAtModifierBoneDataVisitor<'de> {
-                marker: _serde::__private::PhantomData<BSLookAtModifierBoneData>,
+                marker: _serde::__private::PhantomData<BSLookAtModifierBoneData<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -189,7 +191,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __BSLookAtModifierBoneDataVisitor<'de> {
-                type Value = BSLookAtModifierBoneData;
+                type Value = BSLookAtModifierBoneData<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -207,7 +209,7 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_index: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_index: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_fwdAxisLS: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_limitAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_onGain: _serde::__private::Option<f32> = _serde::__private::None;
@@ -223,7 +225,7 @@ const _: () = {
                                     );
                                 }
                                 m_index = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -419,7 +421,7 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_index: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_index: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_fwdAxisLS: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_limitAngleDegrees: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_onGain: _serde::__private::Option<f32> = _serde::__private::None;
@@ -445,7 +447,7 @@ const _: () = {
                                     );
                                 }
                                 m_index = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -652,7 +654,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(BSLookAtModifierBoneData {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_index,
                         m_fwdAxisLS,
                         m_limitAngleDegrees,

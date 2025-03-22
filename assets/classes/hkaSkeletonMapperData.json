@@ -4,9 +4,9 @@
   "signature": "0x95687ea0",
   "size_x86": 112,
   "size_x86_64": 128,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "MappingType",
@@ -29,7 +29,7 @@
     {
       "name": "skeletonA",
       "class_ref": "hkaSkeleton",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkaSkeleton*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -44,7 +44,7 @@
     {
       "name": "skeletonB",
       "class_ref": "hkaSkeleton",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkaSkeleton*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -59,7 +59,7 @@
     {
       "name": "simpleMappings",
       "class_ref": "hkaSkeletonMapperDataSimpleMapping",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkaSkeletonMapperDataSimpleMapping>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -74,7 +74,7 @@
     {
       "name": "chainMappings",
       "class_ref": "hkaSkeletonMapperDataChainMapping",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkaSkeletonMapperDataChainMapping>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -88,7 +88,7 @@
     },
     {
       "name": "unmappedBones",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkInt16>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_INT16",
@@ -102,7 +102,7 @@
     },
     {
       "name": "extractedMotionMapping",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkQsTransform",
       "vtype": "TYPE_QSTRANSFORM",
       "vsubtype": "TYPE_VOID",
@@ -116,7 +116,7 @@
     },
     {
       "name": "keepUnmappedLocal",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -131,7 +131,7 @@
     {
       "name": "mappingType",
       "enum_ref": "MappingType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum MappingType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT32",

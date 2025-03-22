@@ -22,11 +22,13 @@ pub struct hkMemoryMeshBody<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkMeshBody,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkMeshBody<'a>,
     /// # C++ Info
     /// - name: `transform`(ctype: `hkMatrix4`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
@@ -40,21 +42,21 @@ pub struct hkMemoryMeshBody<'a> {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "transformSet"))]
     #[cfg_attr(feature = "serde", serde(rename = "transformSet"))]
-    pub m_transformSet: Pointer,
+    pub m_transformSet: Pointer<'a>,
     /// # C++ Info
     /// - name: `shape`(ctype: `struct hkMeshShape*`)
     /// - offset: ` 84`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "shape"))]
     #[cfg_attr(feature = "serde", serde(rename = "shape"))]
-    pub m_shape: Pointer,
+    pub m_shape: Pointer<'a>,
     /// # C++ Info
     /// - name: `vertexBuffers`(ctype: `hkArray<hkMeshVertexBuffer*>`)
     /// - offset: ` 88`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "vertexBuffers"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexBuffers"))]
-    pub m_vertexBuffers: Vec<Pointer>,
+    pub m_vertexBuffers: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: `100`(x86)/`112`(x86_64)
@@ -76,11 +78,11 @@ const _: () = {
             _serde::__private::Signature::new(0x94a620a8)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_transformSet.get());
-            v.push(self.m_shape.get());
-            v.extend(self.m_vertexBuffers.iter().map(|ptr| ptr.get()));
+            v.push(&self.m_transformSet);
+            v.push(&self.m_shape);
+            v.extend(self.m_vertexBuffers.iter());
             v
         }
     }
@@ -91,6 +93,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x94a620a8)));
             let mut serializer = __serializer
                 .serialize_struct("hkMemoryMeshBody", class_meta, (112u64, 128u64))?;
@@ -204,9 +207,11 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_transform: _serde::__private::Option<Matrix4> = _serde::__private::None;
-                    let mut m_transformSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_vertexBuffers: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_transformSet: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_shape: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_vertexBuffers: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     for i in 0..5usize {
                         match i {
@@ -237,7 +242,7 @@ const _: () = {
                                     );
                                 }
                                 m_transformSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -252,7 +257,7 @@ const _: () = {
                                     );
                                 }
                                 m_shape = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -269,7 +274,7 @@ const _: () = {
                                     );
                                 }
                                 m_vertexBuffers = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -361,9 +366,11 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_transform: _serde::__private::Option<Matrix4> = _serde::__private::None;
-                    let mut m_transformSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_shape: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_vertexBuffers: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_transformSet: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_shape: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_vertexBuffers: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -413,7 +420,7 @@ const _: () = {
                                     );
                                 }
                                 m_transformSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -437,7 +444,7 @@ const _: () = {
                                     );
                                 }
                                 m_shape = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -463,7 +470,7 @@ const _: () = {
                                     );
                                 }
                                 m_vertexBuffers = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -555,16 +562,21 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
-                    let parent = hkMeshBody { __ptr, parent };
+                    let parent = hkMeshBody {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkMemoryMeshBody {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_transform,
                         m_transformSet,

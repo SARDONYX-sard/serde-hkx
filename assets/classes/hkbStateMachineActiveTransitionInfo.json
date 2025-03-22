@@ -4,13 +4,13 @@
   "signature": "0xbb90d54f",
   "size_x86": 32,
   "size_x86_64": 40,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "transitionEffect",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     {
       "name": "transitionEffectInternalStateInfo",
       "class_ref": "hkbNodeInternalStateInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbNodeInternalStateInfo*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -40,7 +40,7 @@
     {
       "name": "transitionInfoReference",
       "class_ref": "hkbStateMachineTransitionInfoReference",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbStateMachineTransitionInfoReference",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -55,7 +55,7 @@
     {
       "name": "transitionInfoReferenceForTE",
       "class_ref": "hkbStateMachineTransitionInfoReference",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbStateMachineTransitionInfoReference",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -69,7 +69,7 @@
     },
     {
       "name": "fromStateId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -83,7 +83,7 @@
     },
     {
       "name": "toStateId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -97,7 +97,7 @@
     },
     {
       "name": "isReturnToPreviousState",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

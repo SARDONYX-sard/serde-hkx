@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbBlenderGeneratorInternalState {
+pub struct hkbBlenderGeneratorInternalState<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,25 +22,27 @@ pub struct hkbBlenderGeneratorInternalState {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `childrenInternalStates`(ctype: `hkArray<struct hkbBlenderGeneratorChildInternalState>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "childrenInternalStates"))]
     #[cfg_attr(feature = "serde", serde(rename = "childrenInternalStates"))]
-    pub m_childrenInternalStates: Vec<hkbBlenderGeneratorChildInternalState>,
+    pub m_childrenInternalStates: Vec<hkbBlenderGeneratorChildInternalState<'a>>,
     /// # C++ Info
     /// - name: `sortedChildren`(ctype: `hkArray<hkInt16>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "sortedChildren"))]
     #[cfg_attr(feature = "serde", serde(rename = "sortedChildren"))]
-    pub m_sortedChildren: Vec<i16>,
+    pub m_sortedChildren: Vec<I16<'a>>,
     /// # C++ Info
     /// - name: `endIntervalWeight`(ctype: `hkReal`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
@@ -54,21 +56,21 @@ pub struct hkbBlenderGeneratorInternalState {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numActiveChildren"))]
     #[cfg_attr(feature = "serde", serde(rename = "numActiveChildren"))]
-    pub m_numActiveChildren: i32,
+    pub m_numActiveChildren: I32<'a>,
     /// # C++ Info
     /// - name: `beginIntervalIndex`(ctype: `hkInt16`)
     /// - offset: ` 40`(x86)/` 56`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "beginIntervalIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "beginIntervalIndex"))]
-    pub m_beginIntervalIndex: i16,
+    pub m_beginIntervalIndex: I16<'a>,
     /// # C++ Info
     /// - name: `endIntervalIndex`(ctype: `hkInt16`)
     /// - offset: ` 42`(x86)/` 58`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "endIntervalIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "endIntervalIndex"))]
-    pub m_endIntervalIndex: i16,
+    pub m_endIntervalIndex: I16<'a>,
     /// # C++ Info
     /// - name: `initSync`(ctype: `hkBool`)
     /// - offset: ` 44`(x86)/` 60`(x86_64)
@@ -86,7 +88,7 @@ pub struct hkbBlenderGeneratorInternalState {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbBlenderGeneratorInternalState {
+    impl<'a> _serde::HavokClass for hkbBlenderGeneratorInternalState<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbBlenderGeneratorInternalState"
@@ -96,25 +98,26 @@ const _: () = {
             _serde::__private::Signature::new(0x84717488)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_childrenInternalStates
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
     }
-    impl _serde::Serialize for hkbBlenderGeneratorInternalState {
+    impl<'a> _serde::Serialize for hkbBlenderGeneratorInternalState<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x84717488)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -159,7 +162,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbBlenderGeneratorInternalState {
+    impl<'de> _serde::Deserialize<'de> for hkbBlenderGeneratorInternalState<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -221,7 +224,9 @@ const _: () = {
                 }
             }
             struct __hkbBlenderGeneratorInternalStateVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbBlenderGeneratorInternalState>,
+                marker: _serde::__private::PhantomData<
+                    hkbBlenderGeneratorInternalState<'de>,
+                >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -229,7 +234,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkbBlenderGeneratorInternalStateVisitor<'de> {
-                type Value = hkbBlenderGeneratorInternalState;
+                type Value = hkbBlenderGeneratorInternalState<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -251,11 +256,11 @@ const _: () = {
                     let mut m_childrenInternalStates: _serde::__private::Option<
                         Vec<hkbBlenderGeneratorChildInternalState>,
                     > = _serde::__private::None;
-                    let mut m_sortedChildren: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
+                    let mut m_sortedChildren: _serde::__private::Option<Vec<I16<'de>>> = _serde::__private::None;
                     let mut m_endIntervalWeight: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_numActiveChildren: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_beginIntervalIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_endIntervalIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_numActiveChildren: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_beginIntervalIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_endIntervalIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_initSync: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_doSubtractiveBlend: _serde::__private::Option<bool> = _serde::__private::None;
                     for i in 0..8usize {
@@ -290,7 +295,7 @@ const _: () = {
                                     );
                                 }
                                 m_sortedChildren = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                    match __A::next_value::<Vec<I16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -328,7 +333,7 @@ const _: () = {
                                     );
                                 }
                                 m_numActiveChildren = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -347,7 +352,7 @@ const _: () = {
                                     );
                                 }
                                 m_beginIntervalIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -364,7 +369,7 @@ const _: () = {
                                     );
                                 }
                                 m_endIntervalIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -514,11 +519,11 @@ const _: () = {
                     let mut m_childrenInternalStates: _serde::__private::Option<
                         Vec<hkbBlenderGeneratorChildInternalState>,
                     > = _serde::__private::None;
-                    let mut m_sortedChildren: _serde::__private::Option<Vec<i16>> = _serde::__private::None;
+                    let mut m_sortedChildren: _serde::__private::Option<Vec<I16<'de>>> = _serde::__private::None;
                     let mut m_endIntervalWeight: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_numActiveChildren: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_beginIntervalIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_endIntervalIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_numActiveChildren: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_beginIntervalIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_endIntervalIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_initSync: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_doSubtractiveBlend: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
@@ -573,7 +578,7 @@ const _: () = {
                                     );
                                 }
                                 m_sortedChildren = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i16>>(&mut __map) {
+                                    match __A::next_value::<Vec<I16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -629,7 +634,7 @@ const _: () = {
                                     );
                                 }
                                 m_numActiveChildren = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -657,7 +662,7 @@ const _: () = {
                                     );
                                 }
                                 m_beginIntervalIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -683,7 +688,7 @@ const _: () = {
                                     );
                                 }
                                 m_endIntervalIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -843,15 +848,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbBlenderGeneratorInternalState {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_childrenInternalStates,
                         m_sortedChildren,

@@ -5,9 +5,9 @@
   "size_x86": 180,
   "size_x86_64": 264,
   "parent": "hkbGenerator",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "StartStateMode",
@@ -58,7 +58,7 @@
     {
       "name": "eventToSendWhenStateOrTransitionChanges",
       "class_ref": "hkbEvent",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbEvent",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -73,7 +73,7 @@
     {
       "name": "startStateChooser",
       "class_ref": "hkbStateChooser",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbStateChooser*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -87,7 +87,7 @@
     },
     {
       "name": "startStateId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -101,7 +101,7 @@
     },
     {
       "name": "returnToPreviousStateEventId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -115,7 +115,7 @@
     },
     {
       "name": "randomTransitionEventId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -129,7 +129,7 @@
     },
     {
       "name": "transitionToNextHigherStateEventId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -143,7 +143,7 @@
     },
     {
       "name": "transitionToNextLowerStateEventId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -157,7 +157,7 @@
     },
     {
       "name": "syncVariableIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -171,7 +171,7 @@
     },
     {
       "name": "currentStateId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -185,7 +185,7 @@
     },
     {
       "name": "wrapAroundStateId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -199,7 +199,7 @@
     },
     {
       "name": "maxSimultaneousTransitions",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt8",
       "vtype": "TYPE_INT8",
       "vsubtype": "TYPE_VOID",
@@ -214,7 +214,7 @@
     {
       "name": "startStateMode",
       "enum_ref": "StartStateMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum StartStateMode",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -229,7 +229,7 @@
     {
       "name": "selfTransitionMode",
       "enum_ref": "StateMachineSelfTransitionMode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum StateMachineSelfTransitionMode",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -243,7 +243,7 @@
     },
     {
       "name": "isActive",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -258,7 +258,7 @@
     {
       "name": "states",
       "class_ref": "hkbStateMachineStateInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkbStateMachineStateInfo*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -273,7 +273,7 @@
     {
       "name": "wildcardTransitions",
       "class_ref": "hkbStateMachineTransitionInfoArray",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbStateMachineTransitionInfoArray*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -287,7 +287,7 @@
     },
     {
       "name": "stateIdToIndexMap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -301,7 +301,7 @@
     },
     {
       "name": "activeTransitions",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",
@@ -315,7 +315,7 @@
     },
     {
       "name": "transitionFlags",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",
@@ -329,7 +329,7 @@
     },
     {
       "name": "wildcardTransitionFlags",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",
@@ -343,7 +343,7 @@
     },
     {
       "name": "delayedTransitions",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",
@@ -357,7 +357,7 @@
     },
     {
       "name": "timeInState",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -371,7 +371,7 @@
     },
     {
       "name": "lastLocalTime",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -385,7 +385,7 @@
     },
     {
       "name": "previousStateId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -399,7 +399,7 @@
     },
     {
       "name": "nextStartStateIndexOverride",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -413,7 +413,7 @@
     },
     {
       "name": "stateOrTransitionChanged",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -427,7 +427,7 @@
     },
     {
       "name": "echoNextUpdate",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -441,7 +441,7 @@
     },
     {
       "name": "sCurrentStateIndexAndEntered",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",

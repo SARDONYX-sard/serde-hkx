@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpPrismaticConstraintDataAtoms {
+pub struct hkpPrismaticConstraintDataAtoms<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,60 +22,61 @@ pub struct hkpPrismaticConstraintDataAtoms {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `transforms`(ctype: `struct hkpSetLocalTransformsConstraintAtom`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `144`(x86)/`144`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "transforms"))]
     #[cfg_attr(feature = "serde", serde(rename = "transforms"))]
-    pub m_transforms: hkpSetLocalTransformsConstraintAtom,
+    pub m_transforms: hkpSetLocalTransformsConstraintAtom<'a>,
     /// # C++ Info
     /// - name: `motor`(ctype: `struct hkpLinMotorConstraintAtom`)
     /// - offset: `144`(x86)/`144`(x86_64)
     /// - type_size: ` 16`(x86)/` 24`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "motor"))]
     #[cfg_attr(feature = "serde", serde(rename = "motor"))]
-    pub m_motor: hkpLinMotorConstraintAtom,
+    pub m_motor: hkpLinMotorConstraintAtom<'a>,
     /// # C++ Info
     /// - name: `friction`(ctype: `struct hkpLinFrictionConstraintAtom`)
     /// - offset: `160`(x86)/`168`(x86_64)
     /// - type_size: `  8`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "friction"))]
     #[cfg_attr(feature = "serde", serde(rename = "friction"))]
-    pub m_friction: hkpLinFrictionConstraintAtom,
+    pub m_friction: hkpLinFrictionConstraintAtom<'a>,
     /// # C++ Info
     /// - name: `ang`(ctype: `struct hkpAngConstraintAtom`)
     /// - offset: `168`(x86)/`176`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "ang"))]
     #[cfg_attr(feature = "serde", serde(rename = "ang"))]
-    pub m_ang: hkpAngConstraintAtom,
+    pub m_ang: hkpAngConstraintAtom<'a>,
     /// # C++ Info
     /// - name: `lin0`(ctype: `struct hkpLinConstraintAtom`)
     /// - offset: `172`(x86)/`180`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "lin0"))]
     #[cfg_attr(feature = "serde", serde(rename = "lin0"))]
-    pub m_lin0: hkpLinConstraintAtom,
+    pub m_lin0: hkpLinConstraintAtom<'a>,
     /// # C++ Info
     /// - name: `lin1`(ctype: `struct hkpLinConstraintAtom`)
     /// - offset: `176`(x86)/`184`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "lin1"))]
     #[cfg_attr(feature = "serde", serde(rename = "lin1"))]
-    pub m_lin1: hkpLinConstraintAtom,
+    pub m_lin1: hkpLinConstraintAtom<'a>,
     /// # C++ Info
     /// - name: `linLimit`(ctype: `struct hkpLinLimitConstraintAtom`)
     /// - offset: `180`(x86)/`188`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "linLimit"))]
     #[cfg_attr(feature = "serde", serde(rename = "linLimit"))]
-    pub m_linLimit: hkpLinLimitConstraintAtom,
+    pub m_linLimit: hkpLinLimitConstraintAtom<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpPrismaticConstraintDataAtoms {
+    impl<'a> _serde::HavokClass for hkpPrismaticConstraintDataAtoms<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpPrismaticConstraintDataAtoms"
@@ -85,7 +86,7 @@ const _: () = {
             _serde::__private::Signature::new(0x7f516137)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_transforms.deps_indexes());
             v.extend(self.m_motor.deps_indexes());
@@ -97,13 +98,14 @@ const _: () = {
             v
         }
     }
-    impl _serde::Serialize for hkpPrismaticConstraintDataAtoms {
+    impl<'a> _serde::Serialize for hkpPrismaticConstraintDataAtoms<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x7f516137)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -128,7 +130,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpPrismaticConstraintDataAtoms {
+    impl<'de> _serde::Deserialize<'de> for hkpPrismaticConstraintDataAtoms<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -188,7 +190,9 @@ const _: () = {
                 }
             }
             struct __hkpPrismaticConstraintDataAtomsVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpPrismaticConstraintDataAtoms>,
+                marker: _serde::__private::PhantomData<
+                    hkpPrismaticConstraintDataAtoms<'de>,
+                >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -196,7 +200,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpPrismaticConstraintDataAtomsVisitor<'de> {
-                type Value = hkpPrismaticConstraintDataAtoms;
+                type Value = hkpPrismaticConstraintDataAtoms<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -709,7 +713,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpPrismaticConstraintDataAtoms {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_transforms,
                         m_motor,
                         m_friction,

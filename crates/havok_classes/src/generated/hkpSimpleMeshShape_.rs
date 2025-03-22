@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpSimpleMeshShape {
+pub struct hkpSimpleMeshShape<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkpSimpleMeshShape {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpShapeCollection,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpShapeCollection<'a>,
     /// # C++ Info
     /// - name: `vertices`(ctype: `hkArray<hkVector4>`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
@@ -40,14 +42,14 @@ pub struct hkpSimpleMeshShape {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "triangles"))]
     #[cfg_attr(feature = "serde", serde(rename = "triangles"))]
-    pub m_triangles: Vec<hkpSimpleMeshShapeTriangle>,
+    pub m_triangles: Vec<hkpSimpleMeshShapeTriangle<'a>>,
     /// # C++ Info
     /// - name: `materialIndices`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "materialIndices"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialIndices"))]
-    pub m_materialIndices: Vec<u8>,
+    pub m_materialIndices: Vec<U8<'a>>,
     /// # C++ Info
     /// - name: `radius`(ctype: `hkReal`)
     /// - offset: ` 60`(x86)/` 96`(x86_64)
@@ -65,7 +67,7 @@ pub struct hkpSimpleMeshShape {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpSimpleMeshShape {
+    impl<'a> _serde::HavokClass for hkpSimpleMeshShape<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpSimpleMeshShape"
@@ -75,25 +77,26 @@ const _: () = {
             _serde::__private::Signature::new(0x16b3c811)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_triangles
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
     }
-    impl _serde::Serialize for hkpSimpleMeshShape {
+    impl<'a> _serde::Serialize for hkpSimpleMeshShape<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x16b3c811)));
             let mut serializer = __serializer
                 .serialize_struct("hkpSimpleMeshShape", class_meta, (68u64, 104u64))?;
@@ -145,7 +148,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpSimpleMeshShape {
+    impl<'de> _serde::Deserialize<'de> for hkpSimpleMeshShape<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -207,14 +210,14 @@ const _: () = {
                 }
             }
             struct __hkpSimpleMeshShapeVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpSimpleMeshShape>,
+                marker: _serde::__private::PhantomData<hkpSimpleMeshShape<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpSimpleMeshShapeVisitor<'de> {
-                type Value = hkpSimpleMeshShape;
+                type Value = hkpSimpleMeshShape<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -237,7 +240,7 @@ const _: () = {
                     let mut m_triangles: _serde::__private::Option<
                         Vec<hkpSimpleMeshShapeTriangle>,
                     > = _serde::__private::None;
-                    let mut m_materialIndices: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_materialIndices: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
                     let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_weldingType: _serde::__private::Option<WeldingType> = _serde::__private::None;
                     for i in 0..5usize {
@@ -287,7 +290,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialIndices = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -404,7 +407,7 @@ const _: () = {
                     let mut m_triangles: _serde::__private::Option<
                         Vec<hkpSimpleMeshShapeTriangle>,
                     > = _serde::__private::None;
-                    let mut m_materialIndices: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_materialIndices: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
                     let mut m_radius: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_weldingType: _serde::__private::Option<WeldingType> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
@@ -561,7 +564,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialIndices = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -713,27 +716,29 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         ..Default::default()
                     };
                     let parent = hkpShapeCollection {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_disableWelding,
                         m_collectionType,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpSimpleMeshShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_vertices,
                         m_triangles,

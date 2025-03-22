@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpPoweredChainDataConstraintInfo {
+pub struct hkpPoweredChainDataConstraintInfo<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkpPoweredChainDataConstraintInfo {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `pivotInA`(ctype: `hkVector4`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -57,7 +58,7 @@ pub struct hkpPoweredChainDataConstraintInfo {
     /// - type_size: ` 12`(x86)/` 24`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "motors"))]
     #[cfg_attr(feature = "serde", serde(rename = "motors"))]
-    pub m_motors: [Pointer; 3usize],
+    pub m_motors: [Pointer<'a>; 3usize],
     /// # C++ Info
     /// - name: `switchBodies`(ctype: `hkBool`)
     /// - offset: ` 76`(x86)/` 88`(x86_64)
@@ -68,7 +69,7 @@ pub struct hkpPoweredChainDataConstraintInfo {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpPoweredChainDataConstraintInfo {
+    impl<'a> _serde::HavokClass for hkpPoweredChainDataConstraintInfo<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpPoweredChainDataConstraintInfo"
@@ -78,19 +79,20 @@ const _: () = {
             _serde::__private::Signature::new(0xf88aee25)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.extend(self.m_motors.iter().map(|ptr| ptr.get()));
+            v.extend(self.m_motors.iter());
             v
         }
     }
-    impl _serde::Serialize for hkpPoweredChainDataConstraintInfo {
+    impl<'a> _serde::Serialize for hkpPoweredChainDataConstraintInfo<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xf88aee25)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -119,7 +121,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpPoweredChainDataConstraintInfo {
+    impl<'de> _serde::Deserialize<'de> for hkpPoweredChainDataConstraintInfo<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -178,7 +180,7 @@ const _: () = {
             }
             struct __hkpPoweredChainDataConstraintInfoVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkpPoweredChainDataConstraintInfo,
+                    hkpPoweredChainDataConstraintInfo<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -187,7 +189,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpPoweredChainDataConstraintInfoVisitor<'de> {
-                type Value = hkpPoweredChainDataConstraintInfo;
+                type Value = hkpPoweredChainDataConstraintInfo<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -209,7 +211,9 @@ const _: () = {
                     let mut m_pivotInB: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_aTc: _serde::__private::Option<Quaternion> = _serde::__private::None;
                     let mut m_bTc: _serde::__private::Option<Quaternion> = _serde::__private::None;
-                    let mut m_motors: _serde::__private::Option<[Pointer; 3usize]> = _serde::__private::None;
+                    let mut m_motors: _serde::__private::Option<
+                        [Pointer<'de>; 3usize],
+                    > = _serde::__private::None;
                     let mut m_switchBodies: _serde::__private::Option<bool> = _serde::__private::None;
                     for i in 0..6usize {
                         match i {
@@ -284,7 +288,9 @@ const _: () = {
                                     );
                                 }
                                 m_motors = _serde::__private::Some(
-                                    match __A::next_value::<[Pointer; 3usize]>(&mut __map) {
+                                    match __A::next_value::<
+                                        [Pointer<'de>; 3usize],
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -385,7 +391,9 @@ const _: () = {
                     let mut m_pivotInB: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_aTc: _serde::__private::Option<Quaternion> = _serde::__private::None;
                     let mut m_bTc: _serde::__private::Option<Quaternion> = _serde::__private::None;
-                    let mut m_motors: _serde::__private::Option<[Pointer; 3usize]> = _serde::__private::None;
+                    let mut m_motors: _serde::__private::Option<
+                        [Pointer<'de>; 3usize],
+                    > = _serde::__private::None;
                     let mut m_switchBodies: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -507,7 +515,9 @@ const _: () = {
                                     );
                                 }
                                 m_motors = _serde::__private::Some(
-                                    match __A::next_value::<[Pointer; 3usize]>(&mut __map) {
+                                    match __A::next_value::<
+                                        [Pointer<'de>; 3usize],
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -608,7 +618,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpPoweredChainDataConstraintInfo {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_pivotInA,
                         m_pivotInB,
                         m_aTc,

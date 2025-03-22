@@ -22,11 +22,13 @@ pub struct hkbAuxiliaryNodeInfo<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `type`(ctype: `enum NodeType`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -40,7 +42,7 @@ pub struct hkbAuxiliaryNodeInfo<'a> {
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "depth"))]
     #[cfg_attr(feature = "serde", serde(rename = "depth"))]
-    pub m_depth: u8,
+    pub m_depth: U8<'a>,
     /// # C++ Info
     /// - name: `referenceBehaviorName`(ctype: `hkStringPtr`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
@@ -70,7 +72,7 @@ const _: () = {
             _serde::__private::Signature::new(0xca0888ca)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
@@ -82,6 +84,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xca0888ca)));
             let mut serializer = __serializer
                 .serialize_struct("hkbAuxiliaryNodeInfo", class_meta, (28u64, 48u64))?;
@@ -193,7 +196,7 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_type: _serde::__private::Option<NodeType> = _serde::__private::None;
-                    let mut m_depth: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_depth: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     let mut m_referenceBehaviorName: _serde::__private::Option<
                         StringPtr<'de>,
                     > = _serde::__private::None;
@@ -224,7 +227,7 @@ const _: () = {
                                     );
                                 }
                                 m_depth = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -328,7 +331,7 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_type: _serde::__private::Option<NodeType> = _serde::__private::None;
-                    let mut m_depth: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_depth: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     let mut m_referenceBehaviorName: _serde::__private::Option<
                         StringPtr<'de>,
                     > = _serde::__private::None;
@@ -379,7 +382,7 @@ const _: () = {
                                     );
                                 }
                                 m_depth = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -491,15 +494,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbAuxiliaryNodeInfo {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_type,
                         m_depth,
@@ -651,23 +656,23 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
-                        2u8 => _serde::__private::Ok(__Field::__field2),
-                        3u8 => _serde::__private::Ok(__Field::__field3),
-                        4u8 => _serde::__private::Ok(__Field::__field4),
-                        5u8 => _serde::__private::Ok(__Field::__field5),
-                        6u8 => _serde::__private::Ok(__Field::__field6),
-                        7u8 => _serde::__private::Ok(__Field::__field7),
-                        8u8 => _serde::__private::Ok(__Field::__field8),
-                        9u8 => _serde::__private::Ok(__Field::__field9),
-                        10u8 => _serde::__private::Ok(__Field::__field10),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(2u8) => _serde::__private::Ok(__Field::__field2),
+                        U8::Number(3u8) => _serde::__private::Ok(__Field::__field3),
+                        U8::Number(4u8) => _serde::__private::Ok(__Field::__field4),
+                        U8::Number(5u8) => _serde::__private::Ok(__Field::__field5),
+                        U8::Number(6u8) => _serde::__private::Ok(__Field::__field6),
+                        U8::Number(7u8) => _serde::__private::Ok(__Field::__field7),
+                        U8::Number(8u8) => _serde::__private::Ok(__Field::__field8),
+                        U8::Number(9u8) => _serde::__private::Ok(__Field::__field9),
+                        U8::Number(10u8) => _serde::__private::Ok(__Field::__field10),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

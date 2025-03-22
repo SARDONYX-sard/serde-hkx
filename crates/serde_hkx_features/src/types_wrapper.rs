@@ -19,12 +19,14 @@ pub struct ClassPtrMap<'a> {
     schema: Cow<'a, str>,
     #[serde(flatten)]
     #[serde(borrow)]
-    classes: IndexMap<Pointer, Classes<'a>>,
+    classes: IndexMap<Pointer<'a>, Classes<'a>>,
 }
 
 #[inline]
 const fn default_schema_url() -> Cow<'static, str> {
-    Cow::Borrowed("https://raw.githubusercontent.com/SARDONYX-sard/serde-hkx/refs/tags/0.7.0/assets/serde_hkx_schema.json")
+    Cow::Borrowed(
+        "https://raw.githubusercontent.com/SARDONYX-sard/serde-hkx/refs/tags/0.7.0/assets/serde_hkx_schema.json",
+    )
 }
 
 impl<'a> ClassPtrMap<'a> {
@@ -41,7 +43,7 @@ impl<'a> ClassPtrMap<'a> {
     pub fn into_class_map(self) -> ClassMap<'a> {
         self.classes
             .into_par_iter()
-            .map(|(k, v)| (k.get(), v))
+            .map(|(k, v)| (k.into_inner(), v))
             .collect()
     }
 }

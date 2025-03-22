@@ -4,13 +4,13 @@
   "signature": "0x1d716a17",
   "size_x86": 16,
   "size_x86_64": 16,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "data",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16[6]",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -24,7 +24,7 @@
     },
     {
       "name": "extras",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16[2]",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",

@@ -5,13 +5,13 @@
   "size_x86": 8,
   "size_x86_64": 16,
   "parent": "hkBaseObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "memSizeAndFlags",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "referenceCount",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",

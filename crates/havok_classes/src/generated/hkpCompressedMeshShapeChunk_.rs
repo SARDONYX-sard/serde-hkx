@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpCompressedMeshShapeChunk {
+pub struct hkpCompressedMeshShapeChunk<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkpCompressedMeshShapeChunk {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `offset`(ctype: `hkVector4`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -36,53 +37,53 @@ pub struct hkpCompressedMeshShapeChunk {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "vertices"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertices"))]
-    pub m_vertices: Vec<u16>,
+    pub m_vertices: Vec<U16<'a>>,
     /// # C++ Info
     /// - name: `indices`(ctype: `hkArray<hkUint16>`)
     /// - offset: ` 28`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "indices"))]
     #[cfg_attr(feature = "serde", serde(rename = "indices"))]
-    pub m_indices: Vec<u16>,
+    pub m_indices: Vec<U16<'a>>,
     /// # C++ Info
     /// - name: `stripLengths`(ctype: `hkArray<hkUint16>`)
     /// - offset: ` 40`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "stripLengths"))]
     #[cfg_attr(feature = "serde", serde(rename = "stripLengths"))]
-    pub m_stripLengths: Vec<u16>,
+    pub m_stripLengths: Vec<U16<'a>>,
     /// # C++ Info
     /// - name: `weldingInfo`(ctype: `hkArray<hkUint16>`)
     /// - offset: ` 52`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "weldingInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "weldingInfo"))]
-    pub m_weldingInfo: Vec<u16>,
+    pub m_weldingInfo: Vec<U16<'a>>,
     /// # C++ Info
     /// - name: `materialInfo`(ctype: `hkUint32`)
     /// - offset: ` 64`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "materialInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialInfo"))]
-    pub m_materialInfo: u32,
+    pub m_materialInfo: U32<'a>,
     /// # C++ Info
     /// - name: `reference`(ctype: `hkUint16`)
     /// - offset: ` 68`(x86)/` 84`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "reference"))]
     #[cfg_attr(feature = "serde", serde(rename = "reference"))]
-    pub m_reference: u16,
+    pub m_reference: U16<'a>,
     /// # C++ Info
     /// - name: `transformIndex`(ctype: `hkUint16`)
     /// - offset: ` 70`(x86)/` 86`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "transformIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "transformIndex"))]
-    pub m_transformIndex: u16,
+    pub m_transformIndex: U16<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpCompressedMeshShapeChunk {
+    impl<'a> _serde::HavokClass for hkpCompressedMeshShapeChunk<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpCompressedMeshShapeChunk"
@@ -92,18 +93,19 @@ const _: () = {
             _serde::__private::Signature::new(0x5d0d67bd)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpCompressedMeshShapeChunk {
+    impl<'a> _serde::Serialize for hkpCompressedMeshShapeChunk<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x5d0d67bd)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -141,7 +143,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpCompressedMeshShapeChunk {
+    impl<'de> _serde::Deserialize<'de> for hkpCompressedMeshShapeChunk<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -203,7 +205,7 @@ const _: () = {
                 }
             }
             struct __hkpCompressedMeshShapeChunkVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpCompressedMeshShapeChunk>,
+                marker: _serde::__private::PhantomData<hkpCompressedMeshShapeChunk<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -211,7 +213,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpCompressedMeshShapeChunkVisitor<'de> {
-                type Value = hkpCompressedMeshShapeChunk;
+                type Value = hkpCompressedMeshShapeChunk<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -230,13 +232,13 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let mut m_offset: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_vertices: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_indices: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_stripLengths: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_weldingInfo: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_materialInfo: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_reference: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_transformIndex: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_vertices: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_indices: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_stripLengths: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_weldingInfo: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_materialInfo: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_reference: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_transformIndex: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     for i in 0..8usize {
                         match i {
                             0usize => {
@@ -263,7 +265,7 @@ const _: () = {
                                     );
                                 }
                                 m_vertices = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -280,7 +282,7 @@ const _: () = {
                                     );
                                 }
                                 m_indices = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -297,7 +299,7 @@ const _: () = {
                                     );
                                 }
                                 m_stripLengths = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -314,7 +316,7 @@ const _: () = {
                                     );
                                 }
                                 m_weldingInfo = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -331,7 +333,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -348,7 +350,7 @@ const _: () = {
                                     );
                                 }
                                 m_reference = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -365,7 +367,7 @@ const _: () = {
                                     );
                                 }
                                 m_transformIndex = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -472,13 +474,13 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_offset: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_vertices: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_indices: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_stripLengths: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_weldingInfo: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_materialInfo: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_reference: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_transformIndex: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_vertices: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_indices: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_stripLengths: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_weldingInfo: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_materialInfo: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_reference: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_transformIndex: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -525,7 +527,7 @@ const _: () = {
                                     );
                                 }
                                 m_vertices = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -551,7 +553,7 @@ const _: () = {
                                     );
                                 }
                                 m_indices = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -577,7 +579,7 @@ const _: () = {
                                     );
                                 }
                                 m_stripLengths = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -603,7 +605,7 @@ const _: () = {
                                     );
                                 }
                                 m_weldingInfo = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -629,7 +631,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -655,7 +657,7 @@ const _: () = {
                                     );
                                 }
                                 m_reference = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -681,7 +683,7 @@ const _: () = {
                                     );
                                 }
                                 m_transformIndex = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -784,7 +786,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpCompressedMeshShapeChunk {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_offset,
                         m_vertices,
                         m_indices,

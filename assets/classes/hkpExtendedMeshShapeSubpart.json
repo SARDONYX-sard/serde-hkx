@@ -4,14 +4,14 @@
   "signature": "0xf4608207",
   "size_x86": 20,
   "size_x86_64": 40,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "type",
       "enum_ref": "SubpartType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum SubpartType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -26,7 +26,7 @@
     {
       "name": "materialIndexStridingType",
       "enum_ref": "MaterialIndexStridingType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum MaterialIndexStridingType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -40,7 +40,7 @@
     },
     {
       "name": "materialStriding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -54,7 +54,7 @@
     },
     {
       "name": "materialIndexBase",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -68,7 +68,7 @@
     },
     {
       "name": "materialIndexStriding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -82,7 +82,7 @@
     },
     {
       "name": "numMaterials",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -96,7 +96,7 @@
     },
     {
       "name": "materialBase",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -110,7 +110,7 @@
     },
     {
       "name": "userData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUlong",
       "vtype": "TYPE_ULONG",
       "vsubtype": "TYPE_VOID",

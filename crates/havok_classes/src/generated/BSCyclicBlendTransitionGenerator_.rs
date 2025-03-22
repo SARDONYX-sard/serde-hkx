@@ -22,7 +22,8 @@ pub struct BSCyclicBlendTransitionGenerator<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -35,21 +36,23 @@ pub struct BSCyclicBlendTransitionGenerator<'a> {
     /// - flags: `ALIGN_16`
     #[cfg_attr(feature = "json_schema", schemars(rename = "pBlenderGenerator"))]
     #[cfg_attr(feature = "serde", serde(rename = "pBlenderGenerator"))]
-    pub m_pBlenderGenerator: Pointer,
+    pub m_pBlenderGenerator: Pointer<'a>,
     /// # C++ Info
     /// - name: `EventToFreezeBlendValue`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 52`(x86)/` 88`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "EventToFreezeBlendValue"))]
     #[cfg_attr(feature = "serde", serde(rename = "EventToFreezeBlendValue"))]
-    pub m_EventToFreezeBlendValue: hkbEventProperty,
+    pub m_EventToFreezeBlendValue: hkbEventProperty<'a>,
     /// # C++ Info
     /// - name: `EventToCrossBlend`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 60`(x86)/`104`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "EventToCrossBlend"))]
     #[cfg_attr(feature = "serde", serde(rename = "EventToCrossBlend"))]
-    pub m_EventToCrossBlend: hkbEventProperty,
+    pub m_EventToCrossBlend: hkbEventProperty<'a>,
     /// # C++ Info
     /// - name: `fBlendParameter`(ctype: `hkReal`)
     /// - offset: ` 68`(x86)/`120`(x86_64)
@@ -81,7 +84,7 @@ pub struct BSCyclicBlendTransitionGenerator<'a> {
         schemars(rename = "pTransitionBlenderGenerator")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "pTransitionBlenderGenerator"))]
-    pub m_pTransitionBlenderGenerator: Pointer,
+    pub m_pTransitionBlenderGenerator: Pointer<'a>,
     /// # C++ Info
     /// - name: `pTransitionEffect`(ctype: `void*`)
     /// - offset: ` 96`(x86)/`160`(x86_64)
@@ -89,7 +92,7 @@ pub struct BSCyclicBlendTransitionGenerator<'a> {
     /// - flags: `ALIGN_16|SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "pTransitionEffect"))]
     #[cfg_attr(feature = "serde", serde(rename = "pTransitionEffect"))]
-    pub m_pTransitionEffect: Pointer,
+    pub m_pTransitionEffect: Pointer<'a>,
     /// # C++ Info
     /// - name: `currentMode`(ctype: `enum unknown`)
     /// - offset: `100`(x86)/`168`(x86_64)
@@ -97,7 +100,7 @@ pub struct BSCyclicBlendTransitionGenerator<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "currentMode"))]
     #[cfg_attr(feature = "serde", serde(rename = "currentMode"))]
-    pub m_currentMode: i8,
+    pub m_currentMode: I8<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -111,14 +114,14 @@ const _: () = {
             _serde::__private::Signature::new(0x5119eb06)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
-            v.push(self.m_pBlenderGenerator.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
+            v.push(&self.m_pBlenderGenerator);
             v.extend(self.m_EventToFreezeBlendValue.deps_indexes());
             v.extend(self.m_EventToCrossBlend.deps_indexes());
-            v.push(self.m_pTransitionBlenderGenerator.get());
-            v.push(self.m_pTransitionEffect.get());
+            v.push(&self.m_pTransitionBlenderGenerator);
+            v.push(&self.m_pTransitionEffect);
             v
         }
     }
@@ -129,6 +132,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x5119eb06)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -302,21 +306,25 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_pBlenderGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_pBlenderGenerator: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_EventToFreezeBlendValue: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     let mut m_EventToCrossBlend: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     let mut m_fBlendParameter: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_fTransitionDuration: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_eBlendCurve: _serde::__private::Option<BlendCurve> = _serde::__private::None;
                     let mut m_pTransitionBlenderGenerator: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
-                    let mut m_pTransitionEffect: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_currentMode: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_pTransitionEffect: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_currentMode: _serde::__private::Option<I8<'de>> = _serde::__private::None;
                     for i in 0..9usize {
                         match i {
                             0usize => {
@@ -331,7 +339,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 8usize, 8usize)?;
                                 m_pBlenderGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -350,7 +358,7 @@ const _: () = {
                                     );
                                 }
                                 m_EventToFreezeBlendValue = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -369,7 +377,7 @@ const _: () = {
                                     );
                                 }
                                 m_EventToCrossBlend = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -442,7 +450,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 15usize)?;
                                 m_pTransitionBlenderGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -462,7 +470,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 12usize, 8usize)?;
                                 m_pTransitionEffect = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -479,7 +487,7 @@ const _: () = {
                                     );
                                 }
                                 m_currentMode = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -603,15 +611,19 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_pBlenderGenerator: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_pBlenderGenerator: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_EventToFreezeBlendValue: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     let mut m_EventToCrossBlend: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
                     let mut m_fBlendParameter: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_fTransitionDuration: _serde::__private::Option<f32> = _serde::__private::None;
@@ -640,7 +652,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -718,7 +730,7 @@ const _: () = {
                                     );
                                 }
                                 m_pBlenderGenerator = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -746,7 +758,7 @@ const _: () = {
                                     );
                                 }
                                 m_EventToFreezeBlendValue = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -774,7 +786,7 @@ const _: () = {
                                     );
                                 }
                                 m_EventToCrossBlend = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -970,29 +982,34 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
-                    let parent = hkbGenerator { __ptr, parent };
+                    let parent = hkbGenerator {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(BSCyclicBlendTransitionGenerator {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_pBlenderGenerator,
                         m_EventToFreezeBlendValue,

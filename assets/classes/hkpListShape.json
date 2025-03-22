@@ -5,9 +5,9 @@
   "size_x86": 112,
   "size_x86_64": 144,
   "parent": "hkpShapeCollection",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "ListShapeFlags",
@@ -30,7 +30,7 @@
     {
       "name": "childInfo",
       "class_ref": "hkpListShapeChildInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkpListShapeChildInfo>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -44,7 +44,7 @@
     },
     {
       "name": "flags",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -58,7 +58,7 @@
     },
     {
       "name": "numDisabledChildren",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -72,7 +72,7 @@
     },
     {
       "name": "aabbHalfExtents",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -86,7 +86,7 @@
     },
     {
       "name": "aabbCenter",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -100,7 +100,7 @@
     },
     {
       "name": "enabledChildren",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32[8]",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",

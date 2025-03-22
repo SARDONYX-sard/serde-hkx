@@ -5,9 +5,9 @@
   "size_x86": 44,
   "size_x86_64": 64,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "IndexType",
@@ -42,7 +42,7 @@
     {
       "name": "indexType",
       "enum_ref": "IndexType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum IndexType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -56,7 +56,7 @@
     },
     {
       "name": "indices16",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkUint16>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_UINT16",
@@ -70,7 +70,7 @@
     },
     {
       "name": "indices32",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkUint32>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_UINT32",
@@ -84,7 +84,7 @@
     },
     {
       "name": "vertexBaseOffset",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -98,7 +98,7 @@
     },
     {
       "name": "length",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",

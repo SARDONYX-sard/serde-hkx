@@ -5,13 +5,13 @@
   "size_x86": 44,
   "size_x86_64": 64,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "materialIndices",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkUint8>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_UINT8",
@@ -26,7 +26,7 @@
     {
       "name": "materials",
       "class_ref": "hkpStorageExtendedMeshShapeMaterial",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "hkArray<struct hkpStorageExtendedMeshShapeMaterial>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -40,7 +40,7 @@
     },
     {
       "name": "materialIndices16",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkUint16>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_UINT16",

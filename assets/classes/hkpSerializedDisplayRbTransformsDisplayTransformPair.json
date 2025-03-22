@@ -4,14 +4,14 @@
   "signature": "0x94ac5bec",
   "size_x86": 80,
   "size_x86_64": 80,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "rb",
       "class_ref": "hkpRigidBody",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpRigidBody*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -25,7 +25,7 @@
     },
     {
       "name": "localToDisplay",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkTransform",
       "vtype": "TYPE_TRANSFORM",
       "vsubtype": "TYPE_VOID",

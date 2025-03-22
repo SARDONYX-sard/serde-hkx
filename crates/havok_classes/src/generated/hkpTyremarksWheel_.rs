@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpTyremarksWheel {
+pub struct hkpTyremarksWheel<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,36 +22,38 @@ pub struct hkpTyremarksWheel {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `currentPosition`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "currentPosition"))]
     #[cfg_attr(feature = "serde", serde(rename = "currentPosition"))]
-    pub m_currentPosition: i32,
+    pub m_currentPosition: I32<'a>,
     /// # C++ Info
     /// - name: `numPoints`(ctype: `hkInt32`)
     /// - offset: ` 12`(x86)/` 20`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numPoints"))]
     #[cfg_attr(feature = "serde", serde(rename = "numPoints"))]
-    pub m_numPoints: i32,
+    pub m_numPoints: I32<'a>,
     /// # C++ Info
     /// - name: `tyremarkPoints`(ctype: `hkArray<struct hkpTyremarkPoint>`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "tyremarkPoints"))]
     #[cfg_attr(feature = "serde", serde(rename = "tyremarkPoints"))]
-    pub m_tyremarkPoints: Vec<hkpTyremarkPoint>,
+    pub m_tyremarkPoints: Vec<hkpTyremarkPoint<'a>>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpTyremarksWheel {
+    impl<'a> _serde::HavokClass for hkpTyremarksWheel<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpTyremarksWheel"
@@ -61,25 +63,26 @@ const _: () = {
             _serde::__private::Signature::new(0x1eaef041)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_tyremarkPoints
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
     }
-    impl _serde::Serialize for hkpTyremarksWheel {
+    impl<'a> _serde::Serialize for hkpTyremarksWheel<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x1eaef041)));
             let mut serializer = __serializer
                 .serialize_struct("hkpTyremarksWheel", class_meta, (28u64, 40u64))?;
@@ -107,7 +110,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpTyremarksWheel {
+    impl<'de> _serde::Deserialize<'de> for hkpTyremarksWheel<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -159,14 +162,14 @@ const _: () = {
                 }
             }
             struct __hkpTyremarksWheelVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpTyremarksWheel>,
+                marker: _serde::__private::PhantomData<hkpTyremarksWheel<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpTyremarksWheelVisitor<'de> {
-                type Value = hkpTyremarksWheel;
+                type Value = hkpTyremarksWheel<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -185,8 +188,8 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_currentPosition: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numPoints: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_currentPosition: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_numPoints: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_tyremarkPoints: _serde::__private::Option<
                         Vec<hkpTyremarkPoint>,
                     > = _serde::__private::None;
@@ -201,7 +204,7 @@ const _: () = {
                                     );
                                 }
                                 m_currentPosition = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -218,7 +221,7 @@ const _: () = {
                                     );
                                 }
                                 m_numPoints = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -292,8 +295,8 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_currentPosition: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numPoints: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_currentPosition: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_numPoints: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_tyremarkPoints: _serde::__private::Option<
                         Vec<hkpTyremarkPoint>,
                     > = _serde::__private::None;
@@ -319,7 +322,7 @@ const _: () = {
                                     );
                                 }
                                 m_currentPosition = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -345,7 +348,7 @@ const _: () = {
                                     );
                                 }
                                 m_numPoints = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -419,15 +422,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpTyremarksWheel {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_currentPosition,
                         m_numPoints,

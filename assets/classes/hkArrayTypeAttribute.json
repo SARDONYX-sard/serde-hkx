@@ -4,9 +4,9 @@
   "signature": "0xd404a39a",
   "size_x86": 1,
   "size_x86_64": 1,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "ArrayType",
@@ -33,7 +33,7 @@
     {
       "name": "type",
       "enum_ref": "ArrayType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum ArrayType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",

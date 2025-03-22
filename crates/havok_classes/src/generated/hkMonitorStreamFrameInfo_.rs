@@ -22,7 +22,8 @@ pub struct hkMonitorStreamFrameInfo<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `heading`(ctype: `hkStringPtr`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -37,14 +38,14 @@ pub struct hkMonitorStreamFrameInfo<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "indexOfTimer0"))]
     #[cfg_attr(feature = "serde", serde(rename = "indexOfTimer0"))]
-    pub m_indexOfTimer0: i32,
+    pub m_indexOfTimer0: I32<'a>,
     /// # C++ Info
     /// - name: `indexOfTimer1`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "indexOfTimer1"))]
     #[cfg_attr(feature = "serde", serde(rename = "indexOfTimer1"))]
-    pub m_indexOfTimer1: i32,
+    pub m_indexOfTimer1: I32<'a>,
     /// # C++ Info
     /// - name: `absoluteTimeCounter`(ctype: `enum AbsoluteTimeCounter`)
     /// - offset: ` 12`(x86)/` 16`(x86_64)
@@ -72,21 +73,21 @@ pub struct hkMonitorStreamFrameInfo<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "threadId"))]
     #[cfg_attr(feature = "serde", serde(rename = "threadId"))]
-    pub m_threadId: i32,
+    pub m_threadId: I32<'a>,
     /// # C++ Info
     /// - name: `frameStreamStart`(ctype: `hkInt32`)
     /// - offset: ` 28`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "frameStreamStart"))]
     #[cfg_attr(feature = "serde", serde(rename = "frameStreamStart"))]
-    pub m_frameStreamStart: i32,
+    pub m_frameStreamStart: I32<'a>,
     /// # C++ Info
     /// - name: `frameStreamEnd`(ctype: `hkInt32`)
     /// - offset: ` 32`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "frameStreamEnd"))]
     #[cfg_attr(feature = "serde", serde(rename = "frameStreamEnd"))]
-    pub m_frameStreamEnd: i32,
+    pub m_frameStreamEnd: I32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -100,7 +101,7 @@ const _: () = {
             _serde::__private::Signature::new(0x7798b7db)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
@@ -112,6 +113,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x7798b7db)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -229,16 +231,16 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let mut m_heading: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_indexOfTimer0: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_indexOfTimer1: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_indexOfTimer0: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_indexOfTimer1: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_absoluteTimeCounter: _serde::__private::Option<
                         AbsoluteTimeCounter,
                     > = _serde::__private::None;
                     let mut m_timerFactor0: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_timerFactor1: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_threadId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_frameStreamStart: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_frameStreamEnd: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_threadId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_frameStreamStart: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_frameStreamEnd: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     for i in 0..9usize {
                         match i {
                             0usize => {
@@ -267,7 +269,7 @@ const _: () = {
                                     );
                                 }
                                 m_indexOfTimer0 = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -284,7 +286,7 @@ const _: () = {
                                     );
                                 }
                                 m_indexOfTimer1 = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -354,7 +356,7 @@ const _: () = {
                                     );
                                 }
                                 m_threadId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -371,7 +373,7 @@ const _: () = {
                                     );
                                 }
                                 m_frameStreamStart = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -388,7 +390,7 @@ const _: () = {
                                     );
                                 }
                                 m_frameStreamEnd = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -507,16 +509,16 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_heading: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_indexOfTimer0: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_indexOfTimer1: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_indexOfTimer0: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_indexOfTimer1: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_absoluteTimeCounter: _serde::__private::Option<
                         AbsoluteTimeCounter,
                     > = _serde::__private::None;
                     let mut m_timerFactor0: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_timerFactor1: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_threadId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_frameStreamStart: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_frameStreamEnd: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_threadId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_frameStreamStart: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_frameStreamEnd: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -565,7 +567,7 @@ const _: () = {
                                     );
                                 }
                                 m_indexOfTimer0 = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -591,7 +593,7 @@ const _: () = {
                                     );
                                 }
                                 m_indexOfTimer1 = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -697,7 +699,7 @@ const _: () = {
                                     );
                                 }
                                 m_threadId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -723,7 +725,7 @@ const _: () = {
                                     );
                                 }
                                 m_frameStreamStart = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -749,7 +751,7 @@ const _: () = {
                                     );
                                 }
                                 m_frameStreamEnd = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -866,7 +868,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkMonitorStreamFrameInfo {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_heading,
                         m_indexOfTimer0,
                         m_indexOfTimer1,
@@ -991,15 +993,17 @@ const _: () = {
                 }
                 fn visit_uint32<__E>(
                     self,
-                    __value: u32,
+                    __value: U32<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u32 => _serde::__private::Ok(__Field::__field0),
-                        1u32 => _serde::__private::Ok(__Field::__field1),
-                        4294967295u32 => _serde::__private::Ok(__Field::__field2),
+                        U32::Number(0u32) => _serde::__private::Ok(__Field::__field0),
+                        U32::Number(1u32) => _serde::__private::Ok(__Field::__field1),
+                        U32::Number(4294967295u32) => {
+                            _serde::__private::Ok(__Field::__field2)
+                        }
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

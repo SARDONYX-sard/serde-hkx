@@ -5,14 +5,14 @@
   "size_x86": 20,
   "size_x86_64": 32,
   "parent": "hkbEventPayload",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "payloads",
       "class_ref": "hkbEventPayload",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkbEventPayload*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",

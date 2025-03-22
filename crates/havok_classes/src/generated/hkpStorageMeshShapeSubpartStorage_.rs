@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpStorageMeshShapeSubpartStorage {
+pub struct hkpStorageMeshShapeSubpartStorage<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkpStorageMeshShapeSubpartStorage {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `vertices`(ctype: `hkArray<hkReal>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -40,39 +42,39 @@ pub struct hkpStorageMeshShapeSubpartStorage {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "indices16"))]
     #[cfg_attr(feature = "serde", serde(rename = "indices16"))]
-    pub m_indices16: Vec<u16>,
+    pub m_indices16: Vec<U16<'a>>,
     /// # C++ Info
     /// - name: `indices32`(ctype: `hkArray<hkUint32>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "indices32"))]
     #[cfg_attr(feature = "serde", serde(rename = "indices32"))]
-    pub m_indices32: Vec<u32>,
+    pub m_indices32: Vec<U32<'a>>,
     /// # C++ Info
     /// - name: `materialIndices`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "materialIndices"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialIndices"))]
-    pub m_materialIndices: Vec<u8>,
+    pub m_materialIndices: Vec<U8<'a>>,
     /// # C++ Info
     /// - name: `materials`(ctype: `hkArray<hkUint32>`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "materials"))]
     #[cfg_attr(feature = "serde", serde(rename = "materials"))]
-    pub m_materials: Vec<u32>,
+    pub m_materials: Vec<U32<'a>>,
     /// # C++ Info
     /// - name: `materialIndices16`(ctype: `hkArray<hkUint16>`)
     /// - offset: ` 68`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "materialIndices16"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialIndices16"))]
-    pub m_materialIndices16: Vec<u16>,
+    pub m_materialIndices16: Vec<U16<'a>>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpStorageMeshShapeSubpartStorage {
+    impl<'a> _serde::HavokClass for hkpStorageMeshShapeSubpartStorage<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpStorageMeshShapeSubpartStorage"
@@ -82,18 +84,19 @@ const _: () = {
             _serde::__private::Signature::new(0xbf27438)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpStorageMeshShapeSubpartStorage {
+    impl<'a> _serde::Serialize for hkpStorageMeshShapeSubpartStorage<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xbf27438)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -146,7 +149,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpStorageMeshShapeSubpartStorage {
+    impl<'de> _serde::Deserialize<'de> for hkpStorageMeshShapeSubpartStorage<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -205,7 +208,7 @@ const _: () = {
             }
             struct __hkpStorageMeshShapeSubpartStorageVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkpStorageMeshShapeSubpartStorage,
+                    hkpStorageMeshShapeSubpartStorage<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -214,7 +217,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpStorageMeshShapeSubpartStorageVisitor<'de> {
-                type Value = hkpStorageMeshShapeSubpartStorage;
+                type Value = hkpStorageMeshShapeSubpartStorage<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -234,11 +237,13 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_vertices: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
-                    let mut m_indices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_indices32: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_materialIndices: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_materials: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_materialIndices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_indices16: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_indices32: _serde::__private::Option<Vec<U32<'de>>> = _serde::__private::None;
+                    let mut m_materialIndices: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
+                    let mut m_materials: _serde::__private::Option<Vec<U32<'de>>> = _serde::__private::None;
+                    let mut m_materialIndices16: _serde::__private::Option<
+                        Vec<U16<'de>>,
+                    > = _serde::__private::None;
                     for i in 0..6usize {
                         match i {
                             0usize => {
@@ -267,7 +272,7 @@ const _: () = {
                                     );
                                 }
                                 m_indices16 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -284,7 +289,7 @@ const _: () = {
                                     );
                                 }
                                 m_indices32 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -301,7 +306,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialIndices = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -318,7 +323,7 @@ const _: () = {
                                     );
                                 }
                                 m_materials = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -337,7 +342,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialIndices16 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -426,11 +431,13 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_vertices: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
-                    let mut m_indices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_indices32: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_materialIndices: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_materials: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
-                    let mut m_materialIndices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_indices16: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_indices32: _serde::__private::Option<Vec<U32<'de>>> = _serde::__private::None;
+                    let mut m_materialIndices: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
+                    let mut m_materials: _serde::__private::Option<Vec<U32<'de>>> = _serde::__private::None;
+                    let mut m_materialIndices16: _serde::__private::Option<
+                        Vec<U16<'de>>,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -479,7 +486,7 @@ const _: () = {
                                     );
                                 }
                                 m_indices16 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -505,7 +512,7 @@ const _: () = {
                                     );
                                 }
                                 m_indices32 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -531,7 +538,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialIndices = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -557,7 +564,7 @@ const _: () = {
                                     );
                                 }
                                 m_materials = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -585,7 +592,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialIndices16 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -667,15 +674,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpStorageMeshShapeSubpartStorage {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_vertices,
                         m_indices16,

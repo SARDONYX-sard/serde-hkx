@@ -24,21 +24,16 @@ pub fn generate(class: &Class) -> Result<ItemStruct, Error> {
 
     let doc_attrs = struct_doc_attrs(class);
     let struct_name = format_ident!("{class_name}");
-    let lifetime = match class.has_string {
-        true => quote! { <'a> },
-        false => quote! {},
-    };
+    // NOTE: This is necessary because the type of an enum that can be obtained with one
+    //       class information cannot be obtained with a reference to an enum by another class.
+    let lifetime = quote! { <'a> };
 
     let parent = class.parent.as_ref().map_or_else(
         || quote! {},
         |parent| {
             let parent_struct_name = format_ident!("{parent}");
 
-            let serde_borrow_attr = serde_borrow_attr(class.parent_has_string);
-            let lifetime = match class.parent_has_string {
-                true => quote! { <'a> },
-                false => quote! {},
-            };
+            let serde_borrow_attr = serde_borrow_attr(class.parent_has_ref);
             quote! {
                 /// Alternative to C++ class inheritance.
                 #[cfg_attr(feature = "json_schema", schemars(flatten))]
@@ -65,7 +60,8 @@ pub fn generate(class: &Class) -> Result<ItemStruct, Error> {
             /// # Note
             /// Not present in the binary & Not exist actual C++ field.
             #[cfg_attr(feature = "serde", serde(skip_serializing_if = "Option::is_none", default))]
-            pub __ptr: Option<Pointer>,
+            #[cfg_attr(feature = "serde", serde(borrow))]
+            pub __ptr: Option<Pointer<'a>>,
             #parent
             #(#fields,)*
         }

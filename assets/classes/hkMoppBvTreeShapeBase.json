@@ -5,14 +5,14 @@
   "size_x86": 48,
   "size_x86_64": 80,
   "parent": "hkpBvTreeShape",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "code",
       "class_ref": "hkpMoppCode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpMoppCode*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -26,7 +26,7 @@
     },
     {
       "name": "moppData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -40,7 +40,7 @@
     },
     {
       "name": "moppDataSize",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint32",
       "vtype": "TYPE_UINT32",
       "vsubtype": "TYPE_VOID",
@@ -54,7 +54,7 @@
     },
     {
       "name": "codeInfoCopy",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",

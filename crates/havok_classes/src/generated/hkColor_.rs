@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkColor {
+pub struct hkColor<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,12 @@ pub struct hkColor {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkColor {
+    impl<'a> _serde::HavokClass for hkColor<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkColor"
@@ -36,18 +37,19 @@ const _: () = {
             _serde::__private::Signature::new(0x106b96ce)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkColor {
+    impl<'a> _serde::Serialize for hkColor<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x106b96ce)));
             let mut serializer = __serializer
                 .serialize_struct("hkColor", class_meta, (1u64, 1u64))?;
@@ -61,7 +63,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkColor {
+    impl<'de> _serde::Deserialize<'de> for hkColor<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -107,14 +109,14 @@ const _: () = {
                 }
             }
             struct __hkColorVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkColor>,
+                marker: _serde::__private::PhantomData<hkColor<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkColorVisitor<'de> {
-                type Value = hkColor;
+                type Value = hkColor<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -153,7 +155,7 @@ const _: () = {
                         }
                     }
                     let __ptr = __A::class_ptr(&mut __map);
-                    _serde::__private::Ok(hkColor { __ptr })
+                    _serde::__private::Ok(hkColor { __ptr: __ptr.clone() })
                 }
             }
             const FIELDS: &[&str] = &[];
@@ -977,155 +979,441 @@ const _: () = {
                 }
                 fn visit_uint32<__E>(
                     self,
-                    __value: u32,
+                    __value: U32<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        4286578688u32 => _serde::__private::Ok(__Field::__field0),
-                        4287299584u32 => _serde::__private::Ok(__Field::__field1),
-                        4294901760u32 => _serde::__private::Ok(__Field::__field2),
-                        4294944449u32 => _serde::__private::Ok(__Field::__field3),
-                        4292613180u32 => _serde::__private::Ok(__Field::__field4),
-                        4292789163u32 => _serde::__private::Ok(__Field::__field5),
-                        4294927108u32 => _serde::__private::Ok(__Field::__field6),
-                        4294907027u32 => _serde::__private::Ok(__Field::__field7),
-                        4291237253u32 => _serde::__private::Ok(__Field::__field8),
-                        4286578816u32 => _serde::__private::Ok(__Field::__field9),
-                        4287299723u32 => _serde::__private::Ok(__Field::__field10),
-                        4292243670u32 => _serde::__private::Ok(__Field::__field11),
-                        4292394968u32 => _serde::__private::Ok(__Field::__field12),
-                        4292714717u32 => _serde::__private::Ok(__Field::__field13),
-                        4293821166u32 => _serde::__private::Ok(__Field::__field14),
-                        4294902015u32 => _serde::__private::Ok(__Field::__field15),
-                        4294902015u32 => _serde::__private::Ok(__Field::__field16),
-                        4290414451u32 => _serde::__private::Ok(__Field::__field17),
-                        4287889619u32 => _serde::__private::Ok(__Field::__field18),
-                        4288230092u32 => _serde::__private::Ok(__Field::__field19),
-                        4287245282u32 => _serde::__private::Ok(__Field::__field20),
-                        4284875570u32 => _serde::__private::Ok(__Field::__field21),
-                        4289454203u32 => _serde::__private::Ok(__Field::__field22),
-                        4287317261u32 => _serde::__private::Ok(__Field::__field23),
-                        4288269460u32 => _serde::__private::Ok(__Field::__field24),
-                        4287299587u32 => _serde::__private::Ok(__Field::__field25),
-                        4289379277u32 => _serde::__private::Ok(__Field::__field26),
-                        4294901760u32 => _serde::__private::Ok(__Field::__field27),
-                        4284875648u32 => _serde::__private::Ok(__Field::__field28),
-                        4281368880u32 => _serde::__private::Ok(__Field::__field29),
-                        4284048699u32 => _serde::__private::Ok(__Field::__field30),
-                        4286006955u32 => _serde::__private::Ok(__Field::__field31),
-                        4284782061u32 => _serde::__private::Ok(__Field::__field32),
-                        4289775366u32 => _serde::__private::Ok(__Field::__field33),
-                        4293982463u32 => _serde::__private::Ok(__Field::__field34),
-                        4294638335u32 => _serde::__private::Ok(__Field::__field35),
-                        4293322490u32 => _serde::__private::Ok(__Field::__field36),
-                        4280193279u32 => _serde::__private::Ok(__Field::__field37),
-                        4282811060u32 => _serde::__private::Ok(__Field::__field38),
-                        4278255615u32 => _serde::__private::Ok(__Field::__field39),
-                        4285835392u32 => _serde::__private::Ok(__Field::__field40),
-                        4286023833u32 => _serde::__private::Ok(__Field::__field41),
-                        4289339194u32 => _serde::__private::Ok(__Field::__field42),
-                        4289342075u32 => _serde::__private::Ok(__Field::__field43),
-                        4289959174u32 => _serde::__private::Ok(__Field::__field44),
-                        4284829576u32 => _serde::__private::Ok(__Field::__field45),
-                        4287358955u32 => _serde::__private::Ok(__Field::__field46),
-                        4289470265u32 => _serde::__private::Ok(__Field::__field47),
-                        4286582015u32 => _serde::__private::Ok(__Field::__field48),
-                        4289789324u32 => _serde::__private::Ok(__Field::__field49),
-                        4288893830u32 => _serde::__private::Ok(__Field::__field50),
-                        4289520374u32 => _serde::__private::Ok(__Field::__field51),
-                        4292935679u32 => _serde::__private::Ok(__Field::__field52),
-                        4293984255u32 => _serde::__private::Ok(__Field::__field53),
-                        4280332970u32 => _serde::__private::Ok(__Field::__field54),
-                        4283796272u32 => _serde::__private::Ok(__Field::__field55),
-                        4289774812u32 => _serde::__private::Ok(__Field::__field56),
-                        4281522975u32 => _serde::__private::Ok(__Field::__field57),
-                        4289379196u32 => _serde::__private::Ok(__Field::__field58),
-                        4278258842u32 => _serde::__private::Ok(__Field::__field59),
-                        4288723946u32 => _serde::__private::Ok(__Field::__field60),
-                        4286563067u32 => _serde::__private::Ok(__Field::__field61),
-                        4285864305u32 => _serde::__private::Ok(__Field::__field62),
-                        4284861671u32 => _serde::__private::Ok(__Field::__field63),
-                        4288347394u32 => _serde::__private::Ok(__Field::__field64),
-                        4284827999u32 => _serde::__private::Ok(__Field::__field65),
-                        4284829695u32 => _serde::__private::Ok(__Field::__field66),
-                        4286563010u32 => _serde::__private::Ok(__Field::__field67),
-                        4286526978u32 => _serde::__private::Ok(__Field::__field68),
-                        4292029967u32 => _serde::__private::Ok(__Field::__field69),
-                        4292148896u32 => _serde::__private::Ok(__Field::__field70),
-                        4292430344u32 => _serde::__private::Ok(__Field::__field71),
-                        4294966780u32 => _serde::__private::Ok(__Field::__field72),
-                        4293987744u32 => _serde::__private::Ok(__Field::__field73),
-                        4289370336u32 => _serde::__private::Ok(__Field::__field74),
-                        4289336832u32 => _serde::__private::Ok(__Field::__field75),
-                        4286085249u32 => _serde::__private::Ok(__Field::__field76),
-                        4283676211u32 => _serde::__private::Ok(__Field::__field77),
-                        4292272306u32 => _serde::__private::Ok(__Field::__field78),
-                        4293960297u32 => _serde::__private::Ok(__Field::__field79),
-                        4293787924u32 => _serde::__private::Ok(__Field::__field80),
-                        4294635702u32 => _serde::__private::Ok(__Field::__field81),
-                        4294637750u32 => _serde::__private::Ok(__Field::__field82),
-                        4286595072u32 => _serde::__private::Ok(__Field::__field83),
-                        4294967040u32 => _serde::__private::Ok(__Field::__field84),
-                        4294967216u32 => _serde::__private::Ok(__Field::__field85),
-                        4294967280u32 => _serde::__private::Ok(__Field::__field86),
-                        4290623339u32 => _serde::__private::Ok(__Field::__field87),
-                        4293988284u32 => _serde::__private::Ok(__Field::__field88),
-                        4293467754u32 => _serde::__private::Ok(__Field::__field89),
-                        4293720580u32 => _serde::__private::Ok(__Field::__field90),
-                        4294956800u32 => _serde::__private::Ok(__Field::__field91),
-                        4294965453u32 => _serde::__private::Ok(__Field::__field92),
-                        4294955917u32 => _serde::__private::Ok(__Field::__field93),
-                        4286903435u32 => _serde::__private::Ok(__Field::__field94),
-                        4292519200u32 => _serde::__private::Ok(__Field::__field95),
-                        4294634455u32 => _serde::__private::Ok(__Field::__field96),
-                        4294966116u32 => _serde::__private::Ok(__Field::__field97),
-                        4294960102u32 => _serde::__private::Ok(__Field::__field98),
-                        4294953679u32 => _serde::__private::Ok(__Field::__field99),
-                        4294956353u32 => _serde::__private::Ok(__Field::__field100),
-                        4294944000u32 => _serde::__private::Ok(__Field::__field101),
-                        4294953924u32 => _serde::__private::Ok(__Field::__field102),
-                        4292907392u32 => _serde::__private::Ok(__Field::__field103),
-                        4294940672u32 => _serde::__private::Ok(__Field::__field104),
-                        4292783287u32 => _serde::__private::Ok(__Field::__field105),
-                        4287317267u32 => _serde::__private::Ok(__Field::__field106),
-                        4294096452u32 => _serde::__private::Ok(__Field::__field107),
-                        4294962125u32 => _serde::__private::Ok(__Field::__field108),
-                        4294964715u32 => _serde::__private::Ok(__Field::__field109),
-                        4294965998u32 => _serde::__private::Ok(__Field::__field110),
-                        4294966496u32 => _serde::__private::Ok(__Field::__field111),
-                        4294967182u32 => _serde::__private::Ok(__Field::__field112),
-                        4286078079u32 => _serde::__private::Ok(__Field::__field113),
-                        4294956489u32 => _serde::__private::Ok(__Field::__field114),
-                        4289864222u32 => _serde::__private::Ok(__Field::__field115),
-                        4288696877u32 => _serde::__private::Ok(__Field::__field116),
-                        4294942842u32 => _serde::__private::Ok(__Field::__field117),
-                        4294934352u32 => _serde::__private::Ok(__Field::__field118),
-                        4293997764u32 => _serde::__private::Ok(__Field::__field119),
-                        4294954237u32 => _serde::__private::Ok(__Field::__field120),
-                        4294940672u32 => _serde::__private::Ok(__Field::__field121),
-                        4294947974u32 => _serde::__private::Ok(__Field::__field122),
-                        4294943895u32 => _serde::__private::Ok(__Field::__field123),
-                        4292080495u32 => _serde::__private::Ok(__Field::__field124),
-                        4294961403u32 => _serde::__private::Ok(__Field::__field125),
-                        4289864222u32 => _serde::__private::Ok(__Field::__field126),
-                        4293959497u32 => _serde::__private::Ok(__Field::__field127),
-                        4289014314u32 => _serde::__private::Ok(__Field::__field128),
-                        4289501062u32 => _serde::__private::Ok(__Field::__field129),
-                        4278190080u32 => _serde::__private::Ok(__Field::__field130),
-                        4285098345u32 => _serde::__private::Ok(__Field::__field131),
-                        4286611584u32 => _serde::__private::Ok(__Field::__field132),
-                        4289309097u32 => _serde::__private::Ok(__Field::__field133),
-                        4289374890u32 => _serde::__private::Ok(__Field::__field134),
-                        4292072403u32 => _serde::__private::Ok(__Field::__field135),
-                        4292332748u32 => _serde::__private::Ok(__Field::__field136),
-                        4294506751u32 => _serde::__private::Ok(__Field::__field137),
-                        4294967295u32 => _serde::__private::Ok(__Field::__field138),
-                        4287137928u32 => _serde::__private::Ok(__Field::__field139),
-                        4282400896u32 => _serde::__private::Ok(__Field::__field140),
-                        4286611584u32 => _serde::__private::Ok(__Field::__field141),
-                        4290822336u32 => _serde::__private::Ok(__Field::__field142),
+                        U32::Number(4286578688u32) => {
+                            _serde::__private::Ok(__Field::__field0)
+                        }
+                        U32::Number(4287299584u32) => {
+                            _serde::__private::Ok(__Field::__field1)
+                        }
+                        U32::Number(4294901760u32) => {
+                            _serde::__private::Ok(__Field::__field2)
+                        }
+                        U32::Number(4294944449u32) => {
+                            _serde::__private::Ok(__Field::__field3)
+                        }
+                        U32::Number(4292613180u32) => {
+                            _serde::__private::Ok(__Field::__field4)
+                        }
+                        U32::Number(4292789163u32) => {
+                            _serde::__private::Ok(__Field::__field5)
+                        }
+                        U32::Number(4294927108u32) => {
+                            _serde::__private::Ok(__Field::__field6)
+                        }
+                        U32::Number(4294907027u32) => {
+                            _serde::__private::Ok(__Field::__field7)
+                        }
+                        U32::Number(4291237253u32) => {
+                            _serde::__private::Ok(__Field::__field8)
+                        }
+                        U32::Number(4286578816u32) => {
+                            _serde::__private::Ok(__Field::__field9)
+                        }
+                        U32::Number(4287299723u32) => {
+                            _serde::__private::Ok(__Field::__field10)
+                        }
+                        U32::Number(4292243670u32) => {
+                            _serde::__private::Ok(__Field::__field11)
+                        }
+                        U32::Number(4292394968u32) => {
+                            _serde::__private::Ok(__Field::__field12)
+                        }
+                        U32::Number(4292714717u32) => {
+                            _serde::__private::Ok(__Field::__field13)
+                        }
+                        U32::Number(4293821166u32) => {
+                            _serde::__private::Ok(__Field::__field14)
+                        }
+                        U32::Number(4294902015u32) => {
+                            _serde::__private::Ok(__Field::__field15)
+                        }
+                        U32::Number(4294902015u32) => {
+                            _serde::__private::Ok(__Field::__field16)
+                        }
+                        U32::Number(4290414451u32) => {
+                            _serde::__private::Ok(__Field::__field17)
+                        }
+                        U32::Number(4287889619u32) => {
+                            _serde::__private::Ok(__Field::__field18)
+                        }
+                        U32::Number(4288230092u32) => {
+                            _serde::__private::Ok(__Field::__field19)
+                        }
+                        U32::Number(4287245282u32) => {
+                            _serde::__private::Ok(__Field::__field20)
+                        }
+                        U32::Number(4284875570u32) => {
+                            _serde::__private::Ok(__Field::__field21)
+                        }
+                        U32::Number(4289454203u32) => {
+                            _serde::__private::Ok(__Field::__field22)
+                        }
+                        U32::Number(4287317261u32) => {
+                            _serde::__private::Ok(__Field::__field23)
+                        }
+                        U32::Number(4288269460u32) => {
+                            _serde::__private::Ok(__Field::__field24)
+                        }
+                        U32::Number(4287299587u32) => {
+                            _serde::__private::Ok(__Field::__field25)
+                        }
+                        U32::Number(4289379277u32) => {
+                            _serde::__private::Ok(__Field::__field26)
+                        }
+                        U32::Number(4294901760u32) => {
+                            _serde::__private::Ok(__Field::__field27)
+                        }
+                        U32::Number(4284875648u32) => {
+                            _serde::__private::Ok(__Field::__field28)
+                        }
+                        U32::Number(4281368880u32) => {
+                            _serde::__private::Ok(__Field::__field29)
+                        }
+                        U32::Number(4284048699u32) => {
+                            _serde::__private::Ok(__Field::__field30)
+                        }
+                        U32::Number(4286006955u32) => {
+                            _serde::__private::Ok(__Field::__field31)
+                        }
+                        U32::Number(4284782061u32) => {
+                            _serde::__private::Ok(__Field::__field32)
+                        }
+                        U32::Number(4289775366u32) => {
+                            _serde::__private::Ok(__Field::__field33)
+                        }
+                        U32::Number(4293982463u32) => {
+                            _serde::__private::Ok(__Field::__field34)
+                        }
+                        U32::Number(4294638335u32) => {
+                            _serde::__private::Ok(__Field::__field35)
+                        }
+                        U32::Number(4293322490u32) => {
+                            _serde::__private::Ok(__Field::__field36)
+                        }
+                        U32::Number(4280193279u32) => {
+                            _serde::__private::Ok(__Field::__field37)
+                        }
+                        U32::Number(4282811060u32) => {
+                            _serde::__private::Ok(__Field::__field38)
+                        }
+                        U32::Number(4278255615u32) => {
+                            _serde::__private::Ok(__Field::__field39)
+                        }
+                        U32::Number(4285835392u32) => {
+                            _serde::__private::Ok(__Field::__field40)
+                        }
+                        U32::Number(4286023833u32) => {
+                            _serde::__private::Ok(__Field::__field41)
+                        }
+                        U32::Number(4289339194u32) => {
+                            _serde::__private::Ok(__Field::__field42)
+                        }
+                        U32::Number(4289342075u32) => {
+                            _serde::__private::Ok(__Field::__field43)
+                        }
+                        U32::Number(4289959174u32) => {
+                            _serde::__private::Ok(__Field::__field44)
+                        }
+                        U32::Number(4284829576u32) => {
+                            _serde::__private::Ok(__Field::__field45)
+                        }
+                        U32::Number(4287358955u32) => {
+                            _serde::__private::Ok(__Field::__field46)
+                        }
+                        U32::Number(4289470265u32) => {
+                            _serde::__private::Ok(__Field::__field47)
+                        }
+                        U32::Number(4286582015u32) => {
+                            _serde::__private::Ok(__Field::__field48)
+                        }
+                        U32::Number(4289789324u32) => {
+                            _serde::__private::Ok(__Field::__field49)
+                        }
+                        U32::Number(4288893830u32) => {
+                            _serde::__private::Ok(__Field::__field50)
+                        }
+                        U32::Number(4289520374u32) => {
+                            _serde::__private::Ok(__Field::__field51)
+                        }
+                        U32::Number(4292935679u32) => {
+                            _serde::__private::Ok(__Field::__field52)
+                        }
+                        U32::Number(4293984255u32) => {
+                            _serde::__private::Ok(__Field::__field53)
+                        }
+                        U32::Number(4280332970u32) => {
+                            _serde::__private::Ok(__Field::__field54)
+                        }
+                        U32::Number(4283796272u32) => {
+                            _serde::__private::Ok(__Field::__field55)
+                        }
+                        U32::Number(4289774812u32) => {
+                            _serde::__private::Ok(__Field::__field56)
+                        }
+                        U32::Number(4281522975u32) => {
+                            _serde::__private::Ok(__Field::__field57)
+                        }
+                        U32::Number(4289379196u32) => {
+                            _serde::__private::Ok(__Field::__field58)
+                        }
+                        U32::Number(4278258842u32) => {
+                            _serde::__private::Ok(__Field::__field59)
+                        }
+                        U32::Number(4288723946u32) => {
+                            _serde::__private::Ok(__Field::__field60)
+                        }
+                        U32::Number(4286563067u32) => {
+                            _serde::__private::Ok(__Field::__field61)
+                        }
+                        U32::Number(4285864305u32) => {
+                            _serde::__private::Ok(__Field::__field62)
+                        }
+                        U32::Number(4284861671u32) => {
+                            _serde::__private::Ok(__Field::__field63)
+                        }
+                        U32::Number(4288347394u32) => {
+                            _serde::__private::Ok(__Field::__field64)
+                        }
+                        U32::Number(4284827999u32) => {
+                            _serde::__private::Ok(__Field::__field65)
+                        }
+                        U32::Number(4284829695u32) => {
+                            _serde::__private::Ok(__Field::__field66)
+                        }
+                        U32::Number(4286563010u32) => {
+                            _serde::__private::Ok(__Field::__field67)
+                        }
+                        U32::Number(4286526978u32) => {
+                            _serde::__private::Ok(__Field::__field68)
+                        }
+                        U32::Number(4292029967u32) => {
+                            _serde::__private::Ok(__Field::__field69)
+                        }
+                        U32::Number(4292148896u32) => {
+                            _serde::__private::Ok(__Field::__field70)
+                        }
+                        U32::Number(4292430344u32) => {
+                            _serde::__private::Ok(__Field::__field71)
+                        }
+                        U32::Number(4294966780u32) => {
+                            _serde::__private::Ok(__Field::__field72)
+                        }
+                        U32::Number(4293987744u32) => {
+                            _serde::__private::Ok(__Field::__field73)
+                        }
+                        U32::Number(4289370336u32) => {
+                            _serde::__private::Ok(__Field::__field74)
+                        }
+                        U32::Number(4289336832u32) => {
+                            _serde::__private::Ok(__Field::__field75)
+                        }
+                        U32::Number(4286085249u32) => {
+                            _serde::__private::Ok(__Field::__field76)
+                        }
+                        U32::Number(4283676211u32) => {
+                            _serde::__private::Ok(__Field::__field77)
+                        }
+                        U32::Number(4292272306u32) => {
+                            _serde::__private::Ok(__Field::__field78)
+                        }
+                        U32::Number(4293960297u32) => {
+                            _serde::__private::Ok(__Field::__field79)
+                        }
+                        U32::Number(4293787924u32) => {
+                            _serde::__private::Ok(__Field::__field80)
+                        }
+                        U32::Number(4294635702u32) => {
+                            _serde::__private::Ok(__Field::__field81)
+                        }
+                        U32::Number(4294637750u32) => {
+                            _serde::__private::Ok(__Field::__field82)
+                        }
+                        U32::Number(4286595072u32) => {
+                            _serde::__private::Ok(__Field::__field83)
+                        }
+                        U32::Number(4294967040u32) => {
+                            _serde::__private::Ok(__Field::__field84)
+                        }
+                        U32::Number(4294967216u32) => {
+                            _serde::__private::Ok(__Field::__field85)
+                        }
+                        U32::Number(4294967280u32) => {
+                            _serde::__private::Ok(__Field::__field86)
+                        }
+                        U32::Number(4290623339u32) => {
+                            _serde::__private::Ok(__Field::__field87)
+                        }
+                        U32::Number(4293988284u32) => {
+                            _serde::__private::Ok(__Field::__field88)
+                        }
+                        U32::Number(4293467754u32) => {
+                            _serde::__private::Ok(__Field::__field89)
+                        }
+                        U32::Number(4293720580u32) => {
+                            _serde::__private::Ok(__Field::__field90)
+                        }
+                        U32::Number(4294956800u32) => {
+                            _serde::__private::Ok(__Field::__field91)
+                        }
+                        U32::Number(4294965453u32) => {
+                            _serde::__private::Ok(__Field::__field92)
+                        }
+                        U32::Number(4294955917u32) => {
+                            _serde::__private::Ok(__Field::__field93)
+                        }
+                        U32::Number(4286903435u32) => {
+                            _serde::__private::Ok(__Field::__field94)
+                        }
+                        U32::Number(4292519200u32) => {
+                            _serde::__private::Ok(__Field::__field95)
+                        }
+                        U32::Number(4294634455u32) => {
+                            _serde::__private::Ok(__Field::__field96)
+                        }
+                        U32::Number(4294966116u32) => {
+                            _serde::__private::Ok(__Field::__field97)
+                        }
+                        U32::Number(4294960102u32) => {
+                            _serde::__private::Ok(__Field::__field98)
+                        }
+                        U32::Number(4294953679u32) => {
+                            _serde::__private::Ok(__Field::__field99)
+                        }
+                        U32::Number(4294956353u32) => {
+                            _serde::__private::Ok(__Field::__field100)
+                        }
+                        U32::Number(4294944000u32) => {
+                            _serde::__private::Ok(__Field::__field101)
+                        }
+                        U32::Number(4294953924u32) => {
+                            _serde::__private::Ok(__Field::__field102)
+                        }
+                        U32::Number(4292907392u32) => {
+                            _serde::__private::Ok(__Field::__field103)
+                        }
+                        U32::Number(4294940672u32) => {
+                            _serde::__private::Ok(__Field::__field104)
+                        }
+                        U32::Number(4292783287u32) => {
+                            _serde::__private::Ok(__Field::__field105)
+                        }
+                        U32::Number(4287317267u32) => {
+                            _serde::__private::Ok(__Field::__field106)
+                        }
+                        U32::Number(4294096452u32) => {
+                            _serde::__private::Ok(__Field::__field107)
+                        }
+                        U32::Number(4294962125u32) => {
+                            _serde::__private::Ok(__Field::__field108)
+                        }
+                        U32::Number(4294964715u32) => {
+                            _serde::__private::Ok(__Field::__field109)
+                        }
+                        U32::Number(4294965998u32) => {
+                            _serde::__private::Ok(__Field::__field110)
+                        }
+                        U32::Number(4294966496u32) => {
+                            _serde::__private::Ok(__Field::__field111)
+                        }
+                        U32::Number(4294967182u32) => {
+                            _serde::__private::Ok(__Field::__field112)
+                        }
+                        U32::Number(4286078079u32) => {
+                            _serde::__private::Ok(__Field::__field113)
+                        }
+                        U32::Number(4294956489u32) => {
+                            _serde::__private::Ok(__Field::__field114)
+                        }
+                        U32::Number(4289864222u32) => {
+                            _serde::__private::Ok(__Field::__field115)
+                        }
+                        U32::Number(4288696877u32) => {
+                            _serde::__private::Ok(__Field::__field116)
+                        }
+                        U32::Number(4294942842u32) => {
+                            _serde::__private::Ok(__Field::__field117)
+                        }
+                        U32::Number(4294934352u32) => {
+                            _serde::__private::Ok(__Field::__field118)
+                        }
+                        U32::Number(4293997764u32) => {
+                            _serde::__private::Ok(__Field::__field119)
+                        }
+                        U32::Number(4294954237u32) => {
+                            _serde::__private::Ok(__Field::__field120)
+                        }
+                        U32::Number(4294940672u32) => {
+                            _serde::__private::Ok(__Field::__field121)
+                        }
+                        U32::Number(4294947974u32) => {
+                            _serde::__private::Ok(__Field::__field122)
+                        }
+                        U32::Number(4294943895u32) => {
+                            _serde::__private::Ok(__Field::__field123)
+                        }
+                        U32::Number(4292080495u32) => {
+                            _serde::__private::Ok(__Field::__field124)
+                        }
+                        U32::Number(4294961403u32) => {
+                            _serde::__private::Ok(__Field::__field125)
+                        }
+                        U32::Number(4289864222u32) => {
+                            _serde::__private::Ok(__Field::__field126)
+                        }
+                        U32::Number(4293959497u32) => {
+                            _serde::__private::Ok(__Field::__field127)
+                        }
+                        U32::Number(4289014314u32) => {
+                            _serde::__private::Ok(__Field::__field128)
+                        }
+                        U32::Number(4289501062u32) => {
+                            _serde::__private::Ok(__Field::__field129)
+                        }
+                        U32::Number(4278190080u32) => {
+                            _serde::__private::Ok(__Field::__field130)
+                        }
+                        U32::Number(4285098345u32) => {
+                            _serde::__private::Ok(__Field::__field131)
+                        }
+                        U32::Number(4286611584u32) => {
+                            _serde::__private::Ok(__Field::__field132)
+                        }
+                        U32::Number(4289309097u32) => {
+                            _serde::__private::Ok(__Field::__field133)
+                        }
+                        U32::Number(4289374890u32) => {
+                            _serde::__private::Ok(__Field::__field134)
+                        }
+                        U32::Number(4292072403u32) => {
+                            _serde::__private::Ok(__Field::__field135)
+                        }
+                        U32::Number(4292332748u32) => {
+                            _serde::__private::Ok(__Field::__field136)
+                        }
+                        U32::Number(4294506751u32) => {
+                            _serde::__private::Ok(__Field::__field137)
+                        }
+                        U32::Number(4294967295u32) => {
+                            _serde::__private::Ok(__Field::__field138)
+                        }
+                        U32::Number(4287137928u32) => {
+                            _serde::__private::Ok(__Field::__field139)
+                        }
+                        U32::Number(4282400896u32) => {
+                            _serde::__private::Ok(__Field::__field140)
+                        }
+                        U32::Number(4286611584u32) => {
+                            _serde::__private::Ok(__Field::__field141)
+                        }
+                        U32::Number(4290822336u32) => {
+                            _serde::__private::Ok(__Field::__field142)
+                        }
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

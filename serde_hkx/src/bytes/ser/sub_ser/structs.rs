@@ -3,7 +3,7 @@ use crate::{align, lib::*, tri};
 use super::super::ByteSerializer;
 use crate::errors::ser::{Error, Result};
 use havok_serde::ser::{Serialize, SerializeStruct, Serializer, TypeSize};
-use havok_types::Ulong;
+use havok_types::{U32, Ulong};
 use std::io::Write as _;
 
 /// For bytes struct serializer.
@@ -62,7 +62,9 @@ impl<'a> StructSerializer<'a> {
                 if self.ser.pointed_pos.len() >= 2 {
                     let new_write_pointed_pos = align!(write_pointed_pos, 16_u64);
                     #[cfg(feature = "tracing")]
-                    tracing::trace!("Apply special align16 to `next_struct_local_dst` because the hkArray is nested twice: {write_pointed_pos:#x} -> {new_write_pointed_pos:#x}");
+                    tracing::trace!(
+                        "Apply special align16 to `next_struct_local_dst` because the hkArray is nested twice: {write_pointed_pos:#x} -> {new_write_pointed_pos:#x}"
+                    );
                     write_pointed_pos = new_write_pointed_pos;
                 }
                 self.ser.pointed_pos.push(write_pointed_pos); // To write inner member type.
@@ -95,11 +97,12 @@ impl<'a> StructSerializer<'a> {
             };
         } else {
             // HACK: unused last value to update;
-            let pos = tri!(self
-                .ser
-                .pointed_pos
-                .pop()
-                .ok_or(Error::NotFoundPointedPosition));
+            let pos = tri!(
+                self.ser
+                    .pointed_pos
+                    .pop()
+                    .ok_or(Error::NotFoundPointedPosition)
+            );
             let pos = align!(pos, 16_u64);
             if let Some(last) = self.ser.pointed_pos.last_mut() {
                 *last = pos;
@@ -163,11 +166,12 @@ impl<'a> StructSerializer<'a> {
 
         if size != TypeSize::NonPtr {
             // HACK: unused last value to update;
-            let pos = tri!(self
-                .ser
-                .pointed_pos
-                .pop()
-                .ok_or(Error::NotFoundPointedPosition));
+            let pos = tri!(
+                self.ser
+                    .pointed_pos
+                    .pop()
+                    .ok_or(Error::NotFoundPointedPosition)
+            );
             if let Some(last) = self.ser.pointed_pos.last_mut() {
                 *last = pos;
             };
@@ -289,8 +293,8 @@ impl SerializeStruct for StructSerializer<'_> {
         let local_src = tri!(self.ser.relative_position()); // Ptr type need to pointing data position(local.dst).
         tri!(self.ser.serialize_ulong(Ulong::new(0))); // ptr size
         let len = value.as_ref().len() as u32;
-        tri!(self.ser.serialize_uint32(len)); // array size
-        tri!(self.ser.serialize_uint32(len | 1 << 31)); // Capacity(same as size) | Owned flag(32nd bit)
+        tri!(self.ser.serialize_uint32(&U32::Number(len))); // array size
+        tri!(self.ser.serialize_uint32(&U32::Number(len | (1 << 31)))); // Capacity(same as size) | Owned flag(32nd bit)
 
         if len == 0 {
             return Ok(());

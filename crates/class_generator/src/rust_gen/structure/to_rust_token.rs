@@ -17,17 +17,14 @@ pub(super) fn member_to_rust_type(member: &Member, class_name: &str) -> Result<T
         name,
         class_ref,
         enum_ref,
-        has_string,
+        // has_ref,
         vtype,
         vsubtype,
         arrsize,
         ..
     } = member;
 
-    let lifetime = match has_string {
-        true => quote! { <'a> },
-        false => quote! {},
-    };
+    let lifetime = quote! { <'a> }; // struct lifetime.
 
     let field_type = match member.vtype {
         TypeKind::Struct => {
@@ -86,14 +83,14 @@ fn to_rust_type(ty: &TypeKind) -> Option<TokenStream> {
         TypeKind::Void => quote!(()),
         TypeKind::Bool => quote!(bool),
         TypeKind::Char => quote!(char),
-        TypeKind::Int8 => quote!(i8),
-        TypeKind::Uint8 => quote!(u8),
-        TypeKind::Int16 => quote!(i16),
-        TypeKind::Uint16 => quote!(u16),
-        TypeKind::Int32 => quote!(i32),
-        TypeKind::Uint32 => quote!(u32),
-        TypeKind::Int64 => quote!(i64),
-        TypeKind::Uint64 => quote!(u64),
+        TypeKind::Int8 => quote!(I8<'a>),
+        TypeKind::Uint8 => quote!(U8<'a>),
+        TypeKind::Int16 => quote!(I16<'a>),
+        TypeKind::Uint16 => quote!(U16<'a>),
+        TypeKind::Int32 => quote!(I32<'a>),
+        TypeKind::Uint32 => quote!(U32<'a>),
+        TypeKind::Int64 => quote!(I64<'a>),
+        TypeKind::Uint64 => quote!(U64<'a>),
         TypeKind::Real => quote!(f32),
         TypeKind::Vector4 => quote!(Vector4),
         TypeKind::Quaternion => quote!(Quaternion),
@@ -103,7 +100,7 @@ fn to_rust_type(ty: &TypeKind) -> Option<TokenStream> {
         TypeKind::Matrix4 => quote!(Matrix4),
         TypeKind::Transform => quote!(Transform),
         // TypeKind::Zero => todo!(),
-        TypeKind::Pointer => quote!(Pointer),
+        TypeKind::Pointer => quote!(Pointer<'a>),
         // TypeKind::FnPtr => todo!(),
         TypeKind::Array | TypeKind::SimpleArray => quote!(Vec),
         // TypeKind::InplaceArray => todo!(),
@@ -111,7 +108,7 @@ fn to_rust_type(ty: &TypeKind) -> Option<TokenStream> {
         // TypeKind::Struct => todo!(),
         // TypeKind::SimpleArray => quote!(Vec),
         // TypeKind::HomogeneousArray => todo!(),
-        TypeKind::Variant => quote!(Variant),
+        TypeKind::Variant => quote!(Variant<'a>),
         TypeKind::CString => quote!(CString<'a>),
         TypeKind::Ulong => quote!(Ulong),
         // TypeKind::Flags => todo!(),

@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpHingeLimitsDataAtoms {
+pub struct hkpHingeLimitsDataAtoms<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,32 +22,33 @@ pub struct hkpHingeLimitsDataAtoms {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `rotations`(ctype: `struct hkpSetLocalRotationsConstraintAtom`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `112`(x86)/`112`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "rotations"))]
     #[cfg_attr(feature = "serde", serde(rename = "rotations"))]
-    pub m_rotations: hkpSetLocalRotationsConstraintAtom,
+    pub m_rotations: hkpSetLocalRotationsConstraintAtom<'a>,
     /// # C++ Info
     /// - name: `angLimit`(ctype: `struct hkpAngLimitConstraintAtom`)
     /// - offset: `112`(x86)/`112`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "angLimit"))]
     #[cfg_attr(feature = "serde", serde(rename = "angLimit"))]
-    pub m_angLimit: hkpAngLimitConstraintAtom,
+    pub m_angLimit: hkpAngLimitConstraintAtom<'a>,
     /// # C++ Info
     /// - name: `2dAng`(ctype: `struct hkp2dAngConstraintAtom`)
     /// - offset: `128`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "2dAng"))]
     #[cfg_attr(feature = "serde", serde(rename = "2dAng"))]
-    pub m_2dAng: hkp2dAngConstraintAtom,
+    pub m_2dAng: hkp2dAngConstraintAtom<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpHingeLimitsDataAtoms {
+    impl<'a> _serde::HavokClass for hkpHingeLimitsDataAtoms<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpHingeLimitsDataAtoms"
@@ -57,7 +58,7 @@ const _: () = {
             _serde::__private::Signature::new(0x555876ff)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_rotations.deps_indexes());
             v.extend(self.m_angLimit.deps_indexes());
@@ -65,13 +66,14 @@ const _: () = {
             v
         }
     }
-    impl _serde::Serialize for hkpHingeLimitsDataAtoms {
+    impl<'a> _serde::Serialize for hkpHingeLimitsDataAtoms<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x555876ff)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -92,7 +94,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpHingeLimitsDataAtoms {
+    impl<'de> _serde::Deserialize<'de> for hkpHingeLimitsDataAtoms<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -144,7 +146,7 @@ const _: () = {
                 }
             }
             struct __hkpHingeLimitsDataAtomsVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpHingeLimitsDataAtoms>,
+                marker: _serde::__private::PhantomData<hkpHingeLimitsDataAtoms<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -152,7 +154,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpHingeLimitsDataAtomsVisitor<'de> {
-                type Value = hkpHingeLimitsDataAtoms;
+                type Value = hkpHingeLimitsDataAtoms<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -409,7 +411,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpHingeLimitsDataAtoms {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_rotations,
                         m_angLimit,
                         m_2dAng,

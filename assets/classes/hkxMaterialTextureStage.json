@@ -4,14 +4,14 @@
   "signature": "0xfa6facb2",
   "size_x86": 12,
   "size_x86_64": 16,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "texture",
       "class_ref": "hkReferencedObject",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkReferencedObject*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -26,7 +26,7 @@
     {
       "name": "usageHint",
       "enum_ref": "TextureType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum TextureType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT32",
@@ -40,7 +40,7 @@
     },
     {
       "name": "tcoordChannel",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",

@@ -22,25 +22,27 @@ pub struct hkbCharacter<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `nearbyCharacters`(ctype: `hkArray<hkbCharacter*>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "nearbyCharacters"))]
     #[cfg_attr(feature = "serde", serde(rename = "nearbyCharacters"))]
-    pub m_nearbyCharacters: Vec<Pointer>,
+    pub m_nearbyCharacters: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `currentLod`(ctype: `hkInt16`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "currentLod"))]
     #[cfg_attr(feature = "serde", serde(rename = "currentLod"))]
-    pub m_currentLod: i16,
+    pub m_currentLod: I16<'a>,
     /// # C++ Info
     /// - name: `numTracksInLod`(ctype: `hkInt16`)
     /// - offset: ` 22`(x86)/` 34`(x86_64)
@@ -48,7 +50,7 @@ pub struct hkbCharacter<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "numTracksInLod"))]
     #[cfg_attr(feature = "serde", serde(rename = "numTracksInLod"))]
-    pub m_numTracksInLod: i16,
+    pub m_numTracksInLod: I16<'a>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
@@ -64,7 +66,7 @@ pub struct hkbCharacter<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "ragdollDriver"))]
     #[cfg_attr(feature = "serde", serde(rename = "ragdollDriver"))]
-    pub m_ragdollDriver: Pointer,
+    pub m_ragdollDriver: Pointer<'a>,
     /// # C++ Info
     /// - name: `characterControllerDriver`(ctype: `void*`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
@@ -72,7 +74,7 @@ pub struct hkbCharacter<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "characterControllerDriver"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterControllerDriver"))]
-    pub m_characterControllerDriver: Pointer,
+    pub m_characterControllerDriver: Pointer<'a>,
     /// # C++ Info
     /// - name: `footIkDriver`(ctype: `void*`)
     /// - offset: ` 36`(x86)/` 64`(x86_64)
@@ -80,7 +82,7 @@ pub struct hkbCharacter<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "footIkDriver"))]
     #[cfg_attr(feature = "serde", serde(rename = "footIkDriver"))]
-    pub m_footIkDriver: Pointer,
+    pub m_footIkDriver: Pointer<'a>,
     /// # C++ Info
     /// - name: `handIkDriver`(ctype: `void*`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
@@ -88,28 +90,28 @@ pub struct hkbCharacter<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "handIkDriver"))]
     #[cfg_attr(feature = "serde", serde(rename = "handIkDriver"))]
-    pub m_handIkDriver: Pointer,
+    pub m_handIkDriver: Pointer<'a>,
     /// # C++ Info
     /// - name: `setup`(ctype: `struct hkbCharacterSetup*`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "setup"))]
     #[cfg_attr(feature = "serde", serde(rename = "setup"))]
-    pub m_setup: Pointer,
+    pub m_setup: Pointer<'a>,
     /// # C++ Info
     /// - name: `behaviorGraph`(ctype: `struct hkbBehaviorGraph*`)
     /// - offset: ` 48`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "behaviorGraph"))]
     #[cfg_attr(feature = "serde", serde(rename = "behaviorGraph"))]
-    pub m_behaviorGraph: Pointer,
+    pub m_behaviorGraph: Pointer<'a>,
     /// # C++ Info
     /// - name: `projectData`(ctype: `struct hkbProjectData*`)
     /// - offset: ` 52`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "projectData"))]
     #[cfg_attr(feature = "serde", serde(rename = "projectData"))]
-    pub m_projectData: Pointer,
+    pub m_projectData: Pointer<'a>,
     /// # C++ Info
     /// - name: `animationBindingSet`(ctype: `void*`)
     /// - offset: ` 56`(x86)/`104`(x86_64)
@@ -117,7 +119,7 @@ pub struct hkbCharacter<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "animationBindingSet"))]
     #[cfg_attr(feature = "serde", serde(rename = "animationBindingSet"))]
-    pub m_animationBindingSet: Pointer,
+    pub m_animationBindingSet: Pointer<'a>,
     /// # C++ Info
     /// - name: `raycastInterface`(ctype: `void*`)
     /// - offset: ` 60`(x86)/`112`(x86_64)
@@ -125,7 +127,7 @@ pub struct hkbCharacter<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "raycastInterface"))]
     #[cfg_attr(feature = "serde", serde(rename = "raycastInterface"))]
-    pub m_raycastInterface: Pointer,
+    pub m_raycastInterface: Pointer<'a>,
     /// # C++ Info
     /// - name: `world`(ctype: `void*`)
     /// - offset: ` 64`(x86)/`120`(x86_64)
@@ -133,7 +135,7 @@ pub struct hkbCharacter<'a> {
     /// - flags: `NOT_OWNED|SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "world"))]
     #[cfg_attr(feature = "serde", serde(rename = "world"))]
-    pub m_world: Pointer,
+    pub m_world: Pointer<'a>,
     /// # C++ Info
     /// - name: `eventQueue`(ctype: `void*`)
     /// - offset: ` 68`(x86)/`128`(x86_64)
@@ -141,7 +143,7 @@ pub struct hkbCharacter<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "eventQueue"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventQueue"))]
-    pub m_eventQueue: Pointer,
+    pub m_eventQueue: Pointer<'a>,
     /// # C++ Info
     /// - name: `worldFromModel`(ctype: `void*`)
     /// - offset: ` 72`(x86)/`136`(x86_64)
@@ -149,7 +151,7 @@ pub struct hkbCharacter<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "worldFromModel"))]
     #[cfg_attr(feature = "serde", serde(rename = "worldFromModel"))]
-    pub m_worldFromModel: Pointer,
+    pub m_worldFromModel: Pointer<'a>,
     /// # C++ Info
     /// - name: `poseLocal`(ctype: `hkSimpleArray<void>`)
     /// - offset: ` 76`(x86)/`144`(x86_64)
@@ -187,21 +189,21 @@ const _: () = {
             _serde::__private::Signature::new(0x3088a5c5)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.extend(self.m_nearbyCharacters.iter().map(|ptr| ptr.get()));
-            v.push(self.m_ragdollDriver.get());
-            v.push(self.m_characterControllerDriver.get());
-            v.push(self.m_footIkDriver.get());
-            v.push(self.m_handIkDriver.get());
-            v.push(self.m_setup.get());
-            v.push(self.m_behaviorGraph.get());
-            v.push(self.m_projectData.get());
-            v.push(self.m_animationBindingSet.get());
-            v.push(self.m_raycastInterface.get());
-            v.push(self.m_world.get());
-            v.push(self.m_eventQueue.get());
-            v.push(self.m_worldFromModel.get());
+            v.extend(self.m_nearbyCharacters.iter());
+            v.push(&self.m_ragdollDriver);
+            v.push(&self.m_characterControllerDriver);
+            v.push(&self.m_footIkDriver);
+            v.push(&self.m_handIkDriver);
+            v.push(&self.m_setup);
+            v.push(&self.m_behaviorGraph);
+            v.push(&self.m_projectData);
+            v.push(&self.m_animationBindingSet);
+            v.push(&self.m_raycastInterface);
+            v.push(&self.m_world);
+            v.push(&self.m_eventQueue);
+            v.push(&self.m_worldFromModel);
             v
         }
     }
@@ -212,6 +214,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x3088a5c5)));
             let mut serializer = __serializer
                 .serialize_struct("hkbCharacter", class_meta, (88u64, 160u64))?;
@@ -340,25 +343,29 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_nearbyCharacters: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
-                    let mut m_currentLod: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_numTracksInLod: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_currentLod: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_numTracksInLod: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_ragdollDriver: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_ragdollDriver: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_characterControllerDriver: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
-                    let mut m_footIkDriver: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_handIkDriver: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_setup: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_behaviorGraph: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_projectData: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_animationBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_raycastInterface: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_world: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_eventQueue: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_worldFromModel: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_footIkDriver: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_handIkDriver: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_setup: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_behaviorGraph: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_projectData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_animationBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_raycastInterface: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_world: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_eventQueue: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_worldFromModel: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_poseLocal: _serde::__private::Option<Vec<()>> = _serde::__private::None;
                     let mut m_deleteWorldFromModel: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_deletePoseLocal: _serde::__private::Option<bool> = _serde::__private::None;
@@ -373,7 +380,7 @@ const _: () = {
                                     );
                                 }
                                 m_nearbyCharacters = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -390,7 +397,7 @@ const _: () = {
                                     );
                                 }
                                 m_currentLod = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -407,7 +414,7 @@ const _: () = {
                                     );
                                 }
                                 m_numTracksInLod = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -440,7 +447,7 @@ const _: () = {
                                     );
                                 }
                                 m_ragdollDriver = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -459,7 +466,7 @@ const _: () = {
                                     );
                                 }
                                 m_characterControllerDriver = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -476,7 +483,7 @@ const _: () = {
                                     );
                                 }
                                 m_footIkDriver = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -493,7 +500,7 @@ const _: () = {
                                     );
                                 }
                                 m_handIkDriver = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -508,7 +515,7 @@ const _: () = {
                                     );
                                 }
                                 m_setup = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -525,7 +532,7 @@ const _: () = {
                                     );
                                 }
                                 m_behaviorGraph = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -542,7 +549,7 @@ const _: () = {
                                     );
                                 }
                                 m_projectData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -561,7 +568,7 @@ const _: () = {
                                     );
                                 }
                                 m_animationBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -578,7 +585,7 @@ const _: () = {
                                     );
                                 }
                                 m_raycastInterface = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -593,7 +600,7 @@ const _: () = {
                                     );
                                 }
                                 m_world = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -610,7 +617,7 @@ const _: () = {
                                     );
                                 }
                                 m_eventQueue = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -627,7 +634,7 @@ const _: () = {
                                     );
                                 }
                                 m_worldFromModel = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -909,13 +916,13 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_nearbyCharacters: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
-                    let mut m_currentLod: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_currentLod: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_setup: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_behaviorGraph: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_projectData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_setup: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_behaviorGraph: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_projectData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -938,7 +945,7 @@ const _: () = {
                                     );
                                 }
                                 m_nearbyCharacters = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -964,7 +971,7 @@ const _: () = {
                                     );
                                 }
                                 m_currentLod = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1012,7 +1019,7 @@ const _: () = {
                                     );
                                 }
                                 m_setup = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1038,7 +1045,7 @@ const _: () = {
                                     );
                                 }
                                 m_behaviorGraph = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1064,7 +1071,7 @@ const _: () = {
                                     );
                                 }
                                 m_projectData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1144,15 +1151,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbCharacter {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_nearbyCharacters,
                         m_currentLod,

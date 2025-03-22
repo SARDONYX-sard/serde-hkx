@@ -22,7 +22,8 @@ pub struct hkbKeyframeBonesModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -34,14 +35,14 @@ pub struct hkbKeyframeBonesModifier<'a> {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "keyframeInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "keyframeInfo"))]
-    pub m_keyframeInfo: Vec<hkbKeyframeBonesModifierKeyframeInfo>,
+    pub m_keyframeInfo: Vec<hkbKeyframeBonesModifierKeyframeInfo<'a>>,
     /// # C++ Info
     /// - name: `keyframedBonesList`(ctype: `struct hkbBoneIndexArray*`)
     /// - offset: ` 56`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "keyframedBonesList"))]
     #[cfg_attr(feature = "serde", serde(rename = "keyframedBonesList"))]
-    pub m_keyframedBonesList: Pointer,
+    pub m_keyframedBonesList: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -55,17 +56,17 @@ const _: () = {
             _serde::__private::Signature::new(0x95f66629)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
             v.extend(
                 self
                     .m_keyframeInfo
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
-            v.push(self.m_keyframedBonesList.get());
+            v.push(&self.m_keyframedBonesList);
             v
         }
     }
@@ -76,6 +77,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x95f66629)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -239,7 +241,9 @@ const _: () = {
                     let mut m_keyframeInfo: _serde::__private::Option<
                         Vec<hkbKeyframeBonesModifierKeyframeInfo>,
                     > = _serde::__private::None;
-                    let mut m_keyframedBonesList: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_keyframedBonesList: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     for i in 0..2usize {
                         match i {
                             0usize => {
@@ -272,7 +276,7 @@ const _: () = {
                                     );
                                 }
                                 m_keyframedBonesList = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -318,14 +322,18 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_keyframeInfo: _serde::__private::Option<
                         Vec<hkbKeyframeBonesModifierKeyframeInfo>,
                     > = _serde::__private::None;
-                    let mut m_keyframedBonesList: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_keyframedBonesList: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -350,7 +358,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -480,7 +488,7 @@ const _: () = {
                                     );
                                 }
                                 m_keyframedBonesList = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -558,34 +566,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbKeyframeBonesModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_keyframeInfo,
                         m_keyframedBonesList,

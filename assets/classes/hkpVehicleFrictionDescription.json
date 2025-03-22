@@ -4,13 +4,13 @@
   "signature": "0x1034549a",
   "size_x86": 208,
   "size_x86_64": 208,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "wheelDistance",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -24,7 +24,7 @@
     },
     {
       "name": "chassisMassInv",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -39,7 +39,7 @@
     {
       "name": "axleDescr",
       "class_ref": "hkpVehicleFrictionDescriptionAxisDescription",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpVehicleFrictionDescriptionAxisDescription[2]",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",

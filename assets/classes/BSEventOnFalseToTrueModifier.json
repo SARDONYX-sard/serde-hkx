@@ -5,13 +5,13 @@
   "size_x86": 84,
   "size_x86_64": 160,
   "parent": "hkbModifier",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "bEnableEvent1",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "bVariableToTest1",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -40,7 +40,7 @@
     {
       "name": "EventToSend1",
       "class_ref": "hkbEventProperty",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbEventProperty",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -54,7 +54,7 @@
     },
     {
       "name": "bEnableEvent2",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -68,7 +68,7 @@
     },
     {
       "name": "bVariableToTest2",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -83,7 +83,7 @@
     {
       "name": "EventToSend2",
       "class_ref": "hkbEventProperty",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbEventProperty",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -97,7 +97,7 @@
     },
     {
       "name": "bEnableEvent3",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -111,7 +111,7 @@
     },
     {
       "name": "bVariableToTest3",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -126,7 +126,7 @@
     {
       "name": "EventToSend3",
       "class_ref": "hkbEventProperty",
-      "has_string": false,
+      "has_ref": true,
       "ctype": "struct hkbEventProperty",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -140,7 +140,7 @@
     },
     {
       "name": "bSlot1ActivatedLastFrame",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -154,7 +154,7 @@
     },
     {
       "name": "bSlot2ActivatedLastFrame",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -168,7 +168,7 @@
     },
     {
       "name": "bSlot3ActivatedLastFrame",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

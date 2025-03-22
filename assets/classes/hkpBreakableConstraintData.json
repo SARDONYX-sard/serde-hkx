@@ -5,14 +5,14 @@
   "size_x86": 40,
   "size_x86_64": 72,
   "parent": "hkpConstraintData",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "atoms",
       "class_ref": "hkpBridgeAtoms",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpBridgeAtoms",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -27,7 +27,7 @@
     {
       "name": "constraintData",
       "class_ref": "hkpConstraintData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpConstraintData*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -41,7 +41,7 @@
     },
     {
       "name": "childRuntimeSize",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -55,7 +55,7 @@
     },
     {
       "name": "childNumSolverResults",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint16",
       "vtype": "TYPE_UINT16",
       "vsubtype": "TYPE_VOID",
@@ -69,7 +69,7 @@
     },
     {
       "name": "solverResultLimit",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -83,7 +83,7 @@
     },
     {
       "name": "removeWhenBroken",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -97,7 +97,7 @@
     },
     {
       "name": "revertBackVelocityOnBreak",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

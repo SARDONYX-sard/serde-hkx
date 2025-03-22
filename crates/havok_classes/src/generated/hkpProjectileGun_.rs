@@ -22,7 +22,8 @@ pub struct hkpProjectileGun<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -34,7 +35,7 @@ pub struct hkpProjectileGun<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "maxProjectiles"))]
     #[cfg_attr(feature = "serde", serde(rename = "maxProjectiles"))]
-    pub m_maxProjectiles: i32,
+    pub m_maxProjectiles: I32<'a>,
     /// # C++ Info
     /// - name: `reloadTime`(ctype: `hkReal`)
     /// - offset: ` 36`(x86)/` 60`(x86_64)
@@ -57,7 +58,7 @@ pub struct hkpProjectileGun<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "projectiles"))]
     #[cfg_attr(feature = "serde", serde(rename = "projectiles"))]
-    pub m_projectiles: Vec<Pointer>,
+    pub m_projectiles: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `world`(ctype: `void*`)
     /// - offset: ` 56`(x86)/` 88`(x86_64)
@@ -65,7 +66,7 @@ pub struct hkpProjectileGun<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "world"))]
     #[cfg_attr(feature = "serde", serde(rename = "world"))]
-    pub m_world: Pointer,
+    pub m_world: Pointer<'a>,
     /// # C++ Info
     /// - name: `destructionWorld`(ctype: `void*`)
     /// - offset: ` 60`(x86)/` 96`(x86_64)
@@ -73,7 +74,7 @@ pub struct hkpProjectileGun<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "destructionWorld"))]
     #[cfg_attr(feature = "serde", serde(rename = "destructionWorld"))]
-    pub m_destructionWorld: Pointer,
+    pub m_destructionWorld: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -87,12 +88,12 @@ const _: () = {
             _serde::__private::Signature::new(0xb4f30148)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.extend(self.parent.m_listeners.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_projectiles.iter().map(|ptr| ptr.get()));
-            v.push(self.m_world.get());
-            v.push(self.m_destructionWorld.get());
+            v.extend(self.parent.m_listeners.iter());
+            v.extend(self.m_projectiles.iter());
+            v.push(&self.m_world);
+            v.push(&self.m_destructionWorld);
             v
         }
     }
@@ -103,6 +104,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xb4f30148)));
             let mut serializer = __serializer
                 .serialize_struct("hkpProjectileGun", class_meta, (64u64, 104u64))?;
@@ -220,12 +222,16 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_maxProjectiles: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_maxProjectiles: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_reloadTime: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_reload: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_projectiles: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_world: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_destructionWorld: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_projectiles: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_world: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_destructionWorld: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     for i in 0..6usize {
                         match i {
                             0usize => {
@@ -237,7 +243,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxProjectiles = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -287,7 +293,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_projectiles = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -302,7 +308,7 @@ const _: () = {
                                     );
                                 }
                                 m_world = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -319,7 +325,7 @@ const _: () = {
                                     );
                                 }
                                 m_destructionWorld = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -407,7 +413,7 @@ const _: () = {
                 {
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_keyboardKey: _serde::__private::Option<KeyboardKey> = _serde::__private::None;
-                    let mut m_maxProjectiles: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_maxProjectiles: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_reloadTime: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -481,7 +487,7 @@ const _: () = {
                                     );
                                 }
                                 m_maxProjectiles = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -565,14 +571,16 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpFirstPersonGun {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_name,
                         m_keyboardKey,
@@ -580,7 +588,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpProjectileGun {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_maxProjectiles,
                         m_reloadTime,

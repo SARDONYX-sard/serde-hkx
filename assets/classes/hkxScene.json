@@ -5,13 +5,13 @@
   "size_x86": 176,
   "size_x86_64": 224,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "modeller",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "asset",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -39,7 +39,7 @@
     },
     {
       "name": "sceneLength",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -54,7 +54,7 @@
     {
       "name": "rootNode",
       "class_ref": "hkxNode",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkxNode*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -69,7 +69,7 @@
     {
       "name": "selectionSets",
       "class_ref": "hkxNodeSelectionSet",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkxNodeSelectionSet*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -84,7 +84,7 @@
     {
       "name": "cameras",
       "class_ref": "hkxCamera",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkxCamera*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -99,7 +99,7 @@
     {
       "name": "lights",
       "class_ref": "hkxLight",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkxLight*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -114,7 +114,7 @@
     {
       "name": "meshes",
       "class_ref": "hkxMesh",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkxMesh*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -129,7 +129,7 @@
     {
       "name": "materials",
       "class_ref": "hkxMaterial",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkxMaterial*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -144,7 +144,7 @@
     {
       "name": "inplaceTextures",
       "class_ref": "hkxTextureInplace",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkxTextureInplace*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -159,7 +159,7 @@
     {
       "name": "externalTextures",
       "class_ref": "hkxTextureFile",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkxTextureFile*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -174,7 +174,7 @@
     {
       "name": "skinBindings",
       "class_ref": "hkxSkinBinding",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkxSkinBinding*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -188,7 +188,7 @@
     },
     {
       "name": "appliedTransform",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkMatrix3",
       "vtype": "TYPE_MATRIX3",
       "vsubtype": "TYPE_VOID",

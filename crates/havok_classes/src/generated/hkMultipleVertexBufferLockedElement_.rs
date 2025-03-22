@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkMultipleVertexBufferLockedElement {
+pub struct hkMultipleVertexBufferLockedElement<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,60 +22,61 @@ pub struct hkMultipleVertexBufferLockedElement {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `vertexBufferIndex`(ctype: `hkUint8`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "vertexBufferIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexBufferIndex"))]
-    pub m_vertexBufferIndex: u8,
+    pub m_vertexBufferIndex: U8<'a>,
     /// # C++ Info
     /// - name: `elementIndex`(ctype: `hkUint8`)
     /// - offset: `  1`(x86)/`  1`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "elementIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "elementIndex"))]
-    pub m_elementIndex: u8,
+    pub m_elementIndex: U8<'a>,
     /// # C++ Info
     /// - name: `lockedBufferIndex`(ctype: `hkUint8`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "lockedBufferIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "lockedBufferIndex"))]
-    pub m_lockedBufferIndex: u8,
+    pub m_lockedBufferIndex: U8<'a>,
     /// # C++ Info
     /// - name: `vertexFormatIndex`(ctype: `hkUint8`)
     /// - offset: `  3`(x86)/`  3`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "vertexFormatIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexFormatIndex"))]
-    pub m_vertexFormatIndex: u8,
+    pub m_vertexFormatIndex: U8<'a>,
     /// # C++ Info
     /// - name: `lockFlags`(ctype: `hkUint8`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "lockFlags"))]
     #[cfg_attr(feature = "serde", serde(rename = "lockFlags"))]
-    pub m_lockFlags: u8,
+    pub m_lockFlags: U8<'a>,
     /// # C++ Info
     /// - name: `outputBufferIndex`(ctype: `hkUint8`)
     /// - offset: `  5`(x86)/`  5`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "outputBufferIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "outputBufferIndex"))]
-    pub m_outputBufferIndex: u8,
+    pub m_outputBufferIndex: U8<'a>,
     /// # C++ Info
     /// - name: `emulatedIndex`(ctype: `hkInt8`)
     /// - offset: `  6`(x86)/`  6`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "emulatedIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "emulatedIndex"))]
-    pub m_emulatedIndex: i8,
+    pub m_emulatedIndex: I8<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkMultipleVertexBufferLockedElement {
+    impl<'a> _serde::HavokClass for hkMultipleVertexBufferLockedElement<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkMultipleVertexBufferLockedElement"
@@ -85,18 +86,19 @@ const _: () = {
             _serde::__private::Signature::new(0xa0e22afc)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkMultipleVertexBufferLockedElement {
+    impl<'a> _serde::Serialize for hkMultipleVertexBufferLockedElement<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xa0e22afc)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -120,7 +122,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkMultipleVertexBufferLockedElement {
+    impl<'de> _serde::Deserialize<'de> for hkMultipleVertexBufferLockedElement<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -181,7 +183,7 @@ const _: () = {
             }
             struct __hkMultipleVertexBufferLockedElementVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkMultipleVertexBufferLockedElement,
+                    hkMultipleVertexBufferLockedElement<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -190,7 +192,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkMultipleVertexBufferLockedElementVisitor<'de> {
-                type Value = hkMultipleVertexBufferLockedElement;
+                type Value = hkMultipleVertexBufferLockedElement<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -208,13 +210,13 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_vertexBufferIndex: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_elementIndex: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_lockedBufferIndex: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_vertexFormatIndex: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_lockFlags: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_outputBufferIndex: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_emulatedIndex: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_vertexBufferIndex: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_elementIndex: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_lockedBufferIndex: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_vertexFormatIndex: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_lockFlags: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_outputBufferIndex: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_emulatedIndex: _serde::__private::Option<I8<'de>> = _serde::__private::None;
                     for i in 0..7usize {
                         match i {
                             0usize => {
@@ -228,7 +230,7 @@ const _: () = {
                                     );
                                 }
                                 m_vertexBufferIndex = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -245,7 +247,7 @@ const _: () = {
                                     );
                                 }
                                 m_elementIndex = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -264,7 +266,7 @@ const _: () = {
                                     );
                                 }
                                 m_lockedBufferIndex = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -283,7 +285,7 @@ const _: () = {
                                     );
                                 }
                                 m_vertexFormatIndex = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -300,7 +302,7 @@ const _: () = {
                                     );
                                 }
                                 m_lockFlags = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -319,7 +321,7 @@ const _: () = {
                                     );
                                 }
                                 m_outputBufferIndex = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -336,7 +338,7 @@ const _: () = {
                                     );
                                 }
                                 m_emulatedIndex = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -436,13 +438,13 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_vertexBufferIndex: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_elementIndex: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_lockedBufferIndex: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_vertexFormatIndex: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_lockFlags: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_outputBufferIndex: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_emulatedIndex: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_vertexBufferIndex: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_elementIndex: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_lockedBufferIndex: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_vertexFormatIndex: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_lockFlags: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_outputBufferIndex: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_emulatedIndex: _serde::__private::Option<I8<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -467,7 +469,7 @@ const _: () = {
                                     );
                                 }
                                 m_vertexBufferIndex = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -493,7 +495,7 @@ const _: () = {
                                     );
                                 }
                                 m_elementIndex = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -521,7 +523,7 @@ const _: () = {
                                     );
                                 }
                                 m_lockedBufferIndex = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -549,7 +551,7 @@ const _: () = {
                                     );
                                 }
                                 m_vertexFormatIndex = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -575,7 +577,7 @@ const _: () = {
                                     );
                                 }
                                 m_lockFlags = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -603,7 +605,7 @@ const _: () = {
                                     );
                                 }
                                 m_outputBufferIndex = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -629,7 +631,7 @@ const _: () = {
                                     );
                                 }
                                 m_emulatedIndex = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -726,7 +728,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkMultipleVertexBufferLockedElement {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_vertexBufferIndex,
                         m_elementIndex,
                         m_lockedBufferIndex,

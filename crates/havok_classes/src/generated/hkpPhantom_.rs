@@ -22,7 +22,8 @@ pub struct hkpPhantom<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -35,7 +36,7 @@ pub struct hkpPhantom<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "overlapListeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "overlapListeners"))]
-    pub m_overlapListeners: Vec<Pointer>,
+    pub m_overlapListeners: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `phantomListeners`(ctype: `hkArray<void*>`)
     /// - offset: `152`(x86)/`224`(x86_64)
@@ -43,7 +44,7 @@ pub struct hkpPhantom<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "phantomListeners"))]
     #[cfg_attr(feature = "serde", serde(rename = "phantomListeners"))]
-    pub m_phantomListeners: Vec<Pointer>,
+    pub m_phantomListeners: Vec<Pointer<'a>>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -57,9 +58,9 @@ const _: () = {
             _serde::__private::Signature::new(0x9b7e6f86)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.m_world.get());
+            v.push(&self.parent.m_world);
             v.extend(self.parent.m_collidable.deps_indexes());
             v.extend(self.parent.m_multiThreadCheck.deps_indexes());
             v.extend(
@@ -68,11 +69,11 @@ const _: () = {
                     .m_properties
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
-            v.push(self.parent.m_treeData.get());
-            v.extend(self.m_overlapListeners.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_phantomListeners.iter().map(|ptr| ptr.get()));
+            v.push(&self.parent.m_treeData);
+            v.extend(self.m_overlapListeners.iter());
+            v.extend(self.m_phantomListeners.iter());
             v
         }
     }
@@ -83,6 +84,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x9b7e6f86)));
             let mut serializer = __serializer
                 .serialize_struct("hkpPhantom", class_meta, (164u64, 240u64))?;
@@ -210,10 +212,10 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_overlapListeners: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     let mut m_phantomListeners: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
                     for i in 0..2usize {
                         match i {
@@ -226,7 +228,7 @@ const _: () = {
                                     );
                                 }
                                 m_overlapListeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -243,7 +245,7 @@ const _: () = {
                                     );
                                 }
                                 m_phantomListeners = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -291,7 +293,7 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_collidable: _serde::__private::Option<
-                        hkpLinkedCollidable,
+                        hkpLinkedCollidable<'de>,
                     > = _serde::__private::None;
                     let mut m_multiThreadCheck: _serde::__private::Option<
                         hkMultiThreadCheck,
@@ -346,7 +348,9 @@ const _: () = {
                                     );
                                 }
                                 m_collidable = _serde::__private::Some(
-                                    match __A::next_value::<hkpLinkedCollidable>(&mut __map) {
+                                    match __A::next_value::<
+                                        hkpLinkedCollidable<'de>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -490,14 +494,16 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpWorldObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_collidable,
@@ -508,7 +514,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpPhantom {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     })

@@ -5,14 +5,14 @@
   "size_x86": 72,
   "size_x86_64": 120,
   "parent": "hkbModifier",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "hands",
       "class_ref": "hkbHandIkModifierHand",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<struct hkbHandIkModifierHand>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -27,7 +27,7 @@
     {
       "name": "fadeInOutCurve",
       "enum_ref": "BlendCurve",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum BlendCurve",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",
@@ -41,7 +41,7 @@
     },
     {
       "name": "internalHandData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",

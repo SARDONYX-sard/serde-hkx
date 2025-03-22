@@ -7,8 +7,8 @@ pub use self::dir::verify_dir;
 pub use self::file::verify_file;
 use crate::progress::ProgressHandler;
 use crate::{
-    error::{DeSnafu, FailedReadFileSnafu, Result, SerSnafu},
     ClassMap,
+    error::{DeSnafu, FailedReadFileSnafu, Result, SerSnafu},
 };
 use serde_hkx::bytes::serde::hkx_header::HkxHeader;
 use snafu::ResultExt as _;

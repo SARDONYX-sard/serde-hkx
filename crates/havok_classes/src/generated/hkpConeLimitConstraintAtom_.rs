@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpConeLimitConstraintAtom {
+pub struct hkpConeLimitConstraintAtom<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,32 +22,34 @@ pub struct hkpConeLimitConstraintAtom {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpConstraintAtom,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpConstraintAtom<'a>,
     /// # C++ Info
     /// - name: `isEnabled`(ctype: `hkUint8`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "isEnabled"))]
     #[cfg_attr(feature = "serde", serde(rename = "isEnabled"))]
-    pub m_isEnabled: u8,
+    pub m_isEnabled: U8<'a>,
     /// # C++ Info
     /// - name: `twistAxisInA`(ctype: `hkUint8`)
     /// - offset: `  3`(x86)/`  3`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "twistAxisInA"))]
     #[cfg_attr(feature = "serde", serde(rename = "twistAxisInA"))]
-    pub m_twistAxisInA: u8,
+    pub m_twistAxisInA: U8<'a>,
     /// # C++ Info
     /// - name: `refAxisInB`(ctype: `hkUint8`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "refAxisInB"))]
     #[cfg_attr(feature = "serde", serde(rename = "refAxisInB"))]
-    pub m_refAxisInB: u8,
+    pub m_refAxisInB: U8<'a>,
     /// # C++ Info
     /// - name: `angleMeasurementMode`(ctype: `enum MeasurementMode`)
     /// - offset: `  5`(x86)/`  5`(x86_64)
@@ -61,7 +63,7 @@ pub struct hkpConeLimitConstraintAtom {
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "memOffsetToAngleOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "memOffsetToAngleOffset"))]
-    pub m_memOffsetToAngleOffset: u8,
+    pub m_memOffsetToAngleOffset: U8<'a>,
     /// # C++ Info
     /// - name: `minAngle`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
@@ -86,7 +88,7 @@ pub struct hkpConeLimitConstraintAtom {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpConeLimitConstraintAtom {
+    impl<'a> _serde::HavokClass for hkpConeLimitConstraintAtom<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpConeLimitConstraintAtom"
@@ -96,18 +98,19 @@ const _: () = {
             _serde::__private::Signature::new(0xf19443c8)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpConeLimitConstraintAtom {
+    impl<'a> _serde::Serialize for hkpConeLimitConstraintAtom<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xf19443c8)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -143,7 +146,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpConeLimitConstraintAtom {
+    impl<'de> _serde::Deserialize<'de> for hkpConeLimitConstraintAtom<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -207,7 +210,7 @@ const _: () = {
                 }
             }
             struct __hkpConeLimitConstraintAtomVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpConeLimitConstraintAtom>,
+                marker: _serde::__private::PhantomData<hkpConeLimitConstraintAtom<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -215,7 +218,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpConeLimitConstraintAtomVisitor<'de> {
-                type Value = hkpConeLimitConstraintAtom;
+                type Value = hkpConeLimitConstraintAtom<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -234,13 +237,15 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_isEnabled: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_twistAxisInA: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_refAxisInB: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_isEnabled: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_twistAxisInA: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_refAxisInB: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     let mut m_angleMeasurementMode: _serde::__private::Option<
                         MeasurementMode,
                     > = _serde::__private::None;
-                    let mut m_memOffsetToAngleOffset: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_memOffsetToAngleOffset: _serde::__private::Option<
+                        U8<'de>,
+                    > = _serde::__private::None;
                     let mut m_minAngle: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_maxAngle: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_angularLimitsTauFactor: _serde::__private::Option<f32> = _serde::__private::None;
@@ -255,7 +260,7 @@ const _: () = {
                                     );
                                 }
                                 m_isEnabled = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -272,7 +277,7 @@ const _: () = {
                                     );
                                 }
                                 m_twistAxisInA = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -289,7 +294,7 @@ const _: () = {
                                     );
                                 }
                                 m_refAxisInB = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -327,7 +332,7 @@ const _: () = {
                                     );
                                 }
                                 m_memOffsetToAngleOffset = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -490,13 +495,15 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_type: _serde::__private::Option<AtomType> = _serde::__private::None;
-                    let mut m_isEnabled: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_twistAxisInA: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_refAxisInB: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_isEnabled: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_twistAxisInA: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_refAxisInB: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     let mut m_angleMeasurementMode: _serde::__private::Option<
                         MeasurementMode,
                     > = _serde::__private::None;
-                    let mut m_memOffsetToAngleOffset: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_memOffsetToAngleOffset: _serde::__private::Option<
+                        U8<'de>,
+                    > = _serde::__private::None;
                     let mut m_minAngle: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_maxAngle: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_angularLimitsTauFactor: _serde::__private::Option<f32> = _serde::__private::None;
@@ -546,7 +553,7 @@ const _: () = {
                                     );
                                 }
                                 m_isEnabled = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -572,7 +579,7 @@ const _: () = {
                                     );
                                 }
                                 m_twistAxisInA = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -598,7 +605,7 @@ const _: () = {
                                     );
                                 }
                                 m_refAxisInB = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -654,7 +661,7 @@ const _: () = {
                                     );
                                 }
                                 m_memOffsetToAngleOffset = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -848,10 +855,13 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkpConstraintAtom { __ptr, m_type };
+                    let parent = hkpConstraintAtom {
+                        __ptr: __ptr.clone(),
+                        m_type,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpConeLimitConstraintAtom {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_isEnabled,
                         m_twistAxisInA,
@@ -967,14 +977,14 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

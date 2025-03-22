@@ -5,14 +5,14 @@
   "size_x86": 100,
   "size_x86_64": 120,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "syncInfo",
       "class_ref": "hkbGeneratorSyncInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbGeneratorSyncInfo",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -26,7 +26,7 @@
     },
     {
       "name": "name",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -41,7 +41,7 @@
     {
       "name": "internalState",
       "class_ref": "hkReferencedObject",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkReferencedObject*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -55,7 +55,7 @@
     },
     {
       "name": "nodeId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -69,7 +69,7 @@
     },
     {
       "name": "hasActivateBeenCalled",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

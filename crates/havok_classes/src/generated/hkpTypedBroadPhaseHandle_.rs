@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpTypedBroadPhaseHandle {
+pub struct hkpTypedBroadPhaseHandle<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,18 +22,20 @@ pub struct hkpTypedBroadPhaseHandle {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpBroadPhaseHandle,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpBroadPhaseHandle<'a>,
     /// # C++ Info
     /// - name: `type`(ctype: `hkInt8`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "type"))]
     #[cfg_attr(feature = "serde", serde(rename = "type"))]
-    pub m_type: i8,
+    pub m_type: I8<'a>,
     /// # C++ Info
     /// - name: `ownerOffset`(ctype: `hkInt8`)
     /// - offset: `  5`(x86)/`  5`(x86_64)
@@ -41,25 +43,25 @@ pub struct hkpTypedBroadPhaseHandle {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "ownerOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "ownerOffset"))]
-    pub m_ownerOffset: i8,
+    pub m_ownerOffset: I8<'a>,
     /// # C++ Info
     /// - name: `objectQualityType`(ctype: `hkInt8`)
     /// - offset: `  6`(x86)/`  6`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "objectQualityType"))]
     #[cfg_attr(feature = "serde", serde(rename = "objectQualityType"))]
-    pub m_objectQualityType: i8,
+    pub m_objectQualityType: I8<'a>,
     /// # C++ Info
     /// - name: `collisionFilterInfo`(ctype: `hkUint32`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "collisionFilterInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "collisionFilterInfo"))]
-    pub m_collisionFilterInfo: u32,
+    pub m_collisionFilterInfo: U32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpTypedBroadPhaseHandle {
+    impl<'a> _serde::HavokClass for hkpTypedBroadPhaseHandle<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpTypedBroadPhaseHandle"
@@ -69,18 +71,19 @@ const _: () = {
             _serde::__private::Signature::new(0xf4b0f799)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpTypedBroadPhaseHandle {
+    impl<'a> _serde::Serialize for hkpTypedBroadPhaseHandle<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xf4b0f799)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -104,7 +107,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpTypedBroadPhaseHandle {
+    impl<'de> _serde::Deserialize<'de> for hkpTypedBroadPhaseHandle<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -156,7 +159,7 @@ const _: () = {
                 }
             }
             struct __hkpTypedBroadPhaseHandleVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpTypedBroadPhaseHandle>,
+                marker: _serde::__private::PhantomData<hkpTypedBroadPhaseHandle<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -164,7 +167,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpTypedBroadPhaseHandleVisitor<'de> {
-                type Value = hkpTypedBroadPhaseHandle;
+                type Value = hkpTypedBroadPhaseHandle<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -183,10 +186,10 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_type: _serde::__private::Option<i8> = _serde::__private::None;
-                    let mut m_ownerOffset: _serde::__private::Option<i8> = _serde::__private::None;
-                    let mut m_objectQualityType: _serde::__private::Option<i8> = _serde::__private::None;
-                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_type: _serde::__private::Option<I8<'de>> = _serde::__private::None;
+                    let mut m_ownerOffset: _serde::__private::Option<I8<'de>> = _serde::__private::None;
+                    let mut m_objectQualityType: _serde::__private::Option<I8<'de>> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     for i in 0..4usize {
                         match i {
                             0usize => {
@@ -196,7 +199,7 @@ const _: () = {
                                     );
                                 }
                                 m_type = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -213,7 +216,7 @@ const _: () = {
                                     );
                                 }
                                 m_ownerOffset = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -232,7 +235,7 @@ const _: () = {
                                     );
                                 }
                                 m_objectQualityType = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -252,7 +255,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 1usize, 1usize)?;
                                 m_collisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -318,9 +321,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_type: _serde::__private::Option<i8> = _serde::__private::None;
-                    let mut m_objectQualityType: _serde::__private::Option<i8> = _serde::__private::None;
-                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_type: _serde::__private::Option<I8<'de>> = _serde::__private::None;
+                    let mut m_objectQualityType: _serde::__private::Option<I8<'de>> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -341,7 +344,7 @@ const _: () = {
                                     );
                                 }
                                 m_type = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -369,7 +372,7 @@ const _: () = {
                                     );
                                 }
                                 m_objectQualityType = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -397,7 +400,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -444,12 +447,12 @@ const _: () = {
                     };
                     let __ptr = None;
                     let parent = hkpBroadPhaseHandle {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpTypedBroadPhaseHandle {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_type,
                         m_objectQualityType,

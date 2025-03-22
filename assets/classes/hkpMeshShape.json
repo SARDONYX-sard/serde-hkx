@@ -5,9 +5,9 @@
   "size_x86": 96,
   "size_x86_64": 128,
   "parent": "hkpShapeCollection",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "MeshShapeIndexStridingType",
@@ -61,7 +61,7 @@
   "members": [
     {
       "name": "scaling",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -75,7 +75,7 @@
     },
     {
       "name": "numBitsForSubpartIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -90,7 +90,7 @@
     {
       "name": "subparts",
       "class_ref": "hkpMeshShapeSubpart",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkpMeshShapeSubpart>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -104,7 +104,7 @@
     },
     {
       "name": "weldingInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkUint16>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_UINT16",
@@ -119,7 +119,7 @@
     {
       "name": "weldingType",
       "enum_ref": "WeldingType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum WeldingType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -133,7 +133,7 @@
     },
     {
       "name": "radius",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -147,7 +147,7 @@
     },
     {
       "name": "pad",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32[3]",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",

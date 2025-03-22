@@ -22,18 +22,20 @@ pub struct hkaMeshBinding<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `mesh`(ctype: `struct hkxMesh*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "mesh"))]
     #[cfg_attr(feature = "serde", serde(rename = "mesh"))]
-    pub m_mesh: Pointer,
+    pub m_mesh: Pointer<'a>,
     /// # C++ Info
     /// - name: `originalSkeletonName`(ctype: `hkStringPtr`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
@@ -48,14 +50,14 @@ pub struct hkaMeshBinding<'a> {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "skeleton"))]
     #[cfg_attr(feature = "serde", serde(rename = "skeleton"))]
-    pub m_skeleton: Pointer,
+    pub m_skeleton: Pointer<'a>,
     /// # C++ Info
     /// - name: `mappings`(ctype: `hkArray<struct hkaMeshBindingMapping>`)
     /// - offset: ` 20`(x86)/` 40`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "mappings"))]
     #[cfg_attr(feature = "serde", serde(rename = "mappings"))]
-    pub m_mappings: Vec<hkaMeshBindingMapping>,
+    pub m_mappings: Vec<hkaMeshBindingMapping<'a>>,
     /// # C++ Info
     /// - name: `boneFromSkinMeshTransforms`(ctype: `hkArray<hkTransform>`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
@@ -76,16 +78,16 @@ const _: () = {
             _serde::__private::Signature::new(0x81d9950b)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_mesh.get());
-            v.push(self.m_skeleton.get());
+            v.push(&self.m_mesh);
+            v.push(&self.m_skeleton);
             v.extend(
                 self
                     .m_mappings
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
@@ -97,6 +99,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x81d9950b)));
             let mut serializer = __serializer
                 .serialize_struct("hkaMeshBinding", class_meta, (44u64, 72u64))?;
@@ -213,11 +216,11 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_mesh: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_mesh: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_originalSkeletonName: _serde::__private::Option<
                         StringPtr<'de>,
                     > = _serde::__private::None;
-                    let mut m_skeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_skeleton: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_mappings: _serde::__private::Option<
                         Vec<hkaMeshBindingMapping>,
                     > = _serde::__private::None;
@@ -233,7 +236,7 @@ const _: () = {
                                     );
                                 }
                                 m_mesh = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -269,7 +272,7 @@ const _: () = {
                                     );
                                 }
                                 m_skeleton = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -380,11 +383,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_mesh: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_mesh: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_originalSkeletonName: _serde::__private::Option<
                         StringPtr<'de>,
                     > = _serde::__private::None;
-                    let mut m_skeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_skeleton: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_mappings: _serde::__private::Option<
                         Vec<hkaMeshBindingMapping>,
                     > = _serde::__private::None;
@@ -411,7 +414,7 @@ const _: () = {
                                     );
                                 }
                                 m_mesh = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -465,7 +468,7 @@ const _: () = {
                                     );
                                 }
                                 m_skeleton = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -587,15 +590,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkaMeshBinding {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_mesh,
                         m_originalSkeletonName,

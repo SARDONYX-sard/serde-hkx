@@ -5,14 +5,14 @@
   "size_x86": 352,
   "size_x86_64": 416,
   "parent": "hkpPhantom",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "motionState",
       "class_ref": "hkMotionState",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkMotionState",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",

@@ -22,7 +22,8 @@ pub struct hkbSenseHandleModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -33,9 +34,10 @@ pub struct hkbSenseHandleModifier<'a> {
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: ` 24`(x86)/` 48`(x86_64)
     /// - flags: `SERIALIZE_IGNORED`
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "handle"))]
     #[cfg_attr(feature = "serde", serde(rename = "handle"))]
-    pub m_handle: hkbHandle,
+    pub m_handle: hkbHandle<'a>,
     /// # C++ Info
     /// - name: `sensorLocalOffset`(ctype: `hkVector4`)
     /// - offset: ` 80`(x86)/`128`(x86_64)
@@ -47,23 +49,24 @@ pub struct hkbSenseHandleModifier<'a> {
     /// - name: `ranges`(ctype: `hkArray<struct hkbSenseHandleModifierRange>`)
     /// - offset: ` 96`(x86)/`144`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "ranges"))]
     #[cfg_attr(feature = "serde", serde(rename = "ranges"))]
-    pub m_ranges: Vec<hkbSenseHandleModifierRange>,
+    pub m_ranges: Vec<hkbSenseHandleModifierRange<'a>>,
     /// # C++ Info
     /// - name: `handleOut`(ctype: `struct hkbHandle*`)
     /// - offset: `108`(x86)/`160`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "handleOut"))]
     #[cfg_attr(feature = "serde", serde(rename = "handleOut"))]
-    pub m_handleOut: Pointer,
+    pub m_handleOut: Pointer<'a>,
     /// # C++ Info
     /// - name: `handleIn`(ctype: `struct hkbHandle*`)
     /// - offset: `112`(x86)/`168`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "handleIn"))]
     #[cfg_attr(feature = "serde", serde(rename = "handleIn"))]
-    pub m_handleIn: Pointer,
+    pub m_handleIn: Pointer<'a>,
     /// # C++ Info
     /// - name: `localFrameName`(ctype: `hkStringPtr`)
     /// - offset: `116`(x86)/`176`(x86_64)
@@ -107,21 +110,21 @@ pub struct hkbSenseHandleModifier<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "collisionFilterInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "collisionFilterInfo"))]
-    pub m_collisionFilterInfo: u32,
+    pub m_collisionFilterInfo: U32<'a>,
     /// # C++ Info
     /// - name: `sensorRagdollBoneIndex`(ctype: `hkInt16`)
     /// - offset: `140`(x86)/`208`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "sensorRagdollBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "sensorRagdollBoneIndex"))]
-    pub m_sensorRagdollBoneIndex: i16,
+    pub m_sensorRagdollBoneIndex: I16<'a>,
     /// # C++ Info
     /// - name: `sensorAnimationBoneIndex`(ctype: `hkInt16`)
     /// - offset: `142`(x86)/`210`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "sensorAnimationBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "sensorAnimationBoneIndex"))]
-    pub m_sensorAnimationBoneIndex: i16,
+    pub m_sensorAnimationBoneIndex: I16<'a>,
     /// # C++ Info
     /// - name: `sensingMode`(ctype: `enum SensingMode`)
     /// - offset: `144`(x86)/`212`(x86_64)
@@ -168,7 +171,7 @@ pub struct hkbSenseHandleModifier<'a> {
         schemars(rename = "rangeIndexForEventToSendNextUpdate")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "rangeIndexForEventToSendNextUpdate"))]
-    pub m_rangeIndexForEventToSendNextUpdate: i32,
+    pub m_rangeIndexForEventToSendNextUpdate: I32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -182,19 +185,19 @@ const _: () = {
             _serde::__private::Signature::new(0x2a064d99)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
             v.extend(self.m_handle.deps_indexes());
             v.extend(
                 self
                     .m_ranges
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
-            v.push(self.m_handleOut.get());
-            v.push(self.m_handleIn.get());
+            v.push(&self.m_handleOut);
+            v.push(&self.m_handleIn);
             v
         }
     }
@@ -205,6 +208,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x2a064d99)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -436,13 +440,13 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_handle: _serde::__private::Option<hkbHandle> = _serde::__private::None;
+                    let mut m_handle: _serde::__private::Option<hkbHandle<'de>> = _serde::__private::None;
                     let mut m_sensorLocalOffset: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_ranges: _serde::__private::Option<
-                        Vec<hkbSenseHandleModifierRange>,
+                        Vec<hkbSenseHandleModifierRange<'de>>,
                     > = _serde::__private::None;
-                    let mut m_handleOut: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_handleIn: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_handleOut: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_handleIn: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_localFrameName: _serde::__private::Option<
                         StringPtr<'de>,
                     > = _serde::__private::None;
@@ -452,9 +456,13 @@ const _: () = {
                     let mut m_minDistance: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_maxDistance: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_distanceOut: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_sensorRagdollBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_sensorAnimationBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_sensorRagdollBoneIndex: _serde::__private::Option<
+                        I16<'de>,
+                    > = _serde::__private::None;
+                    let mut m_sensorAnimationBoneIndex: _serde::__private::Option<
+                        I16<'de>,
+                    > = _serde::__private::None;
                     let mut m_sensingMode: _serde::__private::Option<SensingMode> = _serde::__private::None;
                     let mut m_extrapolateSensorPosition: _serde::__private::Option<
                         bool,
@@ -463,7 +471,7 @@ const _: () = {
                     let mut m_foundHandleOut: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_timeSinceLastModify: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_rangeIndexForEventToSendNextUpdate: _serde::__private::Option<
-                        i32,
+                        I32<'de>,
                     > = _serde::__private::None;
                     for i in 0..19usize {
                         match i {
@@ -474,7 +482,7 @@ const _: () = {
                                     );
                                 }
                                 m_handle = _serde::__private::Some(
-                                    match __A::next_value::<hkbHandle>(&mut __map) {
+                                    match __A::next_value::<hkbHandle<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -510,7 +518,7 @@ const _: () = {
                                 }
                                 m_ranges = _serde::__private::Some(
                                     match __A::next_value::<
-                                        Vec<hkbSenseHandleModifierRange>,
+                                        Vec<hkbSenseHandleModifierRange<'de>>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -528,7 +536,7 @@ const _: () = {
                                     );
                                 }
                                 m_handleOut = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -545,7 +553,7 @@ const _: () = {
                                     );
                                 }
                                 m_handleIn = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -651,7 +659,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -670,7 +678,7 @@ const _: () = {
                                     );
                                 }
                                 m_sensorRagdollBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -689,7 +697,7 @@ const _: () = {
                                     );
                                 }
                                 m_sensorAnimationBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -799,7 +807,7 @@ const _: () = {
                                     );
                                 }
                                 m_rangeIndexForEventToSendNextUpdate = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1027,16 +1035,18 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_sensorLocalOffset: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_ranges: _serde::__private::Option<
-                        Vec<hkbSenseHandleModifierRange>,
+                        Vec<hkbSenseHandleModifierRange<'de>>,
                     > = _serde::__private::None;
-                    let mut m_handleOut: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_handleIn: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_handleOut: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_handleIn: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_localFrameName: _serde::__private::Option<
                         StringPtr<'de>,
                     > = _serde::__private::None;
@@ -1046,9 +1056,13 @@ const _: () = {
                     let mut m_minDistance: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_maxDistance: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_distanceOut: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_sensorRagdollBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_sensorAnimationBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_sensorRagdollBoneIndex: _serde::__private::Option<
+                        I16<'de>,
+                    > = _serde::__private::None;
+                    let mut m_sensorAnimationBoneIndex: _serde::__private::Option<
+                        I16<'de>,
+                    > = _serde::__private::None;
                     let mut m_sensingMode: _serde::__private::Option<SensingMode> = _serde::__private::None;
                     let mut m_extrapolateSensorPosition: _serde::__private::Option<
                         bool,
@@ -1079,7 +1093,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1206,7 +1220,7 @@ const _: () = {
                                 }
                                 m_ranges = _serde::__private::Some(
                                     match __A::next_value::<
-                                        Vec<hkbSenseHandleModifierRange>,
+                                        Vec<hkbSenseHandleModifierRange<'de>>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1233,7 +1247,7 @@ const _: () = {
                                     );
                                 }
                                 m_handleOut = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1259,7 +1273,7 @@ const _: () = {
                                     );
                                 }
                                 m_handleIn = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1419,7 +1433,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1447,7 +1461,7 @@ const _: () = {
                                     );
                                 }
                                 m_sensorRagdollBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1475,7 +1489,7 @@ const _: () = {
                                     );
                                 }
                                 m_sensorAnimationBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1825,34 +1839,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbSenseHandleModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_sensorLocalOffset,
                         m_ranges,
@@ -2038,22 +2054,22 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
-                        2i8 => _serde::__private::Ok(__Field::__field2),
-                        3i8 => _serde::__private::Ok(__Field::__field3),
-                        4i8 => _serde::__private::Ok(__Field::__field4),
-                        5i8 => _serde::__private::Ok(__Field::__field5),
-                        6i8 => _serde::__private::Ok(__Field::__field6),
-                        7i8 => _serde::__private::Ok(__Field::__field7),
-                        8i8 => _serde::__private::Ok(__Field::__field8),
-                        9i8 => _serde::__private::Ok(__Field::__field9),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(2i8) => _serde::__private::Ok(__Field::__field2),
+                        I8::Number(3i8) => _serde::__private::Ok(__Field::__field3),
+                        I8::Number(4i8) => _serde::__private::Ok(__Field::__field4),
+                        I8::Number(5i8) => _serde::__private::Ok(__Field::__field5),
+                        I8::Number(6i8) => _serde::__private::Ok(__Field::__field6),
+                        I8::Number(7i8) => _serde::__private::Ok(__Field::__field7),
+                        I8::Number(8i8) => _serde::__private::Ok(__Field::__field8),
+                        I8::Number(9i8) => _serde::__private::Ok(__Field::__field9),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

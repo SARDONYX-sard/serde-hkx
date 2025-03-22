@@ -5,14 +5,14 @@
   "size_x86": 168,
   "size_x86_64": 248,
   "parent": "hkbModifier",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "eventSequencedData",
       "class_ref": "hkbEventSequencedData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkbEventSequencedData*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -27,7 +27,7 @@
     {
       "name": "realVariableSequencedData",
       "class_ref": "hkbRealVariableSequencedData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkbRealVariableSequencedData*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -42,7 +42,7 @@
     {
       "name": "boolVariableSequencedData",
       "class_ref": "hkbBoolVariableSequencedData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkbBoolVariableSequencedData*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -57,7 +57,7 @@
     {
       "name": "intVariableSequencedData",
       "class_ref": "hkbIntVariableSequencedData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkbIntVariableSequencedData*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -71,7 +71,7 @@
     },
     {
       "name": "enableEventId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -85,7 +85,7 @@
     },
     {
       "name": "disableEventId",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -100,7 +100,7 @@
     {
       "name": "stringData",
       "class_ref": "hkbSequenceStringData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbSequenceStringData*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -114,7 +114,7 @@
     },
     {
       "name": "variableIdMap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -128,7 +128,7 @@
     },
     {
       "name": "eventIdMap",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "void*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_VOID",
@@ -142,7 +142,7 @@
     },
     {
       "name": "nextSampleEvents",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",
@@ -156,7 +156,7 @@
     },
     {
       "name": "nextSampleReals",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",
@@ -170,7 +170,7 @@
     },
     {
       "name": "nextSampleBools",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",
@@ -184,7 +184,7 @@
     },
     {
       "name": "nextSampleInts",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VOID",
@@ -198,7 +198,7 @@
     },
     {
       "name": "time",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -212,7 +212,7 @@
     },
     {
       "name": "isEnabled",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

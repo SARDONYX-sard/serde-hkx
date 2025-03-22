@@ -22,7 +22,8 @@ pub struct hkbPoseMatchingGenerator<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -69,42 +70,42 @@ pub struct hkbPoseMatchingGenerator<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "startPlayingEventId"))]
     #[cfg_attr(feature = "serde", serde(rename = "startPlayingEventId"))]
-    pub m_startPlayingEventId: i32,
+    pub m_startPlayingEventId: I32<'a>,
     /// # C++ Info
     /// - name: `startMatchingEventId`(ctype: `hkInt32`)
     /// - offset: `164`(x86)/`196`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "startMatchingEventId"))]
     #[cfg_attr(feature = "serde", serde(rename = "startMatchingEventId"))]
-    pub m_startMatchingEventId: i32,
+    pub m_startMatchingEventId: I32<'a>,
     /// # C++ Info
     /// - name: `rootBoneIndex`(ctype: `hkInt16`)
     /// - offset: `168`(x86)/`200`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "rootBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "rootBoneIndex"))]
-    pub m_rootBoneIndex: i16,
+    pub m_rootBoneIndex: I16<'a>,
     /// # C++ Info
     /// - name: `otherBoneIndex`(ctype: `hkInt16`)
     /// - offset: `170`(x86)/`202`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "otherBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "otherBoneIndex"))]
-    pub m_otherBoneIndex: i16,
+    pub m_otherBoneIndex: I16<'a>,
     /// # C++ Info
     /// - name: `anotherBoneIndex`(ctype: `hkInt16`)
     /// - offset: `172`(x86)/`204`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "anotherBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "anotherBoneIndex"))]
-    pub m_anotherBoneIndex: i16,
+    pub m_anotherBoneIndex: I16<'a>,
     /// # C++ Info
     /// - name: `pelvisIndex`(ctype: `hkInt16`)
     /// - offset: `174`(x86)/`206`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "pelvisIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "pelvisIndex"))]
-    pub m_pelvisIndex: i16,
+    pub m_pelvisIndex: I16<'a>,
     /// # C++ Info
     /// - name: `mode`(ctype: `enum Mode`)
     /// - offset: `176`(x86)/`208`(x86_64)
@@ -119,7 +120,7 @@ pub struct hkbPoseMatchingGenerator<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "currentMatch"))]
     #[cfg_attr(feature = "serde", serde(rename = "currentMatch"))]
-    pub m_currentMatch: i32,
+    pub m_currentMatch: I32<'a>,
     /// # C++ Info
     /// - name: `bestMatch`(ctype: `hkInt32`)
     /// - offset: `184`(x86)/`216`(x86_64)
@@ -127,7 +128,7 @@ pub struct hkbPoseMatchingGenerator<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "bestMatch"))]
     #[cfg_attr(feature = "serde", serde(rename = "bestMatch"))]
-    pub m_bestMatch: i32,
+    pub m_bestMatch: I32<'a>,
     /// # C++ Info
     /// - name: `timeSinceBetterMatch`(ctype: `hkReal`)
     /// - offset: `188`(x86)/`220`(x86_64)
@@ -159,7 +160,7 @@ pub struct hkbPoseMatchingGenerator<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "poseMatchingUtility"))]
     #[cfg_attr(feature = "serde", serde(rename = "poseMatchingUtility"))]
-    pub m_poseMatchingUtility: Pointer,
+    pub m_poseMatchingUtility: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -173,11 +174,11 @@ const _: () = {
             _serde::__private::Signature::new(0x29e271b4)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.parent.m_variableBindingSet.get());
-            v.extend(self.parent.m_children.iter().map(|ptr| ptr.get()));
-            v.push(self.m_poseMatchingUtility.get());
+            v.push(&self.parent.parent.parent.parent.m_variableBindingSet);
+            v.extend(self.parent.m_children.iter());
+            v.push(&self.m_poseMatchingUtility);
             v
         }
     }
@@ -188,6 +189,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x29e271b4)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -469,21 +471,25 @@ const _: () = {
                     let mut m_minSpeedToSwitch: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_minSwitchTimeNoError: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_minSwitchTimeFullError: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_startPlayingEventId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_startMatchingEventId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_rootBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_otherBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_anotherBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_pelvisIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_startPlayingEventId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_startMatchingEventId: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_rootBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_otherBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_anotherBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_pelvisIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_mode: _serde::__private::Option<Mode> = _serde::__private::None;
-                    let mut m_currentMatch: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_bestMatch: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_currentMatch: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_bestMatch: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_timeSinceBetterMatch: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_error: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_resetCurrentMatchLocalTime: _serde::__private::Option<
                         bool,
                     > = _serde::__private::None;
-                    let mut m_poseMatchingUtility: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_poseMatchingUtility: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     for i in 0..18usize {
                         match i {
                             0usize => {
@@ -589,7 +595,7 @@ const _: () = {
                                     );
                                 }
                                 m_startPlayingEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -608,7 +614,7 @@ const _: () = {
                                     );
                                 }
                                 m_startMatchingEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -625,7 +631,7 @@ const _: () = {
                                     );
                                 }
                                 m_rootBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -642,7 +648,7 @@ const _: () = {
                                     );
                                 }
                                 m_otherBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -659,7 +665,7 @@ const _: () = {
                                     );
                                 }
                                 m_anotherBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -676,7 +682,7 @@ const _: () = {
                                     );
                                 }
                                 m_pelvisIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -709,7 +715,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 3usize)?;
                                 m_currentMatch = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -726,7 +732,7 @@ const _: () = {
                                     );
                                 }
                                 m_bestMatch = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -799,7 +805,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 3usize)?;
                                 m_poseMatchingUtility = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1018,7 +1024,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_referencePoseWeightThreshold: _serde::__private::Option<
@@ -1027,10 +1035,12 @@ const _: () = {
                     let mut m_blendParameter: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_minCyclicBlendParameter: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_maxCyclicBlendParameter: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_indexOfSyncMasterChild: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_flags: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_indexOfSyncMasterChild: _serde::__private::Option<
+                        I16<'de>,
+                    > = _serde::__private::None;
+                    let mut m_flags: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_subtractLastChild: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_children: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_children: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
                     let mut m_worldFromModelRotation: _serde::__private::Option<
                         Quaternion,
                     > = _serde::__private::None;
@@ -1038,12 +1048,14 @@ const _: () = {
                     let mut m_minSpeedToSwitch: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_minSwitchTimeNoError: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_minSwitchTimeFullError: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_startPlayingEventId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_startMatchingEventId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_rootBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_otherBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_anotherBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_pelvisIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_startPlayingEventId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_startMatchingEventId: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_rootBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_otherBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_anotherBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_pelvisIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_mode: _serde::__private::Option<Mode> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -1069,7 +1081,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1257,7 +1269,7 @@ const _: () = {
                                     );
                                 }
                                 m_indexOfSyncMasterChild = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1281,7 +1293,7 @@ const _: () = {
                                     );
                                 }
                                 m_flags = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1335,7 +1347,7 @@ const _: () = {
                                     );
                                 }
                                 m_children = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1499,7 +1511,7 @@ const _: () = {
                                     );
                                 }
                                 m_startPlayingEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1527,7 +1539,7 @@ const _: () = {
                                     );
                                 }
                                 m_startMatchingEventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1553,7 +1565,7 @@ const _: () = {
                                     );
                                 }
                                 m_rootBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1579,7 +1591,7 @@ const _: () = {
                                     );
                                 }
                                 m_otherBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1605,7 +1617,7 @@ const _: () = {
                                     );
                                 }
                                 m_anotherBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1631,7 +1643,7 @@ const _: () = {
                                     );
                                 }
                                 m_pelvisIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1933,28 +1945,33 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
-                    let parent = hkbGenerator { __ptr, parent };
+                    let parent = hkbGenerator {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let parent = hkbBlenderGenerator {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_referencePoseWeightThreshold,
                         m_blendParameter,
@@ -1968,7 +1985,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbPoseMatchingGenerator {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_worldFromModelRotation,
                         m_blendSpeed,
@@ -2092,14 +2109,14 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

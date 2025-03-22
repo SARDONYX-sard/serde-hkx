@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkMultipleVertexBuffer {
+pub struct hkMultipleVertexBuffer<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,53 +22,55 @@ pub struct hkMultipleVertexBuffer {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkMeshVertexBuffer,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkMeshVertexBuffer<'a>,
     /// # C++ Info
     /// - name: `vertexFormat`(ctype: `struct hkVertexFormat`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `260`(x86)/`260`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "vertexFormat"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexFormat"))]
-    pub m_vertexFormat: hkVertexFormat,
+    pub m_vertexFormat: hkVertexFormat<'a>,
     /// # C++ Info
     /// - name: `lockedElements`(ctype: `hkArray<struct hkMultipleVertexBufferLockedElement>`)
     /// - offset: `268`(x86)/`280`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "lockedElements"))]
     #[cfg_attr(feature = "serde", serde(rename = "lockedElements"))]
-    pub m_lockedElements: Vec<hkMultipleVertexBufferLockedElement>,
+    pub m_lockedElements: Vec<hkMultipleVertexBufferLockedElement<'a>>,
     /// # C++ Info
     /// - name: `lockedBuffer`(ctype: `struct hkMemoryMeshVertexBuffer*`)
     /// - offset: `280`(x86)/`296`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "lockedBuffer"))]
     #[cfg_attr(feature = "serde", serde(rename = "lockedBuffer"))]
-    pub m_lockedBuffer: Pointer,
+    pub m_lockedBuffer: Pointer<'a>,
     /// # C++ Info
     /// - name: `elementInfos`(ctype: `hkArray<struct hkMultipleVertexBufferElementInfo>`)
     /// - offset: `284`(x86)/`304`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "elementInfos"))]
     #[cfg_attr(feature = "serde", serde(rename = "elementInfos"))]
-    pub m_elementInfos: Vec<hkMultipleVertexBufferElementInfo>,
+    pub m_elementInfos: Vec<hkMultipleVertexBufferElementInfo<'a>>,
     /// # C++ Info
     /// - name: `vertexBufferInfos`(ctype: `hkArray<struct hkMultipleVertexBufferVertexBufferInfo>`)
     /// - offset: `296`(x86)/`320`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "vertexBufferInfos"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexBufferInfos"))]
-    pub m_vertexBufferInfos: Vec<hkMultipleVertexBufferVertexBufferInfo>,
+    pub m_vertexBufferInfos: Vec<hkMultipleVertexBufferVertexBufferInfo<'a>>,
     /// # C++ Info
     /// - name: `numVertices`(ctype: `hkInt32`)
     /// - offset: `308`(x86)/`336`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numVertices"))]
     #[cfg_attr(feature = "serde", serde(rename = "numVertices"))]
-    pub m_numVertices: i32,
+    pub m_numVertices: I32<'a>,
     /// # C++ Info
     /// - name: `isLocked`(ctype: `hkBool`)
     /// - offset: `312`(x86)/`340`(x86_64)
@@ -82,7 +84,7 @@ pub struct hkMultipleVertexBuffer {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "updateCount"))]
     #[cfg_attr(feature = "serde", serde(rename = "updateCount"))]
-    pub m_updateCount: u32,
+    pub m_updateCount: U32<'a>,
     /// # C++ Info
     /// - name: `writeLock`(ctype: `hkBool`)
     /// - offset: `320`(x86)/`348`(x86_64)
@@ -107,7 +109,7 @@ pub struct hkMultipleVertexBuffer {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkMultipleVertexBuffer {
+    impl<'a> _serde::HavokClass for hkMultipleVertexBuffer<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkMultipleVertexBuffer"
@@ -117,7 +119,7 @@ const _: () = {
             _serde::__private::Signature::new(0xde3ab602)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_vertexFormat.deps_indexes());
             v.extend(
@@ -125,33 +127,34 @@ const _: () = {
                     .m_lockedElements
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
-            v.push(self.m_lockedBuffer.get());
+            v.push(&self.m_lockedBuffer);
             v.extend(
                 self
                     .m_elementInfos
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(
                 self
                     .m_vertexBufferInfos
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
     }
-    impl _serde::Serialize for hkMultipleVertexBuffer {
+    impl<'a> _serde::Serialize for hkMultipleVertexBuffer<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xde3ab602)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -213,7 +216,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkMultipleVertexBuffer {
+    impl<'de> _serde::Deserialize<'de> for hkMultipleVertexBuffer<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -281,14 +284,14 @@ const _: () = {
                 }
             }
             struct __hkMultipleVertexBufferVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkMultipleVertexBuffer>,
+                marker: _serde::__private::PhantomData<hkMultipleVertexBuffer<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkMultipleVertexBufferVisitor<'de> {
-                type Value = hkMultipleVertexBuffer;
+                type Value = hkMultipleVertexBuffer<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -311,16 +314,16 @@ const _: () = {
                     let mut m_lockedElements: _serde::__private::Option<
                         Vec<hkMultipleVertexBufferLockedElement>,
                     > = _serde::__private::None;
-                    let mut m_lockedBuffer: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_lockedBuffer: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_elementInfos: _serde::__private::Option<
                         Vec<hkMultipleVertexBufferElementInfo>,
                     > = _serde::__private::None;
                     let mut m_vertexBufferInfos: _serde::__private::Option<
                         Vec<hkMultipleVertexBufferVertexBufferInfo>,
                     > = _serde::__private::None;
-                    let mut m_numVertices: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numVertices: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_isLocked: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_updateCount: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_updateCount: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     let mut m_writeLock: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_isSharable: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_constructionComplete: _serde::__private::Option<bool> = _serde::__private::None;
@@ -372,7 +375,7 @@ const _: () = {
                                     );
                                 }
                                 m_lockedBuffer = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -429,7 +432,7 @@ const _: () = {
                                     );
                                 }
                                 m_numVertices = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -464,7 +467,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 3usize, 3usize)?;
                                 m_updateCount = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -665,16 +668,16 @@ const _: () = {
                     let mut m_lockedElements: _serde::__private::Option<
                         Vec<hkMultipleVertexBufferLockedElement>,
                     > = _serde::__private::None;
-                    let mut m_lockedBuffer: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_lockedBuffer: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_elementInfos: _serde::__private::Option<
                         Vec<hkMultipleVertexBufferElementInfo>,
                     > = _serde::__private::None;
                     let mut m_vertexBufferInfos: _serde::__private::Option<
                         Vec<hkMultipleVertexBufferVertexBufferInfo>,
                     > = _serde::__private::None;
-                    let mut m_numVertices: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numVertices: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_isLocked: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_updateCount: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_updateCount: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     let mut m_writeLock: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_isSharable: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_constructionComplete: _serde::__private::Option<bool> = _serde::__private::None;
@@ -754,7 +757,7 @@ const _: () = {
                                     );
                                 }
                                 m_lockedBuffer = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -838,7 +841,7 @@ const _: () = {
                                     );
                                 }
                                 m_numVertices = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -890,7 +893,7 @@ const _: () = {
                                     );
                                 }
                                 m_updateCount = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1112,19 +1115,21 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkMeshVertexBuffer {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkMultipleVertexBuffer {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_vertexFormat,
                         m_lockedElements,

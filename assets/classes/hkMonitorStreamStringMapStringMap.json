@@ -4,13 +4,13 @@
   "signature": "0x2c76ce16",
   "size_x86": 16,
   "size_x86_64": 16,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "id",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint64",
       "vtype": "TYPE_UINT64",
       "vsubtype": "TYPE_VOID",
@@ -24,7 +24,7 @@
     },
     {
       "name": "string",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",

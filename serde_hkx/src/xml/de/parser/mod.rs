@@ -6,7 +6,7 @@ use winnow::ascii::multispace0;
 use winnow::combinator::{alt, delimited, fail, repeat};
 use winnow::error::{ContextError, StrContext, StrContextValue};
 use winnow::token::take_until;
-use winnow::{PResult, Parser};
+use winnow::{ModalResult, Parser};
 
 /// Parses a string with surrounding whitespace(0 or more times)
 ///
@@ -47,7 +47,7 @@ pub fn delimited_multispace0_comment<'a>(
 ///
 /// # Errors
 /// When parse failed.
-pub fn comment_multispace0(input: &mut &str) -> PResult<()> {
+pub fn comment_multispace0(input: &mut &str) -> ModalResult<()> {
     repeat(
         0..,
         alt((
@@ -72,7 +72,7 @@ pub fn comment_multispace0(input: &mut &str) -> PResult<()> {
 ///
 /// # Errors
 /// When parse failed.
-pub fn comment_multispace1(input: &mut &str) -> PResult<()> {
+pub fn comment_multispace1(input: &mut &str) -> ModalResult<()> {
     repeat(
         1..,
         alt((
@@ -98,7 +98,7 @@ pub fn comment_multispace1(input: &mut &str) -> PResult<()> {
 ///
 /// # Errors
 /// When parse failed.
-pub fn comment<'a>(input: &mut &'a str) -> PResult<&'a str> {
+pub fn comment<'a>(input: &mut &'a str) -> ModalResult<&'a str> {
     delimited("<!--", take_until(0.., "-->"), "-->")
         .context(StrContext::Expected(StrContextValue::Description(
             "comment",

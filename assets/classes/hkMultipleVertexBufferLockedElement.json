@@ -4,13 +4,13 @@
   "signature": "0xa0e22afc",
   "size_x86": 7,
   "size_x86_64": 7,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "vertexBufferIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -24,7 +24,7 @@
     },
     {
       "name": "elementIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -38,7 +38,7 @@
     },
     {
       "name": "lockedBufferIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -52,7 +52,7 @@
     },
     {
       "name": "vertexFormatIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -66,7 +66,7 @@
     },
     {
       "name": "lockFlags",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -80,7 +80,7 @@
     },
     {
       "name": "outputBufferIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -94,7 +94,7 @@
     },
     {
       "name": "emulatedIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt8",
       "vtype": "TYPE_INT8",
       "vsubtype": "TYPE_VOID",

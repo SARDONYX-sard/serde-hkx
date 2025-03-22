@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbStateMachineTransitionInfoArray {
+pub struct hkbStateMachineTransitionInfoArray<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,22 +22,24 @@ pub struct hkbStateMachineTransitionInfoArray {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `transitions`(ctype: `hkArray<struct hkbStateMachineTransitionInfo>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "transitions"))]
     #[cfg_attr(feature = "serde", serde(rename = "transitions"))]
-    pub m_transitions: Vec<hkbStateMachineTransitionInfo>,
+    pub m_transitions: Vec<hkbStateMachineTransitionInfo<'a>>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbStateMachineTransitionInfoArray {
+    impl<'a> _serde::HavokClass for hkbStateMachineTransitionInfoArray<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbStateMachineTransitionInfoArray"
@@ -47,25 +49,26 @@ const _: () = {
             _serde::__private::Signature::new(0xe397b11e)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_transitions
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
     }
-    impl _serde::Serialize for hkbStateMachineTransitionInfoArray {
+    impl<'a> _serde::Serialize for hkbStateMachineTransitionInfoArray<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xe397b11e)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -95,7 +98,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbStateMachineTransitionInfoArray {
+    impl<'de> _serde::Deserialize<'de> for hkbStateMachineTransitionInfoArray<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -144,7 +147,7 @@ const _: () = {
             }
             struct __hkbStateMachineTransitionInfoArrayVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkbStateMachineTransitionInfoArray,
+                    hkbStateMachineTransitionInfoArray<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -153,7 +156,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkbStateMachineTransitionInfoArrayVisitor<'de> {
-                type Value = hkbStateMachineTransitionInfoArray;
+                type Value = hkbStateMachineTransitionInfoArray<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -274,15 +277,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbStateMachineTransitionInfoArray {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_transitions,
                     })

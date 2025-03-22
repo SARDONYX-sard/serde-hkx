@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpVehicleDefaultAnalogDriverInput {
+pub struct hkpVehicleDefaultAnalogDriverInput<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkpVehicleDefaultAnalogDriverInput {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpVehicleDriverInput,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpVehicleDriverInput<'a>,
     /// # C++ Info
     /// - name: `slopeChangePointX`(ctype: `hkReal`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -58,7 +60,7 @@ pub struct hkpVehicleDefaultAnalogDriverInput {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpVehicleDefaultAnalogDriverInput {
+    impl<'a> _serde::HavokClass for hkpVehicleDefaultAnalogDriverInput<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpVehicleDefaultAnalogDriverInput"
@@ -68,18 +70,19 @@ const _: () = {
             _serde::__private::Signature::new(0x123a5d50)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpVehicleDefaultAnalogDriverInput {
+    impl<'a> _serde::Serialize for hkpVehicleDefaultAnalogDriverInput<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x123a5d50)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -107,7 +110,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpVehicleDefaultAnalogDriverInput {
+    impl<'de> _serde::Deserialize<'de> for hkpVehicleDefaultAnalogDriverInput<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -162,7 +165,7 @@ const _: () = {
             }
             struct __hkpVehicleDefaultAnalogDriverInputVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkpVehicleDefaultAnalogDriverInput,
+                    hkpVehicleDefaultAnalogDriverInput<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -171,7 +174,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpVehicleDefaultAnalogDriverInputVisitor<'de> {
-                type Value = hkpVehicleDefaultAnalogDriverInput;
+                type Value = hkpVehicleDefaultAnalogDriverInput<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -489,19 +492,21 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpVehicleDriverInput {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpVehicleDefaultAnalogDriverInput {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_slopeChangePointX,
                         m_initialSlope,

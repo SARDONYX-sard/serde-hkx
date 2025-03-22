@@ -4,13 +4,13 @@
   "signature": "0x0",
   "size_x86": 48,
   "size_x86_64": 48,
-  "parent_has_string": false,
+  "parent_has_ref": false,
   "vtable": false,
-  "has_string": false,
+  "has_ref": false,
   "members": [
     {
       "name": "transition",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -24,7 +24,7 @@
     },
     {
       "name": "quaternion",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -38,7 +38,7 @@
     },
     {
       "name": "scale",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",

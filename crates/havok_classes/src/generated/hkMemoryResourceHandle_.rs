@@ -22,18 +22,20 @@ pub struct hkMemoryResourceHandle<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkResourceHandle,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkResourceHandle<'a>,
     /// # C++ Info
     /// - name: `variant`(ctype: `struct hkReferencedObject*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "variant"))]
     #[cfg_attr(feature = "serde", serde(rename = "variant"))]
-    pub m_variant: Pointer,
+    pub m_variant: Pointer<'a>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
@@ -63,15 +65,15 @@ const _: () = {
             _serde::__private::Signature::new(0xbffac086)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_variant.get());
+            v.push(&self.m_variant);
             v.extend(
                 self
                     .m_references
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
@@ -83,6 +85,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xbffac086)));
             let mut serializer = __serializer
                 .serialize_struct("hkMemoryResourceHandle", class_meta, (28u64, 48u64))?;
@@ -196,7 +199,7 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_variant: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variant: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_references: _serde::__private::Option<
                         Vec<hkMemoryResourceHandleExternalLink<'de>>,
@@ -212,7 +215,7 @@ const _: () = {
                                     );
                                 }
                                 m_variant = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -299,7 +302,7 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variant: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variant: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_references: _serde::__private::Option<
                         Vec<hkMemoryResourceHandleExternalLink<'de>>,
@@ -326,7 +329,7 @@ const _: () = {
                                     );
                                 }
                                 m_variant = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -422,17 +425,25 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
-                    let parent = hkResourceBase { __ptr, parent };
-                    let parent = hkResourceHandle { __ptr, parent };
+                    let parent = hkResourceBase {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
+                    let parent = hkResourceHandle {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkMemoryResourceHandle {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variant,
                         m_name,

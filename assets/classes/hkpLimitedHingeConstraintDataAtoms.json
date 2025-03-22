@@ -4,9 +4,9 @@
   "signature": "0x54c7715b",
   "size_x86": 240,
   "size_x86_64": 240,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "Axis",
@@ -33,7 +33,7 @@
     {
       "name": "transforms",
       "class_ref": "hkpSetLocalTransformsConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpSetLocalTransformsConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -48,7 +48,7 @@
     {
       "name": "setupStabilization",
       "class_ref": "hkpSetupStabilizationAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpSetupStabilizationAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -63,7 +63,7 @@
     {
       "name": "angMotor",
       "class_ref": "hkpAngMotorConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpAngMotorConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -78,7 +78,7 @@
     {
       "name": "angFriction",
       "class_ref": "hkpAngFrictionConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpAngFrictionConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -93,7 +93,7 @@
     {
       "name": "angLimit",
       "class_ref": "hkpAngLimitConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpAngLimitConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -108,7 +108,7 @@
     {
       "name": "2dAng",
       "class_ref": "hkp2dAngConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkp2dAngConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -123,7 +123,7 @@
     {
       "name": "ballSocket",
       "class_ref": "hkpBallSocketConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpBallSocketConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",

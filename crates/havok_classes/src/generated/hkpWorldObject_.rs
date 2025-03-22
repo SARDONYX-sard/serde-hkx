@@ -22,11 +22,13 @@ pub struct hkpWorldObject<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `world`(ctype: `void*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -34,7 +36,7 @@ pub struct hkpWorldObject<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "world"))]
     #[cfg_attr(feature = "serde", serde(rename = "world"))]
-    pub m_world: Pointer,
+    pub m_world: Pointer<'a>,
     /// # C++ Info
     /// - name: `userData`(ctype: `hkUlong`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
@@ -46,16 +48,17 @@ pub struct hkpWorldObject<'a> {
     /// - name: `collidable`(ctype: `struct hkpLinkedCollidable`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: ` 92`(x86)/`128`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "collidable"))]
     #[cfg_attr(feature = "serde", serde(rename = "collidable"))]
-    pub m_collidable: hkpLinkedCollidable,
+    pub m_collidable: hkpLinkedCollidable<'a>,
     /// # C++ Info
     /// - name: `multiThreadCheck`(ctype: `struct hkMultiThreadCheck`)
     /// - offset: `108`(x86)/`160`(x86_64)
     /// - type_size: ` 12`(x86)/` 12`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "multiThreadCheck"))]
     #[cfg_attr(feature = "serde", serde(rename = "multiThreadCheck"))]
-    pub m_multiThreadCheck: hkMultiThreadCheck,
+    pub m_multiThreadCheck: hkMultiThreadCheck<'a>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: `120`(x86)/`176`(x86_64)
@@ -70,7 +73,7 @@ pub struct hkpWorldObject<'a> {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "properties"))]
     #[cfg_attr(feature = "serde", serde(rename = "properties"))]
-    pub m_properties: Vec<hkpProperty>,
+    pub m_properties: Vec<hkpProperty<'a>>,
     /// # C++ Info
     /// - name: `treeData`(ctype: `void*`)
     /// - offset: `136`(x86)/`200`(x86_64)
@@ -78,7 +81,7 @@ pub struct hkpWorldObject<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "treeData"))]
     #[cfg_attr(feature = "serde", serde(rename = "treeData"))]
-    pub m_treeData: Pointer,
+    pub m_treeData: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -92,9 +95,9 @@ const _: () = {
             _serde::__private::Signature::new(0x49fb6f2e)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_world.get());
+            v.push(&self.m_world);
             v.extend(self.m_collidable.deps_indexes());
             v.extend(self.m_multiThreadCheck.deps_indexes());
             v.extend(
@@ -102,9 +105,9 @@ const _: () = {
                     .m_properties
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
-            v.push(self.m_treeData.get());
+            v.push(&self.m_treeData);
             v
         }
     }
@@ -115,6 +118,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x49fb6f2e)));
             let mut serializer = __serializer
                 .serialize_struct("hkpWorldObject", class_meta, (140u64, 208u64))?;
@@ -226,17 +230,17 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_world: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_world: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_collidable: _serde::__private::Option<
-                        hkpLinkedCollidable,
+                        hkpLinkedCollidable<'de>,
                     > = _serde::__private::None;
                     let mut m_multiThreadCheck: _serde::__private::Option<
                         hkMultiThreadCheck,
                     > = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_properties: _serde::__private::Option<Vec<hkpProperty>> = _serde::__private::None;
-                    let mut m_treeData: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_treeData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     for i in 0..7usize {
                         match i {
                             0usize => {
@@ -246,7 +250,7 @@ const _: () = {
                                     );
                                 }
                                 m_world = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -280,7 +284,9 @@ const _: () = {
                                     );
                                 }
                                 m_collidable = _serde::__private::Some(
-                                    match __A::next_value::<hkpLinkedCollidable>(&mut __map) {
+                                    match __A::next_value::<
+                                        hkpLinkedCollidable<'de>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -347,7 +353,7 @@ const _: () = {
                                     );
                                 }
                                 m_treeData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -442,7 +448,7 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_collidable: _serde::__private::Option<
-                        hkpLinkedCollidable,
+                        hkpLinkedCollidable<'de>,
                     > = _serde::__private::None;
                     let mut m_multiThreadCheck: _serde::__private::Option<
                         hkMultiThreadCheck,
@@ -497,7 +503,9 @@ const _: () = {
                                     );
                                 }
                                 m_collidable = _serde::__private::Some(
-                                    match __A::next_value::<hkpLinkedCollidable>(&mut __map) {
+                                    match __A::next_value::<
+                                        hkpLinkedCollidable<'de>,
+                                    >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -641,15 +649,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpWorldObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_collidable,

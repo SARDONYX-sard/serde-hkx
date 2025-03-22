@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpBridgeAtoms {
+pub struct hkpBridgeAtoms<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,18 +22,19 @@ pub struct hkpBridgeAtoms {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `bridgeAtom`(ctype: `struct hkpBridgeConstraintAtom`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 12`(x86)/` 24`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "bridgeAtom"))]
     #[cfg_attr(feature = "serde", serde(rename = "bridgeAtom"))]
-    pub m_bridgeAtom: hkpBridgeConstraintAtom,
+    pub m_bridgeAtom: hkpBridgeConstraintAtom<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpBridgeAtoms {
+    impl<'a> _serde::HavokClass for hkpBridgeAtoms<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpBridgeAtoms"
@@ -43,19 +44,20 @@ const _: () = {
             _serde::__private::Signature::new(0xde152a4d)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_bridgeAtom.deps_indexes());
             v
         }
     }
-    impl _serde::Serialize for hkpBridgeAtoms {
+    impl<'a> _serde::Serialize for hkpBridgeAtoms<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xde152a4d)));
             let mut serializer = __serializer
                 .serialize_struct("hkpBridgeAtoms", class_meta, (12u64, 24u64))?;
@@ -69,7 +71,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpBridgeAtoms {
+    impl<'de> _serde::Deserialize<'de> for hkpBridgeAtoms<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -117,14 +119,14 @@ const _: () = {
                 }
             }
             struct __hkpBridgeAtomsVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpBridgeAtoms>,
+                marker: _serde::__private::PhantomData<hkpBridgeAtoms<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpBridgeAtomsVisitor<'de> {
-                type Value = hkpBridgeAtoms;
+                type Value = hkpBridgeAtoms<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -241,7 +243,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpBridgeAtoms {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_bridgeAtom,
                     })
                 }

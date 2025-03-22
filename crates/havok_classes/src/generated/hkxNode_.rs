@@ -22,7 +22,8 @@ pub struct hkxNode<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -42,7 +43,7 @@ pub struct hkxNode<'a> {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "object"))]
     #[cfg_attr(feature = "serde", serde(rename = "object"))]
-    pub m_object: Pointer,
+    pub m_object: Pointer<'a>,
     /// # C++ Info
     /// - name: `keyFrames`(ctype: `hkArray<hkMatrix4>`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
@@ -56,7 +57,7 @@ pub struct hkxNode<'a> {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "children"))]
     #[cfg_attr(feature = "serde", serde(rename = "children"))]
-    pub m_children: Vec<Pointer>,
+    pub m_children: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `annotations`(ctype: `hkArray<struct hkxNodeAnnotationData>`)
     /// - offset: ` 52`(x86)/` 80`(x86_64)
@@ -93,7 +94,7 @@ const _: () = {
             _serde::__private::Signature::new(0x5a218502)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
@@ -101,16 +102,16 @@ const _: () = {
                     .m_attributeGroups
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
-            v.push(self.m_object.get());
-            v.extend(self.m_children.iter().map(|ptr| ptr.get()));
+            v.push(&self.m_object);
+            v.extend(self.m_children.iter());
             v.extend(
                 self
                     .m_annotations
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
@@ -122,6 +123,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x5a218502)));
             let mut serializer = __serializer
                 .serialize_struct("hkxNode", class_meta, (72u64, 112u64))?;
@@ -257,9 +259,9 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_object: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_object: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_keyFrames: _serde::__private::Option<Vec<Matrix4>> = _serde::__private::None;
-                    let mut m_children: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_children: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
                     let mut m_annotations: _serde::__private::Option<
                         Vec<hkxNodeAnnotationData<'de>>,
                     > = _serde::__private::None;
@@ -291,7 +293,7 @@ const _: () = {
                                     );
                                 }
                                 m_object = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -325,7 +327,7 @@ const _: () = {
                                     );
                                 }
                                 m_children = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -476,9 +478,9 @@ const _: () = {
                         Vec<hkxAttributeGroup<'de>>,
                     > = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_object: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_object: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_keyFrames: _serde::__private::Option<Vec<Matrix4>> = _serde::__private::None;
-                    let mut m_children: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_children: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
                     let mut m_annotations: _serde::__private::Option<
                         Vec<hkxNodeAnnotationData<'de>>,
                     > = _serde::__private::None;
@@ -558,7 +560,7 @@ const _: () = {
                                     );
                                 }
                                 m_object = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -610,7 +612,7 @@ const _: () = {
                                     );
                                 }
                                 m_children = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -790,20 +792,22 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkxAttributeHolder {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_attributeGroups,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkxNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_name,
                         m_object,

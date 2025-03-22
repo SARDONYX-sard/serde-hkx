@@ -5,14 +5,14 @@
   "size_x86": 112,
   "size_x86_64": 128,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "mesh",
       "class_ref": "hkxMesh",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkxMesh*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -26,7 +26,7 @@
     },
     {
       "name": "nodeNames",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<hkStringPtr>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRINGPTR",
@@ -40,7 +40,7 @@
     },
     {
       "name": "bindPose",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkMatrix4>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_MATRIX4",
@@ -54,7 +54,7 @@
     },
     {
       "name": "initSkinTransform",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkMatrix4",
       "vtype": "TYPE_MATRIX4",
       "vsubtype": "TYPE_VOID",

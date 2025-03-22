@@ -5,13 +5,13 @@
   "size_x86": 12,
   "size_x86_64": 24,
   "parent": "hkWorldMemoryAvailableWatchDog",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "freeHeapMemoryRequested",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",

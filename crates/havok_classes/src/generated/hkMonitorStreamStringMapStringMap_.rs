@@ -22,7 +22,8 @@ pub struct hkMonitorStreamStringMapStringMap<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `id`(ctype: `hkUint64`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -30,7 +31,7 @@ pub struct hkMonitorStreamStringMapStringMap<'a> {
     /// - flags: `ALIGN_8`
     #[cfg_attr(feature = "json_schema", schemars(rename = "id"))]
     #[cfg_attr(feature = "serde", serde(rename = "id"))]
-    pub m_id: u64,
+    pub m_id: U64<'a>,
     /// # C++ Info
     /// - name: `string`(ctype: `hkStringPtr`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
@@ -52,7 +53,7 @@ const _: () = {
             _serde::__private::Signature::new(0x2c76ce16)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
@@ -64,6 +65,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x2c76ce16)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -161,7 +163,7 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_id: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_id: _serde::__private::Option<U64<'de>> = _serde::__private::None;
                     let mut m_string: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     for i in 0..2usize {
                         match i {
@@ -172,7 +174,7 @@ const _: () = {
                                     );
                                 }
                                 m_id = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<U64<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -229,7 +231,7 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_id: _serde::__private::Option<u64> = _serde::__private::None;
+                    let mut m_id: _serde::__private::Option<U64<'de>> = _serde::__private::None;
                     let mut m_string: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -251,7 +253,7 @@ const _: () = {
                                     );
                                 }
                                 m_id = _serde::__private::Some(
-                                    match __A::next_value::<u64>(&mut __map) {
+                                    match __A::next_value::<U64<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -308,7 +310,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkMonitorStreamStringMapStringMap {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_id,
                         m_string,
                     })

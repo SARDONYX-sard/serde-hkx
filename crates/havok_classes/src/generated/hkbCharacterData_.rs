@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbCharacterData {
+pub struct hkbCharacterData<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,18 +22,20 @@ pub struct hkbCharacterData {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `characterControllerInfo`(ctype: `struct hkbCharacterDataCharacterControllerInfo`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 24`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "characterControllerInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterControllerInfo"))]
-    pub m_characterControllerInfo: hkbCharacterDataCharacterControllerInfo,
+    pub m_characterControllerInfo: hkbCharacterDataCharacterControllerInfo<'a>,
     /// # C++ Info
     /// - name: `modelUpMS`(ctype: `hkVector4`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
@@ -61,49 +63,49 @@ pub struct hkbCharacterData {
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "characterPropertyInfos"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterPropertyInfos"))]
-    pub m_characterPropertyInfos: Vec<hkbVariableInfo>,
+    pub m_characterPropertyInfos: Vec<hkbVariableInfo<'a>>,
     /// # C++ Info
     /// - name: `numBonesPerLod`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 92`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numBonesPerLod"))]
     #[cfg_attr(feature = "serde", serde(rename = "numBonesPerLod"))]
-    pub m_numBonesPerLod: Vec<i32>,
+    pub m_numBonesPerLod: Vec<I32<'a>>,
     /// # C++ Info
     /// - name: `characterPropertyValues`(ctype: `struct hkbVariableValueSet*`)
     /// - offset: `104`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "characterPropertyValues"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterPropertyValues"))]
-    pub m_characterPropertyValues: Pointer,
+    pub m_characterPropertyValues: Pointer<'a>,
     /// # C++ Info
     /// - name: `footIkDriverInfo`(ctype: `struct hkbFootIkDriverInfo*`)
     /// - offset: `108`(x86)/`136`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "footIkDriverInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "footIkDriverInfo"))]
-    pub m_footIkDriverInfo: Pointer,
+    pub m_footIkDriverInfo: Pointer<'a>,
     /// # C++ Info
     /// - name: `handIkDriverInfo`(ctype: `struct hkbHandIkDriverInfo*`)
     /// - offset: `112`(x86)/`144`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "handIkDriverInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "handIkDriverInfo"))]
-    pub m_handIkDriverInfo: Pointer,
+    pub m_handIkDriverInfo: Pointer<'a>,
     /// # C++ Info
     /// - name: `stringData`(ctype: `struct hkbCharacterStringData*`)
     /// - offset: `116`(x86)/`152`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "stringData"))]
     #[cfg_attr(feature = "serde", serde(rename = "stringData"))]
-    pub m_stringData: Pointer,
+    pub m_stringData: Pointer<'a>,
     /// # C++ Info
     /// - name: `mirroredSkeletonInfo`(ctype: `struct hkbMirroredSkeletonInfo*`)
     /// - offset: `120`(x86)/`160`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "mirroredSkeletonInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "mirroredSkeletonInfo"))]
-    pub m_mirroredSkeletonInfo: Pointer,
+    pub m_mirroredSkeletonInfo: Pointer<'a>,
     /// # C++ Info
     /// - name: `scale`(ctype: `hkReal`)
     /// - offset: `124`(x86)/`168`(x86_64)
@@ -118,7 +120,7 @@ pub struct hkbCharacterData {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "numHands"))]
     #[cfg_attr(feature = "serde", serde(rename = "numHands"))]
-    pub m_numHands: i16,
+    pub m_numHands: I16<'a>,
     /// # C++ Info
     /// - name: `numFloatSlots`(ctype: `hkInt16`)
     /// - offset: `130`(x86)/`174`(x86_64)
@@ -126,11 +128,11 @@ pub struct hkbCharacterData {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "numFloatSlots"))]
     #[cfg_attr(feature = "serde", serde(rename = "numFloatSlots"))]
-    pub m_numFloatSlots: i16,
+    pub m_numFloatSlots: I16<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbCharacterData {
+    impl<'a> _serde::HavokClass for hkbCharacterData<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbCharacterData"
@@ -140,7 +142,7 @@ const _: () = {
             _serde::__private::Signature::new(0x300d6808)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_characterControllerInfo.deps_indexes());
             v.extend(
@@ -148,23 +150,24 @@ const _: () = {
                     .m_characterPropertyInfos
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
-            v.push(self.m_characterPropertyValues.get());
-            v.push(self.m_footIkDriverInfo.get());
-            v.push(self.m_handIkDriverInfo.get());
-            v.push(self.m_stringData.get());
-            v.push(self.m_mirroredSkeletonInfo.get());
+            v.push(&self.m_characterPropertyValues);
+            v.push(&self.m_footIkDriverInfo);
+            v.push(&self.m_handIkDriverInfo);
+            v.push(&self.m_stringData);
+            v.push(&self.m_mirroredSkeletonInfo);
             v
         }
     }
-    impl _serde::Serialize for hkbCharacterData {
+    impl<'a> _serde::Serialize for hkbCharacterData<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x300d6808)));
             let mut serializer = __serializer
                 .serialize_struct("hkbCharacterData", class_meta, (144u64, 176u64))?;
@@ -219,7 +222,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbCharacterData {
+    impl<'de> _serde::Deserialize<'de> for hkbCharacterData<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -293,14 +296,14 @@ const _: () = {
                 }
             }
             struct __hkbCharacterDataVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbCharacterData>,
+                marker: _serde::__private::PhantomData<hkbCharacterData<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkbCharacterDataVisitor<'de> {
-                type Value = hkbCharacterData;
+                type Value = hkbCharacterData<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -328,17 +331,23 @@ const _: () = {
                     let mut m_characterPropertyInfos: _serde::__private::Option<
                         Vec<hkbVariableInfo>,
                     > = _serde::__private::None;
-                    let mut m_numBonesPerLod: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
+                    let mut m_numBonesPerLod: _serde::__private::Option<Vec<I32<'de>>> = _serde::__private::None;
                     let mut m_characterPropertyValues: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
-                    let mut m_footIkDriverInfo: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_handIkDriverInfo: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_mirroredSkeletonInfo: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_footIkDriverInfo: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_handIkDriverInfo: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_stringData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_mirroredSkeletonInfo: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_scale: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_numHands: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_numFloatSlots: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_numHands: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_numFloatSlots: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     for i in 0..14usize {
                         match i {
                             0usize => {
@@ -442,7 +451,7 @@ const _: () = {
                                     );
                                 }
                                 m_numBonesPerLod = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                    match __A::next_value::<Vec<I32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -461,7 +470,7 @@ const _: () = {
                                     );
                                 }
                                 m_characterPropertyValues = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -478,7 +487,7 @@ const _: () = {
                                     );
                                 }
                                 m_footIkDriverInfo = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -495,7 +504,7 @@ const _: () = {
                                     );
                                 }
                                 m_handIkDriverInfo = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -512,7 +521,7 @@ const _: () = {
                                     );
                                 }
                                 m_stringData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -531,7 +540,7 @@ const _: () = {
                                     );
                                 }
                                 m_mirroredSkeletonInfo = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -563,7 +572,7 @@ const _: () = {
                                     );
                                 }
                                 m_numHands = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -580,7 +589,7 @@ const _: () = {
                                     );
                                 }
                                 m_numFloatSlots = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -764,14 +773,20 @@ const _: () = {
                     let mut m_characterPropertyInfos: _serde::__private::Option<
                         Vec<hkbVariableInfo>,
                     > = _serde::__private::None;
-                    let mut m_numBonesPerLod: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
+                    let mut m_numBonesPerLod: _serde::__private::Option<Vec<I32<'de>>> = _serde::__private::None;
                     let mut m_characterPropertyValues: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
-                    let mut m_footIkDriverInfo: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_handIkDriverInfo: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_stringData: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_mirroredSkeletonInfo: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_footIkDriverInfo: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_handIkDriverInfo: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_stringData: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_mirroredSkeletonInfo: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_scale: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -931,7 +946,7 @@ const _: () = {
                                     );
                                 }
                                 m_numBonesPerLod = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                    match __A::next_value::<Vec<I32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -959,7 +974,7 @@ const _: () = {
                                     );
                                 }
                                 m_characterPropertyValues = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -985,7 +1000,7 @@ const _: () = {
                                     );
                                 }
                                 m_footIkDriverInfo = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1011,7 +1026,7 @@ const _: () = {
                                     );
                                 }
                                 m_handIkDriverInfo = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1037,7 +1052,7 @@ const _: () = {
                                     );
                                 }
                                 m_stringData = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1065,7 +1080,7 @@ const _: () = {
                                     );
                                 }
                                 m_mirroredSkeletonInfo = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1243,15 +1258,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbCharacterData {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_characterControllerInfo,
                         m_modelUpMS,

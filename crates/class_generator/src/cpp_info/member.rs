@@ -18,9 +18,9 @@ pub struct Member<'a> {
     #[serde(skip_serializing_if = "Option::is_none")]
     pub enum_ref: Option<Cow<'a, str>>,
 
-    /// Whether `CString` or `StringPtr` is contained in its own member or in a member of its parent?
+    /// The reference type(e.g. `CString`, `StringPtr`) is contained in its own member or in a member of its parent?
     /// (To calculate lifetime annotation)
-    pub has_string: bool,
+    pub has_ref: bool,
 
     /// C++ Type
     #[serde(bound(deserialize = "Cow<'a, str>: Deserialize<'de>"))]
@@ -87,7 +87,7 @@ impl Member<'_> {
                 return UnsupportedVTypeSnafu {
                     vtype: self.vtype.clone(),
                 }
-                .fail()
+                .fail();
             }
 
             _ => size_of_type_common(&self.vtype, ptr_size)?,
@@ -97,7 +97,7 @@ impl Member<'_> {
     fn size_of_vsubtype(&self, ptr_size: u32) -> Result<u32, MemberError> {
         Ok(match self.vsubtype {
             TypeKind::Enum | TypeKind::Flags => {
-                return UnsupportedFlagAndEnumOnVSubTypeSnafu.fail()
+                return UnsupportedFlagAndEnumOnVSubTypeSnafu.fail();
             }
 
             TypeKind::Void
@@ -111,7 +111,7 @@ impl Member<'_> {
                     vtype: self.vtype.clone(),
                     vsubtype: self.vsubtype.clone(),
                 }
-                .fail()
+                .fail();
             }
 
             _ => size_of_type_common(&self.vsubtype, ptr_size)?,
@@ -178,7 +178,7 @@ impl Member<'_> {
                     vtype: self.vtype.clone(),
                     vsubtype: self.vsubtype.clone(),
                 }
-                .fail()
+                .fail();
             }
         })
     }
@@ -254,7 +254,9 @@ fn size_of_type_common(type_kind: &TypeKind, ptr_size: u32) -> Result<u32, Membe
 #[allow(clippy::enum_variant_names)]
 #[derive(Debug, PartialEq, snafu::Snafu)]
 pub enum MemberError {
-    #[snafu(display("Struct cannot calculate the size here. This is obtained by caching members in a HashMap or similar."))]
+    #[snafu(display(
+        "Struct cannot calculate the size here. This is obtained by caching members in a HashMap or similar."
+    ))]
     UnsupportedTypeKindStruct,
 
     #[snafu(display(
@@ -262,10 +264,14 @@ pub enum MemberError {
     ))]
     UnsupportedVType { vtype: TypeKind },
 
-    #[snafu(display("Unsupported vtype: {vtype}, vsubtype: {vsubtype}. This is because they are not used in the 2010 Havok classes."))]
+    #[snafu(display(
+        "Unsupported vtype: {vtype}, vsubtype: {vsubtype}. This is because they are not used in the 2010 Havok classes."
+    ))]
     UnsupportedVSubType { vtype: TypeKind, vsubtype: TypeKind },
 
-    #[snafu(display("TypeKind::Flag and TypeKind::Enum should not come in generics (vsubtype), so they are not supported (at least in ver. hk2010)."))]
+    #[snafu(display(
+        "TypeKind::Flag and TypeKind::Enum should not come in generics (vsubtype), so they are not supported (at least in ver. hk2010)."
+    ))]
     UnsupportedFlagAndEnumOnVSubType,
 }
 

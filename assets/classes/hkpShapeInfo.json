@@ -5,14 +5,14 @@
   "size_x86": 112,
   "size_x86_64": 128,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "shape",
       "class_ref": "hkpShape",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpShape*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -26,7 +26,7 @@
     },
     {
       "name": "isHierarchicalCompound",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -40,7 +40,7 @@
     },
     {
       "name": "hkdShapesCollected",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -54,7 +54,7 @@
     },
     {
       "name": "childShapeNames",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkArray<hkStringPtr>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRINGPTR",
@@ -68,7 +68,7 @@
     },
     {
       "name": "childTransforms",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkTransform>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_TRANSFORM",
@@ -82,7 +82,7 @@
     },
     {
       "name": "transform",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkTransform",
       "vtype": "TYPE_TRANSFORM",
       "vsubtype": "TYPE_VOID",

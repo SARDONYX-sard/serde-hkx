@@ -22,18 +22,20 @@ pub struct hkxSkinBinding<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `mesh`(ctype: `struct hkxMesh*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "mesh"))]
     #[cfg_attr(feature = "serde", serde(rename = "mesh"))]
-    pub m_mesh: Pointer,
+    pub m_mesh: Pointer<'a>,
     /// # C++ Info
     /// - name: `nodeNames`(ctype: `hkArray<hkStringPtr>`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
@@ -69,9 +71,9 @@ const _: () = {
             _serde::__private::Signature::new(0x5a93f338)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_mesh.get());
+            v.push(&self.m_mesh);
             v
         }
     }
@@ -82,6 +84,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x5a93f338)));
             let mut serializer = __serializer
                 .serialize_struct("hkxSkinBinding", class_meta, (112u64, 128u64))?;
@@ -186,7 +189,7 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_mesh: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_mesh: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_nodeNames: _serde::__private::Option<
                         Vec<StringPtr<'de>>,
                     > = _serde::__private::None;
@@ -201,7 +204,7 @@ const _: () = {
                                     );
                                 }
                                 m_mesh = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -319,7 +322,7 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_mesh: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_mesh: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_nodeNames: _serde::__private::Option<
                         Vec<StringPtr<'de>>,
                     > = _serde::__private::None;
@@ -345,7 +348,7 @@ const _: () = {
                                     );
                                 }
                                 m_mesh = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -481,15 +484,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkxSkinBinding {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_mesh,
                         m_nodeNames,

@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkaSplineCompressedAnimationTrackCompressionParams {
+pub struct hkaSplineCompressedAnimationTrackCompressionParams<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkaSplineCompressedAnimationTrackCompressionParams {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `rotationTolerance`(ctype: `hkReal`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -57,28 +58,28 @@ pub struct hkaSplineCompressedAnimationTrackCompressionParams {
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "rotationDegree"))]
     #[cfg_attr(feature = "serde", serde(rename = "rotationDegree"))]
-    pub m_rotationDegree: u16,
+    pub m_rotationDegree: U16<'a>,
     /// # C++ Info
     /// - name: `translationDegree`(ctype: `hkUint16`)
     /// - offset: ` 18`(x86)/` 18`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "translationDegree"))]
     #[cfg_attr(feature = "serde", serde(rename = "translationDegree"))]
-    pub m_translationDegree: u16,
+    pub m_translationDegree: U16<'a>,
     /// # C++ Info
     /// - name: `scaleDegree`(ctype: `hkUint16`)
     /// - offset: ` 20`(x86)/` 20`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "scaleDegree"))]
     #[cfg_attr(feature = "serde", serde(rename = "scaleDegree"))]
-    pub m_scaleDegree: u16,
+    pub m_scaleDegree: U16<'a>,
     /// # C++ Info
     /// - name: `floatingDegree`(ctype: `hkUint16`)
     /// - offset: ` 22`(x86)/` 22`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "floatingDegree"))]
     #[cfg_attr(feature = "serde", serde(rename = "floatingDegree"))]
-    pub m_floatingDegree: u16,
+    pub m_floatingDegree: U16<'a>,
     /// # C++ Info
     /// - name: `rotationQuantizationType`(ctype: `enum RotationQuantization`)
     /// - offset: ` 24`(x86)/` 24`(x86_64)
@@ -113,7 +114,8 @@ pub struct hkaSplineCompressedAnimationTrackCompressionParams {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkaSplineCompressedAnimationTrackCompressionParams {
+    impl<'a> _serde::HavokClass
+    for hkaSplineCompressedAnimationTrackCompressionParams<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkaSplineCompressedAnimationTrackCompressionParams"
@@ -123,18 +125,20 @@ const _: () = {
             _serde::__private::Signature::new(0x42e878d3)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkaSplineCompressedAnimationTrackCompressionParams {
+    impl<'a> _serde::Serialize
+    for hkaSplineCompressedAnimationTrackCompressionParams<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x42e878d3)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -181,7 +185,7 @@ const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
     impl<'de> _serde::Deserialize<'de>
-    for hkaSplineCompressedAnimationTrackCompressionParams {
+    for hkaSplineCompressedAnimationTrackCompressionParams<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -256,7 +260,7 @@ const _: () = {
             }
             struct __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkaSplineCompressedAnimationTrackCompressionParams,
+                    hkaSplineCompressedAnimationTrackCompressionParams<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -265,7 +269,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkaSplineCompressedAnimationTrackCompressionParamsVisitor<'de> {
-                type Value = hkaSplineCompressedAnimationTrackCompressionParams;
+                type Value = hkaSplineCompressedAnimationTrackCompressionParams<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -287,10 +291,10 @@ const _: () = {
                     let mut m_translationTolerance: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_scaleTolerance: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_floatingTolerance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_rotationDegree: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_translationDegree: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_scaleDegree: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_floatingDegree: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_rotationDegree: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_translationDegree: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_scaleDegree: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_floatingDegree: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     let mut m_rotationQuantizationType: _serde::__private::Option<
                         RotationQuantization,
                     > = _serde::__private::None;
@@ -388,7 +392,7 @@ const _: () = {
                                     );
                                 }
                                 m_rotationDegree = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -407,7 +411,7 @@ const _: () = {
                                     );
                                 }
                                 m_translationDegree = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -424,7 +428,7 @@ const _: () = {
                                     );
                                 }
                                 m_scaleDegree = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -441,7 +445,7 @@ const _: () = {
                                     );
                                 }
                                 m_floatingDegree = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -676,10 +680,10 @@ const _: () = {
                     let mut m_translationTolerance: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_scaleTolerance: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_floatingTolerance: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_rotationDegree: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_translationDegree: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_scaleDegree: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_floatingDegree: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_rotationDegree: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_translationDegree: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_scaleDegree: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_floatingDegree: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     let mut m_rotationQuantizationType: _serde::__private::Option<
                         RotationQuantization,
                     > = _serde::__private::None;
@@ -824,7 +828,7 @@ const _: () = {
                                     );
                                 }
                                 m_rotationDegree = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -852,7 +856,7 @@ const _: () = {
                                     );
                                 }
                                 m_translationDegree = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -878,7 +882,7 @@ const _: () = {
                                     );
                                 }
                                 m_scaleDegree = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -904,7 +908,7 @@ const _: () = {
                                     );
                                 }
                                 m_floatingDegree = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1173,7 +1177,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkaSplineCompressedAnimationTrackCompressionParams {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_rotationTolerance,
                         m_translationTolerance,
                         m_scaleTolerance,
@@ -1347,18 +1351,18 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
-                        2u8 => _serde::__private::Ok(__Field::__field2),
-                        3u8 => _serde::__private::Ok(__Field::__field3),
-                        4u8 => _serde::__private::Ok(__Field::__field4),
-                        5u8 => _serde::__private::Ok(__Field::__field5),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(2u8) => _serde::__private::Ok(__Field::__field2),
+                        U8::Number(3u8) => _serde::__private::Ok(__Field::__field3),
+                        U8::Number(4u8) => _serde::__private::Ok(__Field::__field4),
+                        U8::Number(5u8) => _serde::__private::Ok(__Field::__field5),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -1530,14 +1534,14 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

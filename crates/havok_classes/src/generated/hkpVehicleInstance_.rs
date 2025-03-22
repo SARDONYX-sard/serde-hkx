@@ -22,7 +22,8 @@ pub struct hkpVehicleInstance<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -34,98 +35,98 @@ pub struct hkpVehicleInstance<'a> {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "data"))]
     #[cfg_attr(feature = "serde", serde(rename = "data"))]
-    pub m_data: Pointer,
+    pub m_data: Pointer<'a>,
     /// # C++ Info
     /// - name: `driverInput`(ctype: `struct hkpVehicleDriverInput*`)
     /// - offset: ` 32`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "driverInput"))]
     #[cfg_attr(feature = "serde", serde(rename = "driverInput"))]
-    pub m_driverInput: Pointer,
+    pub m_driverInput: Pointer<'a>,
     /// # C++ Info
     /// - name: `steering`(ctype: `struct hkpVehicleSteering*`)
     /// - offset: ` 36`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "steering"))]
     #[cfg_attr(feature = "serde", serde(rename = "steering"))]
-    pub m_steering: Pointer,
+    pub m_steering: Pointer<'a>,
     /// # C++ Info
     /// - name: `engine`(ctype: `struct hkpVehicleEngine*`)
     /// - offset: ` 40`(x86)/` 80`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "engine"))]
     #[cfg_attr(feature = "serde", serde(rename = "engine"))]
-    pub m_engine: Pointer,
+    pub m_engine: Pointer<'a>,
     /// # C++ Info
     /// - name: `transmission`(ctype: `struct hkpVehicleTransmission*`)
     /// - offset: ` 44`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "transmission"))]
     #[cfg_attr(feature = "serde", serde(rename = "transmission"))]
-    pub m_transmission: Pointer,
+    pub m_transmission: Pointer<'a>,
     /// # C++ Info
     /// - name: `brake`(ctype: `struct hkpVehicleBrake*`)
     /// - offset: ` 48`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "brake"))]
     #[cfg_attr(feature = "serde", serde(rename = "brake"))]
-    pub m_brake: Pointer,
+    pub m_brake: Pointer<'a>,
     /// # C++ Info
     /// - name: `suspension`(ctype: `struct hkpVehicleSuspension*`)
     /// - offset: ` 52`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "suspension"))]
     #[cfg_attr(feature = "serde", serde(rename = "suspension"))]
-    pub m_suspension: Pointer,
+    pub m_suspension: Pointer<'a>,
     /// # C++ Info
     /// - name: `aerodynamics`(ctype: `struct hkpVehicleAerodynamics*`)
     /// - offset: ` 56`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "aerodynamics"))]
     #[cfg_attr(feature = "serde", serde(rename = "aerodynamics"))]
-    pub m_aerodynamics: Pointer,
+    pub m_aerodynamics: Pointer<'a>,
     /// # C++ Info
     /// - name: `wheelCollide`(ctype: `struct hkpVehicleWheelCollide*`)
     /// - offset: ` 60`(x86)/`120`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "wheelCollide"))]
     #[cfg_attr(feature = "serde", serde(rename = "wheelCollide"))]
-    pub m_wheelCollide: Pointer,
+    pub m_wheelCollide: Pointer<'a>,
     /// # C++ Info
     /// - name: `tyreMarks`(ctype: `struct hkpTyremarksInfo*`)
     /// - offset: ` 64`(x86)/`128`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "tyreMarks"))]
     #[cfg_attr(feature = "serde", serde(rename = "tyreMarks"))]
-    pub m_tyreMarks: Pointer,
+    pub m_tyreMarks: Pointer<'a>,
     /// # C++ Info
     /// - name: `velocityDamper`(ctype: `struct hkpVehicleVelocityDamper*`)
     /// - offset: ` 68`(x86)/`136`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "velocityDamper"))]
     #[cfg_attr(feature = "serde", serde(rename = "velocityDamper"))]
-    pub m_velocityDamper: Pointer,
+    pub m_velocityDamper: Pointer<'a>,
     /// # C++ Info
     /// - name: `wheelsInfo`(ctype: `hkArray<struct hkpVehicleInstanceWheelInfo>`)
     /// - offset: ` 72`(x86)/`144`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "wheelsInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "wheelsInfo"))]
-    pub m_wheelsInfo: Vec<hkpVehicleInstanceWheelInfo>,
+    pub m_wheelsInfo: Vec<hkpVehicleInstanceWheelInfo<'a>>,
     /// # C++ Info
     /// - name: `frictionStatus`(ctype: `struct hkpVehicleFrictionStatus`)
     /// - offset: ` 84`(x86)/`160`(x86_64)
     /// - type_size: ` 72`(x86)/` 72`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "frictionStatus"))]
     #[cfg_attr(feature = "serde", serde(rename = "frictionStatus"))]
-    pub m_frictionStatus: hkpVehicleFrictionStatus,
+    pub m_frictionStatus: hkpVehicleFrictionStatus<'a>,
     /// # C++ Info
     /// - name: `deviceStatus`(ctype: `struct hkpVehicleDriverInputStatus*`)
     /// - offset: `156`(x86)/`232`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "deviceStatus"))]
     #[cfg_attr(feature = "serde", serde(rename = "deviceStatus"))]
-    pub m_deviceStatus: Pointer,
+    pub m_deviceStatus: Pointer<'a>,
     /// # C++ Info
     /// - name: `isFixed`(ctype: `hkArray<hkBool>`)
     /// - offset: `160`(x86)/`240`(x86_64)
@@ -191,7 +192,7 @@ pub struct hkpVehicleInstance<'a> {
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "currentGear"))]
     #[cfg_attr(feature = "serde", serde(rename = "currentGear"))]
-    pub m_currentGear: i8,
+    pub m_currentGear: I8<'a>,
     /// # C++ Info
     /// - name: `delayed`(ctype: `hkBool`)
     /// - offset: `206`(x86)/`298`(x86_64)
@@ -219,31 +220,31 @@ const _: () = {
             _serde::__private::Signature::new(0x877bb579)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.m_world.get());
-            v.push(self.parent.parent.m_island.get());
-            v.push(self.parent.m_entity.get());
-            v.push(self.m_data.get());
-            v.push(self.m_driverInput.get());
-            v.push(self.m_steering.get());
-            v.push(self.m_engine.get());
-            v.push(self.m_transmission.get());
-            v.push(self.m_brake.get());
-            v.push(self.m_suspension.get());
-            v.push(self.m_aerodynamics.get());
-            v.push(self.m_wheelCollide.get());
-            v.push(self.m_tyreMarks.get());
-            v.push(self.m_velocityDamper.get());
+            v.push(&self.parent.parent.m_world);
+            v.push(&self.parent.parent.m_island);
+            v.push(&self.parent.m_entity);
+            v.push(&self.m_data);
+            v.push(&self.m_driverInput);
+            v.push(&self.m_steering);
+            v.push(&self.m_engine);
+            v.push(&self.m_transmission);
+            v.push(&self.m_brake);
+            v.push(&self.m_suspension);
+            v.push(&self.m_aerodynamics);
+            v.push(&self.m_wheelCollide);
+            v.push(&self.m_tyreMarks);
+            v.push(&self.m_velocityDamper);
             v.extend(
                 self
                     .m_wheelsInfo
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(self.m_frictionStatus.deps_indexes());
-            v.push(self.m_deviceStatus.get());
+            v.push(&self.m_deviceStatus);
             v
         }
     }
@@ -254,6 +255,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x877bb579)));
             let mut serializer = __serializer
                 .serialize_struct("hkpVehicleInstance", class_meta, (212u64, 304u64))?;
@@ -460,24 +462,24 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_driverInput: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_steering: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_engine: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_transmission: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_brake: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_suspension: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_aerodynamics: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_wheelCollide: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_tyreMarks: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_velocityDamper: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_driverInput: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_steering: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_engine: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_transmission: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_brake: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_suspension: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_aerodynamics: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_wheelCollide: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_tyreMarks: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_velocityDamper: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_wheelsInfo: _serde::__private::Option<
                         Vec<hkpVehicleInstanceWheelInfo>,
                     > = _serde::__private::None;
                     let mut m_frictionStatus: _serde::__private::Option<
                         hkpVehicleFrictionStatus,
                     > = _serde::__private::None;
-                    let mut m_deviceStatus: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_deviceStatus: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_isFixed: _serde::__private::Option<Vec<bool>> = _serde::__private::None;
                     let mut m_wheelsTimeSinceMaxPedalInput: _serde::__private::Option<
                         f32,
@@ -488,7 +490,7 @@ const _: () = {
                     let mut m_mainSteeringAngle: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_wheelsSteeringAngle: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
                     let mut m_isReversing: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_currentGear: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_currentGear: _serde::__private::Option<I8<'de>> = _serde::__private::None;
                     let mut m_delayed: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_clutchDelayCountdown: _serde::__private::Option<f32> = _serde::__private::None;
                     for i in 0..25usize {
@@ -500,7 +502,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -517,7 +519,7 @@ const _: () = {
                                     );
                                 }
                                 m_driverInput = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -534,7 +536,7 @@ const _: () = {
                                     );
                                 }
                                 m_steering = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -549,7 +551,7 @@ const _: () = {
                                     );
                                 }
                                 m_engine = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -566,7 +568,7 @@ const _: () = {
                                     );
                                 }
                                 m_transmission = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -581,7 +583,7 @@ const _: () = {
                                     );
                                 }
                                 m_brake = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -598,7 +600,7 @@ const _: () = {
                                     );
                                 }
                                 m_suspension = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -615,7 +617,7 @@ const _: () = {
                                     );
                                 }
                                 m_aerodynamics = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -632,7 +634,7 @@ const _: () = {
                                     );
                                 }
                                 m_wheelCollide = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -649,7 +651,7 @@ const _: () = {
                                     );
                                 }
                                 m_tyreMarks = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -666,7 +668,7 @@ const _: () = {
                                     );
                                 }
                                 m_velocityDamper = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -721,7 +723,7 @@ const _: () = {
                                     );
                                 }
                                 m_deviceStatus = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -878,7 +880,7 @@ const _: () = {
                                     );
                                 }
                                 m_currentGear = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1200,25 +1202,25 @@ const _: () = {
                 {
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
-                    let mut m_entity: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_driverInput: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_steering: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_engine: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_transmission: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_brake: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_suspension: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_aerodynamics: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_wheelCollide: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_tyreMarks: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_velocityDamper: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_entity: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_driverInput: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_steering: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_engine: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_transmission: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_brake: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_suspension: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_aerodynamics: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_wheelCollide: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_tyreMarks: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_velocityDamper: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_wheelsInfo: _serde::__private::Option<
                         Vec<hkpVehicleInstanceWheelInfo>,
                     > = _serde::__private::None;
                     let mut m_frictionStatus: _serde::__private::Option<
                         hkpVehicleFrictionStatus,
                     > = _serde::__private::None;
-                    let mut m_deviceStatus: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_deviceStatus: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_isFixed: _serde::__private::Option<Vec<bool>> = _serde::__private::None;
                     let mut m_wheelsTimeSinceMaxPedalInput: _serde::__private::Option<
                         f32,
@@ -1229,7 +1231,7 @@ const _: () = {
                     let mut m_mainSteeringAngle: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_wheelsSteeringAngle: _serde::__private::Option<Vec<f32>> = _serde::__private::None;
                     let mut m_isReversing: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_currentGear: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_currentGear: _serde::__private::Option<I8<'de>> = _serde::__private::None;
                     let mut m_delayed: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_clutchDelayCountdown: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
@@ -1302,7 +1304,7 @@ const _: () = {
                                     );
                                 }
                                 m_entity = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1326,7 +1328,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1352,7 +1354,7 @@ const _: () = {
                                     );
                                 }
                                 m_driverInput = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1378,7 +1380,7 @@ const _: () = {
                                     );
                                 }
                                 m_steering = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1402,7 +1404,7 @@ const _: () = {
                                     );
                                 }
                                 m_engine = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1428,7 +1430,7 @@ const _: () = {
                                     );
                                 }
                                 m_transmission = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1452,7 +1454,7 @@ const _: () = {
                                     );
                                 }
                                 m_brake = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1478,7 +1480,7 @@ const _: () = {
                                     );
                                 }
                                 m_suspension = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1504,7 +1506,7 @@ const _: () = {
                                     );
                                 }
                                 m_aerodynamics = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1530,7 +1532,7 @@ const _: () = {
                                     );
                                 }
                                 m_wheelCollide = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1556,7 +1558,7 @@ const _: () = {
                                     );
                                 }
                                 m_tyreMarks = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1582,7 +1584,7 @@ const _: () = {
                                     );
                                 }
                                 m_velocityDamper = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1664,7 +1666,7 @@ const _: () = {
                                     );
                                 }
                                 m_deviceStatus = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1900,7 +1902,7 @@ const _: () = {
                                     );
                                 }
                                 m_currentGear = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -2280,27 +2282,29 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpAction {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkpUnaryAction {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_entity,
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpVehicleInstance {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_data,
                         m_driverInput,

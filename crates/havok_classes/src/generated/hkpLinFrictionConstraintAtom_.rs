@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpLinFrictionConstraintAtom {
+pub struct hkpLinFrictionConstraintAtom<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,25 +22,27 @@ pub struct hkpLinFrictionConstraintAtom {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpConstraintAtom,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpConstraintAtom<'a>,
     /// # C++ Info
     /// - name: `isEnabled`(ctype: `hkUint8`)
     /// - offset: `  2`(x86)/`  2`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "isEnabled"))]
     #[cfg_attr(feature = "serde", serde(rename = "isEnabled"))]
-    pub m_isEnabled: u8,
+    pub m_isEnabled: U8<'a>,
     /// # C++ Info
     /// - name: `frictionAxis`(ctype: `hkUint8`)
     /// - offset: `  3`(x86)/`  3`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "frictionAxis"))]
     #[cfg_attr(feature = "serde", serde(rename = "frictionAxis"))]
-    pub m_frictionAxis: u8,
+    pub m_frictionAxis: U8<'a>,
     /// # C++ Info
     /// - name: `maxFrictionForce`(ctype: `hkReal`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
@@ -51,7 +53,7 @@ pub struct hkpLinFrictionConstraintAtom {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpLinFrictionConstraintAtom {
+    impl<'a> _serde::HavokClass for hkpLinFrictionConstraintAtom<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpLinFrictionConstraintAtom"
@@ -61,18 +63,19 @@ const _: () = {
             _serde::__private::Signature::new(0x3e94ef7c)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpLinFrictionConstraintAtom {
+    impl<'a> _serde::Serialize for hkpLinFrictionConstraintAtom<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x3e94ef7c)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -93,7 +96,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpLinFrictionConstraintAtom {
+    impl<'de> _serde::Deserialize<'de> for hkpLinFrictionConstraintAtom<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -147,7 +150,9 @@ const _: () = {
                 }
             }
             struct __hkpLinFrictionConstraintAtomVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpLinFrictionConstraintAtom>,
+                marker: _serde::__private::PhantomData<
+                    hkpLinFrictionConstraintAtom<'de>,
+                >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -155,7 +160,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpLinFrictionConstraintAtomVisitor<'de> {
-                type Value = hkpLinFrictionConstraintAtom;
+                type Value = hkpLinFrictionConstraintAtom<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -174,8 +179,8 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_isEnabled: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_frictionAxis: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_isEnabled: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_frictionAxis: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     let mut m_maxFrictionForce: _serde::__private::Option<f32> = _serde::__private::None;
                     for i in 0..3usize {
                         match i {
@@ -188,7 +193,7 @@ const _: () = {
                                     );
                                 }
                                 m_isEnabled = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -205,7 +210,7 @@ const _: () = {
                                     );
                                 }
                                 m_frictionAxis = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -280,8 +285,8 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_type: _serde::__private::Option<AtomType> = _serde::__private::None;
-                    let mut m_isEnabled: _serde::__private::Option<u8> = _serde::__private::None;
-                    let mut m_frictionAxis: _serde::__private::Option<u8> = _serde::__private::None;
+                    let mut m_isEnabled: _serde::__private::Option<U8<'de>> = _serde::__private::None;
+                    let mut m_frictionAxis: _serde::__private::Option<U8<'de>> = _serde::__private::None;
                     let mut m_maxFrictionForce: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -329,7 +334,7 @@ const _: () = {
                                     );
                                 }
                                 m_isEnabled = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -355,7 +360,7 @@ const _: () = {
                                     );
                                 }
                                 m_frictionAxis = _serde::__private::Some(
-                                    match __A::next_value::<u8>(&mut __map) {
+                                    match __A::next_value::<U8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -439,10 +444,13 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkpConstraintAtom { __ptr, m_type };
+                    let parent = hkpConstraintAtom {
+                        __ptr: __ptr.clone(),
+                        m_type,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpLinFrictionConstraintAtom {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_isEnabled,
                         m_frictionAxis,

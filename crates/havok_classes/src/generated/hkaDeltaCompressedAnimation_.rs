@@ -22,7 +22,8 @@ pub struct hkaDeltaCompressedAnimation<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -34,98 +35,98 @@ pub struct hkaDeltaCompressedAnimation<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numberOfPoses"))]
     #[cfg_attr(feature = "serde", serde(rename = "numberOfPoses"))]
-    pub m_numberOfPoses: i32,
+    pub m_numberOfPoses: I32<'a>,
     /// # C++ Info
     /// - name: `blockSize`(ctype: `hkInt32`)
     /// - offset: ` 44`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "blockSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "blockSize"))]
-    pub m_blockSize: i32,
+    pub m_blockSize: I32<'a>,
     /// # C++ Info
     /// - name: `qFormat`(ctype: `struct hkaDeltaCompressedAnimationQuantizationFormat`)
     /// - offset: ` 48`(x86)/` 64`(x86_64)
     /// - type_size: ` 20`(x86)/` 20`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "qFormat"))]
     #[cfg_attr(feature = "serde", serde(rename = "qFormat"))]
-    pub m_qFormat: hkaDeltaCompressedAnimationQuantizationFormat,
+    pub m_qFormat: hkaDeltaCompressedAnimationQuantizationFormat<'a>,
     /// # C++ Info
     /// - name: `quantizedDataIdx`(ctype: `hkUint32`)
     /// - offset: ` 68`(x86)/` 84`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "quantizedDataIdx"))]
     #[cfg_attr(feature = "serde", serde(rename = "quantizedDataIdx"))]
-    pub m_quantizedDataIdx: u32,
+    pub m_quantizedDataIdx: U32<'a>,
     /// # C++ Info
     /// - name: `quantizedDataSize`(ctype: `hkUint32`)
     /// - offset: ` 72`(x86)/` 88`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "quantizedDataSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "quantizedDataSize"))]
-    pub m_quantizedDataSize: u32,
+    pub m_quantizedDataSize: U32<'a>,
     /// # C++ Info
     /// - name: `staticMaskIdx`(ctype: `hkUint32`)
     /// - offset: ` 76`(x86)/` 92`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "staticMaskIdx"))]
     #[cfg_attr(feature = "serde", serde(rename = "staticMaskIdx"))]
-    pub m_staticMaskIdx: u32,
+    pub m_staticMaskIdx: U32<'a>,
     /// # C++ Info
     /// - name: `staticMaskSize`(ctype: `hkUint32`)
     /// - offset: ` 80`(x86)/` 96`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "staticMaskSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "staticMaskSize"))]
-    pub m_staticMaskSize: u32,
+    pub m_staticMaskSize: U32<'a>,
     /// # C++ Info
     /// - name: `staticDOFsIdx`(ctype: `hkUint32`)
     /// - offset: ` 84`(x86)/`100`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "staticDOFsIdx"))]
     #[cfg_attr(feature = "serde", serde(rename = "staticDOFsIdx"))]
-    pub m_staticDOFsIdx: u32,
+    pub m_staticDOFsIdx: U32<'a>,
     /// # C++ Info
     /// - name: `staticDOFsSize`(ctype: `hkUint32`)
     /// - offset: ` 88`(x86)/`104`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "staticDOFsSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "staticDOFsSize"))]
-    pub m_staticDOFsSize: u32,
+    pub m_staticDOFsSize: U32<'a>,
     /// # C++ Info
     /// - name: `numStaticTransformDOFs`(ctype: `hkUint32`)
     /// - offset: ` 92`(x86)/`108`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numStaticTransformDOFs"))]
     #[cfg_attr(feature = "serde", serde(rename = "numStaticTransformDOFs"))]
-    pub m_numStaticTransformDOFs: u32,
+    pub m_numStaticTransformDOFs: U32<'a>,
     /// # C++ Info
     /// - name: `numDynamicTransformDOFs`(ctype: `hkUint32`)
     /// - offset: ` 96`(x86)/`112`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numDynamicTransformDOFs"))]
     #[cfg_attr(feature = "serde", serde(rename = "numDynamicTransformDOFs"))]
-    pub m_numDynamicTransformDOFs: u32,
+    pub m_numDynamicTransformDOFs: U32<'a>,
     /// # C++ Info
     /// - name: `totalBlockSize`(ctype: `hkUint32`)
     /// - offset: `100`(x86)/`116`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "totalBlockSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "totalBlockSize"))]
-    pub m_totalBlockSize: u32,
+    pub m_totalBlockSize: U32<'a>,
     /// # C++ Info
     /// - name: `lastBlockSize`(ctype: `hkUint32`)
     /// - offset: `104`(x86)/`120`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "lastBlockSize"))]
     #[cfg_attr(feature = "serde", serde(rename = "lastBlockSize"))]
-    pub m_lastBlockSize: u32,
+    pub m_lastBlockSize: U32<'a>,
     /// # C++ Info
     /// - name: `dataBuffer`(ctype: `hkArray<hkUint8>`)
     /// - offset: `108`(x86)/`128`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "dataBuffer"))]
     #[cfg_attr(feature = "serde", serde(rename = "dataBuffer"))]
-    pub m_dataBuffer: Vec<u8>,
+    pub m_dataBuffer: Vec<U8<'a>>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -139,16 +140,16 @@ const _: () = {
             _serde::__private::Signature::new(0x90a68d40)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.m_extractedMotion.get());
+            v.push(&self.parent.m_extractedMotion);
             v.extend(
                 self
                     .parent
                     .m_annotationTracks
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(self.m_qFormat.deps_indexes());
             v
@@ -161,6 +162,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x90a68d40)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -351,22 +353,26 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_numberOfPoses: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_blockSize: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numberOfPoses: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_blockSize: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_qFormat: _serde::__private::Option<
                         hkaDeltaCompressedAnimationQuantizationFormat,
                     > = _serde::__private::None;
-                    let mut m_quantizedDataIdx: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_quantizedDataSize: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_staticMaskIdx: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_staticMaskSize: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_staticDOFsIdx: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_staticDOFsSize: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_numStaticTransformDOFs: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_numDynamicTransformDOFs: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_totalBlockSize: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_lastBlockSize: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_dataBuffer: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_quantizedDataIdx: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_quantizedDataSize: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_staticMaskIdx: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_staticMaskSize: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_staticDOFsIdx: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_staticDOFsSize: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_numStaticTransformDOFs: _serde::__private::Option<
+                        U32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_numDynamicTransformDOFs: _serde::__private::Option<
+                        U32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_totalBlockSize: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_lastBlockSize: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_dataBuffer: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
                     for i in 0..14usize {
                         match i {
                             0usize => {
@@ -378,7 +384,7 @@ const _: () = {
                                     );
                                 }
                                 m_numberOfPoses = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -395,7 +401,7 @@ const _: () = {
                                     );
                                 }
                                 m_blockSize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -431,7 +437,7 @@ const _: () = {
                                     );
                                 }
                                 m_quantizedDataIdx = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -450,7 +456,7 @@ const _: () = {
                                     );
                                 }
                                 m_quantizedDataSize = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -467,7 +473,7 @@ const _: () = {
                                     );
                                 }
                                 m_staticMaskIdx = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -484,7 +490,7 @@ const _: () = {
                                     );
                                 }
                                 m_staticMaskSize = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -501,7 +507,7 @@ const _: () = {
                                     );
                                 }
                                 m_staticDOFsIdx = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -518,7 +524,7 @@ const _: () = {
                                     );
                                 }
                                 m_staticDOFsSize = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -537,7 +543,7 @@ const _: () = {
                                     );
                                 }
                                 m_numStaticTransformDOFs = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -556,7 +562,7 @@ const _: () = {
                                     );
                                 }
                                 m_numDynamicTransformDOFs = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -573,7 +579,7 @@ const _: () = {
                                     );
                                 }
                                 m_totalBlockSize = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -590,7 +596,7 @@ const _: () = {
                                     );
                                 }
                                 m_lastBlockSize = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -608,7 +614,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_dataBuffer = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -786,28 +792,34 @@ const _: () = {
                 {
                     let mut m_type: _serde::__private::Option<AnimationType> = _serde::__private::None;
                     let mut m_duration: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_numberOfTransformTracks: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numberOfFloatTracks: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_extractedMotion: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_numberOfTransformTracks: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_numberOfFloatTracks: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_extractedMotion: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_annotationTracks: _serde::__private::Option<
                         Vec<hkaAnnotationTrack<'de>>,
                     > = _serde::__private::None;
-                    let mut m_numberOfPoses: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_blockSize: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numberOfPoses: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_blockSize: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_qFormat: _serde::__private::Option<
                         hkaDeltaCompressedAnimationQuantizationFormat,
                     > = _serde::__private::None;
-                    let mut m_quantizedDataIdx: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_quantizedDataSize: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_staticMaskIdx: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_staticMaskSize: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_staticDOFsIdx: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_staticDOFsSize: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_numStaticTransformDOFs: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_numDynamicTransformDOFs: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_totalBlockSize: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_lastBlockSize: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_dataBuffer: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
+                    let mut m_quantizedDataIdx: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_quantizedDataSize: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_staticMaskIdx: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_staticMaskSize: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_staticDOFsIdx: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_staticDOFsSize: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_numStaticTransformDOFs: _serde::__private::Option<
+                        U32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_numDynamicTransformDOFs: _serde::__private::Option<
+                        U32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_totalBlockSize: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_lastBlockSize: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_dataBuffer: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -882,7 +894,7 @@ const _: () = {
                                     );
                                 }
                                 m_numberOfTransformTracks = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -910,7 +922,7 @@ const _: () = {
                                     );
                                 }
                                 m_numberOfFloatTracks = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -936,7 +948,7 @@ const _: () = {
                                     );
                                 }
                                 m_extractedMotion = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -990,7 +1002,7 @@ const _: () = {
                                     );
                                 }
                                 m_numberOfPoses = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1016,7 +1028,7 @@ const _: () = {
                                     );
                                 }
                                 m_blockSize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1070,7 +1082,7 @@ const _: () = {
                                     );
                                 }
                                 m_quantizedDataIdx = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1098,7 +1110,7 @@ const _: () = {
                                     );
                                 }
                                 m_quantizedDataSize = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1124,7 +1136,7 @@ const _: () = {
                                     );
                                 }
                                 m_staticMaskIdx = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1150,7 +1162,7 @@ const _: () = {
                                     );
                                 }
                                 m_staticMaskSize = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1176,7 +1188,7 @@ const _: () = {
                                     );
                                 }
                                 m_staticDOFsIdx = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1202,7 +1214,7 @@ const _: () = {
                                     );
                                 }
                                 m_staticDOFsSize = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1230,7 +1242,7 @@ const _: () = {
                                     );
                                 }
                                 m_numStaticTransformDOFs = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1258,7 +1270,7 @@ const _: () = {
                                     );
                                 }
                                 m_numDynamicTransformDOFs = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1284,7 +1296,7 @@ const _: () = {
                                     );
                                 }
                                 m_totalBlockSize = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1310,7 +1322,7 @@ const _: () = {
                                     );
                                 }
                                 m_lastBlockSize = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1336,7 +1348,7 @@ const _: () = {
                                     );
                                 }
                                 m_dataBuffer = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1582,14 +1594,16 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkaAnimation {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_type,
                         m_duration,
@@ -1600,7 +1614,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkaDeltaCompressedAnimation {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_numberOfPoses,
                         m_blockSize,

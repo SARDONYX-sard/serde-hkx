@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpSimulation {
+pub struct hkpSimulation<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkpSimulation {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `determinismCheckFrameCounter`(ctype: `hkUint32`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -36,14 +38,14 @@ pub struct hkpSimulation {
         schemars(rename = "determinismCheckFrameCounter")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "determinismCheckFrameCounter"))]
-    pub m_determinismCheckFrameCounter: u32,
+    pub m_determinismCheckFrameCounter: U32<'a>,
     /// # C++ Info
     /// - name: `world`(ctype: `struct hkpWorld*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "world"))]
     #[cfg_attr(feature = "serde", serde(rename = "world"))]
-    pub m_world: Pointer,
+    pub m_world: Pointer<'a>,
     /// # C++ Info
     /// - name: `lastProcessingStep`(ctype: `enum LastProcessingStep`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
@@ -92,11 +94,11 @@ pub struct hkpSimulation {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "previousStepResult"))]
     #[cfg_attr(feature = "serde", serde(rename = "previousStepResult"))]
-    pub m_previousStepResult: u32,
+    pub m_previousStepResult: U32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpSimulation {
+    impl<'a> _serde::HavokClass for hkpSimulation<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpSimulation"
@@ -106,19 +108,20 @@ const _: () = {
             _serde::__private::Signature::new(0x97aba922)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_world.get());
+            v.push(&self.m_world);
             v
         }
     }
-    impl _serde::Serialize for hkpSimulation {
+    impl<'a> _serde::Serialize for hkpSimulation<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x97aba922)));
             let mut serializer = __serializer
                 .serialize_struct("hkpSimulation", class_meta, (44u64, 64u64))?;
@@ -154,7 +157,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpSimulation {
+    impl<'de> _serde::Deserialize<'de> for hkpSimulation<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -220,14 +223,14 @@ const _: () = {
                 }
             }
             struct __hkpSimulationVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpSimulation>,
+                marker: _serde::__private::PhantomData<hkpSimulation<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpSimulationVisitor<'de> {
-                type Value = hkpSimulation;
+                type Value = hkpSimulation<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -244,9 +247,9 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_determinismCheckFrameCounter: _serde::__private::Option<
-                        u32,
+                        U32<'de>,
                     > = _serde::__private::None;
-                    let mut m_world: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_world: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_lastProcessingStep: _serde::__private::Option<
                         LastProcessingStep,
                     > = _serde::__private::None;
@@ -255,7 +258,7 @@ const _: () = {
                     let mut m_physicsDeltaTime: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_simulateUntilTime: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_frameMarkerPsiSnap: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_previousStepResult: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_previousStepResult: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     for i in 0..9usize {
                         match i {
                             0usize => {
@@ -269,7 +272,7 @@ const _: () = {
                                     );
                                 }
                                 m_determinismCheckFrameCounter = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -285,7 +288,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_world = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -413,7 +416,7 @@ const _: () = {
                                     );
                                 }
                                 m_previousStepResult = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -536,9 +539,9 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_determinismCheckFrameCounter: _serde::__private::Option<
-                        u32,
+                        U32<'de>,
                     > = _serde::__private::None;
-                    let mut m_world: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_world: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_lastProcessingStep: _serde::__private::Option<
                         LastProcessingStep,
                     > = _serde::__private::None;
@@ -547,7 +550,7 @@ const _: () = {
                     let mut m_physicsDeltaTime: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_simulateUntilTime: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_frameMarkerPsiSnap: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_previousStepResult: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_previousStepResult: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -572,7 +575,7 @@ const _: () = {
                                     );
                                 }
                                 m_determinismCheckFrameCounter = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -596,7 +599,7 @@ const _: () = {
                                     );
                                 }
                                 m_world = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -786,7 +789,7 @@ const _: () = {
                                     );
                                 }
                                 m_previousStepResult = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -904,15 +907,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpSimulation {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_determinismCheckFrameCounter,
                         m_world,
@@ -1025,14 +1030,14 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

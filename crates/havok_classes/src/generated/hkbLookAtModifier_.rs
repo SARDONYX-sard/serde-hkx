@@ -22,7 +22,8 @@ pub struct hkbLookAtModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -125,14 +126,14 @@ pub struct hkbLookAtModifier<'a> {
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "headIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "headIndex"))]
-    pub m_headIndex: i16,
+    pub m_headIndex: I16<'a>,
     /// # C++ Info
     /// - name: `neckIndex`(ctype: `hkInt16`)
     /// - offset: `162`(x86)/`194`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "neckIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "neckIndex"))]
-    pub m_neckIndex: i16,
+    pub m_neckIndex: I16<'a>,
     /// # C++ Info
     /// - name: `isOn`(ctype: `hkBool`)
     /// - offset: `164`(x86)/`196`(x86_64)
@@ -183,9 +184,9 @@ const _: () = {
             _serde::__private::Signature::new(0x3d28e066)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
             v
         }
     }
@@ -196,6 +197,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x3d28e066)));
             let mut serializer = __serializer
                 .serialize_struct("hkbLookAtModifier", class_meta, (208u64, 240u64))?;
@@ -415,8 +417,8 @@ const _: () = {
                     let mut m_limitAngleRight: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_limitAngleUp: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_limitAngleDown: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_headIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_neckIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_headIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_neckIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_isOn: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_individualLimitsOn: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_isTargetInsideLimitCone: _serde::__private::Option<bool> = _serde::__private::None;
@@ -655,7 +657,7 @@ const _: () = {
                                     );
                                 }
                                 m_headIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -672,7 +674,7 @@ const _: () = {
                                     );
                                 }
                                 m_neckIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -999,7 +1001,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
@@ -1016,8 +1020,8 @@ const _: () = {
                     let mut m_limitAngleRight: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_limitAngleUp: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_limitAngleDown: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_headIndex: _serde::__private::Option<i16> = _serde::__private::None;
-                    let mut m_neckIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_headIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
+                    let mut m_neckIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_isOn: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_individualLimitsOn: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_isTargetInsideLimitCone: _serde::__private::Option<bool> = _serde::__private::None;
@@ -1045,7 +1049,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1483,7 +1487,7 @@ const _: () = {
                                     );
                                 }
                                 m_headIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1509,7 +1513,7 @@ const _: () = {
                                     );
                                 }
                                 m_neckIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1851,34 +1855,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbLookAtModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_targetWS,
                         m_headForwardLS,

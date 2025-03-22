@@ -1,17 +1,17 @@
 use crate::get_class_map::{get_inherited_class, get_inherited_members};
 use crate::{
+    ClassMap,
     cpp_info::{Class, Member},
     rust_gen::structure::{
         impls::deserialize::member_to_de_rust_type, to_rust_token::to_rust_field_ident,
     },
-    ClassMap,
 };
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 use syn::Result;
 
 /// Generate `visit_struct` (for XML)
-pub fn gen(class: &Class, classes_map: &ClassMap) -> Result<TokenStream> {
+pub fn generate(class: &Class, classes_map: &ClassMap) -> Result<TokenStream> {
     let mut first_recv_fields = Vec::new(); // after call `next_value`
     let mut visit_fields_matcher = Vec::new(); // 　The process of removing the Option and inserting the value into the field at the end.
     let mut last_recv_fields = Vec::new();
@@ -51,7 +51,7 @@ pub fn gen(class: &Class, classes_map: &ClassMap) -> Result<TokenStream> {
         });
 
         let default_value = if let 33.. = arrsize {
-            quote! { [Default::default(); #arrsize] }
+            quote! { core::array::from_fn(|_idx| Default::default()) }
         } else {
             quote! { Default::default() }
         };
@@ -126,7 +126,7 @@ fn create_struct<'a>(class: &'a Class<'a>) -> TokenStream {
     let mut fields = Vec::new();
     let mut has_skip_once = false; // All fields whose serialize is skipped are made to use `Default::default`.
 
-    fields.push(quote! { __ptr });
+    fields.push(quote! { __ptr: __ptr.clone() });
     if class.parent.is_some() {
         fields.push(quote! { parent });
     };

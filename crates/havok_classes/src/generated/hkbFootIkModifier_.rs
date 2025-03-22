@@ -22,7 +22,8 @@ pub struct hkbFootIkModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -34,14 +35,15 @@ pub struct hkbFootIkModifier<'a> {
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "gains"))]
     #[cfg_attr(feature = "serde", serde(rename = "gains"))]
-    pub m_gains: hkbFootIkGains,
+    pub m_gains: hkbFootIkGains<'a>,
     /// # C++ Info
     /// - name: `legs`(ctype: `hkArray<struct hkbFootIkModifierLeg>`)
     /// - offset: ` 92`(x86)/`128`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "legs"))]
     #[cfg_attr(feature = "serde", serde(rename = "legs"))]
-    pub m_legs: Vec<hkbFootIkModifierLeg>,
+    pub m_legs: Vec<hkbFootIkModifierLeg<'a>>,
     /// # C++ Info
     /// - name: `raycastDistanceUp`(ctype: `hkReal`)
     /// - offset: `104`(x86)/`144`(x86_64)
@@ -97,7 +99,7 @@ pub struct hkbFootIkModifier<'a> {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "collisionFilterInfo"))]
     #[cfg_attr(feature = "serde", serde(rename = "collisionFilterInfo"))]
-    pub m_collisionFilterInfo: u32,
+    pub m_collisionFilterInfo: U32<'a>,
     /// # C++ Info
     /// - name: `forwardAlignFraction`(ctype: `hkReal`)
     /// - offset: `168`(x86)/`200`(x86_64)
@@ -154,7 +156,7 @@ pub struct hkbFootIkModifier<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "internalLegData"))]
     #[cfg_attr(feature = "serde", serde(rename = "internalLegData"))]
-    pub m_internalLegData: Vec<hkbFootIkModifierInternalLegData>,
+    pub m_internalLegData: Vec<hkbFootIkModifierInternalLegData<'a>>,
     /// # C++ Info
     /// - name: `prevIsFootIkEnabled`(ctype: `hkReal`)
     /// - offset: `196`(x86)/`232`(x86_64)
@@ -200,23 +202,23 @@ const _: () = {
             _serde::__private::Signature::new(0xed8966c0)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
             v.extend(self.m_gains.deps_indexes());
             v.extend(
                 self
                     .m_legs
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(
                 self
                     .m_internalLegData
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
@@ -228,6 +230,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xed8966c0)));
             let mut serializer = __serializer
                 .serialize_struct("hkbFootIkModifier", class_meta, (208u64, 256u64))?;
@@ -467,7 +470,7 @@ const _: () = {
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_gains: _serde::__private::Option<hkbFootIkGains> = _serde::__private::None;
                     let mut m_legs: _serde::__private::Option<
-                        Vec<hkbFootIkModifierLeg>,
+                        Vec<hkbFootIkModifierLeg<'de>>,
                     > = _serde::__private::None;
                     let mut m_raycastDistanceUp: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_raycastDistanceDown: _serde::__private::Option<f32> = _serde::__private::None;
@@ -478,7 +481,7 @@ const _: () = {
                         Quaternion,
                     > = _serde::__private::None;
                     let mut m_verticalOffset: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     let mut m_forwardAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_sidewaysAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_sidewaysSampleWidth: _serde::__private::Option<f32> = _serde::__private::None;
@@ -518,7 +521,7 @@ const _: () = {
                                 }
                                 m_legs = _serde::__private::Some(
                                     match __A::next_value::<
-                                        Vec<hkbFootIkModifierLeg>,
+                                        Vec<hkbFootIkModifierLeg<'de>>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -668,7 +671,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1146,13 +1149,15 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_gains: _serde::__private::Option<hkbFootIkGains> = _serde::__private::None;
                     let mut m_legs: _serde::__private::Option<
-                        Vec<hkbFootIkModifierLeg>,
+                        Vec<hkbFootIkModifierLeg<'de>>,
                     > = _serde::__private::None;
                     let mut m_raycastDistanceUp: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_raycastDistanceDown: _serde::__private::Option<f32> = _serde::__private::None;
@@ -1163,7 +1168,7 @@ const _: () = {
                         Quaternion,
                     > = _serde::__private::None;
                     let mut m_verticalOffset: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_collisionFilterInfo: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_collisionFilterInfo: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     let mut m_forwardAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_sidewaysAlignFraction: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_sidewaysSampleWidth: _serde::__private::Option<f32> = _serde::__private::None;
@@ -1195,7 +1200,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1318,7 +1323,7 @@ const _: () = {
                                 }
                                 m_legs = _serde::__private::Some(
                                     match __A::next_value::<
-                                        Vec<hkbFootIkModifierLeg>,
+                                        Vec<hkbFootIkModifierLeg<'de>>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -1539,7 +1544,7 @@ const _: () = {
                                     );
                                 }
                                 m_collisionFilterInfo = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1983,34 +1988,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbFootIkModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_gains,
                         m_legs,
@@ -2149,14 +2156,14 @@ const _: () = {
                 }
                 fn visit_int8<__E>(
                     self,
-                    __value: i8,
+                    __value: I8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0i8 => _serde::__private::Ok(__Field::__field0),
-                        1i8 => _serde::__private::Ok(__Field::__field1),
+                        I8::Number(0i8) => _serde::__private::Ok(__Field::__field0),
+                        I8::Number(1i8) => _serde::__private::Ok(__Field::__field1),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

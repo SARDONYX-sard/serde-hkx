@@ -1,8 +1,8 @@
 extern crate proc_macro;
 
 use proc_macro::TokenStream;
-use quote::{quote, ToTokens};
-use syn::{braced, parse::Parse, punctuated::Punctuated, token::PathSep, Ident, Token};
+use quote::{ToTokens, quote};
+use syn::{Ident, Token, braced, parse::Parse, punctuated::Punctuated, token::PathSep};
 
 /// Automatically implement [`core::str::FromStr`], [`core::fmt::Display`] in string notation according
 /// to Havok's `hkFlags<Enum, SizeType>` XML notation.

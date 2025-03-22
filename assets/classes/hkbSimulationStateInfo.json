@@ -5,14 +5,14 @@
   "size_x86": 12,
   "size_x86_64": 24,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "simulationState",
       "enum_ref": "SimulationState",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum SimulationState",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",

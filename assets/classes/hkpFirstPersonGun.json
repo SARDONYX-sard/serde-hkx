@@ -5,9 +5,9 @@
   "size_x86": 32,
   "size_x86_64": 56,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "enums": [
     {
       "name": "Type",
@@ -121,7 +121,7 @@
   "members": [
     {
       "name": "type",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum unknown",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -135,7 +135,7 @@
     },
     {
       "name": "name",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -150,7 +150,7 @@
     {
       "name": "keyboardKey",
       "enum_ref": "KeyboardKey",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum KeyboardKey",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -164,7 +164,7 @@
     },
     {
       "name": "listeners",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",

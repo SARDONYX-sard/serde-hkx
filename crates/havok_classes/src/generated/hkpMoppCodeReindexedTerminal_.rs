@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpMoppCodeReindexedTerminal {
+pub struct hkpMoppCodeReindexedTerminal<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,25 +22,26 @@ pub struct hkpMoppCodeReindexedTerminal {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `origShapeKey`(ctype: `hkUint32`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "origShapeKey"))]
     #[cfg_attr(feature = "serde", serde(rename = "origShapeKey"))]
-    pub m_origShapeKey: u32,
+    pub m_origShapeKey: U32<'a>,
     /// # C++ Info
     /// - name: `reindexedShapeKey`(ctype: `hkUint32`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "reindexedShapeKey"))]
     #[cfg_attr(feature = "serde", serde(rename = "reindexedShapeKey"))]
-    pub m_reindexedShapeKey: u32,
+    pub m_reindexedShapeKey: U32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpMoppCodeReindexedTerminal {
+    impl<'a> _serde::HavokClass for hkpMoppCodeReindexedTerminal<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpMoppCodeReindexedTerminal"
@@ -50,18 +51,19 @@ const _: () = {
             _serde::__private::Signature::new(0x6ed8ac06)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpMoppCodeReindexedTerminal {
+    impl<'a> _serde::Serialize for hkpMoppCodeReindexedTerminal<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x6ed8ac06)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -80,7 +82,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpMoppCodeReindexedTerminal {
+    impl<'de> _serde::Deserialize<'de> for hkpMoppCodeReindexedTerminal<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -130,7 +132,9 @@ const _: () = {
                 }
             }
             struct __hkpMoppCodeReindexedTerminalVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpMoppCodeReindexedTerminal>,
+                marker: _serde::__private::PhantomData<
+                    hkpMoppCodeReindexedTerminal<'de>,
+                >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -138,7 +142,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpMoppCodeReindexedTerminalVisitor<'de> {
-                type Value = hkpMoppCodeReindexedTerminal;
+                type Value = hkpMoppCodeReindexedTerminal<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -156,8 +160,8 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_origShapeKey: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_reindexedShapeKey: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_origShapeKey: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_reindexedShapeKey: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     for i in 0..2usize {
                         match i {
                             0usize => {
@@ -169,7 +173,7 @@ const _: () = {
                                     );
                                 }
                                 m_origShapeKey = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -188,7 +192,7 @@ const _: () = {
                                     );
                                 }
                                 m_reindexedShapeKey = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -233,8 +237,8 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_origShapeKey: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_reindexedShapeKey: _serde::__private::Option<u32> = _serde::__private::None;
+                    let mut m_origShapeKey: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_reindexedShapeKey: _serde::__private::Option<U32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -257,7 +261,7 @@ const _: () = {
                                     );
                                 }
                                 m_origShapeKey = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -285,7 +289,7 @@ const _: () = {
                                     );
                                 }
                                 m_reindexedShapeKey = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -322,7 +326,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpMoppCodeReindexedTerminal {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_origShapeKey,
                         m_reindexedShapeKey,
                     })

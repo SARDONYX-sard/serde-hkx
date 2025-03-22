@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpCompressedSampledHeightFieldShape {
+pub struct hkpCompressedSampledHeightFieldShape<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,18 +22,20 @@ pub struct hkpCompressedSampledHeightFieldShape {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpSampledHeightFieldShape,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpSampledHeightFieldShape<'a>,
     /// # C++ Info
     /// - name: `storage`(ctype: `hkArray<hkUint16>`)
     /// - offset: ` 96`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "storage"))]
     #[cfg_attr(feature = "serde", serde(rename = "storage"))]
-    pub m_storage: Vec<u16>,
+    pub m_storage: Vec<U16<'a>>,
     /// # C++ Info
     /// - name: `triangleFlip`(ctype: `hkBool`)
     /// - offset: `108`(x86)/`128`(x86_64)
@@ -58,7 +60,7 @@ pub struct hkpCompressedSampledHeightFieldShape {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpCompressedSampledHeightFieldShape {
+    impl<'a> _serde::HavokClass for hkpCompressedSampledHeightFieldShape<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpCompressedSampledHeightFieldShape"
@@ -68,18 +70,19 @@ const _: () = {
             _serde::__private::Signature::new(0x97b6e143)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpCompressedSampledHeightFieldShape {
+    impl<'a> _serde::Serialize for hkpCompressedSampledHeightFieldShape<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x97b6e143)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -140,7 +143,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpCompressedSampledHeightFieldShape {
+    impl<'de> _serde::Deserialize<'de> for hkpCompressedSampledHeightFieldShape<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -219,7 +222,7 @@ const _: () = {
             }
             struct __hkpCompressedSampledHeightFieldShapeVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkpCompressedSampledHeightFieldShape,
+                    hkpCompressedSampledHeightFieldShape<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -228,7 +231,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpCompressedSampledHeightFieldShapeVisitor<'de> {
-                type Value = hkpCompressedSampledHeightFieldShape;
+                type Value = hkpCompressedSampledHeightFieldShape<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -247,7 +250,7 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_storage: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_storage: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
                     let mut m_triangleFlip: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_offset: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_scale: _serde::__private::Option<f32> = _serde::__private::None;
@@ -262,7 +265,7 @@ const _: () = {
                                     );
                                 }
                                 m_storage = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -374,8 +377,8 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
-                    let mut m_xRes: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_zRes: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_xRes: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_zRes: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_heightCenter: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_useProjectionBasedHeight: _serde::__private::Option<
                         bool,
@@ -389,7 +392,7 @@ const _: () = {
                         Vector4,
                     > = _serde::__private::None;
                     let mut m_extents: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_storage: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
+                    let mut m_storage: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
                     let mut m_triangleFlip: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_offset: _serde::__private::Option<f32> = _serde::__private::None;
                     let mut m_scale: _serde::__private::Option<f32> = _serde::__private::None;
@@ -439,7 +442,7 @@ const _: () = {
                                     );
                                 }
                                 m_xRes = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -463,7 +466,7 @@ const _: () = {
                                     );
                                 }
                                 m_zRes = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -675,7 +678,7 @@ const _: () = {
                                     );
                                 }
                                 m_storage = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -915,24 +918,26 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         ..Default::default()
                     };
                     let parent = hkpHeightFieldShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                     };
                     let parent = hkpSampledHeightFieldShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_xRes,
                         m_zRes,
@@ -946,7 +951,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpCompressedSampledHeightFieldShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_storage,
                         m_triangleFlip,

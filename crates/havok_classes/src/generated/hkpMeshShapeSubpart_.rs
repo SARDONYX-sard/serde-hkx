@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpMeshShapeSubpart {
+pub struct hkpMeshShapeSubpart<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkpMeshShapeSubpart {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `vertexBase`(ctype: `void*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -30,21 +31,21 @@ pub struct hkpMeshShapeSubpart {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "vertexBase"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexBase"))]
-    pub m_vertexBase: Pointer,
+    pub m_vertexBase: Pointer<'a>,
     /// # C++ Info
     /// - name: `vertexStriding`(ctype: `hkInt32`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "vertexStriding"))]
     #[cfg_attr(feature = "serde", serde(rename = "vertexStriding"))]
-    pub m_vertexStriding: i32,
+    pub m_vertexStriding: I32<'a>,
     /// # C++ Info
     /// - name: `numVertices`(ctype: `hkInt32`)
     /// - offset: `  8`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numVertices"))]
     #[cfg_attr(feature = "serde", serde(rename = "numVertices"))]
-    pub m_numVertices: i32,
+    pub m_numVertices: I32<'a>,
     /// # C++ Info
     /// - name: `indexBase`(ctype: `void*`)
     /// - offset: ` 12`(x86)/` 16`(x86_64)
@@ -52,7 +53,7 @@ pub struct hkpMeshShapeSubpart {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "indexBase"))]
     #[cfg_attr(feature = "serde", serde(rename = "indexBase"))]
-    pub m_indexBase: Pointer,
+    pub m_indexBase: Pointer<'a>,
     /// # C++ Info
     /// - name: `stridingType`(ctype: `enum MeshShapeIndexStridingType`)
     /// - offset: ` 16`(x86)/` 24`(x86_64)
@@ -73,21 +74,21 @@ pub struct hkpMeshShapeSubpart {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "indexStriding"))]
     #[cfg_attr(feature = "serde", serde(rename = "indexStriding"))]
-    pub m_indexStriding: i32,
+    pub m_indexStriding: I32<'a>,
     /// # C++ Info
     /// - name: `flipAlternateTriangles`(ctype: `hkInt32`)
     /// - offset: ` 24`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "flipAlternateTriangles"))]
     #[cfg_attr(feature = "serde", serde(rename = "flipAlternateTriangles"))]
-    pub m_flipAlternateTriangles: i32,
+    pub m_flipAlternateTriangles: I32<'a>,
     /// # C++ Info
     /// - name: `numTriangles`(ctype: `hkInt32`)
     /// - offset: ` 28`(x86)/` 36`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numTriangles"))]
     #[cfg_attr(feature = "serde", serde(rename = "numTriangles"))]
-    pub m_numTriangles: i32,
+    pub m_numTriangles: I32<'a>,
     /// # C++ Info
     /// - name: `materialIndexBase`(ctype: `void*`)
     /// - offset: ` 32`(x86)/` 40`(x86_64)
@@ -95,14 +96,14 @@ pub struct hkpMeshShapeSubpart {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "materialIndexBase"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialIndexBase"))]
-    pub m_materialIndexBase: Pointer,
+    pub m_materialIndexBase: Pointer<'a>,
     /// # C++ Info
     /// - name: `materialIndexStriding`(ctype: `hkInt32`)
     /// - offset: ` 36`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "materialIndexStriding"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialIndexStriding"))]
-    pub m_materialIndexStriding: i32,
+    pub m_materialIndexStriding: I32<'a>,
     /// # C++ Info
     /// - name: `materialBase`(ctype: `void*`)
     /// - offset: ` 40`(x86)/` 56`(x86_64)
@@ -110,32 +111,32 @@ pub struct hkpMeshShapeSubpart {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "materialBase"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialBase"))]
-    pub m_materialBase: Pointer,
+    pub m_materialBase: Pointer<'a>,
     /// # C++ Info
     /// - name: `materialStriding`(ctype: `hkInt32`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "materialStriding"))]
     #[cfg_attr(feature = "serde", serde(rename = "materialStriding"))]
-    pub m_materialStriding: i32,
+    pub m_materialStriding: I32<'a>,
     /// # C++ Info
     /// - name: `numMaterials`(ctype: `hkInt32`)
     /// - offset: ` 48`(x86)/` 68`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numMaterials"))]
     #[cfg_attr(feature = "serde", serde(rename = "numMaterials"))]
-    pub m_numMaterials: i32,
+    pub m_numMaterials: I32<'a>,
     /// # C++ Info
     /// - name: `triangleOffset`(ctype: `hkInt32`)
     /// - offset: ` 52`(x86)/` 72`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "triangleOffset"))]
     #[cfg_attr(feature = "serde", serde(rename = "triangleOffset"))]
-    pub m_triangleOffset: i32,
+    pub m_triangleOffset: I32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpMeshShapeSubpart {
+    impl<'a> _serde::HavokClass for hkpMeshShapeSubpart<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpMeshShapeSubpart"
@@ -145,22 +146,23 @@ const _: () = {
             _serde::__private::Signature::new(0x27336e5d)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_vertexBase.get());
-            v.push(self.m_indexBase.get());
-            v.push(self.m_materialIndexBase.get());
-            v.push(self.m_materialBase.get());
+            v.push(&self.m_vertexBase);
+            v.push(&self.m_indexBase);
+            v.push(&self.m_materialIndexBase);
+            v.push(&self.m_materialBase);
             v
         }
     }
-    impl _serde::Serialize for hkpMeshShapeSubpart {
+    impl<'a> _serde::Serialize for hkpMeshShapeSubpart<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x27336e5d)));
             let mut serializer = __serializer
                 .serialize_struct("hkpMeshShapeSubpart", class_meta, (56u64, 80u64))?;
@@ -203,7 +205,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpMeshShapeSubpart {
+    impl<'de> _serde::Deserialize<'de> for hkpMeshShapeSubpart<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -273,14 +275,14 @@ const _: () = {
                 }
             }
             struct __hkpMeshShapeSubpartVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpMeshShapeSubpart>,
+                marker: _serde::__private::PhantomData<hkpMeshShapeSubpart<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpMeshShapeSubpartVisitor<'de> {
-                type Value = hkpMeshShapeSubpart;
+                type Value = hkpMeshShapeSubpart<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -298,25 +300,31 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_vertexBase: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_vertexStriding: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numVertices: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_indexBase: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_vertexBase: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_vertexStriding: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_numVertices: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_indexBase: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_stridingType: _serde::__private::Option<
                         MeshShapeIndexStridingType,
                     > = _serde::__private::None;
                     let mut m_materialIndexStridingType: _serde::__private::Option<
                         MeshShapeMaterialIndexStridingType,
                     > = _serde::__private::None;
-                    let mut m_indexStriding: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_flipAlternateTriangles: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numTriangles: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_materialIndexBase: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_materialIndexStriding: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_materialBase: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_materialStriding: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numMaterials: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_triangleOffset: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_indexStriding: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_flipAlternateTriangles: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_numTriangles: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_materialIndexBase: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_materialIndexStriding: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_materialBase: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_materialStriding: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_numMaterials: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_triangleOffset: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     for i in 0..15usize {
                         match i {
                             0usize => {
@@ -328,7 +336,7 @@ const _: () = {
                                     );
                                 }
                                 m_vertexBase = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -345,7 +353,7 @@ const _: () = {
                                     );
                                 }
                                 m_vertexStriding = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -362,7 +370,7 @@ const _: () = {
                                     );
                                 }
                                 m_numVertices = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -379,7 +387,7 @@ const _: () = {
                                     );
                                 }
                                 m_indexBase = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -437,7 +445,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 2usize, 2usize)?;
                                 m_indexStriding = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -456,7 +464,7 @@ const _: () = {
                                     );
                                 }
                                 m_flipAlternateTriangles = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -473,7 +481,7 @@ const _: () = {
                                     );
                                 }
                                 m_numTriangles = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -492,7 +500,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialIndexBase = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -511,7 +519,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialIndexStriding = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -529,7 +537,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_materialBase = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -546,7 +554,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialStriding = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -563,7 +571,7 @@ const _: () = {
                                     );
                                 }
                                 m_numMaterials = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -580,7 +588,7 @@ const _: () = {
                                     );
                                 }
                                 m_triangleOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -769,21 +777,25 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_vertexStriding: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numVertices: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_vertexStriding: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_numVertices: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_stridingType: _serde::__private::Option<
                         MeshShapeIndexStridingType,
                     > = _serde::__private::None;
                     let mut m_materialIndexStridingType: _serde::__private::Option<
                         MeshShapeMaterialIndexStridingType,
                     > = _serde::__private::None;
-                    let mut m_indexStriding: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_flipAlternateTriangles: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numTriangles: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_materialIndexStriding: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_materialStriding: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numMaterials: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_triangleOffset: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_indexStriding: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_flipAlternateTriangles: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_numTriangles: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_materialIndexStriding: _serde::__private::Option<
+                        I32<'de>,
+                    > = _serde::__private::None;
+                    let mut m_materialStriding: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_numMaterials: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_triangleOffset: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -806,7 +818,7 @@ const _: () = {
                                     );
                                 }
                                 m_vertexStriding = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -832,7 +844,7 @@ const _: () = {
                                     );
                                 }
                                 m_numVertices = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -916,7 +928,7 @@ const _: () = {
                                     );
                                 }
                                 m_indexStriding = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -944,7 +956,7 @@ const _: () = {
                                     );
                                 }
                                 m_flipAlternateTriangles = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -970,7 +982,7 @@ const _: () = {
                                     );
                                 }
                                 m_numTriangles = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -998,7 +1010,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialIndexStriding = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1024,7 +1036,7 @@ const _: () = {
                                     );
                                 }
                                 m_materialStriding = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1050,7 +1062,7 @@ const _: () = {
                                     );
                                 }
                                 m_numMaterials = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1076,7 +1088,7 @@ const _: () = {
                                     );
                                 }
                                 m_triangleOffset = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1221,7 +1233,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpMeshShapeSubpart {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_vertexStriding,
                         m_numVertices,
                         m_stridingType,

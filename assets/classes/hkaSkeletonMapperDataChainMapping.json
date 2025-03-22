@@ -4,13 +4,13 @@
   "signature": "0xa528f7cf",
   "size_x86": 112,
   "size_x86_64": 112,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "startBoneA",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -24,7 +24,7 @@
     },
     {
       "name": "endBoneA",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -38,7 +38,7 @@
     },
     {
       "name": "startBoneB",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -52,7 +52,7 @@
     },
     {
       "name": "endBoneB",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -66,7 +66,7 @@
     },
     {
       "name": "startAFromBTransform",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkQsTransform",
       "vtype": "TYPE_QSTRANSFORM",
       "vsubtype": "TYPE_VOID",
@@ -80,7 +80,7 @@
     },
     {
       "name": "endAFromBTransform",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkQsTransform",
       "vtype": "TYPE_QSTRANSFORM",
       "vsubtype": "TYPE_VOID",

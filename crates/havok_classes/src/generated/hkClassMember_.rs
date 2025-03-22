@@ -22,7 +22,8 @@ pub struct hkClassMember<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `name`(ctype: `char*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -37,14 +38,14 @@ pub struct hkClassMember<'a> {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "class"))]
     #[cfg_attr(feature = "serde", serde(rename = "class"))]
-    pub m_class: Pointer,
+    pub m_class: Pointer<'a>,
     /// # C++ Info
     /// - name: `enum`(ctype: `struct hkClassEnum*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "enum"))]
     #[cfg_attr(feature = "serde", serde(rename = "enum"))]
-    pub m_enum: Pointer,
+    pub m_enum: Pointer<'a>,
     /// # C++ Info
     /// - name: `type`(ctype: `enum Type`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
@@ -65,7 +66,7 @@ pub struct hkClassMember<'a> {
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "cArraySize"))]
     #[cfg_attr(feature = "serde", serde(rename = "cArraySize"))]
-    pub m_cArraySize: i16,
+    pub m_cArraySize: I16<'a>,
     /// # C++ Info
     /// - name: `flags`(ctype: `flags FlagValues`)
     /// - offset: ` 16`(x86)/` 28`(x86_64)
@@ -79,7 +80,7 @@ pub struct hkClassMember<'a> {
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "offset"))]
     #[cfg_attr(feature = "serde", serde(rename = "offset"))]
-    pub m_offset: u16,
+    pub m_offset: U16<'a>,
     /// # C++ Info
     /// - name: `attributes`(ctype: `struct hkCustomAttributes*`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
@@ -87,7 +88,7 @@ pub struct hkClassMember<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "attributes"))]
     #[cfg_attr(feature = "serde", serde(rename = "attributes"))]
-    pub m_attributes: Pointer,
+    pub m_attributes: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -101,11 +102,11 @@ const _: () = {
             _serde::__private::Signature::new(0x5c7ea4c2)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_class.get());
-            v.push(self.m_enum.get());
-            v.push(self.m_attributes.get());
+            v.push(&self.m_class);
+            v.push(&self.m_enum);
+            v.push(&self.m_attributes);
             v
         }
     }
@@ -116,6 +117,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x5c7ea4c2)));
             let mut serializer = __serializer
                 .serialize_struct("hkClassMember", class_meta, (24u64, 40u64))?;
@@ -222,14 +224,14 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let mut m_name: _serde::__private::Option<CString<'de>> = _serde::__private::None;
-                    let mut m_class: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_enum: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_class: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_enum: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_type: _serde::__private::Option<Type> = _serde::__private::None;
                     let mut m_subtype: _serde::__private::Option<Type> = _serde::__private::None;
-                    let mut m_cArraySize: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_cArraySize: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_flags: _serde::__private::Option<FlagValues> = _serde::__private::None;
-                    let mut m_offset: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_attributes: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_offset: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_attributes: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     for i in 0..9usize {
                         match i {
                             0usize => {
@@ -254,7 +256,7 @@ const _: () = {
                                     );
                                 }
                                 m_class = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -269,7 +271,7 @@ const _: () = {
                                     );
                                 }
                                 m_enum = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -318,7 +320,7 @@ const _: () = {
                                     );
                                 }
                                 m_cArraySize = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -348,7 +350,7 @@ const _: () = {
                                     );
                                 }
                                 m_offset = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -365,7 +367,7 @@ const _: () = {
                                     );
                                 }
                                 m_attributes = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -474,13 +476,13 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_name: _serde::__private::Option<CString<'de>> = _serde::__private::None;
-                    let mut m_class: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_enum: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_class: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_enum: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_type: _serde::__private::Option<Type> = _serde::__private::None;
                     let mut m_subtype: _serde::__private::Option<Type> = _serde::__private::None;
-                    let mut m_cArraySize: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_cArraySize: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_flags: _serde::__private::Option<FlagValues> = _serde::__private::None;
-                    let mut m_offset: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_offset: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -525,7 +527,7 @@ const _: () = {
                                     );
                                 }
                                 m_class = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -549,7 +551,7 @@ const _: () = {
                                     );
                                 }
                                 m_enum = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -625,7 +627,7 @@ const _: () = {
                                     );
                                 }
                                 m_cArraySize = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -673,7 +675,7 @@ const _: () = {
                                     );
                                 }
                                 m_offset = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -768,7 +770,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkClassMember {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_name,
                         m_class,
                         m_enum,
@@ -1088,48 +1090,48 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
-                        2u8 => _serde::__private::Ok(__Field::__field2),
-                        3u8 => _serde::__private::Ok(__Field::__field3),
-                        4u8 => _serde::__private::Ok(__Field::__field4),
-                        5u8 => _serde::__private::Ok(__Field::__field5),
-                        6u8 => _serde::__private::Ok(__Field::__field6),
-                        7u8 => _serde::__private::Ok(__Field::__field7),
-                        8u8 => _serde::__private::Ok(__Field::__field8),
-                        9u8 => _serde::__private::Ok(__Field::__field9),
-                        10u8 => _serde::__private::Ok(__Field::__field10),
-                        11u8 => _serde::__private::Ok(__Field::__field11),
-                        12u8 => _serde::__private::Ok(__Field::__field12),
-                        13u8 => _serde::__private::Ok(__Field::__field13),
-                        14u8 => _serde::__private::Ok(__Field::__field14),
-                        15u8 => _serde::__private::Ok(__Field::__field15),
-                        16u8 => _serde::__private::Ok(__Field::__field16),
-                        17u8 => _serde::__private::Ok(__Field::__field17),
-                        18u8 => _serde::__private::Ok(__Field::__field18),
-                        19u8 => _serde::__private::Ok(__Field::__field19),
-                        20u8 => _serde::__private::Ok(__Field::__field20),
-                        21u8 => _serde::__private::Ok(__Field::__field21),
-                        22u8 => _serde::__private::Ok(__Field::__field22),
-                        23u8 => _serde::__private::Ok(__Field::__field23),
-                        24u8 => _serde::__private::Ok(__Field::__field24),
-                        25u8 => _serde::__private::Ok(__Field::__field25),
-                        26u8 => _serde::__private::Ok(__Field::__field26),
-                        27u8 => _serde::__private::Ok(__Field::__field27),
-                        28u8 => _serde::__private::Ok(__Field::__field28),
-                        29u8 => _serde::__private::Ok(__Field::__field29),
-                        30u8 => _serde::__private::Ok(__Field::__field30),
-                        31u8 => _serde::__private::Ok(__Field::__field31),
-                        32u8 => _serde::__private::Ok(__Field::__field32),
-                        33u8 => _serde::__private::Ok(__Field::__field33),
-                        34u8 => _serde::__private::Ok(__Field::__field34),
-                        35u8 => _serde::__private::Ok(__Field::__field35),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(2u8) => _serde::__private::Ok(__Field::__field2),
+                        U8::Number(3u8) => _serde::__private::Ok(__Field::__field3),
+                        U8::Number(4u8) => _serde::__private::Ok(__Field::__field4),
+                        U8::Number(5u8) => _serde::__private::Ok(__Field::__field5),
+                        U8::Number(6u8) => _serde::__private::Ok(__Field::__field6),
+                        U8::Number(7u8) => _serde::__private::Ok(__Field::__field7),
+                        U8::Number(8u8) => _serde::__private::Ok(__Field::__field8),
+                        U8::Number(9u8) => _serde::__private::Ok(__Field::__field9),
+                        U8::Number(10u8) => _serde::__private::Ok(__Field::__field10),
+                        U8::Number(11u8) => _serde::__private::Ok(__Field::__field11),
+                        U8::Number(12u8) => _serde::__private::Ok(__Field::__field12),
+                        U8::Number(13u8) => _serde::__private::Ok(__Field::__field13),
+                        U8::Number(14u8) => _serde::__private::Ok(__Field::__field14),
+                        U8::Number(15u8) => _serde::__private::Ok(__Field::__field15),
+                        U8::Number(16u8) => _serde::__private::Ok(__Field::__field16),
+                        U8::Number(17u8) => _serde::__private::Ok(__Field::__field17),
+                        U8::Number(18u8) => _serde::__private::Ok(__Field::__field18),
+                        U8::Number(19u8) => _serde::__private::Ok(__Field::__field19),
+                        U8::Number(20u8) => _serde::__private::Ok(__Field::__field20),
+                        U8::Number(21u8) => _serde::__private::Ok(__Field::__field21),
+                        U8::Number(22u8) => _serde::__private::Ok(__Field::__field22),
+                        U8::Number(23u8) => _serde::__private::Ok(__Field::__field23),
+                        U8::Number(24u8) => _serde::__private::Ok(__Field::__field24),
+                        U8::Number(25u8) => _serde::__private::Ok(__Field::__field25),
+                        U8::Number(26u8) => _serde::__private::Ok(__Field::__field26),
+                        U8::Number(27u8) => _serde::__private::Ok(__Field::__field27),
+                        U8::Number(28u8) => _serde::__private::Ok(__Field::__field28),
+                        U8::Number(29u8) => _serde::__private::Ok(__Field::__field29),
+                        U8::Number(30u8) => _serde::__private::Ok(__Field::__field30),
+                        U8::Number(31u8) => _serde::__private::Ok(__Field::__field31),
+                        U8::Number(32u8) => _serde::__private::Ok(__Field::__field32),
+                        U8::Number(33u8) => _serde::__private::Ok(__Field::__field33),
+                        U8::Number(34u8) => _serde::__private::Ok(__Field::__field34),
+                        U8::Number(35u8) => _serde::__private::Ok(__Field::__field35),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(
@@ -1544,12 +1546,24 @@ const _: () = {
                 #[inline]
                 fn visit_uint32<__E>(
                     self,
-                    __value: u32,
+                    __value: U32<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
-                    Ok(FlagValues::from_bits_retain(__value as _))
+                    match __value {
+                        U32::Number(__value) => {
+                            Ok(FlagValues::from_bits_retain(__value as _))
+                        }
+                        _ => {
+                            Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Uint32(__value as _),
+                                    &"FlagValues(U32) Number",
+                                ),
+                            )
+                        }
+                    }
                 }
                 fn visit_stringptr<__E>(
                     self,

@@ -4,9 +4,9 @@
   "signature": "0x9e746ba2",
   "size_x86": 6,
   "size_x86_64": 6,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "VariableType",
@@ -61,7 +61,7 @@
     {
       "name": "role",
       "class_ref": "hkbRoleAttribute",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkbRoleAttribute",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -76,7 +76,7 @@
     {
       "name": "type",
       "enum_ref": "VariableType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum VariableType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_INT8",

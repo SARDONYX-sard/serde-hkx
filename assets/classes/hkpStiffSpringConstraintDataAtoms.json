@@ -4,14 +4,14 @@
   "signature": "0x207eb376",
   "size_x86": 64,
   "size_x86_64": 64,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "pivots",
       "class_ref": "hkpSetLocalTranslationsConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpSetLocalTranslationsConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -26,7 +26,7 @@
     {
       "name": "spring",
       "class_ref": "hkpStiffSpringConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpStiffSpringConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",

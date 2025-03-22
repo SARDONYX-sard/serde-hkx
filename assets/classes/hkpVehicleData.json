@@ -5,13 +5,13 @@
   "size_x86": 416,
   "size_x86_64": 416,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "gravity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "numWheels",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt8",
       "vtype": "TYPE_INT8",
       "vsubtype": "TYPE_VOID",
@@ -39,7 +39,7 @@
     },
     {
       "name": "chassisOrientation",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkRotation",
       "vtype": "TYPE_ROTATION",
       "vsubtype": "TYPE_VOID",
@@ -53,7 +53,7 @@
     },
     {
       "name": "torqueRollFactor",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -67,7 +67,7 @@
     },
     {
       "name": "torquePitchFactor",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -81,7 +81,7 @@
     },
     {
       "name": "torqueYawFactor",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -95,7 +95,7 @@
     },
     {
       "name": "extraTorqueFactor",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -109,7 +109,7 @@
     },
     {
       "name": "maxVelocityForPositionalFriction",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -123,7 +123,7 @@
     },
     {
       "name": "chassisUnitInertiaYaw",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -137,7 +137,7 @@
     },
     {
       "name": "chassisUnitInertiaRoll",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -151,7 +151,7 @@
     },
     {
       "name": "chassisUnitInertiaPitch",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -165,7 +165,7 @@
     },
     {
       "name": "frictionEqualizer",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -179,7 +179,7 @@
     },
     {
       "name": "normalClippingAngleCos",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -193,7 +193,7 @@
     },
     {
       "name": "maxFrictionSolverMassRatio",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -208,7 +208,7 @@
     {
       "name": "wheelParams",
       "class_ref": "hkpVehicleDataWheelComponentParams",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkpVehicleDataWheelComponentParams>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -222,7 +222,7 @@
     },
     {
       "name": "numWheelsPerAxle",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkInt8>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_INT8",
@@ -237,7 +237,7 @@
     {
       "name": "frictionDescription",
       "class_ref": "hkpVehicleFrictionDescription",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpVehicleFrictionDescription",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -251,7 +251,7 @@
     },
     {
       "name": "chassisFrictionInertiaInvDiag",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -265,7 +265,7 @@
     },
     {
       "name": "alreadyInitialised",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

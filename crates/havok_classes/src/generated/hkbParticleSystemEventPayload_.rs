@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbParticleSystemEventPayload {
+pub struct hkbParticleSystemEventPayload<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkbParticleSystemEventPayload {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkbEventPayload,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkbEventPayload<'a>,
     /// # C++ Info
     /// - name: `type`(ctype: `enum SystemType`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -40,7 +42,7 @@ pub struct hkbParticleSystemEventPayload {
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "emitBoneIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "emitBoneIndex"))]
-    pub m_emitBoneIndex: i16,
+    pub m_emitBoneIndex: I16<'a>,
     /// # C++ Info
     /// - name: `offset`(ctype: `hkVector4`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
@@ -61,7 +63,7 @@ pub struct hkbParticleSystemEventPayload {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numParticles"))]
     #[cfg_attr(feature = "serde", serde(rename = "numParticles"))]
-    pub m_numParticles: i32,
+    pub m_numParticles: I32<'a>,
     /// # C++ Info
     /// - name: `speed`(ctype: `hkReal`)
     /// - offset: ` 52`(x86)/` 68`(x86_64)
@@ -72,7 +74,7 @@ pub struct hkbParticleSystemEventPayload {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbParticleSystemEventPayload {
+    impl<'a> _serde::HavokClass for hkbParticleSystemEventPayload<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbParticleSystemEventPayload"
@@ -82,18 +84,19 @@ const _: () = {
             _serde::__private::Signature::new(0x9df46cd6)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkbParticleSystemEventPayload {
+    impl<'a> _serde::Serialize for hkbParticleSystemEventPayload<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x9df46cd6)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -125,7 +128,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbParticleSystemEventPayload {
+    impl<'de> _serde::Deserialize<'de> for hkbParticleSystemEventPayload<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -183,7 +186,9 @@ const _: () = {
                 }
             }
             struct __hkbParticleSystemEventPayloadVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbParticleSystemEventPayload>,
+                marker: _serde::__private::PhantomData<
+                    hkbParticleSystemEventPayload<'de>,
+                >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -191,7 +196,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkbParticleSystemEventPayloadVisitor<'de> {
-                type Value = hkbParticleSystemEventPayload;
+                type Value = hkbParticleSystemEventPayload<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -211,10 +216,10 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_type: _serde::__private::Option<SystemType> = _serde::__private::None;
-                    let mut m_emitBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_emitBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_offset: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_direction: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_numParticles: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numParticles: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_speed: _serde::__private::Option<f32> = _serde::__private::None;
                     for i in 0..6usize {
                         match i {
@@ -243,7 +248,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 1usize, 1usize)?;
                                 m_emitBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -293,7 +298,7 @@ const _: () = {
                                     );
                                 }
                                 m_numParticles = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -394,10 +399,10 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_type: _serde::__private::Option<SystemType> = _serde::__private::None;
-                    let mut m_emitBoneIndex: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_emitBoneIndex: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_offset: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_direction: _serde::__private::Option<Vector4> = _serde::__private::None;
-                    let mut m_numParticles: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numParticles: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_speed: _serde::__private::Option<f32> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -445,7 +450,7 @@ const _: () = {
                                     );
                                 }
                                 m_emitBoneIndex = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -521,7 +526,7 @@ const _: () = {
                                     );
                                 }
                                 m_numParticles = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -623,16 +628,21 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
-                    let parent = hkbEventPayload { __ptr, parent };
+                    let parent = hkbEventPayload {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbParticleSystemEventPayload {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_type,
                         m_emitBoneIndex,
@@ -750,17 +760,17 @@ const _: () = {
                 }
                 fn visit_uint8<__E>(
                     self,
-                    __value: u8,
+                    __value: U8<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
                     match __value {
-                        0u8 => _serde::__private::Ok(__Field::__field0),
-                        1u8 => _serde::__private::Ok(__Field::__field1),
-                        2u8 => _serde::__private::Ok(__Field::__field2),
-                        3u8 => _serde::__private::Ok(__Field::__field3),
-                        4u8 => _serde::__private::Ok(__Field::__field4),
+                        U8::Number(0u8) => _serde::__private::Ok(__Field::__field0),
+                        U8::Number(1u8) => _serde::__private::Ok(__Field::__field1),
+                        U8::Number(2u8) => _serde::__private::Ok(__Field::__field2),
+                        U8::Number(3u8) => _serde::__private::Ok(__Field::__field3),
+                        U8::Number(4u8) => _serde::__private::Ok(__Field::__field4),
                         _ => {
                             _serde::__private::Err(
                                 _serde::de::Error::invalid_value(

@@ -5,9 +5,9 @@
   "size_x86": 64,
   "size_x86_64": 80,
   "parent": "hkbEventPayload",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "SystemType",
@@ -42,7 +42,7 @@
     {
       "name": "type",
       "enum_ref": "SystemType",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "enum SystemType",
       "vtype": "TYPE_ENUM",
       "vsubtype": "TYPE_UINT8",
@@ -56,7 +56,7 @@
     },
     {
       "name": "emitBoneIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",
@@ -70,7 +70,7 @@
     },
     {
       "name": "offset",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -84,7 +84,7 @@
     },
     {
       "name": "direction",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkVector4",
       "vtype": "TYPE_VECTOR4",
       "vsubtype": "TYPE_VOID",
@@ -98,7 +98,7 @@
     },
     {
       "name": "numParticles",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -112,7 +112,7 @@
     },
     {
       "name": "speed",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",

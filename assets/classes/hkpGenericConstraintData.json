@@ -5,14 +5,14 @@
   "size_x86": 88,
   "size_x86_64": 128,
   "parent": "hkpConstraintData",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "atoms",
       "class_ref": "hkpBridgeAtoms",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpBridgeAtoms",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -27,7 +27,7 @@
     {
       "name": "scheme",
       "class_ref": "hkpGenericConstraintDataScheme",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpGenericConstraintDataScheme",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",

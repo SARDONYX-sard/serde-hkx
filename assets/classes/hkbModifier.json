@@ -5,13 +5,13 @@
   "size_x86": 44,
   "size_x86_64": 80,
   "parent": "hkbNode",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "enable",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "padModifier",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool[3]",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

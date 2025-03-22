@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkTrackerSerializableScanSnapshot {
+pub struct hkTrackerSerializableScanSnapshot<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,64 +22,66 @@ pub struct hkTrackerSerializableScanSnapshot {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `allocations`(ctype: `hkArray<struct hkTrackerSerializableScanSnapshotAllocation>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "allocations"))]
     #[cfg_attr(feature = "serde", serde(rename = "allocations"))]
-    pub m_allocations: Vec<hkTrackerSerializableScanSnapshotAllocation>,
+    pub m_allocations: Vec<hkTrackerSerializableScanSnapshotAllocation<'a>>,
     /// # C++ Info
     /// - name: `blocks`(ctype: `hkArray<struct hkTrackerSerializableScanSnapshotBlock>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "blocks"))]
     #[cfg_attr(feature = "serde", serde(rename = "blocks"))]
-    pub m_blocks: Vec<hkTrackerSerializableScanSnapshotBlock>,
+    pub m_blocks: Vec<hkTrackerSerializableScanSnapshotBlock<'a>>,
     /// # C++ Info
     /// - name: `refs`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "refs"))]
     #[cfg_attr(feature = "serde", serde(rename = "refs"))]
-    pub m_refs: Vec<i32>,
+    pub m_refs: Vec<I32<'a>>,
     /// # C++ Info
     /// - name: `typeNames`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "typeNames"))]
     #[cfg_attr(feature = "serde", serde(rename = "typeNames"))]
-    pub m_typeNames: Vec<u8>,
+    pub m_typeNames: Vec<U8<'a>>,
     /// # C++ Info
     /// - name: `traceText`(ctype: `hkArray<hkUint8>`)
     /// - offset: ` 56`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "traceText"))]
     #[cfg_attr(feature = "serde", serde(rename = "traceText"))]
-    pub m_traceText: Vec<u8>,
+    pub m_traceText: Vec<U8<'a>>,
     /// # C++ Info
     /// - name: `traceAddrs`(ctype: `hkArray<hkUint64>`)
     /// - offset: ` 68`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "traceAddrs"))]
     #[cfg_attr(feature = "serde", serde(rename = "traceAddrs"))]
-    pub m_traceAddrs: Vec<u64>,
+    pub m_traceAddrs: Vec<U64<'a>>,
     /// # C++ Info
     /// - name: `traceParents`(ctype: `hkArray<hkInt32>`)
     /// - offset: ` 80`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "traceParents"))]
     #[cfg_attr(feature = "serde", serde(rename = "traceParents"))]
-    pub m_traceParents: Vec<i32>,
+    pub m_traceParents: Vec<I32<'a>>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkTrackerSerializableScanSnapshot {
+    impl<'a> _serde::HavokClass for hkTrackerSerializableScanSnapshot<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkTrackerSerializableScanSnapshot"
@@ -89,32 +91,33 @@ const _: () = {
             _serde::__private::Signature::new(0x875af1d9)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_allocations
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v.extend(
                 self
                     .m_blocks
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
     }
-    impl _serde::Serialize for hkTrackerSerializableScanSnapshot {
+    impl<'a> _serde::Serialize for hkTrackerSerializableScanSnapshot<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x875af1d9)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -178,7 +181,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkTrackerSerializableScanSnapshot {
+    impl<'de> _serde::Deserialize<'de> for hkTrackerSerializableScanSnapshot<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -239,7 +242,7 @@ const _: () = {
             }
             struct __hkTrackerSerializableScanSnapshotVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkTrackerSerializableScanSnapshot,
+                    hkTrackerSerializableScanSnapshot<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -248,7 +251,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkTrackerSerializableScanSnapshotVisitor<'de> {
-                type Value = hkTrackerSerializableScanSnapshot;
+                type Value = hkTrackerSerializableScanSnapshot<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -273,11 +276,11 @@ const _: () = {
                     let mut m_blocks: _serde::__private::Option<
                         Vec<hkTrackerSerializableScanSnapshotBlock>,
                     > = _serde::__private::None;
-                    let mut m_refs: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
-                    let mut m_typeNames: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_traceText: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_traceAddrs: _serde::__private::Option<Vec<u64>> = _serde::__private::None;
-                    let mut m_traceParents: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
+                    let mut m_refs: _serde::__private::Option<Vec<I32<'de>>> = _serde::__private::None;
+                    let mut m_typeNames: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
+                    let mut m_traceText: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
+                    let mut m_traceAddrs: _serde::__private::Option<Vec<U64<'de>>> = _serde::__private::None;
+                    let mut m_traceParents: _serde::__private::Option<Vec<I32<'de>>> = _serde::__private::None;
                     for i in 0..7usize {
                         match i {
                             0usize => {
@@ -323,7 +326,7 @@ const _: () = {
                                     );
                                 }
                                 m_refs = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                    match __A::next_value::<Vec<I32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -340,7 +343,7 @@ const _: () = {
                                     );
                                 }
                                 m_typeNames = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -357,7 +360,7 @@ const _: () = {
                                     );
                                 }
                                 m_traceText = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -374,7 +377,7 @@ const _: () = {
                                     );
                                 }
                                 m_traceAddrs = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u64>>(&mut __map) {
+                                    match __A::next_value::<Vec<U64<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -391,7 +394,7 @@ const _: () = {
                                     );
                                 }
                                 m_traceParents = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                    match __A::next_value::<Vec<I32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -494,11 +497,11 @@ const _: () = {
                     let mut m_blocks: _serde::__private::Option<
                         Vec<hkTrackerSerializableScanSnapshotBlock>,
                     > = _serde::__private::None;
-                    let mut m_refs: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
-                    let mut m_typeNames: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_traceText: _serde::__private::Option<Vec<u8>> = _serde::__private::None;
-                    let mut m_traceAddrs: _serde::__private::Option<Vec<u64>> = _serde::__private::None;
-                    let mut m_traceParents: _serde::__private::Option<Vec<i32>> = _serde::__private::None;
+                    let mut m_refs: _serde::__private::Option<Vec<I32<'de>>> = _serde::__private::None;
+                    let mut m_typeNames: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
+                    let mut m_traceText: _serde::__private::Option<Vec<U8<'de>>> = _serde::__private::None;
+                    let mut m_traceAddrs: _serde::__private::Option<Vec<U64<'de>>> = _serde::__private::None;
+                    let mut m_traceParents: _serde::__private::Option<Vec<I32<'de>>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -573,7 +576,7 @@ const _: () = {
                                     );
                                 }
                                 m_refs = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                    match __A::next_value::<Vec<I32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -599,7 +602,7 @@ const _: () = {
                                     );
                                 }
                                 m_typeNames = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -625,7 +628,7 @@ const _: () = {
                                     );
                                 }
                                 m_traceText = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u8>>(&mut __map) {
+                                    match __A::next_value::<Vec<U8<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -651,7 +654,7 @@ const _: () = {
                                     );
                                 }
                                 m_traceAddrs = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u64>>(&mut __map) {
+                                    match __A::next_value::<Vec<U64<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -677,7 +680,7 @@ const _: () = {
                                     );
                                 }
                                 m_traceParents = _serde::__private::Some(
-                                    match __A::next_value::<Vec<i32>>(&mut __map) {
+                                    match __A::next_value::<Vec<I32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -769,15 +772,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkTrackerSerializableScanSnapshot {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_allocations,
                         m_blocks,

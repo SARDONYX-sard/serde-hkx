@@ -5,13 +5,13 @@
   "size_x86": 12,
   "size_x86_64": 16,
   "parent": "hkpMeshMaterial",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "restitution",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkHalf",
       "vtype": "TYPE_HALF",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "friction",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkHalf",
       "vtype": "TYPE_HALF",
       "vsubtype": "TYPE_VOID",
@@ -39,7 +39,7 @@
     },
     {
       "name": "userData",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUlong",
       "vtype": "TYPE_ULONG",
       "vsubtype": "TYPE_VOID",

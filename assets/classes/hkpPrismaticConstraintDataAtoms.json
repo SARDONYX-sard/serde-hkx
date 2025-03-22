@@ -4,9 +4,9 @@
   "signature": "0x7f516137",
   "size_x86": 192,
   "size_x86_64": 208,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "enums": [
     {
       "name": "Axis",
@@ -29,7 +29,7 @@
     {
       "name": "transforms",
       "class_ref": "hkpSetLocalTransformsConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpSetLocalTransformsConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -44,7 +44,7 @@
     {
       "name": "motor",
       "class_ref": "hkpLinMotorConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpLinMotorConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -59,7 +59,7 @@
     {
       "name": "friction",
       "class_ref": "hkpLinFrictionConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpLinFrictionConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -74,7 +74,7 @@
     {
       "name": "ang",
       "class_ref": "hkpAngConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpAngConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -89,7 +89,7 @@
     {
       "name": "lin0",
       "class_ref": "hkpLinConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpLinConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -104,7 +104,7 @@
     {
       "name": "lin1",
       "class_ref": "hkpLinConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpLinConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -119,7 +119,7 @@
     {
       "name": "linLimit",
       "class_ref": "hkpLinLimitConstraintAtom",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpLinLimitConstraintAtom",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",

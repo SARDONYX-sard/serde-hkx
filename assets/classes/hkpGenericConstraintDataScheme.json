@@ -4,14 +4,14 @@
   "signature": "0x11fd6f6c",
   "size_x86": 64,
   "size_x86_64": 80,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "info",
       "class_ref": "hkpGenericConstraintDataSchemeConstraintInfo",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpGenericConstraintDataSchemeConstraintInfo",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "data",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkVector4>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VECTOR4",
@@ -39,7 +39,7 @@
     },
     {
       "name": "commands",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkInt32>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_INT32",
@@ -53,7 +53,7 @@
     },
     {
       "name": "modifiers",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<void*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -68,7 +68,7 @@
     {
       "name": "motors",
       "class_ref": "hkpConstraintMotor",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkpConstraintMotor*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",

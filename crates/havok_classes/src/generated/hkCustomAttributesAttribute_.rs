@@ -22,7 +22,8 @@ pub struct hkCustomAttributesAttribute<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `name`(ctype: `char*`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -37,7 +38,7 @@ pub struct hkCustomAttributesAttribute<'a> {
     /// - type_size: `  8`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "value"))]
     #[cfg_attr(feature = "serde", serde(rename = "value"))]
-    pub m_value: Variant,
+    pub m_value: Variant<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -51,7 +52,7 @@ const _: () = {
             _serde::__private::Signature::new(0x1388d601)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
@@ -63,6 +64,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x1388d601)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -158,7 +160,7 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let mut m_name: _serde::__private::Option<CString<'de>> = _serde::__private::None;
-                    let mut m_value: _serde::__private::Option<Variant> = _serde::__private::None;
+                    let mut m_value: _serde::__private::Option<Variant<'de>> = _serde::__private::None;
                     for i in 0..2usize {
                         match i {
                             0usize => {
@@ -183,7 +185,7 @@ const _: () = {
                                     );
                                 }
                                 m_value = _serde::__private::Some(
-                                    match __A::next_value::<Variant>(&mut __map) {
+                                    match __A::next_value::<Variant<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -225,7 +227,7 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_name: _serde::__private::Option<CString<'de>> = _serde::__private::None;
-                    let mut m_value: _serde::__private::Option<Variant> = _serde::__private::None;
+                    let mut m_value: _serde::__private::Option<Variant<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -270,7 +272,7 @@ const _: () = {
                                     );
                                 }
                                 m_value = _serde::__private::Some(
-                                    match __A::next_value::<Variant>(&mut __map) {
+                                    match __A::next_value::<Variant<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -303,7 +305,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkCustomAttributesAttribute {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_name,
                         m_value,
                     })

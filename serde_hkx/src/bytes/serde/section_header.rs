@@ -6,11 +6,11 @@ use crate::{lib::*, tri};
 use byteorder::{ByteOrder, WriteBytesExt};
 use std::io;
 use winnow::{
+    Parser,
     binary::{self, Endianness},
     error::{ContextError, StrContext, StrContextValue::*},
     seq,
     token::take,
-    Parser,
 };
 
 /// The 48bytes each HKX section header contains metadata information about the HKX file.

@@ -1,10 +1,12 @@
+use crate::GenericClassMap;
+
 pub(crate) mod mocks;
 mod re_convert;
 mod verify;
 
 /// - key: class index(e.g. `#0001`)
 /// - value: class
-pub(crate) type ClassMap<'a> = indexmap::IndexMap<usize, havok_classes::Classes<'a>>;
+pub(crate) type ClassMap<'a> = GenericClassMap<'a, havok_classes::Classes<'a>>;
 
 /// Returns a diff string of two strings.
 pub(crate) fn diff(old: impl AsRef<str>, new: impl AsRef<str>) -> String {

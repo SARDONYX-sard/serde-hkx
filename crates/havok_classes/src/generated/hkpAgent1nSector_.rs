@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpAgent1nSector {
+pub struct hkpAgent1nSector<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,35 +22,36 @@ pub struct hkpAgent1nSector {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `bytesAllocated`(ctype: `hkUint32`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "bytesAllocated"))]
     #[cfg_attr(feature = "serde", serde(rename = "bytesAllocated"))]
-    pub m_bytesAllocated: u32,
+    pub m_bytesAllocated: U32<'a>,
     /// # C++ Info
     /// - name: `pad0`(ctype: `hkUint32`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "pad0"))]
     #[cfg_attr(feature = "serde", serde(rename = "pad0"))]
-    pub m_pad0: u32,
+    pub m_pad0: U32<'a>,
     /// # C++ Info
     /// - name: `pad1`(ctype: `hkUint32`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "pad1"))]
     #[cfg_attr(feature = "serde", serde(rename = "pad1"))]
-    pub m_pad1: u32,
+    pub m_pad1: U32<'a>,
     /// # C++ Info
     /// - name: `pad2`(ctype: `hkUint32`)
     /// - offset: ` 12`(x86)/` 12`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "pad2"))]
     #[cfg_attr(feature = "serde", serde(rename = "pad2"))]
-    pub m_pad2: u32,
+    pub m_pad2: U32<'a>,
     /// # C++ Info
     /// - name: `data`(ctype: `hkUint8[496]`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
@@ -63,14 +64,14 @@ pub struct hkpAgent1nSector {
         feature = "serde",
         serde(with = "::serde_with::As::<[::serde_with::Same; 496]>")
     )]
-    #[educe(Default = [0;496usize])]
+    #[educe(Default(expression = core::array::from_fn(|_idx|Default::default())))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "data"))]
     #[cfg_attr(feature = "serde", serde(rename = "data"))]
-    pub m_data: [u8; 496usize],
+    pub m_data: [U8<'a>; 496usize],
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpAgent1nSector {
+    impl<'a> _serde::HavokClass for hkpAgent1nSector<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpAgent1nSector"
@@ -80,18 +81,19 @@ const _: () = {
             _serde::__private::Signature::new(0x626e55a)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkpAgent1nSector {
+    impl<'a> _serde::Serialize for hkpAgent1nSector<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x626e55a)));
             let mut serializer = __serializer
                 .serialize_struct("hkpAgent1nSector", class_meta, (512u64, 512u64))?;
@@ -114,7 +116,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpAgent1nSector {
+    impl<'de> _serde::Deserialize<'de> for hkpAgent1nSector<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -170,14 +172,14 @@ const _: () = {
                 }
             }
             struct __hkpAgent1nSectorVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpAgent1nSector>,
+                marker: _serde::__private::PhantomData<hkpAgent1nSector<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpAgent1nSectorVisitor<'de> {
-                type Value = hkpAgent1nSector;
+                type Value = hkpAgent1nSector<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -195,11 +197,11 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_bytesAllocated: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_pad0: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_pad1: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_pad2: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<[u8; 496usize]> = _serde::__private::None;
+                    let mut m_bytesAllocated: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_pad0: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_pad1: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_pad2: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<[U8<'de>; 496usize]> = _serde::__private::None;
                     for i in 0..5usize {
                         match i {
                             0usize => {
@@ -211,7 +213,7 @@ const _: () = {
                                     );
                                 }
                                 m_bytesAllocated = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -226,7 +228,7 @@ const _: () = {
                                     );
                                 }
                                 m_pad0 = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -241,7 +243,7 @@ const _: () = {
                                     );
                                 }
                                 m_pad1 = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -256,7 +258,7 @@ const _: () = {
                                     );
                                 }
                                 m_pad2 = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -271,7 +273,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 496usize]>(&mut __map) {
+                                    match __A::next_value::<[U8<'de>; 496usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -341,11 +343,11 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_bytesAllocated: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_pad0: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_pad1: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_pad2: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<[u8; 496usize]> = _serde::__private::None;
+                    let mut m_bytesAllocated: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_pad0: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_pad1: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_pad2: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<[U8<'de>; 496usize]> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -368,7 +370,7 @@ const _: () = {
                                     );
                                 }
                                 m_bytesAllocated = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -392,7 +394,7 @@ const _: () = {
                                     );
                                 }
                                 m_pad0 = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -416,7 +418,7 @@ const _: () = {
                                     );
                                 }
                                 m_pad1 = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -440,7 +442,7 @@ const _: () = {
                                     );
                                 }
                                 m_pad2 = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -464,7 +466,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<[u8; 496usize]>(&mut __map) {
+                                    match __A::next_value::<[U8<'de>; 496usize]>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -525,12 +527,12 @@ const _: () = {
                                 <__A::Error as _serde::de::Error>::missing_field("data"),
                             );
                             #[cfg(not(feature = "strict"))]
-                            [Default::default(); 496usize]
+                            core::array::from_fn(|_idx| Default::default())
                         }
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpAgent1nSector {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_bytesAllocated,
                         m_pad0,
                         m_pad1,

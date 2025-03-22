@@ -1,9 +1,10 @@
 use crate::{
+    HavokSort as _,
     bytes::{hexdump, serde::hkx_header::HkxHeader},
     errors::SerdeHkxError,
     from_bytes, from_str,
     tests::ClassMap,
-    to_bytes, to_string, HavokSort as _,
+    to_bytes, to_string,
 };
 use pretty_assertions::assert_eq;
 use winnow::Parser;
@@ -37,7 +38,7 @@ fn reproduce_bytes(expected_bytes: &[u8]) -> Result<()> {
     let xml = {
         let mut actual_classes: ClassMap = from_bytes(expected_bytes)?;
         let top_ptr = actual_classes.sort_for_xml()?;
-        to_string(&actual_classes, top_ptr)?
+        to_string(&actual_classes, &top_ptr)?
     };
 
     // XML => bytes

@@ -22,11 +22,13 @@ pub struct hkxEnum<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `items`(ctype: `hkArray<struct hkxEnumItem>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -48,14 +50,14 @@ const _: () = {
             _serde::__private::Signature::new(0xc4e1211)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_items
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
@@ -67,6 +69,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xc4e1211)));
             let mut serializer = __serializer
                 .serialize_struct("hkxEnum", class_meta, (20u64, 32u64))?;
@@ -245,14 +248,20 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
-                    _serde::__private::Ok(hkxEnum { __ptr, parent, m_items })
+                    _serde::__private::Ok(hkxEnum {
+                        __ptr: __ptr.clone(),
+                        parent,
+                        m_items,
+                    })
                 }
             }
             const FIELDS: &[&str] = &["items"];

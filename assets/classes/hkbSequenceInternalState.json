@@ -5,13 +5,13 @@
   "size_x86": 64,
   "size_x86_64": 88,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "nextSampleEvents",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkInt32>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_INT32",
@@ -25,7 +25,7 @@
     },
     {
       "name": "nextSampleReals",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkInt32>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_INT32",
@@ -39,7 +39,7 @@
     },
     {
       "name": "nextSampleBools",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkInt32>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_INT32",
@@ -53,7 +53,7 @@
     },
     {
       "name": "nextSampleInts",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkInt32>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_INT32",
@@ -67,7 +67,7 @@
     },
     {
       "name": "time",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkReal",
       "vtype": "TYPE_REAL",
       "vsubtype": "TYPE_VOID",
@@ -81,7 +81,7 @@
     },
     {
       "name": "isEnabled",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkBool",
       "vtype": "TYPE_BOOL",
       "vsubtype": "TYPE_VOID",

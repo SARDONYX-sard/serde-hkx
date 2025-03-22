@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkTrackerSerializableScanSnapshotBlock {
+pub struct hkTrackerSerializableScanSnapshotBlock<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,14 +22,15 @@ pub struct hkTrackerSerializableScanSnapshotBlock {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `typeIndex`(ctype: `hkInt32`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "typeIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "typeIndex"))]
-    pub m_typeIndex: i32,
+    pub m_typeIndex: I32<'a>,
     /// # C++ Info
     /// - name: `start`(ctype: `hkUlong`)
     /// - offset: `  4`(x86)/`  8`(x86_64)
@@ -50,25 +51,25 @@ pub struct hkTrackerSerializableScanSnapshotBlock {
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "arraySize"))]
     #[cfg_attr(feature = "serde", serde(rename = "arraySize"))]
-    pub m_arraySize: i32,
+    pub m_arraySize: I32<'a>,
     /// # C++ Info
     /// - name: `startReferenceIndex`(ctype: `hkInt32`)
     /// - offset: ` 16`(x86)/` 28`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "startReferenceIndex"))]
     #[cfg_attr(feature = "serde", serde(rename = "startReferenceIndex"))]
-    pub m_startReferenceIndex: i32,
+    pub m_startReferenceIndex: I32<'a>,
     /// # C++ Info
     /// - name: `numReferences`(ctype: `hkInt32`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numReferences"))]
     #[cfg_attr(feature = "serde", serde(rename = "numReferences"))]
-    pub m_numReferences: i32,
+    pub m_numReferences: I32<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkTrackerSerializableScanSnapshotBlock {
+    impl<'a> _serde::HavokClass for hkTrackerSerializableScanSnapshotBlock<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkTrackerSerializableScanSnapshotBlock"
@@ -78,18 +79,19 @@ const _: () = {
             _serde::__private::Signature::new(0xe7f23e6d)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkTrackerSerializableScanSnapshotBlock {
+    impl<'a> _serde::Serialize for hkTrackerSerializableScanSnapshotBlock<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xe7f23e6d)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -115,7 +117,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkTrackerSerializableScanSnapshotBlock {
+    impl<'de> _serde::Deserialize<'de> for hkTrackerSerializableScanSnapshotBlock<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -174,7 +176,7 @@ const _: () = {
             }
             struct __hkTrackerSerializableScanSnapshotBlockVisitor<'de> {
                 marker: _serde::__private::PhantomData<
-                    hkTrackerSerializableScanSnapshotBlock,
+                    hkTrackerSerializableScanSnapshotBlock<'de>,
                 >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
@@ -183,7 +185,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkTrackerSerializableScanSnapshotBlockVisitor<'de> {
-                type Value = hkTrackerSerializableScanSnapshotBlock;
+                type Value = hkTrackerSerializableScanSnapshotBlock<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -201,12 +203,12 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_typeIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_typeIndex: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_start: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_size: _serde::__private::Option<Ulong> = _serde::__private::None;
-                    let mut m_arraySize: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_startReferenceIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numReferences: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_arraySize: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_startReferenceIndex: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_numReferences: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     for i in 0..6usize {
                         match i {
                             0usize => {
@@ -218,7 +220,7 @@ const _: () = {
                                     );
                                 }
                                 m_typeIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -266,7 +268,7 @@ const _: () = {
                                     );
                                 }
                                 m_arraySize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -285,7 +287,7 @@ const _: () = {
                                     );
                                 }
                                 m_startReferenceIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -302,7 +304,7 @@ const _: () = {
                                     );
                                 }
                                 m_numReferences = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -388,12 +390,12 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_typeIndex: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_typeIndex: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_start: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_size: _serde::__private::Option<Ulong> = _serde::__private::None;
-                    let mut m_arraySize: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_startReferenceIndex: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_numReferences: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_arraySize: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_startReferenceIndex: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_numReferences: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -416,7 +418,7 @@ const _: () = {
                                     );
                                 }
                                 m_typeIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -490,7 +492,7 @@ const _: () = {
                                     );
                                 }
                                 m_arraySize = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -518,7 +520,7 @@ const _: () = {
                                     );
                                 }
                                 m_startReferenceIndex = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -544,7 +546,7 @@ const _: () = {
                                     );
                                 }
                                 m_numReferences = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -625,7 +627,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkTrackerSerializableScanSnapshotBlock {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_typeIndex,
                         m_start,
                         m_size,

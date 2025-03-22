@@ -22,11 +22,13 @@ pub struct hkpAction<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `world`(ctype: `void*`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -34,7 +36,7 @@ pub struct hkpAction<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "world"))]
     #[cfg_attr(feature = "serde", serde(rename = "world"))]
-    pub m_world: Pointer,
+    pub m_world: Pointer<'a>,
     /// # C++ Info
     /// - name: `island`(ctype: `void*`)
     /// - offset: ` 12`(x86)/` 24`(x86_64)
@@ -42,7 +44,7 @@ pub struct hkpAction<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "island"))]
     #[cfg_attr(feature = "serde", serde(rename = "island"))]
-    pub m_island: Pointer,
+    pub m_island: Pointer<'a>,
     /// # C++ Info
     /// - name: `userData`(ctype: `hkUlong`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
@@ -71,10 +73,10 @@ const _: () = {
             _serde::__private::Signature::new(0xbdf70a51)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_world.get());
-            v.push(self.m_island.get());
+            v.push(&self.m_world);
+            v.push(&self.m_island);
             v
         }
     }
@@ -85,6 +87,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xbdf70a51)));
             let mut serializer = __serializer
                 .serialize_struct("hkpAction", class_meta, (24u64, 48u64))?;
@@ -178,8 +181,8 @@ const _: () = {
                 {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
-                    let mut m_world: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_island: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_world: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_island: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     for i in 0..4usize {
@@ -191,7 +194,7 @@ const _: () = {
                                     );
                                 }
                                 m_world = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -206,7 +209,7 @@ const _: () = {
                                     );
                                 }
                                 m_island = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -378,15 +381,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpAction {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,

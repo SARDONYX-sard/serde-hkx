@@ -5,14 +5,14 @@
   "size_x86": 28,
   "size_x86_64": 56,
   "parent": "hkpShape",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "boundingVolumeShape",
       "class_ref": "hkpShape",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpShape*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -27,7 +27,7 @@
     {
       "name": "childShape",
       "class_ref": "hkpSingleShapeContainer",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpSingleShapeContainer",
       "vtype": "TYPE_STRUCT",
       "vsubtype": "TYPE_VOID",

@@ -5,13 +5,13 @@
   "size_x86": 96,
   "size_x86_64": 128,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "originalSkeletonName",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -25,7 +25,7 @@
     },
     {
       "name": "boneFromAttachment",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkMatrix4",
       "vtype": "TYPE_MATRIX4",
       "vsubtype": "TYPE_VOID",
@@ -40,7 +40,7 @@
     {
       "name": "attachment",
       "class_ref": "hkReferencedObject",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkReferencedObject*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",
@@ -54,7 +54,7 @@
     },
     {
       "name": "name",
-      "has_string": true,
+      "has_ref": true,
       "ctype": "hkStringPtr",
       "vtype": "TYPE_STRINGPTR",
       "vsubtype": "TYPE_VOID",
@@ -68,7 +68,7 @@
     },
     {
       "name": "boneIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt16",
       "vtype": "TYPE_INT16",
       "vsubtype": "TYPE_VOID",

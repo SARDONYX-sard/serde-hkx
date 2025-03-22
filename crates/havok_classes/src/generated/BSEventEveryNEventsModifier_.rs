@@ -22,7 +22,8 @@ pub struct BSEventEveryNEventsModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -32,23 +33,25 @@ pub struct BSEventEveryNEventsModifier<'a> {
     /// - name: `eventToCheckFor`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "eventToCheckFor"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventToCheckFor"))]
-    pub m_eventToCheckFor: hkbEventProperty,
+    pub m_eventToCheckFor: hkbEventProperty<'a>,
     /// # C++ Info
     /// - name: `eventToSend`(ctype: `struct hkbEventProperty`)
     /// - offset: ` 52`(x86)/` 96`(x86_64)
     /// - type_size: `  8`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "eventToSend"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventToSend"))]
-    pub m_eventToSend: hkbEventProperty,
+    pub m_eventToSend: hkbEventProperty<'a>,
     /// # C++ Info
     /// - name: `numberOfEventsBeforeSend`(ctype: `hkInt8`)
     /// - offset: ` 60`(x86)/`112`(x86_64)
     /// - type_size: `  1`(x86)/`  1`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "numberOfEventsBeforeSend"))]
     #[cfg_attr(feature = "serde", serde(rename = "numberOfEventsBeforeSend"))]
-    pub m_numberOfEventsBeforeSend: i8,
+    pub m_numberOfEventsBeforeSend: I8<'a>,
     /// # C++ Info
     /// - name: `minimumNumberOfEventsBeforeSend`(ctype: `hkInt8`)
     /// - offset: ` 61`(x86)/`113`(x86_64)
@@ -58,7 +61,7 @@ pub struct BSEventEveryNEventsModifier<'a> {
         schemars(rename = "minimumNumberOfEventsBeforeSend")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "minimumNumberOfEventsBeforeSend"))]
-    pub m_minimumNumberOfEventsBeforeSend: i8,
+    pub m_minimumNumberOfEventsBeforeSend: I8<'a>,
     /// # C++ Info
     /// - name: `randomizeNumberOfEvents`(ctype: `hkBool`)
     /// - offset: ` 62`(x86)/`114`(x86_64)
@@ -73,7 +76,7 @@ pub struct BSEventEveryNEventsModifier<'a> {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "numberOfEventsSeen"))]
     #[cfg_attr(feature = "serde", serde(rename = "numberOfEventsSeen"))]
-    pub m_numberOfEventsSeen: i32,
+    pub m_numberOfEventsSeen: I32<'a>,
     /// # C++ Info
     /// - name: `calculatedNumberOfEventsBeforeSend`(ctype: `hkInt8`)
     /// - offset: ` 68`(x86)/`120`(x86_64)
@@ -84,7 +87,7 @@ pub struct BSEventEveryNEventsModifier<'a> {
         schemars(rename = "calculatedNumberOfEventsBeforeSend")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "calculatedNumberOfEventsBeforeSend"))]
-    pub m_calculatedNumberOfEventsBeforeSend: i8,
+    pub m_calculatedNumberOfEventsBeforeSend: I8<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
@@ -98,9 +101,9 @@ const _: () = {
             _serde::__private::Signature::new(0x6030970c)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
             v.extend(self.m_eventToCheckFor.deps_indexes());
             v.extend(self.m_eventToSend.deps_indexes());
             v
@@ -113,6 +116,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x6030970c)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -300,17 +304,21 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_eventToCheckFor: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
-                    let mut m_eventToSend: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
-                    let mut m_numberOfEventsBeforeSend: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_eventToSend: _serde::__private::Option<
+                        hkbEventProperty<'de>,
+                    > = _serde::__private::None;
+                    let mut m_numberOfEventsBeforeSend: _serde::__private::Option<
+                        I8<'de>,
+                    > = _serde::__private::None;
                     let mut m_minimumNumberOfEventsBeforeSend: _serde::__private::Option<
-                        i8,
+                        I8<'de>,
                     > = _serde::__private::None;
                     let mut m_randomizeNumberOfEvents: _serde::__private::Option<bool> = _serde::__private::None;
-                    let mut m_numberOfEventsSeen: _serde::__private::Option<i32> = _serde::__private::None;
+                    let mut m_numberOfEventsSeen: _serde::__private::Option<I32<'de>> = _serde::__private::None;
                     let mut m_calculatedNumberOfEventsBeforeSend: _serde::__private::Option<
-                        i8,
+                        I8<'de>,
                     > = _serde::__private::None;
                     for i in 0..7usize {
                         match i {
@@ -323,7 +331,7 @@ const _: () = {
                                     );
                                 }
                                 m_eventToCheckFor = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -340,7 +348,7 @@ const _: () = {
                                     );
                                 }
                                 m_eventToSend = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -359,7 +367,7 @@ const _: () = {
                                     );
                                 }
                                 m_numberOfEventsBeforeSend = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -378,7 +386,7 @@ const _: () = {
                                     );
                                 }
                                 m_minimumNumberOfEventsBeforeSend = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -417,7 +425,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 1usize, 1usize)?;
                                 m_numberOfEventsSeen = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -436,7 +444,7 @@ const _: () = {
                                     );
                                 }
                                 m_calculatedNumberOfEventsBeforeSend = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -538,17 +546,23 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
                     let mut m_eventToCheckFor: _serde::__private::Option<
-                        hkbEventProperty,
+                        hkbEventProperty<'de>,
                     > = _serde::__private::None;
-                    let mut m_eventToSend: _serde::__private::Option<hkbEventProperty> = _serde::__private::None;
-                    let mut m_numberOfEventsBeforeSend: _serde::__private::Option<i8> = _serde::__private::None;
+                    let mut m_eventToSend: _serde::__private::Option<
+                        hkbEventProperty<'de>,
+                    > = _serde::__private::None;
+                    let mut m_numberOfEventsBeforeSend: _serde::__private::Option<
+                        I8<'de>,
+                    > = _serde::__private::None;
                     let mut m_minimumNumberOfEventsBeforeSend: _serde::__private::Option<
-                        i8,
+                        I8<'de>,
                     > = _serde::__private::None;
                     let mut m_randomizeNumberOfEvents: _serde::__private::Option<bool> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
@@ -575,7 +589,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -675,7 +689,7 @@ const _: () = {
                                     );
                                 }
                                 m_eventToCheckFor = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -701,7 +715,7 @@ const _: () = {
                                     );
                                 }
                                 m_eventToSend = _serde::__private::Some(
-                                    match __A::next_value::<hkbEventProperty>(&mut __map) {
+                                    match __A::next_value::<hkbEventProperty<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -729,7 +743,7 @@ const _: () = {
                                     );
                                 }
                                 m_numberOfEventsBeforeSend = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -757,7 +771,7 @@ const _: () = {
                                     );
                                 }
                                 m_minimumNumberOfEventsBeforeSend = _serde::__private::Some(
-                                    match __A::next_value::<i8>(&mut __map) {
+                                    match __A::next_value::<I8<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -899,34 +913,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(BSEventEveryNEventsModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_eventToCheckFor,
                         m_eventToSend,

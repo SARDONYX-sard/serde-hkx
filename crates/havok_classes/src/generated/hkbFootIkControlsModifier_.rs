@@ -22,7 +22,8 @@ pub struct hkbFootIkControlsModifier<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
@@ -34,14 +35,15 @@ pub struct hkbFootIkControlsModifier<'a> {
     /// - type_size: ` 48`(x86)/` 48`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "controlData"))]
     #[cfg_attr(feature = "serde", serde(rename = "controlData"))]
-    pub m_controlData: hkbFootIkControlData,
+    pub m_controlData: hkbFootIkControlData<'a>,
     /// # C++ Info
     /// - name: `legs`(ctype: `hkArray<struct hkbFootIkControlsModifierLeg>`)
     /// - offset: ` 96`(x86)/`128`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
+    #[cfg_attr(feature = "serde", serde(borrow))]
     #[cfg_attr(feature = "json_schema", schemars(rename = "legs"))]
     #[cfg_attr(feature = "serde", serde(rename = "legs"))]
-    pub m_legs: Vec<hkbFootIkControlsModifierLeg>,
+    pub m_legs: Vec<hkbFootIkControlsModifierLeg<'a>>,
     /// # C++ Info
     /// - name: `errorOutTranslation`(ctype: `hkVector4`)
     /// - offset: `112`(x86)/`144`(x86_64)
@@ -69,16 +71,16 @@ const _: () = {
             _serde::__private::Signature::new(0xe5b6f544)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.parent.parent.parent.m_variableBindingSet.get());
+            v.push(&self.parent.parent.parent.m_variableBindingSet);
             v.extend(self.m_controlData.deps_indexes());
             v.extend(
                 self
                     .m_legs
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
@@ -90,6 +92,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xe5b6f544)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -268,7 +271,7 @@ const _: () = {
                         hkbFootIkControlData,
                     > = _serde::__private::None;
                     let mut m_legs: _serde::__private::Option<
-                        Vec<hkbFootIkControlsModifierLeg>,
+                        Vec<hkbFootIkControlsModifierLeg<'de>>,
                     > = _serde::__private::None;
                     let mut m_errorOutTranslation: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_alignWithGroundRotation: _serde::__private::Option<
@@ -302,7 +305,7 @@ const _: () = {
                                 }
                                 m_legs = _serde::__private::Some(
                                     match __A::next_value::<
-                                        Vec<hkbFootIkControlsModifierLeg>,
+                                        Vec<hkbFootIkControlsModifierLeg<'de>>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -408,7 +411,9 @@ const _: () = {
                 where
                     __A: _serde::de::MapAccess<'de>,
                 {
-                    let mut m_variableBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_variableBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_userData: _serde::__private::Option<Ulong> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_enable: _serde::__private::Option<bool> = _serde::__private::None;
@@ -416,7 +421,7 @@ const _: () = {
                         hkbFootIkControlData,
                     > = _serde::__private::None;
                     let mut m_legs: _serde::__private::Option<
-                        Vec<hkbFootIkControlsModifierLeg>,
+                        Vec<hkbFootIkControlsModifierLeg<'de>>,
                     > = _serde::__private::None;
                     let mut m_errorOutTranslation: _serde::__private::Option<Vector4> = _serde::__private::None;
                     let mut m_alignWithGroundRotation: _serde::__private::Option<
@@ -446,7 +451,7 @@ const _: () = {
                                     );
                                 }
                                 m_variableBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -571,7 +576,7 @@ const _: () = {
                                 }
                                 m_legs = _serde::__private::Some(
                                     match __A::next_value::<
-                                        Vec<hkbFootIkControlsModifierLeg>,
+                                        Vec<hkbFootIkControlsModifierLeg<'de>>,
                                     >(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
@@ -728,34 +733,36 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkbBindable {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_variableBindingSet,
                         ..Default::default()
                     };
                     let parent = hkbNode {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         m_name,
                         ..Default::default()
                     };
                     let parent = hkbModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_enable,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbFootIkControlsModifier {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_controlData,
                         m_legs,

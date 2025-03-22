@@ -1,9 +1,11 @@
 //! Deserializing each element in an `Array`
+use std::borrow::Cow;
+
+use super::XmlDeserializer;
 use super::parser::{
     comment_multispace0,
     tag::{end_tag, start_tag},
 };
-use super::XmlDeserializer;
 
 use crate::errors::de::{Error, Result};
 use crate::tri;
@@ -34,8 +36,13 @@ impl<'de> SeqAccess<'de> for SeqDeserializer<'_, 'de> {
     type Error = Error;
 
     #[inline]
-    fn class_ptr(&self) -> Result<usize> {
-        self.de.class_index.ok_or(Error::NotFoundClassPtr)
+    fn class_ptr(&self) -> Result<Cow<'de, str>> {
+        let index = self
+            .de
+            .class_index
+            .as_ref()
+            .ok_or(Error::NotFoundClassPtr)?;
+        Ok(index.clone().into_inner())
     }
 
     /// # Expected XML Examples

@@ -22,11 +22,13 @@ pub struct hkxScene<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `modeller`(ctype: `hkStringPtr`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
@@ -56,63 +58,63 @@ pub struct hkxScene<'a> {
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "rootNode"))]
     #[cfg_attr(feature = "serde", serde(rename = "rootNode"))]
-    pub m_rootNode: Pointer,
+    pub m_rootNode: Pointer<'a>,
     /// # C++ Info
     /// - name: `selectionSets`(ctype: `hkArray<hkxNodeSelectionSet*>`)
     /// - offset: ` 24`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "selectionSets"))]
     #[cfg_attr(feature = "serde", serde(rename = "selectionSets"))]
-    pub m_selectionSets: Vec<Pointer>,
+    pub m_selectionSets: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `cameras`(ctype: `hkArray<hkxCamera*>`)
     /// - offset: ` 36`(x86)/` 64`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "cameras"))]
     #[cfg_attr(feature = "serde", serde(rename = "cameras"))]
-    pub m_cameras: Vec<Pointer>,
+    pub m_cameras: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `lights`(ctype: `hkArray<hkxLight*>`)
     /// - offset: ` 48`(x86)/` 80`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "lights"))]
     #[cfg_attr(feature = "serde", serde(rename = "lights"))]
-    pub m_lights: Vec<Pointer>,
+    pub m_lights: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `meshes`(ctype: `hkArray<hkxMesh*>`)
     /// - offset: ` 60`(x86)/` 96`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "meshes"))]
     #[cfg_attr(feature = "serde", serde(rename = "meshes"))]
-    pub m_meshes: Vec<Pointer>,
+    pub m_meshes: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `materials`(ctype: `hkArray<hkxMaterial*>`)
     /// - offset: ` 72`(x86)/`112`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "materials"))]
     #[cfg_attr(feature = "serde", serde(rename = "materials"))]
-    pub m_materials: Vec<Pointer>,
+    pub m_materials: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `inplaceTextures`(ctype: `hkArray<hkxTextureInplace*>`)
     /// - offset: ` 84`(x86)/`128`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "inplaceTextures"))]
     #[cfg_attr(feature = "serde", serde(rename = "inplaceTextures"))]
-    pub m_inplaceTextures: Vec<Pointer>,
+    pub m_inplaceTextures: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `externalTextures`(ctype: `hkArray<hkxTextureFile*>`)
     /// - offset: ` 96`(x86)/`144`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "externalTextures"))]
     #[cfg_attr(feature = "serde", serde(rename = "externalTextures"))]
-    pub m_externalTextures: Vec<Pointer>,
+    pub m_externalTextures: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `skinBindings`(ctype: `hkArray<hkxSkinBinding*>`)
     /// - offset: `108`(x86)/`160`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "skinBindings"))]
     #[cfg_attr(feature = "serde", serde(rename = "skinBindings"))]
-    pub m_skinBindings: Vec<Pointer>,
+    pub m_skinBindings: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `appliedTransform`(ctype: `hkMatrix3`)
     /// - offset: `128`(x86)/`176`(x86_64)
@@ -133,17 +135,17 @@ const _: () = {
             _serde::__private::Signature::new(0x5f673ddd)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.push(self.m_rootNode.get());
-            v.extend(self.m_selectionSets.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_cameras.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_lights.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_meshes.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_materials.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_inplaceTextures.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_externalTextures.iter().map(|ptr| ptr.get()));
-            v.extend(self.m_skinBindings.iter().map(|ptr| ptr.get()));
+            v.push(&self.m_rootNode);
+            v.extend(self.m_selectionSets.iter());
+            v.extend(self.m_cameras.iter());
+            v.extend(self.m_lights.iter());
+            v.extend(self.m_meshes.iter());
+            v.extend(self.m_materials.iter());
+            v.extend(self.m_inplaceTextures.iter());
+            v.extend(self.m_externalTextures.iter());
+            v.extend(self.m_skinBindings.iter());
             v
         }
     }
@@ -154,6 +156,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x5f673ddd)));
             let mut serializer = __serializer
                 .serialize_struct("hkxScene", class_meta, (176u64, 224u64))?;
@@ -311,17 +314,23 @@ const _: () = {
                     let mut m_modeller: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_asset: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_sceneLength: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_rootNode: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_selectionSets: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_cameras: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_lights: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_meshes: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_materials: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_inplaceTextures: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_externalTextures: _serde::__private::Option<
-                        Vec<Pointer>,
+                    let mut m_rootNode: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_selectionSets: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
-                    let mut m_skinBindings: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_cameras: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_lights: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_meshes: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_materials: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_inplaceTextures: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_externalTextures: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_skinBindings: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
                     let mut m_appliedTransform: _serde::__private::Option<Matrix3> = _serde::__private::None;
                     for i in 0..13usize {
                         match i {
@@ -384,7 +393,7 @@ const _: () = {
                                 }
                                 __A::pad(&mut __map, 0usize, 4usize)?;
                                 m_rootNode = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -401,7 +410,7 @@ const _: () = {
                                     );
                                 }
                                 m_selectionSets = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -418,7 +427,7 @@ const _: () = {
                                     );
                                 }
                                 m_cameras = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -433,7 +442,7 @@ const _: () = {
                                     );
                                 }
                                 m_lights = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -448,7 +457,7 @@ const _: () = {
                                     );
                                 }
                                 m_meshes = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -465,7 +474,7 @@ const _: () = {
                                     );
                                 }
                                 m_materials = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -482,7 +491,7 @@ const _: () = {
                                     );
                                 }
                                 m_inplaceTextures = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -499,7 +508,7 @@ const _: () = {
                                     );
                                 }
                                 m_externalTextures = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -516,7 +525,7 @@ const _: () = {
                                     );
                                 }
                                 m_skinBindings = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -692,17 +701,23 @@ const _: () = {
                     let mut m_modeller: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_asset: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     let mut m_sceneLength: _serde::__private::Option<f32> = _serde::__private::None;
-                    let mut m_rootNode: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_selectionSets: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_cameras: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_lights: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_meshes: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_materials: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_inplaceTextures: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
-                    let mut m_externalTextures: _serde::__private::Option<
-                        Vec<Pointer>,
+                    let mut m_rootNode: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_selectionSets: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
-                    let mut m_skinBindings: _serde::__private::Option<Vec<Pointer>> = _serde::__private::None;
+                    let mut m_cameras: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_lights: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_meshes: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_materials: _serde::__private::Option<Vec<Pointer<'de>>> = _serde::__private::None;
+                    let mut m_inplaceTextures: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_externalTextures: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
+                    let mut m_skinBindings: _serde::__private::Option<
+                        Vec<Pointer<'de>>,
+                    > = _serde::__private::None;
                     let mut m_appliedTransform: _serde::__private::Option<Matrix3> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -802,7 +817,7 @@ const _: () = {
                                     );
                                 }
                                 m_rootNode = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -828,7 +843,7 @@ const _: () = {
                                     );
                                 }
                                 m_selectionSets = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -854,7 +869,7 @@ const _: () = {
                                     );
                                 }
                                 m_cameras = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -878,7 +893,7 @@ const _: () = {
                                     );
                                 }
                                 m_lights = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -902,7 +917,7 @@ const _: () = {
                                     );
                                 }
                                 m_meshes = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -928,7 +943,7 @@ const _: () = {
                                     );
                                 }
                                 m_materials = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -954,7 +969,7 @@ const _: () = {
                                     );
                                 }
                                 m_inplaceTextures = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -980,7 +995,7 @@ const _: () = {
                                     );
                                 }
                                 m_externalTextures = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1006,7 +1021,7 @@ const _: () = {
                                     );
                                 }
                                 m_skinBindings = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -1188,15 +1203,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkxScene {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_modeller,
                         m_asset,

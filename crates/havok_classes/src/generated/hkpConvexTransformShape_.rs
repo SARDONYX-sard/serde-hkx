@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpConvexTransformShape {
+pub struct hkpConvexTransformShape<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,11 +22,13 @@ pub struct hkpConvexTransformShape {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpConvexTransformShapeBase,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpConvexTransformShapeBase<'a>,
     /// # C++ Info
     /// - name: `transform`(ctype: `hkTransform`)
     /// - offset: ` 32`(x86)/` 64`(x86_64)
@@ -37,7 +39,7 @@ pub struct hkpConvexTransformShape {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpConvexTransformShape {
+    impl<'a> _serde::HavokClass for hkpConvexTransformShape<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpConvexTransformShape"
@@ -47,19 +49,20 @@ const _: () = {
             _serde::__private::Signature::new(0xae3e5017)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.parent.m_childShape.deps_indexes());
             v
         }
     }
-    impl _serde::Serialize for hkpConvexTransformShape {
+    impl<'a> _serde::Serialize for hkpConvexTransformShape<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xae3e5017)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -101,7 +104,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpConvexTransformShape {
+    impl<'de> _serde::Deserialize<'de> for hkpConvexTransformShape<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -155,7 +158,7 @@ const _: () = {
                 }
             }
             struct __hkpConvexTransformShapeVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpConvexTransformShape>,
+                marker: _serde::__private::PhantomData<hkpConvexTransformShape<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -163,7 +166,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkpConvexTransformShapeVisitor<'de> {
-                type Value = hkpConvexTransformShape;
+                type Value = hkpConvexTransformShape<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -391,33 +394,38 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         ..Default::default()
                     };
-                    let parent = hkpSphereRepShape { __ptr, parent };
+                    let parent = hkpSphereRepShape {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let parent = hkpConvexShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_radius,
                     };
                     let parent = hkpConvexTransformShapeBase {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_childShape,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpConvexTransformShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_transform,
                     })

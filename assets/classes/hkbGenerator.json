@@ -5,8 +5,8 @@
   "size_x86": 40,
   "size_x86_64": 72,
   "parent": "hkbNode",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": []
 }

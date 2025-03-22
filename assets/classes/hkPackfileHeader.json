@@ -4,13 +4,13 @@
   "signature": "0x79f9ffda",
   "size_x86": 64,
   "size_x86_64": 64,
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": false,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "magic",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32[2]",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -24,7 +24,7 @@
     },
     {
       "name": "userTag",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -38,7 +38,7 @@
     },
     {
       "name": "fileVersion",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -52,7 +52,7 @@
     },
     {
       "name": "layoutRules",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkUint8[4]",
       "vtype": "TYPE_UINT8",
       "vsubtype": "TYPE_VOID",
@@ -66,7 +66,7 @@
     },
     {
       "name": "numSections",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -80,7 +80,7 @@
     },
     {
       "name": "contentsSectionIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -94,7 +94,7 @@
     },
     {
       "name": "contentsSectionOffset",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -108,7 +108,7 @@
     },
     {
       "name": "contentsClassNameSectionIndex",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -122,7 +122,7 @@
     },
     {
       "name": "contentsClassNameSectionOffset",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -136,7 +136,7 @@
     },
     {
       "name": "contentsVersion",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkChar[16]",
       "vtype": "TYPE_CHAR",
       "vsubtype": "TYPE_VOID",
@@ -150,7 +150,7 @@
     },
     {
       "name": "flags",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",
@@ -164,7 +164,7 @@
     },
     {
       "name": "pad",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkInt32[1]",
       "vtype": "TYPE_INT32",
       "vsubtype": "TYPE_VOID",

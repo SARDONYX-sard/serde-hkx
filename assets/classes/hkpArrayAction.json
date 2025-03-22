@@ -5,14 +5,14 @@
   "size_x86": 36,
   "size_x86_64": 64,
   "parent": "hkpAction",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "entities",
       "class_ref": "hkpEntity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkpEntity*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",

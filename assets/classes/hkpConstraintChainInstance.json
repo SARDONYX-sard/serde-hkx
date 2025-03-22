@@ -5,14 +5,14 @@
   "size_x86": 72,
   "size_x86_64": 136,
   "parent": "hkpConstraintInstance",
-  "parent_has_string": true,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": true,
+  "has_ref": true,
   "members": [
     {
       "name": "chainedEntities",
       "class_ref": "hkpEntity",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkpEntity*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",
@@ -27,7 +27,7 @@
     {
       "name": "action",
       "class_ref": "hkpConstraintChainInstanceAction",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "struct hkpConstraintChainInstanceAction*",
       "vtype": "TYPE_POINTER",
       "vsubtype": "TYPE_STRUCT",

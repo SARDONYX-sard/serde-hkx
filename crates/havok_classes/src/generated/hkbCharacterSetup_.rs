@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbCharacterSetup {
+pub struct hkbCharacterSetup<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,25 +22,27 @@ pub struct hkbCharacterSetup {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkReferencedObject,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkReferencedObject<'a>,
     /// # C++ Info
     /// - name: `retargetingSkeletonMappers`(ctype: `hkArray<hkaSkeletonMapper*>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "retargetingSkeletonMappers"))]
     #[cfg_attr(feature = "serde", serde(rename = "retargetingSkeletonMappers"))]
-    pub m_retargetingSkeletonMappers: Vec<Pointer>,
+    pub m_retargetingSkeletonMappers: Vec<Pointer<'a>>,
     /// # C++ Info
     /// - name: `animationSkeleton`(ctype: `struct hkaSkeleton*`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "animationSkeleton"))]
     #[cfg_attr(feature = "serde", serde(rename = "animationSkeleton"))]
-    pub m_animationSkeleton: Pointer,
+    pub m_animationSkeleton: Pointer<'a>,
     /// # C++ Info
     /// - name: `ragdollToAnimationSkeletonMapper`(ctype: `struct hkaSkeletonMapper*`)
     /// - offset: ` 24`(x86)/` 40`(x86_64)
@@ -50,7 +52,7 @@ pub struct hkbCharacterSetup {
         schemars(rename = "ragdollToAnimationSkeletonMapper")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "ragdollToAnimationSkeletonMapper"))]
-    pub m_ragdollToAnimationSkeletonMapper: Pointer,
+    pub m_ragdollToAnimationSkeletonMapper: Pointer<'a>,
     /// # C++ Info
     /// - name: `animationToRagdollSkeletonMapper`(ctype: `struct hkaSkeletonMapper*`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
@@ -60,7 +62,7 @@ pub struct hkbCharacterSetup {
         schemars(rename = "animationToRagdollSkeletonMapper")
     )]
     #[cfg_attr(feature = "serde", serde(rename = "animationToRagdollSkeletonMapper"))]
-    pub m_animationToRagdollSkeletonMapper: Pointer,
+    pub m_animationToRagdollSkeletonMapper: Pointer<'a>,
     /// # C++ Info
     /// - name: `animationBindingSet`(ctype: `void*`)
     /// - offset: ` 32`(x86)/` 56`(x86_64)
@@ -68,14 +70,14 @@ pub struct hkbCharacterSetup {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "animationBindingSet"))]
     #[cfg_attr(feature = "serde", serde(rename = "animationBindingSet"))]
-    pub m_animationBindingSet: Pointer,
+    pub m_animationBindingSet: Pointer<'a>,
     /// # C++ Info
     /// - name: `data`(ctype: `struct hkbCharacterData*`)
     /// - offset: ` 36`(x86)/` 64`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "data"))]
     #[cfg_attr(feature = "serde", serde(rename = "data"))]
-    pub m_data: Pointer,
+    pub m_data: Pointer<'a>,
     /// # C++ Info
     /// - name: `mirroredSkeleton`(ctype: `void*`)
     /// - offset: ` 40`(x86)/` 72`(x86_64)
@@ -83,7 +85,7 @@ pub struct hkbCharacterSetup {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "mirroredSkeleton"))]
     #[cfg_attr(feature = "serde", serde(rename = "mirroredSkeleton"))]
-    pub m_mirroredSkeleton: Pointer,
+    pub m_mirroredSkeleton: Pointer<'a>,
     /// # C++ Info
     /// - name: `characterPropertyIdMap`(ctype: `void*`)
     /// - offset: ` 44`(x86)/` 80`(x86_64)
@@ -91,11 +93,11 @@ pub struct hkbCharacterSetup {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "characterPropertyIdMap"))]
     #[cfg_attr(feature = "serde", serde(rename = "characterPropertyIdMap"))]
-    pub m_characterPropertyIdMap: Pointer,
+    pub m_characterPropertyIdMap: Pointer<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbCharacterSetup {
+    impl<'a> _serde::HavokClass for hkbCharacterSetup<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbCharacterSetup"
@@ -105,26 +107,27 @@ const _: () = {
             _serde::__private::Signature::new(0xe5a2a413)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
-            v.extend(self.m_retargetingSkeletonMappers.iter().map(|ptr| ptr.get()));
-            v.push(self.m_animationSkeleton.get());
-            v.push(self.m_ragdollToAnimationSkeletonMapper.get());
-            v.push(self.m_animationToRagdollSkeletonMapper.get());
-            v.push(self.m_animationBindingSet.get());
-            v.push(self.m_data.get());
-            v.push(self.m_mirroredSkeleton.get());
-            v.push(self.m_characterPropertyIdMap.get());
+            v.extend(self.m_retargetingSkeletonMappers.iter());
+            v.push(&self.m_animationSkeleton);
+            v.push(&self.m_ragdollToAnimationSkeletonMapper);
+            v.push(&self.m_animationToRagdollSkeletonMapper);
+            v.push(&self.m_animationBindingSet);
+            v.push(&self.m_data);
+            v.push(&self.m_mirroredSkeleton);
+            v.push(&self.m_characterPropertyIdMap);
             v
         }
     }
-    impl _serde::Serialize for hkbCharacterSetup {
+    impl<'a> _serde::Serialize for hkbCharacterSetup<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xe5a2a413)));
             let mut serializer = __serializer
                 .serialize_struct("hkbCharacterSetup", class_meta, (48u64, 88u64))?;
@@ -163,7 +166,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbCharacterSetup {
+    impl<'de> _serde::Deserialize<'de> for hkbCharacterSetup<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -225,14 +228,14 @@ const _: () = {
                 }
             }
             struct __hkbCharacterSetupVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbCharacterSetup>,
+                marker: _serde::__private::PhantomData<hkbCharacterSetup<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkbCharacterSetupVisitor<'de> {
-                type Value = hkbCharacterSetup;
+                type Value = hkbCharacterSetup<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -252,20 +255,26 @@ const _: () = {
                     let __ptr = __A::class_ptr(&mut __map);
                     let parent = __A::parent_value(&mut __map)?;
                     let mut m_retargetingSkeletonMappers: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
-                    let mut m_animationSkeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_animationSkeleton: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_ragdollToAnimationSkeletonMapper: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
                     let mut m_animationToRagdollSkeletonMapper: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
-                    let mut m_animationBindingSet: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_mirroredSkeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_animationBindingSet: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_mirroredSkeleton: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_characterPropertyIdMap: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
                     for i in 0..8usize {
                         match i {
@@ -280,7 +289,7 @@ const _: () = {
                                     );
                                 }
                                 m_retargetingSkeletonMappers = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -299,7 +308,7 @@ const _: () = {
                                     );
                                 }
                                 m_animationSkeleton = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -318,7 +327,7 @@ const _: () = {
                                     );
                                 }
                                 m_ragdollToAnimationSkeletonMapper = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -337,7 +346,7 @@ const _: () = {
                                     );
                                 }
                                 m_animationToRagdollSkeletonMapper = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -356,7 +365,7 @@ const _: () = {
                                     );
                                 }
                                 m_animationBindingSet = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -371,7 +380,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -388,7 +397,7 @@ const _: () = {
                                     );
                                 }
                                 m_mirroredSkeleton = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -407,7 +416,7 @@ const _: () = {
                                     );
                                 }
                                 m_characterPropertyIdMap = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -518,16 +527,18 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let mut m_retargetingSkeletonMappers: _serde::__private::Option<
-                        Vec<Pointer>,
+                        Vec<Pointer<'de>>,
                     > = _serde::__private::None;
-                    let mut m_animationSkeleton: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_animationSkeleton: _serde::__private::Option<
+                        Pointer<'de>,
+                    > = _serde::__private::None;
                     let mut m_ragdollToAnimationSkeletonMapper: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
                     let mut m_animationToRagdollSkeletonMapper: _serde::__private::Option<
-                        Pointer,
+                        Pointer<'de>,
                     > = _serde::__private::None;
-                    let mut m_data: _serde::__private::Option<Pointer> = _serde::__private::None;
+                    let mut m_data: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
                     } {
@@ -552,7 +563,7 @@ const _: () = {
                                     );
                                 }
                                 m_retargetingSkeletonMappers = _serde::__private::Some(
-                                    match __A::next_value::<Vec<Pointer>>(&mut __map) {
+                                    match __A::next_value::<Vec<Pointer<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -580,7 +591,7 @@ const _: () = {
                                     );
                                 }
                                 m_animationSkeleton = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -608,7 +619,7 @@ const _: () = {
                                     );
                                 }
                                 m_ragdollToAnimationSkeletonMapper = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -636,7 +647,7 @@ const _: () = {
                                     );
                                 }
                                 m_animationToRagdollSkeletonMapper = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -660,7 +671,7 @@ const _: () = {
                                     );
                                 }
                                 m_data = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -730,15 +741,17 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbCharacterSetup {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_retargetingSkeletonMappers,
                         m_animationSkeleton,

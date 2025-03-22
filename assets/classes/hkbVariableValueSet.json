@@ -5,14 +5,14 @@
   "size_x86": 44,
   "size_x86_64": 64,
   "parent": "hkReferencedObject",
-  "parent_has_string": false,
+  "parent_has_ref": true,
   "vtable": true,
-  "has_string": false,
+  "has_ref": true,
   "members": [
     {
       "name": "wordVariableValues",
       "class_ref": "hkbVariableValue",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<struct hkbVariableValue>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_STRUCT",
@@ -26,7 +26,7 @@
     },
     {
       "name": "quadVariableValues",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkVector4>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_VECTOR4",
@@ -41,7 +41,7 @@
     {
       "name": "variantVariableValues",
       "class_ref": "hkReferencedObject",
-      "has_string": false,
+      "has_ref": false,
       "ctype": "hkArray<hkReferencedObject*>",
       "vtype": "TYPE_ARRAY",
       "vsubtype": "TYPE_POINTER",

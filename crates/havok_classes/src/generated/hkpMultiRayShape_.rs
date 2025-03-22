@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkpMultiRayShape {
+pub struct hkpMultiRayShape<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,18 +22,20 @@ pub struct hkpMultiRayShape {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkpShape,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkpShape<'a>,
     /// # C++ Info
     /// - name: `rays`(ctype: `hkArray<struct hkpMultiRayShapeRay>`)
     /// - offset: ` 16`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "rays"))]
     #[cfg_attr(feature = "serde", serde(rename = "rays"))]
-    pub m_rays: Vec<hkpMultiRayShapeRay>,
+    pub m_rays: Vec<hkpMultiRayShapeRay<'a>>,
     /// # C++ Info
     /// - name: `rayPenetrationDistance`(ctype: `hkReal`)
     /// - offset: ` 28`(x86)/` 48`(x86_64)
@@ -44,7 +46,7 @@ pub struct hkpMultiRayShape {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkpMultiRayShape {
+    impl<'a> _serde::HavokClass for hkpMultiRayShape<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkpMultiRayShape"
@@ -54,25 +56,26 @@ const _: () = {
             _serde::__private::Signature::new(0xea2e7ec9)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_rays
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
     }
-    impl _serde::Serialize for hkpMultiRayShape {
+    impl<'a> _serde::Serialize for hkpMultiRayShape<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xea2e7ec9)));
             let mut serializer = __serializer
                 .serialize_struct("hkpMultiRayShape", class_meta, (32u64, 56u64))?;
@@ -109,7 +112,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkpMultiRayShape {
+    impl<'de> _serde::Deserialize<'de> for hkpMultiRayShape<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -161,14 +164,14 @@ const _: () = {
                 }
             }
             struct __hkpMultiRayShapeVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkpMultiRayShape>,
+                marker: _serde::__private::PhantomData<hkpMultiRayShape<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkpMultiRayShapeVisitor<'de> {
-                type Value = hkpMultiRayShape;
+                type Value = hkpMultiRayShape<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -391,21 +394,23 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
                     let parent = hkpShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_userData,
                         ..Default::default()
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkpMultiRayShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_rays,
                         m_rayPenetrationDistance,

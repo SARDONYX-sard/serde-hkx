@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkbStateMachineTransitionInfo {
+pub struct hkbStateMachineTransitionInfo<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,70 +22,71 @@ pub struct hkbStateMachineTransitionInfo {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `triggerInterval`(ctype: `struct hkbStateMachineTimeInterval`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "triggerInterval"))]
     #[cfg_attr(feature = "serde", serde(rename = "triggerInterval"))]
-    pub m_triggerInterval: hkbStateMachineTimeInterval,
+    pub m_triggerInterval: hkbStateMachineTimeInterval<'a>,
     /// # C++ Info
     /// - name: `initiateInterval`(ctype: `struct hkbStateMachineTimeInterval`)
     /// - offset: ` 16`(x86)/` 16`(x86_64)
     /// - type_size: ` 16`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "initiateInterval"))]
     #[cfg_attr(feature = "serde", serde(rename = "initiateInterval"))]
-    pub m_initiateInterval: hkbStateMachineTimeInterval,
+    pub m_initiateInterval: hkbStateMachineTimeInterval<'a>,
     /// # C++ Info
     /// - name: `transition`(ctype: `struct hkbTransitionEffect*`)
     /// - offset: ` 32`(x86)/` 32`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "transition"))]
     #[cfg_attr(feature = "serde", serde(rename = "transition"))]
-    pub m_transition: Pointer,
+    pub m_transition: Pointer<'a>,
     /// # C++ Info
     /// - name: `condition`(ctype: `struct hkbCondition*`)
     /// - offset: ` 36`(x86)/` 40`(x86_64)
     /// - type_size: `  4`(x86)/`  8`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "condition"))]
     #[cfg_attr(feature = "serde", serde(rename = "condition"))]
-    pub m_condition: Pointer,
+    pub m_condition: Pointer<'a>,
     /// # C++ Info
     /// - name: `eventId`(ctype: `hkInt32`)
     /// - offset: ` 40`(x86)/` 48`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "eventId"))]
     #[cfg_attr(feature = "serde", serde(rename = "eventId"))]
-    pub m_eventId: i32,
+    pub m_eventId: I32<'a>,
     /// # C++ Info
     /// - name: `toStateId`(ctype: `hkInt32`)
     /// - offset: ` 44`(x86)/` 52`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "toStateId"))]
     #[cfg_attr(feature = "serde", serde(rename = "toStateId"))]
-    pub m_toStateId: i32,
+    pub m_toStateId: I32<'a>,
     /// # C++ Info
     /// - name: `fromNestedStateId`(ctype: `hkInt32`)
     /// - offset: ` 48`(x86)/` 56`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "fromNestedStateId"))]
     #[cfg_attr(feature = "serde", serde(rename = "fromNestedStateId"))]
-    pub m_fromNestedStateId: i32,
+    pub m_fromNestedStateId: I32<'a>,
     /// # C++ Info
     /// - name: `toNestedStateId`(ctype: `hkInt32`)
     /// - offset: ` 52`(x86)/` 60`(x86_64)
     /// - type_size: `  4`(x86)/`  4`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "toNestedStateId"))]
     #[cfg_attr(feature = "serde", serde(rename = "toNestedStateId"))]
-    pub m_toNestedStateId: i32,
+    pub m_toNestedStateId: I32<'a>,
     /// # C++ Info
     /// - name: `priority`(ctype: `hkInt16`)
     /// - offset: ` 56`(x86)/` 64`(x86_64)
     /// - type_size: `  2`(x86)/`  2`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "priority"))]
     #[cfg_attr(feature = "serde", serde(rename = "priority"))]
-    pub m_priority: i16,
+    pub m_priority: I16<'a>,
     /// # C++ Info
     /// - name: `flags`(ctype: `flags TransitionFlags`)
     /// - offset: ` 58`(x86)/` 66`(x86_64)
@@ -96,7 +97,7 @@ pub struct hkbStateMachineTransitionInfo {
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkbStateMachineTransitionInfo {
+    impl<'a> _serde::HavokClass for hkbStateMachineTransitionInfo<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkbStateMachineTransitionInfo"
@@ -106,22 +107,23 @@ const _: () = {
             _serde::__private::Signature::new(0xcdec8025)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(self.m_triggerInterval.deps_indexes());
             v.extend(self.m_initiateInterval.deps_indexes());
-            v.push(self.m_transition.get());
-            v.push(self.m_condition.get());
+            v.push(&self.m_transition);
+            v.push(&self.m_condition);
             v
         }
     }
-    impl _serde::Serialize for hkbStateMachineTransitionInfo {
+    impl<'a> _serde::Serialize for hkbStateMachineTransitionInfo<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xcdec8025)));
             let mut serializer = __serializer
                 .serialize_struct(
@@ -149,7 +151,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkbStateMachineTransitionInfo {
+    impl<'de> _serde::Deserialize<'de> for hkbStateMachineTransitionInfo<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -215,7 +217,9 @@ const _: () = {
                 }
             }
             struct __hkbStateMachineTransitionInfoVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkbStateMachineTransitionInfo>,
+                marker: _serde::__private::PhantomData<
+                    hkbStateMachineTransitionInfo<'de>,
+                >,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
@@ -223,7 +227,7 @@ const _: () = {
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de>
             for __hkbStateMachineTransitionInfoVisitor<'de> {
-                type Value = hkbStateMachineTransitionInfo;
+                type Value = hkbStateMachineTransitionInfo<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -247,13 +251,13 @@ const _: () = {
                     let mut m_initiateInterval: _serde::__private::Option<
                         hkbStateMachineTimeInterval,
                     > = _serde::__private::None;
-                    let mut m_transition: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_condition: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_eventId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_toStateId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_fromNestedStateId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_toNestedStateId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_priority: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_transition: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_condition: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_eventId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_toStateId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_fromNestedStateId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_toNestedStateId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_priority: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_flags: _serde::__private::Option<TransitionFlags> = _serde::__private::None;
                     for i in 0..10usize {
                         match i {
@@ -304,7 +308,7 @@ const _: () = {
                                     );
                                 }
                                 m_transition = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -321,7 +325,7 @@ const _: () = {
                                     );
                                 }
                                 m_condition = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -338,7 +342,7 @@ const _: () = {
                                     );
                                 }
                                 m_eventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -355,7 +359,7 @@ const _: () = {
                                     );
                                 }
                                 m_toStateId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -374,7 +378,7 @@ const _: () = {
                                     );
                                 }
                                 m_fromNestedStateId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -391,7 +395,7 @@ const _: () = {
                                     );
                                 }
                                 m_toNestedStateId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -408,7 +412,7 @@ const _: () = {
                                     );
                                 }
                                 m_priority = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -557,13 +561,13 @@ const _: () = {
                     let mut m_initiateInterval: _serde::__private::Option<
                         hkbStateMachineTimeInterval,
                     > = _serde::__private::None;
-                    let mut m_transition: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_condition: _serde::__private::Option<Pointer> = _serde::__private::None;
-                    let mut m_eventId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_toStateId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_fromNestedStateId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_toNestedStateId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_priority: _serde::__private::Option<i16> = _serde::__private::None;
+                    let mut m_transition: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_condition: _serde::__private::Option<Pointer<'de>> = _serde::__private::None;
+                    let mut m_eventId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_toStateId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_fromNestedStateId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_toNestedStateId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_priority: _serde::__private::Option<I16<'de>> = _serde::__private::None;
                     let mut m_flags: _serde::__private::Option<TransitionFlags> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -643,7 +647,7 @@ const _: () = {
                                     );
                                 }
                                 m_transition = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -669,7 +673,7 @@ const _: () = {
                                     );
                                 }
                                 m_condition = _serde::__private::Some(
-                                    match __A::next_value::<Pointer>(&mut __map) {
+                                    match __A::next_value::<Pointer<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -695,7 +699,7 @@ const _: () = {
                                     );
                                 }
                                 m_eventId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -721,7 +725,7 @@ const _: () = {
                                     );
                                 }
                                 m_toStateId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -749,7 +753,7 @@ const _: () = {
                                     );
                                 }
                                 m_fromNestedStateId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -775,7 +779,7 @@ const _: () = {
                                     );
                                 }
                                 m_toNestedStateId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -801,7 +805,7 @@ const _: () = {
                                     );
                                 }
                                 m_priority = _serde::__private::Some(
-                                    match __A::next_value::<i16>(&mut __map) {
+                                    match __A::next_value::<I16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -952,7 +956,7 @@ const _: () = {
                     };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkbStateMachineTransitionInfo {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         m_triggerInterval,
                         m_initiateInterval,
                         m_transition,
@@ -1193,12 +1197,24 @@ const _: () = {
                 #[inline]
                 fn visit_int16<__E>(
                     self,
-                    __value: i16,
+                    __value: I16<'de>,
                 ) -> _serde::__private::Result<Self::Value, __E>
                 where
                     __E: _serde::de::Error,
                 {
-                    Ok(TransitionFlags::from_bits_retain(__value as _))
+                    match __value {
+                        I16::Number(__value) => {
+                            Ok(TransitionFlags::from_bits_retain(__value as _))
+                        }
+                        _ => {
+                            Err(
+                                _serde::de::Error::invalid_value(
+                                    _serde::de::Unexpected::Int16(__value as _),
+                                    &"TransitionFlags(I16) Number",
+                                ),
+                            )
+                        }
+                    }
                 }
                 fn visit_stringptr<__E>(
                     self,

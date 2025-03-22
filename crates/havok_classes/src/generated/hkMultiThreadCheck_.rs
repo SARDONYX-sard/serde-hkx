@@ -11,7 +11,7 @@ use super::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[derive(educe::Educe)]
 #[educe(Debug, Clone, Default, PartialEq)]
-pub struct hkMultiThreadCheck {
+pub struct hkMultiThreadCheck<'a> {
     /// # Unique index for this class
     /// - Represents a pointer on XML (`<hkobject name="#0001"></hkobject>`)
     /// - [`Option::None`] => This class is `class in field`.(`<hkobject></hkobject>`)
@@ -22,7 +22,8 @@ pub struct hkMultiThreadCheck {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// # C++ Info
     /// - name: `threadId`(ctype: `hkUint32`)
     /// - offset: `  0`(x86)/`  0`(x86_64)
@@ -30,7 +31,7 @@ pub struct hkMultiThreadCheck {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "threadId"))]
     #[cfg_attr(feature = "serde", serde(rename = "threadId"))]
-    pub m_threadId: u32,
+    pub m_threadId: U32<'a>,
     /// # C++ Info
     /// - name: `stackTraceId`(ctype: `hkInt32`)
     /// - offset: `  4`(x86)/`  4`(x86_64)
@@ -38,7 +39,7 @@ pub struct hkMultiThreadCheck {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "stackTraceId"))]
     #[cfg_attr(feature = "serde", serde(rename = "stackTraceId"))]
-    pub m_stackTraceId: i32,
+    pub m_stackTraceId: I32<'a>,
     /// # C++ Info
     /// - name: `markCount`(ctype: `hkUint16`)
     /// - offset: `  8`(x86)/`  8`(x86_64)
@@ -46,7 +47,7 @@ pub struct hkMultiThreadCheck {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "markCount"))]
     #[cfg_attr(feature = "serde", serde(rename = "markCount"))]
-    pub m_markCount: u16,
+    pub m_markCount: U16<'a>,
     /// # C++ Info
     /// - name: `markBitStack`(ctype: `hkUint16`)
     /// - offset: ` 10`(x86)/` 10`(x86_64)
@@ -54,11 +55,11 @@ pub struct hkMultiThreadCheck {
     /// - flags: `SERIALIZE_IGNORED`
     #[cfg_attr(feature = "json_schema", schemars(rename = "markBitStack"))]
     #[cfg_attr(feature = "serde", serde(rename = "markBitStack"))]
-    pub m_markBitStack: u16,
+    pub m_markBitStack: U16<'a>,
 }
 const _: () = {
     use havok_serde as _serde;
-    impl _serde::HavokClass for hkMultiThreadCheck {
+    impl<'a> _serde::HavokClass for hkMultiThreadCheck<'a> {
         #[inline]
         fn name(&self) -> &'static str {
             "hkMultiThreadCheck"
@@ -68,18 +69,19 @@ const _: () = {
             _serde::__private::Signature::new(0x11e4408b)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v
         }
     }
-    impl _serde::Serialize for hkMultiThreadCheck {
+    impl<'a> _serde::Serialize for hkMultiThreadCheck<'a> {
         fn serialize<S>(&self, __serializer: S) -> Result<S::Ok, S::Error>
         where
             S: _serde::ser::Serializer,
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0x11e4408b)));
             let mut serializer = __serializer
                 .serialize_struct("hkMultiThreadCheck", class_meta, (12u64, 12u64))?;
@@ -96,7 +98,7 @@ const _: () = {
 const _: () = {
     use havok_serde as _serde;
     #[automatically_derived]
-    impl<'de> _serde::Deserialize<'de> for hkMultiThreadCheck {
+    impl<'de> _serde::Deserialize<'de> for hkMultiThreadCheck<'de> {
         fn deserialize<__D>(deserializer: __D) -> core::result::Result<Self, __D::Error>
         where
             __D: _serde::Deserializer<'de>,
@@ -142,14 +144,14 @@ const _: () = {
                 }
             }
             struct __hkMultiThreadCheckVisitor<'de> {
-                marker: _serde::__private::PhantomData<hkMultiThreadCheck>,
+                marker: _serde::__private::PhantomData<hkMultiThreadCheck<'de>>,
                 lifetime: _serde::__private::PhantomData<&'de ()>,
             }
             #[allow(clippy::match_single_binding)]
             #[allow(clippy::reversed_empty_ranges)]
             #[allow(clippy::single_match)]
             impl<'de> _serde::de::Visitor<'de> for __hkMultiThreadCheckVisitor<'de> {
-                type Value = hkMultiThreadCheck;
+                type Value = hkMultiThreadCheck<'de>;
                 fn expecting(
                     &self,
                     __formatter: &mut core::fmt::Formatter,
@@ -167,10 +169,10 @@ const _: () = {
                     __A: _serde::de::MapAccess<'de>,
                 {
                     let __ptr = __A::class_ptr(&mut __map);
-                    let mut m_threadId: _serde::__private::Option<u32> = _serde::__private::None;
-                    let mut m_stackTraceId: _serde::__private::Option<i32> = _serde::__private::None;
-                    let mut m_markCount: _serde::__private::Option<u16> = _serde::__private::None;
-                    let mut m_markBitStack: _serde::__private::Option<u16> = _serde::__private::None;
+                    let mut m_threadId: _serde::__private::Option<U32<'de>> = _serde::__private::None;
+                    let mut m_stackTraceId: _serde::__private::Option<I32<'de>> = _serde::__private::None;
+                    let mut m_markCount: _serde::__private::Option<U16<'de>> = _serde::__private::None;
+                    let mut m_markBitStack: _serde::__private::Option<U16<'de>> = _serde::__private::None;
                     for i in 0..4usize {
                         match i {
                             0usize => {
@@ -182,7 +184,7 @@ const _: () = {
                                     );
                                 }
                                 m_threadId = _serde::__private::Some(
-                                    match __A::next_value::<u32>(&mut __map) {
+                                    match __A::next_value::<U32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -199,7 +201,7 @@ const _: () = {
                                     );
                                 }
                                 m_stackTraceId = _serde::__private::Some(
-                                    match __A::next_value::<i32>(&mut __map) {
+                                    match __A::next_value::<I32<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -216,7 +218,7 @@ const _: () = {
                                     );
                                 }
                                 m_markCount = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -233,7 +235,7 @@ const _: () = {
                                     );
                                 }
                                 m_markBitStack = _serde::__private::Some(
-                                    match __A::next_value::<u16>(&mut __map) {
+                                    match __A::next_value::<U16<'de>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -307,7 +309,7 @@ const _: () = {
                     }
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkMultiThreadCheck {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         ..Default::default()
                     })
                 }

@@ -22,32 +22,34 @@ pub struct hkMemoryMeshShape<'a> {
         feature = "serde",
         serde(skip_serializing_if = "Option::is_none", default)
     )]
-    pub __ptr: Option<Pointer>,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub __ptr: Option<Pointer<'a>>,
     /// Alternative to C++ class inheritance.
     #[cfg_attr(feature = "json_schema", schemars(flatten))]
     #[cfg_attr(feature = "serde", serde(flatten))]
-    pub parent: hkMeshShape,
+    #[cfg_attr(feature = "serde", serde(borrow))]
+    pub parent: hkMeshShape<'a>,
     /// # C++ Info
     /// - name: `sections`(ctype: `hkArray<struct hkMeshSectionCinfo>`)
     /// - offset: `  8`(x86)/` 16`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "sections"))]
     #[cfg_attr(feature = "serde", serde(rename = "sections"))]
-    pub m_sections: Vec<hkMeshSectionCinfo>,
+    pub m_sections: Vec<hkMeshSectionCinfo<'a>>,
     /// # C++ Info
     /// - name: `indices16`(ctype: `hkArray<hkUint16>`)
     /// - offset: ` 20`(x86)/` 32`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "indices16"))]
     #[cfg_attr(feature = "serde", serde(rename = "indices16"))]
-    pub m_indices16: Vec<u16>,
+    pub m_indices16: Vec<U16<'a>>,
     /// # C++ Info
     /// - name: `indices32`(ctype: `hkArray<hkUint32>`)
     /// - offset: ` 32`(x86)/` 48`(x86_64)
     /// - type_size: ` 12`(x86)/` 16`(x86_64)
     #[cfg_attr(feature = "json_schema", schemars(rename = "indices32"))]
     #[cfg_attr(feature = "serde", serde(rename = "indices32"))]
-    pub m_indices32: Vec<u32>,
+    pub m_indices32: Vec<U32<'a>>,
     /// # C++ Info
     /// - name: `name`(ctype: `hkStringPtr`)
     /// - offset: ` 44`(x86)/` 64`(x86_64)
@@ -69,14 +71,14 @@ const _: () = {
             _serde::__private::Signature::new(0xb743a578)
         }
         #[allow(clippy::let_and_return, clippy::vec_init_then_push)]
-        fn deps_indexes(&self) -> Vec<usize> {
+        fn deps_indexes(&self) -> Vec<&Pointer<'_>> {
             let mut v = Vec::new();
             v.extend(
                 self
                     .m_sections
                     .iter()
                     .flat_map(|class| class.deps_indexes())
-                    .collect::<Vec<usize>>(),
+                    .collect::<Vec<&Pointer<'_>>>(),
             );
             v
         }
@@ -88,6 +90,7 @@ const _: () = {
         {
             let class_meta = self
                 .__ptr
+                .as_ref()
                 .map(|name| (name, _serde::__private::Signature::new(0xb743a578)));
             let mut serializer = __serializer
                 .serialize_struct("hkMemoryMeshShape", class_meta, (48u64, 72u64))?;
@@ -211,8 +214,8 @@ const _: () = {
                     let mut m_sections: _serde::__private::Option<
                         Vec<hkMeshSectionCinfo>,
                     > = _serde::__private::None;
-                    let mut m_indices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_indices32: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
+                    let mut m_indices16: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_indices32: _serde::__private::Option<Vec<U32<'de>>> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     for i in 0..4usize {
                         match i {
@@ -244,7 +247,7 @@ const _: () = {
                                     );
                                 }
                                 m_indices16 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -261,7 +264,7 @@ const _: () = {
                                     );
                                 }
                                 m_indices32 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -343,8 +346,8 @@ const _: () = {
                     let mut m_sections: _serde::__private::Option<
                         Vec<hkMeshSectionCinfo>,
                     > = _serde::__private::None;
-                    let mut m_indices16: _serde::__private::Option<Vec<u16>> = _serde::__private::None;
-                    let mut m_indices32: _serde::__private::Option<Vec<u32>> = _serde::__private::None;
+                    let mut m_indices16: _serde::__private::Option<Vec<U16<'de>>> = _serde::__private::None;
+                    let mut m_indices32: _serde::__private::Option<Vec<U32<'de>>> = _serde::__private::None;
                     let mut m_name: _serde::__private::Option<StringPtr<'de>> = _serde::__private::None;
                     while let _serde::__private::Some(__key) = {
                         __A::next_key::<__Field>(&mut __map)?
@@ -396,7 +399,7 @@ const _: () = {
                                     );
                                 }
                                 m_indices16 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u16>>(&mut __map) {
+                                    match __A::next_value::<Vec<U16<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -422,7 +425,7 @@ const _: () = {
                                     );
                                 }
                                 m_indices32 = _serde::__private::Some(
-                                    match __A::next_value::<Vec<u32>>(&mut __map) {
+                                    match __A::next_value::<Vec<U32<'de>>>(&mut __map) {
                                         _serde::__private::Ok(__val) => __val,
                                         _serde::__private::Err(__err) => {
                                             return _serde::__private::Err(__err);
@@ -502,16 +505,21 @@ const _: () = {
                         }
                     };
                     let __ptr = None;
-                    let parent = hkBaseObject { __ptr };
+                    let parent = hkBaseObject {
+                        __ptr: __ptr.clone(),
+                    };
                     let parent = hkReferencedObject {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         ..Default::default()
                     };
-                    let parent = hkMeshShape { __ptr, parent };
+                    let parent = hkMeshShape {
+                        __ptr: __ptr.clone(),
+                        parent,
+                    };
                     let __ptr = __A::class_ptr(&mut __map);
                     _serde::__private::Ok(hkMemoryMeshShape {
-                        __ptr,
+                        __ptr: __ptr.clone(),
                         parent,
                         m_sections,
                         m_indices16,
