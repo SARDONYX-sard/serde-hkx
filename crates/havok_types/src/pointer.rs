@@ -19,8 +19,8 @@ use parse_display::Display;
 /// # Examples
 /// ```
 /// # use havok_types::pointer::Pointer;
-/// assert_eq!(Pointer::new("#0050").to_string(), "#0050");
-/// assert_eq!(Pointer::new("#0100").to_string(), "#0100");
+/// assert_eq!(Pointer::new("#0050".into()).to_string(), "#0050");
+/// assert_eq!(Pointer::new("#0100".into()).to_string(), "#0100");
 /// ```
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "json_schema", schemars(transparent))]
