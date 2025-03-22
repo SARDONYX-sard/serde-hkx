@@ -42,12 +42,12 @@ use crate::{
     errors::{de::Error, readable::ReadableError},
 };
 use winnow::{
+    Parser,
     binary::{self, Endianness},
     combinator::{dispatch, empty, fail},
     error::{ContextError, StrContext, StrContextValue::*},
     seq,
     token::{take, take_until},
-    Parser,
 };
 
 /// The 64bytes HKX header contains metadata information about the HKX file.

@@ -1,8 +1,8 @@
 use indicatif::{MultiProgress, ProgressBar, ProgressStyle};
 use serde_hkx_features::progress::ProgressHandler;
 use std::path::Path;
-use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
+use std::sync::atomic::{AtomicU64, Ordering};
 
 /// For CLI progress bar
 #[derive(Debug, Clone)] // need clone for `tokio::spawn`
@@ -63,7 +63,9 @@ impl CliProgressHandler {
 
 impl ProgressHandler for CliProgressHandler {
     fn on_empty(&self) {
-        println!("No files found in the directory to process. Please check if the directory contains valid files.");
+        println!(
+            "No files found in the directory to process. Please check if the directory contains valid files."
+        );
     }
 
     fn on_set_total(&mut self, total: usize) {

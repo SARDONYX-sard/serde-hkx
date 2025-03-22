@@ -1,5 +1,5 @@
 //! C++ Havok class information.
-use super::{member::Member, Enum};
+use super::{Enum, member::Member};
 use havok_types::signature::Signature;
 use serde::{Deserialize, Serialize};
 use std::borrow::Cow;

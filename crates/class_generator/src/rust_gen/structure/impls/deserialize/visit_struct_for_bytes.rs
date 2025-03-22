@@ -1,10 +1,9 @@
 use crate::{
-    bail_syn_err,
+    ClassMap, bail_syn_err,
     cpp_info::{Class, Member},
     rust_gen::structure::{
         impls::deserialize::member_to_de_rust_type, to_rust_token::to_rust_field_ident,
     },
-    ClassMap,
 };
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};

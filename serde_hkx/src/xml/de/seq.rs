@@ -1,11 +1,11 @@
 //! Deserializing each element in an `Array`
 use std::borrow::Cow;
 
+use super::XmlDeserializer;
 use super::parser::{
     comment_multispace0,
     tag::{end_tag, start_tag},
 };
-use super::XmlDeserializer;
 
 use crate::errors::de::{Error, Result};
 use crate::tri;

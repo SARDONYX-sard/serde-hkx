@@ -1,6 +1,6 @@
 use super::super::ByteSerializer;
 use crate::errors::ser::{Error, Result};
-use havok_serde::{ser::SerializeSeq, Serialize};
+use havok_serde::{Serialize, ser::SerializeSeq};
 use havok_types::{CString, StringPtr};
 
 impl SerializeSeq for &mut ByteSerializer {

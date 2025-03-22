@@ -358,10 +358,11 @@ impl ByteSerializer {
     /// And return destination position.
     #[inline]
     fn goto_local_dst(&mut self) -> Result<u32> {
-        let &dest_abs_pos = tri!(self
-            .pointed_pos
-            .last()
-            .ok_or(Error::NotFoundPointedPosition));
+        let &dest_abs_pos = tri!(
+            self.pointed_pos
+                .last()
+                .ok_or(Error::NotFoundPointedPosition)
+        );
         self.output.set_position(dest_abs_pos);
         self.relative_position()
     }
@@ -513,15 +514,16 @@ impl<'a> Serializer for &'a mut ByteSerializer {
                 *n as i8
             }
             I8::VariableId(variable_id) => {
-                let n = tri!(self
-                    .variable_id_map
-                    .get(variable_id.as_ref())
-                    .ok_or_else(|| {
-                        NotFoundVariableIdSnafu {
-                            variable_id: variable_id.to_string(),
-                        }
-                        .build()
-                    }));
+                let n = tri!(
+                    self.variable_id_map
+                        .get(variable_id.as_ref())
+                        .ok_or_else(|| {
+                            NotFoundVariableIdSnafu {
+                                variable_id: variable_id.to_string(),
+                            }
+                            .build()
+                        })
+                );
                 *n as i8
             }
         };
@@ -543,15 +545,16 @@ impl<'a> Serializer for &'a mut ByteSerializer {
                 *n as u8
             }
             U8::VariableId(variable_id) => {
-                let n = tri!(self
-                    .variable_id_map
-                    .get(variable_id.as_ref())
-                    .ok_or_else(|| {
-                        NotFoundVariableIdSnafu {
-                            variable_id: variable_id.to_string(),
-                        }
-                        .build()
-                    }));
+                let n = tri!(
+                    self.variable_id_map
+                        .get(variable_id.as_ref())
+                        .ok_or_else(|| {
+                            NotFoundVariableIdSnafu {
+                                variable_id: variable_id.to_string(),
+                            }
+                            .build()
+                        })
+                );
                 *n as u8
             }
         };
@@ -702,10 +705,10 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{bytes::hexdump, tests::mocks::new_defaultmale, HavokSort as _};
+    use crate::{HavokSort as _, bytes::hexdump, tests::mocks::new_defaultmale};
     use havok_classes::{
-        hkbBlendingTransitionEffect, hkbGenerator, hkbModifierGenerator, BlendCurve, EndMode,
-        EventMode, FlagBits,
+        BlendCurve, EndMode, EventMode, FlagBits, hkbBlendingTransitionEffect, hkbGenerator,
+        hkbModifierGenerator,
     };
     // use pretty_assertions::assert_eq;
 

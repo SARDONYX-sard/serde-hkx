@@ -25,9 +25,9 @@ use crate::errors::{
 use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;
 use parser::tag::{class_start_tag, start_tag};
+use winnow::Parser;
 use winnow::ascii::{dec_int, dec_uint};
 use winnow::combinator::opt;
-use winnow::Parser;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -126,22 +126,26 @@ where
 {
     let mut de = de;
 
-    tri!(de
-        .parse_next(opt(winnow::token::take_until(
+    tri!(
+        de.parse_next(opt(winnow::token::take_until(
             0..,
             "<hksection name=\"__data__\">"
         )))
-        .map_err(|err| de.to_readable_err(err)));
-    tri!(de
-        .parse_next(winnow::token::take_until(0.., "<hkobject"))
-        .map_err(|err| de.to_readable_err(err)));
+        .map_err(|err| de.to_readable_err(err))
+    );
+    tri!(
+        de.parse_next(winnow::token::take_until(0.., "<hkobject"))
+            .map_err(|err| de.to_readable_err(err))
+    );
     let t = tri!(T::deserialize(&mut de).map_err(|err| de.to_readable_err(err)));
-    tri!(de
-        .parse_next(opt(end_tag("hksection")))
-        .map_err(|err| de.to_readable_err(err)));
-    tri!(de
-        .parse_next(opt(end_tag("hkpackfile")))
-        .map_err(|err| de.to_readable_err(err)));
+    tri!(
+        de.parse_next(opt(end_tag("hksection")))
+            .map_err(|err| de.to_readable_err(err))
+    );
+    tri!(
+        de.parse_next(opt(end_tag("hkpackfile")))
+            .map_err(|err| de.to_readable_err(err))
+    );
 
     if de.input.is_empty() {
         Ok(t)
@@ -587,8 +591,8 @@ mod tests {
 
     #[test]
     fn test_deserialize_primitive() {
-        use havok_classes::hkClassMember_::FlagValues;
         use havok_classes::EventMode;
+        use havok_classes::hkClassMember_::FlagValues;
 
         parse_peek_assert(
             "ALIGN_8|ALiGN_16|SERIALIZE_IGNORED</hkparam>",

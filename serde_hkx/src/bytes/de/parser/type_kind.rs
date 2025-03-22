@@ -116,15 +116,17 @@ pub fn transform<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Transfo
 /// Parses f16
 pub fn half<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, f16, ContextError> {
     move |bytes: &mut BytesStream<'a>| {
-        let (b0, b1) = tri!(seq! {
-            binary::u8,
-            binary::u8,
-        }
-        .context(StrContext::Label("half(f16)"))
-        .context(StrContext::Expected(StrContextValue::Description(
-            "half(f16)",
-        )))
-        .parse_next(bytes));
+        let (b0, b1) = tri!(
+            seq! {
+                binary::u8,
+                binary::u8,
+            }
+            .context(StrContext::Label("half(f16)"))
+            .context(StrContext::Expected(StrContextValue::Description(
+                "half(f16)",
+            )))
+            .parse_next(bytes)
+        );
 
         Ok(match endian {
             Endianness::Little => f16::from_le_bytes([b0, b1]),
@@ -165,20 +167,24 @@ pub fn array_meta<'a>(
 ) -> impl Parser<BytesStream<'a>, (usize, i32), ContextError> {
     move |bytes: &mut BytesStream<'a>| {
         if is_x86 {
-            tri!(binary::u32(endian)
-                .verify(|uint| *uint == 0)
-                .map(|uint| uint as u64)
-                .context(StrContext::Expected(StrContextValue::Description(
-                    "Skip x86 ptr size(0 fill 4bytes)",
-                )))
-                .parse_next(bytes))
+            tri!(
+                binary::u32(endian)
+                    .verify(|uint| *uint == 0)
+                    .map(|uint| uint as u64)
+                    .context(StrContext::Expected(StrContextValue::Description(
+                        "Skip x86 ptr size(0 fill 4bytes)",
+                    )))
+                    .parse_next(bytes)
+            )
         } else {
-            tri!(binary::u64(endian)
-                .verify(|ulong| *ulong == 0)
-                .context(StrContext::Expected(StrContextValue::Description(
-                    "Skip x64 ptr size(0 fill 8bytes)",
-                )))
-                .parse_next(bytes))
+            tri!(
+                binary::u64(endian)
+                    .verify(|ulong| *ulong == 0)
+                    .context(StrContext::Expected(StrContextValue::Description(
+                        "Skip x64 ptr size(0 fill 8bytes)",
+                    )))
+                    .parse_next(bytes)
+            )
         };
 
         seq! {

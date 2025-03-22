@@ -10,13 +10,13 @@ use self::class_index_map::BytesClassIndexMapDeserializer;
 use self::enum_access::EnumDeserializer;
 use self::map::MapDeserializer;
 use self::parser::{
-    classnames::{classnames_section, ClassNames},
+    BytesStream,
+    classnames::{ClassNames, classnames_section},
     fixups::Fixups,
     type_kind::{
         array_meta, boolean, matrix3, matrix4, qstransform, quaternion, real, rotation, string,
         transform, vector4,
     },
-    BytesStream,
 };
 use self::seq::SeqDeserializer;
 use super::hexdump::{self, to_hexdump_pos};
@@ -29,7 +29,7 @@ use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;
 use winnow::binary::Endianness;
 use winnow::error::{StrContext, StrContextValue};
-use winnow::{binary, Parser};
+use winnow::{Parser, binary};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -154,29 +154,32 @@ where
     let mut de = de;
 
     // 1. Deserialize root file header.
-    let header = tri!(de
-        .parse_peek(HkxHeader::parser())
-        .map_err(|err| de.to_readable_err(err)));
+    let header = tri!(
+        de.parse_peek(HkxHeader::parser())
+            .map_err(|err| de.to_readable_err(err))
+    );
     de.current_position += 64; // Advance the position by the header size.
     de.is_x86 = header.pointer_size == 4;
     de.endian = header.endian();
 
     // 2. Deserialize the fixups in the classnames and data sections.
-    tri!(de
-        .set_section_header_and_fixups(
+    tri!(
+        de.set_section_header_and_fixups(
             header.contents_class_name_section_index,
             header.contents_section_index,
             header.section_count,
         )
-        .map_err(|err| de.to_readable_err(err)));
+        .map_err(|err| de.to_readable_err(err))
+    );
 
     // 3. Parse `__classnames__` section.
     let classnames_abs = de.classnames_header.absolute_data_start as usize;
     let data_abs = de.data_header.absolute_data_start as usize;
     let classnames_section_range = classnames_abs..data_abs; // FIXME: Assumption that `classnames_abs` < `data_abs`
-    de.classnames = tri!(de
-        .parse_range(classnames_section(de.endian, 0), classnames_section_range)
-        .map_err(|err| de.to_readable_err(err)));
+    de.classnames = tri!(
+        de.parse_range(classnames_section(de.endian, 0), classnames_section_range)
+            .map_err(|err| de.to_readable_err(err))
+    );
 
     // 4. Parse `__data__` section.
     de.current_position = data_abs; // move to data section start
@@ -298,8 +301,8 @@ impl<'de> BytesDeserializer<'de> {
             } else {
                 #[cfg(feature = "tracing")]
                 tracing::debug!(
-                "Missing unique index of class for `global_fixup.dst(virtual_src)`({global_dst}) -> Not found `virtual_fixup.name_offset`. `NullPtr` is entered instead."
-            );
+                    "Missing unique index of class for `global_fixup.dst(virtual_src)`({global_dst}) -> Not found `virtual_fixup.name_offset`. `NullPtr` is entered instead."
+                );
                 self.current_position += if self.is_x86 { 4 } else { 8 };
                 Ok(Pointer::null())
             }
@@ -377,13 +380,15 @@ impl<'de> BytesDeserializer<'de> {
             );
             self.current_position += 4;
         } else {
-            tri!(self.parse_peek(
-                binary::u64(self.endian)
-                    .verify(|ulong| *ulong == 0)
-                    .context(StrContext::Expected(StrContextValue::Description(
-                        "Skip x64 ptr size(0 fill 8bytes)"
-                    )))
-            ));
+            tri!(
+                self.parse_peek(
+                    binary::u64(self.endian)
+                        .verify(|ulong| *ulong == 0)
+                        .context(StrContext::Expected(StrContextValue::Description(
+                            "Skip x64 ptr size(0 fill 8bytes)"
+                        )))
+                )
+            );
             self.current_position += 8;
         };
         Ok(())
@@ -500,10 +505,12 @@ impl<'de> de::Deserializer<'de> for &mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let n = tri!(self.parse_peek(
-            binary::i16(self.endian)
-                .context(StrContext::Expected(StrContextValue::Description("i16")))
-        ));
+        let n = tri!(
+            self.parse_peek(
+                binary::i16(self.endian)
+                    .context(StrContext::Expected(StrContextValue::Description("i16")))
+            )
+        );
         let res = visitor.visit_int16(I16::Number(n));
         self.current_position += 2;
         res
@@ -513,10 +520,12 @@ impl<'de> de::Deserializer<'de> for &mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let n = tri!(self.parse_peek(
-            binary::u16(self.endian)
-                .context(StrContext::Expected(StrContextValue::Description("u16")))
-        ));
+        let n = tri!(
+            self.parse_peek(
+                binary::u16(self.endian)
+                    .context(StrContext::Expected(StrContextValue::Description("u16")))
+            )
+        );
         let res = visitor.visit_uint16(U16::Number(n));
         self.current_position += 2;
         res
@@ -526,10 +535,12 @@ impl<'de> de::Deserializer<'de> for &mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let n = tri!(self.parse_peek(
-            binary::i32(self.endian)
-                .context(StrContext::Expected(StrContextValue::Description("i32")))
-        ));
+        let n = tri!(
+            self.parse_peek(
+                binary::i32(self.endian)
+                    .context(StrContext::Expected(StrContextValue::Description("i32")))
+            )
+        );
         let res = visitor.visit_int32(I32::Number(n));
         self.current_position += 4;
         res
@@ -539,10 +550,12 @@ impl<'de> de::Deserializer<'de> for &mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let n = tri!(self.parse_peek(
-            binary::u32(self.endian)
-                .context(StrContext::Expected(StrContextValue::Description("u32")))
-        ));
+        let n = tri!(
+            self.parse_peek(
+                binary::u32(self.endian)
+                    .context(StrContext::Expected(StrContextValue::Description("u32")))
+            )
+        );
         let res = visitor.visit_uint32(U32::Number(n));
         self.current_position += 4;
         res
@@ -552,10 +565,12 @@ impl<'de> de::Deserializer<'de> for &mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let n = tri!(self.parse_peek(
-            binary::i64(self.endian)
-                .context(StrContext::Expected(StrContextValue::Description("i64")))
-        ));
+        let n = tri!(
+            self.parse_peek(
+                binary::i64(self.endian)
+                    .context(StrContext::Expected(StrContextValue::Description("i64")))
+            )
+        );
         let res = visitor.visit_int64(I64::Number(n));
         self.current_position += 8;
         res
@@ -565,10 +580,12 @@ impl<'de> de::Deserializer<'de> for &mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let n = tri!(self.parse_peek(
-            binary::u64(self.endian)
-                .context(StrContext::Expected(StrContextValue::Description("u64")))
-        ));
+        let n = tri!(
+            self.parse_peek(
+                binary::u64(self.endian)
+                    .context(StrContext::Expected(StrContextValue::Description("u64")))
+            )
+        );
         let res = visitor.visit_uint64(U64::Number(n));
         self.current_position += 8;
         res
@@ -578,11 +595,9 @@ impl<'de> de::Deserializer<'de> for &mut BytesDeserializer<'de> {
     where
         V: Visitor<'de>,
     {
-        let res =
-            visitor
-                .visit_real(tri!(self.parse_peek(real(self.endian).context(
-                    StrContext::Expected(StrContextValue::Description("f32"))
-                ))));
+        let res = visitor.visit_real(tri!(self.parse_peek(
+            real(self.endian).context(StrContext::Expected(StrContextValue::Description("f32")))
+        )));
         self.current_position += 4;
         res
     }
@@ -821,7 +836,7 @@ impl<'de> de::Deserializer<'de> for &mut BytesDeserializer<'de> {
 mod tests {
     use super::*;
     use crate::tests::ClassMap;
-    use havok_classes::{hkBaseObject, hkClassMember_::FlagValues, hkReferencedObject, EventMode};
+    use havok_classes::{EventMode, hkBaseObject, hkClassMember_::FlagValues, hkReferencedObject};
     use pretty_assertions::assert_eq;
     use zerocopy::IntoBytes as _;
 

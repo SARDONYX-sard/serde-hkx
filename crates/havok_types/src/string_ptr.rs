@@ -1,4 +1,4 @@
-use crate::{lib::*, NULL_STR};
+use crate::{NULL_STR, lib::*};
 
 /// # StringPtr
 ///

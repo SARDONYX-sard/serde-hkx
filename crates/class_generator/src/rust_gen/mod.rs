@@ -1,7 +1,7 @@
 mod enum_or_flags;
 mod structure;
 
-use crate::{cpp_info::Class, ClassMap};
+use crate::{ClassMap, cpp_info::Class};
 use syn::Result;
 
 pub fn from_cpp_class(class: &Class, class_map: &ClassMap) -> Result<syn::File> {

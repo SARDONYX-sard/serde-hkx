@@ -20,7 +20,7 @@
 
 use super::{Deserialize, Deserializer, Error, Visitor};
 use crate::de::Unexpected;
-use crate::de::{seed::InPlaceSeed, size_hint, SeqAccess};
+use crate::de::{SeqAccess, seed::InPlaceSeed, size_hint};
 use crate::lib::*;
 use havok_types::*;
 

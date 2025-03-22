@@ -1,8 +1,8 @@
 use crate::get_class_map::get_inherited_members;
 use crate::{
+    ClassMap,
     cpp_info::{Class, Member, TypeKind},
     error::*,
-    ClassMap,
 };
 use indexmap::IndexMap;
 use proc_macro2::TokenStream;

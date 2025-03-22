@@ -4,8 +4,8 @@ use crate::rust_gen::structure::{
     to_rust_token::to_rust_field_ident,
 };
 use crate::{
-    cpp_info::{Class, Member, TypeKind},
     ClassMap,
+    cpp_info::{Class, Member, TypeKind},
 };
 use proc_macro2::TokenStream;
 use quote::quote;

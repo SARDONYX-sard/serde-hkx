@@ -1,6 +1,6 @@
 //! Parallel Convert hkx <-> xml
 
-use super::{get_output_path, get_supported_files, process_serde, OutFormat};
+use super::{OutFormat, get_output_path, get_supported_files, process_serde};
 use crate::{
     error::{FailedConvertFilesSnafu, Result},
     fs::write_sync,

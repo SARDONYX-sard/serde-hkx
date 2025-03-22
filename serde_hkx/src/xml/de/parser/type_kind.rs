@@ -5,7 +5,7 @@ use crate::{lib::*, tri};
 use super::delimited_with_multispace0;
 use havok_types::*;
 use std::borrow::Cow;
-use winnow::ascii::{float, multispace0, Caseless};
+use winnow::ascii::{Caseless, float, multispace0};
 use winnow::combinator::{alt, opt, seq};
 use winnow::error::{StrContext, StrContextValue};
 use winnow::token::take_until;
@@ -143,9 +143,11 @@ pub fn vector4(input: &mut &str) -> ModalResult<Vector4> {
 /// When parse failed.
 #[inline]
 pub fn quaternion(input: &mut &str) -> ModalResult<Quaternion> {
-    let Vector4 { x, y, z, w } = tri!(vector4
-        .context(StrContext::Label("Quaternion"))
-        .parse_next(input));
+    let Vector4 { x, y, z, w } = tri!(
+        vector4
+            .context(StrContext::Label("Quaternion"))
+            .parse_next(input)
+    );
     Ok(Quaternion { x, y, z, scaler: w })
 }
 
@@ -437,17 +439,19 @@ pub fn vector3(input: &mut &str) -> ModalResult<Vector4> {
         z: f32,
     }
 
-    let Vector3 { x, y, z } = tri!(seq!(Vector3 {
-        _: opt(delimited_with_multispace0("(")),
-        x: real.context(StrContext::Label("x")),
-        _: multispace0,
-        y: real.context(StrContext::Label("y")),
-        _: multispace0,
-        z: real.context(StrContext::Label("z")),
-        _: opt(delimited_with_multispace0(")")),
-    })
-    .context(StrContext::Label("Vector3"))
-    .parse_next(input));
+    let Vector3 { x, y, z } = tri!(
+        seq!(Vector3 {
+            _: opt(delimited_with_multispace0("(")),
+            x: real.context(StrContext::Label("x")),
+            _: multispace0,
+            y: real.context(StrContext::Label("y")),
+            _: multispace0,
+            z: real.context(StrContext::Label("z")),
+            _: opt(delimited_with_multispace0(")")),
+        })
+        .context(StrContext::Label("Vector3"))
+        .parse_next(input)
+    );
 
     Ok(Vector4 { x, y, z, w: 0.0 })
 }

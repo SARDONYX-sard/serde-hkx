@@ -4,7 +4,7 @@ use crate::{
     convert::OutFormat,
     error::{Result, SerSnafu},
 };
-use serde_hkx::{bytes::serde::hkx_header::HkxHeader, to_string, HavokSort};
+use serde_hkx::{HavokSort, bytes::serde::hkx_header::HkxHeader, to_string};
 use snafu::ResultExt as _;
 use std::path::Path;
 

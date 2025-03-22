@@ -3,10 +3,10 @@ use crate::bytes::serde::section_header::SectionHeader;
 use crate::tri;
 use indexmap::IndexMap;
 use winnow::{
+    Parser,
     binary::{self, Endianness},
     error::{ContextError, StrContext, StrContextValue::*},
     token::take_while,
-    Parser,
 };
 
 pub type LocalFixups = IndexMap<u32, u32>;
@@ -133,9 +133,11 @@ fn read_local_fixups(
             .context(StrContext::Expected(Description("local_fixup.src(u32)")))
             .parse_next(bytes)
         {
-            let local_dst = tri!(binary::u32(endian)
-                .context(StrContext::Expected(Description("local_fixup.dst(u32)")))
-                .parse_next(bytes));
+            let local_dst = tri!(
+                binary::u32(endian)
+                    .context(StrContext::Expected(Description("local_fixup.dst(u32)")))
+                    .parse_next(bytes)
+            );
 
             #[cfg(feature = "tracing")]
             tracing::trace!(local_src, local_dst);
@@ -168,15 +170,19 @@ fn read_fixups(
             #[cfg(feature = "tracing")]
             tracing::trace!(src);
 
-            let index = tri!(binary::u32(endian)
-                .context(StrContext::Expected(Description("fixup.index(u32)")))
-                .parse_next(bytes));
+            let index = tri!(
+                binary::u32(endian)
+                    .context(StrContext::Expected(Description("fixup.index(u32)")))
+                    .parse_next(bytes)
+            );
             #[cfg(feature = "tracing")]
             tracing::trace!(index);
 
-            let dst = tri!(binary::u32(endian)
-                .context(StrContext::Expected(Description("fixup.dst(u32)")))
-                .parse_next(bytes));
+            let dst = tri!(
+                binary::u32(endian)
+                    .context(StrContext::Expected(Description("fixup.dst(u32)")))
+                    .parse_next(bytes)
+            );
             #[cfg(feature = "tracing")]
             tracing::trace!(dst);
 

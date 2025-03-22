@@ -1,5 +1,5 @@
 use crate::errors::ser::{Error, Result};
-use havok_serde::{ser::SerializeFlags, Serialize};
+use havok_serde::{Serialize, ser::SerializeFlags};
 
 use super::super::ByteSerializer;
 

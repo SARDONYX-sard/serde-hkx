@@ -4,9 +4,9 @@ mod visit_struct_for_bytes;
 
 use crate::get_class_map::get_inherited_members;
 use crate::{
-    bail_syn_err,
+    ClassMap, bail_syn_err,
     cpp_info::{Class, Member, TypeKind},
-    syn_error, ClassMap,
+    syn_error,
 };
 use enum_fields::gen_enum_visitor;
 use proc_macro2::TokenStream;

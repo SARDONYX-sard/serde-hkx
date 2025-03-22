@@ -1,5 +1,5 @@
 //! Provides a method that can be used to sort bytes and XML to serialize.
-use crate::{errors::ser::Error as SerError, ClassMapKey, GenericClassMap};
+use crate::{ClassMapKey, GenericClassMap, errors::ser::Error as SerError};
 use havok_serde::HavokClass;
 use havok_types::Pointer;
 use indexmap::IndexMap;
