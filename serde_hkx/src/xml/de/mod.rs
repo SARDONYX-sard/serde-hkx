@@ -678,7 +678,7 @@ mod tests {
         use havok_classes::{hkBaseObject, hkReferencedObject};
         partial_parse_assert(
             r##"
-<hkobject name="#01000" class="hkReferencedObject" signature="0xea7f1d08">
+<hkobject name="#1000" class="hkReferencedObject" signature="0xea7f1d08">
     <!-- memSizeAndFlags SERIALIZE_IGNORED -->
     <!-- referenceCount SERIALIZE_IGNORED -->
 </hkobject>
