@@ -2,7 +2,7 @@
 authors = ["SARDONYX"]
 categories = ["encoding"]
 description = "Havok Behavior (De)Serialization Library(ver. hk_2010.2.0-r1)"
-edition = "2021"
+edition = "2024"
 keywords = ["serde", "havok"]
 license = "MIT OR Apache-2.0"
 readme = "README.md"

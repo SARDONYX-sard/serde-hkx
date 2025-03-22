@@ -59,35 +59,43 @@ where
         .with_target(false);
 
     if with_stdout {
-        if let Some(log_path) = log_path {
-            let log_file = File::create(log_path.as_ref())?;
+        match log_path {
+            Some(log_path) => {
+                let log_file = File::create(log_path.as_ref())?;
 
-            let log_file_config = fmt::Layer::default()
-                .compact()
-                .with_ansi(false)
-                .with_file(true)
-                .with_line_number(true)
-                .with_target(false)
-                .with_writer(log_file);
-            tracing::subscriber::set_global_default(
-                subscriber_builder.pretty().finish().with(log_file_config),
-            )?;
-        } else {
-            tracing::subscriber::set_global_default(
-                subscriber_builder
-                    .pretty()
-                    .with_ansi(true)
+                let log_file_config = fmt::Layer::default()
+                    .compact()
+                    .with_ansi(false)
+                    .with_file(true)
                     .with_line_number(true)
                     .with_target(false)
-                    .finish(),
-            )?;
+                    .with_writer(log_file);
+                tracing::subscriber::set_global_default(
+                    subscriber_builder.pretty().finish().with(log_file_config),
+                )?;
+            }
+            _ => {
+                tracing::subscriber::set_global_default(
+                    subscriber_builder
+                        .pretty()
+                        .with_ansi(true)
+                        .with_line_number(true)
+                        .with_target(false)
+                        .finish(),
+                )?;
+            }
         }
-    } else if let Some(log_path) = log_path {
-        let log_file = File::create(log_path.as_ref())?;
-        subscriber_builder
-            .with_writer(log_file)
-            .with_ansi(false)
-            .init();
+    } else {
+        match log_path {
+            Some(log_path) => {
+                let log_file = File::create(log_path.as_ref())?;
+                subscriber_builder
+                    .with_writer(log_file)
+                    .with_ansi(false)
+                    .init();
+            }
+            _ => {}
+        }
     }
 
     Ok(())
