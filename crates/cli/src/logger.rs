@@ -85,14 +85,12 @@ where
                 )?;
             }
         }
-    } else {
-        if let Some(log_path) = log_path {
-            let log_file = File::create(log_path.as_ref())?;
-            subscriber_builder
-                .with_writer(log_file)
-                .with_ansi(false)
-                .init();
-        }
+    } else if let Some(log_path) = log_path {
+        let log_file = File::create(log_path.as_ref())?;
+        subscriber_builder
+            .with_writer(log_file)
+            .with_ansi(false)
+            .init();
     }
 
     Ok(())
