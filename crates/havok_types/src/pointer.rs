@@ -71,10 +71,6 @@ impl<'a> Pointer<'a> {
     /// ```
     #[inline]
     pub fn from_usize(value: usize) -> Self {
-        if value == 0 {
-            return Self::null();
-        }
-
         Self::new(format!("#{:04}", value).into())
     }
 
