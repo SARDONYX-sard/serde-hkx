@@ -14,7 +14,7 @@ where
     I: AsRef<Path>,
     O: AsRef<Path>,
 {
-    let tree = gen(input).await?; // NOTE: With newline
+    let tree = generate(input).await?; // NOTE: With newline
     match output.as_ref() {
         Some(output) => fs::write(output, &tree).await?,
         None => print!("{tree}"),
@@ -26,7 +26,7 @@ where
 ///
 /// # Errors
 /// If the unknown extension. (Not `hkx`, `xml`...).
-pub async fn gen<P>(input: P) -> Result<String>
+pub async fn generate<P>(input: P) -> Result<String>
 where
     P: AsRef<Path>,
 {

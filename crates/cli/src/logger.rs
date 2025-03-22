@@ -86,15 +86,12 @@ where
             }
         }
     } else {
-        match log_path {
-            Some(log_path) => {
-                let log_file = File::create(log_path.as_ref())?;
-                subscriber_builder
-                    .with_writer(log_file)
-                    .with_ansi(false)
-                    .init();
-            }
-            _ => {}
+        if let Some(log_path) = log_path {
+            let log_file = File::create(log_path.as_ref())?;
+            subscriber_builder
+                .with_writer(log_file)
+                .with_ansi(false)
+                .init();
         }
     }
 
