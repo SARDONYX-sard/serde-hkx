@@ -43,7 +43,7 @@ impl<'a> ClassPtrMap<'a> {
     pub fn into_class_map(self) -> ClassMap<'a> {
         self.classes
             .into_par_iter()
-            .map(|(k, v)| (k.get(), v))
+            .map(|(k, v)| (k.into_inner(), v))
             .collect()
     }
 }
