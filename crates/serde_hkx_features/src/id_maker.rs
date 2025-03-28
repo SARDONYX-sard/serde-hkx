@@ -10,6 +10,7 @@ use serde_hkx::{EventIdMap, VariableIdMap};
 /// use serde_hkx::bytes::serde::hkx_header::HkxHeader;
 /// use serde_hkx::errors::SerdeHkxError;
 /// use serde_hkx::{ClassMapKey, EventIdMap, VariableIdMap};
+/// use serde_hkx_features::id_maker::crate_maps_from_id_class;
 /// use serde_hkx_features::ClassMap;
 ///
 /// fn main() -> Result<(), SerdeHkxError> {
