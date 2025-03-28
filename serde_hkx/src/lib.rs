@@ -43,14 +43,48 @@ macro_rules! tri {
 pub(crate) use tri;
 
 pub use crate::bytes::de::from_bytes;
-pub use crate::bytes::ser::to_bytes;
+pub use crate::bytes::ser::{to_bytes, to_bytes_with_maps};
 pub use crate::sort::HavokSort;
 pub use crate::xml::de::from_str;
 pub use crate::xml::ser::to_string;
 
 use indexmap::IndexMap;
 use std::borrow::Cow;
+use std::collections::HashMap;
 
 /// Key type alias for flexibility
 pub type ClassMapKey<'a> = Cow<'a, str>;
 pub type GenericClassMap<'a, V, K = ClassMapKey<'a>> = IndexMap<K, V>;
+
+/// `eventNames` indexes of `hkbBehaviorGraphStringData`.
+///
+/// # Example
+/// If the nemesis id e.g. `$eventID[variableSample]$`, then `variableSample` is the key,
+///
+/// The value is the index of the `eventSample` element in the `variableNames` field array of the `hkbBehaviorGraphStringData` class.
+#[derive(Debug, Default, PartialEq)]
+pub struct VariableIdMap(pub HashMap<String, usize>);
+impl VariableIdMap {
+    /// Creates a new `EventIdMap`
+    #[inline]
+    pub fn new() -> Self {
+        Self(HashMap::new())
+    }
+}
+
+/// `variableNames` indexes of `hkbBehaviorGraphStringData`.
+///
+/// # Example
+/// If the nemesis id e.g. `$variableID[variableSample]$`, then `variableSample` is the key,
+///
+/// The value is the index of the `variableSample` element in the `variableNames` field array of the `hkbBehaviorGraphStringData` class.
+#[derive(Debug, Default, PartialEq)]
+pub struct EventIdMap(pub HashMap<String, usize>);
+
+impl EventIdMap {
+    /// Creates a new `EventIdMap`
+    #[inline]
+    pub fn new() -> Self {
+        Self(HashMap::new())
+    }
+}

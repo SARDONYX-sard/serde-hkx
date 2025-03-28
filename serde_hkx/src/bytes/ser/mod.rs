@@ -2,7 +2,7 @@
 mod sub_ser;
 mod trait_impls;
 
-use crate::{align, lib::*, tri};
+use crate::{EventIdMap, VariableIdMap, align, lib::*, tri};
 
 use self::sub_ser::structs::StructSerializer;
 use self::trait_impls::{Align as _, ClassNamesWriter, ClassStartsMap};
@@ -50,6 +50,41 @@ where
             ..Default::default()
         },
     )
+}
+
+/// Serialize to hkx bytes with `event`&`variable` ID maps + header.
+///
+/// # Errors
+/// Returns an error when
+/// - When ptr_size is other than 4/8
+/// - When endian is other than 0/1
+#[inline]
+pub fn to_bytes_with_maps<V>(
+    value: &V,
+    header: &HkxHeader,
+    event_id_map: EventIdMap,
+    variable_id_map: VariableIdMap,
+) -> Result<Vec<u8>, Error>
+where
+    V: Serialize + ClassNamesWriter,
+{
+    let ser = ByteSerializer {
+        event_id_map,
+        variable_id_map,
+        is_little_endian: match header.endian {
+            0 => false, // big endian
+            1 => true,  // little endian
+            invalid => InvalidEndianSnafu { invalid }.fail()?,
+        },
+        is_x86: match header.pointer_size {
+            4 => true,
+            8 => false,
+            invalid => UnsupportedPtrSizeSnafu { invalid }.fail()?,
+        },
+        ..Default::default()
+    };
+
+    to_bytes_with_opt(value, header, ser)
 }
 
 /// Serialize to bytes with custom `BytesSerializer` settings.
@@ -149,8 +184,30 @@ pub struct ByteSerializer {
     /// Bytes
     output: Cursor<Vec<u8>>,
 
-    event_id_map: HashMap<String, usize>,
-    variable_id_map: HashMap<String, usize>,
+    /// `eventNames` indexes of `hkbBehaviorGraphStringData`.
+    ///
+    /// # Example
+    /// If the nemesis id e.g. `$eventID[variableSample]$`, then `variableSample` is the key,
+    ///
+    /// The value is the index of the `eventSample` element in the `variableNames` field array of the `hkbBehaviorGraphStringData` class.
+    ///
+    /// # Note
+    /// This ID substitution takes place only for integer types.
+    ///
+    /// The pointer refers to the special ID (`e.g. $aaa$10`) of Nemesis as it is.
+    event_id_map: EventIdMap,
+    /// `variableNames` indexes of `hkbBehaviorGraphStringData`.
+    ///
+    /// # Example
+    /// If the nemesis id e.g. `$variableID[variableSample]$`, then `variableSample` is the key,
+    ///
+    /// The value is the index of the `variableSample` element in the `variableNames` field array of the `hkbBehaviorGraphStringData` class.
+    ///
+    /// # Note
+    /// This ID substitution takes place only for integer types.
+    ///
+    /// The pointer refers to the special ID (`e.g. $aaa$10`) of Nemesis as it is.
+    variable_id_map: VariableIdMap,
 
     /// This is cached to find the relative position of the binary.
     abs_data_offset: u32,
@@ -437,7 +494,7 @@ macro_rules! impl_serialize_primitive {
                 let v = match v {
                     $num(n) => *n,
                     $eid(id) => {
-                        let n = tri!(self.event_id_map.get(id.as_ref()).ok_or_else(||
+                        let n = tri!(self.event_id_map.0.get(id.as_ref()).ok_or_else(||
                             NotFoundEventIdSnafu {
                                 event_id: id.to_string(),
                             }.build()
@@ -445,7 +502,7 @@ macro_rules! impl_serialize_primitive {
                         *n as $cast_ty
                     },
                     $vid(id) => {
-                        let n = tri!(self.variable_id_map.get(id.as_ref()).ok_or_else(||
+                        let n = tri!(self.variable_id_map.0.get(id.as_ref()).ok_or_else(||
                             NotFoundVariableIdSnafu {
                                 variable_id: id.to_string(),
                             }.build()
@@ -502,62 +559,60 @@ impl<'a> Serializer for &'a mut ByteSerializer {
 
     #[inline]
     fn serialize_int8(self, v: &I8) -> Result<Self::Ok, Self::Error> {
-        let v = match v {
-            I8::Number(n) => *n,
-            I8::EventId(event_id) => {
-                let n = self.event_id_map.get(event_id.as_ref()).ok_or_else(|| {
-                    NotFoundEventIdSnafu {
-                        event_id: event_id.to_string(),
-                    }
-                    .build()
-                })?;
-                *n as i8
-            }
-            I8::VariableId(variable_id) => {
-                let n = tri!(
-                    self.variable_id_map
-                        .get(variable_id.as_ref())
-                        .ok_or_else(|| {
+        let v =
+            match v {
+                I8::Number(n) => *n,
+                I8::EventId(event_id) => {
+                    let n = self.event_id_map.0.get(event_id.as_ref()).ok_or_else(|| {
+                        NotFoundEventIdSnafu {
+                            event_id: event_id.to_string(),
+                        }
+                        .build()
+                    })?;
+                    *n as i8
+                }
+                I8::VariableId(variable_id) => {
+                    let n = tri!(self.variable_id_map.0.get(variable_id.as_ref()).ok_or_else(
+                        || {
                             NotFoundVariableIdSnafu {
                                 variable_id: variable_id.to_string(),
                             }
                             .build()
-                        })
-                );
-                *n as i8
-            }
-        };
+                        }
+                    ));
+                    *n as i8
+                }
+            };
         self.output.write_i8(v)?;
         Ok(())
     }
 
     #[inline]
     fn serialize_uint8(self, v: &U8) -> Result<Self::Ok, Self::Error> {
-        let v = match v {
-            U8::Number(n) => *n,
-            U8::EventId(event_id) => {
-                let n = self.event_id_map.get(event_id.as_ref()).ok_or_else(|| {
-                    NotFoundEventIdSnafu {
-                        event_id: event_id.to_string(),
-                    }
-                    .build()
-                })?;
-                *n as u8
-            }
-            U8::VariableId(variable_id) => {
-                let n = tri!(
-                    self.variable_id_map
-                        .get(variable_id.as_ref())
-                        .ok_or_else(|| {
+        let v =
+            match v {
+                U8::Number(n) => *n,
+                U8::EventId(event_id) => {
+                    let n = self.event_id_map.0.get(event_id.as_ref()).ok_or_else(|| {
+                        NotFoundEventIdSnafu {
+                            event_id: event_id.to_string(),
+                        }
+                        .build()
+                    })?;
+                    *n as u8
+                }
+                U8::VariableId(variable_id) => {
+                    let n = tri!(self.variable_id_map.0.get(variable_id.as_ref()).ok_or_else(
+                        || {
                             NotFoundVariableIdSnafu {
                                 variable_id: variable_id.to_string(),
                             }
                             .build()
-                        })
-                );
-                *n as u8
-            }
-        };
+                        }
+                    ));
+                    *n as u8
+                }
+            };
         self.output.write_u8(v)?;
         Ok(())
     }

@@ -3,6 +3,7 @@ pub mod diff;
 pub mod dump;
 pub mod error;
 pub mod fs;
+pub mod id_maker;
 #[cfg(feature = "json_schema")]
 pub mod json_schema_gen;
 pub mod progress;
