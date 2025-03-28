@@ -62,7 +62,7 @@ pub type GenericClassMap<'a, V, K = ClassMapKey<'a>> = IndexMap<K, V>;
 /// If the nemesis id e.g. `$eventID[variableSample]$`, then `variableSample` is the key,
 ///
 /// The value is the index of the `eventSample` element in the `variableNames` field array of the `hkbBehaviorGraphStringData` class.
-#[derive(Debug, Default, PartialEq)]
+#[derive(Debug, Default, Clone, PartialEq)]
 pub struct VariableIdMap(pub HashMap<String, usize>);
 impl VariableIdMap {
     /// Creates a new `EventIdMap`
@@ -78,7 +78,7 @@ impl VariableIdMap {
 /// If the nemesis id e.g. `$variableID[variableSample]$`, then `variableSample` is the key,
 ///
 /// The value is the index of the `variableSample` element in the `variableNames` field array of the `hkbBehaviorGraphStringData` class.
-#[derive(Debug, Default, PartialEq)]
+#[derive(Debug, Default, Clone, PartialEq)]
 pub struct EventIdMap(pub HashMap<String, usize>);
 
 impl EventIdMap {
