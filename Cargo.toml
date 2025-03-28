@@ -1,14 +1,14 @@
 [workspace.package]
 authors = ["SARDONYX"]
 categories = ["encoding"]
-description = "Havok Behavior (De)Serialization Library(ver. hk_2010.2.0-r1)"
+description = "Havok Behavior (De)Serialization Library(ver. hk_2010.2.0-r1) + Nemesis ID"
 edition = "2024"
 keywords = ["serde", "havok"]
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/SARDONYX-sard/serde-hkx"                     # NOTE: Without it, CLI & CI build will error.
 rust-version = "1.85"
-version = "0.7.0"
+version = "0.8.0"
 
 [workspace]
 members = [
