@@ -2,6 +2,7 @@
 pub mod cstring;
 pub mod half;
 pub mod math;
+pub mod parse_int;
 pub mod pointer;
 pub mod signature;
 pub mod string_ptr;

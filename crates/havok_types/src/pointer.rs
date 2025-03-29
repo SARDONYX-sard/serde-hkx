@@ -70,7 +70,7 @@ impl FromStr for Pointer {
     #[inline]
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         Ok(Self::new(
-            parse_int::parse(s.trim_start_matches('#'))
+            crate::parse_int::ParseNumber::parse(s.trim_start_matches('#'))
                 .map_err(|_err| "Invalid integer for Name")?,
         ))
     }

@@ -290,7 +290,7 @@ impl SerializeStruct for StructSerializer<'_> {
         tri!(self.ser.serialize_ulong(Ulong::new(0))); // ptr size
         let len = value.as_ref().len() as u32;
         tri!(self.ser.serialize_uint32(len)); // array size
-        tri!(self.ser.serialize_uint32(len | 1 << 31)); // Capacity(same as size) | Owned flag(32nd bit)
+        tri!(self.ser.serialize_uint32(len | (1 << 31))); // Capacity(same as size) | Owned flag(32nd bit)
 
         if len == 0 {
             return Ok(());
