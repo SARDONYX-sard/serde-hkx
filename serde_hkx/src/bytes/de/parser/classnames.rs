@@ -1,11 +1,11 @@
 use std::collections::HashMap;
 
 use winnow::{
+    Parser,
     binary::{self, Endianness},
     error::{ContextError, StrContext, StrContextValue::*},
     seq,
     token::take_while,
-    Parser,
 };
 
 use crate::{bytes::de::parser::type_kind::string, tri};
@@ -65,7 +65,7 @@ pub fn classnames_section<'a>(
 mod tests {
     use super::classnames_section;
     use pretty_assertions::assert_eq;
-    use winnow::{binary::Endianness, Parser};
+    use winnow::{Parser, binary::Endianness};
 
     #[test]
     fn should_parse_classnames() {

@@ -17,8 +17,8 @@ use crate::lib::*;
 mod impls;
 
 use havok_types::{
-    f16, variant::Variant, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation,
-    Signature, StringPtr, Transform, Ulong, Vector4,
+    CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature, StringPtr,
+    Transform, Ulong, Vector4, f16, variant::Variant,
 };
 
 #[cfg(feature = "std")]

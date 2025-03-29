@@ -7,8 +7,8 @@ use havok_serde::ser::{
 };
 use havok_types::variant::Variant;
 use havok_types::{
-    f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature,
-    StringPtr, Transform, Ulong, Vector4,
+    CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, Signature, StringPtr,
+    Transform, Ulong, Vector4, f16,
 };
 
 #[derive(Debug)]
@@ -592,7 +592,7 @@ impl SerializeFlags for &mut XmlSerializer {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::{tests::mocks::new_defaultmale, HavokSort as _};
+    use crate::{HavokSort as _, tests::mocks::new_defaultmale};
     use pretty_assertions::assert_eq;
 
     #[ignore = "No error on local PC Windows, but for some reason error occurs on GitHub Actions Windows"]

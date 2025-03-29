@@ -1,6 +1,6 @@
+use crate::ClassMap;
 use crate::cpp_info::Class;
 use crate::cpp_info::Member;
-use crate::ClassMap;
 use proc_macro2::TokenStream;
 use quote::quote;
 use rayon::prelude::*;

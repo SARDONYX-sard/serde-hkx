@@ -25,14 +25,16 @@ pub fn generate(class: &Class) -> Vec<TokenStream> {
         } = one_enum;
 
         if *vsubtype == TypeKind::Void {
-            tracing::info!("Skip automatic enum generation because this enum {name} is a void storage type, indicating that it is not used.");
+            tracing::info!(
+                "Skip automatic enum generation because this enum {name} is a void storage type, indicating that it is not used."
+            );
             continue;
         };
 
         match vtype {
             TypeKind::Flags => {
                 let flag_struct = gen_flag(one_enum);
-                let impl_json_schema =  impl_schema_for_flag(one_enum);
+                let impl_json_schema = impl_schema_for_flag(one_enum);
 
                 enums.push(quote! {
                     #[havok_types_derive::impl_flags_methods]
@@ -45,7 +47,7 @@ pub fn generate(class: &Class) -> Vec<TokenStream> {
                 // An enum with the same value is not valid as an enum in Rust. Therefore, express them as BitFlag
                 let item_enum = if has_duplicate_value(one_enum) {
                     let flag_struct = gen_flag(one_enum);
-                    let impl_json_schema =  impl_schema_for_enum_flag(one_enum);
+                    let impl_json_schema = impl_schema_for_enum_flag(one_enum);
                     // NOTE: enum can make schema with derive, so it is not impl here.
 
                     quote! {

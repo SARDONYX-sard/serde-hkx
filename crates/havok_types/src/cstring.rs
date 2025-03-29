@@ -1,4 +1,4 @@
-use crate::{lib::*, StringPtr, NULL_STR};
+use crate::{NULL_STR, StringPtr, lib::*};
 
 /// # CString
 /// - binary data(.hkx): null-terminated string

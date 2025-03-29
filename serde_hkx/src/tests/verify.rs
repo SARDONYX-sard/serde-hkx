@@ -1,9 +1,10 @@
 use crate::{
+    HavokSort as _,
     bytes::{hexdump, serde::hkx_header::HkxHeader},
     errors::SerdeHkxError,
     from_bytes, from_str,
-    tests::{diff, ClassMap},
-    to_bytes, to_string, HavokSort as _,
+    tests::{ClassMap, diff},
+    to_bytes, to_string,
 };
 use pretty_assertions::assert_eq;
 use winnow::Parser;

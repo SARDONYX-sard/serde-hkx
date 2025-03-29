@@ -8,9 +8,10 @@ pub fn impl_serialize(class: &Class) -> Vec<TokenStream> {
     let mut enums = Vec::new();
     for one_enum in &class.enums {
         if one_enum.vsubtype == TypeKind::Void {
-            tracing::info!("Skip automatic enum generation because this enum {} is a void storage type, indicating that it is not used.",
+            tracing::info!(
+                "Skip automatic enum generation because this enum {} is a void storage type, indicating that it is not used.",
                 one_enum.name
-        );
+            );
             continue;
         };
 

@@ -62,7 +62,9 @@ impl<'a> StructSerializer<'a> {
                 if self.ser.pointed_pos.len() >= 2 {
                     let new_write_pointed_pos = align!(write_pointed_pos, 16_u64);
                     #[cfg(feature = "tracing")]
-                    tracing::trace!("Apply special align16 to `next_struct_local_dst` because the hkArray is nested twice: {write_pointed_pos:#x} -> {new_write_pointed_pos:#x}");
+                    tracing::trace!(
+                        "Apply special align16 to `next_struct_local_dst` because the hkArray is nested twice: {write_pointed_pos:#x} -> {new_write_pointed_pos:#x}"
+                    );
                     write_pointed_pos = new_write_pointed_pos;
                 }
                 self.ser.pointed_pos.push(write_pointed_pos); // To write inner member type.
@@ -95,11 +97,12 @@ impl<'a> StructSerializer<'a> {
             };
         } else {
             // HACK: unused last value to update;
-            let pos = tri!(self
-                .ser
-                .pointed_pos
-                .pop()
-                .ok_or(Error::NotFoundPointedPosition));
+            let pos = tri!(
+                self.ser
+                    .pointed_pos
+                    .pop()
+                    .ok_or(Error::NotFoundPointedPosition)
+            );
             let pos = align!(pos, 16_u64);
             if let Some(last) = self.ser.pointed_pos.last_mut() {
                 *last = pos;
@@ -163,11 +166,12 @@ impl<'a> StructSerializer<'a> {
 
         if size != TypeSize::NonPtr {
             // HACK: unused last value to update;
-            let pos = tri!(self
-                .ser
-                .pointed_pos
-                .pop()
-                .ok_or(Error::NotFoundPointedPosition));
+            let pos = tri!(
+                self.ser
+                    .pointed_pos
+                    .pop()
+                    .ok_or(Error::NotFoundPointedPosition)
+            );
             if let Some(last) = self.ser.pointed_pos.last_mut() {
                 *last = pos;
             };

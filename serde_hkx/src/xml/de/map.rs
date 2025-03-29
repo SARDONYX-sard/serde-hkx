@@ -6,13 +6,13 @@ use crate::{
 };
 
 use super::{
-    parser::tag::{end_tag, field_start_close_tag, field_start_open_tag},
     XmlDeserializer,
+    parser::tag::{end_tag, field_start_close_tag, field_start_open_tag},
 };
 use crate::errors::de::{Error, Result};
 use havok_serde::de::{DeserializeSeed, MapAccess};
 use havok_types::Pointer;
-use winnow::{combinator::alt, token::take_until, Parser as _};
+use winnow::{Parser as _, combinator::alt, token::take_until};
 
 /// A structure for deserializing each element in an `Struct`.
 ///
@@ -97,18 +97,20 @@ impl<'de> MapAccess<'de> for MapDeserializer<'_, 'de> {
 
     // If an unknown `<hkparam>` exists and `next_value` is not called , `/>` or `</hkparam>` must be skipped.
     fn skip_value_seed(&mut self) -> std::result::Result<(), Self::Error> {
-        let (_num, _value) = tri!(self.de.parse_next(alt((
-            winnow::seq! {
-                field_start_close_tag, // Parse `>` or ` numelements="3">`
-                take_until(0.., "<"),    // take any value
-                _: end_tag("hkparam")       // </hkparam>
-            },
-            winnow::seq! { // Self closing tag
-                _: delimited_with_multispace0("/"),
-                _: delimited_multispace0_comment(">")
-            }
-            .map(|_| (None, "")),
-        ))));
+        let (_num, _value) = tri!(
+            self.de.parse_next(alt((
+                winnow::seq! {
+                    field_start_close_tag, // Parse `>` or ` numelements="3">`
+                    take_until(0.., "<"),    // take any value
+                    _: end_tag("hkparam")       // </hkparam>
+                },
+                winnow::seq! { // Self closing tag
+                    _: delimited_with_multispace0("/"),
+                    _: delimited_multispace0_comment(">")
+                }
+                .map(|_| (None, "")),
+            )))
+        );
         #[cfg(feature = "tracing")]
         {
             let numelements = _num
@@ -124,6 +126,8 @@ impl<'de> MapAccess<'de> for MapDeserializer<'_, 'de> {
     where
         V: DeserializeSeed<'de>,
     {
-        unreachable!("Using the wrong API: This method is not used in `havok_classes` in XML because it is for bytes.")
+        unreachable!(
+            "Using the wrong API: This method is not used in `havok_classes` in XML because it is for bytes."
+        )
     }
 }

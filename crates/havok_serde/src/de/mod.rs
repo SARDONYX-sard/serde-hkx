@@ -17,8 +17,8 @@ mod seed;
 mod size_hint;
 
 use havok_types::{
-    f16, CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, StringPtr,
-    Transform, Ulong, Variant, Vector4,
+    CString, Matrix3, Matrix4, Pointer, QsTransform, Quaternion, Rotation, StringPtr, Transform,
+    Ulong, Variant, Vector4, f16,
 };
 
 use crate::lib::*;

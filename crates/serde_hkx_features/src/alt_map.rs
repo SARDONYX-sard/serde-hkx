@@ -1,5 +1,5 @@
-use crate::error::{KeyParseSnafu, Result};
 use crate::ClassMap;
+use crate::error::{KeyParseSnafu, Result};
 use havok_classes::Classes;
 use indexmap::IndexMap;
 use rayon::prelude::*;

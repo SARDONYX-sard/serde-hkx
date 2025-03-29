@@ -1,5 +1,5 @@
 //! Show dependency tree from havok behavior state machine (hkx/xml file)
-use crate::{error::Result, fs::ReadExt, ClassMap};
+use crate::{ClassMap, error::Result, fs::ReadExt};
 use serde_hkx::tree::HavokTree as _;
 use std::path::Path;
 use tokio::fs;

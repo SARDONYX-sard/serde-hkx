@@ -25,7 +25,9 @@ pub fn impl_ser_for_enum(one_enum: &Enum) -> TokenStream {
     };
 
     if *vsubtype == TypeKind::Void {
-        tracing::info!("Skip automatic enum generation because this enum {name} is a void storage type, indicating that it is not used.");
+        tracing::info!(
+            "Skip automatic enum generation because this enum {name} is a void storage type, indicating that it is not used."
+        );
         return quote! {};
     };
 
