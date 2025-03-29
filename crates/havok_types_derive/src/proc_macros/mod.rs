@@ -8,6 +8,7 @@ use syn::{Ident, Token, braced, parse::Parse, punctuated::Punctuated, token::Pat
 /// to Havok's `hkFlags<Enum, SizeType>` XML notation.
 ///
 /// In addition, [`core::default::Default`] is implemented.
+/// - [Playground](https://play.rust-lang.org/?version=stable&mode=release&edition=2024&gist=da155784893d0200a8d62c04c8c8da16)
 ///
 /// # Note
 /// This attribute macro is automatically implemented by parsing `bitflags!` macro, so it cannot be implemented in a normal structure.
@@ -15,6 +16,7 @@ use syn::{Ident, Token, braced, parse::Parse, punctuated::Punctuated, token::Pat
 pub fn impl_flags_methods(_attr: TokenStream, input: TokenStream) -> TokenStream {
     let bit_flags = syn::parse_macro_input!(input as BitFlagsMacro);
     let struct_ = &bit_flags.struct_;
+    let struct_type = struct_.ty.to_token_stream().to_string();
     let struct_ident = &struct_.ident;
     let struct_name_str = struct_.ident.to_string();
 
@@ -37,9 +39,11 @@ pub fn impl_flags_methods(_attr: TokenStream, input: TokenStream) -> TokenStream
     }
 
     let err_msg = format!(
-        "Invalid {struct_name_str}: '{{unknown}}'. Expected one or more values separated by '|', or custom bits. Valid values are: {}.",
+        "Invalid {struct_name_str}({struct_type}): {{err}} '{{unknown}}'. Expected one or more values separated by '|', or custom bits. Valid values are: {}.",
         field_names.join(", ")
     );
+    // INFO: hkxcmd is setting the RoleFlags of cow\behaviors\quadrupedbehavior to 0xfffff300 (-3328)
+    // by wrapping the input hexadecimal number that is greater than i16::MAX.
 
     quote! {
         #bit_flags
@@ -61,7 +65,7 @@ pub fn impl_flags_methods(_attr: TokenStream, input: TokenStream) -> TokenStream
                 for flag in self.iter() {
                     match flag {
                         #(#str_push_matchers)*
-                        remain => flags.push(remain.bits().to_string().into()),
+                        remain => flags.push(format!("{:#X}", remain.bits() as u32).into()),
                     };
                 }
 
@@ -69,7 +73,7 @@ pub fn impl_flags_methods(_attr: TokenStream, input: TokenStream) -> TokenStream
             }
         }
 
-        // Playground test: https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=b28f172141348b5979d29433588874c7
+        // The FromStr implementation is used to deserialize XML.
         impl core::str::FromStr for #struct_ident {
             type Err = String;
 
@@ -107,7 +111,7 @@ pub fn impl_flags_methods(_attr: TokenStream, input: TokenStream) -> TokenStream
                     match token {
                         #(#matchers)*
                         unknown => {
-                            let bits = ::havok_types_derive::parse_int::parse(unknown).map_err(|_| {
+                            let bits = havok_types::parse_int::ParseNumber::parse_wrapping(unknown).map_err(|err| {
                                 let name = #struct_name_str;
                                 format!(#err_msg)
                             })?;

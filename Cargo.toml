@@ -36,7 +36,7 @@ jwalk = { version = "0.8.1" }                                  # To enumerate js
 num-derive = "0.4"                                             # To serialize Enum & Flags
 num-traits = "0.2.19"                                          # To serialize Enum & Flags
 parse-display = "0.10.0"                                       # Display derive
-parse_int = { version = "0.6" }
+lexical = { version = "7.0.4", features = ["radix", "format", "power-of-two"] }
 proc-macro2 = { version = "1.0.94", default-features = false } # Rust token
 quote = { version = "1.0.40", default-features = false }       # Rust token gen to more convenience
 rayon = { version = "1.10.0" }                                 # Parallel

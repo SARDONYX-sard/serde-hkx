@@ -606,6 +606,20 @@ mod tests {
             "EVENT_MODE_DEFAULT</hkparam>",
             ("</hkparam>", EventMode::EVENT_MODE_DEFAULT),
         );
+
+        // Overflow wrapping(By havok specification)
+        use havok_classes::RoleFlags;
+        const REMAIN_BITS: i16 = 0xFFFFF300_u32 as i16; // -3328 (0xF300)
+        parse_peek_assert(
+            "FLAG_HIDDEN|FLAG_NORMALIZED|FLAG_NONE|0xfffff300</hkparam>",
+            (
+                "</hkparam>",
+                RoleFlags::FLAG_HIDDEN
+                    | RoleFlags::FLAG_NORMALIZED
+                    | RoleFlags::FLAG_NONE
+                    | RoleFlags::from_bits_retain(REMAIN_BITS),
+            ),
+        );
     }
 
     #[test]

@@ -54,7 +54,8 @@ impl FromStr for Signature {
     #[inline]
     fn from_str(s: &str) -> Result<Self, Self::Err> {
         Ok(Self::new(
-            parse_int::parse(s).map_err(|_err| "Invalid integer for Signature")?,
+            crate::parse_int::ParseNumber::parse(s)
+                .map_err(|_err| "Invalid integer for Signature")?,
         ))
     }
 }
