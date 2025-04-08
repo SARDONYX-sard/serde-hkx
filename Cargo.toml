@@ -48,7 +48,7 @@ similar = "2.7.0"                                              # Create diff
 snafu = "0.8.5"                                                # Define all error patterns(with backtrace)
 static_assertions = "1.1.0"                                    # Compile tim assertions
 syn = { version = "2.0.100", default-features = false }         # Rust parser
-tokio = { version = "1.44.1" }                                 # Async runtime
+tokio = { version = "1.44.2" }                                 # Async runtime
 tracing = { version = "0.1.41" }                               # logger
 
 # workspace members
