@@ -125,7 +125,7 @@ fn read_local_fixups(
     bytes: &mut &[u8],
     endian: Endianness,
     len: u32,
-) -> winnow::PResult<LocalFixups> {
+) -> winnow::ModalResult<LocalFixups> {
     let mut local_map = LocalFixups::new();
     for _ in 0..len {
         if let Ok(local_src) = binary::u32::<&[u8], ContextError>(endian)
@@ -156,7 +156,11 @@ fn read_local_fixups(
 ///
 /// # Note
 /// And take align mark(0xff) bytes.
-fn read_fixups(bytes: &mut &[u8], endian: Endianness, len: u32) -> winnow::PResult<VirtualFixups> {
+fn read_fixups(
+    bytes: &mut &[u8],
+    endian: Endianness,
+    len: u32,
+) -> winnow::ModalResult<VirtualFixups> {
     let mut fixups = VirtualFixups::new();
     for _ in 0..len {
         if let Ok(src) = binary::u32::<&[u8], ContextError>(endian)

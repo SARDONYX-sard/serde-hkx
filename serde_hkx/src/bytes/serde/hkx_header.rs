@@ -278,7 +278,7 @@ impl HkxHeader {
     ///     [0x68, 0x6B, 0x5F, 0x32, 0x30, 0x31, 0x30, 0x2E, 0x32, 0x2E, 0x30, 0x2D, 0x72, 0x31, 0x00].as_slice()
     /// ); // To "hk_2010.2.0-r1"
     /// ```
-    pub fn contents_version_string(&self) -> winnow::PResult<&str> {
+    pub fn contents_version_string(&self) -> winnow::ModalResult<&str> {
         let mut bytes = self.contents_version_string.as_slice();
         take_until(0.., b'\0')
             .try_map(|bytes| core::str::from_utf8(bytes))
