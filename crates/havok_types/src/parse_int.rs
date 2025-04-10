@@ -81,7 +81,7 @@ pub trait ParseNumber: Sized {
     /// This method exists to reproduce that behavior.
     ///
     /// - Example: hkxcmd is setting the RoleFlags of `cow/behaviors/quadrupedbehavior.hkx` to `0xfffff300 (-3328)` in XML.
-    ///            by wrapping the input hexadecimal number that is greater than `i16::MAX`
+    ///   by wrapping the input hexadecimal number that is greater than `i16::MAX`
     /// ```
     /// use havok_types::parse_int::ParseNumber;
     /// const OVERFLOW_U32_STR: &str = "0xFFFFF300";

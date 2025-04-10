@@ -14,7 +14,7 @@ pub struct BytesClassIndexMapDeserializer<'a, 'de: 'a> {
 impl<'a, 'de> BytesClassIndexMapDeserializer<'a, 'de> {
     /// Create a new map deserializer
     #[inline]
-    pub fn new(de: &'a mut BytesDeserializer<'de>) -> Self {
+    pub const fn new(de: &'a mut BytesDeserializer<'de>) -> Self {
         Self { de }
     }
 }

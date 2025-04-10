@@ -16,7 +16,7 @@ pub struct StructSerializer<'a> {
 }
 
 impl<'a> StructSerializer<'a> {
-    pub fn new(ser: &'a mut ByteSerializer, is_root: bool) -> Self {
+    pub const fn new(ser: &'a mut ByteSerializer, is_root: bool) -> Self {
         Self { ser, is_root }
     }
 

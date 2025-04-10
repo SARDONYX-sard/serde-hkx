@@ -17,7 +17,7 @@ pub struct EnumDeserializer<'a, 'de: 'a> {
 
 impl<'a, 'de> EnumDeserializer<'a, 'de> {
     #[inline]
-    pub fn new(de: &'a mut XmlDeserializer<'de>) -> Self {
+    pub const fn new(de: &'a mut XmlDeserializer<'de>) -> Self {
         EnumDeserializer { de }
     }
 }

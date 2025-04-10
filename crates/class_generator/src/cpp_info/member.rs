@@ -193,8 +193,7 @@ impl Member<'_> {
 /// Assume that the pointer size is 4 or larger.
 ///
 /// # Errors
-/// - If entered
-///     `TypeKind::Void(vtype) | TypeKind::Zero | TypeKind::FnPtr |
+/// - If entered `TypeKind::Void(vtype) | TypeKind::Zero | TypeKind::FnPtr |
 ///    TypeKind::InplaceArray | TypeKind::HomogeneousArray |
 ///    TypeKind::RelArray | TypeKind::Max` => These are not used inside the 2010 Havok Class.
 ///

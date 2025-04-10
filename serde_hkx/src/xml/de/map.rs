@@ -37,7 +37,7 @@ pub struct MapDeserializer<'a, 'de: 'a> {
 impl<'a, 'de> MapDeserializer<'a, 'de> {
     /// Create a new map deserializer
     #[inline]
-    pub fn new(
+    pub const fn new(
         de: &'a mut XmlDeserializer<'de>,
         ptr_name: Option<Pointer>,
         class_name: &'static str,

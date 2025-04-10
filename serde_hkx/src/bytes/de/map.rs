@@ -21,7 +21,7 @@ pub struct MapDeserializer<'a, 'de: 'a> {
 impl<'a, 'de> MapDeserializer<'a, 'de> {
     /// Create a new map deserializer
     #[inline]
-    pub fn new(de: &'a mut BytesDeserializer<'de>, fields: &'static [&'static str]) -> Self {
+    pub const fn new(de: &'a mut BytesDeserializer<'de>, fields: &'static [&'static str]) -> Self {
         Self {
             de,
             field_index: 0,

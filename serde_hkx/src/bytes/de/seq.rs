@@ -20,7 +20,7 @@ pub struct SeqDeserializer<'a, 'de: 'a> {
 
 impl<'a, 'de> SeqDeserializer<'a, 'de> {
     /// Create a new seq deserializer
-    pub fn new(de: &'a mut BytesDeserializer<'de>, size: usize) -> Self {
+    pub const fn new(de: &'a mut BytesDeserializer<'de>, size: usize) -> Self {
         Self { de, size, index: 0 }
     }
 }

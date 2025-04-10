@@ -327,13 +327,13 @@ impl XmlSerializer {
 
     /// Increment `self.depth` for indentation.
     #[inline]
-    fn increment_depth(&mut self) {
+    const fn increment_depth(&mut self) {
         self.depth += 1;
     }
 
     /// Decrement `self.depth` for indentation.
     #[inline]
-    fn decrement_depth(&mut self) {
+    const fn decrement_depth(&mut self) {
         self.depth -= 1;
     }
 }

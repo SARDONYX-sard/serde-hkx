@@ -23,7 +23,7 @@ pub struct SeqDeserializer<'a, 'de: 'a> {
 impl<'a, 'de> SeqDeserializer<'a, 'de> {
     /// Create a new seq deserializer
     #[inline]
-    pub fn new(de: &'a mut XmlDeserializer<'de>) -> Self {
+    pub const fn new(de: &'a mut XmlDeserializer<'de>) -> Self {
         Self { de }
     }
 }
