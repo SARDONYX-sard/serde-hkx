@@ -1,5 +1,22 @@
 # `defaultmale.hkx` hex dump Journey
 
+## Foundations
+
+- Byte Arrays
+
+Let's learn how to read hkx. A hkx hex dump has the below format: a hex dump is an hkx binary that can be briefly viewed as a string.
+
+```log
+Address:                <Byte Arrays>                      <Byte Sequence to ASCII>
+00000000: 57 e0 e0 57 10 c0 c0 10 00 00 00 00 08 00 00 00  W..W............
+```
+
+Address shows the byte-delimited position of every 16 bytes. A hex dump is a group of two 4-bit digits from 0 to f, which is a single byte element. The character W is the ASCII equivalent of an 1-byte chunk. Dot . means the ASCII of the corresponding byte array is unknown.
+
+For sections that appear every 48 bytes, see [here](https://github.com/SARDONYX-sard/serde-hkx/blob/main/docs/specification/hkx_binary_format.md).
+
+## Hex dump journey
+
 The following is a hex dump by xxd.exe broken down by category.
 
 This page attempts to explain the binary specification of hkx while performing binary analysis based on SkyrimSE's `defaultmale.hkx`.
