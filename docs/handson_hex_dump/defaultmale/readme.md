@@ -7,7 +7,7 @@
 Let's learn how to read hkx. A hkx hex dump has the below format: a hex dump is an hkx binary that can be briefly viewed as a string.
 
 ```log
-Address: <Byte Arrays> <Byte Sequence to ASCII>
+Address:                <Byte Arrays>                      <Byte Sequence to ASCII>
 00000000: 57 e0 e0 57 10 c0 c0 10 00 00 00 00 08 00 00 00  W..W............
 ```
 
