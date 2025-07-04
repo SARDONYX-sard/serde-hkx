@@ -49,6 +49,9 @@ pub fn boolean(input: &mut &str) -> ModalResult<bool> {
 ///
 /// assert_eq!(real.parse("1.0"), Ok(1.0_f32));
 /// assert_eq!(real.parse("0.1"), Ok(0.1_f32));
+/// assert_eq!(real.parse("0"), Ok(0.0_f32)); // Integer format
+/// assert_eq!(real.parse("1"), Ok(1.0_f32)); // Integer format
+/// assert_eq!(real.parse("-1"), Ok(-1.0_f32)); // Negative integer format
 ///
 /// // C++ indeterminate
 /// assert!(real.parse("1.#IND").unwrap().is_nan());
@@ -67,6 +70,9 @@ pub fn boolean(input: &mut &str) -> ModalResult<bool> {
 /// # Errors
 /// When parse failed.
 pub fn real(input: &mut &str) -> ModalResult<f32> {
+    use winnow::ascii::digit1;
+    use winnow::combinator::opt;
+    
     // NOTE: For some reason, early errors occur if the display digits, such as 00, are not parsed first.
 
     // Need to support special representation of decimal points in C++
@@ -82,10 +88,18 @@ pub fn real(input: &mut &str) -> ModalResult<f32> {
     let pos_inf = alt(("1.#INF00", "1.#INF0", "1.#INF")).value(f32::INFINITY);
     let neg_inf = alt(("-1.#INF00", "-1.#INF0", "-1.#INF")).value(f32::NEG_INFINITY);
 
-    alt((nan, pos_inf, neg_inf, float))
+    // Parse integers as floats (e.g., "0" -> 0.0, "1" -> 1.0, "-1" -> -1.0)
+    let integer_as_float = seq!(
+        opt("-"),
+        digit1
+    )
+    .take()
+    .try_map(|s: &str| s.parse::<f32>());
+
+    alt((nan, pos_inf, neg_inf, float, integer_as_float))
         .context(StrContext::Label("real(f32)"))
         .context(StrContext::Expected(StrContextValue::Description(
-            "Real(e.g. `0.100000`)",
+            "Real(e.g. `0.100000` or `0`)",
         )))
         .parse_next(input)
 }
@@ -105,19 +119,29 @@ pub fn real(input: &mut &str) -> ModalResult<f32> {
 /// assert_eq!(vector4.parse("(1.000000 1.000000 1.000000 0.000000)"), Ok(Vector4::new(1.0, 1.0, 1.0, 0.0)));
 /// assert_eq!(vector4.parse("(-0.000000 0.000000 -0.000000 1.000000)"), Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0)));
 /// assert_eq!(vector4.parse("   (   -0.000000 0.000000 -0.000000 1.000000  ) "), Ok(Vector4::new(-0.0, 0.0, -0.0, 1.0)));
+/// assert_eq!(vector4.parse("(0,0,0,0)"), Ok(Vector4::new(0.0, 0.0, 0.0, 0.0)));
+/// assert_eq!(vector4.parse("(1,2,3,4)"), Ok(Vector4::new(1.0, 2.0, 3.0, 4.0)));
 /// ```
 ///
 /// # Errors
 /// When parse failed.
 pub fn vector4(input: &mut &str) -> ModalResult<Vector4> {
+    use winnow::combinator::alt;
+    
+    // Helper function to parse separator (either comma or space)
+    let mut separator = alt((
+        delimited_with_multispace0(","), // comma-separated format: (0,1,2,3)
+        multispace0,                     // space-separated format: (0 1 2 3)
+    ));
+    
     seq!(Vector4 {
         _: opt(delimited_with_multispace0("(")),
         x: real.context(StrContext::Label("x")),
-        _: multispace0,
+        _: separator,
         y: real.context(StrContext::Label("y")),
-        _: multispace0,
+        _: separator,
         z: real.context(StrContext::Label("z")),
-        _: multispace0,
+        _: separator,
         w: real.context(StrContext::Label("w")),
         _: opt(delimited_with_multispace0(")")),
     })
@@ -430,11 +454,21 @@ pub fn string<'a>(input: &mut &'a str) -> ModalResult<Cow<'a, str>> {
 /// assert_eq!(vector3.parse("(1.000000 1.000000 1.000000)"), Ok(Vector4::new(1.0, 1.0, 1.0, 0.0)));
 /// assert_eq!(vector3.parse("(-0.000000 0.000000 -0.000000)"), Ok(Vector4::new(-0.0, 0.0, -0.0, 0.0)));
 /// assert_eq!(vector3.parse("   (   -0.000000 0.000000 -0.000000) "), Ok(Vector4::new(-0.0, 0.0, -0.0, 0.0)));
+/// assert_eq!(vector3.parse("(0,0,0)"), Ok(Vector4::new(0.0, 0.0, 0.0, 0.0)));
+/// assert_eq!(vector3.parse("(1,2,3)"), Ok(Vector4::new(1.0, 2.0, 3.0, 0.0)));
 /// ```
 ///
 /// # Errors
 /// When parse failed.
 pub fn vector3(input: &mut &str) -> ModalResult<Vector4> {
+    use winnow::combinator::alt;
+    
+    // Helper function to parse separator (either comma or space)
+    let mut separator = alt((
+        delimited_with_multispace0(","), // comma-separated format: (0,1,2)
+        multispace0,                     // space-separated format: (0 1 2)
+    ));
+    
     struct Vector3 {
         x: f32,
         y: f32,
@@ -445,9 +479,9 @@ pub fn vector3(input: &mut &str) -> ModalResult<Vector4> {
         seq!(Vector3 {
             _: opt(delimited_with_multispace0("(")),
             x: real.context(StrContext::Label("x")),
-            _: multispace0,
+            _: separator,
             y: real.context(StrContext::Label("y")),
-            _: multispace0,
+            _: separator,
             z: real.context(StrContext::Label("z")),
             _: opt(delimited_with_multispace0(")")),
         })

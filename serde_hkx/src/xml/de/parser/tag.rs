@@ -88,25 +88,56 @@ pub fn field_start_open_tag<'a>(
     )))
 }
 
-/// Parses the field of class start closing tag `>` or `numelements="0">`
+/// Parses the field of class start closing tag `>`, `numelements="0">`, `/>`, or `numelements="0" />`
+///
+/// # Returns
+/// (numelements, is_self_closing)
 ///
 /// # Errors
 /// When parse failed.
-pub fn field_start_close_tag(input: &mut &str) -> ModalResult<Option<u64>> {
-    seq!(
-        winnow::combinator::opt(
+pub fn field_start_close_tag(input: &mut &str) -> ModalResult<(Option<u64>, bool)> {
+    use winnow::combinator::alt;
+    
+    alt((
+        // Handle self-closing tag with numelements: numelements="0" />
+        seq!(
             seq!(
                 _: delimited_with_multispace0("numelements"),
                 _: delimited_with_multispace0("="),
                 number_in_string::<u64>, // e.g. "8"
-            )
-        ),
-        _: delimited_multispace0_comment(">")
-    )
-    .map(|(n,)| n.map(|n| n.0))
+            ),
+            _: delimited_with_multispace0("/"),
+            _: delimited_multispace0_comment(">")
+        )
+        .map(|((n,),)| (Some(n), true)),
+        
+        // Handle regular closing tag with numelements: numelements="0">
+        seq!(
+            seq!(
+                _: delimited_with_multispace0("numelements"),
+                _: delimited_with_multispace0("="),
+                number_in_string::<u64>, // e.g. "8"
+            ),
+            _: delimited_multispace0_comment(">")
+        )
+        .map(|((n,),)| (Some(n), false)),
+        
+        // Handle self-closing tag without numelements: />
+        seq!(
+            _: delimited_with_multispace0("/"),
+            _: delimited_multispace0_comment(">")
+        )
+        .map(|()| (None, true)),
+        
+        // Handle regular closing tag without numelements: >
+        seq!(
+            _: delimited_multispace0_comment(">")
+        )
+        .map(|()| (None, false)),
+    ))
     .context(StrContext::Label("field of class: start closing tag"))
     .context(StrContext::Expected(StrContextValue::Description(
-        "e.g. `>`",
+        "e.g. `>`, `/>`, `numelements=\"0\">`, or `numelements=\"0\" />`",
     )))
     .parse_next(input)
 }
@@ -207,7 +238,7 @@ mod tests {
 
     #[test]
     fn test_parse_array_start_close_tag() {
-        fn test_parse(input: &str, expected: Option<u64>) {
+        fn test_parse(input: &str, expected: (Option<u64>, bool)) {
             match field_start_close_tag
                 .parse(input)
                 .map_err(|e| ReadableError::from_parse(e, input).to_string())
@@ -217,8 +248,9 @@ mod tests {
             }
         }
 
+        // Test regular closing tags
         let ideal_input = r#" numelements="3">"#;
-        test_parse(ideal_input, Some(3));
+        test_parse(ideal_input, (Some(3), false));
 
         let indent_input = r#"
 
@@ -226,7 +258,24 @@ mod tests {
   = "85"
 
 >"#;
-        test_parse(indent_input, Some(85));
+        test_parse(indent_input, (Some(85), false));
+        
+        let simple_closing_input = r#" >"#;
+        test_parse(simple_closing_input, (None, false));
+        
+        // Test self-closing tags
+        let self_closing_input = r#" numelements="5" />"#;
+        test_parse(self_closing_input, (Some(5), true));
+        
+        let simple_self_closing_input = r#" />"#;
+        test_parse(simple_self_closing_input, (None, true));
+        
+        // Test self-closing tags with spaces
+        let spaced_self_closing_input = r#" numelements="0"  /  >"#;
+        test_parse(spaced_self_closing_input, (Some(0), true));
+        
+        let spaced_simple_self_closing_input = r#"  /  >"#;
+        test_parse(spaced_simple_self_closing_input, (None, true));
     }
 
     #[test]
