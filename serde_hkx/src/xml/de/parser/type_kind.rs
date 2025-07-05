@@ -72,7 +72,7 @@ pub fn boolean(input: &mut &str) -> ModalResult<bool> {
 pub fn real(input: &mut &str) -> ModalResult<f32> {
     use winnow::ascii::digit1;
     use winnow::combinator::opt;
-    
+
     // NOTE: For some reason, early errors occur if the display digits, such as 00, are not parsed first.
 
     // Need to support special representation of decimal points in C++
@@ -89,12 +89,9 @@ pub fn real(input: &mut &str) -> ModalResult<f32> {
     let neg_inf = alt(("-1.#INF00", "-1.#INF0", "-1.#INF")).value(f32::NEG_INFINITY);
 
     // Parse integers as floats (e.g., "0" -> 0.0, "1" -> 1.0, "-1" -> -1.0)
-    let integer_as_float = seq!(
-        opt("-"),
-        digit1
-    )
-    .take()
-    .try_map(|s: &str| s.parse::<f32>());
+    let integer_as_float = seq!(opt("-"), digit1)
+        .take()
+        .try_map(|s: &str| s.parse::<f32>());
 
     alt((nan, pos_inf, neg_inf, float, integer_as_float))
         .context(StrContext::Label("real(f32)"))
@@ -127,13 +124,13 @@ pub fn real(input: &mut &str) -> ModalResult<f32> {
 /// When parse failed.
 pub fn vector4(input: &mut &str) -> ModalResult<Vector4> {
     use winnow::combinator::alt;
-    
+
     // Helper function to parse separator (either comma or space)
     let mut separator = alt((
         delimited_with_multispace0(","), // comma-separated format: (0,1,2,3)
         multispace0,                     // space-separated format: (0 1 2 3)
     ));
-    
+
     seq!(Vector4 {
         _: opt(delimited_with_multispace0("(")),
         x: real.context(StrContext::Label("x")),
@@ -462,13 +459,13 @@ pub fn string<'a>(input: &mut &'a str) -> ModalResult<Cow<'a, str>> {
 /// When parse failed.
 pub fn vector3(input: &mut &str) -> ModalResult<Vector4> {
     use winnow::combinator::alt;
-    
+
     // Helper function to parse separator (either comma or space)
     let mut separator = alt((
         delimited_with_multispace0(","), // comma-separated format: (0,1,2)
         multispace0,                     // space-separated format: (0 1 2)
     ));
-    
+
     struct Vector3 {
         x: f32,
         y: f32,

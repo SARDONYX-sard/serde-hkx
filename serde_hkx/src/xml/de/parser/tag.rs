@@ -97,7 +97,7 @@ pub fn field_start_open_tag<'a>(
 /// When parse failed.
 pub fn field_start_close_tag(input: &mut &str) -> ModalResult<(Option<u64>, bool)> {
     use winnow::combinator::alt;
-    
+
     alt((
         // Handle self-closing tag with numelements: numelements="0" />
         seq!(
@@ -110,7 +110,6 @@ pub fn field_start_close_tag(input: &mut &str) -> ModalResult<(Option<u64>, bool
             _: delimited_multispace0_comment(">")
         )
         .map(|((n,),)| (Some(n), true)),
-        
         // Handle regular closing tag with numelements: numelements="0">
         seq!(
             seq!(
@@ -121,14 +120,12 @@ pub fn field_start_close_tag(input: &mut &str) -> ModalResult<(Option<u64>, bool
             _: delimited_multispace0_comment(">")
         )
         .map(|((n,),)| (Some(n), false)),
-        
         // Handle self-closing tag without numelements: />
         seq!(
             _: delimited_with_multispace0("/"),
             _: delimited_multispace0_comment(">")
         )
         .map(|()| (None, true)),
-        
         // Handle regular closing tag without numelements: >
         seq!(
             _: delimited_multispace0_comment(">")
@@ -259,21 +256,21 @@ mod tests {
 
 >"#;
         test_parse(indent_input, (Some(85), false));
-        
+
         let simple_closing_input = r#" >"#;
         test_parse(simple_closing_input, (None, false));
-        
+
         // Test self-closing tags
         let self_closing_input = r#" numelements="5" />"#;
         test_parse(self_closing_input, (Some(5), true));
-        
+
         let simple_self_closing_input = r#" />"#;
         test_parse(simple_self_closing_input, (None, true));
-        
+
         // Test self-closing tags with spaces
         let spaced_self_closing_input = r#" numelements="0"  /  >"#;
         test_parse(spaced_self_closing_input, (Some(0), true));
-        
+
         let spaced_simple_self_closing_input = r#"  /  >"#;
         test_parse(spaced_simple_self_closing_input, (None, true));
     }
