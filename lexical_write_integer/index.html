@@ -1,0 +1,101 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Fast lexical integer-to-string conversion routines."><title>lexical_write_integer - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-916cea96.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="lexical_write_integer" data-themes="" data-resource-suffix="" data-rustdoc-version="1.87.0 (17067e9ac 2025-05-09)" data-channel="1.87.0" data-search-js="search-e7298875.js" data-settings-js="settings-d72f25bb.js" ><script src="../static.files/storage-82c7156e.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-fb8c74a8.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle" title="show sidebar"></button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../lexical_write_integer/index.html">lexical_<wbr>write_<wbr>integer</a><span class="version">1.0.5</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#features" title="Features">Features</a></li><li><a href="#note" title="Note">Note</a></li><li><a href="#version-support" title="Version Support">Version Support</a></li><li><a href="#design" title="Design">Design</a></li><li><a href="#safety" title="Safety">Safety</a></li></ul><h3><a href="#modules">Crate Items</a></h3><ul class="block"><li><a href="#modules" title="Modules">Modules</a></li><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#constants" title="Constants">Constants</a></li><li><a href="#traits" title="Traits">Traits</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer"></div><main><div class="width-limiter"><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>lexical_write_integer</span><button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/lexical_write_integer/lib.rs.html#1-171">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Fast lexical integer-to-string conversion routines.</p>
+<p>The default implementations use power reduction to unroll
+4 loops at a time to minimize the number of required divisions,
+leading to massive performance gains. In addition, decimal
+strings pre-calculate the number of digits, avoiding temporary buffers.</p>
+<p>A compact, fallback algorithm uses a naive, simple algorithm,
+where each loop generates a single digit. This comes at a performance
+penalty, but produces smaller binaries.</p>
+<h2 id="features"><a class="doc-anchor" href="#features">§</a>Features</h2>
+<ul>
+<li><code>std</code> - Use the standard library.</li>
+<li><code>power-of-two</code> - Add support for writing power-of-two integer strings.</li>
+<li><code>radix</code> - Add support for strings of any radix.</li>
+<li><code>compact</code> - Reduce code size at the cost of performance.</li>
+<li><code>safe</code> - Ensure only memory-safe indexing is used.</li>
+</ul>
+<h2 id="note"><a class="doc-anchor" href="#note">§</a>Note</h2>
+<p>Only documented functionality is considered part of the public API:
+any of the modules, internal functions, or structs may change
+release-to-release without major or minor version changes. Use
+internal implementation details at your own risk.</p>
+<p>lexical-write-integer mainly exists as an implementation detail for
+lexical-core, although its API is stable. If you would like to use
+a high-level API that writes to and parses from <code>String</code> and <code>&amp;str</code>,
+respectively, please look at <a href="https://crates.io/crates/lexical">lexical</a>
+instead. If you would like an API that supports multiple numeric
+conversions, please look at <a href="https://crates.io/crates/lexical-core">lexical-core</a>
+instead.</p>
+<h2 id="version-support"><a class="doc-anchor" href="#version-support">§</a>Version Support</h2>
+<p>The minimum, standard, required version is 1.63.0, for const generic
+support. Older versions of lexical support older Rust versions.</p>
+<h2 id="design"><a class="doc-anchor" href="#design">§</a>Design</h2>
+<ul>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-write-integer/docs/Algorithm.md">Algorithm Approach</a></li>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-write-integer/docs/Benchmarks.md">Benchmarks</a></li>
+<li><a href="https://github.com/Alexhuszagh/lexical-benchmarks">Comprehensive Benchmarks</a></li>
+</ul>
+<h2 id="safety"><a class="doc-anchor" href="#safety">§</a>Safety</h2>
+<p>This module uses a some more unsafe code for moderately acceptable
+performance. The compact decimal serializer has no non-local safety
+invariants, which since it’s focused on code size rather than performance,
+this trade-off is acceptable and it uses a temporary, over-allocated buffer
+as an intermediate.</p>
+<p>The decimal writer relies on pre-computed tables and an exact calculation
+of the digit count (<a href="crate::decimal::DigitCount"><code>digit_count</code></a>) to avoid any overhead. Avoid
+intermediary copies is <strong>CRITICAL</strong> for fast performance so the entire
+buffer must be known but assigned to use algorithms the compiler cannot
+easily verify. This is because we use multi-digit optimizations with our
+pre-computed tables, so we cannot just iterate over the slice and assign
+iteratively. Using checked indexing can lead to 30%+ decreases in
+performance. However, with careful analysis and factoring of the code, it’s
+fairly easy to demonstrate the safety as long as the caller ensures at least
+the required number of digits are provided.</p>
+<p>Our algorithms work like this, carving off the lower digits and writing them
+to the back of the buffer.</p>
+
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">let </span><span class="kw-2">mut </span>value = <span class="number">12345u32</span>;
+<span class="kw">let </span>buffer = [<span class="number">0u8</span>; <span class="number">32</span>];
+<span class="kw">let </span>digits = value.digit_count();
+<span class="kw">let </span>bytes = buffer[..digits];
+
+<span class="kw">let </span>radix = <span class="number">10</span>;
+<span class="kw">let </span>radix2 = radix * radix;
+<span class="kw">let </span>radix4 = radix2 * radix2
+<span class="kw">let </span><span class="kw-2">mut </span>index = bytes.len();
+<span class="kw">while </span>value &gt;= <span class="number">10000 </span>{
+    <span class="kw">let </span>r = value % radix4;
+    value /= radix4;
+    <span class="kw">let </span>r1 = <span class="number">2 </span>* (r / radix2) <span class="kw">as </span>usize;
+    <span class="kw">let </span>r2 = <span class="number">2 </span>* (r % radix2) <span class="kw">as </span>usize;
+
+    <span class="comment">// write 5, then 4
+    </span>index -= <span class="number">1</span>;
+    bytes[index] = table[r2 + <span class="number">1</span>];
+    index -= <span class="number">1</span>;
+    bytes[index] = table[r2];
+
+    <span class="comment">// write 3 then 2
+    </span>index -= <span class="number">1</span>;
+    bytes[index] = table[r1 + <span class="number">1</span>];
+    index -= <span class="number">1</span>;
+    bytes[index] = table[r1];
+}
+
+<span class="comment">// oontinue with radix^2 and then a single digit.</span></code></pre></div>
+<p>We can efficiently determine at compile time if the pre-computed
+tables are large enough so there are no non-local safety considerations
+there. The current logic call stack is:</p>
+<ol>
+<li><a href="trait.ToLexical.html#tymethod.to_lexical" title="method lexical_write_integer::ToLexical::to_lexical"><code>to_lexical</code></a></li>
+<li><a href="crate::decimal::Decimal::decimal">decimal</a>, compact, or radix (gets the correct tables and calls
+algorithm)</li>
+<li><a href="algorithm/index.html" title="mod lexical_write_integer::algorithm">algorithm</a></li>
+</ol>
+<p><a href="crate::decimal::Decimal::decimal">decimal</a>, compact, and radix therefore <strong>MUST</strong> be safe and do type
+check of the bounds to avoid too much exposure to unsafety. Only
+<a href="algorithm/fn.algorithm.html" title="fn lexical_write_integer::algorithm::algorithm"><code>algorithm</code></a> should have any unsafety associated with it. That is, as long
+as the direct caller has ensure the proper buffer is allocated, there are
+non-local safety invariants.</p>
+</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="algorithm/index.html" title="mod lexical_write_integer::algorithm">algorithm</a></dt><dd>Radix-generic, optimized, integer-to-string conversion routines.</dd><dt><a class="mod" href="format/index.html" title="mod lexical_write_integer::format">format</a></dt><dd>Public API for the number format packed struct.</dd><dt><a class="mod" href="options/index.html" title="mod lexical_write_integer::options">options</a></dt><dd>Configuration options for writing integers.</dd></dl><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.NumberFormatBuilder.html" title="struct lexical_write_integer::NumberFormatBuilder">Number<wbr>Format<wbr>Builder</a></dt><dd>Build number format from specifications.</dd><dt><a class="struct" href="struct.Options.html" title="struct lexical_write_integer::Options">Options</a></dt><dd>Immutable options to customize writing integers.</dd><dt><a class="struct" href="struct.OptionsBuilder.html" title="struct lexical_write_integer::OptionsBuilder">Options<wbr>Builder</a></dt><dd>Builder for <code>Options</code>.</dd></dl><h2 id="constants" class="section-header">Constants<a href="#constants" class="anchor">§</a></h2><dl class="item-table"><dt><a class="constant" href="constant.BUFFER_SIZE.html" title="constant lexical_write_integer::BUFFER_SIZE">BUFFER_<wbr>SIZE</a></dt><dd>Maximum number of bytes required to serialize any number to string.</dd></dl><h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2><dl class="item-table"><dt><a class="trait" href="trait.FormattedSize.html" title="trait lexical_write_integer::FormattedSize">Formatted<wbr>Size</a></dt><dd>The size, in bytes, of formatted values.</dd><dt><a class="trait" href="trait.ToLexical.html" title="trait lexical_write_integer::ToLexical">ToLexical</a></dt><dd>Trait for numerical types that can be serialized to bytes.</dd><dt><a class="trait" href="trait.ToLexicalWithOptions.html" title="trait lexical_write_integer::ToLexicalWithOptions">ToLexical<wbr>With<wbr>Options</a></dt><dd>Trait for numerical types that can be serialized to bytes with custom
+options.</dd><dt><a class="trait" href="trait.WriteOptions.html" title="trait lexical_write_integer::WriteOptions">Write<wbr>Options</a></dt><dd>Shared trait for all writer options.</dd></dl></section></div></main></body></html>
