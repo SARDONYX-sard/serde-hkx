@@ -288,7 +288,7 @@ checksum = "f46ad14479a25103f283c0f10005961cf086d8dc42205bb44c46ac563475dca6"
 
 [[package]]
 name = "class_generator"
-version = "0.7.1"
+version = "0.7.2"
 dependencies = [
  "bitflags",
  "derive-new",
@@ -660,7 +660,7 @@ checksum = "bf151400ff0baff5465007dd2f3e717f3fe502074ca563069ce3a6629d07b289"
 
 [[package]]
 name = "havok_classes"
-version = "0.7.1"
+version = "0.7.2"
 dependencies = [
  "bitflags",
  "educe",
@@ -676,7 +676,7 @@ dependencies = [
 
 [[package]]
 name = "havok_serde"
-version = "0.7.1"
+version = "0.7.2"
 dependencies = [
  "arrayvec",
  "havok_types",
@@ -685,7 +685,7 @@ dependencies = [
 
 [[package]]
 name = "havok_types"
-version = "0.7.1"
+version = "0.7.2"
 dependencies = [
  "lexical",
  "parse-display",
@@ -699,7 +699,7 @@ dependencies = [
 
 [[package]]
 name = "havok_types_derive"
-version = "0.7.1"
+version = "0.7.2"
 dependencies = [
  "havok_types_derive_proc_macros",
 ]
@@ -733,7 +733,7 @@ checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
 
 [[package]]
 name = "hkxc"
-version = "0.7.1"
+version = "0.7.2"
 dependencies = [
  "clap",
  "clap_complete_command",
@@ -831,7 +831,7 @@ dependencies = [
 
 [[package]]
 name = "inheritance_tree_gen"
-version = "0.7.1"
+version = "0.7.2"
 dependencies = [
  "class_generator",
  "jwalk",
@@ -1327,7 +1327,7 @@ dependencies = [
 
 [[package]]
 name = "serde_hkx"
-version = "0.7.1"
+version = "0.7.2"
 dependencies = [
  "annotate-snippets",
  "bitflags",
@@ -1352,7 +1352,7 @@ dependencies = [
 
 [[package]]
 name = "serde_hkx_features"
-version = "0.7.1"
+version = "0.7.2"
 dependencies = [
  "basic-toml",
  "clap",
