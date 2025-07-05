@@ -93,9 +93,9 @@ impl<'de> MapAccess<'de> for MapDeserializer<'_, 'de> {
         if is_self_closing {
             // For self-closing tags, we need to provide a default value
             // Try to deserialize with an empty string or let the deserializer handle the default
-            let mut empty_input = "";
+            const EMPTY_INPUT: &str = "";
             let original_input = self.de.input;
-            self.de.input = &mut empty_input;
+            self.de.input = EMPTY_INPUT;
             let result = seed.deserialize(&mut *self.de);
             self.de.input = original_input;
             result
