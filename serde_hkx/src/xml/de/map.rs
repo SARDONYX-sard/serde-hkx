@@ -76,7 +76,7 @@ impl<'de> MapAccess<'de> for MapDeserializer<'_, 'de> {
         seed.deserialize(&mut *self.de).map(Some) // Parse `"field_name"`
     }
 
-    // Parse e.g. `>(0.000000 0.000000 1.000000 0.000000)</hkparam>`
+    // Parse e.g. `>(0.000000 0.000000 1.000000 0.000000)</hkparam>` or `numelements="0" />`
     fn next_value_seed<V>(&mut self, seed: V) -> Result<V::Value, Self::Error>
     where
         V: DeserializeSeed<'de>,
@@ -84,31 +84,42 @@ impl<'de> MapAccess<'de> for MapDeserializer<'_, 'de> {
         // HACK: If the `strict` feature is disabled, fall back to the default value
         // if there is an error retrieving the value in the `havok_classes` crate, so check
         // for `>` here and omit the implementation of the `/>` shorthand notation.
-        let _len = tri!(self.de.parse_next(field_start_close_tag)); // Parse `>` or ` numelements="3">`
+        let (_len, is_self_closing) = tri!(self.de.parse_next(field_start_close_tag)); // Parse `>`, `/>`, or ` numelements="3">`
         #[cfg(feature = "tracing")]
         if let Some(numelements) = _len {
             tracing::debug!(numelements);
         }
 
-        let value = tri!(seed.deserialize(&mut *self.de));
-        tri!(self.de.parse_next(end_tag("hkparam")));
-        Ok(value)
+        if is_self_closing {
+            // For self-closing tags, we need to provide a default value
+            // Try to deserialize with an empty string or let the deserializer handle the default
+            let mut empty_input = "";
+            let original_input = self.de.input;
+            self.de.input = &mut empty_input;
+            let result = seed.deserialize(&mut *self.de);
+            self.de.input = original_input;
+            result
+        } else {
+            let value = tri!(seed.deserialize(&mut *self.de));
+            tri!(self.de.parse_next(end_tag("hkparam")));
+            Ok(value)
+        }
     }
 
     // If an unknown `<hkparam>` exists and `next_value` is not called , `/>` or `</hkparam>` must be skipped.
     fn skip_value_seed(&mut self) -> std::result::Result<(), Self::Error> {
-        let (_num, _value) = tri!(
+        let ((_num, _is_self_closing), _value) = tri!(
             self.de.parse_next(alt((
                 winnow::seq! {
-                    field_start_close_tag, // Parse `>` or ` numelements="3">`
+                    field_start_close_tag, // Parse `>`, `/>`, or ` numelements="3">`
                     take_until(0.., "<"),    // take any value
                     _: end_tag("hkparam")       // </hkparam>
                 },
-                winnow::seq! { // Self closing tag
+                winnow::seq! { // Self closing tag (legacy handling - now handled in field_start_close_tag)
                     _: delimited_with_multispace0("/"),
                     _: delimited_multispace0_comment(">")
                 }
-                .map(|_| (None, "")),
+                .map(|_| ((None, true), "")),
             )))
         );
         #[cfg(feature = "tracing")]
