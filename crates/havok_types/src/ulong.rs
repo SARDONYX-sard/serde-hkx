@@ -71,7 +71,7 @@ mod tests {
     #[test]
     fn test_display() {
         let ulong = Ulong::new(12345_u64);
-        assert_eq!(format!("{}", ulong), "12345");
+        assert_eq!(format!("{ulong}"), "12345");
     }
 
     #[test]

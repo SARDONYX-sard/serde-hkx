@@ -9,7 +9,7 @@ pub fn impl_de_for_flag(one_enum: &Enum) -> TokenStream {
     let Enum { name, vsubtype, .. } = one_enum;
 
     let flag_ident = syn::Ident::new(name, proc_macro2::Span::call_site());
-    let expected = format!("struct {}(flags)", name);
+    let expected = format!("struct {name}(flags)");
 
     // e.g. `u64`
     let storage_type = to_rust_storage_type(vsubtype);

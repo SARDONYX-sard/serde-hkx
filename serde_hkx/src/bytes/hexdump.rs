@@ -11,12 +11,12 @@ where
 
     for chunk in data.chunks(16) {
         // Print offset
-        result.push_str(&format!("{:08x}: ", offset));
+        result.push_str(&format!("{offset:08x}: "));
         offset += 16;
 
         // Print hex values
         for byte in chunk {
-            result.push_str(&format!("{:02x} ", byte));
+            result.push_str(&format!("{byte:02x} "));
         }
 
         // Add padding for incomplete lines

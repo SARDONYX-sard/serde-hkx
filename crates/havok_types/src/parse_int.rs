@@ -143,8 +143,8 @@ mod tests {
 
         for (input, expected) in inputs {
             match <i64 as ParseNumber>::parse(input) {
-                Ok(result) => assert_eq!(result, expected, "Failed to parse input: {}", input),
-                Err(e) => panic!("Error parsing input {}: {}", input, e),
+                Ok(result) => assert_eq!(result, expected, "Failed to parse input: {input}"),
+                Err(e) => panic!("Error parsing input {input}: {e}"),
             }
         }
     }

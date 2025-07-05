@@ -80,12 +80,39 @@ impl<'a> StringPtr<'a> {
     pub const fn should_write_binary(&self) -> bool {
         self.get_ref().is_some()
     }
+
+    /// Gets a reference as [`&str`].
+    #[inline]
+    pub fn as_str(&self) -> &str {
+        self.inner.as_ref().map_or(NULL_STR, |s| s.as_ref())
+    }
 }
 
 impl fmt::Display for StringPtr<'_> {
+    #[inline]
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let s = self.inner.as_ref().map_or(NULL_STR, |s| s.as_ref());
-        write!(f, "{s}")
+        write!(f, "{}", self.as_str())
+    }
+}
+
+impl PartialEq<str> for StringPtr<'_> {
+    #[inline]
+    fn eq(&self, other: &str) -> bool {
+        self.as_str() == other
+    }
+}
+
+impl PartialEq<&str> for StringPtr<'_> {
+    #[inline]
+    fn eq(&self, other: &&str) -> bool {
+        self.as_str() == *other
+    }
+}
+
+impl PartialEq<String> for StringPtr<'_> {
+    #[inline]
+    fn eq(&self, other: &String) -> bool {
+        self.as_str() == other.as_str()
     }
 }
 
@@ -136,10 +163,10 @@ mod tests {
     #[test]
     fn stringptr_display() {
         let string_ptr = StringPtr::from_str(TEST_STR);
-        assert_eq!(format!("{}", string_ptr), TEST_STR);
+        assert_eq!(string_ptr, TEST_STR);
 
         let none_string_ptr = StringPtr::new(None);
-        assert_eq!(format!("{}", none_string_ptr), NULL_STR);
+        assert_eq!(none_string_ptr, NULL_STR);
     }
 
     #[cfg(feature = "serde")]
@@ -147,7 +174,7 @@ mod tests {
     fn stringptr_serialize() {
         let string_ptr = StringPtr::from_str(TEST_STR);
         let json = serde_json::to_string(&string_ptr).unwrap();
-        assert_eq!(json, format!("\"{}\"", TEST_STR));
+        assert_eq!(json, format!("\"{TEST_STR}\""));
 
         let none_string_ptr = StringPtr::new(None);
         let json = serde_json::to_string(&none_string_ptr).unwrap();
@@ -157,7 +184,7 @@ mod tests {
     #[cfg(feature = "serde")]
     #[test]
     fn stringptr_deserialize() {
-        let json = format!("\"{}\"", TEST_STR);
+        let json = format!("\"{TEST_STR}\"");
         let string_ptr: StringPtr = serde_json::from_str(&json).unwrap();
         assert_eq!(string_ptr.get_ref().as_deref(), Some(TEST_STR));
 

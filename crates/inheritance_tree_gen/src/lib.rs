@@ -14,11 +14,7 @@ pub fn generate_inheritance_tree(classes_json_dir: impl AsRef<Path>) -> std::io:
         let class_name = class.name;
         mermaid_markdown += &match class.parent {
             Some(parent) => {
-                format!(
-                    "    {child} --> {parent}\n",
-                    child = class_name,
-                    parent = parent
-                )
+                format!("    {class_name} --> {parent}\n")
             }
             None => format!("    {class_name}\n"),
         };

@@ -90,12 +90,39 @@ impl<'a> CString<'a> {
             _ => false,
         }
     }
+
+    /// Gets a reference as [`&str`].
+    #[inline]
+    pub fn as_str(&self) -> &str {
+        self.inner.as_ref().map_or(NULL_STR, |s| s.as_ref())
+    }
 }
 
 impl fmt::Display for CString<'_> {
+    #[inline]
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-        let s = self.inner.as_ref().map_or(NULL_STR, |s| s.as_ref());
-        write!(f, "{s}")
+        write!(f, "{}", self.as_str())
+    }
+}
+
+impl PartialEq<str> for CString<'_> {
+    #[inline]
+    fn eq(&self, other: &str) -> bool {
+        self.as_str() == other
+    }
+}
+
+impl PartialEq<&str> for CString<'_> {
+    #[inline]
+    fn eq(&self, other: &&str) -> bool {
+        self.as_str() == *other
+    }
+}
+
+impl PartialEq<String> for CString<'_> {
+    #[inline]
+    fn eq(&self, other: &String) -> bool {
+        self.as_str() == other.as_str()
     }
 }
 
@@ -145,10 +172,10 @@ mod tests {
     #[test]
     fn test_display() {
         let null_cstring = CString::new(None);
-        assert_eq!(format!("{}", null_cstring), NULL_STR);
+        assert_eq!(null_cstring, NULL_STR);
 
         let cstring = CString::from_str("display test");
-        assert_eq!(format!("{}", cstring), "display test");
+        assert_eq!(cstring, "display test");
     }
 
     #[test]
