@@ -703,40 +703,83 @@ mod tests {
     }
 
     #[test]
-    fn test_deserialize_class() {
-        use havok_classes::{hkRootLevelContainer, hkRootLevelContainerNamedVariant, hkaSkeleton};
-        // use crate::mocks::{hkRootLevelContainer, hkRootLevelContainerNamedVariant};
+    fn test_hka_skeleton_invalid_lock_translation() {
+        use havok_classes::hkaSkeleton;
 
         let xml = r###"
-		<hkobject name="#0122" class="hkaSkeleton" signature="0x366e8220">
-			<hkparam name="name">NPC Root [Root]</hkparam>
-			<hkparam name="parentIndices" numelements="52">
-				-1 0 1 2 3 4 5 6 4 8 9 1 1 9 13 6
-				15 10 17 7 19 4 21 10 7 4 4 23 27 28 23 30
-				31 24 33 34 24 36 37 23 39 40 24 42 43 22 22 22
-				22 4 23 24
-			</hkparam>
-			<hkparam name="bones" numelements="52">
-				<hkobject>
-					<hkparam name="name">NPC Root [Root]</hkparam>
-					<hkparam name="lockTranslation">fals</hkparam>
-				</hkobject>
-			</hkparam>
-		</hkobject>
-"###;
+        <hkobject name="#0122" class="hkaSkeleton" signature="0x366e8220">
+            <hkparam name="name">NPC Root [Root]</hkparam>
+            <hkparam name="parentIndices" numelements="52">-1 0 1</hkparam>
+            <hkparam name="bones" numelements="52">
+                <hkobject>
+                    <hkparam name="name">NPC Root [Root]</hkparam>
+                    <hkparam name="lockTranslation">fals</hkparam>
+                </hkobject>
+            </hkparam>
+        </hkobject>
+    "###;
+
         assert!(from_str::<hkaSkeleton>(xml).is_err());
+    }
+
+    #[test]
+    fn test_hka_skeleton_valid() {
+        use havok_classes::{hkBaseObject, hkReferencedObject, hkaBone, hkaSkeleton};
 
         let xml = r###"
-		<hkobject name="#0008" class="hkRootLevelContainer" signature="0x2772c11e">
-			<hkparam name="namedVariants" numelements="1">
-				<hkobject>
-					<hkparam name="name">hkbProjectData</hkparam>
-					<hkparam name="className">hkbProjectData</hkparam>
-					<hkparam name="variant">#0010</hkparam>
-				</hkobject>
-			</hkparam>
-		</hkobject>
-"###;
+        <hkobject name="#0122" class="hkaSkeleton" signature="0x366e8220">
+            <hkparam name="name">NPC Root [Root]</hkparam>
+            <hkparam name="parentIndices" numelements="0" />
+            <hkparam name="bones" numelements="52">
+                <hkobject>
+                    <hkparam name="name">NPC Root [Root]</hkparam>
+                    <hkparam name="lockTranslation">false</hkparam>
+                </hkobject>
+            </hkparam>
+        </hkobject>
+    "###;
+
+        assert_eq!(
+            from_str::<hkaSkeleton>(xml),
+            Ok(hkaSkeleton {
+                __ptr: Some(Pointer::new(122)),
+                parent: hkReferencedObject {
+                    __ptr: None,
+                    parent: hkBaseObject { __ptr: None },
+                    m_memSizeAndFlags: 0,
+                    m_referenceCount: 0,
+                },
+                m_name: StringPtr::from_str("NPC Root [Root]"),
+                m_parentIndices: vec![],
+                m_bones: vec![hkaBone {
+                    __ptr: None,
+                    m_name: StringPtr::from_str("NPC Root [Root]"),
+                    m_lockTranslation: false,
+                }],
+                m_referencePose: vec![],
+                m_referenceFloats: vec![],
+                m_floatSlots: vec![],
+                m_localFrames: vec![],
+            }),
+        );
+    }
+
+    #[test]
+    fn test_hk_root_level_container_valid() {
+        use havok_classes::{hkRootLevelContainer, hkRootLevelContainerNamedVariant};
+
+        let xml = r###"
+        <hkobject name="#0008" class="hkRootLevelContainer" signature="0x2772c11e">
+            <hkparam name="namedVariants" numelements="1">
+                <hkobject>
+                    <hkparam name="name">hkbProjectData</hkparam>
+                    <hkparam name="className">hkbProjectData</hkparam>
+                    <hkparam name="variant">#0010</hkparam>
+                </hkobject>
+            </hkparam>
+        </hkobject>
+    "###;
+
         assert_eq!(
             from_str::<hkRootLevelContainer>(xml),
             Ok(hkRootLevelContainer {
