@@ -60,6 +60,9 @@ jobs:
               features: extra_fmt,
             }
     runs-on: ${{ matrix.job.os }}
+    permissions:
+      contents: read
+
     steps:
       - uses: actions/checkout@v4.2.2
 
