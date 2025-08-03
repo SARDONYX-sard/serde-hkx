@@ -36,8 +36,8 @@ fn embed_resources() -> Result<(), svg_to_ico::Error> {
     let manifest_dir = env!("CARGO_MANIFEST_DIR");
     let svg_path = format!("{manifest_dir}/assets/icon.svg");
     let ico_path = format!("{manifest_dir}/assets/icon.ico");
-    let svg_dpi = 96.0; // default: 96.0
-    svg_to_ico::svg_to_ico(Path::new(&svg_path), svg_dpi, Path::new(&ico_path), &[16])?;
+    let svg_dpi = 192.0; // default: 96.0
+    svg_to_ico::svg_to_ico(Path::new(&svg_path), svg_dpi, Path::new(&ico_path), &[32])?;
 
     res.set("ProductName", env!("CARGO_PKG_NAME"))
         .set("FileDescription", env!("CARGO_PKG_DESCRIPTION"))
