@@ -1,24 +1,47 @@
 # Havok Behavior Serialization/Deserialization Library
 
-<div>
-    <a href="https://serde-hkx-api.netlify.app/serde_hkx_features">
-        <img src="https://api.netlify.com/api/v1/badges/5f3f47f7-b22b-4d0d-b914-dd697b444858/deploy-status" alt="API docs">
+<div align="center">
+  <a href="https://github.com/SARDONYX-sard/serde-hkx/releases/latest">
+    <img src="./crates/cli/assets/icon.svg" alt="serde hkx logo" width="150" height="150" />
+  </a>
+
+  <!-- Release & Build Badges -->
+  <p>
+    <a href="https://github.com/SARDONYX-sard/serde-hkx/releases">
+      <img src="https://img.shields.io/github/downloads/SARDONYX-sard/serde-hkx/total?style=flat-square" alt="Total Downloads">
     </a>
     <a href="https://github.com/SARDONYX-sard/serde-hkx/actions/workflows/release-cli.yaml">
-        <img src="https://github.com/SARDONYX-sard/serde-hkx/actions/workflows/release-cli.yaml/badge.svg" alt="Release(CLI)">
+      <img src="https://github.com/SARDONYX-sard/serde-hkx/actions/workflows/release-cli.yaml/badge.svg?style=flat-square" alt="Release (CLI)">
     </a>
     <a href="https://github.com/SARDONYX-sard/serde-hkx/actions/workflows/build-cli.yaml">
-        <img src="https://github.com/SARDONYX-sard/serde-hkx/actions/workflows/build-cli.yaml/badge.svg" alt="Build(CLI)">
+      <img src="https://github.com/SARDONYX-sard/serde-hkx/actions/workflows/build-cli.yaml/badge.svg?style=flat-square" alt="Build (CLI)">
     </a>
     <a href="https://github.com/SARDONYX-sard/serde-hkx/actions/workflows/test.yaml">
-        <img src="https://github.com/SARDONYX-sard/serde-hkx/actions/workflows/test.yaml/badge.svg" alt="Test(Cargo)">
+      <img src="https://github.com/SARDONYX-sard/serde-hkx/actions/workflows/test.yaml/badge.svg?style=flat-square" alt="Test (Cargo)">
+    </a>
+    <a href="https://serde-hkx-api.netlify.app/serde_hkx_features">
+      <img src="https://api.netlify.com/api/v1/badges/5f3f47f7-b22b-4d0d-b914-dd697b444858/deploy-status" alt="API Docs">
+    </a>
+  </p>
+
+  <!-- License & Meta Badges -->
+  <p>
+    <a href="https://github.com/SARDONYX-sard/serde-hkx/issues">
+      <img src="https://img.shields.io/github/issues/SARDONYX-sard/serde-hkx?style=flat-square" alt="Open Issues">
+    </a>
+    <a href="https://github.com/SARDONYX-sard/serde-hkx/pulls">
+      <img src="https://img.shields.io/github/issues-pr/SARDONYX-sard/serde-hkx?style=flat-square" alt="Open PRs">
+    </a>
+    <a href="https://github.com/SARDONYX-sard/serde-hkx/commits/main">
+      <img src="https://img.shields.io/github/last-commit/SARDONYX-sard/serde-hkx?style=flat-square" alt="Last Commit">
     </a>
     <a href="https://opensource.org/licenses/MIT">
-        <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
+      <img src="https://img.shields.io/badge/License-MIT-yellow.svg?style=flat-square" alt="License: MIT">
     </a>
     <a href="https://opensource.org/licenses/Apache-2.0">
-        <img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg" alt="License">
+      <img src="https://img.shields.io/badge/License-Apache_2.0-blue.svg?style=flat-square" alt="License: Apache 2.0">
     </a>
+  </p>
 </div>
 
 ## Features
