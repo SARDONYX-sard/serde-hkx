@@ -79,6 +79,7 @@ fn generate_icon(svg_path: &str, ico_path: &str) -> Result<(), Box<dyn std::erro
 fn embed_resources(icon_path: &str) -> std::io::Result<()> {
     let mut res = winres::WindowsResource::new();
 
+    #[cfg(unix)]
     {
         res.set_toolkit_path("/usr/x86_64-w64-mingw32/bin");
         res.set_ar_path("ar");
