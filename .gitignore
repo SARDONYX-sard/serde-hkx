@@ -8,3 +8,5 @@
 
 # Tests
 /tests/
+
+/crates/cli/assets/*.ico
