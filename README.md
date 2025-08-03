@@ -40,6 +40,13 @@
 ./hkxc --help
 ```
 
+## Build CLI(For contributor)
+
+```shell
+git clone https://github.com/SARDONYX-sard/serde-hkx.git;
+cd ./serde-hkx && cargo build --release-lto;
+```
+
 ## When used as a library(For developer)
 
 NOTE: Currently there is a stack overflow problem of unknown cause.
