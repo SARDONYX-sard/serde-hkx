@@ -29,7 +29,7 @@ pub enum Error {
     },
 
     /// Relative position cannot be obtained because abs is larger than {position}.
-    /// This indicates that the value of `absolute_data_offset` in the header is wrong.
+    /// This indicates that the value of `absolute_data_offset`({abs_data_offset}) in the header is wrong.
     OverflowSubtractAbs { position: u32, abs_data_offset: u32 },
 
     /// Missing global fixup class: {ptr}
@@ -41,7 +41,6 @@ pub enum Error {
         location: snafu::Location,
     },
 
-    /// The constructor class for virtual_fixup did not exist in the class
     /// The constructor class for virtual_fixup did not exist in the class
     /// in the `__classnames__` section written.: {class_name}
     MissingClassInClassnamesSection {
@@ -80,15 +79,6 @@ pub enum Error {
         /// I/O Error
         source: std::io::Error,
         /// error location
-        #[snafu(implicit)]
-        location: snafu::Location,
-    },
-
-    /// The state machine in behavior is topologically sorted circularly referenced.
-    #[snafu(display(
-        "The state machine in behavior is topologically sorted circularly referenced."
-    ))]
-    UnexpectedCyclicSort {
         #[snafu(implicit)]
         location: snafu::Location,
     },
