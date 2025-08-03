@@ -14,24 +14,24 @@ use havok_types::{
 #[derive(Debug)]
 pub struct XmlSerializer {
     /// XML string
-    output: String,
-    /// Indent type(tab, space)
-    indent: &'static str,
+    pub output: String,
+    /// Indent type(tab: `\t`, space: ` `. default: `\t`)
+    pub indent: &'static str,
     /// Indent time
-    depth: usize,
+    pub depth: usize,
     /// If you want to output XML partially, put [`Option::None`].
     /// # Example XML
     /// ```xml
     /// <?xml version="1.0" encoding="ascii"?>
     /// <hkpackfile classversion="8" contentsversion="hk_2010.2.0-r1" toplevelobject=""
     /// ```
-    start_root: Option<&'static str>,
+    pub start_root: Option<&'static str>,
     /// If you want to output XML partially, put [`Option::None`].
     /// # Example XML
     /// ```xml
     /// </hkpackfile>
     /// ```
-    end_root: Option<&'static str>,
+    pub end_root: Option<&'static str>,
 }
 
 impl Default for XmlSerializer {
