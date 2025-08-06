@@ -207,7 +207,7 @@ impl HkxHeader {
     /// Convert to bytes.
     ///
     /// # Note
-    /// If `self.endian` is 0, the data is converted to binary data as little endian, otherwise as big endian.
+    /// If `self.endian` is 0, the data is converted to binary data as big endian, otherwise as little endian.
     pub fn to_bytes(&self) -> [u8; 64] {
         let mut buffer = [0; 64];
 
