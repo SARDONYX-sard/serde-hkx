@@ -88,8 +88,8 @@ mod svg_to_ico {
             Self {
                 svg_path: svg_path.as_ref(),
                 ico_path: ico_path.as_ref(),
-                svg_dpi: 96.0,                                // default
-                ico_entry_sizes: &[16, 32, 48, 64, 128, 256], // sensible default sizes
+                svg_dpi: 96.0,                    // default
+                ico_entry_sizes: &[32, 128, 256], // sensible default sizes
             }
         }
 
