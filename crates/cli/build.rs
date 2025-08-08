@@ -1,5 +1,4 @@
 use std::env;
-use std::path::Path;
 
 fn main() {
     // only run if target os is windows
@@ -24,6 +23,13 @@ fn main() {
 
 // ref: https://github.com/mxre/winres/blob/master/example/build.rs
 fn embed_resources() -> Result<(), svg_to_ico::Error> {
+    const ICO_PATH: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/assets/icon.ico");
+    // create icon from svg.
+    {
+        const SVG_PATH: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/assets/icon.svg");
+        crate::svg_to_ico::SvgToIcoBuilder::new(SVG_PATH, ICO_PATH).build()?;
+    }
+
     let mut res = winres::WindowsResource::new();
 
     #[cfg(unix)]
@@ -33,18 +39,12 @@ fn embed_resources() -> Result<(), svg_to_ico::Error> {
         res.set_windres_path("/usr/bin/x86_64-w64-mingw32-windres");
     }
 
-    let manifest_dir = env!("CARGO_MANIFEST_DIR");
-    let svg_path = format!("{manifest_dir}/assets/icon.svg");
-    let ico_path = format!("{manifest_dir}/assets/icon.ico");
-    let svg_dpi = 192.0; // default: 96.0
-    svg_to_ico::svg_to_ico(Path::new(&svg_path), svg_dpi, Path::new(&ico_path), &[32])?;
-
     res.set("ProductName", env!("CARGO_PKG_NAME"))
-        .set("FileDescription", env!("CARGO_PKG_DESCRIPTION"))
         .set("CompanyName", env!("CARGO_PKG_AUTHORS"))
+        .set("FileDescription", env!("CARGO_PKG_DESCRIPTION"))
         .set("LegalCopyright", env!("CARGO_PKG_AUTHORS"))
+        .set_icon(ICO_PATH)
         .set_language(0x0409)
-        .set_icon(&ico_path)
         .set_manifest_file("assets/manifest.xml");
 
     res.compile()?;
@@ -64,31 +64,60 @@ mod svg_to_ico {
     use tiny_skia::Pixmap;
     use usvg::Tree;
 
-    /// Error returned when creating an ICO file from an SVG file fails.
-    #[derive(Debug)]
-    #[allow(clippy::enum_variant_names)]
-    pub enum Error {
-        /// An I/O error occurred, e.g. the input file doesn't exist.
-        IoError(std::io::Error),
-        /// Something went wrong when parsing the SVG file.
-        ParseError,
-        /// Something went wrong when rasterizing the SVG file.
-        RasterizeError,
+    /// Builder for creating an ICO file from an SVG file.
+    pub struct SvgToIcoBuilder<'a> {
+        svg_path: &'a Path,
+        svg_dpi: f32,
+        ico_path: &'a Path,
+        ico_entry_sizes: &'a [u16],
     }
 
-    impl From<std::io::Error> for Error {
-        fn from(error: std::io::Error) -> Self {
-            Self::IoError(error)
-        }
-    }
-
-    impl std::fmt::Display for Error {
-        fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
-            match *self {
-                Self::IoError(ref e) => e.fmt(f),
-                Self::ParseError => write!(f, "An unknown SVG parsing error"),
-                Self::RasterizeError => write!(f, "Failed to rasterize SVG"),
+    impl<'a> SvgToIcoBuilder<'a> {
+        /// Starts building an ICO file from the given SVG input path and output ICO path.
+        ///
+        /// # Defaults
+        /// - `svg_dpi`: Defaults to `96.0`, which corresponds to the standard screen DPI.
+        /// - `ico_entry_sizes`: Defaults to `[16, 32, 48, 64, 128, 256]`, representing multiple icon sizes
+        ///   included in the ICO file to ensure sharp and well-scaled icons on different display resolutions,
+        ///   from small icons to high-DPI screens.
+        pub fn new<I, O>(svg_path: &'a I, ico_path: &'a O) -> Self
+        where
+            I: AsRef<Path> + ?Sized,
+            O: AsRef<Path> + ?Sized,
+        {
+            Self {
+                svg_path: svg_path.as_ref(),
+                ico_path: ico_path.as_ref(),
+                svg_dpi: 96.0,                                // default
+                ico_entry_sizes: &[16, 32, 48, 64, 128, 256], // sensible default sizes
             }
+        }
+
+        /// Set the DPI to use when rasterizing the SVG.
+        #[allow(unused)]
+        pub const fn dpi(mut self, dpi: f32) -> Self {
+            self.svg_dpi = dpi;
+            self
+        }
+
+        /// Set the icon sizes (in pixels) to include in the ICO file.
+        #[allow(unused)]
+        pub fn sizes<I>(mut self, sizes: &'a I) -> Self
+        where
+            I: AsRef<[u16]>,
+        {
+            self.ico_entry_sizes = sizes.as_ref();
+            self
+        }
+
+        /// Run the builder to create the ICO file.
+        pub fn build(self) -> Result<(), Error> {
+            svg_to_ico(
+                self.svg_path,
+                self.svg_dpi,
+                self.ico_path,
+                self.ico_entry_sizes,
+            )
         }
     }
 
@@ -98,7 +127,26 @@ mod svg_to_ico {
     /// entry sizes are the heights in pixels of the images to store inside the ICO file: the SVG image
     /// will be scaled to produce images of the specified sizes. If the ICO
     /// file's parent directory does not exist, it will be created.
-    pub(crate) fn svg_to_ico(
+    pub fn svg_to_ico<I, O>(
+        svg_path: I,
+        svg_dpi: f32,
+        ico_path: O,
+        ico_entry_sizes: &[u16],
+    ) -> Result<(), Error>
+    where
+        I: AsRef<Path>,
+        O: AsRef<Path>,
+    {
+        _svg_to_ico(
+            svg_path.as_ref(),
+            svg_dpi,
+            ico_path.as_ref(),
+            ico_entry_sizes,
+        )
+    }
+
+    /// Separated inner functions to suppress bloating caused by generics
+    fn _svg_to_ico(
         svg_path: &Path,
         svg_dpi: f32,
         ico_path: &Path,
@@ -159,58 +207,40 @@ mod svg_to_ico {
         icon_dir.write(file)
     }
 
-    #[cfg(test)]
-    mod tests {
-        use super::*;
+    /// Error returned when creating an ICO file from an SVG file fails.
+    #[derive(Debug)]
+    #[allow(clippy::enum_variant_names)]
+    pub enum Error {
+        /// An I/O error occurred, e.g. the input file doesn't exist.
+        IoError(std::io::Error),
+        /// Something went wrong when parsing the SVG file.
+        ParseError,
+        /// Something went wrong when rasterizing the SVG file.
+        RasterizeError,
+    }
 
-        fn load_svg(path: &Path) -> Tree {
-            let svg_dpi = 96.0;
-
-            let opt = usvg::Options::<'_> {
-                dpi: svg_dpi,
-                ..Default::default()
-            };
-
-            let file_content = read(path).unwrap();
-            Tree::from_data(&file_content, &opt).unwrap()
+    impl From<std::io::Error> for Error {
+        fn from(error: std::io::Error) -> Self {
+            Self::IoError(error)
         }
+    }
 
-        #[test]
-        fn rasterize_should_scale_svg_to_given_height() {
-            let svg_path = Path::new("examples/example.svg");
-            let svg = load_svg(svg_path);
-
-            assert_eq!(24.0, svg.size().height());
-            assert_eq!(24.0, svg.size().width());
-
-            let image = rasterize(&svg, 400).unwrap();
-            assert_eq!(400, image.height());
-            assert_eq!(400, image.width());
+    impl std::fmt::Display for Error {
+        fn fmt(&self, f: &mut std::fmt::Formatter) -> std::fmt::Result {
+            match *self {
+                Self::IoError(ref e) => e.fmt(f),
+                Self::ParseError => write!(f, "An unknown SVG parsing error"),
+                Self::RasterizeError => write!(f, "Failed to rasterize SVG"),
+            }
         }
+    }
 
-        #[test]
-        fn rasterize_should_set_pixel_colour_correctly() {
-            let svg_path = Path::new("examples/example.svg");
-            let svg = load_svg(svg_path);
-
-            let image = rasterize(&svg, 24).unwrap();
-            let pixel_index = 24 * 6 + 12;
-            let pixel = &image.take()[pixel_index * 4..(pixel_index + 1) * 4];
-
-            assert_eq!(&[50, 100, 150, 255], pixel);
-        }
-
-        #[test]
-        fn rasterize_should_scale_svg_with_width_longer_than_height() {
-            let svg_path = Path::new("examples/landscape.svg");
-            let svg = load_svg(svg_path);
-
-            assert_eq!(24.0, svg.size().height());
-            assert_eq!(48.0, svg.size().width());
-
-            let image = rasterize(&svg, 400).unwrap();
-            assert_eq!(200, image.height());
-            assert_eq!(400, image.width());
+    impl std::error::Error for Error {
+        fn source(&self) -> Option<&(dyn std::error::Error + 'static)> {
+            match self {
+                Self::IoError(e) => Some(e),
+                _ => None,
+            }
         }
     }
 }
