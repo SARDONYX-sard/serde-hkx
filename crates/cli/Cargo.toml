@@ -27,7 +27,7 @@ tokio = { workspace = true, features = [
   "rt-multi-thread",
 ] }
 tracing = { workspace = true }
-tracing-subscriber = "0.3.18"
+tracing-subscriber = "0.3.20"
 
 # workspace members
 serde_hkx_features = { workspace = true, features = ["clap", "tracing"] }
