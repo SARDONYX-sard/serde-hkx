@@ -29,7 +29,7 @@ where
         OutFormat::Toml => basic_toml::to_string(&classes).with_context(|_| TomlSnafu {
             input: input.to_path_buf(),
         })?,
-        OutFormat::Yaml => serde_noway::to_string(&classes).with_context(|_| YamlSnafu {
+        OutFormat::Yaml => serde_norway::to_string(&classes).with_context(|_| YamlSnafu {
             input: input.to_path_buf(),
         })?,
         _ => unreachable!(),

@@ -31,66 +31,65 @@ where
     let input_ext = input.extension();
 
     // Deserialize
-    let classes = if let Some(input_ext) = input_ext {
-        let input_fmt =
-            OutFormat::from_extension(input_ext).map_err(|_| Error::UnsupportedExtensionPath {
-                path: input.to_path_buf(),
+    let classes =
+        if let Some(input_ext) = input_ext {
+            let input_fmt = OutFormat::from_extension(input_ext).map_err(|_| {
+                Error::UnsupportedExtensionPath {
+                    path: input.to_path_buf(),
+                }
             })?;
 
-        match input_fmt {
-            OutFormat::Amd64 | OutFormat::Win32 => {
-                serde_hkx::from_bytes(bytes).context(DeSnafu {
-                    input: input.to_path_buf(),
-                })?
-            }
-
-            _ => {
-                let mut decoder = encoding_rs_io::DecodeReaderBytes::new(bytes.as_slice());
-                decoder
-                    .read_to_string(&mut *string)
-                    .context(FailedReadFileSnafu {
-                        path: input.to_path_buf(),
-                    })?;
-
-                match input_fmt {
-                    OutFormat::Xml => serde_hkx::from_str(&*string).context(DeSnafu {
+            match input_fmt {
+                OutFormat::Amd64 | OutFormat::Win32 => {
+                    serde_hkx::from_bytes(bytes).context(DeSnafu {
                         input: input.to_path_buf(),
-                    })?,
-                    OutFormat::Json => {
-                        let classes =
-                            simd_json::from_slice::<ClassPtrMap>(unsafe { string.as_bytes_mut() })
-                                .with_context(|_| JsonSnafu {
+                    })?
+                }
+
+                _ => {
+                    let mut decoder = encoding_rs_io::DecodeReaderBytes::new(bytes.as_slice());
+                    decoder
+                        .read_to_string(&mut *string)
+                        .context(FailedReadFileSnafu {
+                            path: input.to_path_buf(),
+                        })?;
+
+                    match input_fmt {
+                        OutFormat::Xml => serde_hkx::from_str(&*string).context(DeSnafu {
+                            input: input.to_path_buf(),
+                        })?,
+                        OutFormat::Json => {
+                            let classes = simd_json::from_slice::<ClassPtrMap>(unsafe {
+                                string.as_bytes_mut()
+                            })
+                            .with_context(|_| JsonSnafu {
+                                input: input.to_path_buf(),
+                            })?;
+                            classes.into_class_map()
+                        }
+                        OutFormat::Toml => {
+                            let classes = basic_toml::from_str::<ClassPtrMap>(string)
+                                .with_context(|_| TomlSnafu {
                                     input: input.to_path_buf(),
                                 })?;
-                        classes.into_class_map()
-                    }
-                    OutFormat::Toml => {
-                        let classes =
-                            basic_toml::from_str::<ClassPtrMap>(string).with_context(|_| {
-                                TomlSnafu {
+                            classes.into_class_map()
+                        }
+                        OutFormat::Yaml => {
+                            let classes = serde_norway::from_str::<ClassPtrMap>(string)
+                                .with_context(|_| YamlSnafu {
                                     input: input.to_path_buf(),
-                                }
-                            })?;
-                        classes.into_class_map()
+                                })?;
+                            classes.into_class_map()
+                        }
+                        _ => unreachable!(),
                     }
-                    OutFormat::Yaml => {
-                        let classes =
-                            serde_noway::from_str::<ClassPtrMap>(string).with_context(|_| {
-                                YamlSnafu {
-                                    input: input.to_path_buf(),
-                                }
-                            })?;
-                        classes.into_class_map()
-                    }
-                    _ => unreachable!(),
                 }
             }
-        }
-    } else {
-        return Err(Error::MissingExtension {
-            path: input.to_path_buf(),
-        });
-    };
+        } else {
+            return Err(Error::MissingExtension {
+                path: input.to_path_buf(),
+            });
+        };
 
     Ok(classes)
 }
