@@ -33,7 +33,7 @@ pub enum ExtraSerdeError {
     #[snafu(display("{}:\n {source}", input.display()))]
     YamlError {
         input: PathBuf,
-        source: serde_yml::Error,
+        source: serde_noway::Error,
         #[snafu(implicit)]
         location: Location,
     },

@@ -11,17 +11,17 @@ const BIN_FORMAT: u128 = BASE_FORMAT
     .radix(2)
     .base_prefix(NonZeroU8::new(b'b'))
     .base_prefix(NonZeroU8::new(b'B'))
-    .build();
+    .build_strict();
 const OCTAL_FORMAT: u128 = BASE_FORMAT
     .radix(8)
     .base_prefix(NonZeroU8::new(b'o'))
     .base_prefix(NonZeroU8::new(b'O'))
-    .build();
+    .build_strict();
 const HEX_FORMAT: u128 = BASE_FORMAT
     .radix(16)
     .base_prefix(NonZeroU8::new(b'x'))
     .base_prefix(NonZeroU8::new(b'X'))
-    .build();
+    .build_strict();
 
 /// # Errors
 #[inline]

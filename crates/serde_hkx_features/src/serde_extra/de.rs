@@ -75,7 +75,7 @@ where
                     }
                     OutFormat::Yaml => {
                         let classes =
-                            serde_yml::from_str::<ClassPtrMap>(string).with_context(|_| {
+                            serde_noway::from_str::<ClassPtrMap>(string).with_context(|_| {
                                 YamlSnafu {
                                     input: input.to_path_buf(),
                                 }
