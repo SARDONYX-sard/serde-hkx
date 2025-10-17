@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["BUFFER_SIZE"],"enum":["Error"],"macro":["from_lexical","from_lexical_with_options","to_lexical","to_lexical_with_options"],"mod":["algorithm","ascii","digit","div128","extended_float","format","iterator","mul","num","options","result","step"],"trait":["FormattedSize"]};

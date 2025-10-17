@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"attr":["impl_flags_methods"]};

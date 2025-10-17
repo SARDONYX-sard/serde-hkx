@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["RotationQuantization","ScalarQuantization"],"struct":["hkaSplineCompressedAnimationTrackCompressionParams"]};
