@@ -85,6 +85,7 @@ future_not_send = "allow"
 multiple_crate_versions = "allow"
 pub_with_shorthand = "allow"
 redundant_pub_crate = "allow"
+result_large_err = "allow"
 
 # custom deny list
 char_lit_as_u8 = "deny"

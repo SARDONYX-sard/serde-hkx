@@ -30,7 +30,7 @@ tracing = { workspace = true, optional = true }
 basic-toml = { version = "0.1.9", optional = true }
 schemars = { workspace = true, features = ["indexmap2"], optional = true }
 serde = { workspace = true, optional = true }
-serde_yml = { version = "0.0.12", optional = true }
+serde_norway = { version = "0.9", optional = true }
 simd-json = { version = "0.14.3", optional = true }
 
 # workspace members
@@ -57,7 +57,7 @@ extra_fmt = [
   "dep:basic-toml",
   "dep:havok_types",
   "dep:serde",
-  "dep:serde_yml",
+  "dep:serde_norway",
   "dep:simd-json",
   "havok_classes/serde",
   "indexmap/serde",
