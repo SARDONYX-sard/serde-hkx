@@ -9,12 +9,13 @@ use self::trait_impls::{Align as _, ClassNamesWriter, ClassStartsMap};
 use super::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
 use crate::errors::ser::{
     Error, InvalidEndianSnafu, MissingClassInClassnamesSectionSnafu, MissingGlobalFixupClassSnafu,
-    Result, UnsupportedPtrSizeSnafu,
+    NotFoundPointedPositionSnafu, Result, UnsupportedPtrSizeSnafu,
 };
 use byteorder::{BigEndian, ByteOrder, LittleEndian, WriteBytesExt as _};
 use havok_serde::ser::{Serialize, Serializer};
 use havok_types::*;
 use indexmap::IndexMap;
+use snafu::OptionExt;
 use std::borrow::Cow;
 use std::collections::HashMap;
 use std::ffi::CString as StdCString;
@@ -88,7 +89,6 @@ where
 
     // - `__data__` section
     serializer.abs_data_offset = header.padding_size() + serializer.output.position() as u32;
-    serializer.current_last_local_dst = serializer.abs_data_offset as u64;
     value.serialize(&mut serializer)?;
 
     // 4/5: Write fixups_offsets of `__data__` section header.
@@ -164,8 +164,6 @@ pub struct ByteSerializer {
     /// where the Nth element means N hierarchically nested.
     /// - Example: `u32` <- `ClassB.b: u32` <- `ClassA.a: Array<ClassB>` <- `Array<ClassA>`
     pointed_pos: Vec<u64>,
-    /// each Root class ptr pointed data position.
-    current_last_local_dst: u64,
     /// Coordination information to associate a pointer of a pointer type of a field in a class with the data location to which it points.
     ///
     /// # Note
@@ -348,17 +346,41 @@ impl ByteSerializer {
         Ok(())
     }
 
-    /// The data position pointed to by ptr.
-    /// And return destination position.
+    /// Go to relative The data position pointed to by ptr.
+    ///
+    /// Returns
+    /// (
+    ///  The last write position for the pointer type,
+    ///  `__data__` section relative offset) destination position,
+    /// )
+    ///
+    /// # Note
+    /// Always align to 16 bytes when writing to the array.
+    /// Note: If a Struct within hkArray<Struct> contains a StringPtr, it does not necessarily align to 16 bytes.
     #[inline]
-    fn goto_local_dst(&mut self) -> Result<u32> {
-        let &dest_abs_pos = tri!(
+    fn goto_latest_local_dst(&mut self, need_align16: bool) -> Result<(u64, u32)> {
+        let dest_abs_pos = tri!(
             self.pointed_pos
                 .last()
-                .ok_or(Error::NotFoundPointedPosition)
+                .copied()
+                .context(NotFoundPointedPositionSnafu)
         );
+        let dest_abs_pos = if need_align16 {
+            align!(dest_abs_pos, 16_u64)
+        } else {
+            dest_abs_pos
+        };
         self.output.set_position(dest_abs_pos);
-        self.relative_position()
+        let local_dst = tri!(self.relative_position());
+        Ok((dest_abs_pos, local_dst))
+    }
+
+    fn update_last_local_dst(&mut self, new_pos: u64) -> Result<()> {
+        self.pointed_pos
+            .last_mut()
+            .map(|last| *last = new_pos)
+            .context(NotFoundPointedPositionSnafu)?; // Update to serialize the next pointed data.
+        Ok(())
     }
 
     /// Write a pair of local_fixups.
@@ -389,35 +411,32 @@ impl ByteSerializer {
 
         // Skip if `Option::None`(null pointer).
         if let Some(v) = v {
-            let ptr_start = self.relative_position()?;
+            let rel_ptr_start = self.relative_position()?;
             tri!(self.serialize_ulong(Ulong::new(0))); // ptr size
-            let next_ser_pos = self.output.position();
 
+            let abs_next_ser_pos = self.output.position();
             #[cfg(feature = "tracing")]
-            tracing::trace!("Serialize `CString`/`StringPtr` ({next_ser_pos:#x}): (\"{v}\")",);
+            tracing::trace!("Serialize `CString`/`StringPtr` ({abs_next_ser_pos:#x}): (\"{v}\")",);
 
-            // local dst
-            let pointed_pos = tri!(self.goto_local_dst());
-            tri!(self.write_local_fixup_pair(ptr_start, pointed_pos));
+            // local dst location -----------------------------------------------------
+            {
+                let (_, local_dst) = tri!(self.goto_latest_local_dst(false));
+                tri!(self.write_local_fixup_pair(rel_ptr_start, local_dst));
+            }
 
             let c_string = StdCString::new(v.as_bytes())?;
             let _ = self.output.write(c_string.as_bytes_with_nul())?;
-            if self.is_in_str_array {
-                self.output.zero_fill_align(2)?;
-            } else {
-                self.output.zero_fill_align(16)?;
-            }
+            self.output
+                .zero_fill_align(if self.is_in_str_array { 2 } else { 16 })?;
 
-            let next_pointed_ser_pos = self.output.position();
-            self.current_last_local_dst = next_pointed_ser_pos;
-            if let Some(last) = self.pointed_pos.last_mut() {
-                *last = next_pointed_ser_pos; // Update to serialize the next pointed data.
-            };
+            tri!(self.update_last_local_dst(self.output.position()));
+            // local dst --------------------------------------------------------------
 
-            self.output.set_position(next_ser_pos);
+            self.output.set_position(abs_next_ser_pos); // go back to C++ field serialization position.
         } else {
-            tri!(self.serialize_ulong(Ulong::new(0))); // ptr size
-        };
+            tri!(self.serialize_ulong(Ulong::new(0))); // null ptr, just write ptr size
+        }
+
         Ok(())
     }
 }
@@ -541,8 +560,6 @@ impl<'a> Serializer for &'a mut ByteSerializer {
         class_meta: Option<(Pointer, Signature)>,
         sizes: (u64, u64),
     ) -> Result<Self::SerializeStruct, Self::Error> {
-        let size = if self.is_x86 { sizes.0 } else { sizes.1 };
-
         #[allow(clippy::needless_else)]
         let is_root = if let Some((ptr, _sig)) = class_meta {
             self.output.zero_fill_align(16)?; // Make sure `virtual_fixup.src`(each Class) is `align16`.
@@ -552,20 +569,19 @@ impl<'a> Serializer for &'a mut ByteSerializer {
             tracing::debug!(
                 "serialize struct {name}(index = {ptr}, signature = {_sig}, abs_position = {virtual_fixup_abs:#x})"
             );
+            {
+                let virtual_src = self.relative_position()?;
+                self.write_virtual_fixups_pair(name, virtual_src)?; // Ok, `virtual_fixup` is known.
+                self.virtual_fixups_ptr_src.insert(ptr, virtual_src); // Backup to write `global_fixups`
+            }
 
-            let virtual_src = self.relative_position()?;
-            self.write_virtual_fixups_pair(name, virtual_src)?; // Ok, `virtual_fixup` is known.
-            self.virtual_fixups_ptr_src.insert(ptr, virtual_src); // Backup to write `global_fixups`
-
-            // The data pointed to by the pointer (`T* m_data`) must first be aligned 16 bytes before it is written.
-            let last_local_dst = align!(virtual_fixup_abs + size, 16_u64);
-            self.current_last_local_dst = last_local_dst;
-            self.pointed_pos.push(last_local_dst);
+            // The data pointed to by the pointer member(hkCString/hkStringPtr/`hkArray<T>`)
+            // must first be aligned 16 bytes before it is written.
+            let size = if self.is_x86 { sizes.0 } else { sizes.1 };
+            let abs_latest_local_dst = align!(virtual_fixup_abs + size, 16_u64);
+            self.pointed_pos.push(abs_latest_local_dst);
             true
         } else {
-            // if let Some(last) = self.pointed_pos.last_mut() {
-            //     *last = self.output.position() + size;
-            // }
             #[cfg(feature = "tracing")]
             tracing::debug!("serialize struct {name}(A class within a field.)");
             false
