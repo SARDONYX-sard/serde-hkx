@@ -108,8 +108,8 @@ impl<'a> StructSerializer<'a> {
         V: AsRef<[T]> + Serialize,
         T: Serialize,
     {
-        // NOTE: In C++, structs within arrays reside on the stack, not the heap. Unlike hkArray,
-        //       they are allocated in place because their size affects the allocation.
+        // Note: In C++, structs within arrays are placed inline within their owning class, unlike hkArray.
+        //       Since the size of the struct affects allocation, they are allocated in place.
         if matches!(size, TypeSize::NonPtr | TypeSize::Struct { .. }) {
             tri!(array.serialize(&mut *self.ser)); // serialize [T; N] all.
             return Ok(());
