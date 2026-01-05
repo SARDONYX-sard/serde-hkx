@@ -54,7 +54,8 @@ impl From<serde_hkx_features::error::Error> for SerdeHkxError {
     fn from(e: serde_hkx_features::error::Error) -> Self {
         use serde_hkx_features::error::Error::*;
 
-        #[allow(clippy::match_wildcard_for_single_variants)]
+        // NOTE: Using a single crate doesn't cause errors, but for some reason it does when linting the entire workspace, so I use `_`.
+        #[allow(unused, clippy::match_wildcard_for_single_variants)]
         match e {
             // ----------------------------
             // Argument / format
