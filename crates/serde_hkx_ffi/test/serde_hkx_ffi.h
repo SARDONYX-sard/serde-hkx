@@ -1,6 +1,23 @@
 // SPDX-FileCopyrightText: (C) 2025 SARDONYX
 // SPDX-License-Identifier: Apache-2.0 OR MIT
 
+#ifndef SERDE_HKX_FFI_H
+#define SERDE_HKX_FFI_H
+
+// NOTE: Even with the crt flag enabled, the library is not included for some
+// reason, so include it manually.
+// TODO: MacOS, Linux
+#ifdef _MSC_VER
+#pragma comment(lib, "ntdll.lib")
+#pragma comment(lib, "ws2_32.lib")
+#pragma comment(lib, "userenv.lib")
+#endif
+
+// NOTE: Compiling in C++ assumes name mangling, which causes symbol errors.
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /**
  * Error codes returned by serde_hkx FFI APIs.
  *
@@ -126,3 +143,9 @@ typedef enum OutputFormat {
 SerdeHkxError serde_hkx_ffi_convert(const char *input_path,
                                     const char *output_path,
                                     OutputFormat format);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // SERDE_HKX_FFI_H
