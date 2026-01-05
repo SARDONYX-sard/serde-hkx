@@ -1,0 +1,5 @@
+[build]
+# ref: https://doc.rust-lang.org/rustc/codegen-options/index.html#target-feature
+# crt-static: Combines C runtime libraries, eliminating the need for separate installation, which we found to be cost-effective since it only adds 300KB.
+# Dynamically linked to glibc for linux-gnu and VC++ for windows-msvc.
+rustflags = ["-C", "target-feature=+crt-static"]

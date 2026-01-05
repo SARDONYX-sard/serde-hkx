@@ -75,8 +75,7 @@ cd ./serde-hkx && cargo build --release-lto;
 NOTE: Currently there is a stack overflow problem of unknown cause.
 This occurs with debug build (`cargo build`) but not with release (`cargo build --release`).
 
-- Convenience wrapper API(For CLI/GUI):
-  [Examples](./crates/cli/src/args/mod.rs)/[API docs](https://serde-hkx-api.netlify.app/serde_hkx_features/)
+- Convenience wrapper API(For CLI/GUI): [Examples](./crates/cli/src/args/mod.rs)/[API docs](https://serde-hkx-api.netlify.app/serde_hkx_features/)
 
 ```toml
 # in Cargo.toml
@@ -102,14 +101,23 @@ async fn main() -> Result<()> {
 }
 ```
 
-- Low level API:
-  [Tests](./serde_hkx/src/tests/verify.rs)/[API docs](https://serde-hkx-api.netlify.app/serde_hkx/)
+- Low level API: [Tests](./serde_hkx/src/tests/verify.rs)/[API docs](https://serde-hkx-api.netlify.app/serde_hkx/)
 
 ```toml
 # in Cargo.toml
 havok_classes = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.7.0" }
 serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.7.0" }
 ```
+
+- When using C or other languages (FFI)
+
+  1.First build serde_hkx_ffi.
+
+  ```shell
+  cargo build -p serde_hkx_ffi --release # output: <repo root>/target/release/serde_hkx_ffi.lib
+  ```
+
+  2.See [C Example](./crates/serde_hkx_ffi/test/main.c)
 
 ## Documentation
 
