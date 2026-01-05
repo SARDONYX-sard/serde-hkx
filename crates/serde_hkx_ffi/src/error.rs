@@ -54,6 +54,7 @@ impl From<serde_hkx_features::error::Error> for SerdeHkxError {
     fn from(e: serde_hkx_features::error::Error) -> Self {
         use serde_hkx_features::error::Error::*;
 
+        #[allow(clippy::match_wildcard_for_single_variants)]
         match e {
             // ----------------------------
             // Argument / format
@@ -95,9 +96,8 @@ impl From<serde_hkx_features::error::Error> for SerdeHkxError {
 
             // #[cfg(feature = "json_schema")]
             // JsonError { .. } => Self::ExternalError,
-
-            // #[cfg(feature = "tracing")]
-            // TracingError { .. } => Self::InternalError,
+            // TracingError { .. } => Self::ExternalError,
+            _ => Self::ExternalError,
         }
     }
 }
