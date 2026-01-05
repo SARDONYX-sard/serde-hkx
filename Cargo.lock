@@ -1578,6 +1578,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "serde_hkx_ffi"
+version = "0.7.2"
+dependencies = [
+ "serde_hkx_features",
+]
+
+[[package]]
 name = "serde_json"
 version = "1.0.145"
 source = "registry+https://github.com/rust-lang/crates.io-index"

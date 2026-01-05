@@ -1,0 +1,4 @@
+./out/
+*.obj
+*.lib
+*.exe

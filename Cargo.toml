@@ -14,13 +14,14 @@ version = "0.7.2"
 members = [
   "crates/class_generator",
   "crates/cli",
-  "crates/serde_hkx_features",
   "crates/havok_classes",
   "crates/havok_serde",
   "crates/havok_types",
   "crates/havok_types_derive",
   "crates/havok_types_derive/src/proc_macros",
   "crates/inheritance_tree_gen",
+  "crates/serde_hkx_features",
+  "crates/serde_hkx_ffi",
   "serde_hkx",
 ]
 default-members = ["crates/cli"]

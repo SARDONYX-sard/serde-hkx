@@ -1,0 +1,23 @@
+[package]
+name = "serde_hkx_ffi"
+authors.workspace = true
+categories.workspace = true
+description.workspace = true
+edition.workspace = true
+keywords.workspace = true
+license.workspace = true
+readme.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[lib]
+name = "serde_hkx_ffi"
+crate-type = ["staticlib"]
+
+[dependencies]
+# workspace members
+serde_hkx_features = { workspace = true }
+
+[lints]
+workspace = true
