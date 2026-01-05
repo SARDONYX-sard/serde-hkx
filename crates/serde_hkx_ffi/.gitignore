@@ -1,4 +1,6 @@
-./out/
+out/
 *.obj
 *.lib
 *.exe
+
+defaultmale.hkx
