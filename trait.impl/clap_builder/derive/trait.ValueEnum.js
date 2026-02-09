@@ -1,0 +1,9 @@
+(function() {
+    var implementors = Object.fromEntries([["clap",[]],["clap_builder",[]],["clap_complete",[["impl <a class=\"trait\" href=\"clap_builder/derive/trait.ValueEnum.html\" title=\"trait clap_builder::derive::ValueEnum\">ValueEnum</a> for <a class=\"enum\" href=\"clap_complete/aot/enum.Shell.html\" title=\"enum clap_complete::aot::Shell\">Shell</a>"]]],["clap_complete_command",[["impl <a class=\"trait\" href=\"clap_builder/derive/trait.ValueEnum.html\" title=\"trait clap_builder::derive::ValueEnum\">ValueEnum</a> for <a class=\"enum\" href=\"clap_complete_command/enum.Shell.html\" title=\"enum clap_complete_command::Shell\">Shell</a>"]]],["hkxc",[["impl <a class=\"trait\" href=\"clap_builder/derive/trait.ValueEnum.html\" title=\"trait clap_builder::derive::ValueEnum\">ValueEnum</a> for <a class=\"enum\" href=\"hkxc/args/convert/enum.Runtime.html\" title=\"enum hkxc::args::convert::Runtime\">Runtime</a>"],["impl <a class=\"trait\" href=\"clap_builder/derive/trait.ValueEnum.html\" title=\"trait clap_builder::derive::ValueEnum\">ValueEnum</a> for <a class=\"enum\" href=\"hkxc/logger/enum.LogLevel.html\" title=\"enum hkxc::logger::LogLevel\">LogLevel</a>"]]],["serde_hkx_features",[["impl <a class=\"trait\" href=\"clap_builder/derive/trait.ValueEnum.html\" title=\"trait clap_builder::derive::ValueEnum\">ValueEnum</a> for <a class=\"enum\" href=\"serde_hkx_features/convert/enum.Format.html\" title=\"enum serde_hkx_features::convert::Format\">Format</a>"]]]]);
+    if (window.register_implementors) {
+        window.register_implementors(implementors);
+    } else {
+        window.pending_implementors = implementors;
+    }
+})()
+//{"start":57,"fragment_lengths":[11,20,276,291,527,302]}

@@ -1,0 +1,163 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Fast lexical string-to-integer conversion routines."><title>lexical_parse_integer - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="lexical_parse_integer" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../static.files/storage-e2aeef58.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Crate lexical_parse_integer</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../lexical_parse_integer/index.html">lexical_<wbr>parse_<wbr>integer</a><span class="version">1.0.6</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#getting-started" title="Getting Started">Getting Started</a></li><li><a href="#optionsformatting-api" title="Options/Formatting API">Options/Formatting API</a></li><li><a href="#features" title="Features">Features</a><ul><li><a href="#format" title="format">format</a></li><li><a href="#power-of-two" title="power-of-two">power-of-two</a></li><li><a href="#radix" title="radix">radix</a></li><li><a href="#compact" title="compact">compact</a></li><li><a href="#std" title="std">std</a></li></ul></li><li><a href="#higher-level-apis" title="Higher-Level APIs">Higher-Level APIs</a></li><li><a href="#version-support" title="Version Support">Version Support</a></li><li><a href="#algorithm" title="Algorithm">Algorithm</a></li><li><a href="#design" title="Design">Design</a></li></ul><h3><a href="#modules">Crate Items</a></h3><ul class="block"><li><a href="#modules" title="Modules">Modules</a></li><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#enums" title="Enums">Enums</a></li><li><a href="#traits" title="Traits">Traits</a></li><li><a href="#types" title="Type Aliases">Type Aliases</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>lexical_<wbr>parse_<wbr>integer</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/lexical_parse_integer/lib.rs.html#1-299">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Fast lexical string-to-integer conversion routines.</p>
+<p>This contains high-performance methods to parse integers from bytes.
+Using <a href="trait.FromLexical.html#tymethod.from_lexical" title="associated function lexical_parse_integer::FromLexical::from_lexical"><code>from_lexical</code></a> is analogous to <a href="https://doc.rust-lang.org/1.93.0/core/str/traits/trait.FromStr.html" title="trait core::str::traits::FromStr"><code>parse</code></a>,
+while enabling parsing from bytes as well as <a href="https://doc.rust-lang.org/1.93.0/std/primitive.str.html" title="primitive str"><code>str</code></a>.</p>
+<h2 id="getting-started"><a class="doc-anchor" href="#getting-started">§</a>Getting Started</h2>
+<p>To parse a number from bytes, use <a href="trait.FromLexical.html#tymethod.from_lexical" title="associated function lexical_parse_integer::FromLexical::from_lexical"><code>from_lexical</code></a>:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_parse_integer::{Error, FromLexical};
+
+<span class="kw">let </span>value = u64::from_lexical(<span class="string">"1234"</span>.as_bytes());
+<span class="macro">assert_eq!</span>(value, <span class="prelude-val">Ok</span>(<span class="number">1234</span>));
+
+<span class="kw">let </span>value = u64::from_lexical(<span class="string">"18446744073709551616"</span>.as_bytes());
+<span class="macro">assert_eq!</span>(value, <span class="prelude-val">Err</span>(Error::Overflow(<span class="number">19</span>)));
+
+<span class="kw">let </span>value = u64::from_lexical(<span class="string">"1234 }, {\"Key\", \"Value\"}}"</span>.as_bytes());
+<span class="macro">assert_eq!</span>(value, <span class="prelude-val">Err</span>(Error::InvalidDigit(<span class="number">4</span>)));</code></pre></div>
+<p>If wishing to incrementally parse a string from bytes, that is, parse as
+many characters until an invalid digit is found, you can use the partial
+parsers. This is useful in parsing data where the type is known, such as
+JSON, but where the end of the number is not yet known.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_parse_integer::{Error, FromLexical};
+
+<span class="kw">let </span>value = u64::from_lexical_partial(<span class="string">"1234 }, {\"Key\", \"Value\"}}"</span>.as_bytes());
+<span class="macro">assert_eq!</span>(value, <span class="prelude-val">Ok</span>((<span class="number">1234</span>, <span class="number">4</span>)));
+
+<span class="kw">let </span>value = u64::from_lexical_partial(<span class="string">"18446744073709551616 }, {\"Key\", \"Value\"}}"</span>.as_bytes());
+<span class="macro">assert_eq!</span>(value, <span class="prelude-val">Err</span>(Error::Overflow(<span class="number">19</span>)));</code></pre></div><h2 id="optionsformatting-api"><a class="doc-anchor" href="#optionsformatting-api">§</a>Options/Formatting API</h2>
+<p>Each integer parser contains extensive formatting control through
+<a href="format/index.html" title="mod lexical_parse_integer::format"><code>format</code></a>, particularly digit <a href="struct.NumberFormat.html#method.digit_separator" title="method lexical_parse_integer::NumberFormat::digit_separator"><code>separator</code></a> support (that is,
+integers such as <code>1_2__3</code>). For options, we have custom formats
+optimized for both <a href="options/constant.SMALL_NUMBERS.html" title="constant lexical_parse_integer::options::SMALL_NUMBERS"><code>small</code></a> and <a href="options/constant.LARGE_NUMBERS.html" title="constant lexical_parse_integer::options::LARGE_NUMBERS"><code>large</code></a> integers.</p>
+<p>To optimize for smaller integers at the expense of performance of larger
+ones, you can use <a href="struct.OptionsBuilder.html#method.no_multi_digit" title="method lexical_parse_integer::OptionsBuilder::no_multi_digit"><code>OptionsBuilder::no_multi_digit</code></a> (defaults to <a href="https://doc.rust-lang.org/1.93.0/std/primitive.bool.html" title="primitive bool"><code>true</code></a>).</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_parse_integer::{options, NumberFormatBuilder, FromLexicalWithOptions};
+
+<span class="kw">const </span>FORMAT: u128 = NumberFormatBuilder::new().build_strict();
+
+<span class="comment">// a bit faster
+</span><span class="kw">let </span>value = u64::from_lexical_with_options::&lt;FORMAT&gt;(<span class="string">b"12"</span>, <span class="kw-2">&amp;</span>options::SMALL_NUMBERS);
+<span class="macro">assert_eq!</span>(value, <span class="prelude-val">Ok</span>(<span class="number">12</span>));
+
+<span class="comment">// a lot slower
+</span><span class="kw">let </span>value = u64::from_lexical_with_options::&lt;FORMAT&gt;(<span class="string">b"18446744073709551615"</span>, <span class="kw-2">&amp;</span>options::SMALL_NUMBERS);
+<span class="macro">assert_eq!</span>(value, <span class="prelude-val">Ok</span>(<span class="number">0xffffffffffffffff</span>));</code></pre></div><h2 id="features"><a class="doc-anchor" href="#features">§</a>Features</h2>
+<ul>
+<li><code>format</code> - Add support for parsing custom integer formats.</li>
+<li><code>power-of-two</code> - Add support for parsing power-of-two integer strings.</li>
+<li><code>radix</code> - Add support for strings of any radix.</li>
+<li><code>compact</code> - Reduce code size at the cost of performance.</li>
+<li><code>std</code> (Default) - Disable to allow use in a <a href="https://docs.rust-embedded.org/book/intro/no-std.html"><code>no_std</code></a> environment.</li>
+</ul>
+<p>A complete description of supported features includes:</p>
+<h5 id="format"><a class="doc-anchor" href="#format">§</a>format</h5>
+<p>Add support custom float formatting specifications. This should be used in
+conjunction with <a href="struct.Options.html" title="struct lexical_parse_integer::Options"><code>Options</code></a> for extensible integer parsing. This allows
+changing the use of digit separators, requiring or not allowing signs, and
+more.</p>
+<h6 id="json"><a class="doc-anchor" href="#json">§</a>JSON</h6>
+<p>For example, in JSON, the following integers are valid or invalid:</p>
+<div class="example-wrap"><pre class="language-text"><code>-1          // valid
++1          // invalid
+1           // valid</code></pre></div>
+<p>All of these are valid in our default format (the format of Rust strings),
+so we must use a custom format to parse JSON strings:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_parse_integer::{format, Error, FromLexicalWithOptions, Options};
+
+<span class="kw">const </span>OPTIONS: Options = Options::new();
+<span class="kw">let </span>value = u64::from_lexical_with_options::&lt;{ format::JSON }&gt;(<span class="string">"1234"</span>.as_bytes(), <span class="kw-2">&amp;</span>OPTIONS);
+<span class="macro">assert_eq!</span>(value, <span class="prelude-val">Ok</span>(<span class="number">1234</span>));
+
+<span class="kw">let </span>value = u64::from_lexical_with_options::&lt;{ format::JSON }&gt;(<span class="string">"+1234"</span>.as_bytes(), <span class="kw-2">&amp;</span>OPTIONS);
+<span class="macro">assert_eq!</span>(value, <span class="prelude-val">Err</span>(Error::InvalidPositiveSign(<span class="number">0</span>)));</code></pre></div><h6 id="custom-format"><a class="doc-anchor" href="#custom-format">§</a>Custom Format</h6>
+<p>An example of building a custom format to with digit separator support is:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_parse_integer::{NumberFormatBuilder, Options, FromLexicalWithOptions};
+
+<span class="kw">const </span>FORMAT: u128 = NumberFormatBuilder::new()
+    <span class="comment">// require that a `+` or `-` preceeds the number
+    </span>.required_mantissa_sign(<span class="bool-val">true</span>)
+    <span class="comment">// allow internal digit separators, that is, a special character between digits
+    </span>.integer_internal_digit_separator(<span class="bool-val">true</span>)
+    <span class="comment">// use `_` as the digit separator
+    </span>.digit_separator(num::NonZeroU8::new(<span class="string">b'_'</span>))
+    <span class="comment">// allow an optional `0d` prefix to the number
+    </span>.base_prefix(num::NonZeroU8::new(<span class="string">b'd'</span>))
+    <span class="comment">// build the number format, panicking on error
+    </span>.build_strict();
+<span class="kw">const </span>OPTIONS: Options = Options::new();
+
+<span class="kw">let </span>value = u64::from_lexical_with_options::&lt;FORMAT&gt;(<span class="string">"+12_3_4"</span>.as_bytes(), <span class="kw-2">&amp;</span>OPTIONS);
+<span class="macro">assert_eq!</span>(value, <span class="prelude-val">Ok</span>(<span class="number">1234</span>));
+
+<span class="kw">let </span>value = u64::from_lexical_with_options::&lt;FORMAT&gt;(<span class="string">"+0d12_3_4"</span>.as_bytes(), <span class="kw-2">&amp;</span>OPTIONS);
+<span class="macro">assert_eq!</span>(value, <span class="prelude-val">Ok</span>(<span class="number">1234</span>));</code></pre></div>
+<p>For a list of all supported fields, see <a href="struct.NumberFormatBuilder.html#parse-integer-fields" title="struct lexical_parse_integer::NumberFormatBuilder">Parse Integer
+Fields</a>.</p>
+<p>Enabling the <a href="index.html#format" title="mod lexical_parse_integer"><code>format</code></a> API significantly increases compile
+times, however, it enables a large amount of customization in how integers
+are parsed.</p>
+<h5 id="power-of-two"><a class="doc-anchor" href="#power-of-two">§</a>power-of-two</h5>
+<p>Enable parsing numbers that are powers of two, that is, <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>,
+and <code>32</code>.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_parse_integer::{FromLexicalWithOptions, NumberFormatBuilder, Options};
+
+<span class="kw">const </span>BINARY: u128 = NumberFormatBuilder::binary();
+<span class="kw">const </span>OPTIONS: Options = Options::new();
+<span class="kw">let </span>value = u64::from_lexical_with_options::&lt;BINARY&gt;(<span class="string">"10011010010"</span>.as_bytes(), <span class="kw-2">&amp;</span>OPTIONS);
+<span class="macro">assert_eq!</span>(value, <span class="prelude-val">Ok</span>(<span class="number">1234</span>));</code></pre></div><h5 id="radix"><a class="doc-anchor" href="#radix">§</a>radix</h5>
+<p>Enable parsing numbers using all radixes from <code>2</code> to <code>36</code>. This requires
+more static storage than <a href="index.html#power-of-two" title="mod lexical_parse_integer"><code>power-of-two</code></a>, and increases
+compile times, but can be quite useful for esoteric programming languages
+which use duodecimal integers.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_parse_integer::{FromLexicalWithOptions, NumberFormatBuilder, Options};
+
+<span class="kw">const </span>BINARY: u128 = NumberFormatBuilder::from_radix(<span class="number">12</span>);
+<span class="kw">const </span>OPTIONS: Options = Options::new();
+<span class="kw">let </span>value = u64::from_lexical_with_options::&lt;BINARY&gt;(<span class="string">"86A"</span>.as_bytes(), <span class="kw-2">&amp;</span>OPTIONS);
+<span class="macro">assert_eq!</span>(value, <span class="prelude-val">Ok</span>(<span class="number">1234</span>));</code></pre></div><h5 id="compact"><a class="doc-anchor" href="#compact">§</a>compact</h5>
+<p>Reduce the generated code size at the cost of performance. This minimizes
+the number of static tables, inlining, and generics used, drastically
+reducing the size of the generated binaries. However, this resulting
+performance of the generated code is much lower.</p>
+<h5 id="std"><a class="doc-anchor" href="#std">§</a>std</h5>
+<p>Enable use of the standard library. Currently, the standard library
+is not used, and may be disabled without any change in functionality
+on stable.</p>
+<h2 id="higher-level-apis"><a class="doc-anchor" href="#higher-level-apis">§</a>Higher-Level APIs</h2>
+<p>If you would like an API that supports multiple numeric conversions rather
+than just writing integers, use <a href="https://crates.io/crates/lexical"><code>lexical</code></a> or <a href="https://crates.io/crates/lexical-core"><code>lexical-core</code></a> instead.</p>
+<h2 id="version-support"><a class="doc-anchor" href="#version-support">§</a>Version Support</h2>
+<p>The minimum, standard, required version is <a href="https://blog.rust-lang.org/2022/08/11/Rust-1.63.0.html"><code>1.63.0</code></a>, for
+const generic support. Older versions of lexical support older Rust
+versions.</p>
+<h2 id="algorithm"><a class="doc-anchor" href="#algorithm">§</a>Algorithm</h2>
+<p>The default implementations are highly optimized both for simple
+strings, as well as input with large numbers of digits. In order to
+keep performance optimal for simple strings, we avoid overly branching
+to minimize the number of branches (and therefore optimization checks).
+Most of the branches in the code are resolved at compile-time, and
+the resulting ASM is monitored to ensure there are no regressions. For
+larger strings, a limited number of optimization checks are included
+to try faster, multi-digit parsing algorithms. For 32-bit integers,
+we try to parse 4 digits at a time, and for 64-bit and larger integers,
+we try to parse 8 digits at a time. Attempting both checks leads to
+significant performance penalties for simple strings, so only 1
+optimization is used at at a time.</p>
+<p>In addition, a compact, fallback algorithm uses a naive, simple
+algorithm, parsing only a single digit at a time. This avoid any
+unnecessary branching and produces smaller binaries, but comes
+at a significant performance penalty for integers with more digits.</p>
+<h2 id="design"><a class="doc-anchor" href="#design">§</a>Design</h2>
+<ul>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-parse-integer/docs/Algorithm.md">Algorithm Approach</a></li>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-parse-integer/docs/Benchmarks.md">Benchmarks</a></li>
+<li><a href="https://github.com/Alexhuszagh/lexical-benchmarks">Comprehensive Benchmarks</a></li>
+</ul>
+</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="format/index.html" title="mod lexical_parse_integer::format">format</a></dt><dd>The creation and processing of number format packed structs.</dd><dt><a class="mod" href="options/index.html" title="mod lexical_parse_integer::options">options</a></dt><dd>Configuration options for parsing integers.</dd></dl><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.NumberFormat.html" title="struct lexical_parse_integer::NumberFormat">Number<wbr>Format</a></dt><dd>Helper to access features from the packed format struct.</dd><dt><a class="struct" href="struct.NumberFormatBuilder.html" title="struct lexical_parse_integer::NumberFormatBuilder">Number<wbr>Format<wbr>Builder</a></dt><dd>Validating builder for <a href="struct.NumberFormat.html" title="struct lexical_parse_integer::NumberFormat"><code>NumberFormat</code></a> from the provided specifications.</dd><dt><a class="struct" href="struct.Options.html" title="struct lexical_parse_integer::Options">Options</a></dt><dd>Options to customize the parsing integers.</dd><dt><a class="struct" href="struct.OptionsBuilder.html" title="struct lexical_parse_integer::OptionsBuilder">Options<wbr>Builder</a></dt><dd>Builder for <a href="struct.Options.html" title="struct lexical_parse_integer::Options"><code>Options</code></a>.</dd></dl><h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2><dl class="item-table"><dt><a class="enum" href="enum.Error.html" title="enum lexical_parse_integer::Error">Error</a></dt><dd>Error code during parsing, indicating failure type.</dd></dl><h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2><dl class="item-table"><dt><a class="trait" href="trait.FromLexical.html" title="trait lexical_parse_integer::FromLexical">From<wbr>Lexical</a></dt><dd>Trait for numerical types that can be parsed from bytes.</dd><dt><a class="trait" href="trait.FromLexicalWithOptions.html" title="trait lexical_parse_integer::FromLexicalWithOptions">From<wbr>Lexical<wbr>With<wbr>Options</a></dt><dd>Trait for numerical types that can be parsed from bytes with custom options.</dd><dt><a class="trait" href="trait.ParseOptions.html" title="trait lexical_parse_integer::ParseOptions">Parse<wbr>Options</a></dt><dd>Shared trait for all parser options.</dd></dl><h2 id="types" class="section-header">Type Aliases<a href="#types" class="anchor">§</a></h2><dl class="item-table"><dt><a class="type" href="type.Result.html" title="type lexical_parse_integer::Result">Result</a></dt><dd>A specialized <a href="https://doc.rust-lang.org/1.93.0/core/result/enum.Result.html" title="enum core::result::Result"><code>Result</code></a> type for lexical operations.</dd></dl></section></div></main></body></html>

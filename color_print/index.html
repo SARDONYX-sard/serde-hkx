@@ -1,0 +1,199 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Colorize and stylize strings for terminal at compile-time, by using an HTML-like syntax."><title>color_print - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="color_print" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../static.files/storage-e2aeef58.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Crate color_print</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../color_print/index.html">color_<wbr>print</a><span class="version">0.3.7</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#what-does-it-do-" title="What does it do ?">What does it do ?</a></li><li><a href="#proscons-of-this-crate" title="Pros/cons of this crate">Pros/cons of this crate</a><ul><li><a href="#pros" title="Pros">Pros</a></li><li><a href="#cons" title="Cons">Cons</a></li></ul></li><li><a href="#introduction" title="Introduction">Introduction</a><ul><li><a href="#basic-example" title="Basic example">Basic example</a></li><li><a href="#closing-a-tag-more-simply-the--tag" title="Closing a tag more simply: the `&#60;/&#62;` tag">Closing a tag more simply: the <code>&lt;/&gt;</code> tag</a></li><li><a href="#combining-colors-and-styles" title="Combining colors and styles">Combining colors and styles</a></li><li><a href="#nesting-tags" title="Nesting tags">Nesting tags</a></li><li><a href="#unclosed-tags-are-automatically-closed-at-the-end-of-the-format-string" title="Unclosed tags are automatically closed at the end of the format string">Unclosed tags are automatically closed at the end of the format string</a></li><li><a href="#how-to-display-the-chars--and--verbatim" title="How to display the chars `&#60;` and `&#62;` verbatim">How to display the chars <code>&lt;</code> and <code>&gt;</code> verbatim</a></li></ul></li><li><a href="#optimization-no-redundant-ansi-codes" title="Optimization: no redundant ANSI codes">Optimization: no redundant ANSI codes</a></li><li><a href="#the-feature-terminfo" title="The feature `terminfo`">The feature <code>terminfo</code></a><ul><li><a href="#pros-1" title="Pros">Pros</a></li><li><a href="#cons-1" title="Cons">Cons</a></li></ul></li><li><a href="#naming-rules-of-the-tags" title="Naming rules of the tags:">Naming rules of the tags:</a></li><li><a href="#list-of-accepted-tags" title="List of accepted tags:">List of accepted tags:</a></li></ul><h3><a href="#macros">Crate Items</a></h3><ul class="block"><li><a href="#macros" title="Macros">Macros</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>color_<wbr>print</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/color_print/lib.rs.html#1-483">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Colorize and stylize strings for terminal at compile-time, by using an HTML-like syntax.</p>
+<p>This library provides the following macros:</p>
+<ul>
+<li><code>cformat!(&lt;FORMAT_STRING&gt; [, ARGS...])</code></li>
+<li><code>cprint!(&lt;FORMAT_STRING&gt; [, ARGS...])</code></li>
+<li><code>cprintln!(&lt;FORMAT_STRING&gt; [, ARGS...])</code></li>
+<li><code>ceprint!(&lt;FORMAT_STRING&gt; [, ARGS...])</code></li>
+<li><code>ceprintln!(&lt;FORMAT_STRING&gt; [, ARGS...])</code></li>
+<li><code>cwrite!(f, &lt;FORMAT_STRING&gt; [, ARGS...])</code></li>
+<li><code>cwriteln!(f, &lt;FORMAT_STRING&gt; [, ARGS...])</code></li>
+<li><code>cstr!(&lt;FORMAT_STRING&gt;)</code></li>
+<li><code>untagged!(&lt;FORMAT_STRING&gt;)</code></li>
+</ul>
+<p>The macros have the same syntax as their corresponding <a href="https://doc.rust-lang.org/1.93.0/std/index.html" title="mod std"><code>std</code></a> variants:</p>
+<ul>
+<li><a href="macro.cformat.html" title="macro color_print::cformat"><code>cformat!()</code></a> as <a href="https://doc.rust-lang.org/1.93.0/alloc/macro.format.html" title="macro alloc::format"><code>format!()</code></a></li>
+<li><a href="macro.cprint.html" title="macro color_print::cprint"><code>cprint!()</code></a> as <a href="https://doc.rust-lang.org/1.93.0/std/macro.print.html" title="macro std::print"><code>print!()</code></a></li>
+<li><a href="macro.cprintln.html" title="macro color_print::cprintln"><code>cprintln!()</code></a> as <a href="https://doc.rust-lang.org/1.93.0/std/macro.println.html" title="macro std::println"><code>println!()</code></a></li>
+<li><a href="macro.ceprint.html" title="macro color_print::ceprint"><code>ceprint!()</code></a> as <a href="https://doc.rust-lang.org/1.93.0/std/macro.eprint.html" title="macro std::eprint"><code>eprint!()</code></a></li>
+<li><a href="macro.ceprintln.html" title="macro color_print::ceprintln"><code>ceprintln!()</code></a> as <a href="https://doc.rust-lang.org/1.93.0/std/macro.eprintln.html" title="macro std::eprintln"><code>eprintln!()</code></a></li>
+<li><a href="macro.cwrite.html" title="macro color_print::cwrite"><code>cwrite!()</code></a> as <a href="https://doc.rust-lang.org/1.93.0/core/macro.write.html" title="macro core::write"><code>write!()</code></a></li>
+<li><a href="macro.cwriteln.html" title="macro color_print::cwriteln"><code>cwriteln!()</code></a> as <a href="https://doc.rust-lang.org/1.93.0/core/macro.writeln.html" title="macro core::writeln"><code>writeln!()</code></a></li>
+</ul>
+<p>But they accept an additional syntax inside the
+format string: HTML-like tags which add ANSI colors/styles at compile-time.</p>
+<p><a href="macro.cstr.html" title="macro color_print::cstr"><code>cstr!()</code></a> only transforms the given string literal into another string literal, without
+formatting anything else than the colors tag.</p>
+<p><a href="macro.untagged.html" title="macro color_print::untagged"><code>untagged!()</code></a> removes all the tags found in the given string literal.</p>
+<h3 id="what-does-it-do-"><a class="doc-anchor" href="#what-does-it-do-">§</a>What does it do ?</h3>
+<p>By default, the provided macros will replace the tags found in the format string by ANSI
+hexadecimal escape codes. E.g.:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">cprintln!</span>(<span class="string">"HELLO &lt;green&gt;WORLD&lt;/green&gt;"</span>);
+<span class="macro">cprintln!</span>(<span class="string">"HELLO &lt;green&gt;WORLD&lt;/&gt;"</span>); <span class="comment">// Alternative, shorter syntax</span></code></pre></div>
+<p>will be replaced by:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">println!</span>(<span class="string">"HELLO \u{1b}[31mWORLD\u{1b}[39m"</span>)</code></pre></div>
+<p><em>Note</em>: it is possible to change this behaviour by activating the feature <code>terminfo</code>. Then it
+will question the <code>terminfo</code> database at runtime in order to know which sequence to write for
+each kind of styling/colorizing (see below for more detail).</p>
+<h2 id="proscons-of-this-crate"><a class="doc-anchor" href="#proscons-of-this-crate">§</a>Pros/cons of this crate</h2><h3 id="pros"><a class="doc-anchor" href="#pros">§</a>Pros</h3>
+<ul>
+<li>Styling is processed at compile-time, so the runtime payload is  inexistant (unless the
+feature <code>terminfo</code> is activated);</li>
+<li>Nested tags are well handled, e.g. <code>"&lt;green&gt;...&lt;blue&gt;...&lt;/blue&gt;...&lt;/green&gt;"</code>;</li>
+<li>Some optimizations are performed to avoid redundant ANSI sequences, because these
+optimizations can be done at compile-time without impacting the runtime;</li>
+<li>Almost every tag has a short name, so colorizing can be done quickly: <code>"my &lt;b&gt;blue&lt;/&gt; word"</code>;</li>
+<li>Each provided macro can be used exactly in the same way as the standard <code>format!</code>-like
+macros; e.g., positional arguments and named arguments can be used as usual;</li>
+<li>Supports 16, 256 and 16M colors;</li>
+<li>Fine-grained error handling (errors will be given at compile-time).</li>
+</ul>
+<h3 id="cons"><a class="doc-anchor" href="#cons">§</a>Cons</h3>
+<ul>
+<li>Not compatible with non-ANSI terminals.</li>
+</ul>
+<h2 id="introduction"><a class="doc-anchor" href="#introduction">§</a>Introduction</h2><h3 id="basic-example"><a class="doc-anchor" href="#basic-example">§</a>Basic example</h3>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>color_print::cprintln;
+<span class="macro">cprintln!</span>(<span class="string">"Hello &lt;green&gt;world&lt;/green&gt;!"</span>);</code></pre></div><h3 id="closing-a-tag-more-simply-the--tag"><a class="doc-anchor" href="#closing-a-tag-more-simply-the--tag">§</a>Closing a tag more simply: the <code>&lt;/&gt;</code> tag</h3>
+<p>Basically, tags must be closed by giving <em>exactly</em> the same colors/styles as their matching
+open tag (with a slash <code>/</code> at the beginning), e.g: <code>&lt;blue,bold&gt;...&lt;/blue,bold&gt;</code>. But it can be
+tedious!</p>
+<p>So, it is also possible to close the last open tag simply with <code>&lt;/&gt;</code>:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">cprintln!</span>(<span class="string">"Hello &lt;green&gt;world&lt;/&gt;!"</span>);</code></pre></div><h3 id="combining-colors-and-styles"><a class="doc-anchor" href="#combining-colors-and-styles">§</a>Combining colors and styles</h3>
+<p>Multiple styles and colors can be combined into a single tag by separating them with the <code>,</code>
+comma character:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">cprintln!</span>(<span class="string">"This a &lt;green,bold&gt;green and bold text&lt;/green,bold&gt;."</span>);
+<span class="comment">// The same, but closing with the &lt;/&gt; tag:
+</span><span class="macro">cprintln!</span>(<span class="string">"This a &lt;green,bold&gt;green and bold text&lt;/&gt;."</span>);</code></pre></div><h3 id="nesting-tags"><a class="doc-anchor" href="#nesting-tags">§</a>Nesting tags</h3>
+<p>Any tag can be nested with any other.</p>
+<p><em>Note</em>: The closing tags must match correctly (following the basic rules of nesting for HTML
+tags), but it can always be simplified by using the tag <code>&lt;/&gt;</code>.</p>
+<p>Example of nested tags:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">cprintln!</span>(<span class="string">"&lt;green&gt;This is green, &lt;bold&gt;then green and bold&lt;/bold&gt;, then green again&lt;/green&gt;"</span>);
+<span class="macro">cprintln!</span>(<span class="string">"&lt;green&gt;This is green, &lt;bold&gt;then green and bold&lt;/&gt;, then green again&lt;/&gt;"</span>);
+
+<span class="comment">// Colors can be nested as well:
+</span><span class="macro">cprintln!</span>(<span class="string">"&lt;green&gt;This is green, &lt;blue&gt;then blue&lt;/blue&gt;, then green again&lt;/green&gt;"</span>);
+<span class="macro">cprintln!</span>(<span class="string">"&lt;green&gt;This is green, &lt;blue&gt;then blue&lt;/&gt;, then green again&lt;/&gt;"</span>);</code></pre></div><h3 id="unclosed-tags-are-automatically-closed-at-the-end-of-the-format-string"><a class="doc-anchor" href="#unclosed-tags-are-automatically-closed-at-the-end-of-the-format-string">§</a>Unclosed tags are automatically closed at the end of the format string</h3>
+<p>Tags which have not been closed manually will be closed automatically, which means that the
+ANSI sequences needed to go back to the original state will be added:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// The two following lines are strictly equivalent:
+</span><span class="macro">cprintln!</span>(<span class="string">"&lt;green&gt;&lt;bold&gt;Hello"</span>);
+<span class="macro">cprintln!</span>(<span class="string">"&lt;green&gt;&lt;bold&gt;Hello&lt;/&gt;&lt;/&gt;"</span>);</code></pre></div><h3 id="how-to-display-the-chars--and--verbatim"><a class="doc-anchor" href="#how-to-display-the-chars--and--verbatim">§</a>How to display the chars <code>&lt;</code> and <code>&gt;</code> verbatim</h3>
+<p>As for <code>{</code> and <code>}</code> in standard format strings, the chars <code>&lt;</code> and <code>&gt;</code> have to be doubled in
+order to display them verbatim:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">cprintln!</span>(<span class="string">"This is an angle bracket character: &lt;&lt;, and here is another one: &gt;&gt;"</span>);</code></pre></div><h2 id="optimization-no-redundant-ansi-codes"><a class="doc-anchor" href="#optimization-no-redundant-ansi-codes">§</a>Optimization: no redundant ANSI codes</h2>
+<p>The expanded format string will only contain the <em>needed</em> ANSI codes. This is done by making a
+diff of the different style attributes, each time a tag is encountered, instead of mechanically
+adding the ANSI codes.</p>
+<p>E.g., several nested <code>&lt;bold&gt;</code> tags will only produce one bold ANSI sequence:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">cprintln!</span>(<span class="string">"&lt;bold&gt;&lt;bold&gt; A &lt;bold,blue&gt; B &lt;/&gt; C &lt;/&gt;&lt;/&gt;"</span>)</code></pre></div>
+<p>will be replaced by:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="macro">println!</span>(<span class="string">"\u{1b}[1m A \u{1b}[34m B \u{1b}[39m C \u{1b}[22m"</span>)
+<span class="comment">//        ^-------^   ^--------^   ^--------^   ^--------^
+//          bold         blue         color        bold
+//                                    reset        reset</span></code></pre></div><h2 id="the-feature-terminfo"><a class="doc-anchor" href="#the-feature-terminfo">§</a>The feature <code>terminfo</code></h2>
+<p>Instead of inserting ANSI sequences directly into the format string, it is possible to activate
+the feature <code>terminfo</code>: this will add the format sequences at runtime, by consulting the
+<code>terminfo</code> database.</p>
+<p>This has one pro and several cons:</p>
+<h5 id="pros-1"><a class="doc-anchor" href="#pros-1">§</a>Pros</h5>
+<ul>
+<li>This adds a level of compatibility for some terminals.</li>
+</ul>
+<h5 id="cons-1"><a class="doc-anchor" href="#cons-1">§</a>Cons</h5>
+<ul>
+<li>This adds a little runtime payload;</li>
+<li>This adds two dependencies: <a href="https://crates.io/crates/lazy_static"><code>lazy_static</code></a> and <a href="https://crates.io/crates/terminfo"><code>terminfo</code></a>;</li>
+<li>The styles <code>&lt;strike&gt;</code> and <code>&lt;conceal&gt;</code> are not handled;</li>
+<li>With <code>terminfo</code>, many styles are not resettable individually, which implies longer format
+sequences for the same result;</li>
+<li>For now, the provided macros can only be used in one thread.</li>
+</ul>
+<h2 id="naming-rules-of-the-tags"><a class="doc-anchor" href="#naming-rules-of-the-tags">§</a>Naming rules of the tags:</h2>
+<p>Each tag has at least a <strong>long name</strong>, like <code>&lt;magenta&gt;</code> or <code>&lt;underline&gt;</code>.</p>
+<p>The tags directly relative to <em>colors</em> (like <code>&lt;red&gt;</code>, <code>&lt;bg:blue&gt;</code>, <code>&lt;bg:bright-green&gt;</code>…, as
+opposed to <em>style</em> tags like <code>&lt;bold&gt;</code>, <code>&lt;italics&gt;</code>…) have some common naming rules:</p>
+<ul>
+<li>Each tag has four variants:
+<ul>
+<li><code>&lt;mycolor&gt;</code>: the normal, foreground color;</li>
+<li><code>&lt;bright-mycolor&gt;</code> or <code>&lt;mycolor!&gt;</code>: the bright, foreground color;</li>
+<li><code>&lt;bg:mycolor&gt;</code>, <code>&lt;MYCOLOR&gt;</code>: the normal, background color;</li>
+<li><code>&lt;bg:bright-mycolor&gt;</code>, <code>&lt;bg:mycolor!&gt;</code>, <code>&lt;BRIGHT-MYCOLOR&gt;</code> or <code>&lt;MYCOLOR!&gt;</code>: the bright,
+background color;</li>
+</ul>
+</li>
+<li>Each tag has a <em>shortcut</em>, with a base letter for each color; example with the <code>x</code> letter:
+<ul>
+<li><code>&lt;x&gt;</code>: the normal, foreground color;</li>
+<li><code>&lt;x!&gt;</code>: the bright, foreground color;</li>
+<li><code>&lt;bg:x&gt;</code>, <code>&lt;X&gt;</code>: the normal, background color;</li>
+<li><code>&lt;bg:x!&gt;</code>, <code>&lt;X!&gt;</code>: the bright, background color;</li>
+</ul>
+</li>
+<li>Each color’s shortcut letter is simply the <strong>first letter of its name</strong> (excepted for <code>&lt;k&gt;</code>
+which is the shortcut for <code>&lt;black&gt;</code>), e.g. <code>&lt;y&gt;</code> is the shortcut for <code>&lt;yellow&gt;</code>;</li>
+<li>Each color’s tag which is uppercase is a <strong>background color</strong>;</li>
+<li>Each tag which has a trailing exclamation point <code>!</code> is a <strong>bright color</strong>;</li>
+</ul>
+<h2 id="list-of-accepted-tags"><a class="doc-anchor" href="#list-of-accepted-tags">§</a>List of accepted tags:</h2>
+<p>The two first columns show which styles are supported, respectively with the default crate
+features (ANSI column), and with the feature <code>terminfo</code> being activated.</p>
+<div><table><thead><tr><th>ANSI</th><th>Terminfo</th><th>Shortcuts</th><th>Long names</th><th>Aliases</th></tr></thead><tbody>
+<tr><td>X</td><td>X</td><td><code>&lt;s&gt;</code></td><td><code>&lt;strong&gt;</code></td><td><code>&lt;em&gt;</code> <code>&lt;bold&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td></td><td><code>&lt;dim&gt;</code></td><td></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;u&gt;</code></td><td><code>&lt;underline&gt;</code></td><td></td></tr>
+<tr><td>X</td><td></td><td></td><td><code>&lt;strike&gt;</code></td><td></td></tr>
+<tr><td>X</td><td>X</td><td></td><td><code>&lt;reverse&gt;</code></td><td><code>&lt;rev&gt;</code></td></tr>
+<tr><td>X</td><td></td><td></td><td><code>&lt;conceal&gt;</code></td><td><code>&lt;hide&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;i&gt;</code></td><td><code>&lt;italics&gt;</code></td><td><code>&lt;italic&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td></td><td><code>&lt;blink&gt;</code></td><td></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;k&gt;</code></td><td><code>&lt;black&gt;</code></td><td></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;r&gt;</code></td><td><code>&lt;red&gt;</code></td><td></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;g&gt;</code></td><td><code>&lt;green&gt;</code></td><td></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;y&gt;</code></td><td><code>&lt;yellow&gt;</code></td><td></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;b&gt;</code></td><td><code>&lt;blue&gt;</code></td><td></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;m&gt;</code></td><td><code>&lt;magenta&gt;</code></td><td></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;c&gt;</code></td><td><code>&lt;cyan&gt;</code></td><td></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;w&gt;</code></td><td><code>&lt;white&gt;</code></td><td></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;k!&gt;</code></td><td><code>&lt;bright-black&gt;</code></td><td><code>&lt;black!&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;r!&gt;</code></td><td><code>&lt;bright-red&gt;</code></td><td><code>&lt;red!&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;g!&gt;</code></td><td><code>&lt;bright-green&gt;</code></td><td><code>&lt;green!&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;y!&gt;</code></td><td><code>&lt;bright-yellow&gt;</code></td><td><code>&lt;yellow!&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;b!&gt;</code></td><td><code>&lt;bright-blue&gt;</code></td><td><code>&lt;blue!&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;m!&gt;</code></td><td><code>&lt;bright-magenta&gt;</code></td><td><code>&lt;magenta!&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;c!&gt;</code></td><td><code>&lt;bright-cyan&gt;</code></td><td><code>&lt;cyan!&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;w!&gt;</code></td><td><code>&lt;bright-white&gt;</code></td><td><code>&lt;white!&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;K&gt;</code></td><td><code>&lt;bg:black&gt;</code></td><td><code>&lt;BLACK&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;R&gt;</code></td><td><code>&lt;bg:red&gt;</code></td><td><code>&lt;RED&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;G&gt;</code></td><td><code>&lt;bg:green&gt;</code></td><td><code>&lt;GREEN&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;Y&gt;</code></td><td><code>&lt;bg:yellow&gt;</code></td><td><code>&lt;YELLOW&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;B&gt;</code></td><td><code>&lt;bg:blue&gt;</code></td><td><code>&lt;BLUE&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;M&gt;</code></td><td><code>&lt;bg:magenta&gt;</code></td><td><code>&lt;MAGENTA&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;C&gt;</code></td><td><code>&lt;bg:cyan&gt;</code></td><td><code>&lt;CYAN&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;W&gt;</code></td><td><code>&lt;bg:white&gt;</code></td><td><code>&lt;WHITE&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;K!&gt;</code></td><td><code>&lt;bg:bright-black&gt;</code></td><td><code>&lt;BLACK!&gt;</code> <code>&lt;bg:black!&gt;</code> <code>&lt;BRIGHT-BLACK&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;R!&gt;</code></td><td><code>&lt;bg:bright-red&gt;</code></td><td><code>&lt;RED!&gt;</code> <code>&lt;bg:red!&gt;</code> <code>&lt;BRIGHT-RED&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;G!&gt;</code></td><td><code>&lt;bg:bright-green&gt;</code></td><td><code>&lt;GREEN!&gt;</code> <code>&lt;bg:green!&gt;</code> <code>&lt;BRIGHT-GREEN&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;Y!&gt;</code></td><td><code>&lt;bg:bright-yellow&gt;</code></td><td><code>&lt;YELLOW!&gt;</code> <code>&lt;bg:yellow!&gt;</code> <code>&lt;BRIGHT-YELLOW&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;B!&gt;</code></td><td><code>&lt;bg:bright-blue&gt;</code></td><td><code>&lt;BLUE!&gt;</code> <code>&lt;bg:blue!&gt;</code> <code>&lt;BRIGHT-BLUE&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;M!&gt;</code></td><td><code>&lt;bg:bright-magenta&gt;</code></td><td><code>&lt;MAGENTA!&gt;</code> <code>&lt;bg:magenta!&gt;</code> <code>&lt;BRIGHT-MAGENTA&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;C!&gt;</code></td><td><code>&lt;bg:bright-cyan&gt;</code></td><td><code>&lt;CYAN!&gt;</code> <code>&lt;bg:cyan!&gt;</code> <code>&lt;BRIGHT-CYAN&gt;</code></td></tr>
+<tr><td>X</td><td>X</td><td><code>&lt;W!&gt;</code></td><td><code>&lt;bg:bright-white&gt;</code></td><td><code>&lt;WHITE!&gt;</code> <code>&lt;bg:white!&gt;</code> <code>&lt;BRIGHT-WHITE&gt;</code></td></tr>
+<tr><td>X</td><td></td><td></td><td><code>&lt;rgb(r,g,b)&gt;</code></td><td><code>&lt;#RRGGBB&gt;</code></td></tr>
+<tr><td>X</td><td></td><td></td><td><code>&lt;bg:rgb(r,g,b)&gt;</code></td><td><code>&lt;bg:#RRGGBB&gt;</code> <code>&lt;RGB(r,g,b)&gt;</code></td></tr>
+<tr><td>X</td><td></td><td><code>&lt;0&gt;</code>…<code>&lt;255&gt;</code></td><td><code>&lt;palette(...)&gt;</code></td><td><code>&lt;p(...)&gt;</code> <code>&lt;pal(...)&gt;</code></td></tr>
+<tr><td>X</td><td></td><td><code>&lt;P(...)&gt;</code></td><td><code>&lt;bg:palette(...)&gt;</code></td><td><code>&lt;PALETTE(...)&gt;</code> <code>&lt;PAL(...)&gt;</code> <code>&lt;bg:p(...)&gt;</code> <code>&lt;bg:pal(...)&gt;</code></td></tr>
+</tbody></table>
+</div></div></details><h2 id="macros" class="section-header">Macros<a href="#macros" class="anchor">§</a></h2><dl class="item-table"><dt><a class="macro" href="macro.ceprint.html" title="macro color_print::ceprint">ceprint</a></dt><dd>The same as <code>eprint!()</code>, but parses color tags.</dd><dt><a class="macro" href="macro.ceprintln.html" title="macro color_print::ceprintln">ceprintln</a></dt><dd>The same as <code>eprintln!()</code>, but parses color tags.</dd><dt><a class="macro" href="macro.cformat.html" title="macro color_print::cformat">cformat</a></dt><dd>The same as <code>format!()</code>, but parses color tags.</dd><dt><a class="macro" href="macro.cprint.html" title="macro color_print::cprint">cprint</a></dt><dd>The same as <code>print!()</code>, but parses color tags.</dd><dt><a class="macro" href="macro.cprintln.html" title="macro color_print::cprintln">cprintln</a></dt><dd>The same as <code>println!()</code>, but parses color tags.</dd><dt><a class="macro" href="macro.cstr.html" title="macro color_print::cstr">cstr</a></dt><dd>Colorizes a string literal, without formatting the <code>format!</code>-like placeholders.</dd><dt><a class="macro" href="macro.cwrite.html" title="macro color_print::cwrite">cwrite</a></dt><dd>The same as <code>write!()</code>, but parses color tags.</dd><dt><a class="macro" href="macro.cwriteln.html" title="macro color_print::cwriteln">cwriteln</a></dt><dd>The same as <code>writeln!()</code>, but parses color tags.</dd><dt><a class="macro" href="macro.untagged.html" title="macro color_print::untagged">untagged</a></dt><dd>Removes all the color tags from the given string literal.</dd></dl></section></div></main></body></html>

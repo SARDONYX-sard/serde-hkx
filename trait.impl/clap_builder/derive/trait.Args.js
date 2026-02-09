@@ -1,0 +1,9 @@
+(function() {
+    var implementors = Object.fromEntries([["clap",[]],["clap_builder",[]],["hkxc",[["impl <a class=\"trait\" href=\"clap_builder/derive/trait.Args.html\" title=\"trait clap_builder::derive::Args\">Args</a> for <a class=\"struct\" href=\"hkxc/args/convert/struct.Args.html\" title=\"struct hkxc::args::convert::Args\">Args</a>"],["impl <a class=\"trait\" href=\"clap_builder/derive/trait.Args.html\" title=\"trait clap_builder::derive::Args\">Args</a> for <a class=\"struct\" href=\"hkxc/args/diff/struct.Args.html\" title=\"struct hkxc::args::diff::Args\">Args</a>"],["impl <a class=\"trait\" href=\"clap_builder/derive/trait.Args.html\" title=\"trait clap_builder::derive::Args\">Args</a> for <a class=\"struct\" href=\"hkxc/args/dump/struct.Args.html\" title=\"struct hkxc::args::dump::Args\">Args</a>"],["impl <a class=\"trait\" href=\"clap_builder/derive/trait.Args.html\" title=\"trait clap_builder::derive::Args\">Args</a> for <a class=\"struct\" href=\"hkxc/args/struct.Args.html\" title=\"struct hkxc::args::Args\">Args</a>"],["impl <a class=\"trait\" href=\"clap_builder/derive/trait.Args.html\" title=\"trait clap_builder::derive::Args\">Args</a> for <a class=\"struct\" href=\"hkxc/args/tree/struct.Args.html\" title=\"struct hkxc::args::tree::Args\">Args</a>"],["impl <a class=\"trait\" href=\"clap_builder/derive/trait.Args.html\" title=\"trait clap_builder::derive::Args\">Args</a> for <a class=\"struct\" href=\"hkxc/args/verify/struct.Args.html\" title=\"struct hkxc::args::verify::Args\">Args</a>"]]]]);
+    if (window.register_implementors) {
+        window.register_implementors(implementors);
+    } else {
+        window.pending_implementors = implementors;
+    }
+})()
+//{"start":57,"fragment_lengths":[11,20,1444]}

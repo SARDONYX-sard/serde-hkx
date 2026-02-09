@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["SerdeHkxError"],"mod":["de","readable","ser"]};

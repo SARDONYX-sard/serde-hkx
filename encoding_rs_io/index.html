@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="This crate provides streaming transcoding by implementing Rust’s I/O traits and delegating transcoding to the `encoding_rs` crate."><title>encoding_rs_io - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="encoding_rs_io" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../static.files/storage-e2aeef58.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Crate encoding_rs_io</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../encoding_rs_io/index.html">encoding_<wbr>rs_<wbr>io</a><span class="version">0.1.7</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#example" title="Example">Example</a></li><li><a href="#future-work" title="Future work">Future work</a></li></ul><h3><a href="#structs">Crate Items</a></h3><ul class="block"><li><a href="#structs" title="Structs">Structs</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>encoding_<wbr>rs_<wbr>io</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/encoding_rs_io/lib.rs.html#1-878">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>This crate provides streaming transcoding by implementing Rust’s I/O traits
+and delegating transcoding to the
+<a href="https://crates.io/crates/encoding_rs"><code>encoding_rs</code></a>
+crate.</p>
+<p>Currently, this crate only provides a means of transcoding from a source
+encoding (that is among the encodings supported by <code>encoding_rs</code>) to UTF-8 via
+an implementation of <code>std::io::Read</code>, where errors are handled by replacing
+invalid sequences with the Unicode replacement character. Future work may
+provide additional implementations for <code>std::io::Write</code> and/or implementations
+that make stronger guarantees about UTF-8 validity.</p>
+<h2 id="example"><a class="doc-anchor" href="#example">§</a>Example</h2>
+<p>This example shows how to create a decoder that transcodes UTF-16LE (the
+source) to UTF-8 (the destination).</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">extern crate </span>encoding_rs;
+<span class="kw">extern crate </span>encoding_rs_io;
+
+<span class="kw">use </span>std::error::Error;
+<span class="kw">use </span>std::io::Read;
+
+<span class="kw">use </span>encoding_rs_io::DecodeReaderBytes;
+
+<span class="kw">fn </span>example() -&gt; <span class="prelude-ty">Result</span>&lt;(), Box&lt;Error&gt;&gt; {
+    <span class="kw">let </span>source_data = <span class="kw-2">&amp;</span><span class="string">b"\xFF\xFEf\x00o\x00o\x00b\x00a\x00r\x00"</span>[..];
+    <span class="comment">// N.B. `source_data` can be any arbitrary io::Read implementation.
+    </span><span class="kw">let </span><span class="kw-2">mut </span>decoder = DecodeReaderBytes::new(source_data);
+
+    <span class="kw">let </span><span class="kw-2">mut </span>dest = String::new();
+    <span class="comment">// decoder implements the io::Read trait, so it can easily be plugged
+    // into any consumer expecting an arbitrary reader.
+    </span>decoder.read_to_string(<span class="kw-2">&amp;mut </span>dest)<span class="question-mark">?</span>;
+    <span class="macro">assert_eq!</span>(dest, <span class="string">"foobar"</span>);
+    <span class="prelude-val">Ok</span>(())
+}</code></pre></div><h2 id="future-work"><a class="doc-anchor" href="#future-work">§</a>Future work</h2>
+<p>Currently, this crate only provides a way to get <em>possibly valid</em> UTF-8 from
+some source encoding. There are other transformations that may be useful that
+we could include in this crate. Namely:</p>
+<ul>
+<li>An encoder that accepts an arbitrary <code>std::io::Write</code> implementation and
+takes valid UTF-8 and transcodes it to a selected destination encoding. This
+encoder would implement <code>std::fmt::Write</code>.</li>
+<li>A decoder that accepts an arbitrary <code>std::fmt::Write</code> implementation and
+takes arbitrary bytes and transcodes them from a selected source
+encoding to valid UTF-8. This decoder would implement <code>std::io::Write</code>.</li>
+<li>An encoder that accepts an arbitrary <code>UnicodeRead</code> implementation and
+takes valid UTF-8 and transcodes it to a selected destination encoding.
+This encoder would implement <code>std::io::Read</code>.</li>
+<li>A decoder that accepts an arbitrary <code>std::io::Read</code> implementation and
+takes arbitrary bytes and transcodes them from a selected source encoding
+to valid UTF-8. This decoder would implement the <code>UnicodeRead</code> trait.</li>
+</ul>
+<p>Where <code>UnicodeRead</code> is a hypothetical trait that does not yet exist. Its
+definition might look something like this:</p>
+
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">trait </span>UnicodeRead {
+    <span class="kw">fn </span>read(<span class="kw-2">&amp;mut </span><span class="self">self</span>, buf: <span class="kw-2">&amp;mut </span>str) -&gt; <span class="prelude-ty">Result</span>&lt;usize&gt;;
+}</code></pre></div>
+<p>Interestingly, of the above transformations, none of them correspond to
+<code>DecodeReaderBytes</code>. Namely, <code>DecodeReaderBytes</code> most closely corresponds to
+the last option, but instead of guaranteeing valid UTF-8 by implementing a
+trait like <code>UnicodeRead</code>, it instead implements <code>std::io::Read</code>, which pushes
+UTF-8 handling on to the caller. However, it turns out that this particular
+use case is important for operations like search, which can often be written
+in a way that don’t assume UTF-8 validity but still benefit from it.</p>
+<p>It’s not clear which of the above transformations is actually useful, but all
+of them could theoretically exist. There is more discussion on this topic
+here (and in particular, the above formulation was taken almost verbatim from
+Simon Sapin’s comments): https://github.com/hsivonen/encoding_rs/issues/8</p>
+<p>It is also perhaps worth stating that this crate very much intends on
+remaining coupled to <code>encoding_rs</code>, which helps restrict the scope, but may be
+too biased toward Web oriented encoding to solve grander encoding challenges.
+As such, it may very well be that this crate is actually a stepping stone to
+something with a larger scope. But first, we must learn.</p>
+</div></details><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.DecodeReaderBytes.html" title="struct encoding_rs_io::DecodeReaderBytes">Decode<wbr>Reader<wbr>Bytes</a></dt><dd>An implementation of <code>io::Read</code> that transcodes to UTF-8 in a streaming
+fashion.</dd><dt><a class="struct" href="struct.DecodeReaderBytesBuilder.html" title="struct encoding_rs_io::DecodeReaderBytesBuilder">Decode<wbr>Reader<wbr>Bytes<wbr>Builder</a></dt><dd>A builder for constructing a byte oriented transcoder to UTF-8.</dd></dl></section></div></main></body></html>

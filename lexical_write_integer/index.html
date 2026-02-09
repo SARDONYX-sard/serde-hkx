@@ -1,0 +1,227 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Fast lexical integer-to-string conversion routines."><title>lexical_write_integer - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="lexical_write_integer" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../static.files/storage-e2aeef58.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Crate lexical_write_integer</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../lexical_write_integer/index.html">lexical_<wbr>write_<wbr>integer</a><span class="version">1.0.6</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#getting-started" title="Getting Started">Getting Started</a></li><li><a href="#features" title="Features">Features</a><ul><li><a href="#format" title="format">format</a></li><li><a href="#power-of-two" title="power-of-two">power-of-two</a></li><li><a href="#radix" title="radix">radix</a></li><li><a href="#compact" title="compact">compact</a></li><li><a href="#std" title="std">std</a></li></ul></li><li><a href="#higher-level-apis" title="Higher-Level APIs">Higher-Level APIs</a></li><li><a href="#version-support" title="Version Support">Version Support</a></li><li><a href="#algorithm" title="Algorithm">Algorithm</a><ul><li><a href="#decimal" title="Decimal">Decimal</a></li><li><a href="#radix-1" title="Radix">Radix</a></li></ul></li><li><a href="#compact-1" title="Compact">Compact</a></li><li><a href="#design" title="Design">Design</a></li><li><a href="#safety-guarantees" title="Safety Guarantees">Safety Guarantees</a><ul><li><a href="#decimal-1" title="Decimal">Decimal</a></li><li><a href="#radix-2" title="Radix">Radix</a></li><li><a href="#compact-2" title="Compact">Compact</a></li></ul></li></ul><h3><a href="#modules">Crate Items</a></h3><ul class="block"><li><a href="#modules" title="Modules">Modules</a></li><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#enums" title="Enums">Enums</a></li><li><a href="#constants" title="Constants">Constants</a></li><li><a href="#traits" title="Traits">Traits</a></li><li><a href="#types" title="Type Aliases">Type Aliases</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>lexical_<wbr>write_<wbr>integer</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/lexical_write_integer/lib.rs.html#1-374">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Fast lexical integer-to-string conversion routines.</p>
+<p>This contains high-performance methods to write integers
+directly to bytes, can be converted to <a href="https://doc.rust-lang.org/1.93.0/std/primitive.str.html" title="primitive str"><code>str</code></a> using
+<a href="https://doc.rust-lang.org/1.93.0/core/str/converts/fn.from_utf8.html" title="fn core::str::converts::from_utf8"><code>str::from_utf8</code></a>. Using <a href="trait.ToLexical.html#tymethod.to_lexical" title="method lexical_write_integer::ToLexical::to_lexical"><code>to_lexical</code></a> is analogous to <a href="https://doc.rust-lang.org/alloc/string/trait.ToString.html#tymethod.to_string"><code>to_string</code></a>,
+just writing to an existing buffer.</p>
+<h2 id="getting-started"><a class="doc-anchor" href="#getting-started">§</a>Getting Started</h2>
+<p>To write a number to bytes, use <a href="trait.ToLexical.html#tymethod.to_lexical" title="method lexical_write_integer::ToLexical::to_lexical"><code>to_lexical</code></a>:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_write_integer::{FormattedSize, ToLexical};
+
+<span class="kw">let </span><span class="kw-2">mut </span>buffer = [<span class="number">0u8</span>; u64::FORMATTED_SIZE_DECIMAL];
+<span class="kw">let </span>digits = <span class="number">1234u64</span>.to_lexical(<span class="kw-2">&amp;mut </span>buffer);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"1234"</span>));</code></pre></div>
+<p>Using <a href="trait.FormattedSize.html#associatedconstant.FORMATTED_SIZE_DECIMAL" title="associated constant lexical_write_integer::FormattedSize::FORMATTED_SIZE_DECIMAL"><code>FormattedSize::FORMATTED_SIZE_DECIMAL</code></a> guarantees the buffer
+will be large enough to write the digits for all numbers of that
+type.</p>
+<h2 id="features"><a class="doc-anchor" href="#features">§</a>Features</h2>
+<ul>
+<li><code>format</code> - Add support for custom integer formatting (currently
+unsupported).</li>
+<li><code>power-of-two</code> - Add support for writing power-of-two integer strings.</li>
+<li><code>radix</code> - Add support for strings of any radix.</li>
+<li><code>compact</code> - Reduce code size at the cost of performance.</li>
+<li><code>std</code> (Default) - Disable to allow use in a <a href="https://docs.rust-embedded.org/book/intro/no-std.html"><code>no_std</code></a> environment.</li>
+</ul>
+<p>A complete description of supported features includes:</p>
+<h5 id="format"><a class="doc-anchor" href="#format">§</a>format</h5>
+<p>Add support for custom integer formatting. Currently no custom styles are
+supported but this could include digit <a href="struct.NumberFormatBuilder.html#method.digit_separator" title="method lexical_write_integer::NumberFormatBuilder::digit_separator"><code>separator</code></a> support in the future.</p>
+<!--
+For a list of all supported fields, see [Write Integer
+Fields][NumberFormatBuilder#write-integer-fields].
+-->
+<h5 id="power-of-two"><a class="doc-anchor" href="#power-of-two">§</a>power-of-two</h5>
+<p>Enable writing numbers using radixes that are powers of two, that is, <code>2</code>,
+<code>4</code>, <code>8</code>, <code>16</code>, and <code>32</code>. In these cases, you should use <a href="trait.FormattedSize.html#associatedconstant.FORMATTED_SIZE" title="associated constant lexical_write_integer::FormattedSize::FORMATTED_SIZE"><code>FORMATTED_SIZE</code></a>
+to create a sufficiently large buffer.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_write_integer::{FormattedSize, NumberFormatBuilder, Options, ToLexicalWithOptions};
+
+<span class="kw">let </span><span class="kw-2">mut </span>buffer = [<span class="number">0u8</span>; u64::FORMATTED_SIZE];
+<span class="kw">const </span>BINARY: u128 = NumberFormatBuilder::binary();
+<span class="kw">const </span>OPTIONS: Options = Options::new();
+<span class="kw">let </span>digits = <span class="number">1234u64</span>.to_lexical_with_options::&lt;BINARY&gt;(<span class="kw-2">&amp;mut </span>buffer, <span class="kw-2">&amp;</span>OPTIONS);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"10011010010"</span>));</code></pre></div><h5 id="radix"><a class="doc-anchor" href="#radix">§</a>radix</h5>
+<p>Enable writing numbers using all radixes from <code>2</code> to <code>36</code>. This requires
+more static storage than <a href="index.html#power-of-two" title="mod lexical_write_integer"><code>power-of-two</code></a>, and increases
+compile times, but can be quite useful for esoteric programming languages
+which use duodecimal integers, for example.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_write_integer::{FormattedSize, NumberFormatBuilder, Options, ToLexicalWithOptions};
+
+<span class="kw">let </span><span class="kw-2">mut </span>buffer = [<span class="number">0u8</span>; u64::FORMATTED_SIZE];
+<span class="kw">const </span>FORMAT: u128 = NumberFormatBuilder::from_radix(<span class="number">12</span>);
+<span class="kw">const </span>OPTIONS: Options = Options::new();
+<span class="kw">let </span>digits = <span class="number">1234u64</span>.to_lexical_with_options::&lt;FORMAT&gt;(<span class="kw-2">&amp;mut </span>buffer, <span class="kw-2">&amp;</span>OPTIONS);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"86A"</span>));</code></pre></div><h5 id="compact"><a class="doc-anchor" href="#compact">§</a>compact</h5>
+<p>Reduce the generated code size at the cost of performance. This minimizes
+the number of static tables, inlining, and generics used, drastically
+reducing the size of the generated binaries.</p>
+<h5 id="std"><a class="doc-anchor" href="#std">§</a>std</h5>
+<p>Enable use of the standard library. Currently, the standard library
+is not used, and may be disabled without any change in functionality
+on stable.</p>
+<h2 id="higher-level-apis"><a class="doc-anchor" href="#higher-level-apis">§</a>Higher-Level APIs</h2>
+<p>If you would like support for writing to <a href="https://doc.rust-lang.org/alloc/string/struct.String.html"><code>String</code></a> directly, use
+<a href="https://crates.io/crates/lexical"><code>lexical</code></a> instead. If you would like an API that supports multiple numeric
+conversions rather than just writing integers, use <a href="https://crates.io/crates/lexical-core"><code>lexical-core</code></a> instead.</p>
+<h2 id="version-support"><a class="doc-anchor" href="#version-support">§</a>Version Support</h2>
+<p>The minimum, standard, required version is <a href="https://blog.rust-lang.org/2022/08/11/Rust-1.63.0.html"><code>1.63.0</code></a>, for
+const generic support. Older versions of lexical support older Rust
+versions.</p>
+<h2 id="algorithm"><a class="doc-anchor" href="#algorithm">§</a>Algorithm</h2>
+<p>We use 3 algorithms for serializing numbers:</p>
+<ol>
+<li><a href="https://jk-jeon.github.io/posts/2022/02/jeaiii-algorithm/"><code>Jeaiii Algorithm</code></a> (decimal only)</li>
+<li>Power reduction to write 4 digits at a time (radix only)</li>
+<li>Compact, single-digit serialization</li>
+</ol>
+<h3 id="decimal"><a class="doc-anchor" href="#decimal">§</a>Decimal</h3>
+<p>Our decimal-based digit writers are based on the <a href="https://jk-jeon.github.io/posts/2022/02/jeaiii-algorithm/"><code>Jeaiii Algorithm</code></a>, which
+branches based on the number of digits and writes digits to minimize the
+number of additions and multiplications. This avoids the need to calculate
+the number of digits ahead of time, by just branching on the value.</p>
+<p>James Anhalt’s itoa algorithm along with Junekey Jeon’s performance tweaks
+have excellent performance, however, this can be further optimized. Both
+James Anhalt’s and Junekey Jeon’s use a binary search for determining the
+correct number of digits to print (for 32-bit integers).</p>
+<div class="example-wrap"><pre class="language-text"><code>     /\____________
+    /  \______     \______
+   /\   \     \     \     \
+  0  1  /\    /\    /\    /\
+       2  3  4  5  6  7  8  9</code></pre></div>
+<p>This leads to a max tree depth of 4, and the major performance bottleneck
+with larger type sizes is the branching. A minor modification can optimize
+this, leadingg to a max tree depth of 3 while only required 1 extra
+comparison at the top level. Also, we invert the comparisons: oddly enough,
+our benchmarks show doing larger comparisons then smaller improves
+performance for numbers with both large and small numbers of digits.</p>
+<div class="example-wrap"><pre class="language-text"><code>          ____________________
+      ___/_       __|__       \
+     /  |  \     /     \      /\
+    /\  1   0   /\     /\    8  9
+   3  2        6  7   4  5</code></pre></div>
+<p>For larger integers, we can apply the a similar algorithm with minor
+modifications to minimize branching while keeping excellent performance.</p>
+<h3 id="radix-1"><a class="doc-anchor" href="#radix-1">§</a>Radix</h3>
+<p>Our radix-based algorithms work like this, carving off the lower digits and
+writing them to the back of the buffer.</p>
+
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">let </span><span class="kw-2">mut </span>value = <span class="number">12345u32</span>;
+<span class="kw">let </span>buffer = [<span class="number">0u8</span>; <span class="number">32</span>];
+<span class="kw">let </span>digits = value.digit_count();
+<span class="kw">let </span>bytes = buffer[..digits];
+
+<span class="kw">let </span>table = ...;  <span class="comment">// some pre-computed table of 2 * radix^2 length
+
+</span><span class="kw">let </span>radix = <span class="number">10</span>;
+<span class="kw">let </span>radix2 = radix * radix;
+<span class="kw">let </span>radix4 = radix2 * radix2
+<span class="kw">let </span><span class="kw-2">mut </span>index = bytes.len();
+<span class="kw">while </span>value &gt;= <span class="number">10000 </span>{
+    <span class="kw">let </span>r = value % radix4;
+    value /= radix4;
+    <span class="kw">let </span>r1 = <span class="number">2 </span>* (r / radix2) <span class="kw">as </span>usize;
+    <span class="kw">let </span>r2 = <span class="number">2 </span>* (r % radix2) <span class="kw">as </span>usize;
+
+    <span class="comment">// write 5, then 4
+    </span>index -= <span class="number">1</span>;
+    bytes[index] = table[r2 + <span class="number">1</span>];
+    index -= <span class="number">1</span>;
+    bytes[index] = table[r2];
+
+    <span class="comment">// write 3 then 2
+    </span>index -= <span class="number">1</span>;
+    bytes[index] = table[r1 + <span class="number">1</span>];
+    index -= <span class="number">1</span>;
+    bytes[index] = table[r1];
+}
+
+<span class="comment">// continue with radix^2 and then a single digit.</span></code></pre></div>
+<p>We can efficiently determine at compile time if the pre-computed
+tables are large enough so there are no non-local safety considerations
+there. The current logic call stack is:</p>
+<ol>
+<li><a href="trait.ToLexical.html#tymethod.to_lexical" title="method lexical_write_integer::ToLexical::to_lexical"><code>to_lexical</code></a></li>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/c6c5052/lexical-write-integer/src/decimal.rs#L278"><code>decimal</code></a>, <a href="https://github.com/Alexhuszagh/rust-lexical/blob/c6c5052/lexical-write-integer/src/compact.rs"><code>compact</code></a>, or <a href="https://github.com/Alexhuszagh/rust-lexical/blob/c6c5052/lexical-write-integer/src/radix.rs"><code>radix</code></a> (gets the
+correct tables and calls algorithm)</li>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/c6c5052/lexical-write-integer/src/jeaiii.rs"><code>jeaiii</code></a></li>
+</ol>
+<h2 id="compact-1"><a class="doc-anchor" href="#compact-1">§</a>Compact</h2>
+<p>A compact, fallback algorithm uses a naive, simple algorithm,
+where each loop generates a single digit. This comes at a performance
+penalty, but produces smaller binaries. It is analogous to the below
+code.</p>
+
+<div class="example-wrap ignore"><a href="#" class="tooltip" title="This example is not tested">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">const fn </span>digit_to_char(digit: u32) -&gt; u8 {
+    <span class="kw">match </span>r {
+       <span class="string">b'0'</span>..=<span class="string">b'9' </span>=&gt; c - <span class="string">b'0'</span>,
+       <span class="string">b'A'</span>..=<span class="string">b'Z' </span>=&gt; c - <span class="string">b'A' </span>+ <span class="number">10</span>,
+       <span class="string">b'a'</span>..=<span class="string">b'z' </span>=&gt; c - <span class="string">b'a' </span>+ <span class="number">10</span>,
+       <span class="kw">_ </span>=&gt; <span class="number">0xFF</span>,  <span class="comment">// unreachable
+    </span>}
+}
+
+<span class="kw">let </span><span class="kw-2">mut </span>value = <span class="number">12345u32</span>;
+<span class="kw">let </span>buffer = [<span class="number">0u8</span>; <span class="number">32</span>];
+<span class="kw">let </span>digits = value.digit_count();
+<span class="kw">let </span>bytes = buffer[..digits];
+
+<span class="kw">let </span>radix = <span class="number">10</span>;
+<span class="kw">let </span><span class="kw-2">mut </span>index = bytes.len();
+<span class="kw">while </span>value &gt;= radix {
+    <span class="kw">let </span>r = value % radix;
+    value /= radix;
+    index -= <span class="number">1</span>;
+    bytes[index] = digit_to_char(r);
+}
+
+index -= <span class="number">1</span>;
+bytes[index] = digit_to_char(value);</code></pre></div><h2 id="design"><a class="doc-anchor" href="#design">§</a>Design</h2>
+<ul>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-write-integer/docs/Algorithm.md">Algorithm Approach</a></li>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-write-integer/docs/Benchmarks.md">Benchmarks</a></li>
+<li><a href="https://github.com/Alexhuszagh/lexical-benchmarks">Comprehensive Benchmarks</a></li>
+</ul>
+<h2 id="safety-guarantees"><a class="doc-anchor" href="#safety-guarantees">§</a>Safety Guarantees</h2><div class="warning info-warning">
+<style>
+.info-warning::before {
+  color: #87CEFAb0 !important;
+}
+.info-warning {
+  border-left: 2px solid #87CEFAb0 !important;
+}
+</style>
+<p>This module uses some unsafe code to achieve accept acceptable performance.
+Providing a buffer of insufficient size will cause the code to panic and
+cannot lead to out-of-bounds access. The safety guarantees and logic are
+described below.</p>
+</div>
+<h4 id="decimal-1"><a class="doc-anchor" href="#decimal-1">§</a>Decimal</h4>
+<p>Our decimal writer uses a branched algorithm and therefore the indexing for
+each element in the buffer is known ahead of time. The digit
+<a href="https://github.com/jk-jeon/idiv/blob/main/subproject/example/jeaiii_analysis.cpp"><code>generation</code></a> is <a href="https://jk-jeon.github.io/posts/2022/02/jeaiii-algorithm/">well-established</a> to
+ensure the the lookup value is less than the size of the pre-computed table
+(<code>2 * 10^2</code>, or 200), and as long as this invariant holds true, then no
+undefined behavior can occur.</p>
+<h4 id="radix-2"><a class="doc-anchor" href="#radix-2">§</a>Radix</h4>
+<p>The non-decimal writers rely on pre-computed tables and an exact calculation
+of the digit count (<a href="https://github.com/Alexhuszagh/rust-lexical/blob/c6c5052/lexical-write-integer/src/digit_count.rs#L180"><code>digit_count</code></a>) to avoid any overhead. Avoiding
+intermediary copies is <strong>CRITICAL</strong> for fast performance so the entire
+buffer must be known but assigned to use algorithms the compiler cannot
+easily verify. This is because we use multi-digit optimizations with our
+pre-computed tables, so we cannot just iterate over the slice and assign
+iteratively. Using checked indexing for the pre-compuited table can lead to
+30%+ decreases in performance. However, with careful analysis and factoring
+of the code, it’s trivial to demonstrate both the table lookups and buffer
+indexing are safe.</p>
+<p>For radixes that are 2^N, we use the <code>ceil(log(value | 1, radix))</code> which can
+always be calculated through the number of leading <a href="https://github.com/Alexhuszagh/rust-lexical/blob/c6c5052/lexical-write-integer/src/digit_count.rs#L119"><code>zeros</code></a>. For
+other radixes, we calculate the number of digits exactly the same way as if
+we were writing digits in an initial pass.</p>
+<h4 id="compact-2"><a class="doc-anchor" href="#compact-2">§</a>Compact</h4>
+<p>The compact decimal writer uses no unsafe indexing.</p>
+</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="format/index.html" title="mod lexical_write_integer::format">format</a></dt><dd>The creation and processing of number format packed structs.</dd><dt><a class="mod" href="options/index.html" title="mod lexical_write_integer::options">options</a></dt><dd>Configuration options for writing integers.</dd></dl><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.NumberFormat.html" title="struct lexical_write_integer::NumberFormat">Number<wbr>Format</a></dt><dd>Helper to access features from the packed format struct.</dd><dt><a class="struct" href="struct.NumberFormatBuilder.html" title="struct lexical_write_integer::NumberFormatBuilder">Number<wbr>Format<wbr>Builder</a></dt><dd>Validating builder for <a href="struct.NumberFormat.html" title="struct lexical_write_integer::NumberFormat"><code>NumberFormat</code></a> from the provided specifications.</dd><dt><a class="struct" href="struct.Options.html" title="struct lexical_write_integer::Options">Options</a></dt><dd>Immutable options to customize writing integers.</dd><dt><a class="struct" href="struct.OptionsBuilder.html" title="struct lexical_write_integer::OptionsBuilder">Options<wbr>Builder</a></dt><dd>Builder for <a href="struct.Options.html" title="struct lexical_write_integer::Options"><code>Options</code></a>.</dd></dl><h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2><dl class="item-table"><dt><a class="enum" href="enum.Error.html" title="enum lexical_write_integer::Error">Error</a></dt><dd>Error code during parsing, indicating failure type.</dd></dl><h2 id="constants" class="section-header">Constants<a href="#constants" class="anchor">§</a></h2><dl class="item-table"><dt><a class="constant" href="constant.BUFFER_SIZE.html" title="constant lexical_write_integer::BUFFER_SIZE">BUFFER_<wbr>SIZE</a></dt><dd>Maximum number of bytes required to serialize any number with default
+options to string.</dd></dl><h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2><dl class="item-table"><dt><a class="trait" href="trait.FormattedSize.html" title="trait lexical_write_integer::FormattedSize">Formatted<wbr>Size</a></dt><dd>The size, in bytes, of formatted values.</dd><dt><a class="trait" href="trait.ToLexical.html" title="trait lexical_write_integer::ToLexical">ToLexical</a></dt><dd>Trait for numerical types that can be serialized to bytes.</dd><dt><a class="trait" href="trait.ToLexicalWithOptions.html" title="trait lexical_write_integer::ToLexicalWithOptions">ToLexical<wbr>With<wbr>Options</a></dt><dd>Trait for numerical types that can be serialized to bytes with custom
+options.</dd><dt><a class="trait" href="trait.WriteOptions.html" title="trait lexical_write_integer::WriteOptions">Write<wbr>Options</a></dt><dd>Shared trait for all writer options.</dd></dl><h2 id="types" class="section-header">Type Aliases<a href="#types" class="anchor">§</a></h2><dl class="item-table"><dt><a class="type" href="type.Result.html" title="type lexical_write_integer::Result">Result</a></dt><dd>A specialized <a href="https://doc.rust-lang.org/1.93.0/core/result/enum.Result.html" title="enum core::result::Result"><code>Result</code></a> type for lexical operations.</dd></dl></section></div></main></body></html>

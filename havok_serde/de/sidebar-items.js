@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["ReadEnumSize","Unexpected"],"trait":["ClassIndexAccess","Deserialize","DeserializeOwned","DeserializeSeed","Deserializer","EnumAccess","Error","Expected","MapAccess","SeqAccess","VariantAccess","Visitor"]};

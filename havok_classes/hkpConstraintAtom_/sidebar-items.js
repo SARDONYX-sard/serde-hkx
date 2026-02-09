@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["AtomType","SolvingMethod"],"struct":["hkpConstraintAtom"]};

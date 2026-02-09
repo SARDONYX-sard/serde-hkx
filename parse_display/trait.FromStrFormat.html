@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Parsing method used in `#[display(with = ...)]` and `#[from_str(with = ...)]`."><title>FromStrFormat in parse_display - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="parse_display" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../static.files/storage-e2aeef58.js"></script><script defer src="sidebar-items.js"></script><script defer src="../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc trait"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">FromStrFormat</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../parse_display/index.html">parse_<wbr>display</a><span class="version">0.10.0</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">From<wbr>StrFormat</a></h2><h3><a href="#required-associated-types">Required Associated Types</a></h3><ul class="block"><li><a href="#associatedtype.Err" title="Err">Err</a></li></ul><h3><a href="#required-methods">Required Methods</a></h3><ul class="block"><li><a href="#tymethod.parse" title="parse">parse</a></li></ul><h3><a href="#provided-methods">Provided Methods</a></h3><ul class="block"><li><a href="#method.regex" title="regex">regex</a></li></ul><h3><a href="#implementors">Implementors</a></h3></section><div id="rustdoc-modnav"><h2 class="in-crate"><a href="index.html">In crate parse_<wbr>display</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="index.html">parse_display</a></div><h1>Trait <span class="trait">From<wbr>StrFormat</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/parse_display/lib.rs.html#901-969">Source</a> </span></div><pre class="rust item-decl"><code>pub trait FromStrFormat&lt;T&gt; {
+    type <a href="#associatedtype.Err" class="associatedtype">Err</a>;
+
+    // Required method
+    fn <a href="#tymethod.parse" class="fn">parse</a>(&amp;self, s: &amp;<a class="primitive" href="https://doc.rust-lang.org/1.93.0/std/primitive.str.html">str</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.93.0/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;T, Self::<a class="associatedtype" href="trait.FromStrFormat.html#associatedtype.Err" title="type parse_display::FromStrFormat::Err">Err</a>&gt;;
+
+    // Provided method
+    fn <a href="#method.regex" class="fn">regex</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.93.0/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/1.93.0/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt; { ... }
+}</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Parsing method used in <a href="derive.Display.html#displaywith---from_strwith--" title="derive parse_display::Display"><code>#[display(with = ...)]</code> and <code>#[from_str(with = ...)]</code></a>.</p>
+</div></details><h2 id="required-associated-types" class="section-header">Required Associated Types<a href="#required-associated-types" class="anchor">§</a></h2><div class="methods"><section id="associatedtype.Err" class="method"><a class="src rightside" href="../src/parse_display/lib.rs.html#902">Source</a><h4 class="code-header">type <a href="#associatedtype.Err" class="associatedtype">Err</a></h4></section></div><h2 id="required-methods" class="section-header">Required Methods<a href="#required-methods" class="anchor">§</a></h2><div class="methods"><details class="toggle method-toggle" open><summary><section id="tymethod.parse" class="method"><a class="src rightside" href="../src/parse_display/lib.rs.html#905">Source</a><h4 class="code-header">fn <a href="#tymethod.parse" class="fn">parse</a>(&amp;self, s: &amp;<a class="primitive" href="https://doc.rust-lang.org/1.93.0/std/primitive.str.html">str</a>) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.93.0/core/result/enum.Result.html" title="enum core::result::Result">Result</a>&lt;T, Self::<a class="associatedtype" href="trait.FromStrFormat.html#associatedtype.Err" title="type parse_display::FromStrFormat::Err">Err</a>&gt;</h4></section></summary><div class="docblock"><p>Parsing function used in place of <a href="https://doc.rust-lang.org/1.93.0/core/str/traits/trait.FromStr.html#tymethod.from_str" title="associated function core::str::traits::FromStr::from_str"><code>FromStr::from_str</code></a>.</p>
+</div></details></div><h2 id="provided-methods" class="section-header">Provided Methods<a href="#provided-methods" class="anchor">§</a></h2><div class="methods"><details class="toggle method-toggle" open><summary><section id="method.regex" class="method"><a class="src rightside" href="../src/parse_display/lib.rs.html#966-968">Source</a><h4 class="code-header">fn <a href="#method.regex" class="fn">regex</a>(&amp;self) -&gt; <a class="enum" href="https://doc.rust-lang.org/1.93.0/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;<a class="struct" href="https://doc.rust-lang.org/1.93.0/alloc/string/struct.String.html" title="struct alloc::string::String">String</a>&gt;</h4></section></summary><div class="docblock"><p>Return a regular expression that the input string needs to match.</p>
+<p>If None is returned, the input will be a string that matches <code>.*?</code>.</p>
+<h5 id="examples"><a class="doc-anchor" href="#examples">§</a>Examples</h5>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>parse_display::{FromStr, FromStrFormat};
+
+<span class="kw">struct </span>Number;
+<span class="kw">impl </span>FromStrFormat&lt;String&gt; <span class="kw">for </span>Number {
+    <span class="kw">type </span><span class="prelude-val">Err </span>= &lt;String <span class="kw">as </span>std::str::FromStr&gt;::Err;
+    <span class="kw">fn </span>parse(<span class="kw-2">&amp;</span><span class="self">self</span>, s: <span class="kw-2">&amp;</span>str) -&gt; std::result::Result&lt;String, <span class="self">Self</span>::Err&gt; {
+        s.parse()
+    }
+    <span class="kw">fn </span>regex(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;String&gt; {
+        <span class="prelude-val">Some</span>(<span class="string">r"[0-9]+"</span>.into())
+    }
+}
+
+<span class="attr">#[derive(FromStr, PartialEq, Debug)]
+#[display(<span class="string">"{0}{1}"</span>)]
+</span><span class="kw">struct </span>X(String, String);
+
+<span class="attr">#[derive(FromStr, PartialEq, Debug)]
+#[display(<span class="string">"{0}{1}"</span>)]
+</span><span class="kw">struct </span>Y(<span class="attr">#[from_str(with = Number)] </span>String, String);
+
+<span class="macro">assert_eq!</span>(<span class="string">"123abc"</span>.parse(), <span class="prelude-val">Ok</span>(X(<span class="string">""</span>.into(), <span class="string">"123abc"</span>.into())));
+<span class="macro">assert_eq!</span>(<span class="string">"123abc"</span>.parse(), <span class="prelude-val">Ok</span>(Y(<span class="string">"123"</span>.into(), <span class="string">"abc"</span>.into())));</code></pre></div>
+<p>If the field type includes type parameters, the regex must be the same regardless of the type parameters.</p>
+<p>If the regex differs, it will panic in debug mode and result in an incorrect parse in release mode.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>parse_display::{FromStr, FromStrFormat ,ParseError};
+<span class="kw">use </span>std::any::{type_name, Any};
+<span class="kw">use </span>std::str::FromStr;
+
+<span class="kw">struct </span>TypeNameFormat;
+<span class="kw">impl</span>&lt;T: Default + Any&gt; FromStrFormat&lt;T&gt; <span class="kw">for </span>TypeNameFormat {
+    <span class="kw">type </span><span class="prelude-val">Err </span>= ParseError;
+    <span class="kw">fn </span>parse(<span class="kw-2">&amp;</span><span class="self">self</span>, _s: <span class="kw-2">&amp;</span>str) -&gt; core::result::Result&lt;T, <span class="self">Self</span>::Err&gt; {
+        <span class="prelude-val">Ok</span>(Default::default())
+    }
+    <span class="kw">fn </span>regex(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;String&gt; {
+        <span class="prelude-val">Some</span>(type_name::&lt;T&gt;().to_string())
+    }
+}
+
+<span class="attr">#[derive(FromStr)]
+</span><span class="kw">struct </span>X&lt;T: Default + std::any::Any&gt;(<span class="attr">#[from_str(with = TypeNameFormat)] </span>T);
+<span class="kw">let _ </span>= X::&lt;u32&gt;::from_str(<span class="string">"u32"</span>);
+<span class="kw">let _ </span>= X::&lt;u16&gt;::from_str(<span class="string">"u16"</span>); <span class="comment">// panic on debug mode</span></code></pre></div></div></details></div><h2 id="implementors" class="section-header">Implementors<a href="#implementors" class="anchor">§</a></h2><div id="implementors-list"></div><script src="../trait.impl/parse_display/trait.FromStrFormat.js" async></script></section></div></main></body></html>

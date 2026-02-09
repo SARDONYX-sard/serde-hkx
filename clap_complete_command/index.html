@@ -1,0 +1,61 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Examples"><title>clap_complete_command - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="clap_complete_command" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../static.files/storage-e2aeef58.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Crate clap_complete_command</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../clap_complete_command/index.html">clap_<wbr>complete_<wbr>command</a><span class="version">0.6.1</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#examples" title="Examples">Examples</a><ul><li><a href="#derive" title="Derive">Derive</a></li><li><a href="#builder" title="Builder">Builder</a></li></ul></li></ul><h3><a href="#enums">Crate Items</a></h3><ul class="block"><li><a href="#enums" title="Enums">Enums</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>clap_<wbr>complete_<wbr>command</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/clap_complete_command/lib.rs.html#1-368">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="examples"><a class="doc-anchor" href="#examples">§</a>Examples</h2><h3 id="derive"><a class="doc-anchor" href="#derive">§</a>Derive</h3>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>clap::{CommandFactory, Parser, Subcommand};
+
+<span class="attr">#[derive(Parser)]
+</span><span class="kw">struct </span>Cli {
+    <span class="attr">#[command(subcommand)]
+    </span>command: Commands,
+}
+
+<span class="attr">#[derive(Subcommand)]
+</span><span class="kw">enum </span>Commands {
+    <span class="doccomment">/// Generate shell completions
+    </span>Completions {
+        <span class="doccomment">/// The shell to generate the completions for
+        </span><span class="attr">#[arg(value_enum)]
+        </span>shell: clap_complete_command::Shell,
+    },
+}
+
+<span class="kw">let </span>cli = Cli::parse();
+
+<span class="kw">match </span>cli.command {
+    <span class="comment">// e.g. `$ cli completions bash`
+    </span>Commands::Completions { shell } =&gt; {
+        shell.generate(<span class="kw-2">&amp;mut </span>Cli::command(), <span class="kw-2">&amp;mut </span>std::io::stdout());
+    }
+}</code></pre></div><h3 id="builder"><a class="doc-anchor" href="#builder">§</a>Builder</h3>
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>clap::{Arg, Command};
+
+<span class="kw">fn </span>build_cli() -&gt; Command {
+    Command::new(<span class="macro">env!</span>(<span class="string">"CARGO_PKG_NAME"</span>))
+        .subcommand_required(<span class="bool-val">true</span>)
+        .subcommand(
+            Command::new(<span class="string">"completions"</span>)
+                .about(<span class="string">"Generate shell completions"</span>)
+                .arg(
+                    Arg::new(<span class="string">"shell"</span>)
+                        .value_name(<span class="string">"SHELL"</span>)
+                        .help(<span class="string">"The shell to generate the completions for"</span>)
+                        .required(<span class="bool-val">true</span>)
+                        .value_parser(
+                            clap::builder::EnumValueParser::&lt;clap_complete_command::Shell&gt;::new(),
+                        ),
+                ),
+        )
+}
+
+<span class="kw">let </span>matches = build_cli().get_matches();
+
+<span class="kw">match </span>matches.subcommand() {
+    <span class="prelude-val">Some</span>((<span class="string">"completions"</span>, sub_matches)) =&gt; {
+        <span class="comment">// e.g. `$ cli completions bash`
+        </span><span class="kw">if let </span><span class="prelude-val">Some</span>(shell) = sub_matches.get_one::&lt;clap_complete_command::Shell&gt;(<span class="string">"shell"</span>) {
+            <span class="kw">let </span><span class="kw-2">mut </span>command = build_cli();
+            shell.generate(<span class="kw-2">&amp;mut </span>command, <span class="kw-2">&amp;mut </span>std::io::stdout());
+        }
+    }
+    <span class="kw">_ </span>=&gt; {
+        <span class="macro">unreachable!</span>(<span class="string">"Exhausted list of subcommands and `subcommand_required` prevents `None`"</span>)
+    }
+}</code></pre></div></div></details><h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2><dl class="item-table"><dt><a class="enum" href="enum.Shell.html" title="enum clap_complete_command::Shell">Shell</a></dt><dd>A <a href="../clap_builder/derive/trait.ValueEnum.html" title="trait clap_builder::derive::ValueEnum"><code>clap::ValueEnum</code></a> for available shell completions.</dd></dl></section></div></main></body></html>

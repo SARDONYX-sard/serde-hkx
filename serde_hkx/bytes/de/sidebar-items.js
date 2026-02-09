@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["from_bytes","from_bytes_with_opt","from_partial_bytes","from_partial_bytes_with_opt"],"mod":["parser"],"struct":["BytesDeserializer"]};

@@ -1,0 +1,305 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Fast and compact float-to-string conversions."><title>lexical_write_float - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="lexical_write_float" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../static.files/storage-e2aeef58.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Crate lexical_write_float</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../lexical_write_float/index.html">lexical_<wbr>write_<wbr>float</a><span class="version">1.0.6</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#getting-started" title="Getting Started">Getting Started</a></li><li><a href="#optionsformatting-api" title="Options/Formatting API">Options/Formatting API</a></li><li><a href="#features" title="Features">Features</a><ul><li><a href="#format" title="format">format</a></li><li><a href="#power-of-two" title="power-of-two">power-of-two</a></li><li><a href="#radix" title="radix">radix</a></li><li><a href="#compact" title="compact">compact</a></li><li><a href="#f16" title="f16">f16</a></li><li><a href="#std" title="std">std</a></li></ul></li><li><a href="#comprehensive-configuration" title="Comprehensive Configuration">Comprehensive Configuration</a><ul><li><a href="#number-format" title="Number Format">Number Format</a></li><li><a href="#options-api" title="Options API">Options API</a></li><li><a href="#examples" title="Examples">Examples</a></li></ul></li><li><a href="#higher-level-apis" title="Higher-Level APIs">Higher-Level APIs</a></li><li><a href="#version-support" title="Version Support">Version Support</a></li><li><a href="#algorithms" title="Algorithms">Algorithms</a></li><li><a href="#design" title="Design">Design</a></li></ul><h3><a href="#modules">Crate Items</a></h3><ul class="block"><li><a href="#modules" title="Modules">Modules</a></li><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#enums" title="Enums">Enums</a></li><li><a href="#constants" title="Constants">Constants</a></li><li><a href="#traits" title="Traits">Traits</a></li><li><a href="#types" title="Type Aliases">Type Aliases</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>lexical_<wbr>write_<wbr>float</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/lexical_write_float/lib.rs.html#1-503">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Fast and compact float-to-string conversions.</p>
+<p>This contains high-performance methods to write floating-point numbers
+directly to bytes, can be converted to <a href="https://doc.rust-lang.org/1.93.0/std/primitive.str.html" title="primitive str"><code>str</code></a> using
+<a href="https://doc.rust-lang.org/1.93.0/core/str/converts/fn.from_utf8.html" title="fn core::str::converts::from_utf8"><code>str::from_utf8</code></a>. Using <a href="trait.ToLexical.html#tymethod.to_lexical" title="method lexical_write_float::ToLexical::to_lexical"><code>to_lexical</code></a> is analogous to <a href="https://doc.rust-lang.org/alloc/string/trait.ToString.html#tymethod.to_string"><code>to_string</code></a>,
+just writing to an existing buffer.</p>
+<p>It also contains extensively formatting control, including the use of
+exponent notation, if to round or truncate floats, the number of significant
+digits, and more.</p>
+<h2 id="getting-started"><a class="doc-anchor" href="#getting-started">§</a>Getting Started</h2>
+<p>To write a number to bytes, use <a href="trait.ToLexical.html#tymethod.to_lexical" title="method lexical_write_float::ToLexical::to_lexical"><code>to_lexical</code></a>:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_write_float::{FormattedSize, ToLexical};
+
+<span class="kw">let </span><span class="kw-2">mut </span>buffer = [<span class="number">0u8</span>; f64::FORMATTED_SIZE_DECIMAL];
+<span class="kw">let </span>digits = <span class="number">1.234f64</span>.to_lexical(<span class="kw-2">&amp;mut </span>buffer);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"1.234"</span>));</code></pre></div>
+<p>With the default options, using <a href="trait.FormattedSize.html#associatedconstant.FORMATTED_SIZE_DECIMAL" title="associated constant lexical_write_float::FormattedSize::FORMATTED_SIZE_DECIMAL"><code>FORMATTED_SIZE_DECIMAL</code></a>
+guarantees the buffer will be large enough to write the digits for all
+numbers of that type.</p>
+<h2 id="optionsformatting-api"><a class="doc-anchor" href="#optionsformatting-api">§</a>Options/Formatting API</h2>
+<p>Each float formatter contains extensive formatting control, including
+a maximum number of significant digits written, a minimum number of
+significant digits remaining, the positive and negative exponent break
+points (at what exponent, in scientific-notation, to force scientific
+notation), whether to force or disable scientific notation, the rounding
+mode for truncated float strings, and how to display non-finite floats.
+While using custom float options, you must use
+<a href="struct.Options.html#method.buffer_size_const" title="method lexical_write_float::Options::buffer_size_const"><code>Options::buffer_size_const</code></a> to determine the correct buffer size:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_write_float::{format, options, ToLexicalWithOptions};
+
+<span class="kw">const </span>BUFFER_SIZE: usize = options::RUST_LITERAL
+    .buffer_size_const::&lt;f64, { format::RUST_LITERAL }&gt;();
+
+<span class="kw">fn </span>write_rust_float(f: f64) -&gt; ([u8; BUFFER_SIZE], usize) {
+    <span class="kw">let </span><span class="kw-2">mut </span>buffer = [<span class="number">0u8</span>; BUFFER_SIZE];
+    <span class="kw">let </span>digits = f.to_lexical_with_options::&lt;{ format::RUST_LITERAL }&gt;(
+        <span class="kw-2">&amp;mut </span>buffer,
+        <span class="kw-2">&amp;</span>options::RUST_LITERAL
+    );
+    <span class="kw">let </span>count = digits.len();
+    (buffer, count)
+}
+
+<span class="kw">let </span>(digits, count) = write_rust_float(<span class="number">3.5</span>);
+<span class="macro">assert_eq!</span>(str::from_utf8(<span class="kw-2">&amp;</span>digits[..count]), <span class="prelude-val">Ok</span>(<span class="string">"3.5"</span>));</code></pre></div>
+<p>For additional supported options for customizing how to write floats, see
+the <a href="struct.OptionsBuilder.html" title="struct lexical_write_float::OptionsBuilder"><code>OptionsBuilder</code></a>. If you’re looking to parse floats with a grammar
+for a programming language, many pre-defined options such as for <a href="options/constant.JSON.html" title="constant lexical_write_float::options::JSON"><code>JSON</code></a>
+exist in <a href="options/index.html" title="mod lexical_write_float::options"><code>options</code></a>. For even more customization, see the
+<a href="#format"><code>format</code></a> and <a href="#comprehensive-configuration">Comprehensive Configuration</a> sections
+below.</p>
+<h2 id="features"><a class="doc-anchor" href="#features">§</a>Features</h2>
+<ul>
+<li><code>format</code> - Add support for custom float formatting.</li>
+<li><code>power-of-two</code> - Add support for writing power-of-two float strings.</li>
+<li><code>radix</code> - Add support for strings of any radix.</li>
+<li><code>compact</code> - Reduce code size at the cost of performance.</li>
+<li><code>f16</code> - Enable support for half-precision <a href="https://en.wikipedia.org/wiki/Half-precision_floating-point_format"><code>f16</code></a> and
+<a href="https://en.wikipedia.org/wiki/Bfloat16_floating-point_format"><code>bf16</code></a> floats.</li>
+<li><code>std</code> (Default) - Disable to allow use in a <a href="https://docs.rust-embedded.org/book/intro/no-std.html"><code>no_std</code></a> environment.</li>
+</ul>
+<p>A complete description of supported features includes:</p>
+<h5 id="format"><a class="doc-anchor" href="#format">§</a>format</h5>
+<p>Add support custom float formatting specifications. This should be used in
+conjunction with <a href="struct.Options.html" title="struct lexical_write_float::Options"><code>Options</code></a> for extensible float writing. You must use
+<a href="struct.Options.html#method.buffer_size_const" title="method lexical_write_float::Options::buffer_size_const"><code>Options::buffer_size_const</code></a> to determine the number of bytes requires in
+the buffer. This allows changing the use of exponent notation, requiring or
+not allowing signs, and more.</p>
+<h6 id="json"><a class="doc-anchor" href="#json">§</a>JSON</h6>
+<p>For example, in JSON, the following floats are valid or invalid:</p>
+<div class="example-wrap"><pre class="language-text"><code>-1          // valid
++1          // invalid
+1           // valid
+1.          // invalid
+.1          // invalid
+0.1         // valid
+nan         // invalid
+inf         // invalid
+Infinity    // invalid</code></pre></div>
+<p>All of the finite numbers are valid in Rust, and Rust supports non-finite
+floats. In order to write standard-conforming JSON floats using
+<code>lexical-core</code>, you may use the following approach:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_write_float::{format, options, ToLexicalWithOptions};
+
+<span class="kw">const </span>BUFFER_SIZE: usize = options::JSON.buffer_size_const::&lt;f64, { format::JSON }&gt;();
+
+<span class="kw">fn </span>write_json_float(f: f64) -&gt; ([u8; BUFFER_SIZE], usize) {
+    <span class="kw">let </span><span class="kw-2">mut </span>buffer = [<span class="number">0u8</span>; BUFFER_SIZE];
+    <span class="kw">let </span>digits = f.to_lexical_with_options::&lt;{ format::JSON }&gt;(
+        <span class="kw-2">&amp;mut </span>buffer,
+        <span class="kw-2">&amp;</span>options::JSON
+    );
+    <span class="kw">let </span>count = digits.len();
+    (buffer, count)
+}
+
+<span class="kw">let </span>(digits, count) = write_json_float(<span class="number">3.5</span>);
+<span class="macro">assert_eq!</span>(str::from_utf8(<span class="kw-2">&amp;</span>digits[..count]), <span class="prelude-val">Ok</span>(<span class="string">"3.5"</span>));</code></pre></div><h6 id="custom-signs"><a class="doc-anchor" href="#custom-signs">§</a>Custom Signs</h6>
+<p>An example of building a custom format to ensure positive signs are always
+written is as follows:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_write_float::{FormattedSize, NumberFormatBuilder, Options, ToLexicalWithOptions};
+
+<span class="kw">const </span>FORMAT: u128 = NumberFormatBuilder::new()
+    <span class="comment">// require a `+` or `-` sign before the number
+    </span>.required_mantissa_sign(<span class="bool-val">true</span>)
+    <span class="comment">// require a `+` or `-` sign before the exponent digits
+    </span>.required_exponent_sign(<span class="bool-val">true</span>)
+    <span class="comment">// build the format, panicking if the format is invalid
+    </span>.build_strict();
+<span class="kw">const </span>OPTIONS: Options = Options::new();
+
+<span class="kw">const </span>BUFFER_SIZE: usize = OPTIONS.buffer_size_const::&lt;f64, FORMAT&gt;();
+<span class="kw">let </span><span class="kw-2">mut </span>buffer = [<span class="number">0u8</span>; BUFFER_SIZE];
+
+<span class="kw">let </span>digits = <span class="number">1.234e300f64</span>.to_lexical_with_options::&lt;FORMAT&gt;(<span class="kw-2">&amp;mut </span>buffer, <span class="kw-2">&amp;</span>OPTIONS);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"+1.234e+300"</span>));</code></pre></div>
+<p>Enabling the <a href="index.html#format" title="mod lexical_write_float"><code>format</code></a> API significantly increases compile
+times, however, it enables a large amount of customization in how floats are
+written.</p>
+<h5 id="power-of-two"><a class="doc-anchor" href="#power-of-two">§</a>power-of-two</h5>
+<p>Enable writing numbers that are powers of two, that is, <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>,
+and <code>32</code>. In these cases, you should use <a href="trait.FormattedSize.html#associatedconstant.FORMATTED_SIZE" title="associated constant lexical_write_float::FormattedSize::FORMATTED_SIZE"><code>FORMATTED_SIZE</code></a> to create a
+sufficiently large buffer.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_write_float::{FormattedSize, NumberFormatBuilder, Options, ToLexicalWithOptions};
+
+<span class="kw">let </span><span class="kw-2">mut </span>buffer = [<span class="number">0u8</span>; f64::FORMATTED_SIZE];
+<span class="kw">const </span>BINARY: u128 = NumberFormatBuilder::binary();
+<span class="kw">const </span>OPTIONS: Options = Options::new();
+<span class="kw">let </span>digits = <span class="number">1.234f64</span>.to_lexical_with_options::&lt;BINARY&gt;(<span class="kw-2">&amp;mut </span>buffer, <span class="kw-2">&amp;</span>OPTIONS);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"1.0011101111100111011011001000101101000011100101011"</span>));</code></pre></div><h5 id="radix"><a class="doc-anchor" href="#radix">§</a>radix</h5>
+<p>Enable writing numbers using all radixes from <code>2</code> to <code>36</code>. This requires
+more static storage than <a href="index.html#power-of-two" title="mod lexical_write_float"><code>power-of-two</code></a>, and increases
+compile times, but can be quite useful for esoteric programming languages
+which use duodecimal floats, for example.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_write_float::{FormattedSize, NumberFormatBuilder, Options, ToLexicalWithOptions};
+
+<span class="kw">const </span>FORMAT: u128 = NumberFormatBuilder::from_radix(<span class="number">12</span>);
+<span class="kw">const </span>OPTIONS: Options = Options::new();
+
+<span class="kw">let </span><span class="kw-2">mut </span>buffer = [<span class="number">0u8</span>; f64::FORMATTED_SIZE];
+<span class="kw">let </span>digits = <span class="number">1.234f64</span>.to_lexical_with_options::&lt;FORMAT&gt;(<span class="kw-2">&amp;mut </span>buffer, <span class="kw-2">&amp;</span>OPTIONS);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"1.29842830A44BAA2"</span>));</code></pre></div><h5 id="compact"><a class="doc-anchor" href="#compact">§</a>compact</h5>
+<p>Reduce the generated code size at the cost of performance. This minimizes
+the number of static tables, inlining, and generics used, drastically
+reducing the size of the generated binaries. However, this resulting
+performance of the generated code is much lower.</p>
+<h5 id="f16"><a class="doc-anchor" href="#f16">§</a>f16</h5>
+<p>This enables the use of the half-precision floats <a href="https://en.wikipedia.org/wiki/Half-precision_floating-point_format"><code>f16</code></a> and
+<a href="https://en.wikipedia.org/wiki/Bfloat16_floating-point_format"><code>bf16</code></a>. However, since these have limited hardware support
+and are primarily used for vectorized operations, they are formatted as if
+they were an <a href="https://doc.rust-lang.org/1.93.0/std/primitive.f32.html" title="primitive f32"><code>f32</code></a>. Due to the low precision of 16-bit floats, the results
+may appear to have significant rounding error.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_write_float::{f16, FormattedSize, ToLexical};
+
+<span class="kw">let </span><span class="kw-2">mut </span>buffer = [<span class="number">0u8</span>; f16::FORMATTED_SIZE];
+<span class="kw">let </span>value = f16::from_f64_const(<span class="number">1.234f64</span>);
+<span class="kw">let </span>digits = value.to_lexical(<span class="kw-2">&amp;mut </span>buffer);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"1.234375"</span>));</code></pre></div><h5 id="std"><a class="doc-anchor" href="#std">§</a>std</h5>
+<p>Enable use of the standard library. Currently, the standard library
+is not used, and may be disabled without any change in functionality
+on stable.</p>
+<h2 id="comprehensive-configuration"><a class="doc-anchor" href="#comprehensive-configuration">§</a>Comprehensive Configuration</h2>
+<p><code>lexical-write-float</code> provides two main levels of configuration:</p>
+<ul>
+<li>The <a href="struct.NumberFormatBuilder.html" title="struct lexical_write_float::NumberFormatBuilder"><code>NumberFormatBuilder</code></a>, creating a packed struct with custom
+formatting options.</li>
+<li>The <a href="struct.Options.html" title="struct lexical_write_float::Options"><code>Options</code></a> API.</li>
+</ul>
+<h3 id="number-format"><a class="doc-anchor" href="#number-format">§</a>Number Format</h3>
+<p>The number format class provides numerous flags to specify number writing.
+When the <a href="#power-of-two"><code>power-of-two</code></a> feature is enabled, additional
+flags are added:</p>
+<ul>
+<li>The radix for the significant digits (default <code>10</code>).</li>
+<li>The radix for the exponent base (default <code>10</code>).</li>
+<li>The radix for the exponent digits (default <code>10</code>).</li>
+</ul>
+<p>When the <a href="#format"><code>format</code></a> feature is enabled, numerous other syntax and
+digit separator flags are enabled, including:</p>
+<ul>
+<li>Requiring or ommitting <code>+</code> signs.</li>
+<li>If to use exponent notation.</li>
+</ul>
+<p>Many pre-defined constants therefore exist to simplify common use-cases,
+including:</p>
+<ul>
+<li><a href="options/constant.JSON.html" title="constant lexical_write_float::options::JSON"><code>JSON</code></a>, <a href="format/constant.XML.html" title="constant lexical_write_float::format::XML"><code>XML</code></a>, <a href="format/constant.TOML.html" title="constant lexical_write_float::format::TOML"><code>TOML</code></a>, <a href="format/constant.YAML.html" title="constant lexical_write_float::format::YAML"><code>YAML</code></a>, <a href="format/constant.SQLITE.html" title="constant lexical_write_float::format::SQLITE"><code>SQLite</code></a>, and many more.</li>
+<li><a href="format/constant.RUST_LITERAL.html" title="constant lexical_write_float::format::RUST_LITERAL"><code>Rust</code></a>, <a href="format/constant.PYTHON_LITERAL.html" title="constant lexical_write_float::format::PYTHON_LITERAL"><code>Python</code></a>, <a href="format/constant.CSHARP_LITERAL.html" title="constant lexical_write_float::format::CSHARP_LITERAL"><code>C#</code></a>, <a href="format/constant.FORTRAN_LITERAL.html" title="constant lexical_write_float::format::FORTRAN_LITERAL"><code>FORTRAN</code></a>, <a href="format/constant.COBOL_LITERAL.html" title="constant lexical_write_float::format::COBOL_LITERAL"><code>COBOL</code></a> literals and strings,
+and many more.</li>
+</ul>
+<p>For a list of all supported fields, see <a href="struct.NumberFormatBuilder.html#write-float-fields" title="struct lexical_write_float::NumberFormatBuilder">Write
+Float Fields</a>.</p>
+<!-- Spacer for rustfmt -->
+<h3 id="options-api"><a class="doc-anchor" href="#options-api">§</a>Options API</h3>
+<p>The Options API provides high-level options to specify number parsing
+or writing, options not intrinsically tied to a number format.
+For example, the Options API provides:</p>
+<ul>
+<li>The <a href="struct.Options.html#method.exponent" title="method lexical_write_float::Options::exponent"><code>exponent</code></a> character (defaults to <code>b'e'</code> or
+<code>b'^'</code>, depending on the radix).</li>
+<li>The <a href="struct.Options.html#method.decimal_point" title="method lexical_write_float::Options::decimal_point"><code>decimal point</code></a> character (defaults to
+<code>b'.'</code>).</li>
+<li>Custom <a href="https://doc.rust-lang.org/1.93.0/std/primitive.f64.html#associatedconstant.NAN" title="associated constant f64::NAN"><code>NaN</code></a> and <a href="https://doc.rust-lang.org/1.93.0/std/primitive.f64.html#associatedconstant.INFINITY" title="associated constant f64::INFINITY"><code>Infinity</code></a> string
+<a href="struct.Options.html#method.nan_string" title="method lexical_write_float::Options::nan_string"><code>representations</code></a>.</li>
+<li>Whether to <a href="struct.Options.html#method.trim_floats" title="method lexical_write_float::Options::trim_floats"><code>trim</code></a> the fraction component from
+integral floats.</li>
+<li>The exponent <a href="struct.Options.html#method.positive_exponent_break" title="method lexical_write_float::Options::positive_exponent_break"><code>break-point</code></a> for
+scientific notation.</li>
+<li>The <a href="struct.Options.html#method.max_significant_digits" title="method lexical_write_float::Options::max_significant_digits"><code>maximum</code></a> and
+<a href="struct.Options.html#method.min_significant_digits" title="method lexical_write_float::Options::min_significant_digits"><code>minimum</code></a> number of significant digits
+to write.</li>
+<li>The rounding <a href="struct.Options.html#method.round_mode" title="method lexical_write_float::Options::round_mode"><code>mode</code></a> when truncating significant
+digits while writing.</li>
+</ul>
+<p>In addition, pre-defined constants for each category of options may
+be found in their respective modules, for example, <a href="options/constant.JSON.html" title="constant lexical_write_float::options::JSON"><code>JSON</code></a>.</p>
+<h3 id="examples"><a class="doc-anchor" href="#examples">§</a>Examples</h3>
+<p>An example of creating your own options to parse European-style
+numbers (which use commas as decimal points, controlling the number
+of significant digits, special number representations, and more, is as
+follows:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_write_float::{FormattedSize, Options, ToLexicalWithOptions};
+
+<span class="kw">const </span>FORMAT: u128 = lexical_write_float::format::STANDARD;
+<span class="kw">const </span>CUSTOM: Options = Options::builder()
+    <span class="comment">// write exponents as "1.2^10" and not "1.2e10"
+    </span>.exponent(<span class="string">b'^'</span>)
+    <span class="comment">// use the European decimal point, so "1,2" and not "1.2"
+    </span>.decimal_point(<span class="string">b','</span>)
+    <span class="comment">// write NaN and Infinity using the following formats
+    </span>.nan_string(<span class="prelude-val">Some</span>(<span class="string">b"nan"</span>))
+    .inf_string(<span class="prelude-val">Some</span>(<span class="string">b"inf"</span>))
+    <span class="comment">// set the minimum and maximum number of significant digits to write;
+    </span>.min_significant_digits(num::NonZeroUsize::new(<span class="number">3</span>))
+    .max_significant_digits(num::NonZeroUsize::new(<span class="number">5</span>))
+    .build_strict();
+
+<span class="kw">const </span>BUFFER_SIZE: usize = CUSTOM.buffer_size_const::&lt;f64, FORMAT&gt;();
+<span class="kw">let </span><span class="kw-2">mut </span>buffer = [<span class="number">0u8</span>; BUFFER_SIZE];
+
+<span class="comment">// write 4 digits, no exponent notation
+</span><span class="kw">let </span>digits = <span class="number">1.234f64</span>.to_lexical_with_options::&lt;FORMAT&gt;(<span class="kw-2">&amp;mut </span>buffer, <span class="kw-2">&amp;</span>CUSTOM);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"1,234"</span>));
+
+<span class="comment">// write 6 digits, rounding to 5
+</span><span class="kw">let </span>digits = <span class="number">1.23456f64</span>.to_lexical_with_options::&lt;FORMAT&gt;(<span class="kw-2">&amp;mut </span>buffer, <span class="kw-2">&amp;</span>CUSTOM);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"1,2346"</span>));
+
+<span class="comment">// write 6 digits, rounding to 5, with exponent notation
+</span><span class="kw">let </span>digits = <span class="number">1.23456e300f64</span>.to_lexical_with_options::&lt;FORMAT&gt;(<span class="kw-2">&amp;mut </span>buffer, <span class="kw-2">&amp;</span>CUSTOM);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"1,2346^300"</span>));
+
+<span class="comment">// write 4 digits, no exponent notation
+</span><span class="kw">let </span>digits = <span class="number">1.2f64</span>.to_lexical_with_options::&lt;FORMAT&gt;(<span class="kw-2">&amp;mut </span>buffer, <span class="kw-2">&amp;</span>CUSTOM);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"1,20"</span>));
+
+<span class="comment">// write a literal NaN string
+</span><span class="kw">let </span>digits = f64::NAN.to_lexical_with_options::&lt;FORMAT&gt;(<span class="kw-2">&amp;mut </span>buffer, <span class="kw-2">&amp;</span>CUSTOM);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"nan"</span>));
+
+<span class="comment">// write a literal +Infinity string
+</span><span class="kw">let </span>digits = f64::INFINITY.to_lexical_with_options::&lt;FORMAT&gt;(<span class="kw-2">&amp;mut </span>buffer, <span class="kw-2">&amp;</span>CUSTOM);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"inf"</span>));</code></pre></div><h2 id="higher-level-apis"><a class="doc-anchor" href="#higher-level-apis">§</a>Higher-Level APIs</h2>
+<p>If you would like support for writing to <a href="https://doc.rust-lang.org/alloc/string/struct.String.html"><code>String</code></a> directly, use
+<a href="https://crates.io/crates/lexical"><code>lexical</code></a> instead. If you would like an API that supports multiple numeric
+conversions rather than just writing integers, use <a href="https://crates.io/crates/lexical-core"><code>lexical-core</code></a> instead.</p>
+<h2 id="version-support"><a class="doc-anchor" href="#version-support">§</a>Version Support</h2>
+<p>The minimum, standard, required version is <a href="https://blog.rust-lang.org/2022/08/11/Rust-1.63.0.html"><code>1.63.0</code></a>, for
+const generic support. Older versions of lexical support older Rust
+versions.</p>
+<h2 id="algorithms"><a class="doc-anchor" href="#algorithms">§</a>Algorithms</h2>
+<p>There’s currently 5 algorithms used, depending on the requirements.</p>
+<ol>
+<li>Compact for decimal strings uses the Grisu algorithm.</li>
+<li>An optimized algorithm based on the Dragonbox algorithm.</li>
+<li>An optimized algorithm for formatting to string with power-of-two
+radixes.</li>
+<li>An optimized algorithm for hexadecimal floats.</li>
+<li>A fallback algorithm for all other radixes.</li>
+</ol>
+<p>The Grisu algorithm is based on “Printing Floating-Point Numbers Quickly
+and Accurately with Integers”, by Florian Loitsch, available online
+<a href="https://www.cs.tufts.edu/~nr/cs257/archive/florian-loitsch/printf.pdf">here</a>.
+The dragonbox algorithm is based on the reference C++ implementation,
+hosted <a href="https://github.com/jk-jeon/dragonbox/">here</a>, and the algorithm
+is described in depth
+<a href="https://github.com/jk-jeon/dragonbox/blob/master/other_files/Dragonbox.pdf">here</a>.
+The radix algorithm is adapted from the V8 codebase, and may be found
+<a href="https://github.com/v8/v8">here</a>.</p>
+<h2 id="design"><a class="doc-anchor" href="#design">§</a>Design</h2>
+<ul>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-write-float/docs/Algorithm.md">Algorithm Approach</a></li>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-write-float/docs/Benchmarks.md">Benchmarks</a></li>
+<li><a href="https://github.com/Alexhuszagh/lexical-benchmarks">Comprehensive Benchmarks</a></li>
+</ul>
+</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="format/index.html" title="mod lexical_write_float::format">format</a></dt><dd>The creation and processing of number format packed structs.</dd><dt><a class="mod" href="options/index.html" title="mod lexical_write_float::options">options</a></dt><dd>Configuration options for writing floats.</dd></dl><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.NumberFormat.html" title="struct lexical_write_float::NumberFormat">Number<wbr>Format</a></dt><dd>Helper to access features from the packed format struct.</dd><dt><a class="struct" href="struct.NumberFormatBuilder.html" title="struct lexical_write_float::NumberFormatBuilder">Number<wbr>Format<wbr>Builder</a></dt><dd>Validating builder for <a href="struct.NumberFormat.html" title="struct lexical_write_float::NumberFormat"><code>NumberFormat</code></a> from the provided specifications.</dd><dt><a class="struct" href="struct.Options.html" title="struct lexical_write_float::Options">Options</a></dt><dd>Options to customize writing floats.</dd><dt><a class="struct" href="struct.OptionsBuilder.html" title="struct lexical_write_float::OptionsBuilder">Options<wbr>Builder</a></dt><dd>Builder for <a href="struct.Options.html" title="struct lexical_write_float::Options"><code>Options</code></a>.</dd></dl><h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2><dl class="item-table"><dt><a class="enum" href="enum.Error.html" title="enum lexical_write_float::Error">Error</a></dt><dd>Error code during parsing, indicating failure type.</dd><dt><a class="enum" href="enum.RoundMode.html" title="enum lexical_write_float::RoundMode">Round<wbr>Mode</a></dt><dd>Enumeration for how to round floats with precision control.</dd></dl><h2 id="constants" class="section-header">Constants<a href="#constants" class="anchor">§</a></h2><dl class="item-table"><dt><a class="constant" href="constant.BUFFER_SIZE.html" title="constant lexical_write_float::BUFFER_SIZE">BUFFER_<wbr>SIZE</a></dt><dd>Maximum number of bytes required to serialize any number with default
+options to string.</dd></dl><h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2><dl class="item-table"><dt><a class="trait" href="trait.FormattedSize.html" title="trait lexical_write_float::FormattedSize">Formatted<wbr>Size</a></dt><dd>The size, in bytes, of formatted values.</dd><dt><a class="trait" href="trait.ToLexical.html" title="trait lexical_write_float::ToLexical">ToLexical</a></dt><dd>Trait for numerical types that can be serialized to bytes.</dd><dt><a class="trait" href="trait.ToLexicalWithOptions.html" title="trait lexical_write_float::ToLexicalWithOptions">ToLexical<wbr>With<wbr>Options</a></dt><dd>Trait for numerical types that can be serialized to bytes with custom
+options.</dd><dt><a class="trait" href="trait.WriteOptions.html" title="trait lexical_write_float::WriteOptions">Write<wbr>Options</a></dt><dd>Shared trait for all writer options.</dd></dl><h2 id="types" class="section-header">Type Aliases<a href="#types" class="anchor">§</a></h2><dl class="item-table"><dt><a class="type" href="type.Result.html" title="type lexical_write_float::Result">Result</a></dt><dd>A specialized <a href="https://doc.rust-lang.org/1.93.0/core/result/enum.Result.html" title="enum core::result::Result"><code>Result</code></a> type for lexical operations.</dd></dl></section></div></main></body></html>

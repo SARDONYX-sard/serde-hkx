@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["CharacterControlCommand"],"struct":["hkbCharacterControlCommand"]};

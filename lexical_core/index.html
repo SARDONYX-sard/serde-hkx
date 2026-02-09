@@ -1,0 +1,380 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Fast lexical conversion routines for a `no_std` environment."><title>lexical_core - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="lexical_core" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../static.files/storage-e2aeef58.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Crate lexical_core</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../lexical_core/index.html">lexical_<wbr>core</a><span class="version">1.0.6</span></h2></div><div class="sidebar-elems"><ul class="block"><li><a id="all-types" href="all.html">All Items</a></li></ul><section id="rustdoc-toc"><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#getting-started" title="Getting Started">Getting Started</a><ul><li><a href="#parse-api" title="Parse API">Parse API</a></li><li><a href="#write-api" title="Write API">Write API</a></li></ul></li><li><a href="#conversion-api" title="Conversion API">Conversion API</a></li><li><a href="#optionsformatting-api" title="Options/Formatting API">Options/Formatting API</a></li><li><a href="#features" title="Features">Features</a><ul><li><a href="#write-integers" title="write-integers">write-integers</a></li><li><a href="#write-floats" title="write-floats">write-floats</a></li><li><a href="#parse-integers" title="parse-integers">parse-integers</a></li><li><a href="#parsing-floats" title="parsing-floats">parsing-floats</a></li><li><a href="#format" title="format">format</a></li><li><a href="#power-of-two" title="power-of-two">power-of-two</a></li><li><a href="#radix" title="radix">radix</a></li><li><a href="#compact" title="compact">compact</a></li><li><a href="#std" title="std">std</a></li></ul></li><li><a href="#comprehensive-configuration" title="Comprehensive Configuration">Comprehensive Configuration</a><ul><li><a href="#number-format" title="Number Format">Number Format</a></li><li><a href="#options-api" title="Options API">Options API</a></li><li><a href="#examples" title="Examples">Examples</a></li></ul></li><li><a href="#version-support" title="Version Support">Version Support</a></li><li><a href="#algorithms" title="Algorithms">Algorithms</a></li><li><a href="#benchmarks" title="Benchmarks">Benchmarks</a></li><li><a href="#design" title="Design">Design</a></li><li><a href="#safety-guarantees" title="Safety Guarantees">Safety Guarantees</a></li></ul><h3><a href="#modules">Crate Items</a></h3><ul class="block"><li><a href="#modules" title="Modules">Modules</a></li><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#enums" title="Enums">Enums</a></li><li><a href="#constants" title="Constants">Constants</a></li><li><a href="#traits" title="Traits">Traits</a></li><li><a href="#functions" title="Functions">Functions</a></li><li><a href="#types" title="Type Aliases">Type Aliases</a></li></ul></section><div id="rustdoc-modnav"></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content"><div class="main-heading"><h1>Crate <span>lexical_<wbr>core</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/lexical_core/lib.rs.html#1-1176">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Fast lexical conversion routines for a <a href="https://docs.rust-embedded.org/book/intro/no-std.html"><code>no_std</code></a> environment.</p>
+<p><code>lexical-core</code> is a high-performance library for number-to-string and
+string-to-number conversions, without requiring a system
+allocator. If you would like to use a library that writes to <a href="https://doc.rust-lang.org/alloc/string/struct.String.html"><code>String</code></a>,
+look at <a href="https://crates.io/crates/lexical">lexical</a> instead. In addition
+to high performance, it’s also highly configurable, supporting nearly
+every float and integer format available.</p>
+<p><code>lexical-core</code> is well-tested, and has been downloaded more than 50 million
+times and currently has no known errors in correctness. <code>lexical-core</code>
+prioritizes performance above all else, and is competitive or faster
+than any other float or integer parser and writer.</p>
+<p>In addition, despite having a large number of features, configurability,
+and a focus on performance, it also aims to have fast compile times.
+Recent versions also add <a href="#compact"><code>support</code></a> for smaller binary sizes, as
+well ideal for embedded or web environments, where executable bloat can
+be much more detrimental than performance.</p>
+<h2 id="getting-started"><a class="doc-anchor" href="#getting-started">§</a>Getting Started</h2><h5 id="parse-api"><a class="doc-anchor" href="#parse-api">§</a>Parse API</h5>
+<p>The main parsing API is <a href="fn.parse.html" title="fn lexical_core::parse"><code>parse</code></a> and <a href="fn.parse_partial.html" title="fn lexical_core::parse_partial"><code>parse_partial</code></a>. For example,
+to parse a number from bytes, validating the entire input is a number:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// String to number using Rust slices.
+// The argument is the byte string parsed.
+</span><span class="kw">let </span>f: f32 = lexical_core::parse(<span class="string">b"3.5"</span>).unwrap();   <span class="comment">// 3.5
+</span><span class="kw">let </span>i: i32 = lexical_core::parse(<span class="string">b"15"</span>).unwrap();    <span class="comment">// 15</span></code></pre></div>
+<p>All <code>lexical-core</code> parsers are validating, they check the that entire
+input data is correct, and stop parsing when invalid data is found,
+numerical overflow, or other errors:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>r = lexical_core::parse::&lt;u8&gt;(<span class="string">b"256"</span>); <span class="comment">// Err(ErrorCode::Overflow.into())
+</span><span class="kw">let </span>r = lexical_core::parse::&lt;u8&gt;(<span class="string">b"1a5"</span>); <span class="comment">// Err(ErrorCode::InvalidDigit.into())</span></code></pre></div>
+<p>For streaming APIs or those incrementally parsing data fed to a parser,
+where the input data is known to be a float but where the float ends is
+currently unknown, the partial parsers will both return the data it was
+able to parse and the number of bytes processed:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>r = lexical_core::parse_partial::&lt;i8&gt;(<span class="string">b"3a5"</span>); <span class="comment">// Ok((3, 1))</span></code></pre></div><h5 id="write-api"><a class="doc-anchor" href="#write-api">§</a>Write API</h5>
+<p>The main parsing API is <a href="fn.write.html" title="fn lexical_core::write"><code>write</code></a>. For example, to write a number to an
+existing buffer:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_core::FormattedSize;
+
+<span class="kw">let </span><span class="kw-2">mut </span>buf = [<span class="string">b'0'</span>; f64::FORMATTED_SIZE];
+<span class="kw">let </span>slc = lexical_core::write::&lt;f64&gt;(<span class="number">15.1</span>, <span class="kw-2">&amp;mut </span>buf);
+<span class="macro">assert_eq!</span>(slc, <span class="string">b"15.1"</span>);</code></pre></div>
+<p>If a buffer of an insufficient size is provided, the writer will panic:</p>
+
+<div class="example-wrap should_panic"><a href="#" class="tooltip" title="This example panics">ⓘ</a><pre class="rust rust-example-rendered"><code><span class="kw">let </span><span class="kw-2">mut </span>buf = [<span class="string">b'0'</span>; <span class="number">1</span>];
+<span class="kw">let </span>digits = lexical_core::write::&lt;i64&gt;(<span class="number">15</span>, <span class="kw-2">&amp;mut </span>buf);</code></pre></div>
+<p>In order to guarantee the buffer is large enough, always ensure there
+are at least <a href="trait.FormattedSize.html#associatedconstant.FORMATTED_SIZE_DECIMAL" title="associated constant lexical_core::FormattedSize::FORMATTED_SIZE_DECIMAL"><code>T::FORMATTED_SIZE_DECIMAL</code></a> bytes, which requires the
+<a href="trait.FormattedSize.html" title="trait lexical_core::FormattedSize"><code>FormattedSize</code></a> trait to be in scope.</p>
+<!-- References -->
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_core::FormattedSize;
+
+<span class="kw">let </span><span class="kw-2">mut </span>buf = [<span class="string">b'0'</span>; f64::FORMATTED_SIZE];
+<span class="kw">let </span>slc = lexical_core::write::&lt;f64&gt;(<span class="number">15.1</span>, <span class="kw-2">&amp;mut </span>buf);
+<span class="macro">assert_eq!</span>(slc, <span class="string">b"15.1"</span>);</code></pre></div><h2 id="conversion-api"><a class="doc-anchor" href="#conversion-api">§</a>Conversion API</h2>
+<p>This writes and parses numbers to and from a format identical to
+Rust’s <a href="https://doc.rust-lang.org/1.93.0/core/str/traits/trait.FromStr.html#tymethod.from_str" title="associated function core::str::traits::FromStr::from_str"><code>parse</code></a> and <a href="https://doc.rust-lang.org/1.93.0/core/fmt/trait.Display.html#tymethod.fmt" title="method core::fmt::Display::fmt"><code>write</code></a>.</p>
+<!-- Spacer for rustfmt -->
+<ul>
+<li><a href="fn.write.html" title="fn lexical_core::write"><code>write</code></a>: Write a number to string.</li>
+<li><a href="fn.parse.html" title="fn lexical_core::parse"><code>parse</code></a>: Parse a number from string validating the complete string is a number.</li>
+<li><a href="fn.parse_partial.html" title="fn lexical_core::parse_partial"><code>parse_partial</code></a>: Parse a number from string returning the number and the number
+of digits it was able to parse.</li>
+</ul>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_core::FormattedSize;
+
+<span class="comment">// parse
+</span><span class="kw">let </span>f: f64 = lexical_core::parse(<span class="string">b"3.5"</span>).unwrap();
+<span class="macro">assert_eq!</span>(f, <span class="number">3.5</span>);
+
+<span class="kw">let </span>(f, count): (f64, usize) = lexical_core::parse_partial(<span class="string">b"3.5"</span>).unwrap();
+<span class="macro">assert_eq!</span>(f, <span class="number">3.5</span>);
+<span class="macro">assert_eq!</span>(count, <span class="number">3</span>);
+
+<span class="comment">// write
+</span><span class="kw">let </span><span class="kw-2">mut </span>buffer = [<span class="number">0u8</span>; f64::FORMATTED_SIZE_DECIMAL];
+<span class="kw">let </span>digits = lexical_core::write(f, <span class="kw-2">&amp;mut </span>buffer);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"3.5"</span>));</code></pre></div><h2 id="optionsformatting-api"><a class="doc-anchor" href="#optionsformatting-api">§</a>Options/Formatting API</h2>
+<p>Each number parser and writer contains extensive formatting control
+through options and <a href="format/index.html" title="mod lexical_core::format"><code>format</code></a> specifications, including digit
+<a href="struct.NumberFormat.html#method.digit_separator" title="method lexical_core::NumberFormat::digit_separator"><code>separator</code></a> support (that is, numbers such as <code>1_2__3.4_5</code>), if
+integral, fractional, or any significant digits are required, if to
+disable parsing or writing of non-finite values, if <code>+</code> signs are
+invalid or required, and much more.</p>
+<!-- Spacer for rustfmt -->
+<!-- Spacer for rustfmt -->
+<ul>
+<li><a href="fn.write_with_options.html" title="fn lexical_core::write_with_options"><code>write_with_options</code></a>: Write a number to string using custom formatting options.</li>
+<li><a href="fn.parse_with_options.html" title="fn lexical_core::parse_with_options"><code>parse_with_options</code></a>: Parse a number from string using custom formatting options,
+validating the complete string is a number.</li>
+<li><a href="fn.parse_partial_with_options.html" title="fn lexical_core::parse_partial_with_options"><code>parse_partial_with_options</code></a>: Parse a number from string using custom formatting
+options, returning the number and the number of digits it was able to parse.</li>
+</ul>
+<p>Some options, such as custom string representations of non-finite
+floats (such as <a href="struct.WriteFloatOptionsBuilder.html#method.nan_string" title="method lexical_core::WriteFloatOptionsBuilder::nan_string"><code>NaN</code></a>), are available without the
+<a href="index.html#format" title="mod lexical_core"><code>format</code></a> feature. For more comprehensive examples, see the
+<a href="#format"><code>format</code></a> and <a href="#comprehensive-configuration">Comprehensive Configuration</a> sections
+below.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_core::{format, parse_float_options, write_float_options, FormattedSize};
+
+<span class="comment">// parse
+</span><span class="kw">let </span>f: f64 = lexical_core::parse_with_options::&lt;<span class="kw">_</span>, { format::JSON }&gt;(
+    <span class="string">b"3.5"</span>,
+    <span class="kw-2">&amp;</span>parse_float_options::JSON
+).unwrap();
+
+<span class="comment">// write
+</span><span class="kw">const </span>BUFFER_SIZE: usize = write_float_options::
+    JSON.buffer_size_const::&lt;f64, { format::JSON }&gt;();
+<span class="kw">let </span><span class="kw-2">mut </span>buffer = [<span class="number">0u8</span>; BUFFER_SIZE];
+<span class="kw">let </span>digits = lexical_core::write_with_options::&lt;<span class="kw">_</span>, { format::JSON }&gt;(
+    f,
+    <span class="kw-2">&amp;mut </span>buffer,
+    <span class="kw-2">&amp;</span>write_float_options::JSON
+);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"3.5"</span>));</code></pre></div><h2 id="features"><a class="doc-anchor" href="#features">§</a>Features</h2>
+<p>In accordance with the Rust ethos, all features are additive: the crate
+may be build with <code>--all-features</code> without issue. The following features
+are enabled by default:</p>
+<ul>
+<li><code>write-integers</code> (Default) - Enable writing of integers.</li>
+<li><code>write-floats</code> (Default) - Enable writing of floats.</li>
+<li><code>parse-integers</code> (Default) - Enable parsing of integers.</li>
+<li><code>parse-floats</code> (Default) - Enable parsing of floats.</li>
+<li><code>power-of-two</code> - Add support for writing power-of-two number strings.</li>
+<li><code>radix</code> - Add support for strings of any radix.</li>
+<li><code>compact</code> - Reduce code size at the cost of performance.</li>
+<li><code>format</code> - Add support for custom number formatting.</li>
+<li><code>f16</code> - Enable support for half-precision <a href="https://en.wikipedia.org/wiki/Half-precision_floating-point_format"><code>f16</code></a> and
+<a href="https://en.wikipedia.org/wiki/Bfloat16_floating-point_format"><code>bf16</code></a> floats.</li>
+<li><code>std</code> (Default) - Disable to allow use in a <a href="https://docs.rust-embedded.org/book/intro/no-std.html"><code>no_std</code></a> environment.</li>
+</ul>
+<p>A complete description of supported features includes:</p>
+<h5 id="write-integers"><a class="doc-anchor" href="#write-integers">§</a>write-integers</h5>
+<p>Enable support for writing integers to string.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_core::FormattedSize;
+
+<span class="kw">let </span><span class="kw-2">mut </span>buffer = [<span class="number">0u8</span>; i64::FORMATTED_SIZE_DECIMAL];
+<span class="kw">let </span>digits = lexical_core::write(<span class="number">1234</span>, <span class="kw-2">&amp;mut </span>buffer);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"1234"</span>));</code></pre></div><h5 id="write-floats"><a class="doc-anchor" href="#write-floats">§</a>write-floats</h5>
+<p>Enable support for writing floating-point numbers to string.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_core::FormattedSize;
+
+<span class="kw">let </span><span class="kw-2">mut </span>buffer = [<span class="number">0u8</span>; f64::FORMATTED_SIZE_DECIMAL];
+<span class="kw">let </span>digits = lexical_core::write(<span class="number">1.234</span>, <span class="kw-2">&amp;mut </span>buffer);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(<span class="string">"1.234"</span>));</code></pre></div><h5 id="parse-integers"><a class="doc-anchor" href="#parse-integers">§</a>parse-integers</h5>
+<p>Enable support for parsing integers from string.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>f: i64 = lexical_core::parse(<span class="string">b"1234"</span>).unwrap();
+<span class="macro">assert_eq!</span>(f, <span class="number">1234</span>);</code></pre></div><h5 id="parsing-floats"><a class="doc-anchor" href="#parsing-floats">§</a>parsing-floats</h5>
+<p>Enable support for parsing floating-point numbers from string.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">let </span>f: f64 = lexical_core::parse(<span class="string">b"1.234"</span>).unwrap();
+<span class="macro">assert_eq!</span>(f, <span class="number">1.234</span>);</code></pre></div><h5 id="format"><a class="doc-anchor" href="#format">§</a>format</h5>
+<p>Adds support for the entire format <a href="struct.NumberFormatBuilder.html" title="struct lexical_core::NumberFormatBuilder">API</a>. This
+allows extensive configurability for parsing and writing numbers
+in custom formats, with different valid syntax requirements.</p>
+<h6 id="json"><a class="doc-anchor" href="#json">§</a>JSON</h6>
+<p>For example, in JSON, the following floats are valid or invalid:</p>
+<div class="example-wrap"><pre class="language-text"><code>-1          // valid
++1          // invalid
+1           // valid
+1.          // invalid
+.1          // invalid
+0.1         // valid
+nan         // invalid
+inf         // invalid
+Infinity    // invalid</code></pre></div>
+<p>All of the finite numbers are valid in Rust, and Rust supports non-finite
+floats. In order to parse standard-conforming JSON floats using
+<code>lexical-core</code>, you may use the following approach:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_core::{format, parse_float_options, parse_with_options, <span class="prelude-ty">Result</span>};
+
+<span class="kw">fn </span>parse_json_float&lt;Bytes: AsRef&lt;[u8]&gt;&gt;(bytes: Bytes) -&gt; <span class="prelude-ty">Result</span>&lt;f64&gt; {
+    parse_with_options::&lt;<span class="kw">_</span>, { format::JSON }&gt;(bytes.as_ref(), <span class="kw-2">&amp;</span>parse_float_options::JSON)
+}</code></pre></div>
+<p>Enabling the <a href="index.html#format" title="mod lexical_core"><code>format</code></a> API significantly increases compile
+times, however, it enables a large amount of customization in how floats are
+written.</p>
+<h5 id="power-of-two"><a class="doc-anchor" href="#power-of-two">§</a>power-of-two</h5>
+<p>Enable doing numeric conversions to and from strings radixes that are powers
+of two, that is, <code>2</code>, <code>4</code>, <code>8</code>, <code>16</code>, and <code>32</code>. This avoids most of the
+overhead and binary bloat of the <a href="#radix"><code>radix</code></a> feature, while enabling
+support for the most commonly-used radixes.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_core::{
+    ParseFloatOptions,
+    WriteFloatOptions,
+    FormattedSize,
+    NumberFormatBuilder
+};
+
+<span class="comment">// parse
+</span><span class="kw">const </span>BINARY: u128 = NumberFormatBuilder::binary();
+<span class="kw">let </span>value = <span class="string">"1.0011101111100111011011001000101101000011100101011"</span>;
+<span class="kw">let </span>f: f64 = lexical_core::parse_with_options::&lt;<span class="kw">_</span>, { BINARY }&gt;(
+    value.as_bytes(),
+    <span class="kw-2">&amp;</span>ParseFloatOptions::new()
+).unwrap();
+
+<span class="comment">// write
+</span><span class="kw">let </span><span class="kw-2">mut </span>buffer = [<span class="number">0u8</span>; f64::FORMATTED_SIZE];
+<span class="kw">let </span>digits = lexical_core::write_with_options::&lt;<span class="kw">_</span>, { BINARY }&gt;(
+    f,
+    <span class="kw-2">&amp;mut </span>buffer,
+    <span class="kw-2">&amp;</span>WriteFloatOptions::new()
+);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(value));</code></pre></div><h5 id="radix"><a class="doc-anchor" href="#radix">§</a>radix</h5>
+<p>Enable doing numeric conversions to and from strings for all radixes.
+This requires more static storage than <a href="#power-of-two"><code>power-of-two</code></a>,
+and increases compile times, but can be quite useful
+for esoteric programming languages which use duodecimal floats, for
+example.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>lexical_core::{
+    ParseFloatOptions,
+    WriteFloatOptions,
+    FormattedSize,
+    NumberFormatBuilder
+};
+
+<span class="comment">// parse
+</span><span class="kw">const </span>FORMAT: u128 = NumberFormatBuilder::from_radix(<span class="number">12</span>);
+<span class="kw">let </span>value = <span class="string">"1.29842830A44BAA2"</span>;
+<span class="kw">let </span>f: f64 = lexical_core::parse_with_options::&lt;<span class="kw">_</span>, { FORMAT }&gt;(
+    value.as_bytes(),
+    <span class="kw-2">&amp;</span>ParseFloatOptions::new()
+).unwrap();
+
+<span class="comment">// write
+</span><span class="kw">let </span><span class="kw-2">mut </span>buffer = [<span class="number">0u8</span>; f64::FORMATTED_SIZE];
+<span class="kw">let </span>digits = lexical_core::write_with_options::&lt;<span class="kw">_</span>, { FORMAT }&gt;(
+    f,
+    <span class="kw-2">&amp;mut </span>buffer,
+    <span class="kw-2">&amp;</span>WriteFloatOptions::new()
+);
+<span class="macro">assert_eq!</span>(str::from_utf8(digits), <span class="prelude-val">Ok</span>(value));</code></pre></div><h5 id="compact"><a class="doc-anchor" href="#compact">§</a>compact</h5>
+<p>Reduce the generated code size at the cost of performance. This minimizes
+the number of static tables, inlining, and generics used, drastically
+reducing the size of the generated binaries.</p>
+<h5 id="std"><a class="doc-anchor" href="#std">§</a>std</h5>
+<p>Enable use of the standard library. Currently, the standard library
+is not used, and may be disabled without any change in functionality
+on stable.</p>
+<h2 id="comprehensive-configuration"><a class="doc-anchor" href="#comprehensive-configuration">§</a>Comprehensive Configuration</h2>
+<p><code>lexical-core</code> provides two main levels of configuration:</p>
+<ul>
+<li>The <a href="struct.NumberFormatBuilder.html" title="struct lexical_core::NumberFormatBuilder"><code>NumberFormatBuilder</code></a>, creating a packed struct with custom
+formatting options.</li>
+<li>The Options API.</li>
+</ul>
+<h3 id="number-format"><a class="doc-anchor" href="#number-format">§</a>Number Format</h3>
+<p>The number format class provides numerous flags to specify number parsing or
+writing. When the <a href="#power-of-two"><code>power-of-two</code></a> feature is
+enabled, additional flags are added:</p>
+<ul>
+<li>The radix for the significant digits (default <code>10</code>).</li>
+<li>The radix for the exponent base (default <code>10</code>).</li>
+<li>The radix for the exponent digits (default <code>10</code>).</li>
+</ul>
+<p>When the <a href="#format"><code>format</code></a> feature is enabled, numerous other syntax and
+digit separator flags are enabled, including:</p>
+<ul>
+<li>A digit separator character, to group digits for increased legibility.</li>
+<li>Whether leading, trailing, internal, and consecutive digit separators are
+allowed.</li>
+<li>Toggling required float components, such as digits before the decimal
+point.</li>
+<li>Toggling whether special floats are allowed or are case-sensitive.</li>
+</ul>
+<p>Many pre-defined constants therefore exist to simplify common use-cases,
+including:</p>
+<ul>
+<li><a href="format/constant.JSON.html" title="constant lexical_core::format::JSON"><code>JSON</code></a>, <a href="format/constant.XML.html" title="constant lexical_core::format::XML"><code>XML</code></a>, <a href="format/constant.TOML.html" title="constant lexical_core::format::TOML"><code>TOML</code></a>, <a href="format/constant.YAML.html" title="constant lexical_core::format::YAML"><code>YAML</code></a>, <a href="format/constant.SQLITE.html" title="constant lexical_core::format::SQLITE"><code>SQLite</code></a>, and many more.</li>
+<li><a href="format/constant.RUST_LITERAL.html" title="constant lexical_core::format::RUST_LITERAL"><code>Rust</code></a>, <a href="format/constant.PYTHON_LITERAL.html" title="constant lexical_core::format::PYTHON_LITERAL"><code>Python</code></a>, <a href="format/constant.CSHARP_LITERAL.html" title="constant lexical_core::format::CSHARP_LITERAL"><code>C#</code></a>, <a href="format/constant.FORTRAN_LITERAL.html" title="constant lexical_core::format::FORTRAN_LITERAL"><code>FORTRAN</code></a>, <a href="format/constant.COBOL_LITERAL.html" title="constant lexical_core::format::COBOL_LITERAL"><code>COBOL</code></a> literals and strings,
+and many more.</li>
+</ul>
+<p>For a list of all supported fields, see
+<a href="struct.NumberFormatBuilder.html#fields-1" title="struct lexical_core::NumberFormatBuilder">Fields</a>.</p>
+<!-- Spacer for rustfmt -->
+<h3 id="options-api"><a class="doc-anchor" href="#options-api">§</a>Options API</h3>
+<p>The Options API provides high-level options to specify number parsing
+or writing, options not intrinsically tied to a number format.
+For example, the Options API provides:</p>
+<ul>
+<li>The <a href="struct.WriteFloatOptionsBuilder.html#method.exponent" title="method lexical_core::WriteFloatOptionsBuilder::exponent"><code>exponent</code></a> character (defaults to <code>b'e'</code> or <code>b'^'</code>, depending on the radix).</li>
+<li>The <a href="struct.WriteFloatOptionsBuilder.html#method.decimal_point" title="method lexical_core::WriteFloatOptionsBuilder::decimal_point"><code>decimal point</code></a> character (defaults to <code>b'.'</code>).</li>
+<li>Custom <a href="https://doc.rust-lang.org/1.93.0/std/primitive.f64.html#associatedconstant.NAN" title="associated constant f64::NAN"><code>NaN</code></a> and <a href="https://doc.rust-lang.org/1.93.0/std/primitive.f64.html#associatedconstant.INFINITY" title="associated constant f64::INFINITY"><code>Infinity</code></a> string
+<a href="struct.WriteFloatOptionsBuilder.html#method.nan_string" title="method lexical_core::WriteFloatOptionsBuilder::nan_string"><code>representations</code></a>.</li>
+<li>Whether to <a href="struct.WriteFloatOptionsBuilder.html#method.trim_floats" title="method lexical_core::WriteFloatOptionsBuilder::trim_floats"><code>trim</code></a> the fraction component from integral floats.</li>
+<li>The exponent <a href="struct.WriteFloatOptionsBuilder.html#method.positive_exponent_break" title="method lexical_core::WriteFloatOptionsBuilder::positive_exponent_break"><code>break-point</code></a> for scientific notation.</li>
+<li>The <a href="struct.WriteFloatOptionsBuilder.html#method.max_significant_digits" title="method lexical_core::WriteFloatOptionsBuilder::max_significant_digits"><code>maximum</code></a> and <a href="struct.WriteFloatOptionsBuilder.html#method.min_significant_digits" title="method lexical_core::WriteFloatOptionsBuilder::min_significant_digits"><code>minimum</code></a> number of significant digits to write.</li>
+<li>The rounding <a href="struct.WriteFloatOptionsBuilder.html#method.round_mode" title="method lexical_core::WriteFloatOptionsBuilder::round_mode"><code>mode</code></a> when truncating significant digits while writing.</li>
+</ul>
+<!-- Spacer for Rustfmt -->
+<p>The available options are:</p>
+<ul>
+<li><a href="struct.ParseFloatOptions.html" title="struct lexical_core::ParseFloatOptions"><code>ParseFloatOptions</code></a></li>
+<li><a href="struct.ParseIntegerOptions.html" title="struct lexical_core::ParseIntegerOptions"><code>ParseIntegerOptions</code></a></li>
+<li><a href="struct.WriteFloatOptions.html" title="struct lexical_core::WriteFloatOptions"><code>WriteFloatOptions</code></a></li>
+<li><a href="struct.WriteIntegerOptions.html" title="struct lexical_core::WriteIntegerOptions"><code>WriteIntegerOptions</code></a></li>
+</ul>
+<p>In addition, pre-defined constants for each category of options may
+be found in their respective modules, for example, <a href="parse_float_options/constant.JSON.html" title="constant lexical_core::parse_float_options::JSON"><code>JSON</code></a>.</p>
+<!-- Spacer for Rustfmt -->
+<h3 id="examples"><a class="doc-anchor" href="#examples">§</a>Examples</h3>
+<p>An example of creating your own options to parse European-style
+numbers (which use commas as decimal points, and periods as digit
+separators) is as follows:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// This creates a format to parse a European-style float number.
+// The decimal point is a comma, and the digit separators (optional)
+// are periods.
+</span><span class="kw">const </span>EUROPEAN: u128 = lexical_core::NumberFormatBuilder::new()
+    .digit_separator(num::NonZeroU8::new(<span class="string">b'.'</span>))
+    .build_strict();
+<span class="kw">const </span>COMMA_OPTIONS: lexical_core::ParseFloatOptions = lexical_core::ParseFloatOptions::builder()
+    .decimal_point(<span class="string">b','</span>)
+    .build_strict();
+<span class="macro">assert_eq!</span>(
+    lexical_core::parse_with_options::&lt;f32, EUROPEAN&gt;(<span class="string">b"300,10"</span>, <span class="kw-2">&amp;</span>COMMA_OPTIONS),
+    <span class="prelude-val">Ok</span>(<span class="number">300.10</span>)
+);
+
+<span class="comment">// Another example, using a pre-defined constant for JSON.
+</span><span class="kw">const </span>JSON: u128 = lexical_core::format::JSON;
+<span class="kw">const </span>JSON_OPTIONS: lexical_core::ParseFloatOptions = lexical_core::ParseFloatOptions::new();
+<span class="macro">assert_eq!</span>(
+    lexical_core::parse_with_options::&lt;f32, JSON&gt;(<span class="string">b"0e1"</span>, <span class="kw-2">&amp;</span>JSON_OPTIONS),
+    <span class="prelude-val">Ok</span>(<span class="number">0.0</span>)
+);
+<span class="macro">assert_eq!</span>(
+    lexical_core::parse_with_options::&lt;f32, JSON&gt;(<span class="string">b"1E+2"</span>, <span class="kw-2">&amp;</span>JSON_OPTIONS),
+    <span class="prelude-val">Ok</span>(<span class="number">100.0</span>)
+);</code></pre></div><h2 id="version-support"><a class="doc-anchor" href="#version-support">§</a>Version Support</h2>
+<p>The minimum, standard, required version is <a href="https://blog.rust-lang.org/2022/08/11/Rust-1.63.0.html"><code>1.63.0</code></a>, for
+const generic support. Older versions of lexical support older Rust
+versions.</p>
+<h2 id="algorithms"><a class="doc-anchor" href="#algorithms">§</a>Algorithms</h2>
+<ul>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-parse-float/docs/Algorithm.md">Parsing Floats</a></li>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-parse-integer/docs/Algorithm.md">Parsing Integers</a></li>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-write-float/docs/Algorithm.md">Writing Floats</a></li>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-write-integer/docs/Algorithm.md">Writing Integers</a></li>
+</ul>
+<h2 id="benchmarks"><a class="doc-anchor" href="#benchmarks">§</a>Benchmarks</h2>
+<ul>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-parse-float/docs/Benchmarks.md">Parsing Floats</a></li>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-parse-integer/docs/Benchmarks.md">Parsing Integers</a></li>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-write-float/docs/Benchmarks.md">Writing Floats</a></li>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-write-integer/docs/Benchmarks.md">Writing Integers</a></li>
+<li><a href="https://github.com/Alexhuszagh/lexical-benchmarks">Comprehensive Benchmarks</a></li>
+</ul>
+<p>A comprehensive analysis of lexical commits and their performance can be
+found in <a href="https://github.com/Alexhuszagh/lexical-benchmarks">benchmarks</a>.</p>
+<h2 id="design"><a class="doc-anchor" href="#design">§</a>Design</h2>
+<ul>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/docs/BinarySize.md">Binary Size</a></li>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/docs/BuildTimings.md">Build Timings</a></li>
+<li><a href="https://github.com/Alexhuszagh/rust-lexical/blob/main/docs/DigitSeparators.md">Digit Separators</a></li>
+</ul>
+<h2 id="safety-guarantees"><a class="doc-anchor" href="#safety-guarantees">§</a>Safety Guarantees</h2>
+<p>There is no non-trivial unsafe behavior in <code>lexical-core</code> itself,
+however, any incorrect safety invariants in our parsers and writers
+(<a href="https://crates.io/crates/lexical-parse-float"><code>lexical-parse-float</code></a>, <a href="https://crates.io/crates/lexical-parse-integer"><code>lexical-parse-integer</code></a>,
+<a href="https://crates.io/crates/lexical-write-float"><code>lexical-write-float</code></a>, and <a href="https://crates.io/crates/lexical-write-integer"><code>lexical-write-integer</code></a>) could cause those
+safety invariants to be broken.</p>
+<!-- Spacer for Rustfmt -->
+<!-- Space for Rustfmt -->
+</div></details><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="format/index.html" title="mod lexical_core::format">format</a></dt><dd>The creation and processing of number format packed structs.</dd><dt><a class="mod" href="parse_float_options/index.html" title="mod lexical_core::parse_float_options">parse_<wbr>float_<wbr>options</a></dt><dd>Configuration options for parsing floats.</dd><dt><a class="mod" href="parse_integer_options/index.html" title="mod lexical_core::parse_integer_options">parse_<wbr>integer_<wbr>options</a></dt><dd>Configuration options for parsing integers.</dd><dt><a class="mod" href="write_float_options/index.html" title="mod lexical_core::write_float_options">write_<wbr>float_<wbr>options</a></dt><dd>Configuration options for writing floats.</dd><dt><a class="mod" href="write_integer_options/index.html" title="mod lexical_core::write_integer_options">write_<wbr>integer_<wbr>options</a></dt><dd>Configuration options for writing integers.</dd></dl><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.NumberFormat.html" title="struct lexical_core::NumberFormat">Number<wbr>Format</a></dt><dd>Helper to access features from the packed format struct.</dd><dt><a class="struct" href="struct.NumberFormatBuilder.html" title="struct lexical_core::NumberFormatBuilder">Number<wbr>Format<wbr>Builder</a></dt><dd>Validating builder for <a href="struct.NumberFormat.html" title="struct lexical_core::NumberFormat"><code>NumberFormat</code></a> from the provided specifications.</dd><dt><a class="struct" href="struct.ParseFloatOptions.html" title="struct lexical_core::ParseFloatOptions">Parse<wbr>Float<wbr>Options</a></dt><dd>Options to customize parsing floats.</dd><dt><a class="struct" href="struct.ParseFloatOptionsBuilder.html" title="struct lexical_core::ParseFloatOptionsBuilder">Parse<wbr>Float<wbr>Options<wbr>Builder</a></dt><dd>Builder for <a href="struct.ParseFloatOptions.html" title="struct lexical_core::ParseFloatOptions"><code>Options</code></a>.</dd><dt><a class="struct" href="struct.ParseIntegerOptions.html" title="struct lexical_core::ParseIntegerOptions">Parse<wbr>Integer<wbr>Options</a></dt><dd>Options to customize the parsing integers.</dd><dt><a class="struct" href="struct.ParseIntegerOptionsBuilder.html" title="struct lexical_core::ParseIntegerOptionsBuilder">Parse<wbr>Integer<wbr>Options<wbr>Builder</a></dt><dd>Builder for <a href="struct.ParseIntegerOptions.html" title="struct lexical_core::ParseIntegerOptions"><code>Options</code></a>.</dd><dt><a class="struct" href="struct.WriteFloatOptions.html" title="struct lexical_core::WriteFloatOptions">Write<wbr>Float<wbr>Options</a></dt><dd>Options to customize writing floats.</dd><dt><a class="struct" href="struct.WriteFloatOptionsBuilder.html" title="struct lexical_core::WriteFloatOptionsBuilder">Write<wbr>Float<wbr>Options<wbr>Builder</a></dt><dd>Builder for <a href="struct.WriteFloatOptions.html" title="struct lexical_core::WriteFloatOptions"><code>Options</code></a>.</dd><dt><a class="struct" href="struct.WriteIntegerOptions.html" title="struct lexical_core::WriteIntegerOptions">Write<wbr>Integer<wbr>Options</a></dt><dd>Immutable options to customize writing integers.</dd><dt><a class="struct" href="struct.WriteIntegerOptionsBuilder.html" title="struct lexical_core::WriteIntegerOptionsBuilder">Write<wbr>Integer<wbr>Options<wbr>Builder</a></dt><dd>Builder for <a href="struct.WriteIntegerOptions.html" title="struct lexical_core::WriteIntegerOptions"><code>Options</code></a>.</dd></dl><h2 id="enums" class="section-header">Enums<a href="#enums" class="anchor">§</a></h2><dl class="item-table"><dt><a class="enum" href="enum.Error.html" title="enum lexical_core::Error">Error</a></dt><dd>Error code during parsing, indicating failure type.</dd></dl><h2 id="constants" class="section-header">Constants<a href="#constants" class="anchor">§</a></h2><dl class="item-table"><dt><a class="constant" href="constant.BUFFER_SIZE.html" title="constant lexical_core::BUFFER_SIZE">BUFFER_<wbr>SIZE</a></dt><dd>Maximum number of bytes required to serialize any number with default
+options to string.</dd></dl><h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2><dl class="item-table"><dt><a class="trait" href="trait.FormattedSize.html" title="trait lexical_core::FormattedSize">Formatted<wbr>Size</a></dt><dd>The size, in bytes, of formatted values.</dd><dt><a class="trait" href="trait.FromLexical.html" title="trait lexical_core::FromLexical">From<wbr>Lexical</a></dt><dd>Trait for numerical types that can be parsed from bytes.</dd><dt><a class="trait" href="trait.FromLexicalWithOptions.html" title="trait lexical_core::FromLexicalWithOptions">From<wbr>Lexical<wbr>With<wbr>Options</a></dt><dd>Trait for numerical types that can be parsed from bytes with custom options.</dd><dt><a class="trait" href="trait.ParseOptions.html" title="trait lexical_core::ParseOptions">Parse<wbr>Options</a></dt><dd>Shared trait for all parser options.</dd><dt><a class="trait" href="trait.ToLexical.html" title="trait lexical_core::ToLexical">ToLexical</a></dt><dd>Trait for numerical types that can be serialized to bytes.</dd><dt><a class="trait" href="trait.ToLexicalWithOptions.html" title="trait lexical_core::ToLexicalWithOptions">ToLexical<wbr>With<wbr>Options</a></dt><dd>Trait for numerical types that can be serialized to bytes with custom
+options.</dd><dt><a class="trait" href="trait.WriteOptions.html" title="trait lexical_core::WriteOptions">Write<wbr>Options</a></dt><dd>Shared trait for all writer options.</dd></dl><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><dl class="item-table"><dt><a class="fn" href="fn.format_error.html" title="fn lexical_core::format_error">format_<wbr>error</a></dt><dd>Get the error type from the format packed struct.</dd><dt><a class="fn" href="fn.format_is_valid.html" title="fn lexical_core::format_is_valid">format_<wbr>is_<wbr>valid</a></dt><dd>Determine if the format packed struct is valid.</dd><dt><a class="fn" href="fn.parse.html" title="fn lexical_core::parse">parse</a></dt><dd>Parse complete number from string.</dd><dt><a class="fn" href="fn.parse_partial.html" title="fn lexical_core::parse_partial">parse_<wbr>partial</a></dt><dd>Parse partial number from string.</dd><dt><a class="fn" href="fn.parse_partial_with_options.html" title="fn lexical_core::parse_partial_with_options">parse_<wbr>partial_<wbr>with_<wbr>options</a></dt><dd>Parse partial number from string with custom parsing options.</dd><dt><a class="fn" href="fn.parse_with_options.html" title="fn lexical_core::parse_with_options">parse_<wbr>with_<wbr>options</a></dt><dd>Parse complete number from string with custom parsing options.</dd><dt><a class="fn" href="fn.write.html" title="fn lexical_core::write">write</a></dt><dd>Write number to string.</dd><dt><a class="fn" href="fn.write_with_options.html" title="fn lexical_core::write_with_options">write_<wbr>with_<wbr>options</a></dt><dd>Write number to string with custom options.</dd></dl><h2 id="types" class="section-header">Type Aliases<a href="#types" class="anchor">§</a></h2><dl class="item-table"><dt><a class="type" href="type.Result.html" title="type lexical_core::Result">Result</a></dt><dd>A specialized <a href="https://doc.rust-lang.org/1.93.0/core/result/enum.Result.html" title="enum core::result::Result"><code>Result</code></a> type for lexical operations.</dd></dl></section></div></main></body></html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/lexical-write-integer-1.0.6/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-ca0dd0c4.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="lexical_write_integer" data-themes="" data-resource-suffix="" data-rustdoc-version="1.93.0 (254b59607 2026-01-19)" data-channel="1.93.0" data-search-js="search-9e2438ea.js" data-stringdex-js="stringdex-a3946164.js" data-settings-js="settings-c38705f0.js" ><script src="../../static.files/storage-e2aeef58.js"></script><script defer src="../../static.files/src-script-813739b1.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-a410ff4d.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-263c88ec.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">lexical_write_integer/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap digits-3"><pre class="rust"><code><a href=#1 id=1 data-nosnippet>1</a><span class="doccomment">//! Fast lexical integer-to-string conversion routines.
+<a href=#2 id=2 data-nosnippet>2</a>//!
+<a href=#3 id=3 data-nosnippet>3</a>//! This contains high-performance methods to write integers
+<a href=#4 id=4 data-nosnippet>4</a>//! directly to bytes, can be converted to [`str`] using
+<a href=#5 id=5 data-nosnippet>5</a>//! [`str::from_utf8`]. Using [`to_lexical`] is analogous to [`to_string`],
+<a href=#6 id=6 data-nosnippet>6</a>//! just writing to an existing buffer.
+<a href=#7 id=7 data-nosnippet>7</a>//!
+<a href=#8 id=8 data-nosnippet>8</a>//! [`str::from_utf8`]: core::str::from_utf8
+<a href=#9 id=9 data-nosnippet>9</a>//! [`to_lexical`]: ToLexical::to_lexical
+<a href=#10 id=10 data-nosnippet>10</a>//!
+<a href=#11 id=11 data-nosnippet>11</a>//! # Getting Started
+<a href=#12 id=12 data-nosnippet>12</a>//!
+<a href=#13 id=13 data-nosnippet>13</a>//! To write a number to bytes, use [`to_lexical`]:
+<a href=#14 id=14 data-nosnippet>14</a>//!
+<a href=#15 id=15 data-nosnippet>15</a>//! ```rust
+<a href=#16 id=16 data-nosnippet>16</a>//! # #[no_std]
+<a href=#17 id=17 data-nosnippet>17</a>//! # use core::str;
+<a href=#18 id=18 data-nosnippet>18</a>//! use lexical_write_integer::{FormattedSize, ToLexical};
+<a href=#19 id=19 data-nosnippet>19</a>//!
+<a href=#20 id=20 data-nosnippet>20</a>//! let mut buffer = [0u8; u64::FORMATTED_SIZE_DECIMAL];
+<a href=#21 id=21 data-nosnippet>21</a>//! let digits = 1234u64.to_lexical(&amp;mut buffer);
+<a href=#22 id=22 data-nosnippet>22</a>//! assert_eq!(str::from_utf8(digits), Ok("1234"));
+<a href=#23 id=23 data-nosnippet>23</a>//! ```
+<a href=#24 id=24 data-nosnippet>24</a>//!
+<a href=#25 id=25 data-nosnippet>25</a>//! Using [`FormattedSize::FORMATTED_SIZE_DECIMAL`] guarantees the buffer
+<a href=#26 id=26 data-nosnippet>26</a>//! will be large enough to write the digits for all numbers of that
+<a href=#27 id=27 data-nosnippet>27</a>//! type.
+<a href=#28 id=28 data-nosnippet>28</a>//!
+<a href=#29 id=29 data-nosnippet>29</a>//! # Features
+<a href=#30 id=30 data-nosnippet>30</a>//!
+<a href=#31 id=31 data-nosnippet>31</a>//! * `format` - Add support for custom integer formatting (currently
+<a href=#32 id=32 data-nosnippet>32</a>//!   unsupported).
+<a href=#33 id=33 data-nosnippet>33</a>//! * `power-of-two` - Add support for writing power-of-two integer strings.
+<a href=#34 id=34 data-nosnippet>34</a>//! * `radix` - Add support for strings of any radix.
+<a href=#35 id=35 data-nosnippet>35</a>//! * `compact` - Reduce code size at the cost of performance.
+<a href=#36 id=36 data-nosnippet>36</a>//! * `std` (Default) - Disable to allow use in a [`no_std`] environment.
+<a href=#37 id=37 data-nosnippet>37</a>//!
+<a href=#38 id=38 data-nosnippet>38</a>//! [`no_std`]: https://docs.rust-embedded.org/book/intro/no-std.html
+<a href=#39 id=39 data-nosnippet>39</a>//!
+<a href=#40 id=40 data-nosnippet>40</a>//! A complete description of supported features includes:
+<a href=#41 id=41 data-nosnippet>41</a>//!
+<a href=#42 id=42 data-nosnippet>42</a>//! #### format
+<a href=#43 id=43 data-nosnippet>43</a>//!
+<a href=#44 id=44 data-nosnippet>44</a>//! Add support for custom integer formatting. Currently no custom styles are
+<a href=#45 id=45 data-nosnippet>45</a>//! supported but this could include digit [`separator`] support in the future.
+<a href=#46 id=46 data-nosnippet>46</a>//!
+<a href=#47 id=47 data-nosnippet>47</a>//! [`separator`]: NumberFormatBuilder::digit_separator
+<a href=#48 id=48 data-nosnippet>48</a>//!
+<a href=#49 id=49 data-nosnippet>49</a>//! &lt;!--
+<a href=#50 id=50 data-nosnippet>50</a>//! For a list of all supported fields, see [Write Integer
+<a href=#51 id=51 data-nosnippet>51</a>//! Fields][NumberFormatBuilder#write-integer-fields].
+<a href=#52 id=52 data-nosnippet>52</a>//! --&gt;
+<a href=#53 id=53 data-nosnippet>53</a>//!
+<a href=#54 id=54 data-nosnippet>54</a>//! #### power-of-two
+<a href=#55 id=55 data-nosnippet>55</a>//!
+<a href=#56 id=56 data-nosnippet>56</a>//! Enable writing numbers using radixes that are powers of two, that is, `2`,
+<a href=#57 id=57 data-nosnippet>57</a>//! `4`, `8`, `16`, and `32`. In these cases, you should use [`FORMATTED_SIZE`]
+<a href=#58 id=58 data-nosnippet>58</a>//! to create a sufficiently large buffer.
+<a href=#59 id=59 data-nosnippet>59</a>//!
+<a href=#60 id=60 data-nosnippet>60</a>//! [`FORMATTED_SIZE`]: FormattedSize::FORMATTED_SIZE
+<a href=#61 id=61 data-nosnippet>61</a>//!
+<a href=#62 id=62 data-nosnippet>62</a>//! ```rust
+<a href=#63 id=63 data-nosnippet>63</a>//! # #[cfg(feature = "power-of-two")] {
+<a href=#64 id=64 data-nosnippet>64</a>//! # use core::str;
+<a href=#65 id=65 data-nosnippet>65</a>//! use lexical_write_integer::{FormattedSize, NumberFormatBuilder, Options, ToLexicalWithOptions};
+<a href=#66 id=66 data-nosnippet>66</a>//!
+<a href=#67 id=67 data-nosnippet>67</a>//! let mut buffer = [0u8; u64::FORMATTED_SIZE];
+<a href=#68 id=68 data-nosnippet>68</a>//! const BINARY: u128 = NumberFormatBuilder::binary();
+<a href=#69 id=69 data-nosnippet>69</a>//! const OPTIONS: Options = Options::new();
+<a href=#70 id=70 data-nosnippet>70</a>//! let digits = 1234u64.to_lexical_with_options::&lt;BINARY&gt;(&amp;mut buffer, &amp;OPTIONS);
+<a href=#71 id=71 data-nosnippet>71</a>//! assert_eq!(str::from_utf8(digits), Ok("10011010010"));
+<a href=#72 id=72 data-nosnippet>72</a>//! # }
+<a href=#73 id=73 data-nosnippet>73</a>//! ```
+<a href=#74 id=74 data-nosnippet>74</a>//!
+<a href=#75 id=75 data-nosnippet>75</a>//! #### radix
+<a href=#76 id=76 data-nosnippet>76</a>//!
+<a href=#77 id=77 data-nosnippet>77</a>//! Enable writing numbers using all radixes from `2` to `36`. This requires
+<a href=#78 id=78 data-nosnippet>78</a>//! more static storage than [`power-of-two`][crate#power-of-two], and increases
+<a href=#79 id=79 data-nosnippet>79</a>//! compile times, but can be quite useful for esoteric programming languages
+<a href=#80 id=80 data-nosnippet>80</a>//! which use duodecimal integers, for example.
+<a href=#81 id=81 data-nosnippet>81</a>//!
+<a href=#82 id=82 data-nosnippet>82</a>//! ```rust
+<a href=#83 id=83 data-nosnippet>83</a>//! # #[cfg(feature = "radix")] {
+<a href=#84 id=84 data-nosnippet>84</a>//! # use core::str;
+<a href=#85 id=85 data-nosnippet>85</a>//! use lexical_write_integer::{FormattedSize, NumberFormatBuilder, Options, ToLexicalWithOptions};
+<a href=#86 id=86 data-nosnippet>86</a>//!
+<a href=#87 id=87 data-nosnippet>87</a>//! let mut buffer = [0u8; u64::FORMATTED_SIZE];
+<a href=#88 id=88 data-nosnippet>88</a>//! const FORMAT: u128 = NumberFormatBuilder::from_radix(12);
+<a href=#89 id=89 data-nosnippet>89</a>//! const OPTIONS: Options = Options::new();
+<a href=#90 id=90 data-nosnippet>90</a>//! let digits = 1234u64.to_lexical_with_options::&lt;FORMAT&gt;(&amp;mut buffer, &amp;OPTIONS);
+<a href=#91 id=91 data-nosnippet>91</a>//! assert_eq!(str::from_utf8(digits), Ok("86A"));
+<a href=#92 id=92 data-nosnippet>92</a>//! # }
+<a href=#93 id=93 data-nosnippet>93</a>//! ```
+<a href=#94 id=94 data-nosnippet>94</a>//!
+<a href=#95 id=95 data-nosnippet>95</a>//! #### compact
+<a href=#96 id=96 data-nosnippet>96</a>//!
+<a href=#97 id=97 data-nosnippet>97</a>//! Reduce the generated code size at the cost of performance. This minimizes
+<a href=#98 id=98 data-nosnippet>98</a>//! the number of static tables, inlining, and generics used, drastically
+<a href=#99 id=99 data-nosnippet>99</a>//! reducing the size of the generated binaries.
+<a href=#100 id=100 data-nosnippet>100</a>//!
+<a href=#101 id=101 data-nosnippet>101</a>//! #### std
+<a href=#102 id=102 data-nosnippet>102</a>//!
+<a href=#103 id=103 data-nosnippet>103</a>//! Enable use of the standard library. Currently, the standard library
+<a href=#104 id=104 data-nosnippet>104</a>//! is not used, and may be disabled without any change in functionality
+<a href=#105 id=105 data-nosnippet>105</a>//! on stable.
+<a href=#106 id=106 data-nosnippet>106</a>//!
+<a href=#107 id=107 data-nosnippet>107</a>//! # Higher-Level APIs
+<a href=#108 id=108 data-nosnippet>108</a>//!
+<a href=#109 id=109 data-nosnippet>109</a>//! If you would like support for writing to [`String`] directly, use
+<a href=#110 id=110 data-nosnippet>110</a>//! [`lexical`] instead. If you would like an API that supports multiple numeric
+<a href=#111 id=111 data-nosnippet>111</a>//! conversions rather than just writing integers, use [`lexical-core`] instead.
+<a href=#112 id=112 data-nosnippet>112</a>//!
+<a href=#113 id=113 data-nosnippet>113</a>//! [`lexical`]: https://crates.io/crates/lexical
+<a href=#114 id=114 data-nosnippet>114</a>//! [`lexical-core`]: https://crates.io/crates/lexical-core
+<a href=#115 id=115 data-nosnippet>115</a>//!
+<a href=#116 id=116 data-nosnippet>116</a>//! # Version Support
+<a href=#117 id=117 data-nosnippet>117</a>//!
+<a href=#118 id=118 data-nosnippet>118</a>//! The minimum, standard, required version is [`1.63.0`][`rust-1.63.0`], for
+<a href=#119 id=119 data-nosnippet>119</a>//! const generic support. Older versions of lexical support older Rust
+<a href=#120 id=120 data-nosnippet>120</a>//! versions.
+<a href=#121 id=121 data-nosnippet>121</a>//!
+<a href=#122 id=122 data-nosnippet>122</a>//! # Algorithm
+<a href=#123 id=123 data-nosnippet>123</a>//!
+<a href=#124 id=124 data-nosnippet>124</a>//! We use 3 algorithms for serializing numbers:
+<a href=#125 id=125 data-nosnippet>125</a>//! 1. [`Jeaiii Algorithm`] (decimal only)
+<a href=#126 id=126 data-nosnippet>126</a>//! 2. Power reduction to write 4 digits at a time (radix only)
+<a href=#127 id=127 data-nosnippet>127</a>//! 3. Compact, single-digit serialization
+<a href=#128 id=128 data-nosnippet>128</a>//!
+<a href=#129 id=129 data-nosnippet>129</a>//! ## Decimal
+<a href=#130 id=130 data-nosnippet>130</a>//!
+<a href=#131 id=131 data-nosnippet>131</a>//! Our decimal-based digit writers are based on the [`Jeaiii Algorithm`], which
+<a href=#132 id=132 data-nosnippet>132</a>//! branches based on the number of digits and writes digits to minimize the
+<a href=#133 id=133 data-nosnippet>133</a>//! number of additions and multiplications. This avoids the need to calculate
+<a href=#134 id=134 data-nosnippet>134</a>//! the number of digits ahead of time, by just branching on the value.
+<a href=#135 id=135 data-nosnippet>135</a>//!
+<a href=#136 id=136 data-nosnippet>136</a>//! James Anhalt's itoa algorithm along with Junekey Jeon's performance tweaks
+<a href=#137 id=137 data-nosnippet>137</a>//! have excellent performance, however, this can be further optimized. Both
+<a href=#138 id=138 data-nosnippet>138</a>//! James Anhalt's and Junekey Jeon's use a binary search for determining the
+<a href=#139 id=139 data-nosnippet>139</a>//! correct number of digits to print (for 32-bit integers).
+<a href=#140 id=140 data-nosnippet>140</a>//!
+<a href=#141 id=141 data-nosnippet>141</a>//! ```text
+<a href=#142 id=142 data-nosnippet>142</a>//!      /\____________
+<a href=#143 id=143 data-nosnippet>143</a>//!     /  \______     \______
+<a href=#144 id=144 data-nosnippet>144</a>//!    /\   \     \     \     \
+<a href=#145 id=145 data-nosnippet>145</a>//!   0  1  /\    /\    /\    /\
+<a href=#146 id=146 data-nosnippet>146</a>//!        2  3  4  5  6  7  8  9
+<a href=#147 id=147 data-nosnippet>147</a>//! ```
+<a href=#148 id=148 data-nosnippet>148</a>//!
+<a href=#149 id=149 data-nosnippet>149</a>//! This leads to a max tree depth of 4, and the major performance bottleneck
+<a href=#150 id=150 data-nosnippet>150</a>//! with larger type sizes is the branching. A minor modification can optimize
+<a href=#151 id=151 data-nosnippet>151</a>//! this, leadingg to a max tree depth of 3 while only required 1 extra
+<a href=#152 id=152 data-nosnippet>152</a>//! comparison at the top level. Also, we invert the comparisons: oddly enough,
+<a href=#153 id=153 data-nosnippet>153</a>//! our benchmarks show doing larger comparisons then smaller improves
+<a href=#154 id=154 data-nosnippet>154</a>//! performance for numbers with both large and small numbers of digits.
+<a href=#155 id=155 data-nosnippet>155</a>//!
+<a href=#156 id=156 data-nosnippet>156</a>//! ```text
+<a href=#157 id=157 data-nosnippet>157</a>//!           ____________________
+<a href=#158 id=158 data-nosnippet>158</a>//!       ___/_       __|__       \
+<a href=#159 id=159 data-nosnippet>159</a>//!      /  |  \     /     \      /\
+<a href=#160 id=160 data-nosnippet>160</a>//!     /\  1   0   /\     /\    8  9
+<a href=#161 id=161 data-nosnippet>161</a>//!    3  2        6  7   4  5
+<a href=#162 id=162 data-nosnippet>162</a>//! ```
+<a href=#163 id=163 data-nosnippet>163</a>//!
+<a href=#164 id=164 data-nosnippet>164</a>//! For larger integers, we can apply the a similar algorithm with minor
+<a href=#165 id=165 data-nosnippet>165</a>//! modifications to minimize branching while keeping excellent performance.
+<a href=#166 id=166 data-nosnippet>166</a>//!
+<a href=#167 id=167 data-nosnippet>167</a>//! ## Radix
+<a href=#168 id=168 data-nosnippet>168</a>//!
+<a href=#169 id=169 data-nosnippet>169</a>//! Our radix-based algorithms work like this, carving off the lower digits and
+<a href=#170 id=170 data-nosnippet>170</a>//! writing them to the back of the buffer.
+<a href=#171 id=171 data-nosnippet>171</a>//!
+<a href=#172 id=172 data-nosnippet>172</a>//! ```rust,ignore
+<a href=#173 id=173 data-nosnippet>173</a>//! let mut value = 12345u32;
+<a href=#174 id=174 data-nosnippet>174</a>//! let buffer = [0u8; 32];
+<a href=#175 id=175 data-nosnippet>175</a>//! let digits = value.digit_count();
+<a href=#176 id=176 data-nosnippet>176</a>//! let bytes = buffer[..digits];
+<a href=#177 id=177 data-nosnippet>177</a>//!
+<a href=#178 id=178 data-nosnippet>178</a>//! let table = ...;  // some pre-computed table of 2 * radix^2 length
+<a href=#179 id=179 data-nosnippet>179</a>//!
+<a href=#180 id=180 data-nosnippet>180</a>//! let radix = 10;
+<a href=#181 id=181 data-nosnippet>181</a>//! let radix2 = radix * radix;
+<a href=#182 id=182 data-nosnippet>182</a>//! let radix4 = radix2 * radix2
+<a href=#183 id=183 data-nosnippet>183</a>//! let mut index = bytes.len();
+<a href=#184 id=184 data-nosnippet>184</a>//! while value &gt;= 10000 {
+<a href=#185 id=185 data-nosnippet>185</a>//!     let r = value % radix4;
+<a href=#186 id=186 data-nosnippet>186</a>//!     value /= radix4;
+<a href=#187 id=187 data-nosnippet>187</a>//!     let r1 = 2 * (r / radix2) as usize;
+<a href=#188 id=188 data-nosnippet>188</a>//!     let r2 = 2 * (r % radix2) as usize;
+<a href=#189 id=189 data-nosnippet>189</a>//!
+<a href=#190 id=190 data-nosnippet>190</a>//!     // write 5, then 4
+<a href=#191 id=191 data-nosnippet>191</a>//!     index -= 1;
+<a href=#192 id=192 data-nosnippet>192</a>//!     bytes[index] = table[r2 + 1];
+<a href=#193 id=193 data-nosnippet>193</a>//!     index -= 1;
+<a href=#194 id=194 data-nosnippet>194</a>//!     bytes[index] = table[r2];
+<a href=#195 id=195 data-nosnippet>195</a>//!
+<a href=#196 id=196 data-nosnippet>196</a>//!     // write 3 then 2
+<a href=#197 id=197 data-nosnippet>197</a>//!     index -= 1;
+<a href=#198 id=198 data-nosnippet>198</a>//!     bytes[index] = table[r1 + 1];
+<a href=#199 id=199 data-nosnippet>199</a>//!     index -= 1;
+<a href=#200 id=200 data-nosnippet>200</a>//!     bytes[index] = table[r1];
+<a href=#201 id=201 data-nosnippet>201</a>//! }
+<a href=#202 id=202 data-nosnippet>202</a>//!
+<a href=#203 id=203 data-nosnippet>203</a>//! // continue with radix^2 and then a single digit.
+<a href=#204 id=204 data-nosnippet>204</a>//! ```
+<a href=#205 id=205 data-nosnippet>205</a>//!
+<a href=#206 id=206 data-nosnippet>206</a>//! We can efficiently determine at compile time if the pre-computed
+<a href=#207 id=207 data-nosnippet>207</a>//! tables are large enough so there are no non-local safety considerations
+<a href=#208 id=208 data-nosnippet>208</a>//! there. The current logic call stack is:
+<a href=#209 id=209 data-nosnippet>209</a>//! 1. [`to_lexical`]
+<a href=#210 id=210 data-nosnippet>210</a>//! 2. [`decimal`][`dec`], [`compact`][`cmp`], or [`radix`][`rdx`] (gets the
+<a href=#211 id=211 data-nosnippet>211</a>//!    correct tables and calls algorithm)
+<a href=#212 id=212 data-nosnippet>212</a>//! 3. [`jeaiii`]
+<a href=#213 id=213 data-nosnippet>213</a>//!
+<a href=#214 id=214 data-nosnippet>214</a>//! # Compact
+<a href=#215 id=215 data-nosnippet>215</a>//!
+<a href=#216 id=216 data-nosnippet>216</a>//! A compact, fallback algorithm uses a naive, simple algorithm,
+<a href=#217 id=217 data-nosnippet>217</a>//! where each loop generates a single digit. This comes at a performance
+<a href=#218 id=218 data-nosnippet>218</a>//! penalty, but produces smaller binaries. It is analogous to the below
+<a href=#219 id=219 data-nosnippet>219</a>//! code.
+<a href=#220 id=220 data-nosnippet>220</a>//!
+<a href=#221 id=221 data-nosnippet>221</a>//! ```rust,ignore
+<a href=#222 id=222 data-nosnippet>222</a>//! const fn digit_to_char(digit: u32) -&gt; u8 {
+<a href=#223 id=223 data-nosnippet>223</a>//!     match r {
+<a href=#224 id=224 data-nosnippet>224</a>//!        b'0'..=b'9' =&gt; c - b'0',
+<a href=#225 id=225 data-nosnippet>225</a>//!        b'A'..=b'Z' =&gt; c - b'A' + 10,
+<a href=#226 id=226 data-nosnippet>226</a>//!        b'a'..=b'z' =&gt; c - b'a' + 10,
+<a href=#227 id=227 data-nosnippet>227</a>//!        _ =&gt; 0xFF,  // unreachable
+<a href=#228 id=228 data-nosnippet>228</a>//!     }
+<a href=#229 id=229 data-nosnippet>229</a>//! }
+<a href=#230 id=230 data-nosnippet>230</a>//!
+<a href=#231 id=231 data-nosnippet>231</a>//! let mut value = 12345u32;
+<a href=#232 id=232 data-nosnippet>232</a>//! let buffer = [0u8; 32];
+<a href=#233 id=233 data-nosnippet>233</a>//! let digits = value.digit_count();
+<a href=#234 id=234 data-nosnippet>234</a>//! let bytes = buffer[..digits];
+<a href=#235 id=235 data-nosnippet>235</a>//!
+<a href=#236 id=236 data-nosnippet>236</a>//! let radix = 10;
+<a href=#237 id=237 data-nosnippet>237</a>//! let mut index = bytes.len();
+<a href=#238 id=238 data-nosnippet>238</a>//! while value &gt;= radix {
+<a href=#239 id=239 data-nosnippet>239</a>//!     let r = value % radix;
+<a href=#240 id=240 data-nosnippet>240</a>//!     value /= radix;
+<a href=#241 id=241 data-nosnippet>241</a>//!     index -= 1;
+<a href=#242 id=242 data-nosnippet>242</a>//!     bytes[index] = digit_to_char(r);
+<a href=#243 id=243 data-nosnippet>243</a>//! }
+<a href=#244 id=244 data-nosnippet>244</a>//!
+<a href=#245 id=245 data-nosnippet>245</a>//! index -= 1;
+<a href=#246 id=246 data-nosnippet>246</a>//! bytes[index] = digit_to_char(value);
+<a href=#247 id=247 data-nosnippet>247</a>//! ```
+<a href=#248 id=248 data-nosnippet>248</a>//!
+<a href=#249 id=249 data-nosnippet>249</a>//! # Design
+<a href=#250 id=250 data-nosnippet>250</a>//!
+<a href=#251 id=251 data-nosnippet>251</a>//! - [Algorithm Approach](https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-write-integer/docs/Algorithm.md)
+<a href=#252 id=252 data-nosnippet>252</a>//! - [Benchmarks](https://github.com/Alexhuszagh/rust-lexical/blob/main/lexical-write-integer/docs/Benchmarks.md)
+<a href=#253 id=253 data-nosnippet>253</a>//! - [Comprehensive Benchmarks](https://github.com/Alexhuszagh/lexical-benchmarks)
+<a href=#254 id=254 data-nosnippet>254</a>//!
+<a href=#255 id=255 data-nosnippet>255</a>//! # Safety Guarantees
+<a href=#256 id=256 data-nosnippet>256</a>//!
+<a href=#257 id=257 data-nosnippet>257</a>//! &lt;div class="warning info-warning"&gt;
+<a href=#258 id=258 data-nosnippet>258</a>//! &lt;style&gt;
+<a href=#259 id=259 data-nosnippet>259</a>//! .info-warning::before {
+<a href=#260 id=260 data-nosnippet>260</a>//!   color: #87CEFAb0 !important;
+<a href=#261 id=261 data-nosnippet>261</a>//! }
+<a href=#262 id=262 data-nosnippet>262</a>//! .info-warning {
+<a href=#263 id=263 data-nosnippet>263</a>//!   border-left: 2px solid #87CEFAb0 !important;
+<a href=#264 id=264 data-nosnippet>264</a>//! }
+<a href=#265 id=265 data-nosnippet>265</a>//! &lt;/style&gt;
+<a href=#266 id=266 data-nosnippet>266</a>//!
+<a href=#267 id=267 data-nosnippet>267</a>//! This module uses some unsafe code to achieve accept acceptable performance.
+<a href=#268 id=268 data-nosnippet>268</a>//! Providing a buffer of insufficient size will cause the code to panic and
+<a href=#269 id=269 data-nosnippet>269</a>//! cannot lead to out-of-bounds access. The safety guarantees and logic are
+<a href=#270 id=270 data-nosnippet>270</a>//! described below.
+<a href=#271 id=271 data-nosnippet>271</a>//!
+<a href=#272 id=272 data-nosnippet>272</a>//! &lt;/div&gt;
+<a href=#273 id=273 data-nosnippet>273</a>//!
+<a href=#274 id=274 data-nosnippet>274</a>//! ### Decimal
+<a href=#275 id=275 data-nosnippet>275</a>//!
+<a href=#276 id=276 data-nosnippet>276</a>//! Our decimal writer uses a branched algorithm and therefore the indexing for
+<a href=#277 id=277 data-nosnippet>277</a>//! each element in the buffer is known ahead of time. The digit
+<a href=#278 id=278 data-nosnippet>278</a>//! [`generation`][`digit-gen`] is [well-established][`Jeaiii Algorithm`] to
+<a href=#279 id=279 data-nosnippet>279</a>//! ensure the the lookup value is less than the size of the pre-computed table
+<a href=#280 id=280 data-nosnippet>280</a>//! (`2 * 10^2`, or 200), and as long as this invariant holds true, then no
+<a href=#281 id=281 data-nosnippet>281</a>//! undefined behavior can occur.
+<a href=#282 id=282 data-nosnippet>282</a>//!
+<a href=#283 id=283 data-nosnippet>283</a>//! [`digit-gen`]: https://github.com/jk-jeon/idiv/blob/main/subproject/example/jeaiii_analysis.cpp
+<a href=#284 id=284 data-nosnippet>284</a>//!
+<a href=#285 id=285 data-nosnippet>285</a>//! ### Radix
+<a href=#286 id=286 data-nosnippet>286</a>//!
+<a href=#287 id=287 data-nosnippet>287</a>//! The non-decimal writers rely on pre-computed tables and an exact calculation
+<a href=#288 id=288 data-nosnippet>288</a>//! of the digit count ([`digit_count`]) to avoid any overhead. Avoiding
+<a href=#289 id=289 data-nosnippet>289</a>//! intermediary copies is **CRITICAL** for fast performance so the entire
+<a href=#290 id=290 data-nosnippet>290</a>//! buffer must be known but assigned to use algorithms the compiler cannot
+<a href=#291 id=291 data-nosnippet>291</a>//! easily verify. This is because we use multi-digit optimizations with our
+<a href=#292 id=292 data-nosnippet>292</a>//! pre-computed tables, so we cannot just iterate over the slice and assign
+<a href=#293 id=293 data-nosnippet>293</a>//! iteratively. Using checked indexing for the pre-compuited table can lead to
+<a href=#294 id=294 data-nosnippet>294</a>//! 30%+ decreases in performance. However, with careful analysis and factoring
+<a href=#295 id=295 data-nosnippet>295</a>//! of the code, it's trivial to demonstrate both the table lookups and buffer
+<a href=#296 id=296 data-nosnippet>296</a>//! indexing are safe.
+<a href=#297 id=297 data-nosnippet>297</a>//!
+<a href=#298 id=298 data-nosnippet>298</a>//! For radixes that are 2^N, we use the `ceil(log(value | 1, radix))` which can
+<a href=#299 id=299 data-nosnippet>299</a>//! always be calculated through the number of leading [`zeros`][`log2_lz`]. For
+<a href=#300 id=300 data-nosnippet>300</a>//! other radixes, we calculate the number of digits exactly the same way as if
+<a href=#301 id=301 data-nosnippet>301</a>//! we were writing digits in an initial pass.
+<a href=#302 id=302 data-nosnippet>302</a>//!
+<a href=#303 id=303 data-nosnippet>303</a>//! ### Compact
+<a href=#304 id=304 data-nosnippet>304</a>//!
+<a href=#305 id=305 data-nosnippet>305</a>//! The compact decimal writer uses no unsafe indexing.
+<a href=#306 id=306 data-nosnippet>306</a>//!
+<a href=#307 id=307 data-nosnippet>307</a>//! [`digit_count`]: https://github.com/Alexhuszagh/rust-lexical/blob/c6c5052/lexical-write-integer/src/digit_count.rs#L180
+<a href=#308 id=308 data-nosnippet>308</a>//! [`to_lexical`]: crate::ToLexical::to_lexical
+<a href=#309 id=309 data-nosnippet>309</a>//! [`dec`]: https://github.com/Alexhuszagh/rust-lexical/blob/c6c5052/lexical-write-integer/src/decimal.rs#L278
+<a href=#310 id=310 data-nosnippet>310</a>//! [`jeaiii`]: https://github.com/Alexhuszagh/rust-lexical/blob/c6c5052/lexical-write-integer/src/jeaiii.rs
+<a href=#311 id=311 data-nosnippet>311</a>//! [`cmp`]: https://github.com/Alexhuszagh/rust-lexical/blob/c6c5052/lexical-write-integer/src/compact.rs
+<a href=#312 id=312 data-nosnippet>312</a>//! [`rdx`]: https://github.com/Alexhuszagh/rust-lexical/blob/c6c5052/lexical-write-integer/src/radix.rs
+<a href=#313 id=313 data-nosnippet>313</a>//! [`Jeaiii Algorithm`]: https://jk-jeon.github.io/posts/2022/02/jeaiii-algorithm/
+<a href=#314 id=314 data-nosnippet>314</a>//! [`rust-1.63.0`]: https://blog.rust-lang.org/2022/08/11/Rust-1.63.0.html
+<a href=#315 id=315 data-nosnippet>315</a>//! [`String`]: https://doc.rust-lang.org/alloc/string/struct.String.html
+<a href=#316 id=316 data-nosnippet>316</a>//! [`to_string`]: https://doc.rust-lang.org/alloc/string/trait.ToString.html#tymethod.to_string
+<a href=#317 id=317 data-nosnippet>317</a>//! [`log2_lz`]: https://github.com/Alexhuszagh/rust-lexical/blob/c6c5052/lexical-write-integer/src/digit_count.rs#L119
+<a href=#318 id=318 data-nosnippet>318</a>
+<a href=#319 id=319 data-nosnippet>319</a></span><span class="comment">// We want to have the same safety guarantees as Rust core,
+<a href=#320 id=320 data-nosnippet>320</a>// so we allow unused unsafe to clearly document safety guarantees.
+<a href=#321 id=321 data-nosnippet>321</a></span><span class="attr">#![allow(unused_unsafe)]
+<a href=#322 id=322 data-nosnippet>322</a>#![cfg_attr(feature = <span class="string">"lint"</span>, warn(unsafe_op_in_unsafe_fn))]
+<a href=#323 id=323 data-nosnippet>323</a>#![cfg_attr(not(feature = <span class="string">"std"</span>), no_std)]
+<a href=#324 id=324 data-nosnippet>324</a>#![cfg_attr(docsrs, feature(doc_cfg))]
+<a href=#325 id=325 data-nosnippet>325</a>#![cfg_attr(docsrs, feature(doc_auto_cfg))]
+<a href=#326 id=326 data-nosnippet>326</a>#![deny(
+<a href=#327 id=327 data-nosnippet>327</a>    clippy::doc_markdown,
+<a href=#328 id=328 data-nosnippet>328</a>    clippy::unnecessary_safety_comment,
+<a href=#329 id=329 data-nosnippet>329</a>    clippy::semicolon_if_nothing_returned,
+<a href=#330 id=330 data-nosnippet>330</a>    clippy::unwrap_used,
+<a href=#331 id=331 data-nosnippet>331</a>    clippy::as_underscore
+<a href=#332 id=332 data-nosnippet>332</a>)]
+<a href=#333 id=333 data-nosnippet>333</a>#![allow(
+<a href=#334 id=334 data-nosnippet>334</a>    <span class="comment">// used when concepts are logically separate
+<a href=#335 id=335 data-nosnippet>335</a>    </span>clippy::match_same_arms,
+<a href=#336 id=336 data-nosnippet>336</a>    <span class="comment">// loss of precision is intentional
+<a href=#337 id=337 data-nosnippet>337</a>    </span>clippy::integer_division,
+<a href=#338 id=338 data-nosnippet>338</a>    <span class="comment">// mathematical names use 1-character identifiers
+<a href=#339 id=339 data-nosnippet>339</a>    </span>clippy::min_ident_chars,
+<a href=#340 id=340 data-nosnippet>340</a>    <span class="comment">// these are not cryptographically secure contexts
+<a href=#341 id=341 data-nosnippet>341</a>    </span>clippy::integer_division_remainder_used,
+<a href=#342 id=342 data-nosnippet>342</a>    <span class="comment">// this can be intentional
+<a href=#343 id=343 data-nosnippet>343</a>    </span>clippy::module_name_repetitions,
+<a href=#344 id=344 data-nosnippet>344</a>    <span class="comment">// this is intentional: already passing a pointer and need performance
+<a href=#345 id=345 data-nosnippet>345</a>    </span>clippy::needless_pass_by_value,
+<a href=#346 id=346 data-nosnippet>346</a>    <span class="comment">// we use this for inline formatting for unsafe blocks
+<a href=#347 id=347 data-nosnippet>347</a>    </span>clippy::semicolon_inside_block,
+<a href=#348 id=348 data-nosnippet>348</a>)]
+<a href=#349 id=349 data-nosnippet>349</a>
+<a href=#350 id=350 data-nosnippet>350</a></span><span class="kw">pub mod </span>algorithm;
+<a href=#351 id=351 data-nosnippet>351</a><span class="kw">pub mod </span>compact;
+<a href=#352 id=352 data-nosnippet>352</a><span class="kw">pub mod </span>decimal;
+<a href=#353 id=353 data-nosnippet>353</a><span class="kw">pub mod </span>digit_count;
+<a href=#354 id=354 data-nosnippet>354</a><span class="kw">pub mod </span>jeaiii;
+<a href=#355 id=355 data-nosnippet>355</a><span class="kw">pub mod </span>options;
+<a href=#356 id=356 data-nosnippet>356</a><span class="kw">pub mod </span>radix;
+<a href=#357 id=357 data-nosnippet>357</a><span class="kw">pub mod </span>table;
+<a href=#358 id=358 data-nosnippet>358</a><span class="kw">pub mod </span>write;
+<a href=#359 id=359 data-nosnippet>359</a>
+<a href=#360 id=360 data-nosnippet>360</a><span class="kw">mod </span>api;
+<a href=#361 id=361 data-nosnippet>361</a><span class="kw">mod </span>table_binary;
+<a href=#362 id=362 data-nosnippet>362</a><span class="kw">mod </span>table_decimal;
+<a href=#363 id=363 data-nosnippet>363</a><span class="kw">mod </span>table_radix;
+<a href=#364 id=364 data-nosnippet>364</a>
+<a href=#365 id=365 data-nosnippet>365</a><span class="comment">// Re-exports
+<a href=#366 id=366 data-nosnippet>366</a></span><span class="kw">pub use </span>lexical_util::constants::{FormattedSize, BUFFER_SIZE};
+<a href=#367 id=367 data-nosnippet>367</a><span class="kw">pub use </span>lexical_util::error::Error;
+<a href=#368 id=368 data-nosnippet>368</a><span class="kw">pub use </span>lexical_util::format::{<span class="self">self</span>, NumberFormat, NumberFormatBuilder};
+<a href=#369 id=369 data-nosnippet>369</a><span class="kw">pub use </span>lexical_util::options::WriteOptions;
+<a href=#370 id=370 data-nosnippet>370</a><span class="kw">pub use </span>lexical_util::result::Result;
+<a href=#371 id=371 data-nosnippet>371</a>
+<a href=#372 id=372 data-nosnippet>372</a><span class="kw">pub use </span><span class="self">self</span>::api::{ToLexical, ToLexicalWithOptions};
+<a href=#373 id=373 data-nosnippet>373</a><span class="attr">#[doc(inline)]
+<a href=#374 id=374 data-nosnippet>374</a></span><span class="kw">pub use </span><span class="self">self</span>::options::{Options, OptionsBuilder};
+</code></pre></div></section></main></body></html>
