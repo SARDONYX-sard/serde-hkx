@@ -1,3 +1,4 @@
+pub mod hkx_checker;
 pub mod rayon;
 pub mod tokio;
 
