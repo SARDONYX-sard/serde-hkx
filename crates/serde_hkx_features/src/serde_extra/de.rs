@@ -4,7 +4,7 @@ use super::error::{JsonSnafu, TomlSnafu, YamlSnafu};
 use crate::types_wrapper::ClassPtrMap;
 use crate::{
     ClassMap,
-    convert::OutFormat,
+    convert::Format,
     error::{DeSnafu, Error, FailedReadFileSnafu, Result},
 };
 use snafu::ResultExt as _;
@@ -33,18 +33,15 @@ where
     // Deserialize
     let classes =
         if let Some(input_ext) = input_ext {
-            let input_fmt = OutFormat::from_extension(input_ext).map_err(|_| {
-                Error::UnsupportedExtensionPath {
+            let input_fmt =
+                Format::from_extension(input_ext).map_err(|_| Error::UnsupportedExtensionPath {
                     path: input.to_path_buf(),
-                }
-            })?;
+                })?;
 
             match input_fmt {
-                OutFormat::Amd64 | OutFormat::Win32 => {
-                    serde_hkx::from_bytes(bytes).context(DeSnafu {
-                        input: input.to_path_buf(),
-                    })?
-                }
+                Format::Amd64 | Format::Win32 => serde_hkx::from_bytes(bytes).context(DeSnafu {
+                    input: input.to_path_buf(),
+                })?,
 
                 _ => {
                     let mut decoder = encoding_rs_io::DecodeReaderBytes::new(bytes.as_slice());
@@ -55,10 +52,10 @@ where
                         })?;
 
                     match input_fmt {
-                        OutFormat::Xml => serde_hkx::from_str(&*string).context(DeSnafu {
+                        Format::Xml => serde_hkx::from_str(&*string).context(DeSnafu {
                             input: input.to_path_buf(),
                         })?,
-                        OutFormat::Json => {
+                        Format::Json => {
                             let classes = simd_json::from_slice::<ClassPtrMap>(unsafe {
                                 string.as_bytes_mut()
                             })
@@ -67,14 +64,14 @@ where
                             })?;
                             classes.into_class_map()
                         }
-                        OutFormat::Toml => {
+                        Format::Toml => {
                             let classes = basic_toml::from_str::<ClassPtrMap>(string)
                                 .with_context(|_| TomlSnafu {
                                     input: input.to_path_buf(),
                                 })?;
                             classes.into_class_map()
                         }
-                        OutFormat::Yaml => {
+                        Format::Yaml => {
                             let classes = serde_norway::from_str::<ClassPtrMap>(string)
                                 .with_context(|_| YamlSnafu {
                                     input: input.to_path_buf(),

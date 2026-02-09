@@ -48,7 +48,7 @@ tracing = { workspace = true }
 # default = ["extra_fmt"] # For debug
 # default = ["json_schema"] # For debug
 
-# `derive(clap::ValueEnum)` For `OutFormat`
+# `derive(clap::ValueEnum)` For `Format`
 clap = ["dep:clap"]
 # Enable tracing logging
 tracing = ["dep:tracing", "serde_hkx/tracing"]

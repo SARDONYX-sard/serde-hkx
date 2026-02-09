@@ -67,6 +67,12 @@ pub enum Error {
         source: serde_hkx::errors::de::Error,
     },
 
+    /// hkx header check error
+    #[snafu(transparent)]
+    HkxDetectError {
+        source: crate::convert::hkx_checker::Error,
+    },
+
     /// Standard io error
     #[snafu(transparent)]
     IoError { source: std::io::Error },

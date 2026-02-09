@@ -1,16 +1,14 @@
-//! Check the HKX file header to determine its format.
+//! Check the HKX file header to detect its format.
 use std::path::{Path, PathBuf};
 
-use crate::OutFormat;
+use crate::Format;
 
-/// Check the HKX file header to determine its format.
-///
-/// # Note
-/// use IO operations internally; avoid calling this function within `rayon::par_iter` directly.
+/// Check the HKX file header to detect its format(`Win32`/`Amd64`).
 ///
 /// # Errors
+/// - If tag file magic number
 /// - If hkx magic number is invalid
-pub fn check_hkx_header(input_path: &Path, output_format: OutFormat) -> Result<OutFormat, Error> {
+pub fn detect_hkx_format(input_path: &Path) -> Result<Format, Error> {
     let header = {
         let mut header = [0_u8; 17];
         let mut file = std::fs::File::open(input_path).map_err(|source| Error::FailedReadFile {
@@ -38,12 +36,9 @@ pub fn check_hkx_header(input_path: &Path, output_format: OutFormat) -> Result<O
         header[0..8] == EXPECTED_MAGIC
     };
     if is_tag_file {
-        #[cfg(feature = "tracing")]
-        tracing::info!(
-            path = %input_path.display(),
-            "Tag files cannot be converted by serde_hkx, so they are skipped."
-        );
-        return Ok(output_format);
+        return Err(Error::UnsupportedTagFile {
+            path: input_path.to_path_buf(),
+        });
     }
 
     let is_hkx = {
@@ -57,7 +52,6 @@ pub fn check_hkx_header(input_path: &Path, output_format: OutFormat) -> Result<O
     if !is_hkx {
         return Err(Error::HkxInvalidMagic {
             input_path: input_path.to_path_buf(),
-            target: output_format,
             magic_bytes: header,
         });
     }
@@ -65,12 +59,11 @@ pub fn check_hkx_header(input_path: &Path, output_format: OutFormat) -> Result<O
     // check ptr size
     let ptr_size = header[16];
     let current_format = match ptr_size {
-        4 => OutFormat::Win32,
-        8 => OutFormat::Amd64,
+        4 => Format::Win32,
+        8 => Format::Amd64,
         _ => {
             return Err(Error::HkxInvalidHeader {
                 input_path: input_path.to_path_buf(),
-                target: output_format,
                 actual: ptr_size,
             });
         }
@@ -83,6 +76,9 @@ pub fn check_hkx_header(input_path: &Path, output_format: OutFormat) -> Result<O
 #[derive(Debug, snafu::Snafu)]
 #[snafu(visibility(pub))]
 pub enum Error {
+    #[snafu(display("serde-hkx does not currently support tag files. path: {}", path.display()))]
+    UnsupportedTagFile { path: PathBuf },
+
     /// Failed to read this path.
     #[snafu(display("Failed to read this path: {}", path.display()))]
     FailedReadFile {
@@ -91,7 +87,7 @@ pub enum Error {
     },
 
     #[snafu(display(
-        "HKX for target {target:?}, the file {} did not have the expected Havok magic numbers. \
+        "HKX file {} did not have the expected Havok magic numbers. \
         Expected magic=[0x57, 0xe0, 0xe0, 0x57, 0x10, 0xc0, 0xc0, 0x10, ...], \
         but got {magic_bytes:x?}. \
         This file is not a valid Havok animation or may be from an unsupported version.",
@@ -99,20 +95,14 @@ pub enum Error {
     ))]
     HkxInvalidMagic {
         input_path: PathBuf,
-        target: OutFormat,
         magic_bytes: [u8; 17],
     },
 
     #[snafu(display(
-        "HKX for target {target:?}, pointer size check failed for {}. \
-        Expected pointer size 4/8-byte for {target:?}, \
-        but could not determine a valid header or got {actual}-byte. \
+        "HKX pointer size check failed for {}. \
+        Expected pointer size 4/8-byte, but could not determine a valid header or got {actual}-byte. \
         The HKX may be malformed or from an incompatible platform.",
         input_path.display()
     ))]
-    HkxInvalidHeader {
-        input_path: PathBuf,
-        target: OutFormat,
-        actual: u8,
-    },
+    HkxInvalidHeader { input_path: PathBuf, actual: u8 },
 }

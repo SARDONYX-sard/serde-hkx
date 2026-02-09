@@ -12,7 +12,7 @@ use self::convert::{convert, tokio_convert};
 use crate::logger::LogLevel;
 use clap::CommandFactory as _;
 use serde_hkx_features::{
-    convert::OutFormat,
+    convert::Format,
     diff::write_diff,
     dump as hexdump,
     error::{Error, Result},
@@ -25,7 +25,7 @@ pub(crate) async fn run(args: Args) -> Result<()> {
 
     // For drag & drop
     if let Some(input) = args.input {
-        let out_fmt = OutFormat::from_input(&input)?;
+        let out_fmt = Format::infer_output_from_input(&input)?;
         let output: Option<PathBuf> = None;
         return tokio_convert(input, output, out_fmt).await;
     }
