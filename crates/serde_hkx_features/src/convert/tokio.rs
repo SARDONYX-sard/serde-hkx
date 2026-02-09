@@ -1,5 +1,5 @@
 //! Async Convert hkx <-> xml
-use super::{OutFormat, get_output_path, get_supported_files, process_serde};
+use super::{Format, get_output_path, get_supported_files, process_serde};
 use crate::{
     error::Result,
     fs::{ReadExt as _, write},
@@ -17,7 +17,7 @@ use std::{
 ///
 /// # Errors
 /// Failed to convert.
-pub async fn convert<I, O>(input: I, output: Option<O>, format: OutFormat) -> Result<()>
+pub async fn convert<I, O>(input: I, output: Option<O>, format: Format) -> Result<()>
 where
     I: AsRef<Path>,
     O: AsRef<Path>,
@@ -35,7 +35,7 @@ where
 pub async fn convert_progress<I, O, P>(
     input: I,
     output: Option<O>,
-    format: OutFormat,
+    format: Format,
     progress: P,
 ) -> Result<()>
 where
@@ -68,7 +68,7 @@ where
 pub async fn convert_dir<I, O, P>(
     input_dir: I,
     output_dir: Option<O>,
-    format: OutFormat,
+    format: Format,
     mut progress: P,
 ) -> Result<()>
 where
@@ -129,7 +129,7 @@ where
 ///
 /// # Errors
 /// Failed to convert.
-pub async fn convert_file<I, O>(input: I, output: Option<O>, format: OutFormat) -> Result<()>
+pub async fn convert_file<I, O>(input: I, output: Option<O>, format: Format) -> Result<()>
 where
     I: AsRef<Path>,
     O: AsRef<Path>,

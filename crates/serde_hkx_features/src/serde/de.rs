@@ -2,7 +2,7 @@
 #[cfg(feature = "extra_fmt")]
 use crate::error::UnsupportedExtensionPathSnafu;
 use crate::{
-    convert::OutFormat,
+    convert::Format,
     error::{DeSnafu, Error, FailedReadFileSnafu, Result},
 };
 use serde_hkx::{from_bytes, from_str};
@@ -29,16 +29,16 @@ where
     // Deserialize
     let classes = if let Some(input_ext) = input_ext {
         let fmt =
-            OutFormat::from_extension(input_ext).map_err(|_| Error::UnsupportedExtensionPath {
+            Format::from_extension(input_ext).map_err(|_| Error::UnsupportedExtensionPath {
                 path: input.to_path_buf(),
             })?;
 
         match fmt {
-            OutFormat::Amd64 | OutFormat::Win32 => from_bytes(bytes).context(DeSnafu {
+            Format::Amd64 | Format::Win32 => from_bytes(bytes).context(DeSnafu {
                 input: input.to_path_buf(),
             })?,
 
-            OutFormat::Xml => {
+            Format::Xml => {
                 let mut decoder = encoding_rs_io::DecodeReaderBytes::new(bytes.as_slice());
                 decoder
                     .read_to_string(&mut *string)

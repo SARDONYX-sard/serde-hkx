@@ -1,3 +1,4 @@
+pub mod hkx_checker;
 pub mod rayon;
 pub mod tokio;
 
@@ -8,7 +9,7 @@ use std::{
     path::{Path, PathBuf},
 };
 
-/// Output format
+/// An enum used to specify input/output formats
 ///
 /// # Default
 /// `Amd64`
@@ -16,7 +17,7 @@ use std::{
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display, FromStr)]
 #[display(style = "camelCase")]
 #[non_exhaustive]
-pub enum OutFormat {
+pub enum Format {
     /// 64bit hkx
     #[default]
     Amd64,
@@ -36,16 +37,16 @@ pub enum OutFormat {
     Yaml,
 }
 
-impl OutFormat {
+impl Format {
     /// Return the file extension corresponding to the format.
     ///
     /// # Examples
     /// ```edition2021
-    /// use serde_hkx_features::convert::OutFormat;
+    /// use serde_hkx_features::convert::Format;
     ///
-    /// assert_eq!(OutFormat::Amd64.as_extension(), "hkx");
-    /// assert_eq!(OutFormat::Win32.as_extension(), "hkx");
-    /// assert_eq!(OutFormat::Xml.as_extension(), "xml");
+    /// assert_eq!(Format::Amd64.as_extension(), "hkx");
+    /// assert_eq!(Format::Win32.as_extension(), "hkx");
+    /// assert_eq!(Format::Xml.as_extension(), "xml");
     /// ```
     #[inline]
     pub const fn as_extension(&self) -> &str {
@@ -63,14 +64,63 @@ impl OutFormat {
         }
     }
 
+    /// Return current path format of this path.
+    ///
+    /// # Examples
+    /// ```edition2021 ,no_run
+    /// use serde_hkx_features::convert::Format;
+    ///
+    /// assert_eq!(Format::from_current_format("amd64.hkx").unwrap(), Format::Amd64);
+    /// assert_eq!(Format::from_current_format("win32.hkx").unwrap(), Format::Win32);
+    /// assert_eq!(Format::from_current_format("example.xml").unwrap(), Format::Xml);
+    /// ```
+    ///
+    /// When enable `extra_fmt` feature.
+    /// - `json` -> `Self::Json`
+    /// - `yaml` -> `Self::Yaml`
+    ///
+    /// Internally, when the file extension is .hkx, the first 17 bytes of the file are examined to determine the architecture.
+    ///
+    /// # Errors
+    /// In the case of unsupported file extensions or invalid hkx files.
+    #[inline]
+    pub fn from_current_format<P>(path: P) -> Result<Self>
+    where
+        P: AsRef<Path>,
+    {
+        let path = path.as_ref();
+        let ext = path.extension().ok_or(Error::UnsupportedExtensionPath {
+            path: path.to_path_buf(),
+        })?;
+
+        Ok(match ext {
+            ext if ext.eq_ignore_ascii_case("hkx") => hkx_checker::detect_hkx_format(path)?,
+            ext if ext.eq_ignore_ascii_case("xml") => Self::Xml,
+
+            #[cfg(feature = "extra_fmt")]
+            ext if ext.eq_ignore_ascii_case("json") => Self::Json,
+            #[cfg(feature = "extra_fmt")]
+            ext if ext.eq_ignore_ascii_case("toml") => Self::Toml,
+            #[cfg(feature = "extra_fmt")]
+            ext if ext.eq_ignore_ascii_case("yaml") || ext.eq_ignore_ascii_case("yml") => {
+                Self::Yaml
+            }
+            _ => {
+                return Err(Error::UnsupportedExtensionPath {
+                    path: path.to_path_buf(),
+                });
+            }
+        })
+    }
+
     /// Return output format from input path.
     ///
     /// # Examples
     /// ```edition2021
-    /// use serde_hkx_features::convert::OutFormat;
+    /// use serde_hkx_features::convert::Format;
     ///
-    /// assert_eq!(OutFormat::from_input("example.hkx").unwrap(), OutFormat::Xml);
-    /// assert_eq!(OutFormat::from_input("example.xml").unwrap(), OutFormat::Amd64);
+    /// assert_eq!(Format::infer_output_from_input("example.hkx").unwrap(), Format::Xml);
+    /// assert_eq!(Format::infer_output_from_input("example.xml").unwrap(), Format::Amd64);
     /// ```
     ///
     /// When enable `extra_fmt` feature.
@@ -79,7 +129,7 @@ impl OutFormat {
     /// # Errors
     /// Unknown extension.
     #[inline]
-    pub fn from_input<P>(path: P) -> Result<Self>
+    pub fn infer_output_from_input<P>(path: P) -> Result<Self>
     where
         P: AsRef<Path>,
     {
@@ -112,10 +162,10 @@ impl OutFormat {
     ///
     /// # Examples
     /// ```edition2021
-    /// use serde_hkx_features::convert::OutFormat;
+    /// use serde_hkx_features::convert::Format;
     ///
-    /// assert_eq!(OutFormat::from_extension("hkx").unwrap(), OutFormat::Amd64);
-    /// assert_eq!(OutFormat::from_extension("xml").unwrap(), OutFormat::Xml);
+    /// assert_eq!(Format::from_extension("hkx").unwrap(), Format::Amd64);
+    /// assert_eq!(Format::from_extension("xml").unwrap(), Format::Xml);
     /// ```
     ///
     /// When enable `extra_fmt` feature.
@@ -159,7 +209,7 @@ fn get_output_path<D, I, O>(
     input_dir: D,
     input: I,
     output_dir: &Option<O>,
-    format: OutFormat,
+    format: Format,
 ) -> Option<PathBuf>
 where
     D: AsRef<Path>,
@@ -190,7 +240,7 @@ fn filter_supported_files(entry: &jwalk::DirEntry<((), ())>) -> bool {
     path.extension()
         .and_then(|ext| ext.to_str())
         .is_some_and(|ext| {
-            if OutFormat::from_extension(ext).is_err() {
+            if Format::from_extension(ext).is_err() {
                 #[cfg(feature = "tracing")]
                 tracing::info!("Skip this unsupported extension: {}", path.display());
                 false
@@ -209,7 +259,7 @@ fn get_supported_files(input_dir: &Path) -> Vec<PathBuf> {
         .collect()
 }
 
-fn process_serde<I>(in_bytes: &Vec<u8>, input: I, format: OutFormat) -> Result<Vec<u8>>
+fn process_serde<I>(in_bytes: &Vec<u8>, input: I, format: Format) -> Result<Vec<u8>>
 where
     I: AsRef<Path>,
 {
@@ -230,11 +280,11 @@ where
 
     // Serialize
     let out_bytes = match format {
-        OutFormat::Amd64 | OutFormat::Win32 | OutFormat::Xml => {
+        Format::Amd64 | Format::Win32 | Format::Xml => {
             crate::serde::ser::to_bytes(input, format, &mut classes)?
         }
         #[cfg(feature = "extra_fmt")]
-        OutFormat::Json | OutFormat::Toml | OutFormat::Yaml => {
+        Format::Json | Format::Toml | Format::Yaml => {
             let mut classes = crate::types_wrapper::ClassPtrMap::from_class_map(classes);
             crate::serde_extra::ser::to_bytes(input, format, &mut classes)?
         }

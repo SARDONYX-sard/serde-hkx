@@ -12,7 +12,7 @@ use crate::error::SerdeHkxError;
 #[derive(Debug, Copy, Clone, Eq, PartialEq)]
 pub struct OutputFormat(c_int);
 
-impl TryFrom<OutputFormat> for serde_hkx_features::convert::OutFormat {
+impl TryFrom<OutputFormat> for serde_hkx_features::convert::Format {
     type Error = SerdeHkxError;
 
     #[inline]

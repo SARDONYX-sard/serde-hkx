@@ -1,6 +1,6 @@
 //! Parallel Convert hkx <-> xml
 
-use super::{OutFormat, get_output_path, get_supported_files, process_serde};
+use super::{Format, get_output_path, get_supported_files, process_serde};
 use crate::{
     error::{FailedConvertFilesSnafu, Result},
     fs::write_sync,
@@ -23,7 +23,7 @@ use std::{
 pub fn convert_progress<I, O, P>(
     input: I,
     output: Option<O>,
-    format: OutFormat,
+    format: Format,
     progress: P,
 ) -> Result<()>
 where
@@ -56,7 +56,7 @@ where
 pub fn convert_dir<I, O, P>(
     input_dir: I,
     output_dir: Option<O>,
-    format: OutFormat,
+    format: Format,
     mut progress: P,
 ) -> Result<()>
 where
@@ -115,7 +115,7 @@ where
 ///
 /// # Errors
 /// Failed to convert.
-pub fn convert_file<I, O>(input: I, output: Option<O>, format: OutFormat) -> Result<()>
+pub fn convert_file<I, O>(input: I, output: Option<O>, format: Format) -> Result<()>
 where
     I: AsRef<Path>,
     O: AsRef<Path>,

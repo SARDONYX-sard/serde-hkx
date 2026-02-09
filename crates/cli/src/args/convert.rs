@@ -1,7 +1,7 @@
 //! Convert hkx <-> xml
 use super::progress_handler::CliProgressHandler;
 use clap::ValueEnum;
-use serde_hkx_features::{convert::OutFormat, error::Result};
+use serde_hkx_features::{convert::Format, error::Result};
 use std::path::{Path, PathBuf};
 
 /// ANSI color representation command examples.
@@ -33,7 +33,7 @@ pub(crate) struct Args {
 
     /// File format to output
     #[clap(short = 'v', long, ignore_case = true)]
-    pub format: OutFormat,
+    pub format: Format,
 
     /// Execution runtime: async (Tokio) or parallel (Rayon) (NOTE: Effective only when dir path is selected.)
     #[arg(short, long, ignore_case = true, default_value = "rayon")]
@@ -52,7 +52,7 @@ pub enum Runtime {
 pub async fn convert<I, O>(
     input: I,
     output: Option<O>,
-    format: OutFormat,
+    format: Format,
     runtime: Runtime,
 ) -> Result<()>
 where
@@ -65,7 +65,7 @@ where
     }
 }
 
-fn rayon_convert<I, O>(input: I, output: Option<O>, format: OutFormat) -> Result<()>
+fn rayon_convert<I, O>(input: I, output: Option<O>, format: Format) -> Result<()>
 where
     I: AsRef<Path>,
     O: AsRef<Path> + Sync,
@@ -79,7 +79,7 @@ where
 }
 
 /// convert with cli progress.
-pub async fn tokio_convert<I, O>(input: I, output: Option<O>, format: OutFormat) -> Result<()>
+pub async fn tokio_convert<I, O>(input: I, output: Option<O>, format: Format) -> Result<()>
 where
     I: AsRef<Path>,
     O: AsRef<Path>,
