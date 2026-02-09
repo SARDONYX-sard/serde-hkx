@@ -64,21 +64,25 @@ impl Format {
         }
     }
 
-    /// Return path format of this path.
+    /// Return current path format of this path.
     ///
     /// # Examples
-    /// ```edition2021
+    /// ```edition2021 ,no_run
     /// use serde_hkx_features::convert::Format;
     ///
-    /// assert_eq!(Format::from_current_format("example.hkx").unwrap(), Format::Amd64);
+    /// assert_eq!(Format::from_current_format("amd64.hkx").unwrap(), Format::Amd64);
+    /// assert_eq!(Format::from_current_format("win32.hkx").unwrap(), Format::Win32);
     /// assert_eq!(Format::from_current_format("example.xml").unwrap(), Format::Xml);
     /// ```
     ///
     /// When enable `extra_fmt` feature.
-    /// - `json`, `yaml` -> `Self::Amd64`
+    /// - `json` -> `Self::Json`
+    /// - `yaml` -> `Self::Yaml`
+    ///
+    /// Internally, when the file extension is .hkx, the first 17 bytes of the file are examined to determine the architecture.
     ///
     /// # Errors
-    /// Unknown extension.
+    /// In the case of unsupported file extensions or invalid hkx files.
     #[inline]
     pub fn from_current_format<P>(path: P) -> Result<Self>
     where

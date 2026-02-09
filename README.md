@@ -95,7 +95,7 @@ use std::path::PathBuf;
 #[tokio::main]
 async fn main() -> Result<()> {
   let input = "./defaultmale.hkx"; // file or dir path
-  let out_fmt = Format::from_input(&input)?; // `.hkx` -> Format::Xml, `.xml` -> Format::Amd64
+  let out_fmt = Format::Xml; // Format::Xml, Format::Amd64, Format::Win32
   let output: Option<PathBuf> = None; // `None` is same as input. Or `Some("./output/defaultmale.xml".into())`
   convert(input, output, out_fmt).await
 }
