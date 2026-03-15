@@ -6,6 +6,8 @@ pub mod error;
 pub mod fs;
 #[cfg(feature = "json_schema")]
 pub mod json_schema_gen;
+#[cfg(feature = "kf")]
+pub mod kf;
 pub mod progress;
 pub mod serde;
 #[cfg(feature = "extra_fmt")]

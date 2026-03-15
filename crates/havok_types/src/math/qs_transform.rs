@@ -74,6 +74,33 @@ impl QsTransform {
         bytes[32..48].copy_from_slice(&self.scale.to_le_bytes());
         bytes
     }
+
+    /// Returns the identity transform.
+    ///
+    /// `P' = ( (P * scale) rotated_by(quaternion) ) + translation`
+    #[inline]
+    pub const fn identity() -> Self {
+        Self {
+            transition: Vector4 {
+                x: 0.0,
+                y: 0.0,
+                z: 0.0,
+                w: 0.0,
+            },
+            quaternion: Quaternion {
+                x: 0.0,
+                y: 0.0,
+                z: 0.0,
+                scaler: 1.0,
+            },
+            scale: Vector4 {
+                x: 1.0,
+                y: 1.0,
+                z: 1.0,
+                w: 0.0,
+            },
+        }
+    }
 }
 
 #[test]

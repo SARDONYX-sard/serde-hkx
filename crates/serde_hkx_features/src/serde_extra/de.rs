@@ -55,8 +55,8 @@ where
                         Format::Xml => serde_hkx::from_str(&*string).context(DeSnafu {
                             input: input.to_path_buf(),
                         })?,
-                        Format::Json => {
-                            let classes = simd_json::from_slice::<ClassPtrMap>(unsafe {
+                        OutFormat::Json => {
+                            let classes = sonic_rs::from_slice::<ClassPtrMap>(unsafe {
                                 string.as_bytes_mut()
                             })
                             .with_context(|_| JsonSnafu {

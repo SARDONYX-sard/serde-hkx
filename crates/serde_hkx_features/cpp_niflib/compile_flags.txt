@@ -1,0 +1,4 @@
+-std=c++20
+-xc++
+-I../../../target/cxxbridge/
+-include./wrapper.h
