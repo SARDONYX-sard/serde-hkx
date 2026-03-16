@@ -5,7 +5,7 @@
 
 mod bridge;
 pub(crate) mod de_spline;
-mod info_ver;
+pub mod info_ver;
 mod sampling;
 
 use std::path::{Path, PathBuf};
@@ -73,15 +73,20 @@ impl Default for Config {
 /// - `config`        – Conversion settings.
 ///
 /// Returns every `.kf` path that was written successfully.
-fn export_animations(
+///
+/// # Errors
+/// - `KfDeError::NoSkeleton` if no `hkaSkeleton` is found in the skeleton HKX file.
+/// - `KfDeError::MultipleSkeletons` if multiple `hkaSkeleton` entries are found in the skeleton HKX file.
+/// - `KfDeError::NoAnimations` if `anim_paths` is empty.
+pub fn export_animations(
     skeleton_path: &Path,
     anim_paths: &[PathBuf],
     output: &Path,
     root_dir: &Path,
     config: &Config,
-) -> Result<Vec<PathBuf>, KfDeError> {
+) -> Result<Vec<PathBuf>, KfSerError> {
     if anim_paths.is_empty() {
-        return Err(KfDeError::NoAnimations);
+        return Err(KfSerError::NoAnimations);
     }
 
     let output_is_kf = output
@@ -89,7 +94,7 @@ fn export_animations(
         .is_some_and(|e| e.eq_ignore_ascii_case("kf"));
 
     if output_is_kf && anim_paths.len() > 1 {
-        return Err(KfDeError::ExplicitKfWithMultipleInputs);
+        return Err(KfSerError::ExplicitKfWithMultipleInputs);
     }
 
     // Load skeleton once and reuse for every animation.
@@ -126,13 +131,15 @@ fn export_animations(
 
         match export_one_file(skeleton, anim_path, &out_path, config) {
             Ok(paths) => {
+                #[cfg(feature = "tracing")]
                 for p in &paths {
                     tracing::info!("Exported '{}'", p.display());
                 }
                 written.extend(paths);
             }
-            Err(e) => {
-                tracing::error!("Export failed for '{}': {e}", anim_path.display());
+            Err(_e) => {
+                #[cfg(feature = "tracing")]
+                tracing::error!("Export failed for '{}': {_e}", anim_path.display());
             }
         }
     }
@@ -158,7 +165,7 @@ pub fn export_project(
     root_path: &Path,
     output_dir: &Path,
     config: &Config,
-) -> Result<Vec<PathBuf>, KfDeError> {
+) -> Result<Vec<PathBuf>, KfSerError> {
     use std::ffi::OsStr;
 
     let is_skeleton = proj_path
@@ -198,10 +205,12 @@ pub fn export_project(
 
     match skel_files.len() {
         0 => {
+            #[cfg(feature = "tracing")]
             tracing::warn!("No skeletons found. Skipping '{}'", proj_path.display());
             return Ok(vec![]);
         }
         n if n > 1 => {
+            #[cfg(feature = "tracing")]
             tracing::warn!(
                 "Multiple skeletons found. Skipping '{}'",
                 proj_path.display()
@@ -212,6 +221,7 @@ pub fn export_project(
     }
 
     if anim_files.is_empty() {
+        #[cfg(feature = "tracing")]
         tracing::warn!("No animations found. Skipping '{}'", proj_path.display());
         return Ok(vec![]);
     }
@@ -229,7 +239,7 @@ fn export_one_file(
     anim_path: &Path,
     out_path: &Path,
     config: &Config,
-) -> Result<Vec<PathBuf>, KfDeError> {
+) -> Result<Vec<PathBuf>, KfSerError> {
     let anim_bytes = std::fs::read(anim_path).with_context(|_| IoSnafu {
         path: anim_path.to_owned(),
     })?;
@@ -257,26 +267,26 @@ pub fn to_kf(
     anim_path: &Path,
     out_path: &Path,
     config: &Config,
-) -> Result<Vec<PathBuf>, KfDeError> {
+) -> Result<Vec<PathBuf>, KfSerError> {
     let pairs = collect_binding_anim_pairs(class_map)?;
 
     if pairs.is_empty() {
-        return Err(KfDeError::NoAnimationBindings);
+        return Err(KfSerError::NoAnimationBindings);
     }
 
     // The C++ code rejects files with ≠ 1 binding.
     if pairs.len() != 1 {
-        return Err(KfDeError::UnexpectedBindingCount { count: pairs.len() });
+        return Err(KfSerError::UnexpectedBindingCount { count: pairs.len() });
     }
 
     let (binding, anim) = &pairs[0];
 
     let num_tracks = anim.parent.m_numberOfTransformTracks as usize;
     if num_tracks == 0 {
-        return Err(KfDeError::ZeroTransformTracks);
+        return Err(KfSerError::ZeroTransformTracks);
     }
     if num_tracks > skeleton.m_bones.len() {
-        return Err(KfDeError::TrackCountExceedsBones {
+        return Err(KfSerError::TrackCountExceedsBones {
             tracks: num_tracks,
             bones: skeleton.m_bones.len(),
         });
@@ -298,7 +308,7 @@ pub fn to_kf(
         .context(SamplingSnafu)?;
 
     bridge::write_kf(out_path, &seq_name, target_name, &sampled, config).map_err(|e| {
-        KfDeError::WriteError {
+        KfSerError::WriteError {
             path: out_path.to_owned(),
             source: e,
         }
@@ -311,23 +321,38 @@ pub fn to_kf(
 // Helpers
 // ---------------------------------------------------------------------------
 
-fn find_skeleton<'a>(class_map: &'a ClassMap) -> Result<&'a hkaSkeleton<'a>, KfDeError> {
-    let mut found: Vec<_> = class_map
+fn find_skeleton<'a>(class_map: &'a ClassMap) -> Result<&'a hkaSkeleton<'a>, KfSerError> {
+    // Step 1: Find hkaAnimationContainer
+    let anim_container = class_map
         .values()
-        .filter_map(|c| {
+        .find_map(|c| {
+            if let Classes::hkaAnimationContainer(ac) = c {
+                Some(ac)
+            } else {
+                None
+            }
+        })
+        .ok_or(KfSerError::NoAnimationContainer)?;
+
+    // Step 2: Get the first skeleton pointer from m_skeletons
+    let skeleton_ptr = anim_container
+        .m_skeletons
+        .first()
+        .ok_or(KfSerError::NoSkeleton)?;
+
+    // Step 3: Resolve the pointer into the class_map
+    let skeleton = class_map
+        .get(&skeleton_ptr.get())
+        .and_then(|c| {
             if let Classes::hkaSkeleton(s) = c {
                 Some(s)
             } else {
                 None
             }
         })
-        .collect();
+        .ok_or(KfSerError::NoSkeleton)?;
 
-    match found.len() {
-        1 => Ok(found.swap_remove(0)),
-        0 => Err(KfDeError::NoSkeleton),
-        n => Err(KfDeError::MultipleSkeletons { count: n }),
-    }
+    Ok(skeleton)
 }
 
 fn collect_binding_anim_pairs<'a>(
@@ -337,7 +362,7 @@ fn collect_binding_anim_pairs<'a>(
         &'a hkaAnimationBinding<'a>,
         &'a hkaSplineCompressedAnimation<'a>,
     )>,
-    KfDeError,
+    KfSerError,
 > {
     // Index spline animations by pointer value for O(1) lookup.
     let anim_index: std::collections::HashMap<usize, &hkaSplineCompressedAnimation> = class_map
@@ -392,9 +417,12 @@ fn collect_hkx_files(dir: &Path, recursive: bool) -> Vec<PathBuf> {
 // ---------------------------------------------------------------------------
 
 #[derive(Debug, snafu::Snafu)]
-pub enum KfDeError {
+pub enum KfSerError {
     #[snafu(display("internal serde_hkx error: {source}"))]
-    SerdeHkxFeatureError { source: crate::error::Error },
+    SerdeHkxFeatureError {
+        #[snafu(source(from(crate::error::Error, Box::new)))]
+        source: Box<crate::error::Error>,
+    },
 
     #[snafu(display("sampling error: {source}"))]
     SamplingError { source: sampling::SamplingError },
@@ -405,12 +433,11 @@ pub enum KfDeError {
         source: std::io::Error,
     },
 
+    /// No `hkaAnimationContainer` found in the HKX file.
+    NoAnimationContainer,
+
     /// No `hkaSkeleton` found in the HKX file.
     NoSkeleton,
-
-    /// Multiple skeletons found; expected exactly one.
-    #[snafu(display("expected one hkaSkeleton, found {count}"))]
-    MultipleSkeletons { count: usize },
 
     /// No `hkaAnimationBinding` entries found.
     NoAnimationBindings,

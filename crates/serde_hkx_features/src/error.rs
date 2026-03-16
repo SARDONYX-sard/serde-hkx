@@ -102,6 +102,18 @@ pub enum Error {
         source: std::num::ParseIntError,
     },
 
+    #[cfg(feature = "kf")]
+    #[snafu(transparent)]
+    KfSerError {
+        source: crate::kf::to_kf::KfSerError,
+    },
+
+    #[cfg(feature = "kf")]
+    #[snafu(transparent)]
+    KfDeError {
+        source: crate::kf::from_kf::KfDeError,
+    },
+
     // Extra formats
     #[cfg(feature = "extra_fmt")]
     #[snafu(transparent)]
@@ -112,7 +124,7 @@ pub enum Error {
     // Extra formats
     #[cfg(feature = "json_schema")]
     #[snafu(transparent)]
-    JsonError { source: simd_json::Error },
+    JsonError { source: sonic_rs::Error },
 }
 
 /// `Result` for `serde_hkx_features` crate.

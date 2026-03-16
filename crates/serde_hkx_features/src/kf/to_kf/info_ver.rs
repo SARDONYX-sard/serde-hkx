@@ -92,3 +92,76 @@ pub enum NifVersion {
     /// NIF Version 20.3.0.9
     Ver20_3_0_9 = 0x1403_0009,
 }
+
+#[cfg(feature = "clap")]
+impl clap::ValueEnum for NifVersion {
+    fn value_variants<'a>() -> &'a [Self] {
+        &[
+            Self::Ver2_3,
+            Self::Ver3_0,
+            Self::Ver3_03,
+            Self::Ver3_1,
+            Self::Ver3_3_0_13,
+            Self::Ver4_0_0_0,
+            Self::Ver4_0_0_2,
+            Self::Ver4_1_0_12,
+            Self::Ver4_2_0_2,
+            Self::Ver4_2_1_0,
+            Self::Ver4_2_2_0,
+            Self::Ver10_0_1_0,
+            Self::Ver10_0_1_2,
+            Self::Ver10_0_1_3,
+            Self::Ver10_1_0_0,
+            Self::Ver10_1_0_101,
+            Self::Ver10_1_0_106,
+            Self::Ver10_2_0_0,
+            Self::Ver10_4_0_1,
+            Self::Ver20_0_0_4,
+            Self::Ver20_0_0_5,
+            Self::Ver20_1_0_3,
+            Self::Ver20_2_0_7,
+            Self::Ver20_2_0_8,
+            Self::Ver20_3_0_1,
+            Self::Ver20_3_0_2,
+            Self::Ver20_3_0_3,
+            Self::Ver20_3_0_6,
+            Self::Ver20_3_0_9,
+        ]
+    }
+
+    fn to_possible_value(&self) -> Option<clap::builder::PossibleValue> {
+        // Delegate to FromStr's string representation to keep a single source of truth.
+        // Display must produce the same dot-separated string used in FromStr.
+        Some(clap::builder::PossibleValue::new(match self {
+            Self::Ver2_3 => "2.3",
+            Self::Ver3_0 => "3.0",
+            Self::Ver3_03 => "3.03",
+            Self::Ver3_1 => "3.1",
+            Self::Ver3_3_0_13 => "3.3.0.13",
+            Self::Ver4_0_0_0 => "4.0.0.0",
+            Self::Ver4_0_0_2 => "4.0.0.2",
+            Self::Ver4_1_0_12 => "4.1.0.12",
+            Self::Ver4_2_0_2 => "4.2.0.2",
+            Self::Ver4_2_1_0 => "4.2.1.0",
+            Self::Ver4_2_2_0 => "4.2.2.0",
+            Self::Ver10_0_1_0 => "10.0.1.0",
+            Self::Ver10_0_1_2 => "10.0.1.2",
+            Self::Ver10_0_1_3 => "10.0.1.3",
+            Self::Ver10_1_0_0 => "10.1.0.0",
+            Self::Ver10_1_0_101 => "10.1.0.101",
+            Self::Ver10_1_0_106 => "10.1.0.106",
+            Self::Ver10_2_0_0 => "10.2.0.0",
+            Self::Ver10_4_0_1 => "10.4.0.1",
+            Self::Ver20_0_0_4 => "20.0.0.4",
+            Self::Ver20_0_0_5 => "20.0.0.5",
+            Self::Ver20_1_0_3 => "20.1.0.3",
+            Self::Ver20_2_0_7 => "20.2.0.7",
+            Self::Ver20_2_0_8 => "20.2.0.8",
+            Self::Ver20_3_0_1 => "20.3.0.1",
+            Self::Ver20_3_0_2 => "20.3.0.2",
+            Self::Ver20_3_0_3 => "20.3.0.3",
+            Self::Ver20_3_0_6 => "20.3.0.6",
+            Self::Ver20_3_0_9 => "20.3.0.9",
+        }))
+    }
+}

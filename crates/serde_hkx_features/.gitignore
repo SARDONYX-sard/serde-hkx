@@ -1,2 +1,4 @@
-cpp_niflib/niflib_static.*
+cpp_niflib/bin/
 cpp_niflib/include/
+cpp_niflib/lib/
+cpp_niflib/share/

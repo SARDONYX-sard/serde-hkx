@@ -13,7 +13,7 @@ pub enum ExtraSerdeError {
     #[snafu(display("{}:\n {source}", input.display()))]
     JsonError {
         input: PathBuf,
-        source: simd_json::Error,
+        source: sonic_rs::Error,
         #[snafu(implicit)]
         location: Location,
     },

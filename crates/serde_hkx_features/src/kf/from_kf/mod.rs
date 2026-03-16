@@ -91,6 +91,7 @@ fn collect_tracks(
                 track_to_bone.push(idx);
                 transform_data.push(bridge::ffi::get_transform_ref(block));
             } else {
+                #[cfg(feature = "tracing")]
                 tracing::warn!("Unknown bone '{name}' found in animation. Skipping.");
             }
         }
@@ -101,6 +102,7 @@ fn collect_tracks(
                 track_to_float.push(idx);
                 float_data.push(bridge::ffi::get_float_ref(block));
             } else {
+                #[cfg(feature = "tracing")]
                 tracing::warn!("Unknown float '{name}' found in animation. Skipping.");
             }
         }
@@ -157,7 +159,7 @@ fn export_controller<'a>(
     skeleton: &hkaSkeleton<'a>,
     binding: &mut hkaAnimationBinding<'a>,
     config: &Config,
-) -> Result<hkaSplineCompressedAnimation<'a>, KfSerError> {
+) -> Result<hkaSplineCompressedAnimation<'a>, KfDeError> {
     let Config {
         no_root_siblings,
         additive_blend,
@@ -317,7 +319,7 @@ fn export<'a>(
     binding: &mut hkaAnimationBinding<'a>,
 
     config: &Config,
-) -> Result<hkaSplineCompressedAnimation<'a>, KfSerError> {
+) -> Result<hkaSplineCompressedAnimation<'a>, KfDeError> {
     let s = bridge::ffi::get_target_name(seq)
         .to_string_lossy()
         .to_string();
@@ -345,7 +347,7 @@ pub fn from_kf<'a>(
 
     animations: Vec<PathBuf>,
     config: &Config,
-) -> Result<Vec<u8>, KfSerError> {
+) -> Result<Vec<u8>, KfDeError> {
     let mut class_map: ClassMap<'a> =
         crate::serde::de::deserialize(bytes, text, input_path).context(SerdeHkxFeatureSnafu)?;
     export_animations(&mut class_map, animations, config)?;
@@ -359,7 +361,7 @@ fn export_animations<'a>(
     class_map: &mut ClassMap<'a>,
     anim_list: Vec<PathBuf>, // animations/.hkx paths
     config: &Config,
-) -> Result<(), KfSerError> {
+) -> Result<(), KfDeError> {
     let new_binding_ptr = 9999.into();
 
     {
@@ -372,16 +374,16 @@ fn export_animations<'a>(
 
             match root_container.len() {
                 1 => root_container.swap_remove(0),
-                0 => return Err(KfSerError::MissingAnimationContainer),
+                0 => return Err(KfDeError::MissingAnimationContainer),
                 _ => {
-                    return Err(KfSerError::MultipleAnimationContainerFound {
+                    return Err(KfDeError::MultipleAnimationContainerFound {
                         count: root_container.len(),
                     });
                 }
             }
         };
         let Classes::hkRootLevelContainer(anim) = root_container else {
-            return Err(KfSerError::MissingAnimationContainer);
+            return Err(KfDeError::MissingAnimationContainer);
         };
         anim.m_namedVariants
             .push(havok_classes::hkRootLevelContainerNamedVariant {
@@ -402,16 +404,16 @@ fn export_animations<'a>(
 
             match anim_containers.len() {
                 1 => anim_containers.swap_remove(0),
-                0 => return Err(KfSerError::MissingAnimationContainer),
+                0 => return Err(KfDeError::MissingAnimationContainer),
                 _ => {
-                    return Err(KfSerError::MultipleAnimationContainerFound {
+                    return Err(KfDeError::MultipleAnimationContainerFound {
                         count: anim_containers.len(),
                     });
                 }
             }
         };
         let Classes::hkaAnimationContainer(anim) = anim_container else {
-            return Err(KfSerError::MissingAnimationContainer);
+            return Err(KfDeError::MissingAnimationContainer);
         };
 
         anim.m_bindings.push(new_binding_ptr);
@@ -420,12 +422,12 @@ fn export_animations<'a>(
             anim_container_ptr,
             anim.m_skeletons
                 .first()
-                .ok_or(KfSerError::EmptySkeletons)?
+                .ok_or(KfDeError::EmptySkeletons)?
                 .get(),
         )
     };
     let Some(Classes::hkaSkeleton(skelton_a)) = class_map.get_mut(&skelton_a_ptr) else {
-        return Err(KfSerError::EmptySkeletons);
+        return Err(KfDeError::EmptySkeletons);
     };
 
     let mut new_binding = hkaAnimationBinding {
@@ -456,7 +458,7 @@ fn export_animations<'a>(
     {
         let Some(Classes::hkaAnimationContainer(anim)) = class_map.get_mut(&anim_container_ptr)
         else {
-            return Err(KfSerError::MissingAnimationContainer);
+            return Err(KfDeError::MissingAnimationContainer);
         };
         anim.m_animations.par_extend(anim_indexes);
     }
@@ -465,10 +467,13 @@ fn export_animations<'a>(
 }
 
 #[derive(Debug, snafu::Snafu)]
-pub enum KfSerError {
+pub enum KfDeError {
     /// Raised when the HKX data could not be parsed into a valid ClassMap.
     #[snafu(display("internal serde_hkx_features err: {source}"))]
-    SerdeHkxFeatureError { source: crate::error::Error },
+    SerdeHkxFeatureError {
+        #[snafu(source(from(crate::error::Error, Box::new)))]
+        source: Box<crate::error::Error>,
+    },
 
     /// Raised when the HKX data could not be parsed into a valid ClassMap.
     #[snafu(display("ReadNifList error occurred. path: `{}`, cpp_error: {source}", path.display()))]

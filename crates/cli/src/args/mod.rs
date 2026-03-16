@@ -2,6 +2,8 @@ mod color;
 mod convert;
 mod diff;
 mod dump;
+#[cfg(feature = "kf")]
+mod kf;
 mod progress_handler;
 mod tree;
 mod verify;
@@ -44,6 +46,8 @@ pub(crate) async fn run(args: Args) -> Result<()> {
                 write_diff(args.old, args.new, args.output, args.color).await
             }
             SubCommands::Verify(args) => self::verify::verify(&args.path, args.color),
+            SubCommands::FromKf(args) => kf::from_kf::from_kf(&args).await,
+            SubCommands::ToKf(args) => kf::to_kf::to_kf(&args),
             SubCommands::Completions { shell } => {
                 shell.generate(&mut Args::command(), &mut io::stdout());
                 Ok(())
@@ -104,6 +108,16 @@ pub(crate) enum SubCommands {
 
     /// Parallel hkx reproduction checks. If an error occurs, return a diff showing the location of each error.
     Verify(verify::Args),
+
+    #[cfg(feature = "kf")]
+    /// Convert Havok HKX animation to Gamebryo KF animation.
+    #[clap(name = "from-kf")]
+    FromKf(kf::from_kf::Args),
+
+    #[cfg(feature = "kf")]
+    /// Apply Gamebryo KF animation to Havok HKX behavior.
+    #[clap(name = "to-kf")]
+    ToKf(kf::to_kf::Args),
 
     /// Generate shell completions
     #[clap(arg_required_else_help = true)]

@@ -23,7 +23,7 @@ where
     let input = input.as_ref();
 
     let contents = match format {
-        OutFormat::Json => sonic_rs::to_string_pretty(&classes).with_context(|_| JsonSnafu {
+        Format::Json => sonic_rs::to_string_pretty(&classes).with_context(|_| JsonSnafu {
             input: input.to_path_buf(),
         })?,
         Format::Toml => basic_toml::to_string(&classes).with_context(|_| TomlSnafu {

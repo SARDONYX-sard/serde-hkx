@@ -856,13 +856,11 @@ mod tests {
     /// Smoke-test against a captured 8 384-byte spline block from
     /// `MCO_Dodge-B-1.hkx` (97 transform tracks, 1 block).
     #[test]
+    #[ignore = "requires external test data file"]
     fn decode_single_block() {
-        let re = read_spline_compressed_blocks(
-            include_bytes!("../../../../../tests/data_8384bytes.bin"),
-            97,
-            1,
-        )
-        .unwrap_or_else(|e| panic!("{e}"));
+        let bytes =
+            std::fs::read("../../tests/data_8384bytes.bin").expect("failed to read test data");
+        let re = read_spline_compressed_blocks(&bytes, 97, 1).unwrap_or_else(|e| panic!("{e}"));
 
         assert_eq!(re.len(), 1);
         assert_eq!(re[0].len(), 97);
