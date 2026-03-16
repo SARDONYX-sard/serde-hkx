@@ -3,7 +3,7 @@ use havok_classes::{hkaAnimationBinding, hkaSkeleton};
 use havok_types::QsTransform;
 use rayon::prelude::*;
 
-use crate::kf::to_hkx::{
+use crate::kf::from_kf::{
     bridge,
     math::{
         fill_transforms, normalize_rotations, sample_float, sample_rotation, sample_scale,

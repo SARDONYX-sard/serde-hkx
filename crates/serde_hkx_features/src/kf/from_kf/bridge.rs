@@ -106,9 +106,9 @@ pub(crate) mod ffi {
         // type FloatKey = crate::kf::to_hkx::bridge::FloatKey;
         // type QuaternionKey = crate::kf::to_hkx::bridge::QuaternionKey;
         // type Vector3Key = crate::kf::to_hkx::bridge::Vector3Key;
-        type KeyType = crate::kf::to_hkx::bridge::KeyType;
-        type Vector3 = crate::kf::to_hkx::bridge::Vector3;
-        type Quaternion = crate::kf::to_hkx::bridge::Quaternion;
+        type KeyType = crate::kf::from_kf::bridge::KeyType;
+        type Vector3 = crate::kf::from_kf::bridge::Vector3;
+        type Quaternion = crate::kf::from_kf::bridge::Quaternion;
 
         // ------------------------------------------------------------
         // Sequence / controller

@@ -2,7 +2,7 @@
 
 #include <memory>
 
-#include "serde_hkx_features/src/kf/to_hkx/bridge.rs.h"
+#include "serde_hkx_features/src/kf/from_kf/bridge.rs.h"
 
 namespace nifbridge {
 using namespace Niflib;

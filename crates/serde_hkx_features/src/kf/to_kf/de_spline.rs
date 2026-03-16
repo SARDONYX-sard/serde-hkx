@@ -88,7 +88,7 @@
 //! | THREECOMP24  |   3   |   1   | ← not implemented
 //! | STRAIGHT16   |   2   |   2   | ← not implemented
 //! | UNCOMPRESSED |  16   |   4   |
-
+#![allow(clippy::needless_range_loop)]
 use bitflags::bitflags;
 use havok_types::Quaternion;
 use serde_hkx::errors::readable::ReadableError;
@@ -394,7 +394,7 @@ fn read_quat_three_comp40(input: &mut Input) -> ModalResult<Quaternion> {
     let r_sign = ((c >> 38) & 1) != 0;
 
     let mut out = scatter3_to4(fx, fy, fz, result_shift);
-    let mut w = (1.0 - (fx * fx + fy * fy + fz * fz)).max(0.0).sqrt();
+    let mut w = (1.0 - (fx.mul_add(fx, fy * fy) + fz * fz)).max(0.0).sqrt();
     if r_sign {
         w = -w;
     }

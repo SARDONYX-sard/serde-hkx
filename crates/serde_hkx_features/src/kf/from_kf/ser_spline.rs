@@ -18,9 +18,7 @@
 use havok_classes::hkaSplineCompressedAnimationTrackCompressionParams;
 use havok_types::{QsTransform, Quaternion};
 
-use crate::kf::from_hkx::de_spline::{
-    FlagOffset, RotationQuantizationType, ScalarQuantizationType,
-};
+use crate::kf::to_kf::de_spline::{FlagOffset, RotationQuantizationType, ScalarQuantizationType};
 
 // ---------------------------------------------------------------------------
 // Public entry point

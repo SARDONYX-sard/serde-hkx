@@ -1,7 +1,7 @@
 use havok_types::{QsTransform, Quaternion, Vector4};
 use rayon::prelude::*;
 
-use crate::kf::to_hkx::bridge;
+use crate::kf::from_kf::bridge;
 
 use bridge::{KeyType, Vector3};
 

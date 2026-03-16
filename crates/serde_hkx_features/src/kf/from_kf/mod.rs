@@ -19,7 +19,7 @@ use havok_types::{Pointer, QsTransform};
 use rayon::prelude::*;
 use snafu::ResultExt as _;
 
-use crate::kf::to_hkx::sampling::AnimationLayout;
+use crate::kf::from_kf::sampling::AnimationLayout;
 use crate::{ClassMap, Format};
 
 #[derive(Debug, Clone)]
@@ -240,7 +240,7 @@ fn new_animation<'a>(
     n_frames_per_second: u32,
     params: hkaSplineCompressedAnimationTrackCompressionParams,
 ) -> hkaSplineCompressedAnimation<'a> {
-    use crate::kf::to_hkx::ser_spline::write_block;
+    use crate::kf::from_kf::ser_spline::write_block;
 
     let duration = temp_anim.parent.m_duration;
     let n_transforms = temp_anim.parent.m_numberOfTransformTracks as usize;
@@ -337,7 +337,7 @@ fn export<'a>(
 /// * `animations` - A list of file paths to animation files (.kf) that should be merged into the output HKX.
 ///
 /// # Errors
-pub fn to_hkx<'a>(
+pub fn from_kf<'a>(
     bytes: &'a Vec<u8>,
     text: &'a mut String,
     input_path: &Path,
