@@ -80,7 +80,7 @@ This occurs with debug build (`cargo build`) but not with release (`cargo build 
 ```toml
 # in Cargo.toml
 tokio = { version = "1.41.0", features = ["full"] } # Async runtime
-serde_hkx_features = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.7.0" }
+serde_hkx_features = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "1.0.0" }
 ```
 
 <!--
@@ -105,8 +105,8 @@ async fn main() -> Result<()> {
 
 ```toml
 # in Cargo.toml
-havok_classes = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.7.0" }
-serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "0.7.0" }
+havok_classes = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "1.0.0" }
+serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "1.0.0" }
 ```
 
 - When using C or other languages (FFI)
