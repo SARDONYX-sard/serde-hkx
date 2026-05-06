@@ -2,14 +2,10 @@ use std::env;
 
 fn main() {
     // only run if target os is windows
-    let is_non_windows = env::var("CARGO_CFG_TARGET_OS")
-        .map(|os| os != "windows")
-        .unwrap_or(true);
+    let is_non_windows = env::var("CARGO_CFG_TARGET_OS").map_or(true, |os| os != "windows");
 
     // only build the resource for release builds as calling rc.exe might be slow
-    let is_release = env::var("PROFILE")
-        .map(|p| p.starts_with("release"))
-        .unwrap_or(false);
+    let is_release = env::var("PROFILE").is_ok_and(|p| p.starts_with("release"));
 
     if is_non_windows || !is_release {
         return;
