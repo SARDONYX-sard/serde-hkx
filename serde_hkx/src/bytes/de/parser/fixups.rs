@@ -5,7 +5,7 @@ use indexmap::IndexMap;
 use winnow::{
     Parser,
     binary::{self, Endianness},
-    error::{ContextError, StrContext, StrContextValue::*},
+    error::{ContextError, ErrMode, StrContext, StrContextValue::*},
     token::take_while,
 };
 
@@ -82,7 +82,7 @@ impl Fixups {
     pub fn from_section_header<'a>(
         header: &SectionHeader,
         endian: Endianness,
-    ) -> impl Parser<&'a [u8], Self, ContextError> {
+    ) -> impl Parser<&'a [u8], Self, ErrMode<ContextError>> {
         let SectionHeader {
             local_fixups_offset,
             global_fixups_offset,
@@ -128,7 +128,7 @@ fn read_local_fixups(
 ) -> winnow::ModalResult<LocalFixups> {
     let mut local_map = LocalFixups::new();
     for _ in 0..len {
-        if let Ok(local_src) = binary::u32::<&[u8], ContextError>(endian)
+        if let Ok(local_src) = binary::u32::<&[u8], ErrMode<ContextError>>(endian)
             .verify(|&src| src != FIXUP_VALUE_FOR_ALIGN)
             .context(StrContext::Expected(Description("local_fixup.src(u32)")))
             .parse_next(bytes)
@@ -163,7 +163,7 @@ fn read_fixups(
 ) -> winnow::ModalResult<VirtualFixups> {
     let mut fixups = VirtualFixups::new();
     for _ in 0..len {
-        if let Ok(src) = binary::u32::<&[u8], ContextError>(endian)
+        if let Ok(src) = binary::u32::<&[u8], ErrMode<ContextError>>(endian)
             .verify(|src| *src != FIXUP_VALUE_FOR_ALIGN)
             .parse_next(bytes)
         {

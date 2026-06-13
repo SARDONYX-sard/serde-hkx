@@ -11,23 +11,22 @@ use self::enum_access::EnumDeserializer;
 use self::map::MapDeserializer;
 use self::parser::{
     comment_multispace0,
-    tag::{attr_string, end_tag},
+    tag::{attr_string, end_tag, hksection_start_tag},
     type_kind::{
         boolean, matrix3, matrix4, pointer, qstransform, quaternion, real, rotation, string,
         transform, vector4,
     },
 };
 use self::seq::SeqDeserializer;
-use crate::errors::{
-    de::{Error, Result},
-    readable::ReadableError,
-};
+use crate::errors::de::{Error, Result};
 use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;
 use parser::tag::{class_start_tag, start_tag};
 use winnow::Parser;
 use winnow::ascii::{dec_int, dec_uint};
 use winnow::combinator::opt;
+use winnow::error::{ContextError, ErrMode};
+use winnow_ext::{ReadableError, take_until_ext};
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -127,17 +126,15 @@ where
     let mut de = de;
 
     tri!(
-        de.parse_next(opt(winnow::token::take_until(
-            0..,
-            "<hksection name=\"__data__\">"
+        de.parse_next(opt((
+            take_until_ext(0.., hksection_start_tag),
+            hksection_start_tag
         )))
         .map_err(|err| de.to_readable_err(err))
     );
-    tri!(
-        de.parse_next(winnow::token::take_until(0.., "<hkobject"))
-            .map_err(|err| de.to_readable_err(err))
-    );
+
     let t = tri!(T::deserialize(&mut de).map_err(|err| de.to_readable_err(err)));
+
     tri!(
         de.parse_next(opt(end_tag("hksection")))
             .map_err(|err| de.to_readable_err(err))
@@ -181,7 +178,7 @@ impl<'de> XmlDeserializer<'de> {
     /// If an error occurs, it is converted to [`ReadableError`] and returned.
     fn parse_next<O>(
         &mut self,
-        mut parser: impl Parser<&'de str, O, winnow::error::ContextError>,
+        mut parser: impl Parser<&'de str, O, ErrMode<ContextError>>,
     ) -> Result<O> {
         let res = parser
             .parse_next(&mut self.input)
@@ -194,7 +191,7 @@ impl<'de> XmlDeserializer<'de> {
     /// If an error occurs, it is converted to [`ReadableError`] and returned.
     fn parse_peek<O>(
         &self,
-        mut parser: impl Parser<&'de str, O, winnow::error::ContextError>,
+        mut parser: impl Parser<&'de str, O, ErrMode<ContextError>>,
     ) -> Result<O> {
         let (_, res) = parser
             .parse_peek(self.input)

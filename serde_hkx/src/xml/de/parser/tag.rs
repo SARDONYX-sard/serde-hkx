@@ -1,22 +1,43 @@
 //! XML tag parsers
 use crate::lib::*;
+use crate::xml::de::parser::type_kind::pointer;
 
-use super::{
-    delimited_comment_multispace0, delimited_multispace0_comment, delimited_with_multispace0,
-    type_kind::pointer,
-};
+use super::{delimited_comment_multispace0, delimited_multispace0_comment};
 use havok_types::{Pointer, Signature};
-use winnow::ascii::{digit1, hex_digit1, oct_digit1};
+use winnow::ascii::{Caseless, digit1, hex_digit1, oct_digit1};
 use winnow::combinator::{delimited, dispatch, fail, seq};
-use winnow::error::{ContextError, StrContext, StrContextValue, StrContextValue::*};
+use winnow::error::{
+    ContextError, ErrMode, StrContext,
+    StrContextValue::{self, *},
+};
 use winnow::token::{take, take_until};
 use winnow::{ModalResult, Parser};
+use winnow_ext::delimited_multispace0;
 
-/// Parses the start tag `<tag>`
-pub fn start_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError> {
+/// Parses the start tag `<hksection name="__data__">`
+///
+/// # Errors
+/// When parse failed.
+pub fn hksection_start_tag(input: &mut &str) -> ModalResult<()> {
     seq!(
         _: delimited_comment_multispace0("<"),
-        _: delimited_with_multispace0(tag),
+        _: delimited_multispace0(Caseless("hksection")),
+        _: Caseless("name"),
+        _: delimited_multispace0("="),
+        _: "\"__data__\"",
+        _: delimited_multispace0_comment(">"),
+    )
+    .context(StrContext::Label("hksection start tag"))
+    .context(StrContext::Label("<hksection name=\"__data__\">"))
+    .parse_next(input)?;
+    Ok(())
+}
+
+/// Parses the start tag `<tag>`
+pub fn start_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ErrMode<ContextError>> {
+    seq!(
+        _: delimited_comment_multispace0("<"),
+        _: delimited_multispace0(Caseless(tag)),
         _: delimited_multispace0_comment(">")
     )
     .context(StrContext::Label("start tag"))
@@ -24,11 +45,11 @@ pub fn start_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError
 }
 
 /// Parses the end tag `</tag>`
-pub fn end_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError> {
+pub fn end_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ErrMode<ContextError>> {
     seq!(
         _: delimited_comment_multispace0("<"),
-        _: delimited_with_multispace0("/"),
-        _: delimited_with_multispace0(tag),
+        _: delimited_multispace0("/"),
+        _: delimited_multispace0(Caseless(tag)),
         _: delimited_multispace0_comment(">")
     )
     .context(StrContext::Label("end tag"))
@@ -45,20 +66,20 @@ pub fn end_tag<'a>(tag: &'static str) -> impl Parser<&'a str, (), ContextError> 
 pub fn class_start_tag<'a>(input: &mut &'a str) -> ModalResult<(Pointer, &'a str, Signature)> {
     seq!(
         _: delimited_comment_multispace0("<"),
-        _: delimited_with_multispace0("hkobject"),
-        _: delimited_with_multispace0("name"),
-        _: delimited_with_multispace0("="),
+        _: delimited_multispace0("hkobject"),
+        _: delimited_multispace0("name"),
+        _: delimited_multispace0("="),
         attr_ptr,
 
-        _: delimited_with_multispace0("class"),
-        _: delimited_with_multispace0("="),
+        _: delimited_multispace0("class"),
+        _: delimited_multispace0("="),
         attr_string,
 
-        _: delimited_with_multispace0("signature"),
-        _: delimited_with_multispace0("="),
-        _: delimited_with_multispace0("\""),
+        _: delimited_multispace0("signature"),
+        _: delimited_multispace0("="),
+        _: delimited_multispace0("\""),
         radix_digits.map(|digits| Signature::new(digits as u32)),
-        _: delimited_with_multispace0("\""),
+        _: delimited_multispace0("\""),
         _: delimited_multispace0_comment(">")
     )
     .context(StrContext::Label("Class start tag"))
@@ -74,12 +95,12 @@ pub fn class_start_tag<'a>(input: &mut &'a str) -> ModalResult<(Pointer, &'a str
 /// All arguments are used only for clarity of error reporting.
 pub fn field_start_open_tag<'a>(
     class_name: &'static str,
-) -> impl Parser<&'a str, (), ContextError> {
+) -> impl Parser<&'a str, (), ErrMode<ContextError>> {
     seq!(
         _: delimited_comment_multispace0("<"),
-        _: delimited_with_multispace0("hkparam"),
-        _: delimited_with_multispace0("name"),
-        _: delimited_with_multispace0("="),
+        _: delimited_multispace0("hkparam"),
+        _: delimited_multispace0("name"),
+        _: delimited_multispace0("="),
     )
     .context(StrContext::Label("field of class: start opening tag"))
     .context(StrContext::Label(class_name))
@@ -102,30 +123,33 @@ pub fn field_start_close_tag(input: &mut &str) -> ModalResult<(Option<u64>, bool
         // Handle self-closing tag with numelements: numelements="0" />
         seq!(
             seq!(
-                _: delimited_with_multispace0("numelements"),
-                _: delimited_with_multispace0("="),
+                _: delimited_multispace0("numelements"),
+                _: delimited_multispace0("="),
                 number_in_string::<u64>, // e.g. "8"
             ),
-            _: delimited_with_multispace0("/"),
+            _: delimited_multispace0("/"),
             _: delimited_multispace0_comment(">")
         )
         .map(|((n,),)| (Some(n), true)),
+        //
         // Handle regular closing tag with numelements: numelements="0">
         seq!(
             seq!(
-                _: delimited_with_multispace0("numelements"),
-                _: delimited_with_multispace0("="),
+                _: delimited_multispace0("numelements"),
+                _: delimited_multispace0("="),
                 number_in_string::<u64>, // e.g. "8"
             ),
             _: delimited_multispace0_comment(">")
         )
         .map(|((n,),)| (Some(n), false)),
+        //
         // Handle self-closing tag without numelements: />
         seq!(
-            _: delimited_with_multispace0("/"),
+            _: delimited_multispace0("/"),
             _: delimited_multispace0_comment(">")
         )
         .map(|()| (None, true)),
+        //
         // Handle regular closing tag without numelements: >
         seq!(
             _: delimited_multispace0_comment(">")
@@ -202,13 +226,66 @@ fn radix_digits(input: &mut &str) -> ModalResult<usize> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::errors::readable::ReadableError;
+    use winnow_ext::ReadableError;
 
     #[test]
     fn test_radix_digits() {
         assert_eq!(radix_digits.parse("0b001010"), Ok(10));
         assert_eq!(radix_digits.parse("0o57"), Ok(47));
         assert_eq!(radix_digits.parse("0x1234"), Ok(4660));
+    }
+
+    #[test]
+    fn test_hksection_start_tag() {
+        assert!(
+            hksection_start_tag
+                .parse(r#"<hksection name="__data__">"#)
+                .is_ok()
+        );
+
+        // case insensitive
+        assert!(
+            hksection_start_tag
+                .parse(r#"<HKSECTION name="__data__">"#)
+                .is_ok()
+        );
+
+        // whitespace / newline
+        assert!(
+            hksection_start_tag
+                .parse(
+                    r#"
+<
+    hksection
+    name
+    =
+    "__data__"
+>
+"#
+                )
+                .is_ok()
+        );
+
+        // invalid value
+        assert!(
+            hksection_start_tag
+                .parse(r#"<hksection name="other">"#)
+                .is_err()
+        );
+
+        // invalid tag
+        assert!(
+            hksection_start_tag
+                .parse(r#"<hkobject name="__data__">"#)
+                .is_err()
+        );
+
+        // invalid attribute
+        assert!(
+            hksection_start_tag
+                .parse(r#"<hksection class="__data__">"#)
+                .is_err()
+        );
     }
 
     #[test]
@@ -227,7 +304,7 @@ mod tests {
         let input = "</ hkparam >\n";
         if let Err(err) = end_tag("hkparam")
             .parse(input)
-            .map_err(|e| ReadableError::from_parse(e, input).to_string())
+            .map_err(|e| ReadableError::from_parse(e).to_string())
         {
             panic!("{err}");
         };
@@ -238,7 +315,7 @@ mod tests {
         fn test_parse(input: &str, expected: (Option<u64>, bool)) {
             match field_start_close_tag
                 .parse(input)
-                .map_err(|e| ReadableError::from_parse(e, input).to_string())
+                .map_err(|e| ReadableError::from_parse(e).to_string())
             {
                 Ok(res) => assert_eq!(res, expected),
                 Err(err) => panic!("{err}"),
@@ -280,5 +357,19 @@ mod tests {
         assert_eq!(number_in_string.parse(r#""33""#), Ok(33));
         assert_eq!(number_in_string.parse(r#""100""#), Ok(100));
         assert_eq!(number_in_string.parse(r#""0""#), Ok(0));
+    }
+
+    #[test]
+    fn test_class_start() {
+        let input = r##"<hkobject name="#0010" class="hkbProjectData" signature="0x13a39ba7">"##;
+
+        assert_eq!(
+            class_start_tag.parse(input),
+            Ok((
+                Pointer::new(10),
+                "hkbProjectData",
+                Signature::new(0x13a39ba7)
+            ))
+        );
     }
 }

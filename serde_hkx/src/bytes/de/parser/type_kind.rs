@@ -5,7 +5,7 @@ use super::BytesStream;
 use havok_types::*;
 use winnow::binary::{self, Endianness};
 use winnow::combinator::{alt, seq, terminated};
-use winnow::error::{ContextError, StrContext, StrContextValue};
+use winnow::error::{ContextError, ErrMode, StrContext, StrContextValue};
 use winnow::token::take_until;
 use winnow::{ModalResult, Parser};
 
@@ -29,7 +29,7 @@ pub fn boolean(input: &mut BytesStream<'_>) -> ModalResult<bool> {
 
 /// Parses [`f32`](`Real`)
 #[inline]
-pub fn real<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, f32, ContextError> {
+pub fn real<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, f32, ErrMode<ContextError>> {
     binary::f32(endian)
         .context(StrContext::Label("real(f32)"))
         .context(StrContext::Expected(StrContextValue::Description(
@@ -41,7 +41,9 @@ pub fn real<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, f32, Context
 // Math
 
 /// Parse as [`Vector4`]
-pub fn vector4<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Vector4, ContextError> {
+pub fn vector4<'a>(
+    endian: Endianness,
+) -> impl Parser<BytesStream<'a>, Vector4, ErrMode<ContextError>> {
     seq!(Vector4 {
         x: real(endian).context(StrContext::Label("x")),
         y: real(endian).context(StrContext::Label("y")),
@@ -55,14 +57,16 @@ pub fn vector4<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Vector4, 
 #[inline]
 pub fn quaternion<'a>(
     endian: Endianness,
-) -> impl Parser<BytesStream<'a>, Quaternion, ContextError> {
+) -> impl Parser<BytesStream<'a>, Quaternion, ErrMode<ContextError>> {
     move |input: &mut &'a [u8]| {
         let Vector4 { x, y, z, w } = tri!(vector4(endian).parse_next(input));
         Ok(Quaternion { x, y, z, scaler: w })
     }
 }
 
-pub fn matrix3<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Matrix3, ContextError> {
+pub fn matrix3<'a>(
+    endian: Endianness,
+) -> impl Parser<BytesStream<'a>, Matrix3, ErrMode<ContextError>> {
     seq!(Matrix3 {
         x: vector4(endian).context(StrContext::Label("x")),
         y: vector4(endian).context(StrContext::Label("y")),
@@ -71,7 +75,9 @@ pub fn matrix3<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Matrix3, 
     .context(StrContext::Label("Matrix3"))
 }
 
-pub fn rotation<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Rotation, ContextError> {
+pub fn rotation<'a>(
+    endian: Endianness,
+) -> impl Parser<BytesStream<'a>, Rotation, ErrMode<ContextError>> {
     seq!(Rotation {
         x: vector4(endian).context(StrContext::Label("x")),
         y: vector4(endian).context(StrContext::Label("y")),
@@ -82,7 +88,7 @@ pub fn rotation<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Rotation
 
 pub fn qstransform<'a>(
     endian: Endianness,
-) -> impl Parser<BytesStream<'a>, QsTransform, ContextError> {
+) -> impl Parser<BytesStream<'a>, QsTransform, ErrMode<ContextError>> {
     seq!(QsTransform {
         transition: vector4(endian).context(StrContext::Label("transition")),
         quaternion: quaternion(endian).context(StrContext::Label("quaternion")),
@@ -91,7 +97,9 @@ pub fn qstransform<'a>(
     .context(StrContext::Label("QsTransform"))
 }
 
-pub fn matrix4<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Matrix4, ContextError> {
+pub fn matrix4<'a>(
+    endian: Endianness,
+) -> impl Parser<BytesStream<'a>, Matrix4, ErrMode<ContextError>> {
     seq!(Matrix4 {
         x: vector4(endian).context(StrContext::Label("x")),
         y: vector4(endian).context(StrContext::Label("y")),
@@ -101,7 +109,9 @@ pub fn matrix4<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Matrix4, 
     .context(StrContext::Label("Matrix4"))
 }
 
-pub fn transform<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Transform, ContextError> {
+pub fn transform<'a>(
+    endian: Endianness,
+) -> impl Parser<BytesStream<'a>, Transform, ErrMode<ContextError>> {
     seq!(Transform {
         rotation: rotation(endian).context(StrContext::Label("rotation")),
         transition: vector4(endian).context(StrContext::Label("transition")),
@@ -114,7 +124,7 @@ pub fn transform<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, Transfo
 // NOTE: No Pointer parsing exists because it is automatically created as an index.
 
 /// Parses f16
-pub fn half<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, f16, ContextError> {
+pub fn half<'a>(endian: Endianness) -> impl Parser<BytesStream<'a>, f16, ErrMode<ContextError>> {
     move |bytes: &mut BytesStream<'a>| {
         let (b0, b1) = tri!(
             seq! {
@@ -164,7 +174,7 @@ pub fn string<'a>(input: &mut BytesStream<'a>) -> ModalResult<&'a str> {
 pub fn array_meta<'a>(
     is_x86: bool,
     endian: Endianness,
-) -> impl Parser<BytesStream<'a>, (usize, i32), ContextError> {
+) -> impl Parser<BytesStream<'a>, (usize, i32), ErrMode<ContextError>> {
     move |bytes: &mut BytesStream<'a>| {
         if is_x86 {
             tri!(

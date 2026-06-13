@@ -17,6 +17,7 @@ mod lib {
     }
 
     pub use self::core::f32;
+    #[cfg(test)]
     pub use self::core::fmt;
     pub use self::core::fmt::Display;
     pub use self::core::ops::Range;

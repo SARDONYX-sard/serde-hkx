@@ -7,7 +7,7 @@ keywords = ["serde", "havok"]
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/SARDONYX-sard/serde-hkx"                     # NOTE: Without it, CLI & CI build will error.
-rust-version = "1.85"
+rust-version = "1.95"
 version = "1.0.0"
 
 [workspace]
@@ -22,35 +22,37 @@ members = [
   "crates/inheritance_tree_gen",
   "crates/serde_hkx_features",
   "crates/serde_hkx_ffi",
+  "crates/winnow_ext",
   "serde_hkx",
 ]
 default-members = ["crates/cli"]
-resolver = "2"
+resolver = "3"
 
 [workspace.dependencies]
-bitflags = "2.9.0"                                             # To generate flags type
-clap = { version = "4.5.23", features = ["derive"] }           # For CLI
+bitflags = "2.13.0"                                             # To generate flags type
+clap = { version = "4.6.1", features = ["derive"] }           # For CLI
 color-print = "0.3.7"                                          # To color example help
 educe = "0.6.0"                                                # Custom derive by derive
-indexmap = "2.8.0"                                             # Ordering HashMap
+indexmap = "2.14.0"                                             # Ordering HashMap
 jwalk = { version = "0.8.1" }                                  # To enumerate json class files
-num-derive = "0.4"                                             # To serialize Enum & Flags
+num-derive = "0.4.2"                                             # To serialize Enum & Flags
 num-traits = "0.2.19"                                          # To serialize Enum & Flags
-parse-display = "0.10.0"                                       # Display derive
-lexical = { version = "7.0.4", features = ["radix", "format", "power-of-two"] }
-proc-macro2 = { version = "1.0.94", default-features = false } # Rust token
-quote = { version = "1.0.40", default-features = false }       # Rust token gen to more convenience
-rayon = { version = "1.10.0" }                                 # Parallel
-schemars = { version = "1.0.0-alpha.17" }
-serde = { version = "1.0.219", features = ["derive"] }         # (De)Serializer
-serde_json = { version = "1.0.140" }                           # To read and write Json files
-serde_with = "3.12.0"                                          # Serde utility
-similar = "2.7.0"                                              # Create diff
-snafu = "0.8.5"                                                # Define all error patterns(with backtrace)
+parse-display = "0.11.0"                                       # Display derive
+lexical = { version = "7.0.5", features = ["radix", "format", "power-of-two"] }
+proc-macro2 = { version = "1.0.106", default-features = false } # Rust token
+quote = { version = "1.0.45", default-features = false }       # Rust token gen to more convenience
+rayon = { version = "1.12.0" }                                 # Parallel
+schemars = { version = "1.2.1" }
+serde = { version = "1.0.228", features = ["derive"] }         # (De)Serializer
+serde_json = { version = "1.0.150" }                           # To read and write Json files
+serde_with = "3.21.0"                                          # Serde utility
+similar = "3.1.1"                                              # Create diff
+snafu = "0.9.1"                                                # Define all error patterns(with backtrace)
 static_assertions = "1.1.0"                                    # Compile tim assertions
-syn = { version = "2.0.100", default-features = false }         # Rust parser
-tokio = { version = "1.44.2" }                                 # Async runtime
-tracing = { version = "0.1.41" }                               # logger
+syn = { version = "2.0.117", default-features = false }         # Rust parser
+tokio = { version = "1.52.3" }                                 # Async runtime
+tracing = { version = "0.1.44" }                               # logger
+winnow = { version = "1.0.3", features = ["simd"] } # Parser combinator
 
 # workspace members
 havok_classes = { path = "./crates/havok_classes" }
@@ -59,6 +61,7 @@ havok_types = { path = "./crates/havok_types" }
 havok_types_derive = { path = "./crates/havok_types_derive" }
 serde_hkx = { path = "./serde_hkx", default-features = false }
 serde_hkx_features = { path = "./crates/serde_hkx_features" }
+winnow_ext = { path = "./crates/winnow_ext" }
 
 # dev-dependencies
 pretty_assertions = "1.4.1"                                  # Color diff assertion

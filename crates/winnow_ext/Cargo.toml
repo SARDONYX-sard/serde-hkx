@@ -1,0 +1,20 @@
+[package]
+name = "winnow_ext"
+version = "0.1.0"
+description = "winnow extra functions"
+
+authors.workspace = true
+categories = ["development-tools"]
+edition.workspace = true
+keywords = ["skyrim"]
+license = "MIT OR Apache-2.0"
+readme = "../../README.md"
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+annotate-snippets = "0.12.15"                    # Error reporting display
+winnow = { workspace = true }                   # Parser combinator
+
+[lints]
+workspace = true

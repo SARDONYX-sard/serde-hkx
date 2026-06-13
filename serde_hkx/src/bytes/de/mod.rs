@@ -21,15 +21,13 @@ use self::parser::{
 use self::seq::SeqDeserializer;
 use super::hexdump::{self, to_hexdump_pos};
 use super::serde::{hkx_header::HkxHeader, section_header::SectionHeader};
-use crate::errors::{
-    de::{Error, Result},
-    readable::ReadableError,
-};
+use crate::errors::de::{Error, Result};
 use havok_serde::de::{self, Deserialize, ReadEnumSize, Visitor};
 use havok_types::*;
 use winnow::binary::Endianness;
-use winnow::error::{StrContext, StrContextValue};
+use winnow::error::{ContextError, ErrMode, StrContext, StrContextValue};
 use winnow::{Parser, binary};
+use winnow_ext::ReadableError;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -186,16 +184,13 @@ where
     T::deserialize(&mut de).map_err(|err| de.to_readable_err(err))
 }
 
-// SERDE IS NOT A PARSING LIBRARY. This impl block defines a few basic parsing
-// functions from scratch. More complicated formats may wish to use a dedicated
-// parsing library to help implement their Serde deserializer.
 impl<'de> BytesDeserializer<'de> {
     /// Parse by argument parser.
     ///
     /// If an error occurs, it is converted to [`ReadableError`] and returned.
     fn parse_peek<O, P>(&self, mut parser: P) -> Result<O>
     where
-        P: Parser<BytesStream<'de>, O, winnow::error::ContextError>,
+        P: Parser<BytesStream<'de>, O, winnow::error::ErrMode<ContextError>>,
     {
         let (_, res) = parser
             .parse_peek(&self.input[self.current_position..])
@@ -208,7 +203,7 @@ impl<'de> BytesDeserializer<'de> {
     /// If an error occurs, it is converted to [`Error::ContextError`] and returned.
     fn parse_range<O, P>(&self, mut parser: P, range: Range<usize>) -> Result<O>
     where
-        P: Parser<BytesStream<'de>, O, winnow::error::ContextError>,
+        P: Parser<BytesStream<'de>, O, ErrMode<ContextError>>,
     {
         let (_, res) = parser
             .parse_peek(&self.input[range])
@@ -351,7 +346,7 @@ impl<'de> BytesDeserializer<'de> {
     /// Jump current position(`local_fixup.src`) to dst, then parse, and back to current position.
     fn parse_local_fixup<O, P>(&mut self, parser: P) -> Result<Option<O>>
     where
-        P: Parser<BytesStream<'de>, O, winnow::error::ContextError>,
+        P: Parser<BytesStream<'de>, O, winnow::error::ErrMode<ContextError>>,
     {
         let backup_position = self.current_position();
         self.current_position = match self.get_local_fixup_dst().ok() {
@@ -859,9 +854,7 @@ mod tests {
                 0_u32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
             ]
             .as_bytes(),
-            [
-                0_u32, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
-            ],
+            core::array::from_fn::<u32, 21, _>(|i| i as u32),
         );
     }
 
