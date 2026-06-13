@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["TypeSize"],"trait":["Error","Serialize","SerializeFlags","SerializeSeq","SerializeStruct","Serializer"]};

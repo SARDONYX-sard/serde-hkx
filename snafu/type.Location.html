@@ -1,0 +1,75 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="The source code location where the error was reported."><title>Location in snafu - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../static.files/rustdoc-17e0aaed.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="snafu" data-themes="" data-resource-suffix="" data-rustdoc-version="1.96.0 (ac68faa20 2026-05-25)" data-channel="1.96.0" data-search-js="search-b5634cc7.js" data-stringdex-js="stringdex-2da4960a.js" data-settings-js="settings-170eb4bf.js" ><script src="../static.files/storage-41dd4d93.js"></script><script defer src="sidebar-items.js"></script><script defer src="../static.files/main-5013f961.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-f7c3ffd8.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-044be391.svg"></head><body class="rustdoc type"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Location</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../snafu/index.html">snafu</a><span class="version">0.9.1</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Location</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#limitations" title="Limitations">Limitations</a><ul><li><a href="#asynchronous-code" title="Asynchronous code">Asynchronous code</a></li></ul></li></ul><h3><a href="#trait-implementations">Trait Implementations</a></h3><ul class="block trait-implementation"><li><a href="#impl-GenerateImplicitData-for-%26Location%3C'static%3E" title="GenerateImplicitData">GenerateImplicitData</a></li></ul></section><div id="rustdoc-modnav"><h2 class="in-crate"><a href="index.html">In crate snafu</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content" tabindex="-1"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="index.html">snafu</a></div><h1>Type Alias <span class="type">Location</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../src/snafu/lib.rs.html#1566">Source</a> </span></div><pre class="rust item-decl"><code>pub type Location = &amp;'static <a class="struct" href="https://doc.rust-lang.org/1.96.0/core/panic/location/struct.Location.html" title="struct core::panic::location::Location">Location</a>&lt;'static&gt;;</code></pre><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>The source code location where the error was reported.</p>
+<p>To use it, add a field of type <code>Location</code> to your error and
+register it as <a href="derive.Snafu.html#controlling-implicitly-generated-data" title="derive snafu::Snafu">implicitly generated data</a>. When
+constructing the error, you do not need to provide the location:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="attr">#[derive(Debug, Snafu)]
+</span><span class="kw">struct </span>NeighborhoodError {
+    <span class="attr">#[snafu(implicit)]
+    </span>loc: snafu::Location,
+}
+
+<span class="kw">fn </span>check_next_door() -&gt; <span class="prelude-ty">Result</span>&lt;(), NeighborhoodError&gt; {
+    <span class="macro">ensure!</span>(everything_quiet(), NeighborhoodSnafu);
+    <span class="prelude-val">Ok</span>(())
+}</code></pre></div><h3 id="limitations"><a class="doc-anchor" href="#limitations">§</a>Limitations</h3>
+<p>Implicitly generated data, including <code>Location</code>, is generated when
+the wrapping error value is constructed:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// The first we know about the error is on this line:
+</span><span class="kw">let </span>e = fallible_code();
+<span class="comment">// but the location will correspond to this line:
+</span>e.context(InterestingSnafu)<span class="question-mark">?</span>;</code></pre></div>
+<p>If you have <a href="derive.Snafu.html#disabling-the-context-selector" title="derive snafu::Snafu">disabled the context selector</a>, the
+<code>Location</code> will correspond to where the <code>From</code> implementation is
+invoked. This is usually part of the <code>?</code> operator:</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// The first we know about the error is on this line:
+</span><span class="kw">let </span>e = fallible_code();
+<span class="comment">// but the location will correspond to this line:
+</span>e<span class="question-mark">?</span>;</code></pre></div>
+<p>Inspecting the code at the generated <code>Location</code> will usually
+quickly lead back to the original error, but it’s recommended to
+create the wrapping error as close to the original error location
+to reduce confusion.</p>
+<h4 id="asynchronous-code"><a class="doc-anchor" href="#asynchronous-code">§</a>Asynchronous code</h4>
+<p>When using SNAFU’s
+<code>TryFutureExt</code>
+or
+<code>TryStreamExt</code>
+extension traits, the automatically captured location will
+correspond to where the future or stream was <strong>polled</strong>, not where
+it was created. Additionally, many <code>Future</code> or <code>Stream</code>
+combinators do not forward the caller’s location to their
+closures, causing the recorded location to be inside of the future
+combinator’s library.</p>
+<p>There are two workarounds:</p>
+<ol>
+<li>Avoid combinators and use the non-async <a href="trait.ResultExt.html" title="trait snafu::ResultExt"><code>ResultExt</code></a></li>
+<li>Construct the location explicitly, such as by the <a href="macro.location.html" title="macro snafu::location"><code>location!</code></a> macro</li>
+</ol>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="comment">// Non-ideal: will report where `wrapped_error_future` is `.await`ed.
+</span><span class="kw">let </span>wrapped_error_future = error_future.context(ImplicitLocationSnafu);
+
+<span class="comment">// Better: will report the location of `.context`.
+</span><span class="kw">let </span>wrapped_error_future = <span class="kw">async </span>{ error_future.<span class="kw">await</span>.context(ImplicitLocationSnafu) };
+
+<span class="comment">// Better: Will report the location of `location!`
+</span><span class="kw">let </span>wrapped_error_future = error_future.with_context(|<span class="kw">_</span>| ExplicitLocationSnafu {
+    location: <span class="macro">location!</span>(),
+});
+
+<span class="attr">#[derive(Debug, Snafu)]
+</span><span class="kw">struct </span>ImplicitLocationError {
+    source: AnotherError,
+    <span class="attr">#[snafu(implicit)]
+    </span>location: snafu::Location,
+}
+
+<span class="attr">#[derive(Debug, Snafu)]
+</span><span class="kw">struct </span>ExplicitLocationError {
+    source: AnotherError,
+    location: snafu::Location,
+}</code></pre></div></div></details><h2 id="trait-implementations" class="section-header">Trait Implementations<a href="#trait-implementations" class="anchor">§</a></h2><div id="trait-implementations-list"><details class="toggle implementors-toggle" open><summary><section id="impl-GenerateImplicitData-for-%26Location%3C'static%3E" class="impl"><a class="src rightside" href="../src/snafu/lib.rs.html#1568-1574">Source</a><a href="#impl-GenerateImplicitData-for-%26Location%3C'static%3E" class="anchor">§</a><h3 class="code-header">impl <a class="trait" href="trait.GenerateImplicitData.html" title="trait snafu::GenerateImplicitData">GenerateImplicitData</a> for <a class="type" href="type.Location.html" title="type snafu::Location">Location</a></h3></section></summary><div class="impl-items"><details class="toggle method-toggle" open><summary><section id="method.generate" class="method trait-impl"><a class="src rightside" href="../src/snafu/lib.rs.html#1571-1573">Source</a><a href="#method.generate" class="anchor">§</a><h4 class="code-header">fn <a href="trait.GenerateImplicitData.html#tymethod.generate" class="fn">generate</a>() -&gt; Self</h4></section></summary><div class='docblock'>Build the data.</div></details><details class="toggle method-toggle" open><summary><section id="method.generate_with_source" class="method trait-impl"><a class="src rightside" href="../src/snafu/lib.rs.html#1335-1341">Source</a><a href="#method.generate_with_source" class="anchor">§</a><h4 class="code-header">fn <a href="trait.GenerateImplicitData.html#method.generate_with_source" class="fn">generate_with_source</a>(source: &amp;dyn <a class="trait" href="https://doc.rust-lang.org/1.96.0/core/error/trait.Error.html" title="trait core::error::Error">Error</a>) -&gt; Self<div class="where">where
+    Self: <a class="trait" href="https://doc.rust-lang.org/1.96.0/core/marker/trait.Sized.html" title="trait core::marker::Sized">Sized</a>,</div></h4></section></summary><div class='docblock'>Build the data using the given source</div></details></div></details></div><script src="../type.impl/core/panic/location/struct.Location.js" data-self-path="snafu::Location" async></script></section></div></main></body></html>

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"struct":["hkp2dAngConstraintAtom"]};

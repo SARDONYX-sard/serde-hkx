@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["ANY_REGEX"],"derive":["Display","FromStr"],"struct":["ParseError"],"trait":["DisplayFormat","FromStrFormat","FromStrRegex","IntoResult"]};

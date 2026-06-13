@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["to_string","to_string_with_opt"],"struct":["XmlSerializer"]};

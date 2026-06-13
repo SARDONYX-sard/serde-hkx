@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Various diff (longest common subsequence) algorithms."><title>similar::algorithms - Rust</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Italic-81dc35de.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-MediumItalic-ccf7e434.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2"href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-17e0aaed.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="similar" data-themes="" data-resource-suffix="" data-rustdoc-version="1.96.0 (ac68faa20 2026-05-25)" data-channel="1.96.0" data-search-js="search-b5634cc7.js" data-stringdex-js="stringdex-2da4960a.js" data-settings-js="settings-170eb4bf.js" ><script src="../../static.files/storage-41dd4d93.js"></script><script defer src="../sidebar-items.js"></script><script defer src="../../static.files/main-5013f961.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-f7c3ffd8.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-eab170b8.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc mod"><a class="skip-main-content" href="#main-content">Skip to main content</a><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><rustdoc-topbar><h2><a href="#">Module algorithms</a></h2></rustdoc-topbar><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../../similar/index.html">similar</a><span class="version">3.1.1</span></h2></div><div class="sidebar-elems"><section id="rustdoc-toc"><h2 class="location"><a href="#">Module algorithms</a></h2><h3><a href="#">Sections</a></h3><ul class="block top-toc"><li><a href="#which-algorithm-should-you-use" title="Which Algorithm Should You Use?">Which Algorithm Should You Use?</a></li><li><a href="#heuristics" title="Heuristics">Heuristics</a></li><li><a href="#sequence-adapters" title="Sequence Adapters">Sequence Adapters</a></li><li><a href="#example" title="Example">Example</a></li></ul><h3><a href="#reexports">Module Items</a></h3><ul class="block"><li><a href="#reexports" title="Re-exports">Re-exports</a></li><li><a href="#modules" title="Modules">Modules</a></li><li><a href="#structs" title="Structs">Structs</a></li><li><a href="#traits" title="Traits">Traits</a></li><li><a href="#functions" title="Functions">Functions</a></li></ul></section><div id="rustdoc-modnav"><h2 class="in-crate"><a href="../index.html">In crate similar</a></h2></div></div></nav><div class="sidebar-resizer" title="Drag to resize sidebar"></div><main><div class="width-limiter"><section id="main-content" class="content" tabindex="-1"><div class="main-heading"><div class="rustdoc-breadcrumbs"><a href="../index.html">similar</a></div><h1>Module <span>algorithms</span>&nbsp;<button id="copy-path" title="Copy item path to clipboard">Copy item path</button></h1><rustdoc-toolbar></rustdoc-toolbar><span class="sub-heading"><a class="src" href="../../src/similar/algorithms/mod.rs.html#1-273">Source</a> </span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><p>Various diff (longest common subsequence) algorithms.</p>
+<p>The implementations of the algorithms in this module are relatively low
+level and expose the most generic bounds possible for the algorithm.  To
+use them you would typically use the higher level API if possible but
+direct access to these algorithms can be useful in some cases.</p>
+<p>All these algorithms provide a <code>diff</code> function which takes two indexable
+objects (for instance slices) and a <a href="trait.DiffHook.html" title="trait similar::algorithms::DiffHook"><code>DiffHook</code></a>.  As the
+diff is generated the diff hook is invoked.  Note that the diff hook does
+not get access to the actual values but only the indexes.  This is why the
+diff hook is not used outside of the raw algorithm implementations as for
+most situations access to the values is useful of required.</p>
+<p>The algorithms module really is the most low-level module in similar and
+generally not the place to start.</p>
+<h2 id="which-algorithm-should-you-use"><a class="doc-anchor" href="#which-algorithm-should-you-use">§</a>Which Algorithm Should You Use?</h2>
+<p>For most users, start with <strong><a href="../enum.Algorithm.html#variant.Myers" title="variant similar::Algorithm::Myers"><code>Algorithm::Myers</code></a></strong>.  It’s the default for a
+reason: good general quality, good performance, and robust behavior with
+deadlines.</p>
+<p>If you need to tune behavior, use this rule of thumb:</p>
+<ul>
+<li><strong><a href="../enum.Algorithm.html#variant.Myers" title="variant similar::Algorithm::Myers"><code>Algorithm::Myers</code></a></strong> (default):
+best all-around choice for mixed workloads.</li>
+<li><strong><a href="../enum.Algorithm.html#variant.Patience" title="variant similar::Algorithm::Patience"><code>Algorithm::Patience</code></a></strong>:
+often more human-readable for refactors and reordered blocks, especially
+when there are unique lines/tokens to anchor on.</li>
+<li><strong><a href="../enum.Algorithm.html#variant.Histogram" title="variant similar::Algorithm::Histogram"><code>Algorithm::Histogram</code></a></strong>:
+good for noisy/repetitive inputs (logs, generated text, repeated lines),
+as it prefers low-frequency anchors over common noise.</li>
+<li><strong><a href="../enum.Algorithm.html#variant.Hunt" title="variant similar::Algorithm::Hunt"><code>Algorithm::Hunt</code></a></strong>:
+useful when matching pairs are relatively sparse and you want
+Hunt/LCS-style anchoring; can use more memory on highly repetitive input.</li>
+<li><strong><a href="../enum.Algorithm.html#variant.Lcs" title="variant similar::Algorithm::Lcs"><code>Algorithm::Lcs</code></a></strong>:
+mainly for small inputs, debugging, or reference behavior. It has
+<code>O(N*M)</code> time/space and is usually not a good default at scale.</li>
+</ul>
+<p>Trade-offs to keep in mind:</p>
+<ul>
+<li><code>Patience</code> can lose its edge when there are few unique anchors.</li>
+<li><code>Histogram</code> may prefer readability-oriented anchors over minimal edit
+scripts.</li>
+<li><code>Hunt</code> can degrade on inputs with many repeated matches (<code>R</code> grows large).</li>
+<li><code>Lcs</code> scales poorly and produces weak approximations when deadlines hit.</li>
+</ul>
+<h2 id="heuristics"><a class="doc-anchor" href="#heuristics">§</a>Heuristics</h2>
+<p>Algorithm entrypoints in this module (<code>diff</code> / <code>diff_deadline</code>) are
+heuristic-enabled.  In practice that means they use practical shortcuts to
+keep difficult inputs fast while still producing useful diff scripts.</p>
+<p>At a high level, the current heuristics are:</p>
+<ul>
+<li><strong>Shared disjoint-range fast path</strong> (all algorithms):
+if two large ranges appear to have no common items, we skip expensive
+search and emit a straight delete+insert replacement.</li>
+<li><strong>Prefix/suffix trimming</strong> (used widely):
+matching runs at the beginning/end are emitted immediately so each
+algorithm only works on the changed middle.</li>
+<li><strong>Deadline-aware fallback behavior</strong>:
+when a deadline is provided, algorithms periodically check it and may fall
+back to a simpler script instead of running too long.</li>
+<li><strong>Algorithm-local anchor strategies</strong>:
+<ul>
+<li><strong>Patience</strong> anchors on items unique in both sides.</li>
+<li><strong>Histogram</strong> prefers low-frequency anchors and avoids very noisy lines.</li>
+<li><strong>Hunt</strong> uses match lists and longest-increasing anchor chains.</li>
+</ul>
+</li>
+<li><strong>Myers-specific safeguards</strong>:
+Myers follows Eugene W. Myers’ shortest-edit-script approach: it finds a
+“middle snake” (a central diagonal run of equal items on an optimal edit
+path) and recursively diffs the left and right sides around that split.
+Beyond that classic middle-snake recursion, this implementation adds a
+“front-anchor peel” for heavily unbalanced shifts (it probes a few small
+one-sided skips near the start to find a long shared run, emits that
+prefix anchor early, then recurses on the remaining tail) and an exact
+small-side fallback when one side is tiny and the other is large.</li>
+</ul>
+<p>Some heuristic-enabled entrypoints may require stricter trait bounds than
+their raw counterpart (for example, shared heuristics that build hash-based
+lookups require <a href="https://doc.rust-lang.org/1.96.0/core/hash/trait.Hash.html" title="trait core::hash::Hash"><code>Hash</code></a> + <a href="https://doc.rust-lang.org/1.96.0/core/cmp/trait.Eq.html" title="trait core::cmp::Eq"><code>Eq</code></a>). If your values need to be computed lazily
+or compared via a derived key, wrap them in <a href="struct.CachedLookup.html" title="struct similar::algorithms::CachedLookup"><code>CachedLookup</code></a>
+first. In the remaining cases, <code>diff_deadline_raw</code> is the compatibility path
+with minimal bounds.</p>
+<p>If you want to skip shared heuristics, each algorithm module provides
+<code>diff_deadline_raw</code>, which keeps that algorithm’s minimal intrinsic bounds.</p>
+<p>The top-level dispatcher <a href="fn.diff_deadline.html" title="fn similar::algorithms::diff_deadline"><code>diff_deadline</code></a> always calls the
+heuristic-enabled entrypoints and never calls raw variants.</p>
+<h2 id="sequence-adapters"><a class="doc-anchor" href="#sequence-adapters">§</a>Sequence Adapters</h2>
+<p>Two helpers are available when your input is not already a plain slice:</p>
+<ul>
+<li><a href="struct.CachedLookup.html" title="struct similar::algorithms::CachedLookup"><code>CachedLookup</code></a>: lazily computes and caches sequence items on first access.</li>
+<li><a href="struct.IdentifyDistinct.html" title="struct similar::algorithms::IdentifyDistinct"><code>IdentifyDistinct</code></a>: eagerly remaps values to dense integer IDs.</li>
+</ul>
+<h2 id="example"><a class="doc-anchor" href="#example">§</a>Example</h2>
+<p>This is a simple example that shows how you can calculate the difference
+between two sequences and capture the ops into a vector.</p>
+
+<div class="example-wrap"><pre class="rust rust-example-rendered"><code><span class="kw">use </span>similar::algorithms::{Algorithm, Replace, Capture, diff_slices};
+
+<span class="kw">let </span>a = <span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>];
+<span class="kw">let </span>b = <span class="macro">vec!</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">7</span>];
+<span class="kw">let </span><span class="kw-2">mut </span>d = Replace::new(Capture::new());
+diff_slices(Algorithm::Myers, <span class="kw-2">&amp;mut </span>d, <span class="kw-2">&amp;</span>a, <span class="kw-2">&amp;</span>b).unwrap();
+<span class="kw">let </span>ops = d.into_inner().into_ops();</code></pre></div>
+<p>The above example is equivalent to using
+<a href="../fn.capture_diff_slices.html" title="fn similar::capture_diff_slices"><code>capture_diff_slices</code></a>.</p>
+</div></details><h2 id="reexports" class="section-header">Re-exports<a href="#reexports" class="anchor">§</a></h2><dl class="item-table reexports"><dt id="reexport.Algorithm"><code>pub use crate::<a class="enum" href="../enum.Algorithm.html" title="enum similar::Algorithm">Algorithm</a>;</code></dt></dl><h2 id="modules" class="section-header">Modules<a href="#modules" class="anchor">§</a></h2><dl class="item-table"><dt><a class="mod" href="histogram/index.html" title="mod similar::algorithms::histogram">histogram</a></dt><dd>Histogram diff algorithm.</dd><dt><a class="mod" href="hunt/index.html" title="mod similar::algorithms::hunt">hunt</a></dt><dd>Hunt-style diff algorithm.</dd><dt><a class="mod" href="lcs/index.html" title="mod similar::algorithms::lcs">lcs</a></dt><dd>Classic LCS table diff algorithm.</dd><dt><a class="mod" href="myers/index.html" title="mod similar::algorithms::myers">myers</a></dt><dd>Myers’ diff algorithm.</dd><dt><a class="mod" href="patience/index.html" title="mod similar::algorithms::patience">patience</a></dt><dd>Patience diff algorithm.</dd></dl><h2 id="structs" class="section-header">Structs<a href="#structs" class="anchor">§</a></h2><dl class="item-table"><dt><a class="struct" href="struct.CachedLookup.html" title="struct similar::algorithms::CachedLookup">Cached<wbr>Lookup</a></dt><dd>Caches computed values for indexed lookup.</dd><dt><a class="struct" href="struct.Capture.html" title="struct similar::algorithms::Capture">Capture</a></dt><dd>A <a href="trait.DiffHook.html" title="trait similar::algorithms::DiffHook"><code>DiffHook</code></a> that captures all diff operations.</dd><dt><a class="struct" href="struct.Compact.html" title="struct similar::algorithms::Compact">Compact</a></dt><dd>Performs semantic cleanup operations on a diff.</dd><dt><a class="struct" href="struct.IdentifyDistinct.html" title="struct similar::algorithms::IdentifyDistinct">Identify<wbr>Distinct</a></dt><dd>A utility struct to convert distinct items to unique integers.</dd><dt><a class="struct" href="struct.NoFinishHook.html" title="struct similar::algorithms::NoFinishHook">NoFinish<wbr>Hook</a></dt><dd>Wrapper <a href="trait.DiffHook.html" title="trait similar::algorithms::DiffHook"><code>DiffHook</code></a> that prevents calls to <a href="trait.DiffHook.html#method.finish" title="method similar::algorithms::DiffHook::finish"><code>DiffHook::finish</code></a>.</dd><dt><a class="struct" href="struct.Replace.html" title="struct similar::algorithms::Replace">Replace</a></dt><dd>A <a href="trait.DiffHook.html" title="trait similar::algorithms::DiffHook"><code>DiffHook</code></a> that combines deletions and insertions to give blocks
+of maximal length, and replacements when appropriate.</dd></dl><h2 id="traits" class="section-header">Traits<a href="#traits" class="anchor">§</a></h2><dl class="item-table"><dt><a class="trait" href="trait.DiffHook.html" title="trait similar::algorithms::DiffHook">Diff<wbr>Hook</a></dt><dd>A trait for reacting to an edit script from the “old” version to
+the “new” version.</dd></dl><h2 id="functions" class="section-header">Functions<a href="#functions" class="anchor">§</a></h2><dl class="item-table"><dt><a class="fn" href="fn.diff.html" title="fn similar::algorithms::diff">diff</a></dt><dd>Creates a diff between old and new with the given algorithm.</dd><dt><a class="fn" href="fn.diff_deadline.html" title="fn similar::algorithms::diff_deadline">diff_<wbr>deadline</a></dt><dd>Creates a diff between old and new with the given algorithm with deadline.</dd><dt><a class="fn" href="fn.diff_slices.html" title="fn similar::algorithms::diff_slices">diff_<wbr>slices</a></dt><dd>Shortcut for diffing slices with a specific algorithm.</dd><dt><a class="fn" href="fn.diff_slices_deadline.html" title="fn similar::algorithms::diff_slices_deadline">diff_<wbr>slices_<wbr>deadline</a></dt><dd>Shortcut for diffing slices with a specific algorithm.</dd></dl></section></div></main></body></html>
