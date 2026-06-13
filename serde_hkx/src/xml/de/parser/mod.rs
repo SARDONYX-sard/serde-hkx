@@ -4,20 +4,9 @@ pub mod type_kind;
 
 use winnow::ascii::multispace0;
 use winnow::combinator::{alt, delimited, fail, repeat};
-use winnow::error::{ContextError, StrContext, StrContextValue};
+use winnow::error::{ContextError, ErrMode, StrContext, StrContextValue};
 use winnow::token::take_until;
 use winnow::{ModalResult, Parser};
-
-/// Parses a string with surrounding whitespace(0 or more times)
-///
-/// # Note
-/// Has expected info.
-pub fn delimited_with_multispace0<'a>(
-    s: &'static str,
-) -> impl Parser<&'a str, &'a str, ContextError> {
-    delimited(multispace0, s, multispace0)
-        .context(StrContext::Expected(StrContextValue::StringLiteral(s)))
-}
 
 /// Analyze in the following order.
 /// - `Comments or multi spaces` -> `s` -> `multi spaces`
@@ -26,7 +15,7 @@ pub fn delimited_with_multispace0<'a>(
 /// Has expected info.
 pub fn delimited_comment_multispace0<'a>(
     s: &'static str,
-) -> impl Parser<&'a str, &'a str, ContextError> {
+) -> impl Parser<&'a str, &'a str, ErrMode<ContextError>> {
     delimited(comment_multispace0, s, multispace0)
         .context(StrContext::Expected(StrContextValue::StringLiteral(s)))
 }
@@ -38,7 +27,7 @@ pub fn delimited_comment_multispace0<'a>(
 /// Has expected info.
 pub fn delimited_multispace0_comment<'a>(
     s: &'static str,
-) -> impl Parser<&'a str, &'a str, ContextError> {
+) -> impl Parser<&'a str, &'a str, ErrMode<ContextError>> {
     delimited(multispace0, s, comment_multispace0)
         .context(StrContext::Expected(StrContextValue::StringLiteral(s)))
 }

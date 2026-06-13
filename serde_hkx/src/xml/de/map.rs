@@ -1,18 +1,19 @@
 //! Deserializing each field element in an `Struct`
 
-use crate::{
-    tri,
-    xml::de::parser::{delimited_multispace0_comment, delimited_with_multispace0},
-};
+use crate::tri;
 
 use super::{
     XmlDeserializer,
-    parser::tag::{end_tag, field_start_close_tag, field_start_open_tag},
+    parser::{
+        delimited_multispace0_comment,
+        tag::{end_tag, field_start_close_tag, field_start_open_tag},
+    },
 };
 use crate::errors::de::{Error, Result};
 use havok_serde::de::{DeserializeSeed, MapAccess};
 use havok_types::Pointer;
 use winnow::{Parser as _, combinator::alt, token::take_until};
+use winnow_ext::delimited_multispace0;
 
 /// A structure for deserializing each element in an `Struct`.
 ///
@@ -116,7 +117,7 @@ impl<'de> MapAccess<'de> for MapDeserializer<'_, 'de> {
                     _: end_tag("hkparam")       // </hkparam>
                 },
                 winnow::seq! { // Self closing tag (legacy handling - now handled in field_start_close_tag)
-                    _: delimited_with_multispace0("/"),
+                    _: delimited_multispace0("/"),
                     _: delimited_multispace0_comment(">")
                 }
                 .map(|_| ((None, true), "")),

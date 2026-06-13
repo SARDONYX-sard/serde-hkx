@@ -2,7 +2,6 @@
 
 use crate::{lib::*, tri};
 
-use super::delimited_with_multispace0;
 use havok_types::*;
 use std::borrow::Cow;
 use winnow::ascii::{Caseless, digit1, float, multispace0};
@@ -10,6 +9,7 @@ use winnow::combinator::{alt, opt, preceded, seq};
 use winnow::error::{StrContext, StrContextValue};
 use winnow::token::take_until;
 use winnow::{ModalResult, Parser};
+use winnow_ext::delimited_multispace0;
 
 /// Parses [`bool`]. `true` or `false`
 /// - The corresponding type kind: `Bool`
@@ -127,12 +127,12 @@ pub fn vector4(input: &mut &str) -> ModalResult<Vector4> {
 
     // Helper function to parse separator (either comma or space)
     let mut separator = alt((
-        delimited_with_multispace0(","), // comma-separated format: (0,1,2,3)
-        multispace0,                     // space-separated format: (0 1 2 3)
+        delimited_multispace0(","), // comma-separated format: (0,1,2,3)
+        multispace0,                // space-separated format: (0 1 2 3)
     ));
 
     seq!(Vector4 {
-        _: opt(delimited_with_multispace0("(")),
+        _: opt(delimited_multispace0("(")),
         x: real.context(StrContext::Label("x")),
         _: separator,
         y: real.context(StrContext::Label("y")),
@@ -140,7 +140,7 @@ pub fn vector4(input: &mut &str) -> ModalResult<Vector4> {
         z: real.context(StrContext::Label("z")),
         _: separator,
         w: real.context(StrContext::Label("w")),
-        _: opt(delimited_with_multispace0(")")),
+        _: opt(delimited_multispace0(")")),
     })
     .context(StrContext::Label("Vector4"))
     .parse_next(input)
@@ -364,7 +364,7 @@ pub fn transform(input: &mut &str) -> ModalResult<Transform> {
 /// use serde_hkx::xml::de::parser::type_kind::pointer;
 /// use winnow::Parser as _;
 ///
-/// assert_eq!(pointer.parse("null"), Ok(Pointer::new(0))); // null pointer
+/// assert_eq!(pointer.parse("null"), Ok(Pointer::null())); // null pointer
 /// assert_eq!(pointer.parse("#0000"), Ok(Pointer::new(0))); // null pointer
 /// assert_eq!(pointer.parse("#0100"), Ok(Pointer::new(100)));
 /// assert!(pointer.parse("Non_Prefix#").is_err());
@@ -374,7 +374,7 @@ pub fn transform(input: &mut &str) -> ModalResult<Transform> {
 /// When parse failed.
 pub fn pointer(input: &mut &str) -> ModalResult<Pointer> {
     let null_ptr = Caseless("null")
-        .value(Pointer::new(0))
+        .value(Pointer::null())
         .context(StrContext::Label("Pointer"))
         .context(StrContext::Expected(StrContextValue::Description(
             "Pointer(e.g. `null`)",
@@ -462,8 +462,8 @@ pub fn vector3(input: &mut &str) -> ModalResult<Vector4> {
 
     // Helper function to parse separator (either comma or space)
     let mut separator = alt((
-        delimited_with_multispace0(","), // comma-separated format: (0,1,2)
-        multispace0,                     // space-separated format: (0 1 2)
+        delimited_multispace0(","), // comma-separated format: (0,1,2)
+        multispace0,                // space-separated format: (0 1 2)
     ));
 
     struct Vector3 {
@@ -474,13 +474,13 @@ pub fn vector3(input: &mut &str) -> ModalResult<Vector4> {
 
     let Vector3 { x, y, z } = tri!(
         seq!(Vector3 {
-            _: opt(delimited_with_multispace0("(")),
+            _: opt(delimited_multispace0("(")),
             x: real.context(StrContext::Label("x")),
             _: separator,
             y: real.context(StrContext::Label("y")),
             _: separator,
             z: real.context(StrContext::Label("z")),
-            _: opt(delimited_with_multispace0(")")),
+            _: opt(delimited_multispace0(")")),
         })
         .context(StrContext::Label("Vector3"))
         .parse_next(input)

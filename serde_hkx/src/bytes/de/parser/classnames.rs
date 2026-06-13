@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use winnow::{
     Parser,
     binary::{self, Endianness},
-    error::{ContextError, StrContext, StrContextValue::*},
+    error::{ContextError, ErrMode, StrContext, StrContextValue::*},
     seq,
     token::take_while,
 };
@@ -26,12 +26,12 @@ const FIXUP_VALUE_FOR_ALIGN: u32 = u32::MAX;
 pub fn classnames_section<'a>(
     endian: Endianness,
     base_offset: usize,
-) -> impl Parser<&'a [u8], ClassNames<'a>, ContextError> {
+) -> impl Parser<&'a [u8], ClassNames<'a>, ErrMode<ContextError>> {
     move |bytes: &mut &'a [u8]| {
         let mut class_map = HashMap::new();
         let mut offset = base_offset; // Necessary to determine the starting position of class_name.
 
-        while let Ok(_signature) = binary::u32::<&[u8], ContextError>(endian)
+        while let Ok(_signature) = binary::u32::<&[u8], ErrMode<ContextError>>(endian)
             .verify(|src| *src != FIXUP_VALUE_FOR_ALIGN)
             .context(StrContext::Expected(Description("local_fixup.src(u32)")))
             .parse_next(bytes)
@@ -40,7 +40,7 @@ pub fn classnames_section<'a>(
             tracing::trace!("signature: {_signature:#x}");
 
             let (class_name,) =tri!(seq! {
-                _: binary::u8::<&[u8], ContextError>
+                _: binary::u8::<&[u8], ErrMode<ContextError>>
                     .verify(|byte| *byte == 0x9)
                     .context(StrContext::Expected(Description("class name separator(0x9)"))),
                 string // Parse until `\0`

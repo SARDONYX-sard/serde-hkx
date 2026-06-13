@@ -51,6 +51,12 @@ impl Pointer {
         Self(ptr)
     }
 
+    /// Creates a new null `Pointer`
+    #[inline]
+    pub const fn null() -> Self {
+        Self(0)
+    }
+
     /// Pointer(Class index) is null(`#0000`)?
     #[inline]
     pub const fn is_null(&self) -> bool {

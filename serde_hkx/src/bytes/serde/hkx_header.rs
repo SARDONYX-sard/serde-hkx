@@ -37,18 +37,16 @@
 //! | Unk48                          | Unknown field (Hex offset: 48)                                 | 4            | 72             |
 //! | Unk4C                          | Unknown field (Hex offset: 4C)                                 | 4            | 76             |
 
-use crate::{
-    bytes::hexdump,
-    errors::{de::Error, readable::ReadableError},
-};
+use crate::{bytes::hexdump, errors::de::Error};
 use winnow::{
     Parser,
     binary::{self, Endianness},
     combinator::{dispatch, empty, fail},
-    error::{ContextError, StrContext, StrContextValue::*},
+    error::{ContextError, ErrMode, StrContext, StrContextValue::*},
     seq,
     token::{take, take_until},
 };
+use winnow_ext::ReadableError;
 
 /// The 64bytes HKX header contains metadata information about the HKX file.
 #[derive(Debug, Clone, Default, Eq, PartialEq, Hash)]
@@ -137,7 +135,7 @@ impl HkxHeader {
     }
 
     /// Check valid endian & Parse as hkx root header.
-    pub fn parser<'a>() -> impl Parser<&'a [u8], Self, ContextError> {
+    pub fn parser<'a>() -> impl Parser<&'a [u8], Self, ErrMode<ContextError>> {
         move |bytes: &mut &[u8]| {
             let endianness = {
                 let (mut bytes, _) = take(17_usize).parse_peek(*bytes)?;
@@ -207,7 +205,7 @@ impl HkxHeader {
     /// Convert to bytes.
     ///
     /// # Note
-    /// If `self.endian` is 0, the data is converted to binary data as big endian, otherwise as little endian.
+    /// If `self.endian` is 0, the data is converted to binary data as little endian, otherwise as big endian.
     pub fn to_bytes(&self) -> [u8; 64] {
         let mut buffer = [0; 64];
 

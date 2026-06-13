@@ -370,7 +370,7 @@ impl SerializeSeq for &mut XmlSerializer {
             // regardless of whether it is every 16 or not.
             self.output.push('\n');
             return Ok(());
-        } else if (index + 1) % 16 == 0 {
+        } else if (index + 1).is_multiple_of(16) {
             self.output.push('\n'); // After 16 outputs, indent and make 16 columns.
             self.indent();
         } else {

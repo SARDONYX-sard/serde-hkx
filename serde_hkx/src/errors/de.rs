@@ -45,9 +45,7 @@ pub enum Error {
 
     /// Human readable XML parsing error
     #[snafu(transparent)]
-    ReadableError {
-        source: super::readable::ReadableError,
-    },
+    ReadableError { source: winnow_ext::ReadableError },
 }
 
 impl havok_serde::de::Error for Error {
