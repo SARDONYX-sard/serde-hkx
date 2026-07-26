@@ -46,8 +46,9 @@ pub fn gen_index(class_index_map: &[(&String, bool)]) -> Result<String> {
 
         enum_match_variants.push(quote! { Classes::#class_name_ident });
 
+        let fn_name = quote::format_ident!("de_{class_name}");
         de_matcher.push(quote! {
-            #class_name => Ok(Classes::#class_name_ident(map.next_value()?))
+            #class_name => deserialize_dev_stack_safe!(#fn_name, #class_name_ident, &mut map)
         });
     }
 
@@ -128,6 +129,46 @@ pub fn gen_index(class_index_map: &[(&String, bool)]) -> Result<String> {
                         where
                             A: _serde::de::ClassIndexAccess<'de>,
                         {
+                            /// Generates a debug stack-safe deserialization dispatch.
+                            ///
+                            /// # Background
+                            ///
+                            /// `Classes` is intentionally stored by value. Although it is currently about
+                            /// 1120 bytes, storing variants inline avoids heap allocations during
+                            /// deserialization.
+                            ///
+                            /// In debug builds (`opt-level = 0`), LLVM may allocate a separate stack slot
+                            /// for every `match` arm constructing `Classes`, producing a stack frame well
+                            /// over 1 MiB and causing the CLI to overflow its stack even on trivial inputs.
+                            ///
+                            /// The `d_merge_serde-hkx` fork solves this by boxing every enum variant
+                            /// (`Classes::Variant(Box<Variant>)`), reducing the enum size at the cost of
+                            /// an allocation for every deserialized object. This crate deliberately keeps
+                            /// the value representation to preserve runtime performance.
+                            ///
+                            /// Instead, this macro generates a helper function marked `#[inline(never)]`
+                            /// in debug builds and dispatches through that function. The extra call breaks
+                            /// up LLVM's large stack frame generation while leaving the release build
+                            /// unchanged.
+                            ///
+                            /// This is a workaround for LLVM debug code generation rather than a semantic
+                            /// requirement.
+                            macro_rules! deserialize_dev_stack_safe {
+                                ($fn_name:ident, $variant:ident, $map:expr) => {{
+                                    #[cfg_attr(debug_assertions, inline(never))]
+                                    fn $fn_name<'de, A>(
+                                        map: &mut A,
+                                    ) -> Result<Classes<'de>, A::Error>
+                                    where
+                                        A: _serde::de::ClassIndexAccess<'de>,
+                                    {
+                                        Ok(Classes::$variant(map.next_value::<$variant>()?))
+                                    }
+
+                                    $fn_name($map)
+                                }};
+                            }
+
                             let class_name = map.next_key()?;
                             match class_name {
                                 #(#de_matcher,)*

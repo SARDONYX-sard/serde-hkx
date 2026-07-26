@@ -1,5 +1,3 @@
-use parse_display::{Display, FromStr};
-
 /// Ptr size is the same as the ptr size.
 /// - 32bit for hkx for 32bit
 /// - 64bit for hkx for 64bit
@@ -10,9 +8,22 @@ use parse_display::{Display, FromStr};
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[cfg_attr(feature = "serde", serde(transparent))]
 #[repr(transparent)]
-#[derive(Debug, Copy, Clone, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display, FromStr)]
-#[display("{0}")]
+#[derive(Debug, Copy, Clone, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Ulong(u64);
+
+impl core::fmt::Display for Ulong {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "{}", self.0)
+    }
+}
+
+impl core::str::FromStr for Ulong {
+    type Err = <u64 as core::str::FromStr>::Err;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        s.parse().map(Self)
+    }
+}
 
 impl Ulong {
     /// Creates a new `Ulong`

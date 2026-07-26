@@ -7,7 +7,6 @@
 //! - `#0457`
 //! - `#0007`
 use core::str::FromStr;
-use parse_display::Display;
 
 /// Havok C++ Class unique number.
 ///
@@ -40,8 +39,7 @@ use parse_display::Display;
     derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr)
 )]
 #[repr(transparent)]
-#[derive(Debug, Copy, Clone, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display)]
-#[display("#{0:04}")]
+#[derive(Debug, Copy, Clone, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Pointer(#[cfg_attr(feature = "json_schema", schemars(with = "String"))] usize);
 
 impl Pointer {
@@ -67,6 +65,12 @@ impl Pointer {
     #[inline]
     pub const fn get(&self) -> usize {
         self.0
+    }
+}
+
+impl core::fmt::Display for Pointer {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "#{:04}", self.0)
     }
 }
 

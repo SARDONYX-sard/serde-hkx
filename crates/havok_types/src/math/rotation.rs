@@ -1,5 +1,4 @@
 use crate::Vector4;
-use parse_display::Display;
 
 /// Rotation (same as [`Matrix3`])
 ///
@@ -24,8 +23,7 @@ use parse_display::Display;
 #[repr(C, align(16))]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-#[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display)]
-#[display("{x}{y}{z}")]
+#[derive(Debug, Clone, Default, PartialEq, PartialOrd)]
 pub struct Rotation {
     /// # C++ Info
     /// - name: `x`(ctype: `hkVector4`)
@@ -34,7 +32,6 @@ pub struct Rotation {
     ///
     /// # NOTE
     /// - `Vector4::w`(4th) isn't used(always 0.0).
-    #[display("({x:.06} {y:.06} {z:.06})")]
     pub x: Vector4,
     /// # C++ Info
     /// - name: `y`(ctype: `hkVector4`)
@@ -43,7 +40,6 @@ pub struct Rotation {
     ///
     /// # NOTE
     /// - `Vector4::w`(4th) isn't used(always 0.0).
-    #[display("({x:.06} {y:.06} {z:.06})")]
     pub y: Vector4,
     /// # C++ Info
     /// - name: `z`(ctype: `hkVector4`)
@@ -52,11 +48,19 @@ pub struct Rotation {
     ///
     /// # NOTE
     /// - `Vector4::w`(4th) isn't used(always 0.0).
-    #[display("({x:.06} {y:.06} {z:.06})")]
     pub z: Vector4,
 }
 
-static_assertions::assert_eq_size!(Rotation, [u8; 48]);
+const _: () = assert!(core::mem::size_of::<Rotation>() == 48);
+
+impl core::fmt::Display for Rotation {
+    #[rustfmt::skip]
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "({:.06} {:.06} {:.06})({:.06} {:.06} {:.06})({:.06} {:.06} {:.06})",
+            self.x.x, self.x.y, self.x.z, self.y.x, self.y.y, self.y.z, self.z.x, self.z.y, self.z.z,
+        )
+    }
+}
 
 impl Rotation {
     /// Creates a new `Rotation`

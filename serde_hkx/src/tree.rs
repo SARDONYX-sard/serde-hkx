@@ -7,10 +7,29 @@ use std::collections::HashMap;
 
 /// Trait to create ptr dependencies tree
 pub trait HavokTree {
+    type Error;
+
     /// Tree of the order in which to serialize as binary data.
-    fn tree_for_bytes(&mut self) -> String;
-    /// Tree of the order in which to serialize as XML.
-    fn tree_for_xml(&mut self) -> String;
+    ///
+    /// # Errors
+    /// If `hkRootLevelContainer` is missing.
+    fn tree_for_bytes(&mut self) -> Result<String, Self::Error>;
+
+    // FIXME: This is not possible unless sort can be reproduced.
+    // /// Tree of the order in which to serialize as XML.
+    // ///
+    // /// # Errors
+    // /// If `hkRootLevelContainer` is missing.
+    // fn tree_for_xml(&mut self) -> Result<String, Self::Error>;
+
+    /// Returns class indexes that are not reachable from `hkRootLevelContainer`.
+    ///
+    /// These classes are not referenced by any dependency pointer and can be safely removed before serialization if they are not required externally.
+    ///
+    /// # Errors
+    ///
+    /// If `hkRootLevelContainer` is missing.
+    fn unreferenced_indexes(&self) -> Result<Vec<usize>, Self::Error>;
 }
 
 #[derive(Debug)]
@@ -142,8 +161,10 @@ impl<V> HavokTree for IndexMap<usize, V>
 where
     V: HavokClass,
 {
-    fn tree_for_bytes(&mut self) -> String {
-        self.sort_for_bytes();
+    type Error = crate::errors::ser::Error;
+
+    fn tree_for_bytes(&mut self) -> Result<String, Self::Error> {
+        self.checked_sort_for_bytes()?;
 
         let mut nodes: IndexMap<usize, Node> = IndexMap::new();
         for (&index, class) in self.iter() {
@@ -181,26 +202,122 @@ where
             }
         }
 
-        result
+        Ok(result)
     }
 
-    // FIXME: This is not possible unless sort can be reproduced.
-    fn tree_for_xml(&mut self) -> String {
-        String::new()
+    fn unreferenced_indexes(&self) -> Result<Vec<usize>, Self::Error> {
+        use std::collections::HashSet;
+
+        let (root_ptr, _) = crate::sort::find_root_ptr(self)?;
+
+        let mut reachable = HashSet::new();
+
+        fn collect_reachable<V>(
+            classes: &IndexMap<usize, V>,
+            key: usize,
+            reachable: &mut HashSet<usize>,
+        ) where
+            V: HavokClass,
+        {
+            if !reachable.insert(key) {
+                return;
+            }
+
+            let Some(class) = classes.get(&key) else {
+                return;
+            };
+
+            for dep in class.deps_indexes() {
+                if dep != 0 {
+                    collect_reachable(classes, dep, reachable);
+                }
+            }
+        }
+        collect_reachable(self, root_ptr, &mut reachable);
+
+        Ok(self
+            .keys()
+            .filter(|index| !reachable.contains(index))
+            .copied()
+            .collect())
     }
 }
 
-#[cfg_attr(miri, ignore)] // Unexplained hang
-#[test]
-#[cfg_attr(
-    feature = "tracing",
-    quick_tracing::init(test = "generate_tree_from_xml", stdio = false)
-)]
-fn should_create_tree() {
-    use crate::tests::ClassMap;
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::tests::mocks::new_defaultmale;
+    use havok_classes::*;
 
-    let s = include_str!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml");
-    let mut classes: ClassMap = crate::from_str(s).unwrap();
-    let tree = classes.tree_for_bytes();
-    tracing::debug!("tree =\n{tree}");
+    #[cfg_attr(miri, ignore)] // Unexplained hang
+    #[test]
+    #[cfg_attr(
+        feature = "tracing",
+        quick_tracing::init(test = "generate_tree_from_xml", stdio = false)
+    )]
+    fn should_create_tree() {
+        use crate::tests::ClassMap;
+
+        let s = include_str!("../../docs/handson_hex_dump/wisp_skeleton/skeleton.xml");
+        let mut classes: ClassMap = crate::from_str(s).unwrap();
+        let tree = classes.tree_for_bytes().unwrap();
+        tracing::debug!("tree =\n{tree}");
+    }
+
+    #[test]
+    fn unreferenced_indexes_defaultmale() {
+        let mut classes = new_defaultmale();
+
+        // Add a class that is not reachable from hkRootLevelContainer.
+        //
+        // Dependency tree:
+        //
+        // hkRootLevelContainer(8)
+        //          |
+        //          v
+        // hkbProjectData(10)
+        //          |
+        //          v
+        // hkbProjectStringData(9)
+        //
+        // UnusedClass(100) has no incoming dependency pointer.
+        classes.insert(
+            100,
+            Classes::hkbProjectStringData(hkbProjectStringData {
+                __ptr: Some(100.into()),
+                ..Default::default()
+            }),
+        );
+
+        let unused = classes.unreferenced_indexes().expect("root class exists");
+
+        assert_eq!(unused, vec![100]);
+    }
+
+    #[test]
+    fn unreferenced_indexes_multiple_classes() {
+        let mut classes = new_defaultmale();
+
+        classes.insert(
+            100,
+            Classes::hkbProjectStringData(hkbProjectStringData {
+                __ptr: Some(100.into()),
+                ..Default::default()
+            }),
+        );
+
+        classes.insert(
+            101,
+            Classes::hkbProjectStringData(hkbProjectStringData {
+                __ptr: Some(101.into()),
+                ..Default::default()
+            }),
+        );
+
+        let mut unused = classes.unreferenced_indexes().expect("root class exists");
+
+        unused.sort_unstable();
+
+        assert_eq!(unused, vec![100, 101]);
+    }
 }

@@ -1,5 +1,4 @@
 use crate::{Rotation, Vector4};
-use parse_display::Display;
 
 /// # Transform
 ///
@@ -17,8 +16,7 @@ use parse_display::Display;
 #[repr(C, align(16))]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-#[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display)]
-#[display("{rotation}{transition}")]
+#[derive(Debug, Clone, Default, PartialEq, PartialOrd)]
 pub struct Transform {
     /// # C++ Info
     /// - name: `rotation`(ctype: `hkRotation`)
@@ -32,11 +30,20 @@ pub struct Transform {
     ///
     /// # NOTE
     /// - `Vector4::w`(4th) isn't used(always 0.0).
-    #[display("({x:.06} {y:.06} {z:.06})")]
     pub transition: Vector4,
 }
 
-static_assertions::assert_eq_size!(Transform, [u8; 64]);
+const _: () = assert!(core::mem::size_of::<Transform>() == 64);
+
+impl core::fmt::Display for Transform {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(
+            f,
+            "{}({:.06} {:.06} {:.06})",
+            self.rotation, self.transition.x, self.transition.y, self.transition.z,
+        )
+    }
+}
 
 impl Transform {
     /// Create a new `Transform`
@@ -60,5 +67,27 @@ impl Transform {
         bytes[0..48].copy_from_slice(&self.rotation.to_be_bytes());
         bytes[48..64].copy_from_slice(&self.transition.to_be_bytes());
         bytes
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_xml_representation() {
+        let transform = Transform {
+            rotation: Rotation {
+                x: Vector4::new(0.0, 0.0, 0.0, 0.0),
+                y: Vector4::new(0.0, 0.0, 0.0, 0.0),
+                z: Vector4::new(0.0, 0.0, 0.0, 0.0),
+            },
+            transition: Vector4::new(-0.0, 0.0, -0.0, 0.0),
+        };
+
+        assert_eq!(
+            transform.to_string(),
+            "(0.000000 0.000000 0.000000)(0.000000 0.000000 0.000000)(0.000000 0.000000 0.000000)(-0.000000 0.000000 -0.000000)"
+        );
     }
 }

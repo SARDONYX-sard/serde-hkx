@@ -3,7 +3,6 @@ pub mod rayon;
 pub mod tokio;
 
 use crate::error::{Error, Result};
-use parse_display::{Display, FromStr};
 use std::{
     ffi::OsStr,
     path::{Path, PathBuf},
@@ -14,9 +13,7 @@ use std::{
 /// # Default
 /// `Amd64`
 #[cfg_attr(feature = "clap", derive(clap::ValueEnum))]
-#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display, FromStr)]
-#[display(style = "camelCase")]
-#[non_exhaustive]
+#[derive(Debug, Clone, Copy, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum Format {
     /// 64bit hkx
     #[default]
@@ -35,6 +32,53 @@ pub enum Format {
     #[cfg(feature = "extra_fmt")]
     /// yaml
     Yaml,
+}
+
+impl core::fmt::Display for Format {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        match self {
+            Self::Amd64 => write!(f, "amd64"),
+            Self::Win32 => write!(f, "win32"),
+            Self::Xml => write!(f, "xml"),
+            #[cfg(feature = "extra_fmt")]
+            Self::Json => write!(f, "json"),
+            #[cfg(feature = "extra_fmt")]
+            Self::Toml => write!(f, "toml"),
+            #[cfg(feature = "extra_fmt")]
+            Self::Yaml => write!(f, "yaml"),
+        }
+    }
+}
+
+/// invalid format
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct ParseFormatError;
+
+impl core::fmt::Display for ParseFormatError {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "invalid format")
+    }
+}
+
+impl core::error::Error for ParseFormatError {}
+
+impl core::str::FromStr for Format {
+    type Err = ParseFormatError;
+
+    fn from_str(value: &str) -> Result<Self, Self::Err> {
+        match value {
+            _ if value.eq_ignore_ascii_case("amd64") => Ok(Self::Amd64),
+            _ if value.eq_ignore_ascii_case("win32") => Ok(Self::Win32),
+            _ if value.eq_ignore_ascii_case("xml") => Ok(Self::Xml),
+            #[cfg(feature = "extra_fmt")]
+            _ if value.eq_ignore_ascii_case("json") => Ok(Self::Json),
+            #[cfg(feature = "extra_fmt")]
+            _ if value.eq_ignore_ascii_case("toml") => Ok(Self::Toml),
+            #[cfg(feature = "extra_fmt")]
+            _ if value.eq_ignore_ascii_case("yaml") => Ok(Self::Yaml),
+            _ => Err(ParseFormatError),
+        }
+    }
 }
 
 impl Format {

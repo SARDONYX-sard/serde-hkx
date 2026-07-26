@@ -72,15 +72,17 @@ cd ./serde-hkx && cargo build --release-lto;
 
 ## When used as a library(For developer)
 
-NOTE: Currently there is a stack overflow problem of unknown cause.
-This occurs with debug build (`cargo build`) but not with release (`cargo build --release`).
+~~NOTE: Currently there is a stack overflow problem of unknown cause.
+This occurs with debug build (`cargo build`) but not with release (`cargo build --release`).~~
+
+According to this [CAO issue report](https://github.com/evildarkarchon/CAO/issues/85#issuecomment-5076687967), it was found that passing through a function (fn) can prevent stack overflow without requiring Classes to be wrapped in Box. Thank you. (I made the changes using a macro and have verified that they actually work.)
 
 - Convenience wrapper API(For CLI/GUI): [Examples](./crates/cli/src/args/mod.rs)/[API docs](https://serde-hkx-api.netlify.app/serde_hkx_features/)
 
 ```toml
 # in Cargo.toml
 tokio = { version = "1.41.0", features = ["full"] } # Async runtime
-serde_hkx_features = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "1.0.0" }
+serde_hkx_features = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "1.1.0" }
 ```
 
 <!--
@@ -105,8 +107,8 @@ async fn main() -> Result<()> {
 
 ```toml
 # in Cargo.toml
-havok_classes = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "1.0.0" }
-serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "1.0.0" }
+havok_classes = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "1.1.0" }
+serde_hkx = { git = "https://github.com/SARDONYX-sard/serde-hkx", tag = "1.1.0" }
 ```
 
 - When using C or other languages (FFI)

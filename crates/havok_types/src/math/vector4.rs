@@ -1,5 +1,3 @@
-use parse_display::Display;
-
 /// # Vector4
 ///
 /// # C++ Info
@@ -24,8 +22,7 @@ use parse_display::Display;
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 #[repr(C, align(16))]
-#[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display)]
-#[display("({x:.06} {y:.06} {z:.06} {w:.06})")]
+#[derive(Debug, Clone, Default, PartialEq, PartialOrd)]
 pub struct Vector4 {
     /// # C++ Info
     /// - name: `x`(ctype: `hkReal`)
@@ -49,7 +46,20 @@ pub struct Vector4 {
     pub w: f32,
 }
 
-static_assertions::assert_eq_size!(Vector4, [u8; 16]);
+const _: () = {
+    assert!(core::mem::size_of::<Vector4>() == 16);
+    assert!(core::mem::align_of::<Vector4>() == 16); // Vector4 must be 16bytes(16 * 8 = 128bit) align.
+};
+
+impl core::fmt::Display for Vector4 {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(
+            f,
+            "({:.06} {:.06} {:.06} {:.06})",
+            self.x, self.y, self.z, self.w
+        )
+    }
+}
 
 impl Vector4 {
     /// Creates a new `Vector4`
@@ -101,9 +111,6 @@ impl Vector4 {
         }
     }
 }
-
-static_assertions::assert_eq_size!(Vector4, [u8; 16]); // Vector4 must be 16bytes size.
-static_assertions::assert_eq_align!(Vector4, u128); // Vector4 must be 16bytes(16 * 8 = 128bit) align.
 
 #[cfg(test)]
 mod tests {

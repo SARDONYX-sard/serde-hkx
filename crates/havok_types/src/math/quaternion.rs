@@ -1,5 +1,3 @@
-use parse_display::Display;
-
 /// # Quaternion
 ///
 /// # C++ Info
@@ -13,8 +11,7 @@ use parse_display::Display;
 #[repr(C, align(16))]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-#[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display)]
-#[display("({x:.06} {y:.06} {z:.06} {scaler:.06})")]
+#[derive(Debug, Clone, Default, PartialEq, PartialOrd)]
 pub struct Quaternion {
     /// # C++ Info
     /// - name: `x`(ctype: `hkReal`)
@@ -38,7 +35,17 @@ pub struct Quaternion {
     pub scaler: f32,
 }
 
-static_assertions::assert_eq_size!(Quaternion, [u8; 16]);
+const _: () = assert!(core::mem::size_of::<Quaternion>() == 16);
+
+impl core::fmt::Display for Quaternion {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(
+            f,
+            "({:.06} {:.06} {:.06} {:.06})",
+            self.x, self.y, self.z, self.scaler,
+        )
+    }
+}
 
 impl Quaternion {
     /// Creates a new `Quaternion`
@@ -86,5 +93,25 @@ impl Quaternion {
             z: f32::from_be_bytes([bytes[8], bytes[9], bytes[10], bytes[11]]),
             scaler: f32::from_be_bytes([bytes[12], bytes[13], bytes[14], bytes[15]]),
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_xml_representation() {
+        let quaternion = Quaternion {
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+            scaler: 1.0,
+        };
+
+        assert_eq!(
+            quaternion.to_string(),
+            "(0.000000 0.000000 0.000000 1.000000)"
+        );
     }
 }

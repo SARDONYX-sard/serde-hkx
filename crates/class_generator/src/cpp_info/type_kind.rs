@@ -3,7 +3,6 @@
 //!
 //! e.g. `hkArray<hkBool>` => `vtype: hkArray, vsubtype: hkBool`
 use num_derive::{FromPrimitive, ToPrimitive};
-use parse_display::{Display, FromStr};
 use serde_with::{DeserializeFromStr, SerializeDisplay};
 
 /// Type kinds used in Havok Class.
@@ -13,14 +12,11 @@ use serde_with::{DeserializeFromStr, SerializeDisplay};
     Default,
     PartialEq,
     Eq,
-    FromStr,
-    Display,
     SerializeDisplay,
     DeserializeFromStr,
     FromPrimitive,
     ToPrimitive,
 )]
-#[display("TYPE_{}", style = "UPPERCASE")]
 pub enum TypeKind {
     /// No type information.
     ///
@@ -178,6 +174,106 @@ pub enum TypeKind {
     /// Not used in `hk_2010.2.0-r1` havok class.
     Max,
 }
+
+impl core::fmt::Display for TypeKind {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "TYPE_")?;
+
+        match self {
+            Self::Void => write!(f, "VOID"),
+            Self::Bool => write!(f, "BOOL"),
+            Self::Char => write!(f, "CHAR"),
+            Self::Int8 => write!(f, "INT8"),
+            Self::Uint8 => write!(f, "UINT8"),
+            Self::Int16 => write!(f, "INT16"),
+            Self::Uint16 => write!(f, "UINT16"),
+            Self::Int32 => write!(f, "INT32"),
+            Self::Uint32 => write!(f, "UINT32"),
+            Self::Int64 => write!(f, "INT64"),
+            Self::Uint64 => write!(f, "UINT64"),
+            Self::Real => write!(f, "REAL"),
+            Self::Vector4 => write!(f, "VECTOR4"),
+            Self::Quaternion => write!(f, "QUATERNION"),
+            Self::Matrix3 => write!(f, "MATRIX3"),
+            Self::Rotation => write!(f, "ROTATION"),
+            Self::QsTransform => write!(f, "QSTRANSFORM"),
+            Self::Matrix4 => write!(f, "MATRIX4"),
+            Self::Transform => write!(f, "TRANSFORM"),
+            Self::Zero => write!(f, "ZERO"),
+            Self::Pointer => write!(f, "POINTER"),
+            Self::FnPtr => write!(f, "FNPTR"),
+            Self::Array => write!(f, "ARRAY"),
+            Self::InplaceArray => write!(f, "INPLACEARRAY"),
+            Self::Enum => write!(f, "ENUM"),
+            Self::Struct => write!(f, "STRUCT"),
+            Self::SimpleArray => write!(f, "SIMPLEARRAY"),
+            Self::HomogeneousArray => write!(f, "HOMOGENEOUSARRAY"),
+            Self::Variant => write!(f, "VARIANT"),
+            Self::CString => write!(f, "CSTRING"),
+            Self::Ulong => write!(f, "ULONG"),
+            Self::Flags => write!(f, "FLAGS"),
+            Self::Half => write!(f, "HALF"),
+            Self::StringPtr => write!(f, "STRINGPTR"),
+            Self::RelArray => write!(f, "RELARRAY"),
+            Self::Max => write!(f, "MAX"),
+        }
+    }
+}
+impl core::str::FromStr for TypeKind {
+    type Err = ParseTypeKindError;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        match s {
+            "TYPE_VOID" => Ok(Self::Void),
+            "TYPE_BOOL" => Ok(Self::Bool),
+            "TYPE_CHAR" => Ok(Self::Char),
+            "TYPE_INT8" => Ok(Self::Int8),
+            "TYPE_UINT8" => Ok(Self::Uint8),
+            "TYPE_INT16" => Ok(Self::Int16),
+            "TYPE_UINT16" => Ok(Self::Uint16),
+            "TYPE_INT32" => Ok(Self::Int32),
+            "TYPE_UINT32" => Ok(Self::Uint32),
+            "TYPE_INT64" => Ok(Self::Int64),
+            "TYPE_UINT64" => Ok(Self::Uint64),
+            "TYPE_REAL" => Ok(Self::Real),
+            "TYPE_VECTOR4" => Ok(Self::Vector4),
+            "TYPE_QUATERNION" => Ok(Self::Quaternion),
+            "TYPE_MATRIX3" => Ok(Self::Matrix3),
+            "TYPE_ROTATION" => Ok(Self::Rotation),
+            "TYPE_QSTRANSFORM" => Ok(Self::QsTransform),
+            "TYPE_MATRIX4" => Ok(Self::Matrix4),
+            "TYPE_TRANSFORM" => Ok(Self::Transform),
+            "TYPE_ZERO" => Ok(Self::Zero),
+            "TYPE_POINTER" => Ok(Self::Pointer),
+            "TYPE_FNPTR" => Ok(Self::FnPtr),
+            "TYPE_ARRAY" => Ok(Self::Array),
+            "TYPE_INPLACEARRAY" => Ok(Self::InplaceArray),
+            "TYPE_ENUM" => Ok(Self::Enum),
+            "TYPE_STRUCT" => Ok(Self::Struct),
+            "TYPE_SIMPLEARRAY" => Ok(Self::SimpleArray),
+            "TYPE_HOMOGENEOUSARRAY" => Ok(Self::HomogeneousArray),
+            "TYPE_VARIANT" => Ok(Self::Variant),
+            "TYPE_CSTRING" => Ok(Self::CString),
+            "TYPE_ULONG" => Ok(Self::Ulong),
+            "TYPE_FLAGS" => Ok(Self::Flags),
+            "TYPE_HALF" => Ok(Self::Half),
+            "TYPE_STRINGPTR" => Ok(Self::StringPtr),
+            "TYPE_RELARRAY" => Ok(Self::RelArray),
+            "TYPE_MAX" => Ok(Self::Max),
+            _ => Err(ParseTypeKindError),
+        }
+    }
+}
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct ParseTypeKindError;
+
+impl core::fmt::Display for ParseTypeKindError {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "invalid TypeKind")
+    }
+}
+
+impl core::error::Error for ParseTypeKindError {}
 
 #[cfg(test)]
 mod tests {

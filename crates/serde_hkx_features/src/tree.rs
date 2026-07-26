@@ -1,6 +1,7 @@
 //! Show dependency tree from havok behavior state machine (hkx/xml file)
-use crate::{ClassMap, error::Result, fs::ReadExt};
+use crate::{ClassMap, error::Error, fs::ReadExt};
 use serde_hkx::tree::HavokTree as _;
+use snafu::ResultExt as _;
 use std::path::Path;
 use tokio::fs;
 
@@ -9,7 +10,7 @@ use tokio::fs;
 ///
 /// # Errors
 /// If the extension is not `hkx` or `xml`.
-pub async fn write_tree<I, O>(input: I, output: Option<O>) -> Result<()>
+pub async fn write_tree<I, O>(input: I, output: Option<O>) -> Result<(), Error>
 where
     I: AsRef<Path>,
     O: AsRef<Path>,
@@ -26,10 +27,12 @@ where
 ///
 /// # Errors
 /// If the unknown extension. (Not `hkx`, `xml`...).
-pub async fn generate<P>(input: P) -> Result<String>
+pub async fn generate<P>(input: P) -> Result<String, Error>
 where
     P: AsRef<Path>,
 {
+    let input = input.as_ref();
+
     let bytes = input.read_bytes().await?;
     let mut string = String::new();
     let mut class_map: ClassMap = {
@@ -43,5 +46,7 @@ where
         }
     };
 
-    Ok(class_map.tree_for_bytes())
+    class_map
+        .tree_for_bytes()
+        .with_context(|_| crate::error::SerSnafu { input })
 }
