@@ -95,3 +95,23 @@ impl Quaternion {
         }
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_xml_representation() {
+        let quaternion = Quaternion {
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+            scaler: 1.0,
+        };
+
+        assert_eq!(
+            quaternion.to_string(),
+            "(0.000000 0.000000 0.000000 1.000000)"
+        );
+    }
+}

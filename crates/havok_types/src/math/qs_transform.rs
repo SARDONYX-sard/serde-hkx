@@ -125,3 +125,22 @@ fn should_write_bytes() {
         ]
     );
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_xml_representation() {
+        let transform = QsTransform {
+            transition: Vector4::new(0.0, 0.0, 0.0, 0.0),
+            quaternion: Quaternion::new(-0.0, 0.0, -0.0, 1.0),
+            scale: Vector4::new(1.0, 1.0, 1.0, 0.0),
+        };
+
+        assert_eq!(
+            transform.to_string(),
+            "(0.000000 0.000000 0.000000)(-0.000000 0.000000 -0.000000 1.000000)(1.000000 1.000000 1.000000)"
+        );
+    }
+}

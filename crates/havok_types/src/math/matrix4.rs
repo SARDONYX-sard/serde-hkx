@@ -71,3 +71,26 @@ impl Matrix4 {
         bytes
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_xml_representation() {
+        let matrix = Matrix4::new(
+            Vector4::new(0.0, 0.0, 0.0, 0.0),
+            Vector4::new(-0.0, 0.0, -0.0, 1.0),
+            Vector4::new(1.0, 1.0, 1.0, 0.0),
+            Vector4::new(1.0, 1.0, 1.0, 0.0),
+        );
+
+        assert_eq!(
+            matrix.to_string(),
+            "(0.000000 0.000000 0.000000 0.000000)\
+             (-0.000000 0.000000 -0.000000 1.000000)\
+             (1.000000 1.000000 1.000000 0.000000)\
+             (1.000000 1.000000 1.000000 0.000000)"
+        );
+    }
+}

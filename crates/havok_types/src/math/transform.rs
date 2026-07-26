@@ -69,3 +69,25 @@ impl Transform {
         bytes
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_xml_representation() {
+        let transform = Transform {
+            rotation: Rotation {
+                x: Vector4::new(0.0, 0.0, 0.0, 0.0),
+                y: Vector4::new(0.0, 0.0, 0.0, 0.0),
+                z: Vector4::new(0.0, 0.0, 0.0, 0.0),
+            },
+            transition: Vector4::new(-0.0, 0.0, -0.0, 0.0),
+        };
+
+        assert_eq!(
+            transform.to_string(),
+            "(0.000000 0.000000 0.000000)(0.000000 0.000000 0.000000)(0.000000 0.000000 0.000000)(-0.000000 0.000000 -0.000000)"
+        );
+    }
+}
