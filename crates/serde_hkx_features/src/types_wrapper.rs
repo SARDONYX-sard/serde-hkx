@@ -24,9 +24,11 @@ pub struct ClassPtrMap<'a> {
 
 #[inline]
 const fn default_schema_url() -> Cow<'static, str> {
-    Cow::Borrowed(
-        "https://raw.githubusercontent.com/SARDONYX-sard/serde-hkx/refs/tags/0.7.0/assets/serde_hkx_schema.json",
-    )
+    Cow::Borrowed(concat!(
+        "https://raw.githubusercontent.com/SARDONYX-sard/serde-hkx/refs/tags/",
+        env!("CARGO_PKG_VERSION"),
+        "/assets/serde_hkx_schema.json",
+    ))
 }
 
 impl<'a> ClassPtrMap<'a> {

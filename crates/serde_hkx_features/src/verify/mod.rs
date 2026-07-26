@@ -32,7 +32,7 @@ where
     }
 }
 
-pub(super) fn verify_inner<I>(input: I) -> Result<(Vec<u8>, Vec<u8>)>
+pub(super) fn verify_inner<I>(input: I) -> Result<(Vec<u8>, Vec<u8>), crate::error::Error>
 where
     I: AsRef<Path>,
 {
@@ -43,11 +43,18 @@ where
     })?;
 
     let actual_bytes = {
-        let classes: ClassMap =
-            serde_hkx::from_bytes(&expected_bytes).with_context(|_| DeSnafu { input })?;
-        let header = HkxHeader::from_bytes(&expected_bytes).with_context(|_| DeSnafu { input })?;
+        let classes: ClassMap = serde_hkx::from_bytes(&expected_bytes)
+            .context(crate::serde::de::HkxSnafu {})
+            .with_context(|_| DeSnafu {
+                input: input.to_path_buf(),
+            })?;
+        let header = HkxHeader::from_bytes(&expected_bytes)
+            .context(crate::serde::de::HkxSnafu {})
+            .with_context(|_| DeSnafu { input })?;
 
-        serde_hkx::to_bytes(&classes, &header).with_context(|_| SerSnafu { input })?
+        serde_hkx::to_bytes(&classes, &header)
+            .context(crate::serde::ser::HkxSnafu {})
+            .with_context(|_| SerSnafu { input })?
     };
 
     Ok((expected_bytes, actual_bytes))

@@ -2,7 +2,9 @@ pub mod hkx_checker;
 pub mod rayon;
 pub mod tokio;
 
-use crate::error::{Error, Result};
+use snafu::ResultExt as _;
+
+use crate::error::{DeSnafu, Error, Result};
 use std::{
     ffi::OsStr,
     path::{Path, PathBuf},
@@ -303,36 +305,137 @@ fn get_supported_files(input_dir: &Path) -> Vec<PathBuf> {
         .collect()
 }
 
-fn process_serde<I>(in_bytes: &Vec<u8>, input: I, format: Format) -> Result<Vec<u8>>
+/// Deserializes serialized HKX data into a [`ClassMap`] and applies a
+/// format-specific transformation.
+///
+/// This is useful when the deserialized class data needs to be modified
+/// before constructing higher-level types such as `Hkanno`.
+///
+/// # Errors
+///
+/// Returns an error if:
+///
+/// * the input path has no extension.
+/// * the extension is unsupported.
+/// * deserialization fails.
+/// * the handler returns an error.
+pub fn process_serde_with<'a, I, F, G, T>(
+    bytes: &'a [u8],
+    input: I,
+    on_xml: G,   // ClassMap borrows from local String, must return T directly
+    on_other: F, // ClassMap borrows from bytes ('a), T can carry 'a
+) -> Result<T, Error>
+where
+    I: AsRef<Path>,
+    F: FnOnce(crate::ClassMap<'a>) -> Result<T, Error>,
+    G: FnOnce(crate::ClassMap<'_>) -> Result<T, Error>, // '_ = local String lifetime
+{
+    let input = input.as_ref();
+    let input_fmt = {
+        let Some(input_ext) = input.extension() else {
+            return Err(Error::MissingExtension {
+                path: input.to_path_buf(),
+            });
+        };
+        Format::from_extension(input_ext).map_err(|_| Error::UnsupportedExtensionPath {
+            path: input.to_path_buf(),
+        })?
+    };
+
+    let classes = match input_fmt {
+        Format::Amd64 | Format::Win32 => serde_hkx::from_bytes(bytes)
+            .context(crate::serde::de::HkxSnafu {})
+            .with_context(|_| DeSnafu {
+                input: input.to_path_buf(),
+            })?,
+        Format::Xml => {
+            let string = auto_charset::decode_str_to_utf8(bytes)?;
+            let classes = serde_hkx::from_str(&string)
+                .context(crate::serde::de::XmlSnafu {})
+                .with_context(|_| DeSnafu {
+                    input: input.to_path_buf(),
+                })?;
+
+            return on_xml(classes);
+        }
+        #[cfg(feature = "extra_fmt")]
+        Format::Json => {
+            use crate::types_wrapper::ClassPtrMap;
+            let classes = sonic_rs::from_slice::<ClassPtrMap>(bytes)
+                .context(crate::serde::de::JsonSnafu {})
+                .with_context(|_| crate::error::DeSnafu {
+                    input: input.to_path_buf(),
+                })?;
+            classes.into_class_map()
+        }
+        #[cfg(feature = "extra_fmt")]
+        Format::Toml => {
+            use crate::types_wrapper::ClassPtrMap;
+            let classes = basic_toml::from_slice::<ClassPtrMap>(bytes)
+                .context(crate::serde::de::TomlSnafu {})
+                .with_context(|_| crate::error::DeSnafu {
+                    input: input.to_path_buf(),
+                })?;
+            classes.into_class_map()
+        }
+        #[cfg(feature = "extra_fmt")]
+        Format::Yaml => {
+            use crate::types_wrapper::ClassPtrMap;
+            let classes = serde_norway::from_slice::<ClassPtrMap>(bytes)
+                .context(crate::serde::de::YamlSnafu {})
+                .with_context(|_| crate::error::DeSnafu {
+                    input: input.to_path_buf(),
+                })?;
+            classes.into_class_map()
+        }
+    };
+
+    on_other(classes)
+}
+
+/// bytes(input) -> output_format
+pub(crate) fn process_serde<I>(
+    bytes: Vec<u8>,
+    input: I,
+    output_format: Format,
+) -> Result<Vec<u8>, Error>
 where
     I: AsRef<Path>,
 {
     let input = input.as_ref();
-    let mut string = String::new();
 
-    // Deserialize
-    let mut classes = {
-        #[cfg(not(feature = "extra_fmt"))]
-        {
-            crate::serde::de::deserialize(in_bytes, &mut string, input)?
-        }
-        #[cfg(feature = "extra_fmt")]
-        {
-            crate::serde_extra::de::deserialize(in_bytes, &mut string, input)?
-        }
-    };
-
-    // Serialize
-    let out_bytes = match format {
-        Format::Amd64 | Format::Win32 | Format::Xml => {
-            crate::serde::ser::to_bytes(input, format, &mut classes)?
-        }
-        #[cfg(feature = "extra_fmt")]
-        Format::Json | Format::Toml | Format::Yaml => {
-            let mut classes = crate::types_wrapper::ClassPtrMap::from_class_map(classes);
-            crate::serde_extra::ser::to_bytes(input, format, &mut classes)?
-        }
-    };
-
-    Ok(out_bytes)
+    process_serde_with(
+        &bytes,
+        input,
+        |mut classes| {
+            match output_format {
+                Format::Amd64 | Format::Win32 | Format::Xml => {
+                    crate::serde::ser::to_bytes(&mut classes, output_format)
+                }
+                #[cfg(feature = "extra_fmt")]
+                Format::Json | Format::Toml | Format::Yaml => {
+                    let mut classes = crate::types_wrapper::ClassPtrMap::from_class_map(classes);
+                    crate::serde_extra::ser::to_bytes(&mut classes, output_format)
+                }
+            }
+            .with_context(|_| crate::error::SerSnafu {
+                input: input.to_path_buf(),
+            })
+        },
+        |mut classes| {
+            match output_format {
+                Format::Amd64 | Format::Win32 | Format::Xml => {
+                    crate::serde::ser::to_bytes(&mut classes, output_format)
+                }
+                #[cfg(feature = "extra_fmt")]
+                Format::Json | Format::Toml | Format::Yaml => {
+                    let mut classes = crate::types_wrapper::ClassPtrMap::from_class_map(classes);
+                    crate::serde_extra::ser::to_bytes(&mut classes, output_format)
+                }
+            }
+            .with_context(|_| crate::error::SerSnafu {
+                input: input.to_path_buf(),
+            })
+        },
+    )
 }

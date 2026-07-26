@@ -12,6 +12,7 @@ version = "1.0.1"
 
 [workspace]
 members = [
+  "crates/auto_charset",
   "crates/class_generator",
   "crates/cli",
   "crates/havok_classes",
@@ -52,6 +53,7 @@ tracing = { version = "0.1.44" }                               # logger
 winnow = { version = "1.0.4", features = ["simd"] } # Parser combinator
 
 # workspace members
+auto_charset = { path = "./crates/auto_charset" }
 havok_classes = { path = "./crates/havok_classes" }
 havok_serde = { path = "./crates/havok_serde" }
 havok_types = { path = "./crates/havok_types" }
@@ -86,7 +88,6 @@ future_not_send = "allow"
 multiple_crate_versions = "allow"
 pub_with_shorthand = "allow"
 redundant_pub_crate = "allow"
-result_large_err = "allow"
 
 # custom deny list
 char_lit_as_u8 = "deny"
@@ -96,7 +97,7 @@ cognitive_complexity = "deny"
 debug_assert_with_mut_call = "deny"
 disallowed_script_idents = "deny"
 doc_link_with_quotes = "deny"
-empty_enum = "deny"
+empty_enums = "deny"
 empty_line_after_outer_attr = "deny"
 empty_structs_with_brackets = "deny"
 expect_used = "deny"
@@ -129,7 +130,6 @@ macro_use_imports = "deny"
 manual_ok_or = "deny"
 map_flatten = "deny"
 map_unwrap_or = "deny"
-match_on_vec_items = "deny"
 match_same_arms = "deny"
 match_wild_err_arm = "deny"
 match_wildcard_for_single_variants = "deny"
@@ -157,16 +157,14 @@ single_match_else = "deny"
 string_add = "deny"
 string_add_assign = "deny"
 string_lit_as_bytes = "deny"
-string_to_string = "deny"
 suspicious_operation_groupings = "deny"
 trait_duplication_in_bounds = "deny"
 unnested_or_patterns = "deny"
 unseparated_literal_suffix = "deny"
 unused_self = "deny"
-unwrap_used = "deny"
 unwrap_in_result = "deny"
+unwrap_used = "deny"
 useless_let_if_seq = "deny"
 useless_transmute = "deny"
 verbose_file_reads = "deny"
 wildcard_dependencies = "deny"
-zero_sized_map_values = "deny"

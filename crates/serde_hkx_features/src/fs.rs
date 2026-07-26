@@ -4,7 +4,7 @@ use crate::error::{FailedReadFileSnafu, Result};
 use snafu::ResultExt as _;
 use std::borrow::Cow;
 use std::io;
-use std::{future::Future, io::Read as _, path::Path};
+use std::{future::Future, path::Path};
 use tokio::fs;
 
 /// Reads a file with some encoded string trait.
@@ -26,17 +26,15 @@ where
 {
     async fn read_any_string(&self) -> Result<String> {
         let input = self.as_ref();
-        let mut string = String::new();
-
         let bytes = input.read_bytes().await?;
-        let mut decoder = encoding_rs_io::DecodeReaderBytes::new(bytes.as_slice());
-        decoder.read_to_string(&mut string)?;
-        Ok(string)
+        auto_charset::decode_to_utf8(bytes).with_context(|_| FailedReadFileSnafu {
+            path: input.to_path_buf(),
+        })
     }
 
     async fn read_bytes(&self) -> Result<Vec<u8>> {
         let input = self.as_ref();
-        fs::read(input).await.context(FailedReadFileSnafu {
+        fs::read(input).await.with_context(|_| FailedReadFileSnafu {
             path: input.to_path_buf(),
         })
     }
