@@ -44,7 +44,7 @@ fn reproduce_bytes(expected_bytes: &[u8]) -> Result<()> {
     // XML => bytes
     let actual_bytes = {
         let mut actual_classes: ClassMap = from_str(&xml)?;
-        actual_classes.sort_for_bytes();
+        actual_classes.sort_for_bytes()?;
 
         #[allow(clippy::unwrap_in_result)]
         let (_remain, header) = HkxHeader::parser().parse_peek(expected_bytes).unwrap();

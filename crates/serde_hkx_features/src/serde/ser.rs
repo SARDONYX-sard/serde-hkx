@@ -16,7 +16,7 @@ use std::path::Path;
 /// See `serde_hkx::errors::ser::Error` for possible errors that may occur.
 ///
 /// # Panics
-/// If `format` is not `XML`, `Amd64`, or `WIn32`.
+/// If `format` is not `XML`, `Amd64`, or `Win32`.
 /// That means the API is being used incorrectly.
 pub fn to_bytes<I>(input: I, format: Format, classes: &mut ClassMap<'_>) -> Result<Vec<u8>>
 where
@@ -26,7 +26,7 @@ where
 
     // Serialize
     if format == Format::Xml {
-        let top_ptr = classes.sort_for_xml().with_context(|_| SerSnafu {
+        let top_ptr = classes.checked_sort_for_xml().with_context(|_| SerSnafu {
             input: input.to_path_buf(),
         })?;
         let xml = to_string(classes, top_ptr).with_context(|_| SerSnafu {
@@ -34,15 +34,19 @@ where
         })?;
         Ok(xml.into_bytes())
     } else {
-        classes.sort_for_bytes();
-        let binary_data = match format {
+        classes
+            .checked_sort_for_bytes()
+            .with_context(|_| SerSnafu {
+                input: input.to_path_buf(),
+            })?;
+
+        match format {
             Format::Win32 => serde_hkx::to_bytes(classes, &HkxHeader::new_skyrim_le()),
             Format::Amd64 => serde_hkx::to_bytes(classes, &HkxHeader::new_skyrim_se()),
             _ => unreachable!(),
         }
         .with_context(|_| SerSnafu {
             input: input.to_path_buf(),
-        })?;
-        Ok(binary_data)
+        })
     }
 }

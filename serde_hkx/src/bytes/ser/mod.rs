@@ -795,7 +795,7 @@ mod tests {
     #[test]
     fn test_serialize() -> Result<()> {
         let mut classes = new_defaultmale();
-        classes.sort_for_bytes();
+        classes.sort_for_bytes()?;
         tracing::debug!("{classes:#?}");
 
         let bytes = to_bytes(&classes, &HkxHeader::new_skyrim_se())?;

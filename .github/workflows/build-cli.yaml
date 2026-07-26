@@ -15,7 +15,7 @@ concurrency:
 env:
   APP_NAME: hkxc
   CARGO_TERM_COLOR: always
-  PROFILE: release
+  PROFILE: dev # dev | release
 
 jobs:
   build:
