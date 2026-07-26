@@ -1,23 +1,62 @@
-use parse_display::{Display, FromStr};
 use serde_hkx_features::error::Result;
 use std::fs::File;
 use std::path::Path;
 use tracing::Level;
 
 /// Log level.
-#[derive(Debug, clap::ValueEnum, Clone, Copy, Default, PartialEq, Eq, Display, FromStr)]
+#[derive(Debug, clap::ValueEnum, Clone, Copy, Default, PartialEq, Eq)]
 pub enum LogLevel {
-    #[display("trace")]
     Trace,
-    #[display("debug")]
     Debug,
-    #[display("info")]
     Info,
-    #[display("warn")]
     Warn,
     #[default]
-    #[display("error")]
     Error,
+}
+
+impl core::fmt::Display for LogLevel {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        let value = match self {
+            Self::Trace => "trace",
+            Self::Debug => "debug",
+            Self::Info => "info",
+            Self::Warn => "warn",
+            Self::Error => "error",
+        };
+
+        f.write_str(value)
+    }
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct ParseLogLevelError;
+
+impl core::fmt::Display for ParseLogLevelError {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        f.write_str("invalid log level")
+    }
+}
+
+impl core::error::Error for ParseLogLevelError {}
+
+impl core::str::FromStr for LogLevel {
+    type Err = ParseLogLevelError;
+
+    fn from_str(value: &str) -> Result<Self, Self::Err> {
+        if value.eq_ignore_ascii_case("trace") {
+            Ok(Self::Trace)
+        } else if value.eq_ignore_ascii_case("debug") {
+            Ok(Self::Debug)
+        } else if value.eq_ignore_ascii_case("info") {
+            Ok(Self::Info)
+        } else if value.eq_ignore_ascii_case("warn") {
+            Ok(Self::Warn)
+        } else if value.eq_ignore_ascii_case("error") {
+            Ok(Self::Error)
+        } else {
+            Err(ParseLogLevelError)
+        }
+    }
 }
 
 impl From<LogLevel> for Level {

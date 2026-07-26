@@ -3,7 +3,6 @@
 //! # Example
 //! - `0x13a39ba7`
 use core::str::FromStr;
-use parse_display::Display;
 
 /// Havok C++ Class signature hex number.
 ///
@@ -30,9 +29,14 @@ use parse_display::Display;
     derive(serde_with::SerializeDisplay, serde_with::DeserializeFromStr)
 )]
 #[repr(transparent)]
-#[derive(Debug, Copy, Clone, Default, PartialEq, Eq, PartialOrd, Ord, Hash, Display)]
-#[display("{0:#x}")]
+#[derive(Debug, Copy, Clone, Default, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Signature(u32);
+
+impl core::fmt::Display for Signature {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "{:#x}", self.0)
+    }
+}
 
 impl Signature {
     /// Creates a new `Signature`

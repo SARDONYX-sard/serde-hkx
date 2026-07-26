@@ -18,7 +18,6 @@ indexmap = { workspace = true, features = ["rayon"] }
 jwalk = { workspace = true }                          # To enumarate json class files
 num-derive = { workspace = true }                     # TypeKind extension
 num-traits = { workspace = true }                     # TypeKind extension
-parse-display = { workspace = true }                  # Derive Display
 rayon = { workspace = true }                          # Parallel iterator
 serde = { workspace = true, features = ["derive"] }   # Implement (De)Serializer
 serde_json = { workspace = true }                     # To read and write Json files
@@ -26,7 +25,7 @@ serde_with = { workspace = true }                     # Serde utility
 snafu = { workspace = true }                          # Define all error patterns(with backtrace)
 tracing = { workspace = true }                        # Logger
 
-prettyplease = "0.2.25"
+prettyplease = "0.3.0"
 proc-macro2 = { workspace = true }
 quote = { workspace = true }
 syn = { workspace = true, features = [

@@ -1,5 +1,4 @@
 use crate::Vector4;
-use parse_display::Display;
 
 /// # Matrix4x4
 ///
@@ -15,8 +14,7 @@ use parse_display::Display;
 #[repr(C, align(16))]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-#[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display)]
-#[display("{x}{y}{z}{w}")]
+#[derive(Debug, Clone, Default, PartialEq, PartialOrd)]
 pub struct Matrix4 {
     /// # C++ Info
     /// - name: `x`(ctype: `hkVector4`)
@@ -40,7 +38,13 @@ pub struct Matrix4 {
     pub w: Vector4,
 }
 
-static_assertions::assert_eq_size!(Matrix4, [u8; 64]);
+const _: () = assert!(core::mem::size_of::<Matrix4>() == 64);
+
+impl core::fmt::Display for Matrix4 {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(f, "{}{}{}{}", self.x, self.y, self.z, self.w)
+    }
+}
 
 impl Matrix4 {
     /// Creates a new `Matrix4`

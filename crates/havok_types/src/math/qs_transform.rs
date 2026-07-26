@@ -1,5 +1,4 @@
 use crate::{Quaternion, Vector4};
-use parse_display::Display;
 
 /// # QsTransform
 ///
@@ -19,8 +18,7 @@ use parse_display::Display;
 #[repr(C, align(16))]
 #[cfg_attr(feature = "json_schema", derive(schemars::JsonSchema))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-#[derive(Debug, Clone, Default, PartialEq, PartialOrd, Display)]
-#[display("{transition}{quaternion}{scale}")]
+#[derive(Debug, Clone, Default, PartialEq, PartialOrd)]
 pub struct QsTransform {
     /// # C++ Info
     /// - name: `transition`(ctype: `hkVector4`)
@@ -29,7 +27,6 @@ pub struct QsTransform {
     ///
     /// # NOTE
     /// - `Vector4::w`(4th) isn't used(always 0.0).
-    #[display("({x:.06} {y:.06} {z:.06})")]
     pub transition: Vector4,
     /// # C++ Info
     /// - name: `quaternion`(ctype: `hkQuaternion`)
@@ -44,8 +41,23 @@ pub struct QsTransform {
     ///
     /// # NOTE
     /// - `Vector4::w`(4th) isn't used(always 0.0).
-    #[display("({x:.06} {y:.06} {z:.06})")]
     pub scale: Vector4,
+}
+
+impl core::fmt::Display for QsTransform {
+    fn fmt(&self, f: &mut core::fmt::Formatter<'_>) -> core::fmt::Result {
+        write!(
+            f,
+            "({:.06} {:.06} {:.06}){}({:.06} {:.06} {:.06})",
+            self.transition.x,
+            self.transition.y,
+            self.transition.z,
+            self.quaternion,
+            self.scale.x,
+            self.scale.y,
+            self.scale.z,
+        )
+    }
 }
 
 impl QsTransform {

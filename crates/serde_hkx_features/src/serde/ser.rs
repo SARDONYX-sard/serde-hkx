@@ -40,6 +40,7 @@ where
                 input: input.to_path_buf(),
             })?;
 
+        #[expect(clippy::match_wildcard_for_single_variants)]
         match format {
             Format::Win32 => serde_hkx::to_bytes(classes, &HkxHeader::new_skyrim_le()),
             Format::Amd64 => serde_hkx::to_bytes(classes, &HkxHeader::new_skyrim_se()),
