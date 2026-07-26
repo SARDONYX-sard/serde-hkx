@@ -52,7 +52,8 @@ where
         return Err(io::Error::new(
             io::ErrorKind::NotFound,
             format!("The path does not exist: {}", input.display()),
-        ))?;
+        )
+        .into());
     }
 
     Ok(())

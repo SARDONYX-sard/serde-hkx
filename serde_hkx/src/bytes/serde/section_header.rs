@@ -224,22 +224,22 @@ impl Display for SectionHeader {
             f,
             r#"
           section tag: {section_tag}
-section tag separator: {section_tag_separator:#02x}
+section tag separator: {section_tag_separator:#x}
 
 Offsets:
-  absolute data start: {absolute_data_start:#02x}
-         local fixups: {local_fixups_offset:#02x}
-        global fixups: {global_fixups_offset:#02x}
-       virtual fixups: {virtual_fixups_offset:#02x}
-              exports: {exports_offset:#02x}
-              imports; {imports_offset:#02x}
-                  end: {end_offset:#02x}
-        abs +   local: {l_offset:#02x}
-        abs +  global: {g_offset:#02x}
-        abs + virtual: {v_offset:#02x}
-        abs + exports: {e_offset:#02x}
-        abs + imports: {i_offset:#02x}
-        abs +     end: {end_off:#02x}
+  absolute data start: {absolute_data_start:#x}
+         local fixups: {local_fixups_offset:#x}
+        global fixups: {global_fixups_offset:#x}
+       virtual fixups: {virtual_fixups_offset:#x}
+              exports: {exports_offset:#x}
+              imports; {imports_offset:#x}
+                  end: {end_offset:#x}
+        abs +   local: {l_offset:#x}
+        abs +  global: {g_offset:#x}
+        abs + virtual: {v_offset:#x}
+        abs + exports: {e_offset:#x}
+        abs + imports: {i_offset:#x}
+        abs +     end: {end_off:#x}
 "#
         )
     }
@@ -350,5 +350,42 @@ mod tests {
         let result =
             SectionHeader::from_bytes(Endianness::Little).parse_next(&mut written.as_slice());
         assert!(result.is_err());
+    }
+
+    #[test]
+    fn display_section_header() {
+        let header = SectionHeader {
+            section_tag: SectionHeader::DATA_SECTION_HEADER_TAG,
+            section_tag_separator: 0x3A,
+            absolute_data_start: 0x100,
+            local_fixups_offset: 0x10,
+            global_fixups_offset: 0x20,
+            virtual_fixups_offset: 0x30,
+            exports_offset: 0x40,
+            imports_offset: 0x50,
+            end_offset: 0x60,
+        };
+
+        let expected = r#"
+          section tag: __data__
+section tag separator: 0x3a
+
+Offsets:
+  absolute data start: 0x100
+         local fixups: 0x10
+        global fixups: 0x20
+       virtual fixups: 0x30
+              exports: 0x40
+              imports; 0x50
+                  end: 0x60
+        abs +   local: 0x110
+        abs +  global: 0x120
+        abs + virtual: 0x130
+        abs + exports: 0x140
+        abs + imports: 0x150
+        abs +     end: 0x160
+"#;
+
+        pretty_assertions::assert_eq!(header.to_string(), expected);
     }
 }
