@@ -41,12 +41,22 @@ runs:
       run: mkdir -p ./build
       shell: bash
 
+    - name: Resolve cargo output directory
+      id: profile
+      shell: bash
+      run: |
+        if [[ "${{ inputs.profile }}" == "dev" ]]; then
+          echo "dir=debug" >> "$GITHUB_OUTPUT"
+        else
+          echo "dir=${{ inputs.profile }}" >> "$GITHUB_OUTPUT"
+        fi
+
     # NOTE: Because the `zip` command does not exist
     - name: Compress outputs(Windows)
       shell: pwsh
       if: runner.os == 'Windows'
       run: |
-        Move-Item -Path ./target/${{ matrix.job.target }}/${{ inputs.profile }}/${{ inputs.app_name }}.exe -Destination './build'
+        Move-Item -Path ./target/${{ matrix.job.target }}/${{ steps.profile.outputs.dir }}/${{ inputs.app_name }}.exe -Destination './build'
         Move-Item -Path ./LICENSES.toml -Destination './build'
         Compress-Archive -Path './build/*' -DestinationPath './${{ inputs.asset_name }}'
 
@@ -56,5 +66,5 @@ runs:
       run: |
         mkdir -p ./build
         mv ./LICENSES.toml ./build
-        mv ./target/${{ inputs.target }}/${{ inputs.profile }}/${{ inputs.app_name }} ./build
+        mv ./target/${{ inputs.target }}/${{ steps.profile.outputs.dir }}/${{ inputs.app_name }} ./build
         tar -czf ${{ inputs.asset_name }} -C ./build .
