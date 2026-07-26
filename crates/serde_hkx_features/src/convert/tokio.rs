@@ -49,11 +49,10 @@ where
     } else if input.is_file() {
         convert_file(input, output, format).await?;
     } else {
-        return Err(io::Error::new(
+        Err(io::Error::new(
             io::ErrorKind::NotFound,
             format!("The path does not exist: {}", input.display()),
-        )
-        .into());
+        ))?;
     }
 
     Ok(())
@@ -136,8 +135,8 @@ where
     O: AsRef<Path>,
 {
     let input = input.as_ref();
-    let in_bytes = input.read_bytes().await?;
-    let out_bytes = process_serde(&in_bytes, input, format)?;
+    let input_bytes = input.read_bytes().await?;
+    let out_bytes = process_serde(input_bytes, input, format)?;
 
     Ok(write(input, output, format.as_extension(), out_bytes).await?)
 }

@@ -57,14 +57,17 @@ pub enum Error {
     #[snafu(display("{}:\n {source}", input.display()))]
     SerError {
         input: PathBuf,
-        source: serde_hkx::errors::ser::Error,
+
+        #[snafu(source(from(crate::serde::ser::SerError, Box::new)))]
+        source: Box<crate::serde::ser::SerError>,
     },
 
     /// Deserialize error
     #[snafu(display("{}:\n {source}", input.display()))]
     DeError {
         input: PathBuf,
-        source: serde_hkx::errors::de::Error,
+        #[snafu(source(from(crate::serde::de::DeError, Box::new)))]
+        source: Box<crate::serde::de::DeError>,
     },
 
     /// hkx header check error
@@ -103,16 +106,9 @@ pub enum Error {
     },
 
     // Extra formats
-    #[cfg(feature = "extra_fmt")]
-    #[snafu(transparent)]
-    ExtraSerdeError {
-        source: crate::serde_extra::error::ExtraSerdeError,
-    },
-
-    // Extra formats
     #[cfg(feature = "json_schema")]
     #[snafu(transparent)]
-    JsonError { source: simd_json::Error },
+    JsonError { source: sonic_rs::Error },
 }
 
 /// `Result` for `serde_hkx_features` crate.

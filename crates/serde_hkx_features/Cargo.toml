@@ -1,7 +1,7 @@
 [package]
 name = "serde_hkx_features"
 description = "Havok Behavior (De)Serialization easy-to-use upper wrapper for CLI/GUI"
-version.workspace = true
+version.workspace = true # NOTE: use env!("CARGO_PKG_VERSION"), therefore, sync root version
 readme.workspace = true
 
 authors.workspace = true
@@ -16,7 +16,6 @@ rust-version.workspace = true
 
 [dependencies]
 clap = { workspace = true, optional = true }          # For CLI
-encoding_rs_io = "0.1.7"                              # Read any string
 indexmap = { workspace = true, features = ["rayon"] } # Ordering HashMap
 jwalk = { workspace = true }                          # To enumerate json class files
 rayon = { workspace = true }                          # Parallel
@@ -30,13 +29,14 @@ basic-toml = { version = "0.1.10", optional = true }
 schemars = { workspace = true, features = ["indexmap2"], optional = true }
 serde = { workspace = true, optional = true }
 serde_norway = { version = "0.9", optional = true }
-simd-json = { version = "0.17.3", optional = true }
+sonic-rs = { version = "0.5.8", optional = true }
 
 # workspace members
-havok_serde = { workspace = true }
+auto_charset = { workspace = true }
 havok_classes = { workspace = true, features = ["ignore_duplicates"] }
-serde_hkx = { workspace = true }
+havok_serde = { workspace = true }
 havok_types = { workspace = true, features = ["serde"], optional = true }
+serde_hkx = { workspace = true }
 
 [dev-dependencies]
 quick_tracing = { workspace = true }
@@ -57,12 +57,12 @@ extra_fmt = [
   "dep:havok_types",
   "dep:serde",
   "dep:serde_norway",
-  "dep:simd-json",
+  "dep:sonic-rs",
   "havok_classes/serde",
   "indexmap/serde",
 ]
 # Json schema generation
-json_schema = ["havok_classes/json_schema", "dep:simd-json", "dep:schemars"]
+json_schema = ["havok_classes/json_schema", "dep:sonic-rs", "dep:schemars"]
 
 [lints]
 workspace = true

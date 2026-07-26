@@ -122,7 +122,7 @@ where
 {
     let input = input.as_ref();
     let in_bytes = fs::read(input)?;
-    let out_bytes = process_serde(&in_bytes, input, format)?;
+    let out_bytes = process_serde(in_bytes, input, format)?;
 
     Ok(write_sync(input, output, format.as_extension(), out_bytes)?)
 }

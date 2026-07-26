@@ -9,7 +9,7 @@ use schemars::schema_for;
 /// - When parse Json failed.
 pub fn generate_json_schema() -> Result<String> {
     let schema = schema_for!(ClassPtrMap);
-    let schema = simd_json::to_string_pretty(&schema)?;
+    let schema = sonic_rs::to_string_pretty(&schema)?;
     Ok(schema)
 }
 

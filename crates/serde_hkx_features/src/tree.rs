@@ -1,7 +1,11 @@
 //! Show dependency tree from havok behavior state machine (hkx/xml file)
-use crate::{ClassMap, error::Error, fs::ReadExt};
+use crate::{
+    error::{Error, SerSnafu},
+    fs::ReadExt as _,
+    serde::ser::HkxSnafu,
+};
 use serde_hkx::tree::HavokTree as _;
-use snafu::ResultExt as _;
+use snafu::ResultExt;
 use std::path::Path;
 use tokio::fs;
 
@@ -27,6 +31,7 @@ where
 ///
 /// # Errors
 /// If the unknown extension. (Not `hkx`, `xml`...).
+#[inline]
 pub async fn generate<P>(input: P) -> Result<String, Error>
 where
     P: AsRef<Path>,
@@ -34,19 +39,18 @@ where
     let input = input.as_ref();
 
     let bytes = input.read_bytes().await?;
-    let mut string = String::new();
-    let mut class_map: ClassMap = {
-        #[cfg(not(feature = "extra_fmt"))]
-        {
-            crate::serde::de::deserialize(&bytes, &mut string, input)?
-        }
-        #[cfg(feature = "extra_fmt")]
-        {
-            crate::serde_extra::de::deserialize(&bytes, &mut string, input)?
-        }
-    };
-
-    class_map
-        .tree_for_bytes()
-        .with_context(|_| crate::error::SerSnafu { input })
+    crate::convert::process_serde_with(
+        &bytes,
+        input,
+        |mut c| {
+            c.tree_for_bytes()
+                .with_context(|_| HkxSnafu {})
+                .with_context(|_| SerSnafu { input })
+        },
+        |mut c| {
+            c.tree_for_bytes()
+                .with_context(|_| HkxSnafu {})
+                .with_context(|_| SerSnafu { input })
+        },
+    )
 }
