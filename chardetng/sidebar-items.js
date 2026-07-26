@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Iso2022JpDetection","Utf8Detection"],"struct":["EncodingDetector"]};

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"constant":["FIXUP_VALUE_FOR_ALIGN","GLOBAL_FIXUP_ONE_SIZE","LOCAL_FIXUP_ONE_SIZE","VIRTUAL_FIXUP_ONE_SIZE"],"struct":["Fixups"],"type":["GLobalFixups","LocalFixups","VirtualFixups"]};

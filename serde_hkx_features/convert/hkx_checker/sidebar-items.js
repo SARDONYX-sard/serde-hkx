@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Error"],"fn":["detect_hkx_format"],"struct":["FailedReadFileSnafu","HkxInvalidHeaderSnafu","HkxInvalidMagicSnafu","UnsupportedTagFileSnafu"]};

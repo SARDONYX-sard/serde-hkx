@@ -1,0 +1,9 @@
+(function() {
+    const implementors = Object.fromEntries([["havok_classes",[["impl PublicFlags for <a class=\"struct\" href=\"havok_classes/struct.ExtendedColors.html\" title=\"struct havok_classes::ExtendedColors\">ExtendedColors</a>",0],["impl PublicFlags for <a class=\"struct\" href=\"havok_classes/struct.FlagBits.html\" title=\"struct havok_classes::FlagBits\">FlagBits</a>",0],["impl PublicFlags for <a class=\"struct\" href=\"havok_classes/struct.FlagValues.html\" title=\"struct havok_classes::FlagValues\">FlagValues</a>",0],["impl PublicFlags for <a class=\"struct\" href=\"havok_classes/struct.FlagValues.html\" title=\"struct havok_classes::FlagValues\">FlagValues</a>",0],["impl PublicFlags for <a class=\"struct\" href=\"havok_classes/struct.FlagValues.html\" title=\"struct havok_classes::FlagValues\">FlagValues</a>",0],["impl PublicFlags for <a class=\"struct\" href=\"havok_classes/struct.Flags.html\" title=\"struct havok_classes::Flags\">Flags</a>",0],["impl PublicFlags for <a class=\"struct\" href=\"havok_classes/struct.Flags.html\" title=\"struct havok_classes::Flags\">Flags</a>",0],["impl PublicFlags for <a class=\"struct\" href=\"havok_classes/struct.HintFlags.html\" title=\"struct havok_classes::HintFlags\">HintFlags</a>",0],["impl PublicFlags for <a class=\"struct\" href=\"havok_classes/struct.RoleFlags.html\" title=\"struct havok_classes::RoleFlags\">RoleFlags</a>",0],["impl PublicFlags for <a class=\"struct\" href=\"havok_classes/struct.TransitionFlags.html\" title=\"struct havok_classes::TransitionFlags\">TransitionFlags</a>",0]]]]);
+    if (window.register_implementors) {
+        window.register_implementors(implementors);
+    } else {
+        window.pending_implementors = implementors;
+    }
+})()
+//{"start":59,"fragment_lengths":[1514]}

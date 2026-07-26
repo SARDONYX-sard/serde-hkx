@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["IndexStridingType","MaterialIndexStridingType","SubpartType"],"struct":["hkpExtendedMeshShape"]};

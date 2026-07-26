@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["Parallelism"],"struct":["DirEntry","DirEntryIter","Error","WalkDirGeneric"],"trait":["ClientState"],"type":["Result","WalkDir"]};

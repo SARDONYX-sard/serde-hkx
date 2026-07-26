@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"enum":["SerError"],"fn":["to_bytes"]};

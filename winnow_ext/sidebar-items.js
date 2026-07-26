@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["delimited_multispace0","take_until_ext"],"struct":["ReadableError"]};
