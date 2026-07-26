@@ -5502,2173 +5502,3717 @@ impl<'a, 'de: 'a> _serde::Deserialize<'de> for Classes<'a> {
             where
                 A: _serde::de::ClassIndexAccess<'de>,
             {
+                /// Generates a debug stack-safe deserialization dispatch.
+                ///
+                /// # Why this exists
+                ///
+                /// `Classes` is a very large enum (currently ~1120 bytes). In debug builds
+                /// (`opt-level = 0`), LLVM may reserve a separate stack slot for every `match`
+                /// arm when constructing `Classes`, producing an enormous stack frame and
+                /// causing stack overflows even for trivial inputs.
+                ///
+                /// One possible solution would be to box every enum variant, but that would
+                /// introduce heap allocations into the hot deserialization path. We intentionally
+                /// keep `Classes` as a value type to avoid that runtime cost. (The
+                /// `d_merge_serde-hkx` fork instead boxes the variants.)
+                ///
+                /// Instead, this macro generates a small helper function marked
+                /// `#[inline(never)]` in debug builds and dispatches through that function.
+                /// The extra call prevents LLVM from inflating the caller's stack frame while
+                /// preserving the release build's performance characteristics.
+                ///
+                /// Release builds are unaffected.
+                macro_rules! deserialize_dev_stack_safe {
+                    ($fn_name:ident, $variant:ident, $map:expr) => {
+                        { #[cfg_attr(debug_assertions, inline(never))] fn $fn_name < 'de,
+                        A > (map : & mut A,) -> Result < Classes < 'de >, A::Error >
+                        where A : _serde::de::ClassIndexAccess < 'de >, { Ok(Classes::
+                        $variant (map.next_value:: < $variant > () ?)) } $fn_name ($map)
+                        }
+                    };
+                }
                 let class_name = map.next_key()?;
                 match class_name {
                     "BGSGamebryoSequenceGenerator" => {
-                        Ok(Classes::BGSGamebryoSequenceGenerator(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BGSGamebryoSequenceGenerator,
+                            BGSGamebryoSequenceGenerator, & mut map
+                        )
                     }
                     "BSBoneSwitchGenerator" => {
-                        Ok(Classes::BSBoneSwitchGenerator(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSBoneSwitchGenerator, BSBoneSwitchGenerator, & mut map
+                        )
                     }
                     "BSBoneSwitchGeneratorBoneData" => {
-                        Ok(Classes::BSBoneSwitchGeneratorBoneData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSBoneSwitchGeneratorBoneData,
+                            BSBoneSwitchGeneratorBoneData, & mut map
+                        )
                     }
                     "BSComputeAddBoneAnimModifier" => {
-                        Ok(Classes::BSComputeAddBoneAnimModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSComputeAddBoneAnimModifier,
+                            BSComputeAddBoneAnimModifier, & mut map
+                        )
                     }
                     "BSCyclicBlendTransitionGenerator" => {
-                        Ok(Classes::BSCyclicBlendTransitionGenerator(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSCyclicBlendTransitionGenerator,
+                            BSCyclicBlendTransitionGenerator, & mut map
+                        )
                     }
                     "BSDecomposeVectorModifier" => {
-                        Ok(Classes::BSDecomposeVectorModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSDecomposeVectorModifier, BSDecomposeVectorModifier, &
+                            mut map
+                        )
                     }
                     "BSDirectAtModifier" => {
-                        Ok(Classes::BSDirectAtModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSDirectAtModifier, BSDirectAtModifier, & mut map
+                        )
                     }
                     "BSDistTriggerModifier" => {
-                        Ok(Classes::BSDistTriggerModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSDistTriggerModifier, BSDistTriggerModifier, & mut map
+                        )
                     }
                     "BSEventEveryNEventsModifier" => {
-                        Ok(Classes::BSEventEveryNEventsModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSEventEveryNEventsModifier, BSEventEveryNEventsModifier,
+                            & mut map
+                        )
                     }
                     "BSEventOnDeactivateModifier" => {
-                        Ok(Classes::BSEventOnDeactivateModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSEventOnDeactivateModifier, BSEventOnDeactivateModifier,
+                            & mut map
+                        )
                     }
                     "BSEventOnFalseToTrueModifier" => {
-                        Ok(Classes::BSEventOnFalseToTrueModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSEventOnFalseToTrueModifier,
+                            BSEventOnFalseToTrueModifier, & mut map
+                        )
                     }
                     "BSGetTimeStepModifier" => {
-                        Ok(Classes::BSGetTimeStepModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSGetTimeStepModifier, BSGetTimeStepModifier, & mut map
+                        )
                     }
                     "BSInterpValueModifier" => {
-                        Ok(Classes::BSInterpValueModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSInterpValueModifier, BSInterpValueModifier, & mut map
+                        )
                     }
                     "BSIsActiveModifier" => {
-                        Ok(Classes::BSIsActiveModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSIsActiveModifier, BSIsActiveModifier, & mut map
+                        )
                     }
                     "BSIStateManagerModifier" => {
-                        Ok(Classes::BSIStateManagerModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSIStateManagerModifier, BSIStateManagerModifier, & mut
+                            map
+                        )
                     }
                     "BSIStateManagerModifierBSiStateData" => {
-                        Ok(
-                            Classes::BSIStateManagerModifierBSiStateData(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_BSIStateManagerModifierBSiStateData,
+                            BSIStateManagerModifierBSiStateData, & mut map
                         )
                     }
                     "BSIStateManagerModifierBSIStateManagerStateListener" => {
-                        Ok(
-                            Classes::BSIStateManagerModifierBSIStateManagerStateListener(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_BSIStateManagerModifierBSIStateManagerStateListener,
+                            BSIStateManagerModifierBSIStateManagerStateListener, & mut
+                            map
                         )
                     }
                     "BSiStateTaggingGenerator" => {
-                        Ok(Classes::BSiStateTaggingGenerator(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSiStateTaggingGenerator, BSiStateTaggingGenerator, & mut
+                            map
+                        )
                     }
                     "BSLimbIKModifier" => {
-                        Ok(Classes::BSLimbIKModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSLimbIKModifier, BSLimbIKModifier, & mut map
+                        )
                     }
                     "BSLookAtModifier" => {
-                        Ok(Classes::BSLookAtModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSLookAtModifier, BSLookAtModifier, & mut map
+                        )
                     }
                     "BSLookAtModifierBoneData" => {
-                        Ok(Classes::BSLookAtModifierBoneData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSLookAtModifierBoneData, BSLookAtModifierBoneData, & mut
+                            map
+                        )
                     }
                     "BSModifyOnceModifier" => {
-                        Ok(Classes::BSModifyOnceModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSModifyOnceModifier, BSModifyOnceModifier, & mut map
+                        )
                     }
                     "BSOffsetAnimationGenerator" => {
-                        Ok(Classes::BSOffsetAnimationGenerator(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSOffsetAnimationGenerator, BSOffsetAnimationGenerator, &
+                            mut map
+                        )
                     }
                     "BSPassByTargetTriggerModifier" => {
-                        Ok(Classes::BSPassByTargetTriggerModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSPassByTargetTriggerModifier,
+                            BSPassByTargetTriggerModifier, & mut map
+                        )
                     }
                     "BSRagdollContactListenerModifier" => {
-                        Ok(Classes::BSRagdollContactListenerModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSRagdollContactListenerModifier,
+                            BSRagdollContactListenerModifier, & mut map
+                        )
                     }
                     "BSSpeedSamplerModifier" => {
-                        Ok(Classes::BSSpeedSamplerModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSSpeedSamplerModifier, BSSpeedSamplerModifier, & mut map
+                        )
                     }
                     "BSSynchronizedClipGenerator" => {
-                        Ok(Classes::BSSynchronizedClipGenerator(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSSynchronizedClipGenerator, BSSynchronizedClipGenerator,
+                            & mut map
+                        )
                     }
-                    "BSTimerModifier" => Ok(Classes::BSTimerModifier(map.next_value()?)),
+                    "BSTimerModifier" => {
+                        deserialize_dev_stack_safe!(
+                            de_BSTimerModifier, BSTimerModifier, & mut map
+                        )
+                    }
                     "BSTweenerModifier" => {
-                        Ok(Classes::BSTweenerModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_BSTweenerModifier, BSTweenerModifier, & mut map
+                        )
                     }
-                    "hkAabb" => Ok(Classes::hkAabb(map.next_value()?)),
-                    "hkAabbHalf" => Ok(Classes::hkAabbHalf(map.next_value()?)),
-                    "hkAabbUint32" => Ok(Classes::hkAabbUint32(map.next_value()?)),
+                    "hkAabb" => deserialize_dev_stack_safe!(de_hkAabb, hkAabb, & mut map),
+                    "hkAabbHalf" => {
+                        deserialize_dev_stack_safe!(de_hkAabbHalf, hkAabbHalf, & mut map)
+                    }
+                    "hkAabbUint32" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkAabbUint32, hkAabbUint32, & mut map
+                        )
+                    }
                     "hkaAnimatedReferenceFrame" => {
-                        Ok(Classes::hkaAnimatedReferenceFrame(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaAnimatedReferenceFrame, hkaAnimatedReferenceFrame, &
+                            mut map
+                        )
                     }
-                    "hkaAnimation" => Ok(Classes::hkaAnimation(map.next_value()?)),
+                    "hkaAnimation" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkaAnimation, hkaAnimation, & mut map
+                        )
+                    }
                     "hkaAnimationBinding" => {
-                        Ok(Classes::hkaAnimationBinding(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaAnimationBinding, hkaAnimationBinding, & mut map
+                        )
                     }
                     "hkaAnimationContainer" => {
-                        Ok(Classes::hkaAnimationContainer(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaAnimationContainer, hkaAnimationContainer, & mut map
+                        )
                     }
                     "hkaAnimationPreviewColorContainer" => {
-                        Ok(Classes::hkaAnimationPreviewColorContainer(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaAnimationPreviewColorContainer,
+                            hkaAnimationPreviewColorContainer, & mut map
+                        )
                     }
                     "hkaAnnotationTrack" => {
-                        Ok(Classes::hkaAnnotationTrack(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaAnnotationTrack, hkaAnnotationTrack, & mut map
+                        )
                     }
                     "hkaAnnotationTrackAnnotation" => {
-                        Ok(Classes::hkaAnnotationTrackAnnotation(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaAnnotationTrackAnnotation,
+                            hkaAnnotationTrackAnnotation, & mut map
+                        )
                     }
-                    "hkaBone" => Ok(Classes::hkaBone(map.next_value()?)),
+                    "hkaBone" => {
+                        deserialize_dev_stack_safe!(de_hkaBone, hkaBone, & mut map)
+                    }
                     "hkaBoneAttachment" => {
-                        Ok(Classes::hkaBoneAttachment(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaBoneAttachment, hkaBoneAttachment, & mut map
+                        )
                     }
                     "hkaDefaultAnimatedReferenceFrame" => {
-                        Ok(Classes::hkaDefaultAnimatedReferenceFrame(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaDefaultAnimatedReferenceFrame,
+                            hkaDefaultAnimatedReferenceFrame, & mut map
+                        )
                     }
                     "hkaDeltaCompressedAnimation" => {
-                        Ok(Classes::hkaDeltaCompressedAnimation(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaDeltaCompressedAnimation, hkaDeltaCompressedAnimation,
+                            & mut map
+                        )
                     }
                     "hkaDeltaCompressedAnimationQuantizationFormat" => {
-                        Ok(
-                            Classes::hkaDeltaCompressedAnimationQuantizationFormat(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkaDeltaCompressedAnimationQuantizationFormat,
+                            hkaDeltaCompressedAnimationQuantizationFormat, & mut map
                         )
                     }
                     "hkaFootstepAnalysisInfo" => {
-                        Ok(Classes::hkaFootstepAnalysisInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaFootstepAnalysisInfo, hkaFootstepAnalysisInfo, & mut
+                            map
+                        )
                     }
                     "hkaFootstepAnalysisInfoContainer" => {
-                        Ok(Classes::hkaFootstepAnalysisInfoContainer(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaFootstepAnalysisInfoContainer,
+                            hkaFootstepAnalysisInfoContainer, & mut map
+                        )
                     }
                     "hkaInterleavedUncompressedAnimation" => {
-                        Ok(
-                            Classes::hkaInterleavedUncompressedAnimation(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkaInterleavedUncompressedAnimation,
+                            hkaInterleavedUncompressedAnimation, & mut map
                         )
                     }
                     "hkaKeyFrameHierarchyUtility" => {
-                        Ok(Classes::hkaKeyFrameHierarchyUtility(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaKeyFrameHierarchyUtility, hkaKeyFrameHierarchyUtility,
+                            & mut map
+                        )
                     }
                     "hkaKeyFrameHierarchyUtilityControlData" => {
-                        Ok(
-                            Classes::hkaKeyFrameHierarchyUtilityControlData(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkaKeyFrameHierarchyUtilityControlData,
+                            hkaKeyFrameHierarchyUtilityControlData, & mut map
                         )
                     }
                     "hkAlignSceneToNodeOptions" => {
-                        Ok(Classes::hkAlignSceneToNodeOptions(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkAlignSceneToNodeOptions, hkAlignSceneToNodeOptions, &
+                            mut map
+                        )
                     }
-                    "hkaMeshBinding" => Ok(Classes::hkaMeshBinding(map.next_value()?)),
+                    "hkaMeshBinding" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkaMeshBinding, hkaMeshBinding, & mut map
+                        )
+                    }
                     "hkaMeshBindingMapping" => {
-                        Ok(Classes::hkaMeshBindingMapping(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaMeshBindingMapping, hkaMeshBindingMapping, & mut map
+                        )
                     }
                     "hkaQuantizedAnimation" => {
-                        Ok(Classes::hkaQuantizedAnimation(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaQuantizedAnimation, hkaQuantizedAnimation, & mut map
+                        )
                     }
                     "hkaQuantizedAnimationTrackCompressionParams" => {
-                        Ok(
-                            Classes::hkaQuantizedAnimationTrackCompressionParams(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkaQuantizedAnimationTrackCompressionParams,
+                            hkaQuantizedAnimationTrackCompressionParams, & mut map
                         )
                     }
                     "hkaRagdollInstance" => {
-                        Ok(Classes::hkaRagdollInstance(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaRagdollInstance, hkaRagdollInstance, & mut map
+                        )
                     }
                     "hkArrayTypeAttribute" => {
-                        Ok(Classes::hkArrayTypeAttribute(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkArrayTypeAttribute, hkArrayTypeAttribute, & mut map
+                        )
                     }
-                    "hkaSkeleton" => Ok(Classes::hkaSkeleton(map.next_value()?)),
+                    "hkaSkeleton" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkaSkeleton, hkaSkeleton, & mut map
+                        )
+                    }
                     "hkaSkeletonLocalFrameOnBone" => {
-                        Ok(Classes::hkaSkeletonLocalFrameOnBone(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaSkeletonLocalFrameOnBone, hkaSkeletonLocalFrameOnBone,
+                            & mut map
+                        )
                     }
                     "hkaSkeletonMapper" => {
-                        Ok(Classes::hkaSkeletonMapper(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaSkeletonMapper, hkaSkeletonMapper, & mut map
+                        )
                     }
                     "hkaSkeletonMapperData" => {
-                        Ok(Classes::hkaSkeletonMapperData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaSkeletonMapperData, hkaSkeletonMapperData, & mut map
+                        )
                     }
                     "hkaSkeletonMapperDataChainMapping" => {
-                        Ok(Classes::hkaSkeletonMapperDataChainMapping(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaSkeletonMapperDataChainMapping,
+                            hkaSkeletonMapperDataChainMapping, & mut map
+                        )
                     }
                     "hkaSkeletonMapperDataSimpleMapping" => {
-                        Ok(
-                            Classes::hkaSkeletonMapperDataSimpleMapping(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkaSkeletonMapperDataSimpleMapping,
+                            hkaSkeletonMapperDataSimpleMapping, & mut map
                         )
                     }
                     "hkaSplineCompressedAnimation" => {
-                        Ok(Classes::hkaSplineCompressedAnimation(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaSplineCompressedAnimation,
+                            hkaSplineCompressedAnimation, & mut map
+                        )
                     }
                     "hkaSplineCompressedAnimationAnimationCompressionParams" => {
-                        Ok(
-                            Classes::hkaSplineCompressedAnimationAnimationCompressionParams(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkaSplineCompressedAnimationAnimationCompressionParams,
+                            hkaSplineCompressedAnimationAnimationCompressionParams, & mut
+                            map
                         )
                     }
                     "hkaSplineCompressedAnimationTrackCompressionParams" => {
-                        Ok(
-                            Classes::hkaSplineCompressedAnimationTrackCompressionParams(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkaSplineCompressedAnimationTrackCompressionParams,
+                            hkaSplineCompressedAnimationTrackCompressionParams, & mut map
                         )
                     }
                     "hkaWaveletCompressedAnimation" => {
-                        Ok(Classes::hkaWaveletCompressedAnimation(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkaWaveletCompressedAnimation,
+                            hkaWaveletCompressedAnimation, & mut map
+                        )
                     }
                     "hkaWaveletCompressedAnimationCompressionParams" => {
-                        Ok(
-                            Classes::hkaWaveletCompressedAnimationCompressionParams(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkaWaveletCompressedAnimationCompressionParams,
+                            hkaWaveletCompressedAnimationCompressionParams, & mut map
                         )
                     }
                     "hkaWaveletCompressedAnimationQuantizationFormat" => {
-                        Ok(
-                            Classes::hkaWaveletCompressedAnimationQuantizationFormat(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkaWaveletCompressedAnimationQuantizationFormat,
+                            hkaWaveletCompressedAnimationQuantizationFormat, & mut map
                         )
                     }
-                    "hkBaseObject" => Ok(Classes::hkBaseObject(map.next_value()?)),
+                    "hkBaseObject" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkBaseObject, hkBaseObject, & mut map
+                        )
+                    }
                     "hkbAttachmentModifier" => {
-                        Ok(Classes::hkbAttachmentModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbAttachmentModifier, hkbAttachmentModifier, & mut map
+                        )
                     }
                     "hkbAttachmentSetup" => {
-                        Ok(Classes::hkbAttachmentSetup(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbAttachmentSetup, hkbAttachmentSetup, & mut map
+                        )
                     }
                     "hkbAttributeModifier" => {
-                        Ok(Classes::hkbAttributeModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbAttributeModifier, hkbAttributeModifier, & mut map
+                        )
                     }
                     "hkbAttributeModifierAssignment" => {
-                        Ok(Classes::hkbAttributeModifierAssignment(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbAttributeModifierAssignment,
+                            hkbAttributeModifierAssignment, & mut map
+                        )
                     }
                     "hkbAuxiliaryNodeInfo" => {
-                        Ok(Classes::hkbAuxiliaryNodeInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbAuxiliaryNodeInfo, hkbAuxiliaryNodeInfo, & mut map
+                        )
                     }
                     "hkbBehaviorEventsInfo" => {
-                        Ok(Classes::hkbBehaviorEventsInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbBehaviorEventsInfo, hkbBehaviorEventsInfo, & mut map
+                        )
                     }
                     "hkbBehaviorGraph" => {
-                        Ok(Classes::hkbBehaviorGraph(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbBehaviorGraph, hkbBehaviorGraph, & mut map
+                        )
                     }
                     "hkbBehaviorGraphData" => {
-                        Ok(Classes::hkbBehaviorGraphData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbBehaviorGraphData, hkbBehaviorGraphData, & mut map
+                        )
                     }
                     "hkbBehaviorGraphInternalState" => {
-                        Ok(Classes::hkbBehaviorGraphInternalState(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbBehaviorGraphInternalState,
+                            hkbBehaviorGraphInternalState, & mut map
+                        )
                     }
                     "hkbBehaviorGraphInternalStateInfo" => {
-                        Ok(Classes::hkbBehaviorGraphInternalStateInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbBehaviorGraphInternalStateInfo,
+                            hkbBehaviorGraphInternalStateInfo, & mut map
+                        )
                     }
                     "hkbBehaviorGraphStringData" => {
-                        Ok(Classes::hkbBehaviorGraphStringData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbBehaviorGraphStringData, hkbBehaviorGraphStringData, &
+                            mut map
+                        )
                     }
-                    "hkbBehaviorInfo" => Ok(Classes::hkbBehaviorInfo(map.next_value()?)),
+                    "hkbBehaviorInfo" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbBehaviorInfo, hkbBehaviorInfo, & mut map
+                        )
+                    }
                     "hkbBehaviorInfoIdToNamePair" => {
-                        Ok(Classes::hkbBehaviorInfoIdToNamePair(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbBehaviorInfoIdToNamePair, hkbBehaviorInfoIdToNamePair,
+                            & mut map
+                        )
                     }
                     "hkbBehaviorReferenceGenerator" => {
-                        Ok(Classes::hkbBehaviorReferenceGenerator(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbBehaviorReferenceGenerator,
+                            hkbBehaviorReferenceGenerator, & mut map
+                        )
                     }
-                    "hkbBindable" => Ok(Classes::hkbBindable(map.next_value()?)),
+                    "hkbBindable" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbBindable, hkbBindable, & mut map
+                        )
+                    }
                     "hkbBlendCurveUtils" => {
-                        Ok(Classes::hkbBlendCurveUtils(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbBlendCurveUtils, hkbBlendCurveUtils, & mut map
+                        )
                     }
                     "hkbBlenderGenerator" => {
-                        Ok(Classes::hkbBlenderGenerator(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbBlenderGenerator, hkbBlenderGenerator, & mut map
+                        )
                     }
                     "hkbBlenderGeneratorChild" => {
-                        Ok(Classes::hkbBlenderGeneratorChild(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbBlenderGeneratorChild, hkbBlenderGeneratorChild, & mut
+                            map
+                        )
                     }
                     "hkbBlenderGeneratorChildInternalState" => {
-                        Ok(
-                            Classes::hkbBlenderGeneratorChildInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbBlenderGeneratorChildInternalState,
+                            hkbBlenderGeneratorChildInternalState, & mut map
                         )
                     }
                     "hkbBlenderGeneratorInternalState" => {
-                        Ok(Classes::hkbBlenderGeneratorInternalState(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbBlenderGeneratorInternalState,
+                            hkbBlenderGeneratorInternalState, & mut map
+                        )
                     }
                     "hkbBlendingTransitionEffect" => {
-                        Ok(Classes::hkbBlendingTransitionEffect(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbBlendingTransitionEffect, hkbBlendingTransitionEffect,
+                            & mut map
+                        )
                     }
                     "hkbBlendingTransitionEffectInternalState" => {
-                        Ok(
-                            Classes::hkbBlendingTransitionEffectInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbBlendingTransitionEffectInternalState,
+                            hkbBlendingTransitionEffectInternalState, & mut map
                         )
                     }
                     "hkbBoneIndexArray" => {
-                        Ok(Classes::hkbBoneIndexArray(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbBoneIndexArray, hkbBoneIndexArray, & mut map
+                        )
                     }
                     "hkbBoneWeightArray" => {
-                        Ok(Classes::hkbBoneWeightArray(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbBoneWeightArray, hkbBoneWeightArray, & mut map
+                        )
                     }
                     "hkbBoolVariableSequencedData" => {
-                        Ok(Classes::hkbBoolVariableSequencedData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbBoolVariableSequencedData,
+                            hkbBoolVariableSequencedData, & mut map
+                        )
                     }
                     "hkbBoolVariableSequencedDataSample" => {
-                        Ok(
-                            Classes::hkbBoolVariableSequencedDataSample(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbBoolVariableSequencedDataSample,
+                            hkbBoolVariableSequencedDataSample, & mut map
                         )
                     }
                     "hkbCameraShakeEventPayload" => {
-                        Ok(Classes::hkbCameraShakeEventPayload(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbCameraShakeEventPayload, hkbCameraShakeEventPayload, &
+                            mut map
+                        )
                     }
-                    "hkbCharacter" => Ok(Classes::hkbCharacter(map.next_value()?)),
+                    "hkbCharacter" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbCharacter, hkbCharacter, & mut map
+                        )
+                    }
                     "hkbCharacterAddedInfo" => {
-                        Ok(Classes::hkbCharacterAddedInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbCharacterAddedInfo, hkbCharacterAddedInfo, & mut map
+                        )
                     }
                     "hkbCharacterControlCommand" => {
-                        Ok(Classes::hkbCharacterControlCommand(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbCharacterControlCommand, hkbCharacterControlCommand, &
+                            mut map
+                        )
                     }
                     "hkbCharacterControllerControlData" => {
-                        Ok(Classes::hkbCharacterControllerControlData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbCharacterControllerControlData,
+                            hkbCharacterControllerControlData, & mut map
+                        )
                     }
                     "hkbCharacterControllerModifier" => {
-                        Ok(Classes::hkbCharacterControllerModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbCharacterControllerModifier,
+                            hkbCharacterControllerModifier, & mut map
+                        )
                     }
                     "hkbCharacterControllerModifierInternalState" => {
-                        Ok(
-                            Classes::hkbCharacterControllerModifierInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbCharacterControllerModifierInternalState,
+                            hkbCharacterControllerModifierInternalState, & mut map
                         )
                     }
                     "hkbCharacterData" => {
-                        Ok(Classes::hkbCharacterData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbCharacterData, hkbCharacterData, & mut map
+                        )
                     }
                     "hkbCharacterDataCharacterControllerInfo" => {
-                        Ok(
-                            Classes::hkbCharacterDataCharacterControllerInfo(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbCharacterDataCharacterControllerInfo,
+                            hkbCharacterDataCharacterControllerInfo, & mut map
                         )
                     }
                     "hkbCharacterInfo" => {
-                        Ok(Classes::hkbCharacterInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbCharacterInfo, hkbCharacterInfo, & mut map
+                        )
                     }
                     "hkbCharacterSetup" => {
-                        Ok(Classes::hkbCharacterSetup(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbCharacterSetup, hkbCharacterSetup, & mut map
+                        )
                     }
                     "hkbCharacterSkinInfo" => {
-                        Ok(Classes::hkbCharacterSkinInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbCharacterSkinInfo, hkbCharacterSkinInfo, & mut map
+                        )
                     }
                     "hkbCharacterSteppedInfo" => {
-                        Ok(Classes::hkbCharacterSteppedInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbCharacterSteppedInfo, hkbCharacterSteppedInfo, & mut
+                            map
+                        )
                     }
                     "hkbCharacterStringData" => {
-                        Ok(Classes::hkbCharacterStringData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbCharacterStringData, hkbCharacterStringData, & mut map
+                        )
                     }
                     "hkbClientCharacterState" => {
-                        Ok(Classes::hkbClientCharacterState(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbClientCharacterState, hkbClientCharacterState, & mut
+                            map
+                        )
                     }
                     "hkbClipGenerator" => {
-                        Ok(Classes::hkbClipGenerator(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbClipGenerator, hkbClipGenerator, & mut map
+                        )
                     }
                     "hkbClipGeneratorEcho" => {
-                        Ok(Classes::hkbClipGeneratorEcho(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbClipGeneratorEcho, hkbClipGeneratorEcho, & mut map
+                        )
                     }
                     "hkbClipGeneratorInternalState" => {
-                        Ok(Classes::hkbClipGeneratorInternalState(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbClipGeneratorInternalState,
+                            hkbClipGeneratorInternalState, & mut map
+                        )
                     }
-                    "hkbClipTrigger" => Ok(Classes::hkbClipTrigger(map.next_value()?)),
+                    "hkbClipTrigger" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbClipTrigger, hkbClipTrigger, & mut map
+                        )
+                    }
                     "hkbClipTriggerArray" => {
-                        Ok(Classes::hkbClipTriggerArray(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbClipTriggerArray, hkbClipTriggerArray, & mut map
+                        )
                     }
                     "hkbCombineTransformsModifier" => {
-                        Ok(Classes::hkbCombineTransformsModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbCombineTransformsModifier,
+                            hkbCombineTransformsModifier, & mut map
+                        )
                     }
                     "hkbCombineTransformsModifierInternalState" => {
-                        Ok(
-                            Classes::hkbCombineTransformsModifierInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbCombineTransformsModifierInternalState,
+                            hkbCombineTransformsModifierInternalState, & mut map
                         )
                     }
                     "hkbCompiledExpressionSet" => {
-                        Ok(Classes::hkbCompiledExpressionSet(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbCompiledExpressionSet, hkbCompiledExpressionSet, & mut
+                            map
+                        )
                     }
                     "hkbCompiledExpressionSetToken" => {
-                        Ok(Classes::hkbCompiledExpressionSetToken(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbCompiledExpressionSetToken,
+                            hkbCompiledExpressionSetToken, & mut map
+                        )
                     }
                     "hkbComputeDirectionModifier" => {
-                        Ok(Classes::hkbComputeDirectionModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbComputeDirectionModifier, hkbComputeDirectionModifier,
+                            & mut map
+                        )
                     }
                     "hkbComputeDirectionModifierInternalState" => {
-                        Ok(
-                            Classes::hkbComputeDirectionModifierInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbComputeDirectionModifierInternalState,
+                            hkbComputeDirectionModifierInternalState, & mut map
                         )
                     }
                     "hkbComputeRotationFromAxisAngleModifier" => {
-                        Ok(
-                            Classes::hkbComputeRotationFromAxisAngleModifier(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbComputeRotationFromAxisAngleModifier,
+                            hkbComputeRotationFromAxisAngleModifier, & mut map
                         )
                     }
                     "hkbComputeRotationFromAxisAngleModifierInternalState" => {
-                        Ok(
-                            Classes::hkbComputeRotationFromAxisAngleModifierInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbComputeRotationFromAxisAngleModifierInternalState,
+                            hkbComputeRotationFromAxisAngleModifierInternalState, & mut
+                            map
                         )
                     }
                     "hkbComputeRotationToTargetModifier" => {
-                        Ok(
-                            Classes::hkbComputeRotationToTargetModifier(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbComputeRotationToTargetModifier,
+                            hkbComputeRotationToTargetModifier, & mut map
                         )
                     }
                     "hkbComputeRotationToTargetModifierInternalState" => {
-                        Ok(
-                            Classes::hkbComputeRotationToTargetModifierInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbComputeRotationToTargetModifierInternalState,
+                            hkbComputeRotationToTargetModifierInternalState, & mut map
                         )
                     }
-                    "hkbCondition" => Ok(Classes::hkbCondition(map.next_value()?)),
-                    "hkbContext" => Ok(Classes::hkbContext(map.next_value()?)),
+                    "hkbCondition" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbCondition, hkbCondition, & mut map
+                        )
+                    }
+                    "hkbContext" => {
+                        deserialize_dev_stack_safe!(de_hkbContext, hkbContext, & mut map)
+                    }
                     "hkbDampingModifier" => {
-                        Ok(Classes::hkbDampingModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbDampingModifier, hkbDampingModifier, & mut map
+                        )
                     }
                     "hkbDampingModifierInternalState" => {
-                        Ok(Classes::hkbDampingModifierInternalState(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbDampingModifierInternalState,
+                            hkbDampingModifierInternalState, & mut map
+                        )
                     }
                     "hkbDefaultMessageLog" => {
-                        Ok(Classes::hkbDefaultMessageLog(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbDefaultMessageLog, hkbDefaultMessageLog, & mut map
+                        )
                     }
                     "hkbDelayedModifier" => {
-                        Ok(Classes::hkbDelayedModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbDelayedModifier, hkbDelayedModifier, & mut map
+                        )
                     }
                     "hkbDelayedModifierInternalState" => {
-                        Ok(Classes::hkbDelayedModifierInternalState(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbDelayedModifierInternalState,
+                            hkbDelayedModifierInternalState, & mut map
+                        )
                     }
                     "hkbDetectCloseToGroundModifier" => {
-                        Ok(Classes::hkbDetectCloseToGroundModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbDetectCloseToGroundModifier,
+                            hkbDetectCloseToGroundModifier, & mut map
+                        )
                     }
                     "hkbDetectCloseToGroundModifierInternalState" => {
-                        Ok(
-                            Classes::hkbDetectCloseToGroundModifierInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbDetectCloseToGroundModifierInternalState,
+                            hkbDetectCloseToGroundModifierInternalState, & mut map
                         )
                     }
                     "hkbEvaluateExpressionModifier" => {
-                        Ok(Classes::hkbEvaluateExpressionModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbEvaluateExpressionModifier,
+                            hkbEvaluateExpressionModifier, & mut map
+                        )
                     }
                     "hkbEvaluateExpressionModifierInternalExpressionData" => {
-                        Ok(
-                            Classes::hkbEvaluateExpressionModifierInternalExpressionData(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbEvaluateExpressionModifierInternalExpressionData,
+                            hkbEvaluateExpressionModifierInternalExpressionData, & mut
+                            map
                         )
                     }
                     "hkbEvaluateExpressionModifierInternalState" => {
-                        Ok(
-                            Classes::hkbEvaluateExpressionModifierInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbEvaluateExpressionModifierInternalState,
+                            hkbEvaluateExpressionModifierInternalState, & mut map
                         )
                     }
                     "hkbEvaluateHandleModifier" => {
-                        Ok(Classes::hkbEvaluateHandleModifier(map.next_value()?))
-                    }
-                    "hkbEvent" => Ok(Classes::hkbEvent(map.next_value()?)),
-                    "hkbEventBase" => Ok(Classes::hkbEventBase(map.next_value()?)),
-                    "hkbEventDrivenModifier" => {
-                        Ok(Classes::hkbEventDrivenModifier(map.next_value()?))
-                    }
-                    "hkbEventDrivenModifierInternalState" => {
-                        Ok(
-                            Classes::hkbEventDrivenModifierInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbEvaluateHandleModifier, hkbEvaluateHandleModifier, &
+                            mut map
                         )
                     }
-                    "hkbEventInfo" => Ok(Classes::hkbEventInfo(map.next_value()?)),
-                    "hkbEventPayload" => Ok(Classes::hkbEventPayload(map.next_value()?)),
+                    "hkbEvent" => {
+                        deserialize_dev_stack_safe!(de_hkbEvent, hkbEvent, & mut map)
+                    }
+                    "hkbEventBase" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbEventBase, hkbEventBase, & mut map
+                        )
+                    }
+                    "hkbEventDrivenModifier" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbEventDrivenModifier, hkbEventDrivenModifier, & mut map
+                        )
+                    }
+                    "hkbEventDrivenModifierInternalState" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbEventDrivenModifierInternalState,
+                            hkbEventDrivenModifierInternalState, & mut map
+                        )
+                    }
+                    "hkbEventInfo" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbEventInfo, hkbEventInfo, & mut map
+                        )
+                    }
+                    "hkbEventPayload" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbEventPayload, hkbEventPayload, & mut map
+                        )
+                    }
                     "hkbEventPayloadList" => {
-                        Ok(Classes::hkbEventPayloadList(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbEventPayloadList, hkbEventPayloadList, & mut map
+                        )
                     }
                     "hkbEventProperty" => {
-                        Ok(Classes::hkbEventProperty(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbEventProperty, hkbEventProperty, & mut map
+                        )
                     }
                     "hkbEventRaisedInfo" => {
-                        Ok(Classes::hkbEventRaisedInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbEventRaisedInfo, hkbEventRaisedInfo, & mut map
+                        )
                     }
                     "hkbEventRangeData" => {
-                        Ok(Classes::hkbEventRangeData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbEventRangeData, hkbEventRangeData, & mut map
+                        )
                     }
                     "hkbEventRangeDataArray" => {
-                        Ok(Classes::hkbEventRangeDataArray(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbEventRangeDataArray, hkbEventRangeDataArray, & mut map
+                        )
                     }
                     "hkbEventSequencedData" => {
-                        Ok(Classes::hkbEventSequencedData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbEventSequencedData, hkbEventSequencedData, & mut map
+                        )
                     }
                     "hkbEventSequencedDataSequencedEvent" => {
-                        Ok(
-                            Classes::hkbEventSequencedDataSequencedEvent(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbEventSequencedDataSequencedEvent,
+                            hkbEventSequencedDataSequencedEvent, & mut map
                         )
                     }
                     "hkbEventsFromRangeModifier" => {
-                        Ok(Classes::hkbEventsFromRangeModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbEventsFromRangeModifier, hkbEventsFromRangeModifier, &
+                            mut map
+                        )
                     }
                     "hkbEventsFromRangeModifierInternalState" => {
-                        Ok(
-                            Classes::hkbEventsFromRangeModifierInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbEventsFromRangeModifierInternalState,
+                            hkbEventsFromRangeModifierInternalState, & mut map
                         )
                     }
                     "hkbExpressionCondition" => {
-                        Ok(Classes::hkbExpressionCondition(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbExpressionCondition, hkbExpressionCondition, & mut map
+                        )
                     }
                     "hkbExpressionData" => {
-                        Ok(Classes::hkbExpressionData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbExpressionData, hkbExpressionData, & mut map
+                        )
                     }
                     "hkbExpressionDataArray" => {
-                        Ok(Classes::hkbExpressionDataArray(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbExpressionDataArray, hkbExpressionDataArray, & mut map
+                        )
                     }
                     "hkbExtractRagdollPoseModifier" => {
-                        Ok(Classes::hkbExtractRagdollPoseModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbExtractRagdollPoseModifier,
+                            hkbExtractRagdollPoseModifier, & mut map
+                        )
                     }
                     "hkbFootIkControlData" => {
-                        Ok(Classes::hkbFootIkControlData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbFootIkControlData, hkbFootIkControlData, & mut map
+                        )
                     }
                     "hkbFootIkControlsModifier" => {
-                        Ok(Classes::hkbFootIkControlsModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbFootIkControlsModifier, hkbFootIkControlsModifier, &
+                            mut map
+                        )
                     }
                     "hkbFootIkControlsModifierLeg" => {
-                        Ok(Classes::hkbFootIkControlsModifierLeg(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbFootIkControlsModifierLeg,
+                            hkbFootIkControlsModifierLeg, & mut map
+                        )
                     }
                     "hkbFootIkDriverInfo" => {
-                        Ok(Classes::hkbFootIkDriverInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbFootIkDriverInfo, hkbFootIkDriverInfo, & mut map
+                        )
                     }
                     "hkbFootIkDriverInfoLeg" => {
-                        Ok(Classes::hkbFootIkDriverInfoLeg(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbFootIkDriverInfoLeg, hkbFootIkDriverInfoLeg, & mut map
+                        )
                     }
-                    "hkbFootIkGains" => Ok(Classes::hkbFootIkGains(map.next_value()?)),
+                    "hkbFootIkGains" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbFootIkGains, hkbFootIkGains, & mut map
+                        )
+                    }
                     "hkbFootIkModifier" => {
-                        Ok(Classes::hkbFootIkModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbFootIkModifier, hkbFootIkModifier, & mut map
+                        )
                     }
                     "hkbFootIkModifierInternalLegData" => {
-                        Ok(Classes::hkbFootIkModifierInternalLegData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbFootIkModifierInternalLegData,
+                            hkbFootIkModifierInternalLegData, & mut map
+                        )
                     }
                     "hkbFootIkModifierLeg" => {
-                        Ok(Classes::hkbFootIkModifierLeg(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbFootIkModifierLeg, hkbFootIkModifierLeg, & mut map
+                        )
                     }
-                    "hkbGenerator" => Ok(Classes::hkbGenerator(map.next_value()?)),
+                    "hkbGenerator" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbGenerator, hkbGenerator, & mut map
+                        )
+                    }
                     "hkbGeneratorOutputListener" => {
-                        Ok(Classes::hkbGeneratorOutputListener(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbGeneratorOutputListener, hkbGeneratorOutputListener, &
+                            mut map
+                        )
                     }
                     "hkbGeneratorSyncInfo" => {
-                        Ok(Classes::hkbGeneratorSyncInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbGeneratorSyncInfo, hkbGeneratorSyncInfo, & mut map
+                        )
                     }
                     "hkbGeneratorSyncInfoSyncPoint" => {
-                        Ok(Classes::hkbGeneratorSyncInfoSyncPoint(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbGeneratorSyncInfoSyncPoint,
+                            hkbGeneratorSyncInfoSyncPoint, & mut map
+                        )
                     }
                     "hkbGeneratorTransitionEffect" => {
-                        Ok(Classes::hkbGeneratorTransitionEffect(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbGeneratorTransitionEffect,
+                            hkbGeneratorTransitionEffect, & mut map
+                        )
                     }
                     "hkbGeneratorTransitionEffectInternalState" => {
-                        Ok(
-                            Classes::hkbGeneratorTransitionEffectInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbGeneratorTransitionEffectInternalState,
+                            hkbGeneratorTransitionEffectInternalState, & mut map
                         )
                     }
                     "hkbGetHandleOnBoneModifier" => {
-                        Ok(Classes::hkbGetHandleOnBoneModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbGetHandleOnBoneModifier, hkbGetHandleOnBoneModifier, &
+                            mut map
+                        )
                     }
                     "hkbGetUpModifier" => {
-                        Ok(Classes::hkbGetUpModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbGetUpModifier, hkbGetUpModifier, & mut map
+                        )
                     }
                     "hkbGetUpModifierInternalState" => {
-                        Ok(Classes::hkbGetUpModifierInternalState(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbGetUpModifierInternalState,
+                            hkbGetUpModifierInternalState, & mut map
+                        )
                     }
                     "hkbGetWorldFromModelModifier" => {
-                        Ok(Classes::hkbGetWorldFromModelModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbGetWorldFromModelModifier,
+                            hkbGetWorldFromModelModifier, & mut map
+                        )
                     }
                     "hkbGetWorldFromModelModifierInternalState" => {
-                        Ok(
-                            Classes::hkbGetWorldFromModelModifierInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbGetWorldFromModelModifierInternalState,
+                            hkbGetWorldFromModelModifierInternalState, & mut map
                         )
                     }
                     "hkbHandIkControlData" => {
-                        Ok(Classes::hkbHandIkControlData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbHandIkControlData, hkbHandIkControlData, & mut map
+                        )
                     }
                     "hkbHandIkControlsModifier" => {
-                        Ok(Classes::hkbHandIkControlsModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbHandIkControlsModifier, hkbHandIkControlsModifier, &
+                            mut map
+                        )
                     }
                     "hkbHandIkControlsModifierHand" => {
-                        Ok(Classes::hkbHandIkControlsModifierHand(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbHandIkControlsModifierHand,
+                            hkbHandIkControlsModifierHand, & mut map
+                        )
                     }
                     "hkbHandIkDriverInfo" => {
-                        Ok(Classes::hkbHandIkDriverInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbHandIkDriverInfo, hkbHandIkDriverInfo, & mut map
+                        )
                     }
                     "hkbHandIkDriverInfoHand" => {
-                        Ok(Classes::hkbHandIkDriverInfoHand(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbHandIkDriverInfoHand, hkbHandIkDriverInfoHand, & mut
+                            map
+                        )
                     }
                     "hkbHandIkModifier" => {
-                        Ok(Classes::hkbHandIkModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbHandIkModifier, hkbHandIkModifier, & mut map
+                        )
                     }
                     "hkbHandIkModifierHand" => {
-                        Ok(Classes::hkbHandIkModifierHand(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbHandIkModifierHand, hkbHandIkModifierHand, & mut map
+                        )
                     }
-                    "hkbHandle" => Ok(Classes::hkbHandle(map.next_value()?)),
+                    "hkbHandle" => {
+                        deserialize_dev_stack_safe!(de_hkbHandle, hkbHandle, & mut map)
+                    }
                     "hkbIntEventPayload" => {
-                        Ok(Classes::hkbIntEventPayload(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbIntEventPayload, hkbIntEventPayload, & mut map
+                        )
                     }
                     "hkbIntVariableSequencedData" => {
-                        Ok(Classes::hkbIntVariableSequencedData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbIntVariableSequencedData, hkbIntVariableSequencedData,
+                            & mut map
+                        )
                     }
                     "hkbIntVariableSequencedDataSample" => {
-                        Ok(Classes::hkbIntVariableSequencedDataSample(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbIntVariableSequencedDataSample,
+                            hkbIntVariableSequencedDataSample, & mut map
+                        )
                     }
-                    "hkBitField" => Ok(Classes::hkBitField(map.next_value()?)),
+                    "hkBitField" => {
+                        deserialize_dev_stack_safe!(de_hkBitField, hkBitField, & mut map)
+                    }
                     "hkbKeyframeBonesModifier" => {
-                        Ok(Classes::hkbKeyframeBonesModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbKeyframeBonesModifier, hkbKeyframeBonesModifier, & mut
+                            map
+                        )
                     }
                     "hkbKeyframeBonesModifierKeyframeInfo" => {
-                        Ok(
-                            Classes::hkbKeyframeBonesModifierKeyframeInfo(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbKeyframeBonesModifierKeyframeInfo,
+                            hkbKeyframeBonesModifierKeyframeInfo, & mut map
                         )
                     }
                     "hkbLinkedSymbolInfo" => {
-                        Ok(Classes::hkbLinkedSymbolInfo(map.next_value()?))
-                    }
-                    "hkbLookAtModifier" => {
-                        Ok(Classes::hkbLookAtModifier(map.next_value()?))
-                    }
-                    "hkbLookAtModifierInternalState" => {
-                        Ok(Classes::hkbLookAtModifierInternalState(map.next_value()?))
-                    }
-                    "hkbManualSelectorGenerator" => {
-                        Ok(Classes::hkbManualSelectorGenerator(map.next_value()?))
-                    }
-                    "hkbManualSelectorGeneratorInternalState" => {
-                        Ok(
-                            Classes::hkbManualSelectorGeneratorInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbLinkedSymbolInfo, hkbLinkedSymbolInfo, & mut map
                         )
                     }
-                    "hkbMessageLog" => Ok(Classes::hkbMessageLog(map.next_value()?)),
+                    "hkbLookAtModifier" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbLookAtModifier, hkbLookAtModifier, & mut map
+                        )
+                    }
+                    "hkbLookAtModifierInternalState" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbLookAtModifierInternalState,
+                            hkbLookAtModifierInternalState, & mut map
+                        )
+                    }
+                    "hkbManualSelectorGenerator" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbManualSelectorGenerator, hkbManualSelectorGenerator, &
+                            mut map
+                        )
+                    }
+                    "hkbManualSelectorGeneratorInternalState" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbManualSelectorGeneratorInternalState,
+                            hkbManualSelectorGeneratorInternalState, & mut map
+                        )
+                    }
+                    "hkbMessageLog" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbMessageLog, hkbMessageLog, & mut map
+                        )
+                    }
                     "hkbMirroredSkeletonInfo" => {
-                        Ok(Classes::hkbMirroredSkeletonInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbMirroredSkeletonInfo, hkbMirroredSkeletonInfo, & mut
+                            map
+                        )
                     }
                     "hkbMirrorModifier" => {
-                        Ok(Classes::hkbMirrorModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbMirrorModifier, hkbMirrorModifier, & mut map
+                        )
                     }
-                    "hkbModifier" => Ok(Classes::hkbModifier(map.next_value()?)),
+                    "hkbModifier" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbModifier, hkbModifier, & mut map
+                        )
+                    }
                     "hkbModifierGenerator" => {
-                        Ok(Classes::hkbModifierGenerator(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbModifierGenerator, hkbModifierGenerator, & mut map
+                        )
                     }
-                    "hkbModifierList" => Ok(Classes::hkbModifierList(map.next_value()?)),
+                    "hkbModifierList" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbModifierList, hkbModifierList, & mut map
+                        )
+                    }
                     "hkbModifierWrapper" => {
-                        Ok(Classes::hkbModifierWrapper(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbModifierWrapper, hkbModifierWrapper, & mut map
+                        )
                     }
                     "hkbMoveCharacterModifier" => {
-                        Ok(Classes::hkbMoveCharacterModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbMoveCharacterModifier, hkbMoveCharacterModifier, & mut
+                            map
+                        )
                     }
                     "hkbMoveCharacterModifierInternalState" => {
-                        Ok(
-                            Classes::hkbMoveCharacterModifierInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbMoveCharacterModifierInternalState,
+                            hkbMoveCharacterModifierInternalState, & mut map
                         )
                     }
                     "hkbNamedEventPayload" => {
-                        Ok(Classes::hkbNamedEventPayload(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbNamedEventPayload, hkbNamedEventPayload, & mut map
+                        )
                     }
                     "hkbNamedIntEventPayload" => {
-                        Ok(Classes::hkbNamedIntEventPayload(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbNamedIntEventPayload, hkbNamedIntEventPayload, & mut
+                            map
+                        )
                     }
                     "hkbNamedRealEventPayload" => {
-                        Ok(Classes::hkbNamedRealEventPayload(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbNamedRealEventPayload, hkbNamedRealEventPayload, & mut
+                            map
+                        )
                     }
                     "hkbNamedStringEventPayload" => {
-                        Ok(Classes::hkbNamedStringEventPayload(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbNamedStringEventPayload, hkbNamedStringEventPayload, &
+                            mut map
+                        )
                     }
-                    "hkbNode" => Ok(Classes::hkbNode(map.next_value()?)),
+                    "hkbNode" => {
+                        deserialize_dev_stack_safe!(de_hkbNode, hkbNode, & mut map)
+                    }
                     "hkbNodeInternalStateInfo" => {
-                        Ok(Classes::hkbNodeInternalStateInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbNodeInternalStateInfo, hkbNodeInternalStateInfo, & mut
+                            map
+                        )
                     }
                     "hkbParticleSystemEventPayload" => {
-                        Ok(Classes::hkbParticleSystemEventPayload(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbParticleSystemEventPayload,
+                            hkbParticleSystemEventPayload, & mut map
+                        )
                     }
                     "hkbPoseMatchingGenerator" => {
-                        Ok(Classes::hkbPoseMatchingGenerator(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbPoseMatchingGenerator, hkbPoseMatchingGenerator, & mut
+                            map
+                        )
                     }
                     "hkbPoseMatchingGeneratorInternalState" => {
-                        Ok(
-                            Classes::hkbPoseMatchingGeneratorInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbPoseMatchingGeneratorInternalState,
+                            hkbPoseMatchingGeneratorInternalState, & mut map
                         )
                     }
                     "hkbPoweredRagdollControlData" => {
-                        Ok(Classes::hkbPoweredRagdollControlData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbPoweredRagdollControlData,
+                            hkbPoweredRagdollControlData, & mut map
+                        )
                     }
                     "hkbPoweredRagdollControlsModifier" => {
-                        Ok(Classes::hkbPoweredRagdollControlsModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbPoweredRagdollControlsModifier,
+                            hkbPoweredRagdollControlsModifier, & mut map
+                        )
                     }
-                    "hkbProjectData" => Ok(Classes::hkbProjectData(map.next_value()?)),
+                    "hkbProjectData" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbProjectData, hkbProjectData, & mut map
+                        )
+                    }
                     "hkbProjectStringData" => {
-                        Ok(Classes::hkbProjectStringData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbProjectStringData, hkbProjectStringData, & mut map
+                        )
                     }
                     "hkbProxyModifier" => {
-                        Ok(Classes::hkbProxyModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbProxyModifier, hkbProxyModifier, & mut map
+                        )
                     }
                     "hkbProxyModifierProxyInfo" => {
-                        Ok(Classes::hkbProxyModifierProxyInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbProxyModifierProxyInfo, hkbProxyModifierProxyInfo, &
+                            mut map
+                        )
                     }
                     "hkbRaiseEventCommand" => {
-                        Ok(Classes::hkbRaiseEventCommand(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbRaiseEventCommand, hkbRaiseEventCommand, & mut map
+                        )
                     }
                     "hkbRealEventPayload" => {
-                        Ok(Classes::hkbRealEventPayload(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbRealEventPayload, hkbRealEventPayload, & mut map
+                        )
                     }
                     "hkbRealVariableSequencedData" => {
-                        Ok(Classes::hkbRealVariableSequencedData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbRealVariableSequencedData,
+                            hkbRealVariableSequencedData, & mut map
+                        )
                     }
                     "hkbRealVariableSequencedDataSample" => {
-                        Ok(
-                            Classes::hkbRealVariableSequencedDataSample(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbRealVariableSequencedDataSample,
+                            hkbRealVariableSequencedDataSample, & mut map
                         )
                     }
                     "hkbReferencePoseGenerator" => {
-                        Ok(Classes::hkbReferencePoseGenerator(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbReferencePoseGenerator, hkbReferencePoseGenerator, &
+                            mut map
+                        )
                     }
                     "hkbRegisteredGenerator" => {
-                        Ok(Classes::hkbRegisteredGenerator(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbRegisteredGenerator, hkbRegisteredGenerator, & mut map
+                        )
                     }
                     "hkbRigidBodyRagdollControlData" => {
-                        Ok(Classes::hkbRigidBodyRagdollControlData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbRigidBodyRagdollControlData,
+                            hkbRigidBodyRagdollControlData, & mut map
+                        )
                     }
                     "hkbRigidBodyRagdollControlsModifier" => {
-                        Ok(
-                            Classes::hkbRigidBodyRagdollControlsModifier(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbRigidBodyRagdollControlsModifier,
+                            hkbRigidBodyRagdollControlsModifier, & mut map
                         )
                     }
                     "hkbRoleAttribute" => {
-                        Ok(Classes::hkbRoleAttribute(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbRoleAttribute, hkbRoleAttribute, & mut map
+                        )
                     }
                     "hkbRotateCharacterModifier" => {
-                        Ok(Classes::hkbRotateCharacterModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbRotateCharacterModifier, hkbRotateCharacterModifier, &
+                            mut map
+                        )
                     }
                     "hkbRotateCharacterModifierInternalState" => {
-                        Ok(
-                            Classes::hkbRotateCharacterModifierInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbRotateCharacterModifierInternalState,
+                            hkbRotateCharacterModifierInternalState, & mut map
                         )
                     }
                     "hkbSenseHandleModifier" => {
-                        Ok(Classes::hkbSenseHandleModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbSenseHandleModifier, hkbSenseHandleModifier, & mut map
+                        )
                     }
                     "hkbSenseHandleModifierRange" => {
-                        Ok(Classes::hkbSenseHandleModifierRange(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbSenseHandleModifierRange, hkbSenseHandleModifierRange,
+                            & mut map
+                        )
                     }
-                    "hkbSequence" => Ok(Classes::hkbSequence(map.next_value()?)),
+                    "hkbSequence" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbSequence, hkbSequence, & mut map
+                        )
+                    }
                     "hkbSequencedData" => {
-                        Ok(Classes::hkbSequencedData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbSequencedData, hkbSequencedData, & mut map
+                        )
                     }
                     "hkbSequenceInternalState" => {
-                        Ok(Classes::hkbSequenceInternalState(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbSequenceInternalState, hkbSequenceInternalState, & mut
+                            map
+                        )
                     }
                     "hkbSequenceStringData" => {
-                        Ok(Classes::hkbSequenceStringData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbSequenceStringData, hkbSequenceStringData, & mut map
+                        )
                     }
                     "hkbSetBehaviorCommand" => {
-                        Ok(Classes::hkbSetBehaviorCommand(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbSetBehaviorCommand, hkbSetBehaviorCommand, & mut map
+                        )
                     }
                     "hkbSetLocalTimeOfClipGeneratorCommand" => {
-                        Ok(
-                            Classes::hkbSetLocalTimeOfClipGeneratorCommand(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbSetLocalTimeOfClipGeneratorCommand,
+                            hkbSetLocalTimeOfClipGeneratorCommand, & mut map
                         )
                     }
                     "hkbSetNodePropertyCommand" => {
-                        Ok(Classes::hkbSetNodePropertyCommand(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbSetNodePropertyCommand, hkbSetNodePropertyCommand, &
+                            mut map
+                        )
                     }
                     "hkbSetWordVariableCommand" => {
-                        Ok(Classes::hkbSetWordVariableCommand(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbSetWordVariableCommand, hkbSetWordVariableCommand, &
+                            mut map
+                        )
                     }
                     "hkbSetWorldFromModelModifier" => {
-                        Ok(Classes::hkbSetWorldFromModelModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbSetWorldFromModelModifier,
+                            hkbSetWorldFromModelModifier, & mut map
+                        )
                     }
                     "hkbSimulationControlCommand" => {
-                        Ok(Classes::hkbSimulationControlCommand(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbSimulationControlCommand, hkbSimulationControlCommand,
+                            & mut map
+                        )
                     }
                     "hkbSimulationStateInfo" => {
-                        Ok(Classes::hkbSimulationStateInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbSimulationStateInfo, hkbSimulationStateInfo, & mut map
+                        )
                     }
-                    "hkbStateChooser" => Ok(Classes::hkbStateChooser(map.next_value()?)),
+                    "hkbStateChooser" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbStateChooser, hkbStateChooser, & mut map
+                        )
+                    }
                     "hkbStateListener" => {
-                        Ok(Classes::hkbStateListener(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbStateListener, hkbStateListener, & mut map
+                        )
                     }
-                    "hkbStateMachine" => Ok(Classes::hkbStateMachine(map.next_value()?)),
+                    "hkbStateMachine" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbStateMachine, hkbStateMachine, & mut map
+                        )
+                    }
                     "hkbStateMachineActiveTransitionInfo" => {
-                        Ok(
-                            Classes::hkbStateMachineActiveTransitionInfo(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbStateMachineActiveTransitionInfo,
+                            hkbStateMachineActiveTransitionInfo, & mut map
                         )
                     }
                     "hkbStateMachineDelayedTransitionInfo" => {
-                        Ok(
-                            Classes::hkbStateMachineDelayedTransitionInfo(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbStateMachineDelayedTransitionInfo,
+                            hkbStateMachineDelayedTransitionInfo, & mut map
                         )
                     }
                     "hkbStateMachineEventPropertyArray" => {
-                        Ok(Classes::hkbStateMachineEventPropertyArray(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbStateMachineEventPropertyArray,
+                            hkbStateMachineEventPropertyArray, & mut map
+                        )
                     }
                     "hkbStateMachineInternalState" => {
-                        Ok(Classes::hkbStateMachineInternalState(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbStateMachineInternalState,
+                            hkbStateMachineInternalState, & mut map
+                        )
                     }
                     "hkbStateMachineNestedStateMachineData" => {
-                        Ok(
-                            Classes::hkbStateMachineNestedStateMachineData(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbStateMachineNestedStateMachineData,
+                            hkbStateMachineNestedStateMachineData, & mut map
                         )
                     }
                     "hkbStateMachineProspectiveTransitionInfo" => {
-                        Ok(
-                            Classes::hkbStateMachineProspectiveTransitionInfo(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbStateMachineProspectiveTransitionInfo,
+                            hkbStateMachineProspectiveTransitionInfo, & mut map
                         )
                     }
                     "hkbStateMachineStateInfo" => {
-                        Ok(Classes::hkbStateMachineStateInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbStateMachineStateInfo, hkbStateMachineStateInfo, & mut
+                            map
+                        )
                     }
                     "hkbStateMachineTimeInterval" => {
-                        Ok(Classes::hkbStateMachineTimeInterval(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbStateMachineTimeInterval, hkbStateMachineTimeInterval,
+                            & mut map
+                        )
                     }
                     "hkbStateMachineTransitionInfo" => {
-                        Ok(Classes::hkbStateMachineTransitionInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbStateMachineTransitionInfo,
+                            hkbStateMachineTransitionInfo, & mut map
+                        )
                     }
                     "hkbStateMachineTransitionInfoArray" => {
-                        Ok(
-                            Classes::hkbStateMachineTransitionInfoArray(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbStateMachineTransitionInfoArray,
+                            hkbStateMachineTransitionInfoArray, & mut map
                         )
                     }
                     "hkbStateMachineTransitionInfoReference" => {
-                        Ok(
-                            Classes::hkbStateMachineTransitionInfoReference(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbStateMachineTransitionInfoReference,
+                            hkbStateMachineTransitionInfoReference, & mut map
                         )
                     }
                     "hkbStringCondition" => {
-                        Ok(Classes::hkbStringCondition(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbStringCondition, hkbStringCondition, & mut map
+                        )
                     }
                     "hkbStringEventPayload" => {
-                        Ok(Classes::hkbStringEventPayload(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbStringEventPayload, hkbStringEventPayload, & mut map
+                        )
                     }
                     "hkbTestStateChooser" => {
-                        Ok(Classes::hkbTestStateChooser(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbTestStateChooser, hkbTestStateChooser, & mut map
+                        )
                     }
                     "hkbTimerModifier" => {
-                        Ok(Classes::hkbTimerModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbTimerModifier, hkbTimerModifier, & mut map
+                        )
                     }
                     "hkbTimerModifierInternalState" => {
-                        Ok(Classes::hkbTimerModifierInternalState(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbTimerModifierInternalState,
+                            hkbTimerModifierInternalState, & mut map
+                        )
                     }
                     "hkbTransformVectorModifier" => {
-                        Ok(Classes::hkbTransformVectorModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbTransformVectorModifier, hkbTransformVectorModifier, &
+                            mut map
+                        )
                     }
                     "hkbTransformVectorModifierInternalState" => {
-                        Ok(
-                            Classes::hkbTransformVectorModifierInternalState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkbTransformVectorModifierInternalState,
+                            hkbTransformVectorModifierInternalState, & mut map
                         )
                     }
                     "hkbTransitionEffect" => {
-                        Ok(Classes::hkbTransitionEffect(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbTransitionEffect, hkbTransitionEffect, & mut map
+                        )
                     }
                     "hkbTwistModifier" => {
-                        Ok(Classes::hkbTwistModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbTwistModifier, hkbTwistModifier, & mut map
+                        )
                     }
                     "hkbVariableBindingSet" => {
-                        Ok(Classes::hkbVariableBindingSet(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbVariableBindingSet, hkbVariableBindingSet, & mut map
+                        )
                     }
                     "hkbVariableBindingSetBinding" => {
-                        Ok(Classes::hkbVariableBindingSetBinding(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbVariableBindingSetBinding,
+                            hkbVariableBindingSetBinding, & mut map
+                        )
                     }
-                    "hkbVariableInfo" => Ok(Classes::hkbVariableInfo(map.next_value()?)),
+                    "hkbVariableInfo" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbVariableInfo, hkbVariableInfo, & mut map
+                        )
+                    }
                     "hkbVariableValue" => {
-                        Ok(Classes::hkbVariableValue(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbVariableValue, hkbVariableValue, & mut map
+                        )
                     }
                     "hkbVariableValueSet" => {
-                        Ok(Classes::hkbVariableValueSet(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbVariableValueSet, hkbVariableValueSet, & mut map
+                        )
                     }
-                    "hkbWorldEnums" => Ok(Classes::hkbWorldEnums(map.next_value()?)),
+                    "hkbWorldEnums" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkbWorldEnums, hkbWorldEnums, & mut map
+                        )
+                    }
                     "hkbWorldFromModelModeData" => {
-                        Ok(Classes::hkbWorldFromModelModeData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkbWorldFromModelModeData, hkbWorldFromModelModeData, &
+                            mut map
+                        )
                     }
-                    "hkClass" => Ok(Classes::hkClass(map.next_value()?)),
-                    "hkClassEnum" => Ok(Classes::hkClassEnum(map.next_value()?)),
-                    "hkClassEnumItem" => Ok(Classes::hkClassEnumItem(map.next_value()?)),
-                    "hkClassMember" => Ok(Classes::hkClassMember(map.next_value()?)),
-                    "hkColor" => Ok(Classes::hkColor(map.next_value()?)),
-                    "hkContactPoint" => Ok(Classes::hkContactPoint(map.next_value()?)),
+                    "hkClass" => {
+                        deserialize_dev_stack_safe!(de_hkClass, hkClass, & mut map)
+                    }
+                    "hkClassEnum" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkClassEnum, hkClassEnum, & mut map
+                        )
+                    }
+                    "hkClassEnumItem" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkClassEnumItem, hkClassEnumItem, & mut map
+                        )
+                    }
+                    "hkClassMember" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkClassMember, hkClassMember, & mut map
+                        )
+                    }
+                    "hkColor" => {
+                        deserialize_dev_stack_safe!(de_hkColor, hkColor, & mut map)
+                    }
+                    "hkContactPoint" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkContactPoint, hkContactPoint, & mut map
+                        )
+                    }
                     "hkContactPointMaterial" => {
-                        Ok(Classes::hkContactPointMaterial(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkContactPointMaterial, hkContactPointMaterial, & mut map
+                        )
                     }
                     "hkCustomAttributes" => {
-                        Ok(Classes::hkCustomAttributes(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkCustomAttributes, hkCustomAttributes, & mut map
+                        )
                     }
                     "hkCustomAttributesAttribute" => {
-                        Ok(Classes::hkCustomAttributesAttribute(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkCustomAttributesAttribute, hkCustomAttributesAttribute,
+                            & mut map
+                        )
                     }
                     "hkDataObjectTypeAttribute" => {
-                        Ok(Classes::hkDataObjectTypeAttribute(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkDataObjectTypeAttribute, hkDataObjectTypeAttribute, &
+                            mut map
+                        )
                     }
                     "hkDescriptionAttribute" => {
-                        Ok(Classes::hkDescriptionAttribute(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkDescriptionAttribute, hkDescriptionAttribute, & mut map
+                        )
                     }
                     "hkDocumentationAttribute" => {
-                        Ok(Classes::hkDocumentationAttribute(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkDocumentationAttribute, hkDocumentationAttribute, & mut
+                            map
+                        )
                     }
-                    "hkGeometry" => Ok(Classes::hkGeometry(map.next_value()?)),
+                    "hkGeometry" => {
+                        deserialize_dev_stack_safe!(de_hkGeometry, hkGeometry, & mut map)
+                    }
                     "hkGeometryTriangle" => {
-                        Ok(Classes::hkGeometryTriangle(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkGeometryTriangle, hkGeometryTriangle, & mut map
+                        )
                     }
                     "hkGizmoAttribute" => {
-                        Ok(Classes::hkGizmoAttribute(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkGizmoAttribute, hkGizmoAttribute, & mut map
+                        )
                     }
-                    "hkHalf8" => Ok(Classes::hkHalf8(map.next_value()?)),
+                    "hkHalf8" => {
+                        deserialize_dev_stack_safe!(de_hkHalf8, hkHalf8, & mut map)
+                    }
                     "hkIndexedTransformSet" => {
-                        Ok(Classes::hkIndexedTransformSet(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkIndexedTransformSet, hkIndexedTransformSet, & mut map
+                        )
                     }
-                    "hkLinkAttribute" => Ok(Classes::hkLinkAttribute(map.next_value()?)),
-                    "hkLocalFrame" => Ok(Classes::hkLocalFrame(map.next_value()?)),
+                    "hkLinkAttribute" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkLinkAttribute, hkLinkAttribute, & mut map
+                        )
+                    }
+                    "hkLocalFrame" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkLocalFrame, hkLocalFrame, & mut map
+                        )
+                    }
                     "hkLocalFrameGroup" => {
-                        Ok(Classes::hkLocalFrameGroup(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkLocalFrameGroup, hkLocalFrameGroup, & mut map
+                        )
                     }
                     "hkMemoryMeshBody" => {
-                        Ok(Classes::hkMemoryMeshBody(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMemoryMeshBody, hkMemoryMeshBody, & mut map
+                        )
                     }
                     "hkMemoryMeshMaterial" => {
-                        Ok(Classes::hkMemoryMeshMaterial(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMemoryMeshMaterial, hkMemoryMeshMaterial, & mut map
+                        )
                     }
                     "hkMemoryMeshShape" => {
-                        Ok(Classes::hkMemoryMeshShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMemoryMeshShape, hkMemoryMeshShape, & mut map
+                        )
                     }
                     "hkMemoryMeshTexture" => {
-                        Ok(Classes::hkMemoryMeshTexture(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMemoryMeshTexture, hkMemoryMeshTexture, & mut map
+                        )
                     }
                     "hkMemoryMeshVertexBuffer" => {
-                        Ok(Classes::hkMemoryMeshVertexBuffer(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMemoryMeshVertexBuffer, hkMemoryMeshVertexBuffer, & mut
+                            map
+                        )
                     }
                     "hkMemoryResourceContainer" => {
-                        Ok(Classes::hkMemoryResourceContainer(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMemoryResourceContainer, hkMemoryResourceContainer, &
+                            mut map
+                        )
                     }
                     "hkMemoryResourceHandle" => {
-                        Ok(Classes::hkMemoryResourceHandle(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMemoryResourceHandle, hkMemoryResourceHandle, & mut map
+                        )
                     }
                     "hkMemoryResourceHandleExternalLink" => {
-                        Ok(
-                            Classes::hkMemoryResourceHandleExternalLink(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkMemoryResourceHandleExternalLink,
+                            hkMemoryResourceHandleExternalLink, & mut map
                         )
                     }
                     "hkMemoryTrackerAttribute" => {
-                        Ok(Classes::hkMemoryTrackerAttribute(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMemoryTrackerAttribute, hkMemoryTrackerAttribute, & mut
+                            map
+                        )
                     }
-                    "hkMeshBody" => Ok(Classes::hkMeshBody(map.next_value()?)),
+                    "hkMeshBody" => {
+                        deserialize_dev_stack_safe!(de_hkMeshBody, hkMeshBody, & mut map)
+                    }
                     "hkMeshBoneIndexMapping" => {
-                        Ok(Classes::hkMeshBoneIndexMapping(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMeshBoneIndexMapping, hkMeshBoneIndexMapping, & mut map
+                        )
                     }
-                    "hkMeshMaterial" => Ok(Classes::hkMeshMaterial(map.next_value()?)),
-                    "hkMeshSection" => Ok(Classes::hkMeshSection(map.next_value()?)),
+                    "hkMeshMaterial" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkMeshMaterial, hkMeshMaterial, & mut map
+                        )
+                    }
+                    "hkMeshSection" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkMeshSection, hkMeshSection, & mut map
+                        )
+                    }
                     "hkMeshSectionCinfo" => {
-                        Ok(Classes::hkMeshSectionCinfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMeshSectionCinfo, hkMeshSectionCinfo, & mut map
+                        )
                     }
-                    "hkMeshShape" => Ok(Classes::hkMeshShape(map.next_value()?)),
-                    "hkMeshTexture" => Ok(Classes::hkMeshTexture(map.next_value()?)),
+                    "hkMeshShape" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkMeshShape, hkMeshShape, & mut map
+                        )
+                    }
+                    "hkMeshTexture" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkMeshTexture, hkMeshTexture, & mut map
+                        )
+                    }
                     "hkMeshVertexBuffer" => {
-                        Ok(Classes::hkMeshVertexBuffer(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMeshVertexBuffer, hkMeshVertexBuffer, & mut map
+                        )
                     }
                     "hkModelerNodeTypeAttribute" => {
-                        Ok(Classes::hkModelerNodeTypeAttribute(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkModelerNodeTypeAttribute, hkModelerNodeTypeAttribute, &
+                            mut map
+                        )
                     }
                     "hkMonitorStreamColorTable" => {
-                        Ok(Classes::hkMonitorStreamColorTable(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMonitorStreamColorTable, hkMonitorStreamColorTable, &
+                            mut map
+                        )
                     }
                     "hkMonitorStreamColorTableColorPair" => {
-                        Ok(
-                            Classes::hkMonitorStreamColorTableColorPair(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkMonitorStreamColorTableColorPair,
+                            hkMonitorStreamColorTableColorPair, & mut map
                         )
                     }
                     "hkMonitorStreamFrameInfo" => {
-                        Ok(Classes::hkMonitorStreamFrameInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMonitorStreamFrameInfo, hkMonitorStreamFrameInfo, & mut
+                            map
+                        )
                     }
                     "hkMonitorStreamStringMap" => {
-                        Ok(Classes::hkMonitorStreamStringMap(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMonitorStreamStringMap, hkMonitorStreamStringMap, & mut
+                            map
+                        )
                     }
                     "hkMonitorStreamStringMapStringMap" => {
-                        Ok(Classes::hkMonitorStreamStringMapStringMap(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMonitorStreamStringMapStringMap,
+                            hkMonitorStreamStringMapStringMap, & mut map
+                        )
                     }
                     "hkMoppBvTreeShapeBase" => {
-                        Ok(Classes::hkMoppBvTreeShapeBase(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMoppBvTreeShapeBase, hkMoppBvTreeShapeBase, & mut map
+                        )
                     }
-                    "hkMotionState" => Ok(Classes::hkMotionState(map.next_value()?)),
+                    "hkMotionState" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkMotionState, hkMotionState, & mut map
+                        )
+                    }
                     "hkMultipleVertexBuffer" => {
-                        Ok(Classes::hkMultipleVertexBuffer(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMultipleVertexBuffer, hkMultipleVertexBuffer, & mut map
+                        )
                     }
                     "hkMultipleVertexBufferElementInfo" => {
-                        Ok(Classes::hkMultipleVertexBufferElementInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkMultipleVertexBufferElementInfo,
+                            hkMultipleVertexBufferElementInfo, & mut map
+                        )
                     }
                     "hkMultipleVertexBufferLockedElement" => {
-                        Ok(
-                            Classes::hkMultipleVertexBufferLockedElement(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkMultipleVertexBufferLockedElement,
+                            hkMultipleVertexBufferLockedElement, & mut map
                         )
                     }
                     "hkMultipleVertexBufferVertexBufferInfo" => {
-                        Ok(
-                            Classes::hkMultipleVertexBufferVertexBufferInfo(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkMultipleVertexBufferVertexBufferInfo,
+                            hkMultipleVertexBufferVertexBufferInfo, & mut map
                         )
                     }
                     "hkMultiThreadCheck" => {
-                        Ok(Classes::hkMultiThreadCheck(map.next_value()?))
-                    }
-                    "hkp2dAngConstraintAtom" => {
-                        Ok(Classes::hkp2dAngConstraintAtom(map.next_value()?))
-                    }
-                    "hkpAabbPhantom" => Ok(Classes::hkpAabbPhantom(map.next_value()?)),
-                    "hkPackedVector3" => Ok(Classes::hkPackedVector3(map.next_value()?)),
-                    "hkPackfileHeader" => {
-                        Ok(Classes::hkPackfileHeader(map.next_value()?))
-                    }
-                    "hkPackfileSectionHeader" => {
-                        Ok(Classes::hkPackfileSectionHeader(map.next_value()?))
-                    }
-                    "hkpAction" => Ok(Classes::hkpAction(map.next_value()?)),
-                    "hkpAgent1nSector" => {
-                        Ok(Classes::hkpAgent1nSector(map.next_value()?))
-                    }
-                    "hkpAngConstraintAtom" => {
-                        Ok(Classes::hkpAngConstraintAtom(map.next_value()?))
-                    }
-                    "hkpAngFrictionConstraintAtom" => {
-                        Ok(Classes::hkpAngFrictionConstraintAtom(map.next_value()?))
-                    }
-                    "hkpAngLimitConstraintAtom" => {
-                        Ok(Classes::hkpAngLimitConstraintAtom(map.next_value()?))
-                    }
-                    "hkpAngMotorConstraintAtom" => {
-                        Ok(Classes::hkpAngMotorConstraintAtom(map.next_value()?))
-                    }
-                    "hkpAngularDashpotAction" => {
-                        Ok(Classes::hkpAngularDashpotAction(map.next_value()?))
-                    }
-                    "hkpArrayAction" => Ok(Classes::hkpArrayAction(map.next_value()?)),
-                    "hkpBallAndSocketConstraintData" => {
-                        Ok(Classes::hkpBallAndSocketConstraintData(map.next_value()?))
-                    }
-                    "hkpBallAndSocketConstraintDataAtoms" => {
-                        Ok(
-                            Classes::hkpBallAndSocketConstraintDataAtoms(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkMultiThreadCheck, hkMultiThreadCheck, & mut map
                         )
                     }
-                    "hkpBallGun" => Ok(Classes::hkpBallGun(map.next_value()?)),
+                    "hkp2dAngConstraintAtom" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkp2dAngConstraintAtom, hkp2dAngConstraintAtom, & mut map
+                        )
+                    }
+                    "hkpAabbPhantom" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpAabbPhantom, hkpAabbPhantom, & mut map
+                        )
+                    }
+                    "hkPackedVector3" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkPackedVector3, hkPackedVector3, & mut map
+                        )
+                    }
+                    "hkPackfileHeader" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkPackfileHeader, hkPackfileHeader, & mut map
+                        )
+                    }
+                    "hkPackfileSectionHeader" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkPackfileSectionHeader, hkPackfileSectionHeader, & mut
+                            map
+                        )
+                    }
+                    "hkpAction" => {
+                        deserialize_dev_stack_safe!(de_hkpAction, hkpAction, & mut map)
+                    }
+                    "hkpAgent1nSector" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpAgent1nSector, hkpAgent1nSector, & mut map
+                        )
+                    }
+                    "hkpAngConstraintAtom" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpAngConstraintAtom, hkpAngConstraintAtom, & mut map
+                        )
+                    }
+                    "hkpAngFrictionConstraintAtom" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpAngFrictionConstraintAtom,
+                            hkpAngFrictionConstraintAtom, & mut map
+                        )
+                    }
+                    "hkpAngLimitConstraintAtom" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpAngLimitConstraintAtom, hkpAngLimitConstraintAtom, &
+                            mut map
+                        )
+                    }
+                    "hkpAngMotorConstraintAtom" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpAngMotorConstraintAtom, hkpAngMotorConstraintAtom, &
+                            mut map
+                        )
+                    }
+                    "hkpAngularDashpotAction" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpAngularDashpotAction, hkpAngularDashpotAction, & mut
+                            map
+                        )
+                    }
+                    "hkpArrayAction" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpArrayAction, hkpArrayAction, & mut map
+                        )
+                    }
+                    "hkpBallAndSocketConstraintData" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpBallAndSocketConstraintData,
+                            hkpBallAndSocketConstraintData, & mut map
+                        )
+                    }
+                    "hkpBallAndSocketConstraintDataAtoms" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpBallAndSocketConstraintDataAtoms,
+                            hkpBallAndSocketConstraintDataAtoms, & mut map
+                        )
+                    }
+                    "hkpBallGun" => {
+                        deserialize_dev_stack_safe!(de_hkpBallGun, hkpBallGun, & mut map)
+                    }
                     "hkpBallSocketChainData" => {
-                        Ok(Classes::hkpBallSocketChainData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpBallSocketChainData, hkpBallSocketChainData, & mut map
+                        )
                     }
                     "hkpBallSocketChainDataConstraintInfo" => {
-                        Ok(
-                            Classes::hkpBallSocketChainDataConstraintInfo(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpBallSocketChainDataConstraintInfo,
+                            hkpBallSocketChainDataConstraintInfo, & mut map
                         )
                     }
                     "hkpBallSocketConstraintAtom" => {
-                        Ok(Classes::hkpBallSocketConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpBallSocketConstraintAtom, hkpBallSocketConstraintAtom,
+                            & mut map
+                        )
                     }
-                    "hkpBinaryAction" => Ok(Classes::hkpBinaryAction(map.next_value()?)),
-                    "hkpBoxMotion" => Ok(Classes::hkpBoxMotion(map.next_value()?)),
-                    "hkpBoxShape" => Ok(Classes::hkpBoxShape(map.next_value()?)),
+                    "hkpBinaryAction" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpBinaryAction, hkpBinaryAction, & mut map
+                        )
+                    }
+                    "hkpBoxMotion" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpBoxMotion, hkpBoxMotion, & mut map
+                        )
+                    }
+                    "hkpBoxShape" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpBoxShape, hkpBoxShape, & mut map
+                        )
+                    }
                     "hkpBreakableBody" => {
-                        Ok(Classes::hkpBreakableBody(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpBreakableBody, hkpBreakableBody, & mut map
+                        )
                     }
                     "hkpBreakableConstraintData" => {
-                        Ok(Classes::hkpBreakableConstraintData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpBreakableConstraintData, hkpBreakableConstraintData, &
+                            mut map
+                        )
                     }
-                    "hkpBridgeAtoms" => Ok(Classes::hkpBridgeAtoms(map.next_value()?)),
+                    "hkpBridgeAtoms" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpBridgeAtoms, hkpBridgeAtoms, & mut map
+                        )
+                    }
                     "hkpBridgeConstraintAtom" => {
-                        Ok(Classes::hkpBridgeConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpBridgeConstraintAtom, hkpBridgeConstraintAtom, & mut
+                            map
+                        )
                     }
                     "hkpBroadPhaseHandle" => {
-                        Ok(Classes::hkpBroadPhaseHandle(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpBroadPhaseHandle, hkpBroadPhaseHandle, & mut map
+                        )
                     }
-                    "hkpBvShape" => Ok(Classes::hkpBvShape(map.next_value()?)),
-                    "hkpBvTreeShape" => Ok(Classes::hkpBvTreeShape(map.next_value()?)),
+                    "hkpBvShape" => {
+                        deserialize_dev_stack_safe!(de_hkpBvShape, hkpBvShape, & mut map)
+                    }
+                    "hkpBvTreeShape" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpBvTreeShape, hkpBvTreeShape, & mut map
+                        )
+                    }
                     "hkpCachingShapePhantom" => {
-                        Ok(Classes::hkpCachingShapePhantom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCachingShapePhantom, hkpCachingShapePhantom, & mut map
+                        )
                     }
                     "hkpCallbackConstraintMotor" => {
-                        Ok(Classes::hkpCallbackConstraintMotor(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCallbackConstraintMotor, hkpCallbackConstraintMotor, &
+                            mut map
+                        )
                     }
-                    "hkpCapsuleShape" => Ok(Classes::hkpCapsuleShape(map.next_value()?)),
-                    "hkpCdBody" => Ok(Classes::hkpCdBody(map.next_value()?)),
+                    "hkpCapsuleShape" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpCapsuleShape, hkpCapsuleShape, & mut map
+                        )
+                    }
+                    "hkpCdBody" => {
+                        deserialize_dev_stack_safe!(de_hkpCdBody, hkpCdBody, & mut map)
+                    }
                     "hkpCenterOfMassChangerModifierConstraintAtom" => {
-                        Ok(
-                            Classes::hkpCenterOfMassChangerModifierConstraintAtom(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpCenterOfMassChangerModifierConstraintAtom,
+                            hkpCenterOfMassChangerModifierConstraintAtom, & mut map
                         )
                     }
                     "hkpCharacterControllerCinfo" => {
-                        Ok(Classes::hkpCharacterControllerCinfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCharacterControllerCinfo, hkpCharacterControllerCinfo,
+                            & mut map
+                        )
                     }
                     "hkpCharacterMotion" => {
-                        Ok(Classes::hkpCharacterMotion(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCharacterMotion, hkpCharacterMotion, & mut map
+                        )
                     }
                     "hkpCharacterProxyCinfo" => {
-                        Ok(Classes::hkpCharacterProxyCinfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCharacterProxyCinfo, hkpCharacterProxyCinfo, & mut map
+                        )
                     }
                     "hkpCharacterRigidBodyCinfo" => {
-                        Ok(Classes::hkpCharacterRigidBodyCinfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCharacterRigidBodyCinfo, hkpCharacterRigidBodyCinfo, &
+                            mut map
+                        )
                     }
                     "hkpCogWheelConstraintAtom" => {
-                        Ok(Classes::hkpCogWheelConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCogWheelConstraintAtom, hkpCogWheelConstraintAtom, &
+                            mut map
+                        )
                     }
                     "hkpCogWheelConstraintData" => {
-                        Ok(Classes::hkpCogWheelConstraintData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCogWheelConstraintData, hkpCogWheelConstraintData, &
+                            mut map
+                        )
                     }
                     "hkpCogWheelConstraintDataAtoms" => {
-                        Ok(Classes::hkpCogWheelConstraintDataAtoms(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCogWheelConstraintDataAtoms,
+                            hkpCogWheelConstraintDataAtoms, & mut map
+                        )
                     }
-                    "hkpCollidable" => Ok(Classes::hkpCollidable(map.next_value()?)),
+                    "hkpCollidable" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpCollidable, hkpCollidable, & mut map
+                        )
+                    }
                     "hkpCollidableBoundingVolumeData" => {
-                        Ok(Classes::hkpCollidableBoundingVolumeData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCollidableBoundingVolumeData,
+                            hkpCollidableBoundingVolumeData, & mut map
+                        )
                     }
                     "hkpCollidableCollidableFilter" => {
-                        Ok(Classes::hkpCollidableCollidableFilter(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCollidableCollidableFilter,
+                            hkpCollidableCollidableFilter, & mut map
+                        )
                     }
                     "hkpCollisionFilter" => {
-                        Ok(Classes::hkpCollisionFilter(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCollisionFilter, hkpCollisionFilter, & mut map
+                        )
                     }
                     "hkpCollisionFilterList" => {
-                        Ok(Classes::hkpCollisionFilterList(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCollisionFilterList, hkpCollisionFilterList, & mut map
+                        )
                     }
                     "hkpCompressedMeshShape" => {
-                        Ok(Classes::hkpCompressedMeshShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCompressedMeshShape, hkpCompressedMeshShape, & mut map
+                        )
                     }
                     "hkpCompressedMeshShapeBigTriangle" => {
-                        Ok(Classes::hkpCompressedMeshShapeBigTriangle(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCompressedMeshShapeBigTriangle,
+                            hkpCompressedMeshShapeBigTriangle, & mut map
+                        )
                     }
                     "hkpCompressedMeshShapeChunk" => {
-                        Ok(Classes::hkpCompressedMeshShapeChunk(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCompressedMeshShapeChunk, hkpCompressedMeshShapeChunk,
+                            & mut map
+                        )
                     }
                     "hkpCompressedMeshShapeConvexPiece" => {
-                        Ok(Classes::hkpCompressedMeshShapeConvexPiece(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCompressedMeshShapeConvexPiece,
+                            hkpCompressedMeshShapeConvexPiece, & mut map
+                        )
                     }
                     "hkpCompressedSampledHeightFieldShape" => {
-                        Ok(
-                            Classes::hkpCompressedSampledHeightFieldShape(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpCompressedSampledHeightFieldShape,
+                            hkpCompressedSampledHeightFieldShape, & mut map
                         )
                     }
                     "hkpConeLimitConstraintAtom" => {
-                        Ok(Classes::hkpConeLimitConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConeLimitConstraintAtom, hkpConeLimitConstraintAtom, &
+                            mut map
+                        )
                     }
                     "hkpConstrainedSystemFilter" => {
-                        Ok(Classes::hkpConstrainedSystemFilter(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConstrainedSystemFilter, hkpConstrainedSystemFilter, &
+                            mut map
+                        )
                     }
                     "hkpConstraintAtom" => {
-                        Ok(Classes::hkpConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConstraintAtom, hkpConstraintAtom, & mut map
+                        )
                     }
                     "hkpConstraintChainData" => {
-                        Ok(Classes::hkpConstraintChainData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConstraintChainData, hkpConstraintChainData, & mut map
+                        )
                     }
                     "hkpConstraintChainInstance" => {
-                        Ok(Classes::hkpConstraintChainInstance(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConstraintChainInstance, hkpConstraintChainInstance, &
+                            mut map
+                        )
                     }
                     "hkpConstraintChainInstanceAction" => {
-                        Ok(Classes::hkpConstraintChainInstanceAction(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConstraintChainInstanceAction,
+                            hkpConstraintChainInstanceAction, & mut map
+                        )
                     }
                     "hkpConstraintCollisionFilter" => {
-                        Ok(Classes::hkpConstraintCollisionFilter(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConstraintCollisionFilter,
+                            hkpConstraintCollisionFilter, & mut map
+                        )
                     }
                     "hkpConstraintData" => {
-                        Ok(Classes::hkpConstraintData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConstraintData, hkpConstraintData, & mut map
+                        )
                     }
                     "hkpConstraintInstance" => {
-                        Ok(Classes::hkpConstraintInstance(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConstraintInstance, hkpConstraintInstance, & mut map
+                        )
                     }
                     "hkpConstraintInstanceSmallArraySerializeOverrideType" => {
-                        Ok(
-                            Classes::hkpConstraintInstanceSmallArraySerializeOverrideType(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpConstraintInstanceSmallArraySerializeOverrideType,
+                            hkpConstraintInstanceSmallArraySerializeOverrideType, & mut
+                            map
                         )
                     }
                     "hkpConstraintMotor" => {
-                        Ok(Classes::hkpConstraintMotor(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConstraintMotor, hkpConstraintMotor, & mut map
+                        )
                     }
                     "hkpConvexListFilter" => {
-                        Ok(Classes::hkpConvexListFilter(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConvexListFilter, hkpConvexListFilter, & mut map
+                        )
                     }
                     "hkpConvexListShape" => {
-                        Ok(Classes::hkpConvexListShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConvexListShape, hkpConvexListShape, & mut map
+                        )
                     }
                     "hkpConvexPieceMeshShape" => {
-                        Ok(Classes::hkpConvexPieceMeshShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConvexPieceMeshShape, hkpConvexPieceMeshShape, & mut
+                            map
+                        )
                     }
                     "hkpConvexPieceStreamData" => {
-                        Ok(Classes::hkpConvexPieceStreamData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConvexPieceStreamData, hkpConvexPieceStreamData, & mut
+                            map
+                        )
                     }
-                    "hkpConvexShape" => Ok(Classes::hkpConvexShape(map.next_value()?)),
+                    "hkpConvexShape" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpConvexShape, hkpConvexShape, & mut map
+                        )
+                    }
                     "hkpConvexTransformShape" => {
-                        Ok(Classes::hkpConvexTransformShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConvexTransformShape, hkpConvexTransformShape, & mut
+                            map
+                        )
                     }
                     "hkpConvexTransformShapeBase" => {
-                        Ok(Classes::hkpConvexTransformShapeBase(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConvexTransformShapeBase, hkpConvexTransformShapeBase,
+                            & mut map
+                        )
                     }
                     "hkpConvexTranslateShape" => {
-                        Ok(Classes::hkpConvexTranslateShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConvexTranslateShape, hkpConvexTranslateShape, & mut
+                            map
+                        )
                     }
                     "hkpConvexVerticesConnectivity" => {
-                        Ok(Classes::hkpConvexVerticesConnectivity(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConvexVerticesConnectivity,
+                            hkpConvexVerticesConnectivity, & mut map
+                        )
                     }
                     "hkpConvexVerticesShape" => {
-                        Ok(Classes::hkpConvexVerticesShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConvexVerticesShape, hkpConvexVerticesShape, & mut map
+                        )
                     }
                     "hkpConvexVerticesShapeFourVectors" => {
-                        Ok(Classes::hkpConvexVerticesShapeFourVectors(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpConvexVerticesShapeFourVectors,
+                            hkpConvexVerticesShapeFourVectors, & mut map
+                        )
                     }
                     "hkpCylinderShape" => {
-                        Ok(Classes::hkpCylinderShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpCylinderShape, hkpCylinderShape, & mut map
+                        )
                     }
                     "hkpDashpotAction" => {
-                        Ok(Classes::hkpDashpotAction(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpDashpotAction, hkpDashpotAction, & mut map
+                        )
                     }
                     "hkpDefaultConvexListFilter" => {
-                        Ok(Classes::hkpDefaultConvexListFilter(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpDefaultConvexListFilter, hkpDefaultConvexListFilter, &
+                            mut map
+                        )
                     }
                     "hkpDefaultWorldMemoryWatchDog" => {
-                        Ok(Classes::hkpDefaultWorldMemoryWatchDog(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpDefaultWorldMemoryWatchDog,
+                            hkpDefaultWorldMemoryWatchDog, & mut map
+                        )
                     }
                     "hkpDisableEntityCollisionFilter" => {
-                        Ok(Classes::hkpDisableEntityCollisionFilter(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpDisableEntityCollisionFilter,
+                            hkpDisableEntityCollisionFilter, & mut map
+                        )
                     }
                     "hkpDisplayBindingData" => {
-                        Ok(Classes::hkpDisplayBindingData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpDisplayBindingData, hkpDisplayBindingData, & mut map
+                        )
                     }
                     "hkpDisplayBindingDataPhysicsSystem" => {
-                        Ok(
-                            Classes::hkpDisplayBindingDataPhysicsSystem(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpDisplayBindingDataPhysicsSystem,
+                            hkpDisplayBindingDataPhysicsSystem, & mut map
                         )
                     }
                     "hkpDisplayBindingDataRigidBody" => {
-                        Ok(Classes::hkpDisplayBindingDataRigidBody(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpDisplayBindingDataRigidBody,
+                            hkpDisplayBindingDataRigidBody, & mut map
+                        )
                     }
-                    "hkpEntity" => Ok(Classes::hkpEntity(map.next_value()?)),
+                    "hkpEntity" => {
+                        deserialize_dev_stack_safe!(de_hkpEntity, hkpEntity, & mut map)
+                    }
                     "hkpEntityExtendedListeners" => {
-                        Ok(Classes::hkpEntityExtendedListeners(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpEntityExtendedListeners, hkpEntityExtendedListeners, &
+                            mut map
+                        )
                     }
                     "hkpEntitySmallArraySerializeOverrideType" => {
-                        Ok(
-                            Classes::hkpEntitySmallArraySerializeOverrideType(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpEntitySmallArraySerializeOverrideType,
+                            hkpEntitySmallArraySerializeOverrideType, & mut map
                         )
                     }
                     "hkpEntitySpuCollisionCallback" => {
-                        Ok(Classes::hkpEntitySpuCollisionCallback(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpEntitySpuCollisionCallback,
+                            hkpEntitySpuCollisionCallback, & mut map
+                        )
                     }
                     "hkpExtendedMeshShape" => {
-                        Ok(Classes::hkpExtendedMeshShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpExtendedMeshShape, hkpExtendedMeshShape, & mut map
+                        )
                     }
                     "hkpExtendedMeshShapeShapesSubpart" => {
-                        Ok(Classes::hkpExtendedMeshShapeShapesSubpart(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpExtendedMeshShapeShapesSubpart,
+                            hkpExtendedMeshShapeShapesSubpart, & mut map
+                        )
                     }
                     "hkpExtendedMeshShapeSubpart" => {
-                        Ok(Classes::hkpExtendedMeshShapeSubpart(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpExtendedMeshShapeSubpart, hkpExtendedMeshShapeSubpart,
+                            & mut map
+                        )
                     }
                     "hkpExtendedMeshShapeTrianglesSubpart" => {
-                        Ok(
-                            Classes::hkpExtendedMeshShapeTrianglesSubpart(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpExtendedMeshShapeTrianglesSubpart,
+                            hkpExtendedMeshShapeTrianglesSubpart, & mut map
                         )
                     }
                     "hkpFastMeshShape" => {
-                        Ok(Classes::hkpFastMeshShape(map.next_value()?))
-                    }
-                    "hkpFirstPersonGun" => {
-                        Ok(Classes::hkpFirstPersonGun(map.next_value()?))
-                    }
-                    "hkpFixedRigidMotion" => {
-                        Ok(Classes::hkpFixedRigidMotion(map.next_value()?))
-                    }
-                    "hkpGenericConstraintData" => {
-                        Ok(Classes::hkpGenericConstraintData(map.next_value()?))
-                    }
-                    "hkpGenericConstraintDataScheme" => {
-                        Ok(Classes::hkpGenericConstraintDataScheme(map.next_value()?))
-                    }
-                    "hkpGenericConstraintDataSchemeConstraintInfo" => {
-                        Ok(
-                            Classes::hkpGenericConstraintDataSchemeConstraintInfo(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpFastMeshShape, hkpFastMeshShape, & mut map
                         )
                     }
-                    "hkpGravityGun" => Ok(Classes::hkpGravityGun(map.next_value()?)),
-                    "hkpGroupCollisionFilter" => {
-                        Ok(Classes::hkpGroupCollisionFilter(map.next_value()?))
+                    "hkpFirstPersonGun" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpFirstPersonGun, hkpFirstPersonGun, & mut map
+                        )
                     }
-                    "hkpGroupFilter" => Ok(Classes::hkpGroupFilter(map.next_value()?)),
+                    "hkpFixedRigidMotion" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpFixedRigidMotion, hkpFixedRigidMotion, & mut map
+                        )
+                    }
+                    "hkpGenericConstraintData" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpGenericConstraintData, hkpGenericConstraintData, & mut
+                            map
+                        )
+                    }
+                    "hkpGenericConstraintDataScheme" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpGenericConstraintDataScheme,
+                            hkpGenericConstraintDataScheme, & mut map
+                        )
+                    }
+                    "hkpGenericConstraintDataSchemeConstraintInfo" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpGenericConstraintDataSchemeConstraintInfo,
+                            hkpGenericConstraintDataSchemeConstraintInfo, & mut map
+                        )
+                    }
+                    "hkpGravityGun" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpGravityGun, hkpGravityGun, & mut map
+                        )
+                    }
+                    "hkpGroupCollisionFilter" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpGroupCollisionFilter, hkpGroupCollisionFilter, & mut
+                            map
+                        )
+                    }
+                    "hkpGroupFilter" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpGroupFilter, hkpGroupFilter, & mut map
+                        )
+                    }
                     "hkpHeightFieldShape" => {
-                        Ok(Classes::hkpHeightFieldShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpHeightFieldShape, hkpHeightFieldShape, & mut map
+                        )
                     }
                     "hkpHingeConstraintData" => {
-                        Ok(Classes::hkpHingeConstraintData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpHingeConstraintData, hkpHingeConstraintData, & mut map
+                        )
                     }
                     "hkpHingeConstraintDataAtoms" => {
-                        Ok(Classes::hkpHingeConstraintDataAtoms(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpHingeConstraintDataAtoms, hkpHingeConstraintDataAtoms,
+                            & mut map
+                        )
                     }
                     "hkpHingeLimitsData" => {
-                        Ok(Classes::hkpHingeLimitsData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpHingeLimitsData, hkpHingeLimitsData, & mut map
+                        )
                     }
                     "hkpHingeLimitsDataAtoms" => {
-                        Ok(Classes::hkpHingeLimitsDataAtoms(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpHingeLimitsDataAtoms, hkpHingeLimitsDataAtoms, & mut
+                            map
+                        )
                     }
                     "hkpIgnoreModifierConstraintAtom" => {
-                        Ok(Classes::hkpIgnoreModifierConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpIgnoreModifierConstraintAtom,
+                            hkpIgnoreModifierConstraintAtom, & mut map
+                        )
                     }
                     "hkpKeyframedRigidMotion" => {
-                        Ok(Classes::hkpKeyframedRigidMotion(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpKeyframedRigidMotion, hkpKeyframedRigidMotion, & mut
+                            map
+                        )
                     }
                     "hkpLimitedForceConstraintMotor" => {
-                        Ok(Classes::hkpLimitedForceConstraintMotor(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpLimitedForceConstraintMotor,
+                            hkpLimitedForceConstraintMotor, & mut map
+                        )
                     }
                     "hkpLimitedHingeConstraintData" => {
-                        Ok(Classes::hkpLimitedHingeConstraintData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpLimitedHingeConstraintData,
+                            hkpLimitedHingeConstraintData, & mut map
+                        )
                     }
                     "hkpLimitedHingeConstraintDataAtoms" => {
-                        Ok(
-                            Classes::hkpLimitedHingeConstraintDataAtoms(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpLimitedHingeConstraintDataAtoms,
+                            hkpLimitedHingeConstraintDataAtoms, & mut map
                         )
                     }
                     "hkpLinConstraintAtom" => {
-                        Ok(Classes::hkpLinConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpLinConstraintAtom, hkpLinConstraintAtom, & mut map
+                        )
                     }
                     "hkpLinearParametricCurve" => {
-                        Ok(Classes::hkpLinearParametricCurve(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpLinearParametricCurve, hkpLinearParametricCurve, & mut
+                            map
+                        )
                     }
                     "hkpLinFrictionConstraintAtom" => {
-                        Ok(Classes::hkpLinFrictionConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpLinFrictionConstraintAtom,
+                            hkpLinFrictionConstraintAtom, & mut map
+                        )
                     }
                     "hkpLinkedCollidable" => {
-                        Ok(Classes::hkpLinkedCollidable(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpLinkedCollidable, hkpLinkedCollidable, & mut map
+                        )
                     }
                     "hkpLinLimitConstraintAtom" => {
-                        Ok(Classes::hkpLinLimitConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpLinLimitConstraintAtom, hkpLinLimitConstraintAtom, &
+                            mut map
+                        )
                     }
                     "hkpLinMotorConstraintAtom" => {
-                        Ok(Classes::hkpLinMotorConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpLinMotorConstraintAtom, hkpLinMotorConstraintAtom, &
+                            mut map
+                        )
                     }
                     "hkpLinSoftConstraintAtom" => {
-                        Ok(Classes::hkpLinSoftConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpLinSoftConstraintAtom, hkpLinSoftConstraintAtom, & mut
+                            map
+                        )
                     }
-                    "hkpListShape" => Ok(Classes::hkpListShape(map.next_value()?)),
+                    "hkpListShape" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpListShape, hkpListShape, & mut map
+                        )
+                    }
                     "hkpListShapeChildInfo" => {
-                        Ok(Classes::hkpListShapeChildInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpListShapeChildInfo, hkpListShapeChildInfo, & mut map
+                        )
                     }
                     "hkpMalleableConstraintData" => {
-                        Ok(Classes::hkpMalleableConstraintData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpMalleableConstraintData, hkpMalleableConstraintData, &
+                            mut map
+                        )
                     }
                     "hkpMassChangerModifierConstraintAtom" => {
-                        Ok(
-                            Classes::hkpMassChangerModifierConstraintAtom(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpMassChangerModifierConstraintAtom,
+                            hkpMassChangerModifierConstraintAtom, & mut map
                         )
                     }
                     "hkpMassProperties" => {
-                        Ok(Classes::hkpMassProperties(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpMassProperties, hkpMassProperties, & mut map
+                        )
                     }
-                    "hkpMaterial" => Ok(Classes::hkpMaterial(map.next_value()?)),
+                    "hkpMaterial" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpMaterial, hkpMaterial, & mut map
+                        )
+                    }
                     "hkpMaxSizeMotion" => {
-                        Ok(Classes::hkpMaxSizeMotion(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpMaxSizeMotion, hkpMaxSizeMotion, & mut map
+                        )
                     }
-                    "hkpMeshMaterial" => Ok(Classes::hkpMeshMaterial(map.next_value()?)),
-                    "hkpMeshShape" => Ok(Classes::hkpMeshShape(map.next_value()?)),
+                    "hkpMeshMaterial" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpMeshMaterial, hkpMeshMaterial, & mut map
+                        )
+                    }
+                    "hkpMeshShape" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpMeshShape, hkpMeshShape, & mut map
+                        )
+                    }
                     "hkpMeshShapeSubpart" => {
-                        Ok(Classes::hkpMeshShapeSubpart(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpMeshShapeSubpart, hkpMeshShapeSubpart, & mut map
+                        )
                     }
                     "hkpModifierConstraintAtom" => {
-                        Ok(Classes::hkpModifierConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpModifierConstraintAtom, hkpModifierConstraintAtom, &
+                            mut map
+                        )
                     }
                     "hkpMoppBvTreeShape" => {
-                        Ok(Classes::hkpMoppBvTreeShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpMoppBvTreeShape, hkpMoppBvTreeShape, & mut map
+                        )
                     }
-                    "hkpMoppCode" => Ok(Classes::hkpMoppCode(map.next_value()?)),
+                    "hkpMoppCode" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpMoppCode, hkpMoppCode, & mut map
+                        )
+                    }
                     "hkpMoppCodeCodeInfo" => {
-                        Ok(Classes::hkpMoppCodeCodeInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpMoppCodeCodeInfo, hkpMoppCodeCodeInfo, & mut map
+                        )
                     }
                     "hkpMoppCodeReindexedTerminal" => {
-                        Ok(Classes::hkpMoppCodeReindexedTerminal(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpMoppCodeReindexedTerminal,
+                            hkpMoppCodeReindexedTerminal, & mut map
+                        )
                     }
-                    "hkpMotion" => Ok(Classes::hkpMotion(map.next_value()?)),
-                    "hkpMotorAction" => Ok(Classes::hkpMotorAction(map.next_value()?)),
+                    "hkpMotion" => {
+                        deserialize_dev_stack_safe!(de_hkpMotion, hkpMotion, & mut map)
+                    }
+                    "hkpMotorAction" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpMotorAction, hkpMotorAction, & mut map
+                        )
+                    }
                     "hkpMountedBallGun" => {
-                        Ok(Classes::hkpMountedBallGun(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpMountedBallGun, hkpMountedBallGun, & mut map
+                        )
                     }
                     "hkpMouseSpringAction" => {
-                        Ok(Classes::hkpMouseSpringAction(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpMouseSpringAction, hkpMouseSpringAction, & mut map
+                        )
                     }
                     "hkpMovingSurfaceModifierConstraintAtom" => {
-                        Ok(
-                            Classes::hkpMovingSurfaceModifierConstraintAtom(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpMovingSurfaceModifierConstraintAtom,
+                            hkpMovingSurfaceModifierConstraintAtom, & mut map
                         )
                     }
                     "hkpMultiRayShape" => {
-                        Ok(Classes::hkpMultiRayShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpMultiRayShape, hkpMultiRayShape, & mut map
+                        )
                     }
                     "hkpMultiRayShapeRay" => {
-                        Ok(Classes::hkpMultiRayShapeRay(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpMultiRayShapeRay, hkpMultiRayShapeRay, & mut map
+                        )
                     }
                     "hkpMultiSphereShape" => {
-                        Ok(Classes::hkpMultiSphereShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpMultiSphereShape, hkpMultiSphereShape, & mut map
+                        )
                     }
                     "hkpMultithreadedVehicleManager" => {
-                        Ok(Classes::hkpMultithreadedVehicleManager(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpMultithreadedVehicleManager,
+                            hkpMultithreadedVehicleManager, & mut map
+                        )
                     }
                     "hkpNamedMeshMaterial" => {
-                        Ok(Classes::hkpNamedMeshMaterial(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpNamedMeshMaterial, hkpNamedMeshMaterial, & mut map
+                        )
                     }
                     "hkpNullCollisionFilter" => {
-                        Ok(Classes::hkpNullCollisionFilter(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpNullCollisionFilter, hkpNullCollisionFilter, & mut map
+                        )
                     }
                     "hkPostFinishAttribute" => {
-                        Ok(Classes::hkPostFinishAttribute(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkPostFinishAttribute, hkPostFinishAttribute, & mut map
+                        )
                     }
                     "hkpOverwritePivotConstraintAtom" => {
-                        Ok(Classes::hkpOverwritePivotConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpOverwritePivotConstraintAtom,
+                            hkpOverwritePivotConstraintAtom, & mut map
+                        )
                     }
                     "hkpPairCollisionFilter" => {
-                        Ok(Classes::hkpPairCollisionFilter(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPairCollisionFilter, hkpPairCollisionFilter, & mut map
+                        )
                     }
                     "hkpPairCollisionFilterMapPairFilterKeyOverrideType" => {
-                        Ok(
-                            Classes::hkpPairCollisionFilterMapPairFilterKeyOverrideType(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpPairCollisionFilterMapPairFilterKeyOverrideType,
+                            hkpPairCollisionFilterMapPairFilterKeyOverrideType, & mut map
                         )
                     }
                     "hkpParametricCurve" => {
-                        Ok(Classes::hkpParametricCurve(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpParametricCurve, hkpParametricCurve, & mut map
+                        )
                     }
-                    "hkpPhantom" => Ok(Classes::hkpPhantom(map.next_value()?)),
+                    "hkpPhantom" => {
+                        deserialize_dev_stack_safe!(de_hkpPhantom, hkpPhantom, & mut map)
+                    }
                     "hkpPhantomCallbackShape" => {
-                        Ok(Classes::hkpPhantomCallbackShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPhantomCallbackShape, hkpPhantomCallbackShape, & mut
+                            map
+                        )
                     }
-                    "hkpPhysicsData" => Ok(Classes::hkpPhysicsData(map.next_value()?)),
+                    "hkpPhysicsData" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpPhysicsData, hkpPhysicsData, & mut map
+                        )
+                    }
                     "hkpPhysicsSystem" => {
-                        Ok(Classes::hkpPhysicsSystem(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPhysicsSystem, hkpPhysicsSystem, & mut map
+                        )
                     }
                     "hkpPhysicsSystemWithContacts" => {
-                        Ok(Classes::hkpPhysicsSystemWithContacts(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPhysicsSystemWithContacts,
+                            hkpPhysicsSystemWithContacts, & mut map
+                        )
                     }
-                    "hkpPlaneShape" => Ok(Classes::hkpPlaneShape(map.next_value()?)),
+                    "hkpPlaneShape" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpPlaneShape, hkpPlaneShape, & mut map
+                        )
+                    }
                     "hkpPointToPathConstraintData" => {
-                        Ok(Classes::hkpPointToPathConstraintData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPointToPathConstraintData,
+                            hkpPointToPathConstraintData, & mut map
+                        )
                     }
                     "hkpPointToPlaneConstraintData" => {
-                        Ok(Classes::hkpPointToPlaneConstraintData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPointToPlaneConstraintData,
+                            hkpPointToPlaneConstraintData, & mut map
+                        )
                     }
                     "hkpPointToPlaneConstraintDataAtoms" => {
-                        Ok(
-                            Classes::hkpPointToPlaneConstraintDataAtoms(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpPointToPlaneConstraintDataAtoms,
+                            hkpPointToPlaneConstraintDataAtoms, & mut map
                         )
                     }
                     "hkpPositionConstraintMotor" => {
-                        Ok(Classes::hkpPositionConstraintMotor(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPositionConstraintMotor, hkpPositionConstraintMotor, &
+                            mut map
+                        )
                     }
                     "hkpPoweredChainData" => {
-                        Ok(Classes::hkpPoweredChainData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPoweredChainData, hkpPoweredChainData, & mut map
+                        )
                     }
                     "hkpPoweredChainDataConstraintInfo" => {
-                        Ok(Classes::hkpPoweredChainDataConstraintInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPoweredChainDataConstraintInfo,
+                            hkpPoweredChainDataConstraintInfo, & mut map
+                        )
                     }
                     "hkpPoweredChainMapper" => {
-                        Ok(Classes::hkpPoweredChainMapper(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPoweredChainMapper, hkpPoweredChainMapper, & mut map
+                        )
                     }
                     "hkpPoweredChainMapperLinkInfo" => {
-                        Ok(Classes::hkpPoweredChainMapperLinkInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPoweredChainMapperLinkInfo,
+                            hkpPoweredChainMapperLinkInfo, & mut map
+                        )
                     }
                     "hkpPoweredChainMapperTarget" => {
-                        Ok(Classes::hkpPoweredChainMapperTarget(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPoweredChainMapperTarget, hkpPoweredChainMapperTarget,
+                            & mut map
+                        )
                     }
                     "hkpPrismaticConstraintData" => {
-                        Ok(Classes::hkpPrismaticConstraintData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPrismaticConstraintData, hkpPrismaticConstraintData, &
+                            mut map
+                        )
                     }
                     "hkpPrismaticConstraintDataAtoms" => {
-                        Ok(Classes::hkpPrismaticConstraintDataAtoms(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPrismaticConstraintDataAtoms,
+                            hkpPrismaticConstraintDataAtoms, & mut map
+                        )
                     }
                     "hkpProjectileGun" => {
-                        Ok(Classes::hkpProjectileGun(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpProjectileGun, hkpProjectileGun, & mut map
+                        )
                     }
-                    "hkpProperty" => Ok(Classes::hkpProperty(map.next_value()?)),
+                    "hkpProperty" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpProperty, hkpProperty, & mut map
+                        )
+                    }
                     "hkpPropertyValue" => {
-                        Ok(Classes::hkpPropertyValue(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPropertyValue, hkpPropertyValue, & mut map
+                        )
                     }
                     "hkpPulleyConstraintAtom" => {
-                        Ok(Classes::hkpPulleyConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPulleyConstraintAtom, hkpPulleyConstraintAtom, & mut
+                            map
+                        )
                     }
                     "hkpPulleyConstraintData" => {
-                        Ok(Classes::hkpPulleyConstraintData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPulleyConstraintData, hkpPulleyConstraintData, & mut
+                            map
+                        )
                     }
                     "hkpPulleyConstraintDataAtoms" => {
-                        Ok(Classes::hkpPulleyConstraintDataAtoms(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpPulleyConstraintDataAtoms,
+                            hkpPulleyConstraintDataAtoms, & mut map
+                        )
                     }
                     "hkpRackAndPinionConstraintAtom" => {
-                        Ok(Classes::hkpRackAndPinionConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpRackAndPinionConstraintAtom,
+                            hkpRackAndPinionConstraintAtom, & mut map
+                        )
                     }
                     "hkpRackAndPinionConstraintData" => {
-                        Ok(Classes::hkpRackAndPinionConstraintData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpRackAndPinionConstraintData,
+                            hkpRackAndPinionConstraintData, & mut map
+                        )
                     }
                     "hkpRackAndPinionConstraintDataAtoms" => {
-                        Ok(
-                            Classes::hkpRackAndPinionConstraintDataAtoms(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpRackAndPinionConstraintDataAtoms,
+                            hkpRackAndPinionConstraintDataAtoms, & mut map
                         )
                     }
                     "hkpRagdollConstraintData" => {
-                        Ok(Classes::hkpRagdollConstraintData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpRagdollConstraintData, hkpRagdollConstraintData, & mut
+                            map
+                        )
                     }
                     "hkpRagdollConstraintDataAtoms" => {
-                        Ok(Classes::hkpRagdollConstraintDataAtoms(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpRagdollConstraintDataAtoms,
+                            hkpRagdollConstraintDataAtoms, & mut map
+                        )
                     }
                     "hkpRagdollLimitsData" => {
-                        Ok(Classes::hkpRagdollLimitsData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpRagdollLimitsData, hkpRagdollLimitsData, & mut map
+                        )
                     }
                     "hkpRagdollLimitsDataAtoms" => {
-                        Ok(Classes::hkpRagdollLimitsDataAtoms(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpRagdollLimitsDataAtoms, hkpRagdollLimitsDataAtoms, &
+                            mut map
+                        )
                     }
                     "hkpRagdollMotorConstraintAtom" => {
-                        Ok(Classes::hkpRagdollMotorConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpRagdollMotorConstraintAtom,
+                            hkpRagdollMotorConstraintAtom, & mut map
+                        )
                     }
                     "hkpRayCollidableFilter" => {
-                        Ok(Classes::hkpRayCollidableFilter(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpRayCollidableFilter, hkpRayCollidableFilter, & mut map
+                        )
                     }
                     "hkpRayShapeCollectionFilter" => {
-                        Ok(Classes::hkpRayShapeCollectionFilter(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpRayShapeCollectionFilter, hkpRayShapeCollectionFilter,
+                            & mut map
+                        )
                     }
                     "hkpRejectChassisListener" => {
-                        Ok(Classes::hkpRejectChassisListener(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpRejectChassisListener, hkpRejectChassisListener, & mut
+                            map
+                        )
                     }
                     "hkpRemoveTerminalsMoppModifier" => {
-                        Ok(Classes::hkpRemoveTerminalsMoppModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpRemoveTerminalsMoppModifier,
+                            hkpRemoveTerminalsMoppModifier, & mut map
+                        )
                     }
                     "hkpReorientAction" => {
-                        Ok(Classes::hkpReorientAction(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpReorientAction, hkpReorientAction, & mut map
+                        )
                     }
-                    "hkpRigidBody" => Ok(Classes::hkpRigidBody(map.next_value()?)),
+                    "hkpRigidBody" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpRigidBody, hkpRigidBody, & mut map
+                        )
+                    }
                     "hkpRotationalConstraintData" => {
-                        Ok(Classes::hkpRotationalConstraintData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpRotationalConstraintData, hkpRotationalConstraintData,
+                            & mut map
+                        )
                     }
                     "hkpRotationalConstraintDataAtoms" => {
-                        Ok(Classes::hkpRotationalConstraintDataAtoms(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpRotationalConstraintDataAtoms,
+                            hkpRotationalConstraintDataAtoms, & mut map
+                        )
                     }
                     "hkpSampledHeightFieldShape" => {
-                        Ok(Classes::hkpSampledHeightFieldShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpSampledHeightFieldShape, hkpSampledHeightFieldShape, &
+                            mut map
+                        )
                     }
                     "hkpSerializedAgentNnEntry" => {
-                        Ok(Classes::hkpSerializedAgentNnEntry(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpSerializedAgentNnEntry, hkpSerializedAgentNnEntry, &
+                            mut map
+                        )
                     }
                     "hkpSerializedDisplayMarker" => {
-                        Ok(Classes::hkpSerializedDisplayMarker(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpSerializedDisplayMarker, hkpSerializedDisplayMarker, &
+                            mut map
+                        )
                     }
                     "hkpSerializedDisplayMarkerList" => {
-                        Ok(Classes::hkpSerializedDisplayMarkerList(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpSerializedDisplayMarkerList,
+                            hkpSerializedDisplayMarkerList, & mut map
+                        )
                     }
                     "hkpSerializedDisplayRbTransforms" => {
-                        Ok(Classes::hkpSerializedDisplayRbTransforms(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpSerializedDisplayRbTransforms,
+                            hkpSerializedDisplayRbTransforms, & mut map
+                        )
                     }
                     "hkpSerializedDisplayRbTransformsDisplayTransformPair" => {
-                        Ok(
-                            Classes::hkpSerializedDisplayRbTransformsDisplayTransformPair(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpSerializedDisplayRbTransformsDisplayTransformPair,
+                            hkpSerializedDisplayRbTransformsDisplayTransformPair, & mut
+                            map
                         )
                     }
                     "hkpSerializedSubTrack1nInfo" => {
-                        Ok(Classes::hkpSerializedSubTrack1nInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpSerializedSubTrack1nInfo, hkpSerializedSubTrack1nInfo,
+                            & mut map
+                        )
                     }
                     "hkpSerializedTrack1nInfo" => {
-                        Ok(Classes::hkpSerializedTrack1nInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpSerializedTrack1nInfo, hkpSerializedTrack1nInfo, & mut
+                            map
+                        )
                     }
                     "hkpSetLocalRotationsConstraintAtom" => {
-                        Ok(
-                            Classes::hkpSetLocalRotationsConstraintAtom(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpSetLocalRotationsConstraintAtom,
+                            hkpSetLocalRotationsConstraintAtom, & mut map
                         )
                     }
                     "hkpSetLocalTransformsConstraintAtom" => {
-                        Ok(
-                            Classes::hkpSetLocalTransformsConstraintAtom(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpSetLocalTransformsConstraintAtom,
+                            hkpSetLocalTransformsConstraintAtom, & mut map
                         )
                     }
                     "hkpSetLocalTranslationsConstraintAtom" => {
-                        Ok(
-                            Classes::hkpSetLocalTranslationsConstraintAtom(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpSetLocalTranslationsConstraintAtom,
+                            hkpSetLocalTranslationsConstraintAtom, & mut map
                         )
                     }
                     "hkpSetupStabilizationAtom" => {
-                        Ok(Classes::hkpSetupStabilizationAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpSetupStabilizationAtom, hkpSetupStabilizationAtom, &
+                            mut map
+                        )
                     }
-                    "hkpShape" => Ok(Classes::hkpShape(map.next_value()?)),
+                    "hkpShape" => {
+                        deserialize_dev_stack_safe!(de_hkpShape, hkpShape, & mut map)
+                    }
                     "hkpShapeCollection" => {
-                        Ok(Classes::hkpShapeCollection(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpShapeCollection, hkpShapeCollection, & mut map
+                        )
                     }
                     "hkpShapeCollectionFilter" => {
-                        Ok(Classes::hkpShapeCollectionFilter(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpShapeCollectionFilter, hkpShapeCollectionFilter, & mut
+                            map
+                        )
                     }
                     "hkpShapeContainer" => {
-                        Ok(Classes::hkpShapeContainer(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpShapeContainer, hkpShapeContainer, & mut map
+                        )
                     }
-                    "hkpShapeInfo" => Ok(Classes::hkpShapeInfo(map.next_value()?)),
+                    "hkpShapeInfo" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpShapeInfo, hkpShapeInfo, & mut map
+                        )
+                    }
                     "hkpShapeModifier" => {
-                        Ok(Classes::hkpShapeModifier(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpShapeModifier, hkpShapeModifier, & mut map
+                        )
                     }
-                    "hkpShapePhantom" => Ok(Classes::hkpShapePhantom(map.next_value()?)),
+                    "hkpShapePhantom" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpShapePhantom, hkpShapePhantom, & mut map
+                        )
+                    }
                     "hkpSimpleContactConstraintAtom" => {
-                        Ok(Classes::hkpSimpleContactConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpSimpleContactConstraintAtom,
+                            hkpSimpleContactConstraintAtom, & mut map
+                        )
                     }
                     "hkpSimpleContactConstraintDataInfo" => {
-                        Ok(
-                            Classes::hkpSimpleContactConstraintDataInfo(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpSimpleContactConstraintDataInfo,
+                            hkpSimpleContactConstraintDataInfo, & mut map
                         )
                     }
                     "hkpSimpleMeshShape" => {
-                        Ok(Classes::hkpSimpleMeshShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpSimpleMeshShape, hkpSimpleMeshShape, & mut map
+                        )
                     }
                     "hkpSimpleMeshShapeTriangle" => {
-                        Ok(Classes::hkpSimpleMeshShapeTriangle(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpSimpleMeshShapeTriangle, hkpSimpleMeshShapeTriangle, &
+                            mut map
+                        )
                     }
                     "hkpSimpleShapePhantom" => {
-                        Ok(Classes::hkpSimpleShapePhantom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpSimpleShapePhantom, hkpSimpleShapePhantom, & mut map
+                        )
                     }
                     "hkpSimpleShapePhantomCollisionDetail" => {
-                        Ok(
-                            Classes::hkpSimpleShapePhantomCollisionDetail(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpSimpleShapePhantomCollisionDetail,
+                            hkpSimpleShapePhantomCollisionDetail, & mut map
                         )
                     }
-                    "hkpSimulation" => Ok(Classes::hkpSimulation(map.next_value()?)),
+                    "hkpSimulation" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpSimulation, hkpSimulation, & mut map
+                        )
+                    }
                     "hkpSingleShapeContainer" => {
-                        Ok(Classes::hkpSingleShapeContainer(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpSingleShapeContainer, hkpSingleShapeContainer, & mut
+                            map
+                        )
                     }
                     "hkpSoftContactModifierConstraintAtom" => {
-                        Ok(
-                            Classes::hkpSoftContactModifierConstraintAtom(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpSoftContactModifierConstraintAtom,
+                            hkpSoftContactModifierConstraintAtom, & mut map
                         )
                     }
-                    "hkpSphereMotion" => Ok(Classes::hkpSphereMotion(map.next_value()?)),
-                    "hkpSphereRepShape" => {
-                        Ok(Classes::hkpSphereRepShape(map.next_value()?))
+                    "hkpSphereMotion" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpSphereMotion, hkpSphereMotion, & mut map
+                        )
                     }
-                    "hkpSphereShape" => Ok(Classes::hkpSphereShape(map.next_value()?)),
-                    "hkpSpringAction" => Ok(Classes::hkpSpringAction(map.next_value()?)),
+                    "hkpSphereRepShape" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpSphereRepShape, hkpSphereRepShape, & mut map
+                        )
+                    }
+                    "hkpSphereShape" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpSphereShape, hkpSphereShape, & mut map
+                        )
+                    }
+                    "hkpSpringAction" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpSpringAction, hkpSpringAction, & mut map
+                        )
+                    }
                     "hkpSpringDamperConstraintMotor" => {
-                        Ok(Classes::hkpSpringDamperConstraintMotor(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpSpringDamperConstraintMotor,
+                            hkpSpringDamperConstraintMotor, & mut map
+                        )
                     }
                     "hkpStiffSpringChainData" => {
-                        Ok(Classes::hkpStiffSpringChainData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpStiffSpringChainData, hkpStiffSpringChainData, & mut
+                            map
+                        )
                     }
                     "hkpStiffSpringChainDataConstraintInfo" => {
-                        Ok(
-                            Classes::hkpStiffSpringChainDataConstraintInfo(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpStiffSpringChainDataConstraintInfo,
+                            hkpStiffSpringChainDataConstraintInfo, & mut map
                         )
                     }
                     "hkpStiffSpringConstraintAtom" => {
-                        Ok(Classes::hkpStiffSpringConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpStiffSpringConstraintAtom,
+                            hkpStiffSpringConstraintAtom, & mut map
+                        )
                     }
                     "hkpStiffSpringConstraintData" => {
-                        Ok(Classes::hkpStiffSpringConstraintData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpStiffSpringConstraintData,
+                            hkpStiffSpringConstraintData, & mut map
+                        )
                     }
                     "hkpStiffSpringConstraintDataAtoms" => {
-                        Ok(Classes::hkpStiffSpringConstraintDataAtoms(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpStiffSpringConstraintDataAtoms,
+                            hkpStiffSpringConstraintDataAtoms, & mut map
+                        )
                     }
                     "hkpStorageExtendedMeshShape" => {
-                        Ok(Classes::hkpStorageExtendedMeshShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpStorageExtendedMeshShape, hkpStorageExtendedMeshShape,
+                            & mut map
+                        )
                     }
                     "hkpStorageExtendedMeshShapeMaterial" => {
-                        Ok(
-                            Classes::hkpStorageExtendedMeshShapeMaterial(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpStorageExtendedMeshShapeMaterial,
+                            hkpStorageExtendedMeshShapeMaterial, & mut map
                         )
                     }
                     "hkpStorageExtendedMeshShapeMeshSubpartStorage" => {
-                        Ok(
-                            Classes::hkpStorageExtendedMeshShapeMeshSubpartStorage(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpStorageExtendedMeshShapeMeshSubpartStorage,
+                            hkpStorageExtendedMeshShapeMeshSubpartStorage, & mut map
                         )
                     }
                     "hkpStorageExtendedMeshShapeShapeSubpartStorage" => {
-                        Ok(
-                            Classes::hkpStorageExtendedMeshShapeShapeSubpartStorage(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpStorageExtendedMeshShapeShapeSubpartStorage,
+                            hkpStorageExtendedMeshShapeShapeSubpartStorage, & mut map
                         )
                     }
                     "hkpStorageMeshShape" => {
-                        Ok(Classes::hkpStorageMeshShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpStorageMeshShape, hkpStorageMeshShape, & mut map
+                        )
                     }
                     "hkpStorageMeshShapeSubpartStorage" => {
-                        Ok(Classes::hkpStorageMeshShapeSubpartStorage(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpStorageMeshShapeSubpartStorage,
+                            hkpStorageMeshShapeSubpartStorage, & mut map
+                        )
                     }
                     "hkpStorageSampledHeightFieldShape" => {
-                        Ok(Classes::hkpStorageSampledHeightFieldShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpStorageSampledHeightFieldShape,
+                            hkpStorageSampledHeightFieldShape, & mut map
+                        )
                     }
                     "hkpThinBoxMotion" => {
-                        Ok(Classes::hkpThinBoxMotion(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpThinBoxMotion, hkpThinBoxMotion, & mut map
+                        )
                     }
                     "hkpTransformShape" => {
-                        Ok(Classes::hkpTransformShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpTransformShape, hkpTransformShape, & mut map
+                        )
                     }
                     "hkpTriangleShape" => {
-                        Ok(Classes::hkpTriangleShape(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpTriangleShape, hkpTriangleShape, & mut map
+                        )
                     }
                     "hkpTriggerVolume" => {
-                        Ok(Classes::hkpTriggerVolume(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpTriggerVolume, hkpTriggerVolume, & mut map
+                        )
                     }
                     "hkpTriggerVolumeEventInfo" => {
-                        Ok(Classes::hkpTriggerVolumeEventInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpTriggerVolumeEventInfo, hkpTriggerVolumeEventInfo, &
+                            mut map
+                        )
                     }
                     "hkpTriSampledHeightFieldBvTreeShape" => {
-                        Ok(
-                            Classes::hkpTriSampledHeightFieldBvTreeShape(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpTriSampledHeightFieldBvTreeShape,
+                            hkpTriSampledHeightFieldBvTreeShape, & mut map
                         )
                     }
                     "hkpTriSampledHeightFieldCollection" => {
-                        Ok(
-                            Classes::hkpTriSampledHeightFieldCollection(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpTriSampledHeightFieldCollection,
+                            hkpTriSampledHeightFieldCollection, & mut map
                         )
                     }
                     "hkpTwistLimitConstraintAtom" => {
-                        Ok(Classes::hkpTwistLimitConstraintAtom(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpTwistLimitConstraintAtom, hkpTwistLimitConstraintAtom,
+                            & mut map
+                        )
                     }
                     "hkpTypedBroadPhaseHandle" => {
-                        Ok(Classes::hkpTypedBroadPhaseHandle(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpTypedBroadPhaseHandle, hkpTypedBroadPhaseHandle, & mut
+                            map
+                        )
                     }
                     "hkpTyremarkPoint" => {
-                        Ok(Classes::hkpTyremarkPoint(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpTyremarkPoint, hkpTyremarkPoint, & mut map
+                        )
                     }
                     "hkpTyremarksInfo" => {
-                        Ok(Classes::hkpTyremarksInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpTyremarksInfo, hkpTyremarksInfo, & mut map
+                        )
                     }
                     "hkpTyremarksWheel" => {
-                        Ok(Classes::hkpTyremarksWheel(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpTyremarksWheel, hkpTyremarksWheel, & mut map
+                        )
                     }
-                    "hkpUnaryAction" => Ok(Classes::hkpUnaryAction(map.next_value()?)),
+                    "hkpUnaryAction" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpUnaryAction, hkpUnaryAction, & mut map
+                        )
+                    }
                     "hkpVehicleAerodynamics" => {
-                        Ok(Classes::hkpVehicleAerodynamics(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleAerodynamics, hkpVehicleAerodynamics, & mut map
+                        )
                     }
-                    "hkpVehicleBrake" => Ok(Classes::hkpVehicleBrake(map.next_value()?)),
+                    "hkpVehicleBrake" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleBrake, hkpVehicleBrake, & mut map
+                        )
+                    }
                     "hkpVehicleCastBatchingManager" => {
-                        Ok(Classes::hkpVehicleCastBatchingManager(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleCastBatchingManager,
+                            hkpVehicleCastBatchingManager, & mut map
+                        )
                     }
-                    "hkpVehicleData" => Ok(Classes::hkpVehicleData(map.next_value()?)),
+                    "hkpVehicleData" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleData, hkpVehicleData, & mut map
+                        )
+                    }
                     "hkpVehicleDataWheelComponentParams" => {
-                        Ok(
-                            Classes::hkpVehicleDataWheelComponentParams(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleDataWheelComponentParams,
+                            hkpVehicleDataWheelComponentParams, & mut map
                         )
                     }
                     "hkpVehicleDefaultAerodynamics" => {
-                        Ok(Classes::hkpVehicleDefaultAerodynamics(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleDefaultAerodynamics,
+                            hkpVehicleDefaultAerodynamics, & mut map
+                        )
                     }
                     "hkpVehicleDefaultAnalogDriverInput" => {
-                        Ok(
-                            Classes::hkpVehicleDefaultAnalogDriverInput(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleDefaultAnalogDriverInput,
+                            hkpVehicleDefaultAnalogDriverInput, & mut map
                         )
                     }
                     "hkpVehicleDefaultBrake" => {
-                        Ok(Classes::hkpVehicleDefaultBrake(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleDefaultBrake, hkpVehicleDefaultBrake, & mut map
+                        )
                     }
                     "hkpVehicleDefaultBrakeWheelBrakingProperties" => {
-                        Ok(
-                            Classes::hkpVehicleDefaultBrakeWheelBrakingProperties(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleDefaultBrakeWheelBrakingProperties,
+                            hkpVehicleDefaultBrakeWheelBrakingProperties, & mut map
                         )
                     }
                     "hkpVehicleDefaultEngine" => {
-                        Ok(Classes::hkpVehicleDefaultEngine(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleDefaultEngine, hkpVehicleDefaultEngine, & mut
+                            map
+                        )
                     }
                     "hkpVehicleDefaultSteering" => {
-                        Ok(Classes::hkpVehicleDefaultSteering(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleDefaultSteering, hkpVehicleDefaultSteering, &
+                            mut map
+                        )
                     }
                     "hkpVehicleDefaultSuspension" => {
-                        Ok(Classes::hkpVehicleDefaultSuspension(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleDefaultSuspension, hkpVehicleDefaultSuspension,
+                            & mut map
+                        )
                     }
                     "hkpVehicleDefaultSuspensionWheelSpringSuspensionParameters" => {
-                        Ok(
-                            Classes::hkpVehicleDefaultSuspensionWheelSpringSuspensionParameters(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleDefaultSuspensionWheelSpringSuspensionParameters,
+                            hkpVehicleDefaultSuspensionWheelSpringSuspensionParameters, &
+                            mut map
                         )
                     }
                     "hkpVehicleDefaultTransmission" => {
-                        Ok(Classes::hkpVehicleDefaultTransmission(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleDefaultTransmission,
+                            hkpVehicleDefaultTransmission, & mut map
+                        )
                     }
                     "hkpVehicleDefaultVelocityDamper" => {
-                        Ok(Classes::hkpVehicleDefaultVelocityDamper(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleDefaultVelocityDamper,
+                            hkpVehicleDefaultVelocityDamper, & mut map
+                        )
                     }
                     "hkpVehicleDriverInput" => {
-                        Ok(Classes::hkpVehicleDriverInput(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleDriverInput, hkpVehicleDriverInput, & mut map
+                        )
                     }
                     "hkpVehicleDriverInputAnalogStatus" => {
-                        Ok(Classes::hkpVehicleDriverInputAnalogStatus(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleDriverInputAnalogStatus,
+                            hkpVehicleDriverInputAnalogStatus, & mut map
+                        )
                     }
                     "hkpVehicleDriverInputStatus" => {
-                        Ok(Classes::hkpVehicleDriverInputStatus(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleDriverInputStatus, hkpVehicleDriverInputStatus,
+                            & mut map
+                        )
                     }
                     "hkpVehicleEngine" => {
-                        Ok(Classes::hkpVehicleEngine(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleEngine, hkpVehicleEngine, & mut map
+                        )
                     }
                     "hkpVehicleFrictionDescription" => {
-                        Ok(Classes::hkpVehicleFrictionDescription(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleFrictionDescription,
+                            hkpVehicleFrictionDescription, & mut map
+                        )
                     }
                     "hkpVehicleFrictionDescriptionAxisDescription" => {
-                        Ok(
-                            Classes::hkpVehicleFrictionDescriptionAxisDescription(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleFrictionDescriptionAxisDescription,
+                            hkpVehicleFrictionDescriptionAxisDescription, & mut map
                         )
                     }
                     "hkpVehicleFrictionStatus" => {
-                        Ok(Classes::hkpVehicleFrictionStatus(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleFrictionStatus, hkpVehicleFrictionStatus, & mut
+                            map
+                        )
                     }
                     "hkpVehicleFrictionStatusAxisStatus" => {
-                        Ok(
-                            Classes::hkpVehicleFrictionStatusAxisStatus(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleFrictionStatusAxisStatus,
+                            hkpVehicleFrictionStatusAxisStatus, & mut map
                         )
                     }
                     "hkpVehicleInstance" => {
-                        Ok(Classes::hkpVehicleInstance(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleInstance, hkpVehicleInstance, & mut map
+                        )
                     }
                     "hkpVehicleInstanceWheelInfo" => {
-                        Ok(Classes::hkpVehicleInstanceWheelInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleInstanceWheelInfo, hkpVehicleInstanceWheelInfo,
+                            & mut map
+                        )
                     }
                     "hkpVehicleLinearCastBatchingManager" => {
-                        Ok(
-                            Classes::hkpVehicleLinearCastBatchingManager(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleLinearCastBatchingManager,
+                            hkpVehicleLinearCastBatchingManager, & mut map
                         )
                     }
                     "hkpVehicleLinearCastWheelCollide" => {
-                        Ok(Classes::hkpVehicleLinearCastWheelCollide(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleLinearCastWheelCollide,
+                            hkpVehicleLinearCastWheelCollide, & mut map
+                        )
                     }
                     "hkpVehicleLinearCastWheelCollideWheelState" => {
-                        Ok(
-                            Classes::hkpVehicleLinearCastWheelCollideWheelState(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleLinearCastWheelCollideWheelState,
+                            hkpVehicleLinearCastWheelCollideWheelState, & mut map
                         )
                     }
                     "hkpVehicleManager" => {
-                        Ok(Classes::hkpVehicleManager(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleManager, hkpVehicleManager, & mut map
+                        )
                     }
                     "hkpVehicleRayCastBatchingManager" => {
-                        Ok(Classes::hkpVehicleRayCastBatchingManager(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleRayCastBatchingManager,
+                            hkpVehicleRayCastBatchingManager, & mut map
+                        )
                     }
                     "hkpVehicleRayCastWheelCollide" => {
-                        Ok(Classes::hkpVehicleRayCastWheelCollide(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleRayCastWheelCollide,
+                            hkpVehicleRayCastWheelCollide, & mut map
+                        )
                     }
                     "hkpVehicleSteering" => {
-                        Ok(Classes::hkpVehicleSteering(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleSteering, hkpVehicleSteering, & mut map
+                        )
                     }
                     "hkpVehicleSuspension" => {
-                        Ok(Classes::hkpVehicleSuspension(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleSuspension, hkpVehicleSuspension, & mut map
+                        )
                     }
                     "hkpVehicleSuspensionSuspensionWheelParameters" => {
-                        Ok(
-                            Classes::hkpVehicleSuspensionSuspensionWheelParameters(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleSuspensionSuspensionWheelParameters,
+                            hkpVehicleSuspensionSuspensionWheelParameters, & mut map
                         )
                     }
                     "hkpVehicleTransmission" => {
-                        Ok(Classes::hkpVehicleTransmission(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleTransmission, hkpVehicleTransmission, & mut map
+                        )
                     }
                     "hkpVehicleVelocityDamper" => {
-                        Ok(Classes::hkpVehicleVelocityDamper(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleVelocityDamper, hkpVehicleVelocityDamper, & mut
+                            map
+                        )
                     }
                     "hkpVehicleWheelCollide" => {
-                        Ok(Classes::hkpVehicleWheelCollide(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVehicleWheelCollide, hkpVehicleWheelCollide, & mut map
+                        )
                     }
                     "hkpVelocityConstraintMotor" => {
-                        Ok(Classes::hkpVelocityConstraintMotor(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpVelocityConstraintMotor, hkpVelocityConstraintMotor, &
+                            mut map
+                        )
                     }
                     "hkpViscousSurfaceModifierConstraintAtom" => {
-                        Ok(
-                            Classes::hkpViscousSurfaceModifierConstraintAtom(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkpViscousSurfaceModifierConstraintAtom,
+                            hkpViscousSurfaceModifierConstraintAtom, & mut map
                         )
                     }
                     "hkpWeldingUtility" => {
-                        Ok(Classes::hkpWeldingUtility(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpWeldingUtility, hkpWeldingUtility, & mut map
+                        )
                     }
                     "hkpWheelConstraintData" => {
-                        Ok(Classes::hkpWheelConstraintData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpWheelConstraintData, hkpWheelConstraintData, & mut map
+                        )
                     }
                     "hkpWheelConstraintDataAtoms" => {
-                        Ok(Classes::hkpWheelConstraintDataAtoms(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkpWheelConstraintDataAtoms, hkpWheelConstraintDataAtoms,
+                            & mut map
+                        )
                     }
-                    "hkpWorld" => Ok(Classes::hkpWorld(map.next_value()?)),
-                    "hkpWorldCinfo" => Ok(Classes::hkpWorldCinfo(map.next_value()?)),
-                    "hkpWorldObject" => Ok(Classes::hkpWorldObject(map.next_value()?)),
-                    "hkQTransform" => Ok(Classes::hkQTransform(map.next_value()?)),
+                    "hkpWorld" => {
+                        deserialize_dev_stack_safe!(de_hkpWorld, hkpWorld, & mut map)
+                    }
+                    "hkpWorldCinfo" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpWorldCinfo, hkpWorldCinfo, & mut map
+                        )
+                    }
+                    "hkpWorldObject" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkpWorldObject, hkpWorldObject, & mut map
+                        )
+                    }
+                    "hkQTransform" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkQTransform, hkQTransform, & mut map
+                        )
+                    }
                     "hkRangeInt32Attribute" => {
-                        Ok(Classes::hkRangeInt32Attribute(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkRangeInt32Attribute, hkRangeInt32Attribute, & mut map
+                        )
                     }
                     "hkRangeRealAttribute" => {
-                        Ok(Classes::hkRangeRealAttribute(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkRangeRealAttribute, hkRangeRealAttribute, & mut map
+                        )
                     }
                     "hkReferencedObject" => {
-                        Ok(Classes::hkReferencedObject(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkReferencedObject, hkReferencedObject, & mut map
+                        )
                     }
                     "hkReflectedFileAttribute" => {
-                        Ok(Classes::hkReflectedFileAttribute(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkReflectedFileAttribute, hkReflectedFileAttribute, & mut
+                            map
+                        )
                     }
-                    "hkResourceBase" => Ok(Classes::hkResourceBase(map.next_value()?)),
+                    "hkResourceBase" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkResourceBase, hkResourceBase, & mut map
+                        )
+                    }
                     "hkResourceContainer" => {
-                        Ok(Classes::hkResourceContainer(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkResourceContainer, hkResourceContainer, & mut map
+                        )
                     }
                     "hkResourceHandle" => {
-                        Ok(Classes::hkResourceHandle(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkResourceHandle, hkResourceHandle, & mut map
+                        )
                     }
                     "hkRootLevelContainer" => {
-                        Ok(Classes::hkRootLevelContainer(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkRootLevelContainer, hkRootLevelContainer, & mut map
+                        )
                     }
                     "hkRootLevelContainerNamedVariant" => {
-                        Ok(Classes::hkRootLevelContainerNamedVariant(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkRootLevelContainerNamedVariant,
+                            hkRootLevelContainerNamedVariant, & mut map
+                        )
                     }
                     "hkSemanticsAttribute" => {
-                        Ok(Classes::hkSemanticsAttribute(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkSemanticsAttribute, hkSemanticsAttribute, & mut map
+                        )
                     }
                     "hkSimpleLocalFrame" => {
-                        Ok(Classes::hkSimpleLocalFrame(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkSimpleLocalFrame, hkSimpleLocalFrame, & mut map
+                        )
                     }
-                    "hkSphere" => Ok(Classes::hkSphere(map.next_value()?)),
+                    "hkSphere" => {
+                        deserialize_dev_stack_safe!(de_hkSphere, hkSphere, & mut map)
+                    }
                     "hkSweptTransform" => {
-                        Ok(Classes::hkSweptTransform(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkSweptTransform, hkSweptTransform, & mut map
+                        )
                     }
                     "hkTraceStreamTitle" => {
-                        Ok(Classes::hkTraceStreamTitle(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkTraceStreamTitle, hkTraceStreamTitle, & mut map
+                        )
                     }
                     "hkTrackerSerializableScanSnapshot" => {
-                        Ok(Classes::hkTrackerSerializableScanSnapshot(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkTrackerSerializableScanSnapshot,
+                            hkTrackerSerializableScanSnapshot, & mut map
+                        )
                     }
                     "hkTrackerSerializableScanSnapshotAllocation" => {
-                        Ok(
-                            Classes::hkTrackerSerializableScanSnapshotAllocation(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkTrackerSerializableScanSnapshotAllocation,
+                            hkTrackerSerializableScanSnapshotAllocation, & mut map
                         )
                     }
                     "hkTrackerSerializableScanSnapshotBlock" => {
-                        Ok(
-                            Classes::hkTrackerSerializableScanSnapshotBlock(
-                                map.next_value()?,
-                            ),
+                        deserialize_dev_stack_safe!(
+                            de_hkTrackerSerializableScanSnapshotBlock,
+                            hkTrackerSerializableScanSnapshotBlock, & mut map
                         )
                     }
-                    "hkUiAttribute" => Ok(Classes::hkUiAttribute(map.next_value()?)),
-                    "hkVertexFormat" => Ok(Classes::hkVertexFormat(map.next_value()?)),
+                    "hkUiAttribute" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkUiAttribute, hkUiAttribute, & mut map
+                        )
+                    }
+                    "hkVertexFormat" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkVertexFormat, hkVertexFormat, & mut map
+                        )
+                    }
                     "hkVertexFormatElement" => {
-                        Ok(Classes::hkVertexFormatElement(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkVertexFormatElement, hkVertexFormatElement, & mut map
+                        )
                     }
                     "hkWorldMemoryAvailableWatchDog" => {
-                        Ok(Classes::hkWorldMemoryAvailableWatchDog(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkWorldMemoryAvailableWatchDog,
+                            hkWorldMemoryAvailableWatchDog, & mut map
+                        )
                     }
                     "hkxAnimatedFloat" => {
-                        Ok(Classes::hkxAnimatedFloat(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxAnimatedFloat, hkxAnimatedFloat, & mut map
+                        )
                     }
                     "hkxAnimatedMatrix" => {
-                        Ok(Classes::hkxAnimatedMatrix(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxAnimatedMatrix, hkxAnimatedMatrix, & mut map
+                        )
                     }
                     "hkxAnimatedQuaternion" => {
-                        Ok(Classes::hkxAnimatedQuaternion(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxAnimatedQuaternion, hkxAnimatedQuaternion, & mut map
+                        )
                     }
                     "hkxAnimatedVector" => {
-                        Ok(Classes::hkxAnimatedVector(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxAnimatedVector, hkxAnimatedVector, & mut map
+                        )
                     }
-                    "hkxAttribute" => Ok(Classes::hkxAttribute(map.next_value()?)),
+                    "hkxAttribute" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkxAttribute, hkxAttribute, & mut map
+                        )
+                    }
                     "hkxAttributeGroup" => {
-                        Ok(Classes::hkxAttributeGroup(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxAttributeGroup, hkxAttributeGroup, & mut map
+                        )
                     }
                     "hkxAttributeHolder" => {
-                        Ok(Classes::hkxAttributeHolder(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxAttributeHolder, hkxAttributeHolder, & mut map
+                        )
                     }
-                    "hkxCamera" => Ok(Classes::hkxCamera(map.next_value()?)),
+                    "hkxCamera" => {
+                        deserialize_dev_stack_safe!(de_hkxCamera, hkxCamera, & mut map)
+                    }
                     "hkxEdgeSelectionChannel" => {
-                        Ok(Classes::hkxEdgeSelectionChannel(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxEdgeSelectionChannel, hkxEdgeSelectionChannel, & mut
+                            map
+                        )
                     }
-                    "hkxEnum" => Ok(Classes::hkxEnum(map.next_value()?)),
-                    "hkxEnumItem" => Ok(Classes::hkxEnumItem(map.next_value()?)),
-                    "hkxEnvironment" => Ok(Classes::hkxEnvironment(map.next_value()?)),
+                    "hkxEnum" => {
+                        deserialize_dev_stack_safe!(de_hkxEnum, hkxEnum, & mut map)
+                    }
+                    "hkxEnumItem" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkxEnumItem, hkxEnumItem, & mut map
+                        )
+                    }
+                    "hkxEnvironment" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkxEnvironment, hkxEnvironment, & mut map
+                        )
+                    }
                     "hkxEnvironmentVariable" => {
-                        Ok(Classes::hkxEnvironmentVariable(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxEnvironmentVariable, hkxEnvironmentVariable, & mut map
+                        )
                     }
-                    "hkxIndexBuffer" => Ok(Classes::hkxIndexBuffer(map.next_value()?)),
-                    "hkxLight" => Ok(Classes::hkxLight(map.next_value()?)),
-                    "hkxMaterial" => Ok(Classes::hkxMaterial(map.next_value()?)),
+                    "hkxIndexBuffer" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkxIndexBuffer, hkxIndexBuffer, & mut map
+                        )
+                    }
+                    "hkxLight" => {
+                        deserialize_dev_stack_safe!(de_hkxLight, hkxLight, & mut map)
+                    }
+                    "hkxMaterial" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkxMaterial, hkxMaterial, & mut map
+                        )
+                    }
                     "hkxMaterialEffect" => {
-                        Ok(Classes::hkxMaterialEffect(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxMaterialEffect, hkxMaterialEffect, & mut map
+                        )
                     }
                     "hkxMaterialProperty" => {
-                        Ok(Classes::hkxMaterialProperty(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxMaterialProperty, hkxMaterialProperty, & mut map
+                        )
                     }
                     "hkxMaterialShader" => {
-                        Ok(Classes::hkxMaterialShader(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxMaterialShader, hkxMaterialShader, & mut map
+                        )
                     }
                     "hkxMaterialShaderSet" => {
-                        Ok(Classes::hkxMaterialShaderSet(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxMaterialShaderSet, hkxMaterialShaderSet, & mut map
+                        )
                     }
                     "hkxMaterialTextureStage" => {
-                        Ok(Classes::hkxMaterialTextureStage(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxMaterialTextureStage, hkxMaterialTextureStage, & mut
+                            map
+                        )
                     }
-                    "hkxMesh" => Ok(Classes::hkxMesh(map.next_value()?)),
-                    "hkxMeshSection" => Ok(Classes::hkxMeshSection(map.next_value()?)),
+                    "hkxMesh" => {
+                        deserialize_dev_stack_safe!(de_hkxMesh, hkxMesh, & mut map)
+                    }
+                    "hkxMeshSection" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkxMeshSection, hkxMeshSection, & mut map
+                        )
+                    }
                     "hkxMeshUserChannelInfo" => {
-                        Ok(Classes::hkxMeshUserChannelInfo(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxMeshUserChannelInfo, hkxMeshUserChannelInfo, & mut map
+                        )
                     }
-                    "hkxNode" => Ok(Classes::hkxNode(map.next_value()?)),
+                    "hkxNode" => {
+                        deserialize_dev_stack_safe!(de_hkxNode, hkxNode, & mut map)
+                    }
                     "hkxNodeAnnotationData" => {
-                        Ok(Classes::hkxNodeAnnotationData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxNodeAnnotationData, hkxNodeAnnotationData, & mut map
+                        )
                     }
                     "hkxNodeSelectionSet" => {
-                        Ok(Classes::hkxNodeSelectionSet(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxNodeSelectionSet, hkxNodeSelectionSet, & mut map
+                        )
                     }
-                    "hkxScene" => Ok(Classes::hkxScene(map.next_value()?)),
-                    "hkxSkinBinding" => Ok(Classes::hkxSkinBinding(map.next_value()?)),
+                    "hkxScene" => {
+                        deserialize_dev_stack_safe!(de_hkxScene, hkxScene, & mut map)
+                    }
+                    "hkxSkinBinding" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkxSkinBinding, hkxSkinBinding, & mut map
+                        )
+                    }
                     "hkxSparselyAnimatedBool" => {
-                        Ok(Classes::hkxSparselyAnimatedBool(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxSparselyAnimatedBool, hkxSparselyAnimatedBool, & mut
+                            map
+                        )
                     }
                     "hkxSparselyAnimatedEnum" => {
-                        Ok(Classes::hkxSparselyAnimatedEnum(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxSparselyAnimatedEnum, hkxSparselyAnimatedEnum, & mut
+                            map
+                        )
                     }
                     "hkxSparselyAnimatedInt" => {
-                        Ok(Classes::hkxSparselyAnimatedInt(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxSparselyAnimatedInt, hkxSparselyAnimatedInt, & mut map
+                        )
                     }
                     "hkxSparselyAnimatedString" => {
-                        Ok(Classes::hkxSparselyAnimatedString(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxSparselyAnimatedString, hkxSparselyAnimatedString, &
+                            mut map
+                        )
                     }
-                    "hkxTextureFile" => Ok(Classes::hkxTextureFile(map.next_value()?)),
+                    "hkxTextureFile" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkxTextureFile, hkxTextureFile, & mut map
+                        )
+                    }
                     "hkxTextureInplace" => {
-                        Ok(Classes::hkxTextureInplace(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxTextureInplace, hkxTextureInplace, & mut map
+                        )
                     }
                     "hkxTriangleSelectionChannel" => {
-                        Ok(Classes::hkxTriangleSelectionChannel(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxTriangleSelectionChannel, hkxTriangleSelectionChannel,
+                            & mut map
+                        )
                     }
-                    "hkxVertexBuffer" => Ok(Classes::hkxVertexBuffer(map.next_value()?)),
+                    "hkxVertexBuffer" => {
+                        deserialize_dev_stack_safe!(
+                            de_hkxVertexBuffer, hkxVertexBuffer, & mut map
+                        )
+                    }
                     "hkxVertexBufferVertexData" => {
-                        Ok(Classes::hkxVertexBufferVertexData(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxVertexBufferVertexData, hkxVertexBufferVertexData, &
+                            mut map
+                        )
                     }
                     "hkxVertexDescription" => {
-                        Ok(Classes::hkxVertexDescription(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxVertexDescription, hkxVertexDescription, & mut map
+                        )
                     }
                     "hkxVertexDescriptionElementDecl" => {
-                        Ok(Classes::hkxVertexDescriptionElementDecl(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxVertexDescriptionElementDecl,
+                            hkxVertexDescriptionElementDecl, & mut map
+                        )
                     }
                     "hkxVertexFloatDataChannel" => {
-                        Ok(Classes::hkxVertexFloatDataChannel(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxVertexFloatDataChannel, hkxVertexFloatDataChannel, &
+                            mut map
+                        )
                     }
                     "hkxVertexIntDataChannel" => {
-                        Ok(Classes::hkxVertexIntDataChannel(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxVertexIntDataChannel, hkxVertexIntDataChannel, & mut
+                            map
+                        )
                     }
                     "hkxVertexSelectionChannel" => {
-                        Ok(Classes::hkxVertexSelectionChannel(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxVertexSelectionChannel, hkxVertexSelectionChannel, &
+                            mut map
+                        )
                     }
                     "hkxVertexVectorDataChannel" => {
-                        Ok(Classes::hkxVertexVectorDataChannel(map.next_value()?))
+                        deserialize_dev_stack_safe!(
+                            de_hkxVertexVectorDataChannel, hkxVertexVectorDataChannel, &
+                            mut map
+                        )
                     }
                     _ => {
                         Err(
