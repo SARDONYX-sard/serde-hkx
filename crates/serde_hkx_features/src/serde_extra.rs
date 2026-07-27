@@ -2,7 +2,7 @@ pub mod ser {
     //! Serialize ClassMap with extra formats.
     use crate::convert::Format;
     use crate::error::Result;
-    use crate::serde::ser::{JsonSnafu, TomlSnafu};
+    use crate::serde::ser::{JsonSnafu, TomlSnafu, YamlSnafu};
     use crate::types_wrapper::ClassPtrMap;
     use snafu::ResultExt as _;
 
@@ -23,6 +23,7 @@ pub mod ser {
         let contents = match output_format {
             Format::Json => sonic_rs::to_string_pretty(&classes).context(JsonSnafu {})?,
             Format::Toml => basic_toml::to_string(&classes).context(TomlSnafu {})?,
+            Format::Yaml => serde_norway::to_string(&classes).context(YamlSnafu {})?,
             _ => unreachable!(),
         };
         Ok(contents.into_bytes())
