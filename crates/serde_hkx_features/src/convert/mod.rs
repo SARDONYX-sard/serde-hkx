@@ -319,23 +319,25 @@ fn get_supported_files(input_dir: &Path) -> Vec<PathBuf> {
 /// * the extension is unsupported.
 /// * deserialization fails.
 /// * the handler returns an error.
-pub fn process_serde_with<'a, I, F, G, T>(
+pub fn process_serde_with<'a, I, F, G, T, E>(
     bytes: &'a [u8],
     input: I,
     on_xml: G,   // ClassMap borrows from local String, must return T directly
     on_other: F, // ClassMap borrows from bytes ('a), T can carry 'a
-) -> Result<T, Error>
+) -> Result<T, E>
 where
     I: AsRef<Path>,
-    F: FnOnce(crate::ClassMap<'a>) -> Result<T, Error>,
-    G: FnOnce(crate::ClassMap<'_>) -> Result<T, Error>, // '_ = local String lifetime
+    F: FnOnce(crate::ClassMap<'a>) -> Result<T, E>,
+    G: FnOnce(crate::ClassMap<'_>) -> Result<T, E>, // '_ = local String lifetime
+    E: From<Error>,
 {
     let input = input.as_ref();
     let input_fmt = {
         let Some(input_ext) = input.extension() else {
             return Err(Error::MissingExtension {
                 path: input.to_path_buf(),
-            });
+            }
+            .into());
         };
         Format::from_extension(input_ext).map_err(|_| Error::UnsupportedExtensionPath {
             path: input.to_path_buf(),
@@ -349,7 +351,11 @@ where
                 input: input.to_path_buf(),
             })?,
         Format::Xml => {
-            let string = auto_charset::decode_str_to_utf8(bytes)?;
+            let string =
+                auto_charset::decode_str_to_utf8(bytes).map_err(|e| Error::FailedReadFile {
+                    source: e,
+                    path: input.to_path_buf(),
+                })?;
             let classes = serde_hkx::from_str(&string)
                 .context(crate::serde::de::XmlSnafu {})
                 .with_context(|_| DeSnafu {
