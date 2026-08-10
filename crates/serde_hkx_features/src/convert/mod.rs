@@ -445,3 +445,38 @@ where
         },
     )
 }
+
+/// Serializes a [`ClassMap`] into the specified output format.
+///
+/// Formats that use pointer-based serialization are converted through
+/// [`ClassPtrMap`] before serialization.
+///
+/// # Errors
+///
+/// Returns an error if:
+/// - the input path has no extension.
+/// - the extension is unsupported.
+/// - deserialization fails.
+/// - the handler returns an error.
+pub fn serialize_class_map<I>(
+    mut classes: crate::ClassMap<'_>,
+    output_format: Format,
+    input: I,
+) -> Result<Vec<u8>, Error>
+where
+    I: AsRef<Path>,
+{
+    match output_format {
+        Format::Amd64 | Format::Win32 | Format::Xml => {
+            crate::serde::ser::to_bytes(&mut classes, output_format)
+        }
+        #[cfg(feature = "extra_fmt")]
+        Format::Json | Format::Toml | Format::Yaml => {
+            let mut classes = crate::types_wrapper::ClassPtrMap::from_class_map(classes);
+            crate::serde_extra::ser::to_bytes(&mut classes, output_format)
+        }
+    }
+    .with_context(|_| crate::error::SerSnafu {
+        input: input.as_ref().to_path_buf(),
+    })
+}
